@@ -1,6 +1,8 @@
 'use client'
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
+import { setUserLocale } from '@/lib/locale'
 
 import Checkbox from '@/common/components/checkbox/Checkbox'
 import AppButton from '@/common/components/appButton/AppButton'
@@ -10,6 +12,7 @@ import useForm from '../hooks/useForm'
 type Props = {}
 
 const LoginForm = (props: Props) => {
+  const t = useTranslations('')
   const { values, handleBlur, handleChange, handleSubmit } = useForm()
 
   return (
@@ -45,7 +48,7 @@ const LoginForm = (props: Props) => {
       </StyledForm>
       <div>
         <StyledP>არ ხარ დარეგისტრირებული?</StyledP>
-        <AppButton type='outlined' text={'register'} disabled={false} />
+        <AppButton type='outlined' text={t('register')} disabled={false} />
       </div>
     </Container>
   )
