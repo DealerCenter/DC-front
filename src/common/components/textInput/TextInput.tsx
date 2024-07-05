@@ -1,14 +1,14 @@
-import React, { ChangeEventHandler } from "react";
-import styled from "styled-components";
+import React, { ChangeEventHandler } from 'react'
+import styled from 'styled-components'
 
 type Props = {
-  type: string;
-  placeholder: string;
-  name: string;
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  onBlur: ChangeEventHandler<HTMLInputElement>;
-};
+  type: string
+  placeholder: string
+  name: string
+  value: string
+  onChange: ChangeEventHandler<HTMLInputElement>
+  onBlur: ChangeEventHandler<HTMLInputElement>
+}
 
 const TextInput = ({
   type,
@@ -27,10 +27,10 @@ const TextInput = ({
       onChange={onChange}
       onBlur={onBlur}
     />
-  );
-};
+  )
+}
 
-export default TextInput;
+export default TextInput
 
 const StyledInput = styled.input`
   box-sizing: border-box;
@@ -47,4 +47,4 @@ const StyledInput = styled.input`
     border: none;
     outline: 4px solid rgba(216, 226, 244, 1);
   }
-`;
+`
