@@ -1,7 +1,5 @@
-'use client'
-import AppButton from '@/common/components/appButton/AppButton'
-import Checkbox from '@/common/components/checkbox/Checkbox'
-import LoginForm from './components/LoginForm'
+"use client";
+import LoginForm from "./components/LoginForm";
 
 type Props = {}
 
