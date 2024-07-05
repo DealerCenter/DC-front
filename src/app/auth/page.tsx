@@ -1,5 +1,5 @@
-import AppButton from '@/common/components/appButton/AppButton';
-import React from 'react';
+import AppButton from "@/common/components/appButton/AppButton";
+import React from "react";
 
 type Props = {};
 
