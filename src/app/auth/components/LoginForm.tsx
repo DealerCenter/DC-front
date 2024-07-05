@@ -18,7 +18,7 @@ const LoginForm = (props: Props) => {
   return (
     <Container>
       <StyledForm onSubmit={handleSubmit}>
-        <H4Bold>შესვლა</H4Bold>
+        <H4Bold>{t('login')}</H4Bold>
         <TextInput
           type='email'
           name='email'
@@ -38,16 +38,16 @@ const LoginForm = (props: Props) => {
           />
           <LabelContainer>
             <StyledLabel>
-              <StyledCheckbox />
-              დამახსოვრება
+              {/* <StyledCheckbox checked={false} /> */}
+              {t('remember')}
             </StyledLabel>
-            <StyledLabel>დაგავიწყდა პაროლი?</StyledLabel>
+            <StyledLabel>{t('forgot password?')}</StyledLabel>
           </LabelContainer>
         </div>
-        <AppButton type='filled' text='შესვლა' disabled={false} />
+        <AppButton type='filled' text={t('login')} disabled={false} />
       </StyledForm>
       <div>
-        <StyledP>არ ხარ დარეგისტრირებული?</StyledP>
+        <StyledP>{t('not registered?')}</StyledP>
         <AppButton type='outlined' text={t('register')} disabled={false} />
       </div>
     </Container>
@@ -70,7 +70,8 @@ const Container = styled.div`
   margin-top: 2rem;
 
   @media (${({ theme }) => theme.media?.desktop}) {
-    width: 682px;
+    width: 65%;
+    max-width: 682px;
     padding: 42px 120px 42px 120px;
   }
 `

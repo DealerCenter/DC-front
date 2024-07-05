@@ -5,6 +5,7 @@ const theme = {
     white: '#FFFFFF',
     red: '#CF341F',
     gray: '#20202042',
+    disabled_gray: 'rgba(32, 32, 32, 0.56)',
   },
   media: {
     mobile: 'max-width: 500px',

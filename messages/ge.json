@@ -1,4 +1,12 @@
 {
-    "register": "რეგისტრაცია",
-    "login:": "შესვლა"
+  "register": "რეგისტრაცია",
+  "login": "შესვლა",
+  "not registered?": "არ ხარ დარეგისტრირებული?",
+  "already registered?": "უკვე ხარ დარეგისტრირებული?",
+  "forgot password?": "დაგავიწყდა პაროლი?",
+  "remember": "დამახსოვრება",
+  "choose user type": "აირჩიეთ მომხმარებლის ტიპი",
+  "next": "შემდეგი",
+  "individual": "ფიზიკური პირი",
+  "legal person": "იურიდიული პირი"
 }

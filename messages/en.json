@@ -1,4 +1,12 @@
 {
-    "register": "Register",
-    "login:": "Login"
+  "register": "Register",
+  "login": "Login",
+  "not registered?": "Not registered?",
+  "already registered?": "Already registered?",
+  "forgot password?": "Forgot password?",
+  "remember": "Remember",
+  "choose user type": "Choose user type",
+  "next": "Next",
+  "individual": "Individual",
+  "legal person": "Legal person"
 }
