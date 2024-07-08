@@ -8,5 +8,7 @@
   "choose user type": "აირჩიეთ მომხმარებლის ტიპი",
   "next": "შემდეგი",
   "individual": "ფიზიკური პირი",
-  "legal person": "იურიდიული პირი"
+  "legal person": "იურიდიული პირი",
+  "company name": "კომპანიის სახელწოდება",
+  "upload a certificate of commercial activity from the public register": "ატვირთეთ კომერციული საქმიანობის დამადასტურებელი ამონაწერი საჯარო რეესტრიდან"
 }

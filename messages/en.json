@@ -8,5 +8,10 @@
   "choose user type": "Choose user type",
   "next": "Next",
   "individual": "Individual",
-  "legal person": "Legal person"
+  "legal person": "Legal person",
+  "company name": "Company name",
+  "identification code": "Identification code",
+  "adress": "Adress",
+  "website": "Website",
+  "upload a certificate of commercial activity from the public register": " Upload a certificate of commercial activity from the public register"
 }

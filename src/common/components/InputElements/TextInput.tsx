@@ -36,12 +36,17 @@ const StyledInput = styled.input`
   box-sizing: border-box;
   background-color: white;
   border: none;
-  outline: 2px solid rgba(32, 32, 32, 0.04);
-  outline-offset: 2px;
+  outline: 1px solid rgba(32, 32, 32, 0.04);
+  outline-offset: 1px;
   width: 350px;
   height: 52px;
   padding: 10px 10px 10px 16px;
   border-radius: 12px;
+  font-size: 16px;
+
+  &::placeholder {
+    color: rgba(18, 18, 20, 0.56);
+  }
 
   &:focus {
     border: none;

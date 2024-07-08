@@ -6,7 +6,7 @@ import { setUserLocale } from '@/lib/locale'
 
 import Checkbox from '@/common/components/checkbox/Checkbox'
 import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/textInput/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import useForm from '../hooks/useForm'
 
 type Props = {}
@@ -44,11 +44,21 @@ const LoginForm = (props: Props) => {
             <StyledLabel>{t('forgot password?')}</StyledLabel>
           </LabelContainer>
         </div>
-        <AppButton type='filled' text={t('login')} disabled={false} />
+        <AppButton
+          type='filled'
+          text={t('login')}
+          disabled={false}
+          onClick={() => {}}
+        />
       </StyledForm>
       <div>
         <StyledP>{t('not registered?')}</StyledP>
-        <AppButton type='outlined' text={t('register')} disabled={false} />
+        <AppButton
+          type='outlined'
+          text={t('register')}
+          disabled={false}
+          onClick={() => {}}
+        />
       </div>
     </Container>
   )

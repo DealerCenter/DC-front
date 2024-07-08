@@ -3,11 +3,16 @@ import styled from 'styled-components'
 
 type ButtonTypes = 'filled' | 'outlined'
 
-type Props = { text: string; type: ButtonTypes; disabled: boolean }
+type Props = {
+  text: string
+  type: ButtonTypes
+  disabled: boolean
+  onClick: () => void
+}
 
-const AppButton = ({ text, type, disabled }: Props) => {
+const AppButton = ({ text, type, disabled, onClick }: Props) => {
   return (
-    <StyledButton disabled={disabled} type={type}>
+    <StyledButton disabled={disabled} type={type} onClick={onClick}>
       {text}
     </StyledButton>
   )

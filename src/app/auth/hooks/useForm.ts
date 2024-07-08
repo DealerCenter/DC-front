@@ -7,6 +7,10 @@ const useForm = () => {
     initialValues: {
       email: '',
       password: '',
+      companyName: '',
+      identificationCode: '',
+      adress: '',
+      website: '',
     },
     onSubmit: () => {
       console.log(formik.values.email)
@@ -17,6 +21,10 @@ const useForm = () => {
         .email('Must be a valid email')
         .required('Email is required'),
       password: yup.string().required('Password is required'),
+      companyName: yup.string().required('Company name is required'),
+      identificationCode: yup.string().required('Company name is required'),
+      adress: yup.string().required('Company name is required'),
+      website: yup.string(),
     }),
   })
 
