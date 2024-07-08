@@ -2,27 +2,35 @@
 import AppButton from '@/common/components/appButton/AppButton'
 import Checkbox from '@/common/components/checkbox/Checkbox'
 import { useTranslations } from 'next-intl'
-import React, { useState } from 'react'
-import styled from 'styled-components'
+import React, { useEffect, useState } from 'react'
+import styled, { css } from 'styled-components'
 
 type CheckboxOption = {
   value: string
 }
 
 const options: CheckboxOption[] = [
-  { value: 'individual' },
-  { value: 'legal person' },
+  { title: 'Individual', value: 'individual' },
+  { title: 'Legal person', value: 'legalPerson' },
 ]
 
 type Props = {}
 
 const RegistrationForm = (props: Props) => {
+  // props.setStep((step) => step + 1)
   const t = useTranslations('')
-  const [selectedOption, setSelectedOption] = useState<string | null>(null)
+  const [selectedOption, setSelectedOption] = useState<
+    'individual' | 'legalPerson' | null
+  >('individual')
 
   const handleCheckboxChange = (value: string) => {
-    setSelectedOption((prev) => (prev === value ? null : value))
+    // setSelectedOption((prev) => (prev === value ? null : value))
+    setSelectedOption(value)
   }
+
+  useEffect(() => {
+    console.log(selectedOption)
+  }, [selectedOption])
 
   return (
     <Container>
@@ -32,12 +40,14 @@ const RegistrationForm = (props: Props) => {
           <UserType
             key={index}
             onClick={() => handleCheckboxChange(option.value)}
+            // selected={true}
+            selected={selectedOption === option.value}
           >
             <Checkbox
               value={option.value}
               checked={selectedOption === option.value}
             />
-            <UserTypeText>{t(`${option.value}`)}</UserTypeText>
+            <UserTypeText>{t(`${option.title}`)}</UserTypeText>
           </UserType>
         ))}
       </Frame>
@@ -93,12 +103,23 @@ const Frame = styled.div`
   justify-content: space-between;
 `
 
-const UserType = styled.div`
+type UserTypeProps = {
+  selected: boolean
+}
+
+const UserType = styled.div<UserTypeProps>`
   position: relative;
   border: 1px solid ${({ theme }) => theme.colors?.disabled_gray};
   width: 148px;
   height: 120px;
   border-radius: 12px;
+  /* ${({ selected }) => console.log('style:', selected)} */
+
+  ${({ selected, theme }) =>
+    selected &&
+    `
+      background-color: ${theme.colors?.red};
+    `}
 `
 
 const UserTypeText = styled.div`
