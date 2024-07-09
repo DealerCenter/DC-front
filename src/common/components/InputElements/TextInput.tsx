@@ -1,5 +1,7 @@
 import React, { ChangeEventHandler } from 'react'
 import styled, { css } from 'styled-components'
+import infoIcon from '@/app/assets/icons/info.svg'
+import Image from 'next/image'
 
 type Props = {
   type: string
@@ -9,6 +11,7 @@ type Props = {
   onChange: ChangeEventHandler<HTMLInputElement>
   onBlur: ChangeEventHandler<HTMLInputElement>
   withIcon?: boolean
+  optionalInfo?: string | null
 }
 
 const TextInput = ({
@@ -19,17 +22,26 @@ const TextInput = ({
   onChange,
   onBlur,
   withIcon = false,
+  optionalInfo = null,
 }: Props) => {
   return (
-    <StyledInput
-      type={type}
-      name={name}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      onBlur={onBlur}
-      withIcon={withIcon}
-    />
+    <div>
+      <StyledInput
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        withIcon={withIcon}
+      />
+      {optionalInfo && (
+        <TextBox>
+          <Image src={infoIcon} alt='info icon' width={16} height={16} />
+          <OptionalText>{optionalInfo}</OptionalText>
+        </TextBox>
+      )}
+    </div>
   )
 }
 
@@ -65,4 +77,22 @@ const StyledInput = styled.input<InputProps>`
     border: none;
     outline: 4px solid rgba(216, 226, 244, 1);
   }
+`
+
+const TextBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2.5px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  height: 20px;
+`
+
+const OptionalText = styled.p`
+  font-size: 11px;
+  color: rgba(32, 32, 32, 0.56);
+  padding: 4px;
+  font-weight: 400;
+  margin: 0;
 `

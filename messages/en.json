@@ -14,5 +14,12 @@
   "adress": "Adress",
   "website": "Website",
   "upload a certificate of commercial activity from the public register": " Upload a certificate of commercial activity from the public register",
-  "drop the files here ...": "Drop the files here ..."
+  "drop the files here ...": "Drop the files here ...",
+  "name of representative": "Name of representative",
+  "surname of representative": "Surname of representative",
+  "contact number": "Contact number",
+  "date of birth": "Date of birth",
+  "personal number": "Personal number",
+  "upload an ID photo": "Upload an ID photo",
+  "enter your date of birth as year/month/day": "Enter your date of birth as year/month/day"
 }

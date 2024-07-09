@@ -2,14 +2,21 @@ import Image from 'next/image'
 import React from 'react'
 import styled, { css } from 'styled-components'
 import stepFrame from '@/app/assets/icons/stepNav.svg'
+import doneIcon from '@/app/assets/icons/doneIcon.svg'
 
-type Props = { children: string; active: boolean; onClick: () => void }
+type Props = {
+  children: string
+  active: boolean
+  done: boolean
+  onClick: () => void
+}
 
-const TextNav = ({ children, active, onClick }: Props) => {
+const TextNav = ({ children, active, onClick, done }: Props) => {
   return (
-    <StyledDiv active={active} onClick={onClick}>
-      {/* <Image src={stepFrame} alt='step frame' /> */}
-      <StyledP active={active}>{children}</StyledP>
+    <StyledDiv active={active} onClick={onClick} done={done}>
+      <StyledP active={active} done={done}>
+        {done ? <Image src={doneIcon} alt='done icon' width={10} /> : children}
+      </StyledP>
     </StyledDiv>
   )
 }
@@ -18,9 +25,11 @@ export default TextNav
 
 type StyledDivProps = {
   active: boolean
+  done: boolean
 }
 type StyledPProps = {
   active: boolean
+  done: boolean
 }
 
 const StyledDiv = styled.div<StyledDivProps>`
@@ -33,29 +42,36 @@ const StyledDiv = styled.div<StyledDivProps>`
   /* padding: 12px 16px 12px 16px; */
   width: 32px;
   height: 32px;
-
   cursor: pointer;
 
-  ${({ active }) =>
-    active
+  ${({ done, active }) =>
+    done
       ? css`
-          border-color: rgba(18, 18, 20, 1);
+          background-color: rgba(32, 32, 32, 1);
         `
-      : css`
-          border-color: rgba(32, 32, 32, 0.42);
-        `}
+      : active
+        ? css`
+            border-color: rgba(32, 32, 32, 1);
+          `
+        : css`
+            border-color: rgba(32, 32, 32, 0.42);
+          `}
 `
 
 const StyledP = styled.p<StyledPProps>`
   font-size: 14px;
   font-weight: 700;
 
-  ${({ active }) =>
-    active
+  ${({ done, active }) =>
+    done
       ? css`
-          color: rgba(18, 18, 20, 1);
+          color: white;
         `
-      : css`
-          color: rgba(32, 32, 32, 0.42);
-        `}
+      : active
+        ? css`
+            color: rgba(18, 18, 20, 1);
+          `
+        : css`
+            color: rgba(32, 32, 32, 0.42);
+          `}
 `

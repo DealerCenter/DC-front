@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import FormStep3 from './RegistrationSteps.tsx/FormStep3'
-import LegalPersonForm2 from './RegistrationSteps.tsx/LegalPersonForm2'
-import LegalPersonForm1 from './RegistrationSteps.tsx/LegalPersonForm1'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
-import useForm from '../hooks/useForm'
-import TextInput from '@/common/components/InputElements/TextInput'
-import AppButton from '@/common/components/appButton/AppButton'
-import TextNav from '@/common/components/textNav/TextNav'
-import stepArrow from '@/app/assets/icons/stepArrow.svg'
 import Image from 'next/image'
+
+import TextNav from '@/common/components/textNav/TextNav'
+import LegalPersonForm1 from './RegistrationSteps.tsx/LegalPersonForm1'
+import LegalPersonForm2 from './RegistrationSteps.tsx/LegalPersonForm2'
+import FormStep3 from './RegistrationSteps.tsx/FormStep3'
+
+import stepArrow from '@/app/assets/icons/stepArrow.svg'
 
 type Props = {}
 
@@ -47,7 +46,12 @@ function InputFormLegalPerson(props: Props) {
               <Image src={stepArrow} alt='step arrow' width={20} height={20} />
             )}
             <TextNav
-              onClick={() => setFormStep(step.stepNumber)}
+              done={step.stepNumber < activeStep.stepNumber}
+              onClick={() => {
+                if (step.stepNumber < activeStep.stepNumber) {
+                  setFormStep(step.stepNumber)
+                }
+              }}
               key={step.stepNumber}
               active={step.stepNumber === formStep}
             >
@@ -57,7 +61,6 @@ function InputFormLegalPerson(props: Props) {
         ))}
       </StepsContainer>
       {activeStep.component}
-      {/* <LegalPersonForm1 setFormStep={setFormStep}></LegalPersonForm1> */}
     </StyledDiv>
   )
 }
@@ -68,7 +71,6 @@ const H2Bold = styled.h2`
   font-size: 40px;
   font-weight: 700;
   margin: 0;
-  margin-bottom: 6px;
 `
 
 const StepsContainer = styled.div`
@@ -82,8 +84,7 @@ const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
-  gap: 24px;
+  gap: 48px;
 `
 
 const StyledP = styled.p`
