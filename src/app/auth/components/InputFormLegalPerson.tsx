@@ -8,7 +8,6 @@ import useForm from '../hooks/useForm'
 import TextInput from '@/common/components/InputElements/TextInput'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextNav from '@/common/components/textNav/TextNav'
-import FileInput from '@/common/components/InputElements/FileInput'
 
 type Props = {}
 
@@ -34,7 +33,7 @@ function InputFormLegalPerson(props: Props) {
     },
   ]
 
-  const activeStep = steps.filter((step) => step.stepNumber === formStep)
+  const activeStep = steps.filter((step) => step.stepNumber === formStep)[0]
 
   return (
     <StyledDiv>
@@ -50,7 +49,7 @@ function InputFormLegalPerson(props: Props) {
           </TextNav>
         ))}
       </StepsContainer>
-      {activeStep[0].component}
+      {activeStep.component}
       {/* <LegalPersonForm1 setFormStep={setFormStep}></LegalPersonForm1> */}
     </StyledDiv>
   )

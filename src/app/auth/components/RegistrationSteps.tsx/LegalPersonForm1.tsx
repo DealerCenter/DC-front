@@ -1,10 +1,10 @@
 import AppButton from '@/common/components/appButton/AppButton'
-import FileInput from '@/common/components/InputElements/FileInput'
 import TextInput from '@/common/components/InputElements/TextInput'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
 import useForm from '../../hooks/useForm'
+import FileDropZone from '@/common/components/InputElements/FileDropZone'
 
 type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
 
@@ -46,11 +46,12 @@ const LegalPersonForm1 = ({ setFormStep }: Props) => {
         onChange={handleChange}
         onBlur={handleBlur}
       />
-      <FileInput>
-        {t(
+      <FileDropZone
+        dropText={t('Drop the files here ...')}
+        text={t(
           'upload a certificate of commercial activity from the public register'
         )}
-      </FileInput>
+      />
       <AppButton
         text={t('next')}
         type='filled'
