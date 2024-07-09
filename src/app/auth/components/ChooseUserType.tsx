@@ -16,13 +16,13 @@ const options: CheckboxOption[] = [
 ]
 
 type Props = {
-  setStep: React.Dispatch<
+  setType: React.Dispatch<
     React.SetStateAction<'chooseType' | 'individual' | 'legalPerson' | null>
   >
 }
 
-const ChooseUserType = ({ setStep }: Props) => {
-  // props.setStep((step) => step + 1)
+const ChooseUserType = ({ setType }: Props) => {
+  // props.setType((step) => step + 1)
   const t = useTranslations('')
   const [selectedOption, setSelectedOption] = useState<
     'individual' | 'legalPerson' | null
@@ -58,7 +58,7 @@ const ChooseUserType = ({ setStep }: Props) => {
         text={t('next')}
         type={'filled'}
         disabled={selectedOption === null}
-        onClick={() => setStep(selectedOption)}
+        onClick={() => setType(selectedOption)}
       />
       <div>
         <StyledP>{t('already registered?')}</StyledP>

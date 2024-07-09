@@ -10,13 +10,9 @@ import AppButton from '@/common/components/appButton/AppButton'
 import TextNav from '@/common/components/textNav/TextNav'
 import FileInput from '@/common/components/InputElements/FileInput'
 
-type Props = {
-  setStep: React.Dispatch<
-    React.SetStateAction<'chooseType' | 'individual' | 'legalPerson' | null>
-  >
-}
+type Props = {}
 
-function InputFormLegalPerson({ setStep }: Props) {
+function InputFormLegalPerson(props: Props) {
   const t = useTranslations('')
   const [formStep, setFormStep] = useState(1)
 

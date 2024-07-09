@@ -1,12 +1,8 @@
 import React from 'react'
 
-type Props = {
-  setStep: React.Dispatch<
-    React.SetStateAction<'chooseType' | 'individual' | 'legalPerson' | null>
-  >
-}
+type Props = {}
 
-function InputsIndividual({ setStep }: Props) {
+function InputsIndividual(props: Props) {
   return <div>InputsIndividual</div>
 }
 

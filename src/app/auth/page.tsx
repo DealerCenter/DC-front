@@ -10,42 +10,30 @@ import AppButton from '@/common/components/appButton/AppButton'
 type Props = {}
 
 const Page = (props: Props) => {
-  const [step, setStep] = useState<
+  const [type, setType] = useState<
     'chooseType' | 'individual' | 'legalPerson' | null
   >('chooseType')
-  // const [step, setStep] = useState('chooseType')
 
-  const steps = [
-    {
-      stepNumber: 1,
-      stepName: 'chooseType',
-      component: <ChooseUserType setStep={setStep} />,
-    },
-    {
-      stepNumber: 2,
-      stepName: 'individual',
-      component: <InputFormIndividual setStep={setStep} />,
-    },
-    {
-      stepNumber: 3,
-      stepName: 'legalPerson',
-      component: <InputFormLegalPerson setStep={setStep} />,
-    },
-  ]
-
-  const activeStep = steps.filter((st) => st.stepName === step)
+  const activeStep =
+    type === 'individual' ? (
+      <InputFormIndividual />
+    ) : type === 'legalPerson' ? (
+      <InputFormLegalPerson />
+    ) : (
+      <ChooseUserType setType={setType} />
+    )
 
   return (
     <>
       <RegistrationForm>
         <>
-          {activeStep[0].component}
-          {step !== 'chooseType' && (
+          {activeStep}
+          {type !== 'chooseType' && (
             <AppButton
               text='Back to Choose Type'
               type='filled'
               disabled={false}
-              onClick={() => setStep('chooseType')}
+              onClick={() => setType('chooseType')}
             ></AppButton>
           )}
         </>
