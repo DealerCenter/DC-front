@@ -1,10 +1,10 @@
 "use client";
 import LoginForm from "./components/LoginForm";
 
-type Props = {};
+type Props = {}
 
 const Page = (props: Props) => {
-  return <LoginForm />;
-};
+  return <LoginForm />
+}
 
-export default Page;
+export default Page

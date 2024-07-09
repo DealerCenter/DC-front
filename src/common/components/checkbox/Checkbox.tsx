@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-type Props = {};
+type Props = {}
 
 const Checkbox = (props: Props) => {
-  return <StyledInput type="checkbox" />;
-};
+  return <StyledInput type='checkbox' />
+}
 
-export default Checkbox;
+export default Checkbox
 
 const StyledInput = styled.input`
   width: 24px;
@@ -16,4 +16,4 @@ const StyledInput = styled.input`
   border-radius: 6px;
   color: red;
   background-color: red;
-`;
+`
