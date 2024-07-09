@@ -7,6 +7,7 @@ const useForm = () => {
     initialValues: {
       email: '',
       password: '',
+      repeatPassword: '',
       companyName: '',
       identificationCode: '',
       adress: '',
@@ -26,6 +27,7 @@ const useForm = () => {
         .email('Must be a valid email')
         .required('Email is required'),
       password: yup.string().required('Password is required'),
+      repeatPassword: yup.string().required('Password is required'),
       companyName: yup.string().required('Company name  is required'),
       identificationCode: yup
         .string()

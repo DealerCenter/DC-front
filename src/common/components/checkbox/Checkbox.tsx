@@ -14,15 +14,15 @@ const Checkbox = ({ checked, value }: Props) => {
         <Image
           src={checkboxFilled}
           alt='checkbox filled'
-          width={48}
-          height={48}
+          width={24}
+          height={24}
         />
       ) : (
         <Image
           src={checkboxEmpty}
           alt='checkbox empty'
-          width={48}
-          height={48}
+          width={24}
+          height={24}
         />
       )}
       <StyledInput type='checkbox' value={value} checked={checked} />
@@ -37,9 +37,9 @@ const StyledInput = styled.input`
 `
 
 const Container = styled.div`
-  /* width: 48px;
+  width: 48px;
   height: 48px;
   display: flex;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
 `

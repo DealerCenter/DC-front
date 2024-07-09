@@ -3,6 +3,8 @@
   "login": "Login",
   "not registered?": "Not registered?",
   "already registered?": "Already registered?",
+  "password": "Password",
+  "repeat password": "Repeat password",
   "forgot password?": "Forgot password?",
   "remember": "Remember",
   "choose user type": "Choose user type",
@@ -21,5 +23,6 @@
   "date of birth": "Date of birth",
   "personal number": "Personal number",
   "upload an ID photo": "Upload an ID photo",
-  "enter your date of birth as year/month/day": "Enter your date of birth as year/month/day"
+  "enter your date of birth as year/month/day": "Enter your date of birth as year/month/day",
+  "email": "E-mail"
 }

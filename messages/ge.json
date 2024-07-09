@@ -3,6 +3,8 @@
   "login": "შესვლა",
   "not registered?": "არ ხარ დარეგისტრირებული?",
   "already registered?": "უკვე ხარ დარეგისტრირებული?",
+  "password": "პაროლი",
+  "repeat password": "გაიმეორეთ პაროლი",
   "forgot password?": "დაგავიწყდა პაროლი?",
   "remember": "დამახსოვრება",
   "choose user type": "აირჩიეთ მომხმარებლის ტიპი",
@@ -18,5 +20,6 @@
   "date of birth": "დაბადების თარიღი",
   "personal number": "პირადი ნომერი",
   "upload an ID photo": "ატვირთეთ პირადობის ფოტო",
-  "enter your date of birth as year/month/day": "შეიყვანე დაბადების თარიღი შემდეგნაირად წელი/თვე/რიცხვი"
+  "enter your date of birth as year/month/day": "შეიყვანე დაბადების თარიღი შემდეგნაირად წელი/თვე/რიცხვი",
+  "email": "ელ-ფოსტა"
 }
