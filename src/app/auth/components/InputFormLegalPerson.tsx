@@ -8,6 +8,8 @@ import useForm from '../hooks/useForm'
 import TextInput from '@/common/components/InputElements/TextInput'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextNav from '@/common/components/textNav/TextNav'
+import stepArrow from '@/app/assets/icons/stepArrow.svg'
+import Image from 'next/image'
 
 type Props = {}
 
@@ -39,14 +41,19 @@ function InputFormLegalPerson(props: Props) {
     <StyledDiv>
       <H2Bold>{t('register')}</H2Bold>
       <StepsContainer>
-        {steps.map((step) => (
-          <TextNav
-            onClick={() => setFormStep(step.stepNumber)}
-            key={step.stepNumber}
-            active={step.stepNumber === formStep}
-          >
-            {step.stepNumber.toString()}
-          </TextNav>
+        {steps.map((step, i) => (
+          <>
+            {i > 0 && (
+              <Image src={stepArrow} alt='step arrow' width={20} height={20} />
+            )}
+            <TextNav
+              onClick={() => setFormStep(step.stepNumber)}
+              key={step.stepNumber}
+              active={step.stepNumber === formStep}
+            >
+              {step.stepNumber.toString()}
+            </TextNav>
+          </>
         ))}
       </StepsContainer>
       {activeStep.component}
@@ -67,7 +74,8 @@ const H2Bold = styled.h2`
 const StepsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 56px;
+  gap: 16px;
+  align-items: center;
 `
 
 const StyledDiv = styled.div`

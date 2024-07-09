@@ -41,12 +41,10 @@ const ChooseUserType = ({ setType }: Props) => {
           <UserType
             key={index}
             onClick={() => handleCheckboxChange(option.value)}
-            // selected={true}
             selected={selectedOption === option.value}
           >
-            <Checkbox
+            <StyledCheckbox
               value={option.value}
-              // onChange={() => handleCheckboxChange(option.value)}
               checked={selectedOption === option.value}
             />
             <UserTypeText>{t(`${option.title}`)}</UserTypeText>
@@ -101,6 +99,7 @@ const UserType = styled.div<UserTypeProps>`
   width: 148px;
   height: 120px;
   border-radius: 12px;
+  display: flex;
 
   ${({ selected }) =>
     selected &&
@@ -116,4 +115,8 @@ const UserTypeText = styled.div`
   font-weight: 700;
   line-height: 19.2px;
   padding: 16px;
+`
+const StyledCheckbox = styled(Checkbox)`
+  position: absolute;
+  right: 16px;
 `

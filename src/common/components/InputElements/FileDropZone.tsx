@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styled from 'styled-components'
+import uploadIcon from '@/app/assets/icons/FileUpload.svg'
+import Image from 'next/image'
 
 type Props = { text: string; dropText: string }
 
@@ -14,6 +16,9 @@ const FileDropZone = ({ text, dropText }: Props) => {
 
   return (
     <Container {...getRootProps()}>
+      <IconBox>
+        <Image src={uploadIcon} alt='upload icon' width={22.95} height={25} />
+      </IconBox>
       <input {...getInputProps()} />
       {isDragActive ? (
         <StyledLabel>{dropText}</StyledLabel>
@@ -27,13 +32,17 @@ const FileDropZone = ({ text, dropText }: Props) => {
 export default FileDropZone
 
 const Container = styled.div`
+  box-sizing: border-box;
   position: relative;
   width: 350px;
   height: 161px;
   display: flex;
+  justify-content: center;
+
   background-color: white;
   border: 2px dashed rgba(32, 32, 32, 0.04);
   border-radius: 12px;
+  padding: 16px;
 
   cursor: pointer;
 
@@ -53,4 +62,14 @@ const StyledLabel = styled.label`
   text-align: center;
 
   cursor: pointer;
+`
+
+const IconBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background-color: rgba(32, 32, 32, 0.04);
+  width: 60px;
+  height: 60px;
 `

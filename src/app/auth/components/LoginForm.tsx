@@ -8,7 +8,9 @@ import Checkbox from '@/common/components/checkbox/Checkbox'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/InputElements/TextInput'
 import useForm from '../hooks/useForm'
-
+import Image from 'next/image'
+import emailIcon from '@/app/assets/icons/email.svg'
+import passwordIcon from '@/app/assets/icons/password.svg'
 type Props = {}
 
 const LoginForm = (props: Props) => {
@@ -19,23 +21,36 @@ const LoginForm = (props: Props) => {
     <Container>
       <StyledForm onSubmit={handleSubmit}>
         <H4Bold>{t('login')}</H4Bold>
-        <TextInput
-          type='email'
-          name='email'
-          placeholder='john@example.com'
-          value={values.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-        <div>
+        <TextInputContainer>
           <TextInput
-            type='password'
-            name='password'
-            placeholder='******'
-            value={values.password}
+            type='email'
+            name='email'
+            placeholder='john@example.com'
+            value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
+            withIcon={true}
           />
+          <Icon src={emailIcon} alt='email icon' width={20} height={16} />
+        </TextInputContainer>
+        <div>
+          <TextInputContainer>
+            <TextInput
+              type='password'
+              name='password'
+              placeholder='•••••••'
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              withIcon={true}
+            />
+            <Icon
+              src={passwordIcon}
+              alt='password icon'
+              width={19}
+              height={22}
+            />
+          </TextInputContainer>
           <LabelContainer>
             <StyledLabel>
               {/* <StyledCheckbox checked={false} /> */}
@@ -77,13 +92,17 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 48px;
-  margin-top: 2rem;
+  margin-top: 63px;
 
   @media (${({ theme }) => theme.media?.desktop}) {
-    width: 65%;
+    width: 47%;
     max-width: 682px;
     padding: 42px 120px 42px 120px;
   }
+`
+
+const TextInputContainer = styled.div`
+  position: relative;
 `
 
 const StyledForm = styled.form`
@@ -118,4 +137,12 @@ const StyledCheckbox = styled(Checkbox)`
 const StyledLabel = styled.label`
   display: flex;
   align-items: center;
+`
+
+const Icon = styled(Image)`
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  left: 16px;
+  top: 17px;
 `

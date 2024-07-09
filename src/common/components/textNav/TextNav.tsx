@@ -1,12 +1,14 @@
+import Image from 'next/image'
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { CSS } from 'styled-components/dist/types'
+import stepFrame from '@/app/assets/icons/stepNav.svg'
 
 type Props = { children: string; active: boolean; onClick: () => void }
 
 const TextNav = ({ children, active, onClick }: Props) => {
   return (
     <StyledDiv active={active} onClick={onClick}>
+      {/* <Image src={stepFrame} alt='step frame' /> */}
       <StyledP active={active}>{children}</StyledP>
     </StyledDiv>
   )
@@ -46,6 +48,7 @@ const StyledDiv = styled.div<StyledDivProps>`
 
 const StyledP = styled.p<StyledPProps>`
   font-size: 14px;
+  font-weight: 700;
 
   ${({ active }) =>
     active

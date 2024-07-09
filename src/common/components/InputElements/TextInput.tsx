@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 type Props = {
   type: string
@@ -8,6 +8,7 @@ type Props = {
   value: string
   onChange: ChangeEventHandler<HTMLInputElement>
   onBlur: ChangeEventHandler<HTMLInputElement>
+  withIcon?: boolean
 }
 
 const TextInput = ({
@@ -17,6 +18,7 @@ const TextInput = ({
   value,
   onChange,
   onBlur,
+  withIcon = false,
 }: Props) => {
   return (
     <StyledInput
@@ -26,13 +28,19 @@ const TextInput = ({
       value={value}
       onChange={onChange}
       onBlur={onBlur}
+      withIcon={withIcon}
     />
   )
 }
 
 export default TextInput
 
-const StyledInput = styled.input`
+type InputProps = {
+  withIcon: boolean
+}
+
+const StyledInput = styled.input<InputProps>`
+  position: relative;
   box-sizing: border-box;
   background-color: white;
   border: none;
@@ -43,6 +51,11 @@ const StyledInput = styled.input`
   padding: 10px 10px 10px 16px;
   border-radius: 12px;
   font-size: 16px;
+  ${({ withIcon }) =>
+    withIcon &&
+    css`
+      padding-left: 50px;
+    `}
 
   &::placeholder {
     color: rgba(18, 18, 20, 0.56);
