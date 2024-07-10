@@ -6,9 +6,12 @@ import styled from 'styled-components'
 import useForm from '../../hooks/useForm'
 import FileDropZone from '@/common/components/InputElements/FileDropZone'
 
-type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
+type Props = {
+  setFormStep: React.Dispatch<React.SetStateAction<number>>
+  goToLogin: () => void
+}
 
-const LegalPersonForm1 = ({ setFormStep }: Props) => {
+const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
   const t = useTranslations('')
   const { values, handleBlur, handleChange, handleSubmit } = useForm()
 
@@ -66,7 +69,7 @@ const LegalPersonForm1 = ({ setFormStep }: Props) => {
           type='outlined'
           text={t('register')}
           disabled={false}
-          onClick={() => {}}
+          onClick={goToLogin}
         />
       </div>
     </StyledForm>

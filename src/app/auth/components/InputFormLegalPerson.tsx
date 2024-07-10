@@ -10,9 +10,11 @@ import FormStep3 from './RegistrationSteps.tsx/FormStep3'
 
 import stepArrow from '@/app/assets/icons/stepArrow.svg'
 
-type Props = {}
+type Props = {
+  goToLogin: () => void
+}
 
-function InputFormLegalPerson(props: Props) {
+function InputFormLegalPerson({ goToLogin }: Props) {
   const t = useTranslations('')
   const [formStep, setFormStep] = useState(1)
 
@@ -20,7 +22,9 @@ function InputFormLegalPerson(props: Props) {
     {
       stepNumber: 1,
       stepName: 'legalPerson1',
-      component: <LegalPersonForm1 setFormStep={setFormStep} />,
+      component: (
+        <LegalPersonForm1 setFormStep={setFormStep} goToLogin={goToLogin} />
+      ),
     },
     {
       stepNumber: 2,

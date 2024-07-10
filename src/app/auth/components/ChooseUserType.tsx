@@ -16,12 +16,13 @@ const options: CheckboxOption[] = [
 ]
 
 type Props = {
+  goToLogin: () => void
   setType: React.Dispatch<
     React.SetStateAction<'chooseType' | 'individual' | 'legalPerson' | null>
   >
 }
 
-const ChooseUserType = ({ setType }: Props) => {
+const ChooseUserType = ({ setType, goToLogin }: Props) => {
   // props.setType((step) => step + 1)
   const t = useTranslations('')
   const [selectedOption, setSelectedOption] = useState<
@@ -64,7 +65,7 @@ const ChooseUserType = ({ setType }: Props) => {
           text={t('login')}
           type={'outlined'}
           disabled={false}
-          onClick={() => {}}
+          onClick={() => goToLogin()}
         />
       </div>
     </>

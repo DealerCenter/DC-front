@@ -36,7 +36,7 @@ const Container = styled.div`
 `;
 
 const HeaderBox = styled.div`
-  background-color: red;
+  /* background-color: red; */
 
   @media (min-width: 500px) {
     box-sizing: border-box;

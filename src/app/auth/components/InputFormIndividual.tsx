@@ -10,7 +10,9 @@ import FormStep3 from './RegistrationSteps.tsx/FormStep3'
 
 import stepArrow from '@/app/assets/icons/stepArrow.svg'
 
-type Props = {}
+type Props = {
+  goToLogin: () => void
+}
 
 function InputsIndividual(props: Props) {
   const t = useTranslations('')

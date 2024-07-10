@@ -10,7 +10,7 @@ type Props = {
   value: string
   onChange: ChangeEventHandler<HTMLInputElement>
   onBlur: ChangeEventHandler<HTMLInputElement>
-  withIcon?: boolean
+  icon?: any
   optionalInfo?: string | null
 }
 
@@ -21,11 +21,12 @@ const TextInput = ({
   value,
   onChange,
   onBlur,
-  withIcon = false,
+  icon,
   optionalInfo = null,
 }: Props) => {
   return (
     <div>
+      {icon ? icon : null}
       <StyledInput
         type={type}
         name={name}
@@ -33,7 +34,7 @@ const TextInput = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        withIcon={withIcon}
+        icon={icon}
       />
       {optionalInfo && (
         <TextBox>
@@ -48,7 +49,7 @@ const TextInput = ({
 export default TextInput
 
 type InputProps = {
-  withIcon: boolean
+  icon: any
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -63,8 +64,8 @@ const StyledInput = styled.input<InputProps>`
   padding: 10px 10px 10px 16px;
   border-radius: 12px;
   font-size: 16px;
-  ${({ withIcon }) =>
-    withIcon &&
+  ${({ icon }) =>
+    icon &&
     css`
       padding-left: 50px;
     `}

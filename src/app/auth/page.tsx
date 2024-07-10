@@ -10,35 +10,39 @@ import AppButton from '@/common/components/appButton/AppButton'
 type Props = {}
 
 const Page = (props: Props) => {
+  const [isLogin, setIsLogin] = useState(true)
   const [type, setType] = useState<
     'chooseType' | 'individual' | 'legalPerson' | null
   >('chooseType')
 
   const activeStep =
     type === 'individual' ? (
-      <InputFormIndividual />
+      <InputFormIndividual goToLogin={() => setIsLogin(true)} />
     ) : type === 'legalPerson' ? (
-      <InputFormLegalPerson />
+      <InputFormLegalPerson goToLogin={() => setIsLogin(true)} />
     ) : (
-      <ChooseUserType setType={setType} />
+      <ChooseUserType setType={setType} goToLogin={() => setIsLogin(true)} />
     )
 
   return (
     <>
-      <RegistrationForm>
-        <>
-          {activeStep}
-          {type !== 'chooseType' && (
-            <AppButton
-              text='Back to Choose Type'
-              type='filled'
-              disabled={false}
-              onClick={() => setType('chooseType')}
-            ></AppButton>
-          )}
-        </>
-      </RegistrationForm>
-      {/* <LoginForm /> */}
+      {isLogin ? (
+        <LoginForm goToRegistration={() => setIsLogin(false)} />
+      ) : (
+        <RegistrationForm>
+          <>
+            {activeStep}
+            {type !== 'chooseType' && (
+              <AppButton
+                text='Back to Choose Type'
+                type='filled'
+                disabled={false}
+                onClick={() => setType('chooseType')}
+              ></AppButton>
+            )}
+          </>
+        </RegistrationForm>
+      )}
     </>
   )
 }
