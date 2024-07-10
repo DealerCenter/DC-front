@@ -17,6 +17,9 @@ const useForm = () => {
       contactNumber: '',
       dateOfBirth: '',
       personalNumber: '',
+      name: '',
+      surname: '',
+      actualAddress: '',
     },
     onSubmit: () => {
       console.log(formik.values.email)
@@ -41,8 +44,11 @@ const useForm = () => {
         .string()
         .required('Surname of representative is required'),
       contactNumber: yup.string().required('Contact number name is required'),
-      dateOfBirth: yup.date().required('Date of birth name is required'),
-      personalNumber: yup.number().required('Personal number name is required'),
+      dateOfBirth: yup.date().required('date of birth name is required'),
+      personalNumber: yup.number().required('personal number name is required'),
+      name: yup.number().required('name is required'),
+      surname: yup.number().required('surname is required'),
+      actualAddress: yup.number().required('actual adress is required'),
     }),
   })
 

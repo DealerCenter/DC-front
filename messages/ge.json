@@ -21,5 +21,8 @@
   "personal number": "პირადი ნომერი",
   "upload an ID photo": "ატვირთეთ პირადობის ფოტო",
   "enter your date of birth as year/month/day": "შეიყვანე დაბადების თარიღი შემდეგნაირად წელი/თვე/რიცხვი",
-  "email": "ელ-ფოსტა"
+  "email": "ელ-ფოსტა",
+  "name": "სახელი",
+  "surname": "გვარი",
+  "actual address": "ფაქტობრივი მისამართი"
 }

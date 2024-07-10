@@ -24,5 +24,8 @@
   "personal number": "Personal number",
   "upload an ID photo": "Upload an ID photo",
   "enter your date of birth as year/month/day": "Enter your date of birth as year/month/day",
-  "email": "E-mail"
+  "email": "E-mail",
+  "name": "Name",
+  "surname": "Surname",
+  "actual address": "Actual address"
 }
