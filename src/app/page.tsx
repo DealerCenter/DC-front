@@ -9,12 +9,7 @@ import LoginForm from './auth/components/LoginForm'
 export default function Page() {
   const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
 
-  return (
-    <main>
-      {isMobile ? <BurgerHeader /> : <Header />}
-      <LoginForm />
-    </main>
-  )
+  return <main>{isMobile ? <BurgerHeader /> : <Header />}</main>
 }
 
 Page.getStaticProps = () => ({

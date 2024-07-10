@@ -1,4 +1,25 @@
 {
-    "register": "რეგისტრაცია",
-    "login:": "შესვლა"
+  "register": "რეგისტრაცია",
+  "login": "შესვლა",
+  "not registered?": "არ ხარ დარეგისტრირებული?",
+  "already registered?": "უკვე ხარ დარეგისტრირებული?",
+  "password": "პაროლი",
+  "repeat password": "გაიმეორეთ პაროლი",
+  "forgot password?": "დაგავიწყდა პაროლი?",
+  "remember": "დამახსოვრება",
+  "choose user type": "აირჩიეთ მომხმარებლის ტიპი",
+  "next": "შემდეგი",
+  "individual": "ფიზიკური პირი",
+  "legal person": "იურიდიული პირი",
+  "company name": "კომპანიის სახელწოდება",
+  "upload a certificate of commercial activity from the public register": "ატვირთეთ კომერციული საქმიანობის დამადასტურებელი ამონაწერი საჯარო რეესტრიდან",
+  "drop the files here ...": "ფაილი ჩააგდეთ აქ ...",
+  "name of representative": "წარმომადგენლის სახელი",
+  "surname of representative": "წარმომადგენლის გვარი",
+  "contact number": "საკონტაქტო ნომერი",
+  "date of birth": "დაბადების თარიღი",
+  "personal number": "პირადი ნომერი",
+  "upload an ID photo": "ატვირთეთ პირადობის ფოტო",
+  "enter your date of birth as year/month/day": "შეიყვანე დაბადების თარიღი შემდეგნაირად წელი/თვე/რიცხვი",
+  "email": "ელ-ფოსტა"
 }
