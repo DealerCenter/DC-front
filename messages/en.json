@@ -30,6 +30,11 @@
   "actual address": "Actual address",
   "file uploaded": "File uploaded",
   "photo uploaded": "Photo uploaded",
+  "use numbers": "Use numbers",
+  "use uppercase characters": "Use uppercase characters",
+  "use lowercase characters": "Use lowercase characters",
+  "at least 14 characters": "At least 14 characters",
+
   "useForm": {
     "must be valid email": "must be a valid email",
 

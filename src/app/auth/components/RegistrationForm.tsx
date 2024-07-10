@@ -10,7 +10,8 @@ const RegistrationForm = ({ children }: Props) => {
 export default RegistrationForm
 
 const Container = styled.div`
-  background-color: ${({ theme }) => theme.colors?.background};
+  /* background-color: ${({ theme }) => theme.colors?.background}; */
+  background-color: #2020200a;
   margin: auto;
   width: 374px;
   min-height: 617px;

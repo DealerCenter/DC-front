@@ -28,6 +28,11 @@
   "actual address": "ფაქტობრივი მისამართი",
   "file uploaded": "ფაილი ატვირთულია",
   "photo uploaded": "ფოტო ატვირთულია",
+  "use numbers": "გამოიყენეთ რიცხვები",
+  "use uppercase characters": "გამოიყენეთ დიდი სიმბოლოები",
+  "use lowercase characters": "გამოიყენეთ პატარა სიმბოლოები",
+  "at least 14 characters": "მინიმუმ 14 სიმბოლო",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 
