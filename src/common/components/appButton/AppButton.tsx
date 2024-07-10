@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 type ButtonTypes = 'filled' | 'outlined'
 
@@ -8,11 +8,23 @@ type Props = {
   type: ButtonTypes
   disabled: boolean
   onClick: () => void
+  isSmall?: boolean
 }
 
-const AppButton = ({ text, type, disabled, onClick }: Props) => {
+const AppButton = ({
+  text,
+  type,
+  disabled,
+  onClick,
+  isSmall = false,
+}: Props) => {
   return (
-    <StyledButton disabled={disabled} type={type} onClick={onClick}>
+    <StyledButton
+      disabled={disabled}
+      type={type}
+      onClick={onClick}
+      isSmall={isSmall}
+    >
       {text}
     </StyledButton>
   )
@@ -20,7 +32,9 @@ const AppButton = ({ text, type, disabled, onClick }: Props) => {
 
 export default AppButton
 
-const StyledButton = styled.button<{ type?: string }>`
+type ButtonProps = { type?: string; isSmall?: boolean }
+
+const StyledButton = styled.button<ButtonProps>`
   background-color: ${(props) =>
     props.disabled && props.type === 'filled'
       ? 'rgba(32, 32, 32, 0.26)'
@@ -46,8 +60,17 @@ const StyledButton = styled.button<{ type?: string }>`
         ? 'rgba(32, 32, 32, 1)'
         : 'rgba(32, 32, 32, 0.56)'};
 
+  ${({ isSmall }) =>
+    isSmall
+      ? css`
+          width: 200px;
+        `
+      : css`
+          width: 350px;
+        `}
+
   height: 56px;
-  width: 350px;
+  /* width: 350px; */
   font-size: 16px;
   line-height: 33.6px;
   font-weight: 700;

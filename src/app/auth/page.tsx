@@ -6,10 +6,14 @@ import InputFormIndividual from './components/InputFormIndividual'
 import ChooseUserType from './components/ChooseUserType'
 import InputFormLegalPerson from './components/InputFormLegalPerson'
 import AppButton from '@/common/components/appButton/AppButton'
+import { useMediaQuery } from 'react-responsive'
+import BurgerHeader from '@/common/components/header/BurgerHeader'
+import Header from '@/common/components/header/Header'
 
 type Props = {}
 
 const Page = (props: Props) => {
+  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
   const [isLogin, setIsLogin] = useState(true)
   const [type, setType] = useState<
     'chooseType' | 'individual' | 'legalPerson' | null
@@ -26,6 +30,7 @@ const Page = (props: Props) => {
 
   return (
     <>
+      {isMobile ? <BurgerHeader /> : <Header />}
       {isLogin ? (
         <LoginForm goToRegistration={() => setIsLogin(false)} />
       ) : (
