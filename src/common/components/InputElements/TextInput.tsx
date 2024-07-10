@@ -25,8 +25,8 @@ const TextInput = ({
   optionalInfo = null,
 }: Props) => {
   return (
-    <div>
-      {icon ? icon : null}
+    <Container>
+      {icon ? <IconBox>{icon}</IconBox> : null}
       <StyledInput
         type={type}
         name={name}
@@ -42,11 +42,15 @@ const TextInput = ({
           <OptionalText>{optionalInfo}</OptionalText>
         </TextBox>
       )}
-    </div>
+    </Container>
   )
 }
 
 export default TextInput
+
+const Container = styled.div`
+  position: relative;
+`
 
 type InputProps = {
   icon: any
@@ -96,4 +100,13 @@ const OptionalText = styled.p`
   padding: 4px;
   font-weight: 400;
   margin: 0;
+`
+
+const IconBox = styled.div`
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  left: 16px;
+  top: 17px;
+  z-index: 1000;
 `
