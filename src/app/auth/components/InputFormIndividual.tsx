@@ -1,8 +1,10 @@
 import React from 'react'
 
-type Props = {}
+type Props = {
+  goToLogin: () => void
+}
 
-function InputsIndividual(props: Props) {
+function InputsIndividual({ goToLogin }: Props) {
   return <div>InputsIndividual</div>
 }
 

@@ -12,7 +12,7 @@ export default function Page() {
   return (
     <main>
       {isMobile ? <BurgerHeader /> : <Header />}
-      <LoginForm />
+      {/* <LoginForm /> */}
     </main>
   )
 }

@@ -11,9 +11,12 @@ import useForm from '../hooks/useForm'
 import Image from 'next/image'
 import emailIcon from '@/app/assets/icons/email.svg'
 import passwordIcon from '@/app/assets/icons/password.svg'
-type Props = {}
 
-const LoginForm = (props: Props) => {
+type Props = {
+  goToRegistration: () => void
+}
+
+const LoginForm = ({ goToRegistration }: Props) => {
   const t = useTranslations('')
   const { values, handleBlur, handleChange, handleSubmit } = useForm()
 
@@ -29,9 +32,10 @@ const LoginForm = (props: Props) => {
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            withIcon={true}
+            icon={
+              <Icon src={emailIcon} alt='email icon' width={20} height={16} />
+            }
           />
-          <Icon src={emailIcon} alt='email icon' width={20} height={16} />
         </TextInputContainer>
         <div>
           <TextInputContainer>
@@ -72,7 +76,7 @@ const LoginForm = (props: Props) => {
           type='outlined'
           text={t('register')}
           disabled={false}
-          onClick={() => {}}
+          onClick={goToRegistration}
         />
       </div>
     </Container>
