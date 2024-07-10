@@ -1,9 +1,11 @@
-import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/InputElements/TextInput'
-import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
+
 import useForm from '../../hooks/useForm'
+
+import AppButton from '@/common/components/appButton/AppButton'
+import TextInput from '@/common/components/InputElements/TextInput'
 import FileDropZone from '@/common/components/InputElements/FileDropZone'
 
 type Props = {
@@ -54,6 +56,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         text={t(
           'upload a certificate of commercial activity from the public register'
         )}
+        uploadedText={t('file uploaded')}
       />
       <AppButton
         text={t('next')}

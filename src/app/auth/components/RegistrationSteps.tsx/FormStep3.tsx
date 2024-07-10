@@ -7,8 +7,8 @@ import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
 import useForm from '../../hooks/useForm'
 
-import checkboxFilled from '@/app/assets/icons/checkboxFilled.svg'
-import checkboxRed from '@/app/assets/icons/checkboxRed.svg'
+import checkboxFilled from '@/assets/icons/checkboxFilled.svg'
+import checkboxRed from '@/assets/icons/checkboxRed.svg'
 
 type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
 

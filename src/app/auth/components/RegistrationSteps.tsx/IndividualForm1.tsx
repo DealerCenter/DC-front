@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl'
 import React from 'react'
 import useForm from '../../hooks/useForm'
 import AppButton from '@/common/components/appButton/AppButton'
-import FileDropZone from '@/common/components/InputElements/FileDropZone'
 import styled from 'styled-components'
 
 type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }

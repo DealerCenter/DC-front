@@ -24,5 +24,7 @@
   "email": "ელ-ფოსტა",
   "name": "სახელი",
   "surname": "გვარი",
-  "actual address": "ფაქტობრივი მისამართი"
+  "actual address": "ფაქტობრივი მისამართი",
+  "file uploaded": "ფაილი ატვირთულია",
+  "photo uploaded": "ფოტო ატვირთულია"
 }

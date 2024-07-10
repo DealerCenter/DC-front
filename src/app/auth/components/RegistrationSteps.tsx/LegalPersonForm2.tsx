@@ -1,8 +1,10 @@
-import TextInput from '@/common/components/InputElements/TextInput'
-import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
+
 import useForm from '../../hooks/useForm'
+
+import TextInput from '@/common/components/InputElements/TextInput'
 import FileDropZone from '@/common/components/InputElements/FileDropZone'
 import AppButton from '@/common/components/appButton/AppButton'
 
@@ -58,6 +60,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
       <FileDropZone
         dropText={t('Drop the file here ...')}
         text={t('upload an ID photo')}
+        uploadedText={t('photo uploaded')}
       />
       <AppButton
         text={t('next')}

@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler } from 'react'
 import styled, { css } from 'styled-components'
-import infoIcon from '@/app/assets/icons/info.svg'
+import infoIcon from '@/assets/icons/info.svg'
 import Image from 'next/image'
 
 type Props = {
