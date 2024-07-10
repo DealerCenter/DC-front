@@ -12,7 +12,8 @@
   "individual": "ფიზიკური პირი",
   "legal person": "იურიდიული პირი",
   "company name": "კომპანიის სახელწოდება",
-  "upload a certificate of commercial activity from the public register": "ატვირთეთ კომერციული საქმიანობის დამადასტურებელი ამონაწერი საჯარო რეესტრიდან",
+  "identification code": "საიდენტიფიკაციო კოდი",
+  "upload a certificate": "ატვირთეთ კომერციული საქმიანობის დამადასტურებელი ამონაწერი საჯარო რეესტრიდან",
   "drop the files here ...": "ფაილი ჩააგდეთ აქ ...",
   "name of representative": "წარმომადგენლის სახელი",
   "surname of representative": "წარმომადგენლის გვარი",
@@ -20,11 +21,28 @@
   "date of birth": "დაბადების თარიღი",
   "personal number": "პირადი ნომერი",
   "upload an ID photo": "ატვირთეთ პირადობის ფოტო",
-  "enter your date of birth as year/month/day": "შეიყვანე დაბადების თარიღი შემდეგნაირად წელი/თვე/რიცხვი",
+  "enter your date of birth": "შეიყვანე დაბადების თარიღი შემდეგნაირად წელი/თვე/რიცხვი",
   "email": "ელ-ფოსტა",
   "name": "სახელი",
   "surname": "გვარი",
   "actual address": "ფაქტობრივი მისამართი",
   "file uploaded": "ფაილი ატვირთულია",
-  "photo uploaded": "ფოტო ატვირთულია"
+  "photo uploaded": "ფოტო ატვირთულია",
+  "useForm": {
+    "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
+
+    "email required": "ელ-ფოსტა აუცილებელია",
+    "password required": "პაროლი აუცილებელია",
+    "company name required": "კომპანიის სახელი აუცილებელია",
+    "identification code required": "საიდენტიფიკაციო კოდი აუცილებელია",
+    "address required": "მისამართი აუცილებელია",
+    "name of representative required": "წარმომადგენლის სახელი აუცილებელია",
+    "surname of representative required": "წარმომადგენლის გვარი აუცილებელია",
+    "contact number required": "საკონტაქტო ნომერი აუცილებელია",
+    "date of birth required": "დაბადების თარიღი აუცილებელია",
+    "personal number required": "პირადი ნომერი აუცილებელია",
+    "name required": "სახელი აუცილებელია",
+    "surname required": "გვარი აუცილებელია",
+    "actual address required": "ფაქტობრივი მისამართი აუცილებელია"
+  }
 }

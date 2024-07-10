@@ -47,7 +47,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         value={values.dateOfBirth}
         onChange={handleChange}
         onBlur={handleBlur}
-        optionalInfo={t('enter your date of birth as year/month/day')}
+        optionalInfo={t('enter your date of birth')}
       />
       <TextInput
         type='text'

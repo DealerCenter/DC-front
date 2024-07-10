@@ -53,9 +53,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
       />
       <FileDropZone
         dropText={t('Drop the files here ...')}
-        text={t(
-          'upload a certificate of commercial activity from the public register'
-        )}
+        text={t('upload a certificate')}
         uploadedText={t('file uploaded')}
       />
       <AppButton
