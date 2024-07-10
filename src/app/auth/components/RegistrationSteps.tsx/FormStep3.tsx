@@ -9,38 +9,15 @@ import useForm from '../../hooks/useForm'
 
 import { number } from 'yup'
 import ValidateTextBox from '@/common/components/passwordValidateTextBox/ValidateTextBox'
+import usePasswordValidation from '../../hooks/usePasswordValidation'
 
 type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
 
 const FormStep3 = ({ setFormStep }: Props) => {
   const t = useTranslations('')
   const { values, handleBlur, handleChange, handleSubmit } = useForm()
-  const [criteria, setCriteria] = useState({
-    number: false,
-    uppercase: false,
-    lowercase: false,
-    length: false,
-  })
 
-  const validatePassword = (password: string) => {
-    const number = /[0-9]/.test(password)
-    const uppercase = /[A-Z]/.test(password)
-    const lowercase = /[a-z]/.test(password)
-    const length = password.length >= 14
-
-    setCriteria({
-      number,
-      uppercase,
-      lowercase,
-      length,
-    })
-  }
-
-  useEffect(() => {
-    validatePassword(values.password)
-  }, [values.password])
-
-  console.log(criteria)
+  const criteria = usePasswordValidation(values.password)
 
   return (
     <StyledForm onSubmit={handleSubmit}>

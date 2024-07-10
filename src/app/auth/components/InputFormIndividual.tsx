@@ -14,7 +14,7 @@ type Props = {
   goToLogin: () => void
 }
 
-function InputsIndividual(props: Props) {
+function InputsIndividual({ goToLogin }: Props) {
   const t = useTranslations('')
   const [formStep, setFormStep] = useState(1)
 
@@ -22,7 +22,9 @@ function InputsIndividual(props: Props) {
     {
       stepNumber: 1,
       stepName: 'IndividualForm1',
-      component: <IndividualForm1 setFormStep={setFormStep} />,
+      component: (
+        <IndividualForm1 setFormStep={setFormStep} goToLogin={goToLogin} />
+      ),
     },
     {
       stepNumber: 2,

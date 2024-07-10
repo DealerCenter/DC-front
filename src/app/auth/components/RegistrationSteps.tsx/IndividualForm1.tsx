@@ -5,30 +5,37 @@ import useForm from '../../hooks/useForm'
 import AppButton from '@/common/components/appButton/AppButton'
 import styled from 'styled-components'
 
-type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
+type Props = {
+  setFormStep: React.Dispatch<React.SetStateAction<number>>
+  goToLogin: () => void
+}
 
-const IndividualForm1 = ({ setFormStep }: Props) => {
+const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
   const t = useTranslations('')
   const { values, handleBlur, handleChange, handleSubmit } = useForm()
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <TextInput
-        type='text'
-        name='name'
-        placeholder={t('name')}
-        value={values.name}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
-      <TextInput
-        type='text'
-        name='surname'
-        placeholder={t('surname')}
-        value={values.surname}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+      <Frame>
+        <TextInput
+          type='text'
+          name='name'
+          placeholder={t('name')}
+          value={values.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          isHalfSize={true}
+        />
+        <TextInput
+          type='text'
+          name='surname'
+          placeholder={t('surname')}
+          value={values.surname}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          isHalfSize={true}
+        />
+      </Frame>
       <TextInput
         type='text'
         name='dateOfBirth'
@@ -45,6 +52,14 @@ const IndividualForm1 = ({ setFormStep }: Props) => {
         onChange={handleChange}
         onBlur={handleBlur}
       />
+      <TextInput
+        type='text'
+        name='contactNumber'
+        placeholder={t('contact number')}
+        value={values.contactNumber}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
       <AppButton
         text={t('next')}
         type='filled'
@@ -57,9 +72,9 @@ const IndividualForm1 = ({ setFormStep }: Props) => {
         <StyledP>{t('already registered?')}</StyledP>
         <AppButton
           type='outlined'
-          text={t('register')}
+          text={t('login')}
           disabled={false}
-          onClick={() => {}}
+          onClick={goToLogin}
         />
       </div>
     </StyledForm>
@@ -67,6 +82,13 @@ const IndividualForm1 = ({ setFormStep }: Props) => {
 }
 
 export default IndividualForm1
+
+const Frame = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+`
 
 const StyledForm = styled.form`
   display: flex;

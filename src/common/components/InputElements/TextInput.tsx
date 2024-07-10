@@ -12,6 +12,7 @@ type Props = {
   onBlur: ChangeEventHandler<HTMLInputElement>
   icon?: any
   optionalInfo?: string | null
+  isHalfSize?: boolean | undefined
 }
 
 const TextInput = ({
@@ -23,6 +24,7 @@ const TextInput = ({
   onBlur,
   icon,
   optionalInfo = null,
+  isHalfSize = false,
 }: Props) => {
   return (
     <Container>
@@ -35,6 +37,7 @@ const TextInput = ({
         onChange={onChange}
         onBlur={onBlur}
         icon={icon}
+        isHalfSize={isHalfSize}
       />
       {optionalInfo && (
         <TextBox>
@@ -54,6 +57,7 @@ const Container = styled.div`
 
 type InputProps = {
   icon: any
+  isHalfSize: boolean
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -68,6 +72,16 @@ const StyledInput = styled.input<InputProps>`
   padding: 10px 10px 10px 16px;
   border-radius: 12px;
   font-size: 16px;
+
+  ${({ isHalfSize }) =>
+    isHalfSize
+      ? css`
+          width: 167.5px;
+        `
+      : css`
+          width: 350px;
+        `}
+
   ${({ icon }) =>
     icon &&
     css`
