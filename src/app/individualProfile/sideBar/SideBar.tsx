@@ -4,6 +4,10 @@ import React from 'react'
 import styled from 'styled-components'
 import BalanceContainer from './BalanceContainer'
 import InfoBox from './InfoBox'
+import clockIcon from '@/assets/icons/clock.svg'
+import personSettings from '@/assets/icons/personSettings.svg'
+import personList from '@/assets/icons/personList.svg'
+import bellIcon from '@/assets/icons/bell.svg'
 
 type Props = {}
 
@@ -20,10 +24,34 @@ const SideBar = (props: Props) => {
       <Frame>
         <BalanceContainer text={t('balance')} balance={'$ 9873.32'} />
         <ButtonFrame>
-          <BarButton active={false} text={t('something')} />
-          <BarButton active={false} text={t('something')} />
-          <BarButton active={true} text={t('something')} />
-          <BarButton active={false} text={t('something')} />
+          <BarButton
+            active={false}
+            text={t('something')}
+            icon={clockIcon}
+            width={20}
+            height={20}
+          />
+          <BarButton
+            active={false}
+            text={t('something')}
+            icon={personSettings}
+            width={20}
+            height={20}
+          />
+          <BarButton
+            active={true}
+            text={t('something')}
+            icon={personList}
+            width={20}
+            height={20}
+          />
+          <BarButton
+            active={false}
+            text={t('something')}
+            icon={bellIcon}
+            width={18}
+            height={19.5}
+          />
         </ButtonFrame>
       </Frame>
     </BarContainer>

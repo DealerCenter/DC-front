@@ -1,13 +1,34 @@
+import Image from 'next/image'
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-type Props = { text: string; active: boolean }
+type Props = {
+  icon: string
+  text: string
+  active: boolean
+  width: number
+  height: number
+}
 
-const BarButton = ({ text, active }: Props) => {
-  return <StyledButton active={active}>{text}</StyledButton>
+const BarButton = ({ text, active, icon, width, height }: Props) => {
+  return (
+    <Container>
+      <StyledButton active={active}>
+        {text}
+
+        <IconBox>
+          <Image src={icon} alt='icon' width={width} height={height} />
+        </IconBox>
+      </StyledButton>
+    </Container>
+  )
 }
 
 export default BarButton
+
+const Container = styled.div`
+  position: relative;
+`
 
 type ButtonProps = { active: boolean }
 
@@ -30,4 +51,16 @@ const StyledButton = styled.button<ButtonProps>`
   font-weight: 700;
   border-radius: 12px;
   border: none;
+
+  border: 2px dashed red;
+`
+const IconBox = styled.div`
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 17px;
+  left: 17px;
 `
