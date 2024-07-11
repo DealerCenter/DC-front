@@ -35,6 +35,12 @@
   "use lowercase characters": "Use lowercase characters",
   "at least 14 characters": "At least 14 characters",
   "bring your car": "Bring your car from America easily and safely",
+  "order history": "Order history",
+  "balance": "Balance",
+  "hello": "Hello",
+  "personal information": "Personal information",
+  "list of recipients": "List of recipients",
+  "manage notifications": "Manage notifications",
 
   "useForm": {
     "must be valid email": "must be a valid email",

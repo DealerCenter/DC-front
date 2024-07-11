@@ -1,4 +1,3 @@
-import BarButton from '@/common/components/appButton/BarButton'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
@@ -8,6 +7,7 @@ import clockIcon from '@/assets/icons/clock.svg'
 import personSettings from '@/assets/icons/personSettings.svg'
 import personList from '@/assets/icons/personList.svg'
 import bellIcon from '@/assets/icons/bell.svg'
+import BarButton from './BarButton'
 
 type Props = {}
 
@@ -26,28 +26,28 @@ const SideBar = (props: Props) => {
         <ButtonFrame>
           <BarButton
             active={false}
-            text={t('something')}
+            text={t('order history')}
             icon={clockIcon}
             width={20}
             height={20}
           />
           <BarButton
             active={false}
-            text={t('something')}
+            text={t('personal information')}
             icon={personSettings}
             width={20}
             height={20}
           />
           <BarButton
             active={true}
-            text={t('something')}
+            text={t('list of recipients')}
             icon={personList}
             width={20}
             height={20}
           />
           <BarButton
             active={false}
-            text={t('something')}
+            text={t('manage notifications')}
             icon={bellIcon}
             width={18}
             height={19.5}

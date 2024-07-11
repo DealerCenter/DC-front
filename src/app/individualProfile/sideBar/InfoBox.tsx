@@ -1,17 +1,20 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useTransition } from 'react'
 import styled from 'styled-components'
 import notificationBell from '@/assets/icons/notificatonBell.svg'
 import notificationDot from '@/assets/icons/notificationDot.svg'
+import { useTranslations } from 'next-intl'
 
 type Props = { refreshDate: string; name: string; notificationCount: number }
 
 const InfoBox = ({ refreshDate, name, notificationCount }: Props) => {
+  const t = useTranslations('')
+
   return (
     <Container>
       <Frame>
         <TextBox>
-          <Text>gamrjoba,</Text>
+          <Text>{t('hello')}</Text>
           <TextName>{name}</TextName>
         </TextBox>
         <DateText>{refreshDate}</DateText>

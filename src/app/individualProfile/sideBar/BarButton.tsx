@@ -15,7 +15,6 @@ const BarButton = ({ text, active, icon, width, height }: Props) => {
     <Container>
       <StyledButton active={active}>
         {text}
-
         <IconBox>
           <Image src={icon} alt='icon' width={width} height={height} />
         </IconBox>
@@ -42,8 +41,14 @@ const StyledButton = styled.button<ButtonProps>`
       : css`
           background-color: white;
           color: rgba(32, 32, 32, 1);
+
+          &:hover {
+            background-color: rgba(32, 32, 32, 0.04);
+          }
         `}
 
+  text-align: left;
+  padding-left: 48px;
   height: 56px;
   width: 286px;
   font-size: 16px;
@@ -51,8 +56,6 @@ const StyledButton = styled.button<ButtonProps>`
   font-weight: 700;
   border-radius: 12px;
   border: none;
-
-  border: 2px dashed red;
 `
 const IconBox = styled.div`
   width: 24px;

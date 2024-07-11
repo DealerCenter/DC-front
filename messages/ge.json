@@ -33,6 +33,12 @@
   "use lowercase characters": "გამოიყენეთ პატარა სიმბოლოები",
   "at least 14 characters": "მინიმუმ 14 სიმბოლო",
   "bring your car": "ჩამოიყვანე ავტომობილი ამერიკიდან მარტივად და უსაფრთხოდ",
+  "order history": "შეკვეთების ისტორია",
+  "balance": "ბალანსი",
+  "hello": "გამარჯობა",
+  "personal information": "პირადი მონაცემები",
+  "list of recipients": "მიმღებთა სია",
+  "manage notifications": "შეტყობინებების მართვა",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
