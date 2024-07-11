@@ -69,7 +69,6 @@ const BarContainer = styled.div`
   width: 334px;
   height: 902px;
   border-radius: 16px;
-  margin-left: 7.5rem;
   padding: 24px;
   gap: 60px;
 `
