@@ -1,60 +1,64 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useTranslations } from 'next-intl'
-
-import useForm from '../../hooks/useForm'
-
-import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/InputElements/TextInput'
-import FileDropZone from '@/common/components/InputElements/FileDropZone'
+import { useTranslations } from 'next-intl'
+import React from 'react'
+import useForm from '../../hooks/useForm'
+import AppButton from '@/common/components/appButton/AppButton'
+import styled from 'styled-components'
 
 type Props = {
   setFormStep: React.Dispatch<React.SetStateAction<number>>
   goToLogin: () => void
 }
 
-const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
+const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
   const t = useTranslations('')
   const { values, handleBlur, handleChange, handleSubmit } = useForm()
 
   return (
     <StyledForm onSubmit={handleSubmit}>
+      <Frame>
+        <TextInput
+          type='text'
+          name='name'
+          placeholder={t('name')}
+          value={values.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          isHalfSize={true}
+        />
+        <TextInput
+          type='text'
+          name='surname'
+          placeholder={t('surname')}
+          value={values.surname}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          isHalfSize={true}
+        />
+      </Frame>
       <TextInput
         type='text'
-        name='companyName'
-        placeholder={t('company name')}
-        value={values.companyName}
+        name='dateOfBirth'
+        placeholder={t('date of birth')}
+        value={values.dateOfBirth}
         onChange={handleChange}
         onBlur={handleBlur}
       />
       <TextInput
         type='text'
-        name='identificationCode'
-        placeholder={t('identification code')}
-        value={values.identificationCode}
+        name='actualAddress'
+        placeholder={t('actual address')}
+        value={values.actualAddress}
         onChange={handleChange}
         onBlur={handleBlur}
       />
       <TextInput
         type='text'
-        name='adress'
-        placeholder={t('adress')}
-        value={values.adress}
+        name='contactNumber'
+        placeholder={t('contact number')}
+        value={values.contactNumber}
         onChange={handleChange}
         onBlur={handleBlur}
-      />
-      <TextInput
-        type='text'
-        name='website'
-        placeholder={t('website')}
-        value={values.website}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
-      <FileDropZone
-        dropText={t('Drop the files here ...')}
-        text={t('upload a certificate')}
-        uploadedText={t('file uploaded')}
       />
       <AppButton
         text={t('next')}
@@ -77,7 +81,14 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
   )
 }
 
-export default LegalPersonForm1
+export default IndividualForm1
+
+const Frame = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+`
 
 const StyledForm = styled.form`
   display: flex;

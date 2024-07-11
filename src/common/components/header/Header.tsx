@@ -1,8 +1,11 @@
-"use client";
-import React from "react";
-import styled from "styled-components";
+'use client'
+import React from 'react'
+import styled from 'styled-components'
+import search from '@/assets/icons/search.svg'
+import person from '@/assets/icons/person.svg'
+import Image from 'next/image'
 
-type Props = {};
+type Props = {}
 
 const Header = (props: Props) => {
   return (
@@ -16,16 +19,22 @@ const Header = (props: Props) => {
           <Title2>კონტაქტი</Title2>
         </Frame>
         <Menu>
-          <Item>S</Item>
-          <Item>P</Item>
-          <Item>GE</Item>
+          <Item>
+            <Image width={20} height={20} src={search} alt='search icon' />
+          </Item>
+          <Item>
+            <Image width={20} height={20} src={person} alt='person icon' />
+          </Item>
+          <Item>
+            <Label>GE</Label>
+          </Item>
         </Menu>
       </HeaderBox>
     </Container>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
 
 const Container = styled.div`
   width: 100vw;
@@ -33,7 +42,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 16px 0px 16px 0px;
-`;
+`
 
 const HeaderBox = styled.div`
   /* background-color: red; */
@@ -50,13 +59,13 @@ const HeaderBox = styled.div`
     margin: 0;
     background-color: rgba(18, 18, 20, 1);
   }
-`;
+`
 
 const Frame = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
-`;
+`
 
 const Title2 = styled.div`
   color: white;
@@ -73,7 +82,7 @@ const Title2 = styled.div`
   &:active {
     color: black;
   }
-`;
+`
 
 const Logo = styled.h2`
   color: white;
@@ -81,13 +90,13 @@ const Logo = styled.h2`
   font-weight: bold;
   padding: 12px 16px 12px 16px;
   margin: 0;
-`;
+`
 
 const Menu = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
-`;
+`
 
 const Item = styled.div`
   height: 44px;
@@ -98,4 +107,8 @@ const Item = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
+const Label = styled.label`
+  font-size: 16px;
+  font-weight: 500;
+`

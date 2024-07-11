@@ -6,42 +6,64 @@ import InputFormIndividual from './components/InputFormIndividual'
 import ChooseUserType from './components/ChooseUserType'
 import InputFormLegalPerson from './components/InputFormLegalPerson'
 import AppButton from '@/common/components/appButton/AppButton'
+import { useMediaQuery } from 'react-responsive'
+import BurgerHeader from '@/common/components/header/BurgerHeader'
+import Header from '@/common/components/header/Header'
+import AuthLanding from './components/AuthLanding'
 
 type Props = {}
 
 const Page = (props: Props) => {
-  const [isLogin, setIsLogin] = useState(true)
+  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
+  // const [isLogin, setIsLogin] = useState<null | boolean>(null)
+  const [authStep, setAuthStep] = useState<
+    'landing' | 'registration' | 'login'
+  >('landing')
   const [type, setType] = useState<
     'chooseType' | 'individual' | 'legalPerson' | null
   >('chooseType')
 
   const activeStep =
     type === 'individual' ? (
-      <InputFormIndividual goToLogin={() => setIsLogin(true)} />
+      <InputFormIndividual goToLogin={() => setAuthStep('login')} />
     ) : type === 'legalPerson' ? (
-      <InputFormLegalPerson goToLogin={() => setIsLogin(true)} />
+      <InputFormLegalPerson goToLogin={() => setAuthStep('login')} />
     ) : (
-      <ChooseUserType setType={setType} goToLogin={() => setIsLogin(true)} />
+      <ChooseUserType
+        setType={setType}
+        goToLogin={() => setAuthStep('login')}
+      />
     )
 
   return (
     <>
-      {isLogin ? (
-        <LoginForm goToRegistration={() => setIsLogin(false)} />
+      {authStep === 'login' ? (
+        <>
+          {isMobile ? <BurgerHeader /> : <Header />}
+          <LoginForm goToRegistration={() => setAuthStep('registration')} />
+        </>
+      ) : authStep === 'registration' ? (
+        <>
+          {isMobile ? <BurgerHeader /> : <Header />}
+          <RegistrationForm>
+            <>
+              {activeStep}
+              {type !== 'chooseType' && (
+                <AppButton
+                  text='Back to Choose Type'
+                  type='filled'
+                  disabled={false}
+                  onClick={() => setType('chooseType')}
+                ></AppButton>
+              )}
+            </>
+          </RegistrationForm>
+        </>
       ) : (
-        <RegistrationForm>
-          <>
-            {activeStep}
-            {type !== 'chooseType' && (
-              <AppButton
-                text='Back to Choose Type'
-                type='filled'
-                disabled={false}
-                onClick={() => setType('chooseType')}
-              ></AppButton>
-            )}
-          </>
-        </RegistrationForm>
+        <AuthLanding
+          goToLogin={() => setAuthStep('login')}
+          goToRegistration={() => setAuthStep('registration')}
+        />
       )}
     </>
   )

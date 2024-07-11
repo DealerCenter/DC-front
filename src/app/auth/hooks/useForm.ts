@@ -1,8 +1,11 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import { useTranslations } from 'next-intl'
 
 const useForm = () => {
+  const t = useTranslations('useForm')
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -17,6 +20,9 @@ const useForm = () => {
       contactNumber: '',
       dateOfBirth: '',
       personalNumber: '',
+      name: '',
+      surname: '',
+      actualAddress: '',
     },
     onSubmit: () => {
       console.log(formik.values.email)
@@ -24,25 +30,28 @@ const useForm = () => {
     validationSchema: yup.object({
       email: yup
         .string()
-        .email('Must be a valid email')
-        .required('Email is required'),
-      password: yup.string().required('Password is required'),
-      repeatPassword: yup.string().required('Password is required'),
-      companyName: yup.string().required('Company name  is required'),
+        .email(t('must be valid email'))
+        .required(t('email required')),
+      password: yup.string().required(t('password required')),
+      repeatPassword: yup.string().required(t('password required')),
+      companyName: yup.string().required(t('company name required')),
       identificationCode: yup
         .string()
-        .required('Identification code is required'),
-      adress: yup.string().required('Adress  is required'),
+        .required(t('identification code required')),
+      address: yup.string().required(t('address required')),
       website: yup.string(),
       nameOfRepresentative: yup
         .string()
-        .required('Name of representative is required'),
+        .required(t('name of representative required')),
       surnameOfRepresentative: yup
         .string()
-        .required('Surname of representative is required'),
-      contactNumber: yup.string().required('Contact number name is required'),
-      dateOfBirth: yup.date().required('Date of birth name is required'),
-      personalNumber: yup.number().required('Personal number name is required'),
+        .required(t('surname of representative required')),
+      contactNumber: yup.string().required(t('contact number required')),
+      dateOfBirth: yup.date().required(t('date of birth required')),
+      personalNumber: yup.number().required(t('personal number required')),
+      name: yup.number().required(t('name required')),
+      surname: yup.number().required(t('surname required')),
+      actualAddress: yup.number().required(t('actual address required')),
     }),
   })
 

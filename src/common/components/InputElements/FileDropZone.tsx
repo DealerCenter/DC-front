@@ -1,15 +1,18 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import styled from 'styled-components'
-import uploadIcon from '@/app/assets/icons/FileUpload.svg'
+import styled, { css } from 'styled-components'
+import uploadIcon from '@/assets/icons/FileUpload.svg'
 import Image from 'next/image'
 
-type Props = { text: string; dropText: string }
+type Props = { text: string; dropText: string; uploadedText: string }
 
-const FileDropZone = ({ text, dropText }: Props) => {
+const FileDropZone = ({ text, dropText, uploadedText }: Props) => {
+  const [isDropped, setIsDropped] = useState(false)
+
   const onDrop = useCallback(<T extends File>(acceptedFiles: T[]) => {
     // Do something with the files
     console.log('accepted files: ', acceptedFiles)
+    setIsDropped(true)
   }, [])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
@@ -20,7 +23,9 @@ const FileDropZone = ({ text, dropText }: Props) => {
         <Image src={uploadIcon} alt='upload icon' width={22.95} height={25} />
       </IconBox>
       <input {...getInputProps()} />
-      {isDragActive ? (
+      {isDropped ? (
+        <StyledLabel isDropped={isDropped}>{uploadedText}</StyledLabel>
+      ) : isDragActive ? (
         <StyledLabel>{dropText}</StyledLabel>
       ) : (
         <StyledLabel>{text}</StyledLabel>
@@ -52,8 +57,20 @@ const Container = styled.div`
   }
 `
 
-const StyledLabel = styled.label`
-  color: rgba(18, 18, 20, 0.56);
+type LabelProps = {
+  isDropped?: boolean
+}
+
+const StyledLabel = styled.label<LabelProps>`
+  ${({ isDropped }) =>
+    isDropped
+      ? css`
+          color: rgba(32, 32, 32, 1);
+        `
+      : css`
+          color: rgba(18, 18, 20, 0.56);
+        `}
+
   font-size: 16px;
   line-height: 19.2px;
   position: absolute;
