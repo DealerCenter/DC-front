@@ -5,9 +5,7 @@ import BurgerHeader from '@/common/components/header/BurgerHeader'
 import AppButton from '@/common/components/appButton/AppButton'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
-import Image from 'next/image'
-import landingPicture from '@/assets/pictures/landingPicture.svg'
-import Link from 'next/link'
+import 'normalize.css/normalize.css'
 import { useRouter } from 'next/navigation'
 
 export default function Page() {
@@ -48,7 +46,17 @@ export default function Page() {
         </Frame>
         {!isMobile && (
           <ImageFrame>
-            <Image src={landingPicture} alt='landing picture' />
+            {/* <Image
+              src={landingPicture}
+              alt='landing picture'
+              height={'100vh'}
+            /> */}
+            <img
+              // src={'.}
+              src='https://static.vecteezy.com/system/resources/previews/025/220/125/non_2x/picture-a-captivating-scene-of-a-tranquil-lake-at-sunset-ai-generative-photo.jpg'
+              alt='landing picture'
+              style={{ width: '200px', height: '100vh' }}
+            />
           </ImageFrame>
         )}
       </Container>

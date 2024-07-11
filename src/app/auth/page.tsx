@@ -14,26 +14,33 @@ type Props = {}
 
 const Page = (props: Props) => {
   const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
-  const [isLogin, setIsLogin] = useState(true)
+  // const [isLogin, setIsLogin] = useState<null | boolean>(null)
+  const [authStep, setAuthStep] = useState<
+    'landing' | 'registration' | 'login'
+  >('landing')
   const [type, setType] = useState<
     'chooseType' | 'individual' | 'legalPerson' | null
   >('chooseType')
 
   const activeStep =
     type === 'individual' ? (
-      <InputFormIndividual goToLogin={() => setIsLogin(true)} />
+      <InputFormIndividual goToLogin={() => setAuthStep('login')} />
     ) : type === 'legalPerson' ? (
-      <InputFormLegalPerson goToLogin={() => setIsLogin(true)} />
+      <InputFormLegalPerson goToLogin={() => setAuthStep('login')} />
     ) : (
-      <ChooseUserType setType={setType} goToLogin={() => setIsLogin(true)} />
+      <ChooseUserType
+        setType={setType}
+        goToLogin={() => setAuthStep('login')}
+      />
     )
 
   return (
     <>
       {isMobile ? <BurgerHeader /> : <Header />}
-      {isLogin ? (
-        <LoginForm goToRegistration={() => setIsLogin(false)} />
-      ) : (
+
+      {authStep === 'login' ? (
+        <LoginForm goToRegistration={() => setAuthStep('registration')} />
+      ) : authStep === 'registration' ? (
         <RegistrationForm>
           <>
             {activeStep}
@@ -47,6 +54,8 @@ const Page = (props: Props) => {
             )}
           </>
         </RegistrationForm>
+      ) : (
+        <div>Authorization page</div>
       )}
     </>
   )
