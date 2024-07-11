@@ -7,17 +7,26 @@ import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 import Image from 'next/image'
 import landingPicture from '@/assets/pictures/landingPicture.svg'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
   const t = useTranslations('')
+
+  const router = useRouter()
+
+  const navigateToAuth = () => {
+    router.push('/auth')
+  }
 
   return (
     <main>
       <Container>
         <Frame>
           <TextFrame>
-            <Text>ჩამოიყვანე ავტომობილი ამერიკიდან მარტივად და უსაფრთხოდ</Text>
+            {/* <Text>ჩამოიყვანე ავტომობილი ამერიკიდან მარტივად და უსაფრთხოდ</Text> */}
+            <Text>{t('bring your car')}</Text>
           </TextFrame>
           <ButtonFrame>
             <AppButton
@@ -27,18 +36,21 @@ export default function Page() {
               onClick={() => {}}
               isSmall={true}
             />
+
             <AppButton
               type='filled'
               text={t('login')}
               disabled={false}
-              onClick={() => {}}
+              onClick={navigateToAuth}
               isSmall={true}
             />
           </ButtonFrame>
         </Frame>
-        <ImageFrame>
-          <Image src={landingPicture} alt='landing picture' />
-        </ImageFrame>
+        {!isMobile && (
+          <ImageFrame>
+            <Image src={landingPicture} alt='landing picture' />
+          </ImageFrame>
+        )}
       </Container>
     </main>
   )
@@ -78,6 +90,7 @@ const Frame = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  z-index: 999;
 `
 const TextFrame = styled.div`
   width: 703px;
