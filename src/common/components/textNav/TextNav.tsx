@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import styled, { css } from 'styled-components'
-import stepFrame from '@/app/assets/icons/stepNav.svg'
-import doneIcon from '@/app/assets/icons/doneIcon.svg'
+import doneIcon from '@/assets/icons/doneIcon.svg'
 
 type Props = {
   children: string

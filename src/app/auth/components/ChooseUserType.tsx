@@ -1,9 +1,10 @@
 'use client'
+import { useTranslations } from 'next-intl'
+import React, { useState } from 'react'
+import styled, { css } from 'styled-components'
+
 import AppButton from '@/common/components/appButton/AppButton'
 import Checkbox from '@/common/components/checkbox/Checkbox'
-import { useTranslations } from 'next-intl'
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
 
 type CheckboxOption = {
   title: string
@@ -23,7 +24,6 @@ type Props = {
 }
 
 const ChooseUserType = ({ setType, goToLogin }: Props) => {
-  // props.setType((step) => step + 1)
   const t = useTranslations('')
   const [selectedOption, setSelectedOption] = useState<
     'individual' | 'legalPerson' | null

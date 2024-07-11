@@ -2,15 +2,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
-import { setUserLocale } from '@/lib/locale'
 
 import Checkbox from '@/common/components/checkbox/Checkbox'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/InputElements/TextInput'
 import useForm from '../hooks/useForm'
 import Image from 'next/image'
-import emailIcon from '@/app/assets/icons/email.svg'
-import passwordIcon from '@/app/assets/icons/password.svg'
+import emailIcon from '@/assets/icons/email.svg'
+import passwordIcon from '@/assets/icons/password.svg'
 
 type Props = {
   goToRegistration: () => void
@@ -33,7 +32,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
             onChange={handleChange}
             onBlur={handleBlur}
             icon={
-              <Icon src={emailIcon} alt='email icon' width={20} height={16} />
+              <Image src={emailIcon} alt='email icon' width={20} height={16} />
             }
           />
         </TextInputContainer>
@@ -46,13 +45,14 @@ const LoginForm = ({ goToRegistration }: Props) => {
               value={values.password}
               onChange={handleChange}
               onBlur={handleBlur}
-              withIcon={true}
-            />
-            <Icon
-              src={passwordIcon}
-              alt='password icon'
-              width={19}
-              height={22}
+              icon={
+                <Image
+                  src={passwordIcon}
+                  alt='password icon'
+                  width={19}
+                  height={22}
+                />
+              }
             />
           </TextInputContainer>
           <LabelContainer>
@@ -141,12 +141,4 @@ const StyledCheckbox = styled(Checkbox)`
 const StyledLabel = styled.label`
   display: flex;
   align-items: center;
-`
-
-const Icon = styled(Image)`
-  position: absolute;
-  align-self: center;
-  justify-self: center;
-  left: 16px;
-  top: 17px;
 `

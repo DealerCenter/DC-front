@@ -15,7 +15,7 @@
   "identification code": "Identification code",
   "adress": "Adress",
   "website": "Website",
-  "upload a certificate of commercial activity from the public register": " Upload a certificate of commercial activity from the public register",
+  "upload a certificate": " Upload a certificate of commercial activity from the public register",
   "drop the files here ...": "Drop the files here ...",
   "name of representative": "Name of representative",
   "surname of representative": "Surname of representative",
@@ -23,6 +23,34 @@
   "date of birth": "Date of birth",
   "personal number": "Personal number",
   "upload an ID photo": "Upload an ID photo",
-  "enter your date of birth as year/month/day": "Enter your date of birth as year/month/day",
-  "email": "E-mail"
+  "enter your date of birth": "Enter your date of birth as year/month/day",
+  "email": "E-mail",
+  "name": "Name",
+  "surname": "Surname",
+  "actual address": "Actual address",
+  "file uploaded": "File uploaded",
+  "photo uploaded": "Photo uploaded",
+  "use numbers": "Use numbers",
+  "use uppercase characters": "Use uppercase characters",
+  "use lowercase characters": "Use lowercase characters",
+  "at least 14 characters": "At least 14 characters",
+  "bring your car": "Bring your car from America easily and safely",
+
+  "useForm": {
+    "must be valid email": "must be a valid email",
+
+    "email required": "email is required",
+    "password required": "password is required",
+    "company name required": "company name is required",
+    "identification code required": "identification code is required",
+    "address required": "address is required",
+    "name of representative required": "name of the representative is required",
+    "surname of representative required": "surname of the representative is required",
+    "contact number required": "contact number is required",
+    "date of birth required": "date of birth is required",
+    "personal number required": "personal number is required",
+    "name required": "name is required",
+    "surname required": "surname is required",
+    "actual address required": "actual address is required"
+  }
 }

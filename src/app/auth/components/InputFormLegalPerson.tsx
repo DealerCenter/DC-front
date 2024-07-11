@@ -8,7 +8,7 @@ import LegalPersonForm1 from './RegistrationSteps.tsx/LegalPersonForm1'
 import LegalPersonForm2 from './RegistrationSteps.tsx/LegalPersonForm2'
 import FormStep3 from './RegistrationSteps.tsx/FormStep3'
 
-import stepArrow from '@/app/assets/icons/stepArrow.svg'
+import stepArrow from '@/assets/icons/stepArrow.svg'
 
 type Props = {
   goToLogin: () => void
