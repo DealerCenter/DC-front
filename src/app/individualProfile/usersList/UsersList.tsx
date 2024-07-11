@@ -1,39 +1,32 @@
-import React from 'react'
+import LabelsContainer from '@/common/components/labelsContainer/LabelsContainer'
+import { useTranslations } from 'next-intl'
+import React, { useTransition } from 'react'
 import styled from 'styled-components'
 
 type Props = {}
 
-const UsersList = (props: Props) => {
+const UserList = (props: Props) => {
+  const t = useTranslations('')
+
   return (
     <Container>
-      <H2Box>
-        <StyledH2>მომხმარებლების სია</StyledH2>
-      </H2Box>
+      <LabelsContainer
+        labels={[
+          t('recipient'),
+          t('mobile'),
+          t('the date of addition'),
+          t('verification'),
+        ]}
+      />
     </Container>
   )
 }
 
-export default UsersList
+export default UserList
 
 const Container = styled.div`
-  box-sizing: border-box;
-  padding: 24px;
-  width: 836px;
-  height: 569px;
-  background-color: white;
-  border-radius: 16px;
-  margin: 0;
-`
-const H2Box = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 372px;
-  height: 82px;
-`
-
-const StyledH2 = styled.div`
-  color: rgba(32, 32, 32, 1);
-  font-size: 28px;
-  font-weight: 700;
+  width: 788px;
+  /* heigh is temporary */
+  height: 363px;
+  background-color: aliceblue;
 `

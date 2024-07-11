@@ -39,6 +39,12 @@
   "personal information": "პირადი მონაცემები",
   "list of recipients": "მიმღებთა სია",
   "manage notifications": "შეტყობინებების მართვა",
+  "search": "ძებნა",
+  "add recipient": "მიმღების დამატება",
+  "recipient": "მიმღები პირი",
+  "mobile": "მობილური",
+  "the date of addition": "დამატების თარიღი",
+  "verification": "ვერიფიკაცია",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
