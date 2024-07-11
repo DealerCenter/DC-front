@@ -9,6 +9,7 @@ import AppButton from '@/common/components/appButton/AppButton'
 import { useMediaQuery } from 'react-responsive'
 import BurgerHeader from '@/common/components/header/BurgerHeader'
 import Header from '@/common/components/header/Header'
+import AuthLanding from './components/AuthLanding'
 
 type Props = {}
 
@@ -36,26 +37,33 @@ const Page = (props: Props) => {
 
   return (
     <>
-      {isMobile ? <BurgerHeader /> : <Header />}
-
       {authStep === 'login' ? (
-        <LoginForm goToRegistration={() => setAuthStep('registration')} />
+        <>
+          {isMobile ? <BurgerHeader /> : <Header />}
+          <LoginForm goToRegistration={() => setAuthStep('registration')} />
+        </>
       ) : authStep === 'registration' ? (
-        <RegistrationForm>
-          <>
-            {activeStep}
-            {type !== 'chooseType' && (
-              <AppButton
-                text='Back to Choose Type'
-                type='filled'
-                disabled={false}
-                onClick={() => setType('chooseType')}
-              ></AppButton>
-            )}
-          </>
-        </RegistrationForm>
+        <>
+          {isMobile ? <BurgerHeader /> : <Header />}
+          <RegistrationForm>
+            <>
+              {activeStep}
+              {type !== 'chooseType' && (
+                <AppButton
+                  text='Back to Choose Type'
+                  type='filled'
+                  disabled={false}
+                  onClick={() => setType('chooseType')}
+                ></AppButton>
+              )}
+            </>
+          </RegistrationForm>
+        </>
       ) : (
-        <div>Authorization page</div>
+        <AuthLanding
+          goToLogin={() => setAuthStep('login')}
+          goToRegistration={() => setAuthStep('registration')}
+        />
       )}
     </>
   )

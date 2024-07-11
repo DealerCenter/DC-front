@@ -68,7 +68,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         <StyledP>{t('already registered?')}</StyledP>
         <AppButton
           type='outlined'
-          text={t('register')}
+          text={t('login')}
           disabled={false}
           onClick={goToLogin}
         />

@@ -65,9 +65,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
         text={t('register')}
         type='filled'
         disabled={false}
-        onClick={() => {
-          setFormStep((step) => step + 1)
-        }}
+        onClick={() => {}}
       />
     </StyledForm>
   )
