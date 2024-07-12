@@ -14,7 +14,6 @@ import AuthLanding from './components/AuthLanding'
 type Props = {}
 
 const Page = (props: Props) => {
-  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
   // const [isLogin, setIsLogin] = useState<null | boolean>(null)
   const [authStep, setAuthStep] = useState<
     'landing' | 'registration' | 'login'
@@ -39,12 +38,12 @@ const Page = (props: Props) => {
     <>
       {authStep === 'login' ? (
         <>
-          {isMobile ? <BurgerHeader /> : <Header />}
+          <Header />
           <LoginForm goToRegistration={() => setAuthStep('registration')} />
         </>
       ) : authStep === 'registration' ? (
         <>
-          {isMobile ? <BurgerHeader /> : <Header />}
+          <Header />
           <RegistrationForm>
             <>
               {activeStep}

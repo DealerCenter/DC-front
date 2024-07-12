@@ -1,10 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
+import { RegisterFormProvider } from '../hooks/useRegistrationForm'
 
 type Props = { children: JSX.Element }
 
 const RegistrationForm = ({ children }: Props) => {
-  return <Container>{children}</Container>
+  return (
+    <RegisterFormProvider>
+      <Container>{children}</Container>
+    </RegisterFormProvider>
+  )
 }
 
 export default RegistrationForm

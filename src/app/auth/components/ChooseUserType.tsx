@@ -44,10 +44,12 @@ const ChooseUserType = ({ setType, goToLogin }: Props) => {
             onClick={() => handleCheckboxChange(option.value)}
             selected={selectedOption === option.value}
           >
-            <StyledCheckbox
-              value={option.value}
-              checked={selectedOption === option.value}
-            />
+            <StyledCheckbox style={{ alignSelf: 'flex-end' }}>
+              <Checkbox
+                value={option.value}
+                checked={selectedOption === option.value}
+              />
+            </StyledCheckbox>
             <UserTypeText>{t(`${option.title}`)}</UserTypeText>
           </UserType>
         ))}
@@ -88,6 +90,7 @@ const Frame = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 24px;
 `
 
 type UserTypeProps = {
@@ -101,23 +104,24 @@ const UserType = styled.div<UserTypeProps>`
   height: 120px;
   border-radius: 12px;
   display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
 
   ${({ selected }) =>
     selected &&
     css`
       border-color: rgba(32, 32, 32, 1);
-    `}
+    `};
 `
 
 const UserTypeText = styled.div`
-  position: absolute;
-  bottom: 0;
   font-size: 16px;
   font-weight: 700;
   line-height: 19.2px;
   padding: 16px;
 `
-const StyledCheckbox = styled(Checkbox)`
-  /* position: absolute; */
-  /* right: 16px; */
+
+const StyledCheckbox = styled.div`
+  align-self: flex-end;
 `

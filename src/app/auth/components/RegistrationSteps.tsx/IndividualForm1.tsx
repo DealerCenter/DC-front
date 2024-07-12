@@ -1,7 +1,8 @@
 import TextInput from '@/common/components/InputElements/TextInput'
 import { useTranslations } from 'next-intl'
 import React from 'react'
-import useForm from '../../hooks/useForm'
+import { useRegisterFormContext } from '../../hooks/useRegistrationForm'
+
 import AppButton from '@/common/components/appButton/AppButton'
 import styled from 'styled-components'
 
@@ -12,7 +13,8 @@ type Props = {
 
 const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, handleSubmit } = useForm()
+  const { values, handleBlur, handleChange, handleSubmit } =
+    useRegisterFormContext()
 
   return (
     <StyledForm onSubmit={handleSubmit}>

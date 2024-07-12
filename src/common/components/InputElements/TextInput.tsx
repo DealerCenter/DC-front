@@ -13,6 +13,7 @@ type Props = {
   icon?: any
   optionalInfo?: string | null
   isHalfSize?: boolean | undefined
+  errorMessage?: string
 }
 
 const TextInput = ({
@@ -25,6 +26,7 @@ const TextInput = ({
   icon,
   optionalInfo = null,
   isHalfSize = false,
+  errorMessage,
 }: Props) => {
   return (
     <Container>
@@ -45,6 +47,7 @@ const TextInput = ({
           <OptionalText>{optionalInfo}</OptionalText>
         </TextBox>
       )}
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Container>
   )
 }
@@ -106,6 +109,14 @@ const TextBox = styled.div`
   margin-top: 8px;
   margin-bottom: 0;
   height: 20px;
+`
+
+const ErrorMessage = styled.p`
+  color: #cf341f;
+  position: absolute;
+  font-size: 10px;
+  top: 44px;
+  left: 12px;
 `
 
 const OptionalText = styled.p`

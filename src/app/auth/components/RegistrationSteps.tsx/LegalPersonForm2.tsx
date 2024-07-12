@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import useForm from '../../hooks/useForm'
+import { useRegisterFormContext } from '../../hooks/useRegistrationForm'
 
 import TextInput from '@/common/components/InputElements/TextInput'
 import FileDropZone from '@/common/components/InputElements/FileDropZone'
@@ -12,10 +12,31 @@ type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
 
 const LegalPersonForm2 = ({ setFormStep }: Props) => {
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, handleSubmit } = useForm()
+  const { values, handleBlur, handleChange, validateForm, errors, touched } =
+    useRegisterFormContext()
+
+  const onNextClick = async () => {
+    const validated = await validateForm()
+    if (
+      !validated.nameOfRepresentative &&
+      !validated.surnameOfRepresentative &&
+      !validated.contactNumber &&
+      !validated.dateOfBirth &&
+      !validated.personalNumber
+    ) {
+      setFormStep((prev) => prev + 1)
+    }
+  }
+
+  const isButtonDisabled =
+    values.nameOfRepresentative.length === 0 ||
+    values.surnameOfRepresentative.length === 0 ||
+    values.contactNumber.length === 0 ||
+    values.dateOfBirth.length === 0 ||
+    values.personalNumber.length === 0
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm>
       <TextInput
         type='text'
         name='nameOfRepresentative'
@@ -23,6 +44,11 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         value={values.nameOfRepresentative}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.nameOfRepresentative && touched.nameOfRepresentative
+            ? errors.nameOfRepresentative
+            : ''
+        }
       />
       <TextInput
         type='text'
@@ -31,6 +57,11 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         value={values.surnameOfRepresentative}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.surnameOfRepresentative && touched.surnameOfRepresentative
+            ? errors.surnameOfRepresentative
+            : ''
+        }
       />
       <TextInput
         type='text'
@@ -39,15 +70,23 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         value={values.contactNumber}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.contactNumber && touched.contactNumber
+            ? errors.contactNumber
+            : ''
+        }
       />
       <TextInput
-        type='text'
+        type='date'
         name='dateOfBirth'
         placeholder={t('date of birth')}
         value={values.dateOfBirth}
         onChange={handleChange}
         onBlur={handleBlur}
         optionalInfo={t('enter your date of birth')}
+        errorMessage={
+          errors.dateOfBirth && touched.dateOfBirth ? errors.dateOfBirth : ''
+        }
       />
       <TextInput
         type='text'
@@ -56,6 +95,11 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         value={values.personalNumber}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.personalNumber && touched.personalNumber
+            ? errors.personalNumber
+            : ''
+        }
       />
       <FileDropZone
         dropText={t('Drop the file here ...')}
@@ -65,10 +109,8 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
       <AppButton
         text={t('next')}
         type='filled'
-        disabled={false}
-        onClick={() => {
-          setFormStep((step) => step + 1)
-        }}
+        disabled={isButtonDisabled}
+        onClick={onNextClick}
       />
     </StyledForm>
   )
@@ -76,7 +118,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
 
 export default LegalPersonForm2
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
-import useForm from '../../hooks/useForm'
+import useForm from '../../hooks/useRegistrationForm'
 import TextInput from '@/common/components/InputElements/TextInput'
 import FileDropZone from '@/common/components/InputElements/FileDropZone'
 import AppButton from '@/common/components/appButton/AppButton'
