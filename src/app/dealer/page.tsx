@@ -4,6 +4,9 @@ import SideBar from './sideBar/SideBar'
 import Header from '@/common/components/header/Header'
 import styled from 'styled-components'
 import UsersListBox from './usersList/UsersListBox'
+import OrderHistory from './orderHistory/OrderHistory'
+import ManageNotifications from './manageNotifications/ManageNotifications'
+import PersonalInformation from './personalInformation/PersonalInformation'
 
 type Props = {}
 
@@ -14,7 +17,10 @@ const page = (props: Props) => {
       <Frame>
         <SideBar />
         <ContentContainer>
-          <UsersListBox />
+          <OrderHistory />
+          <ManageNotifications />
+          <PersonalInformation />
+          {/* <UsersListBox /> */}
         </ContentContainer>
       </Frame>
     </Container>

@@ -31,7 +31,6 @@ const ChooseUserType = ({ setType, goToLogin }: Props) => {
 
   const handleCheckboxChange = (value: 'individual' | 'legalPerson') => {
     setSelectedOption((prev) => (prev === value ? null : value))
-    // setSelectedOption(value)
   }
 
   return (
