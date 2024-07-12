@@ -18,6 +18,7 @@ export const RegisterFormProviderIndividual = ({
     dateOfBirth: '',
     actualAddress: '',
     contactNumber: '',
+
     personalNumber: '',
 
     email: '',
@@ -36,6 +37,7 @@ export const RegisterFormProviderIndividual = ({
       dateOfBirth: yup.date().required(t('date of birth required')),
       actualAddress: yup.string().required(t('actual address required')),
       contactNumber: yup.string().required(t('contact number required')),
+
       personalNumber: yup.number().required(t('personal number required')),
 
       email: yup

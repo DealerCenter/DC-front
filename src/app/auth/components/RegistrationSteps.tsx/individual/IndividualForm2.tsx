@@ -39,7 +39,7 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
         }
       />{' '}
       <FileDropZone
-        dropText={t('Drop the file here ...')}
+        dropText={t('drop the file here')}
         text={t('upload an ID photo')}
         uploadedText={t('photo uploaded')}
       />
@@ -55,7 +55,7 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
 
 export default IndividualForm2
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -102,7 +102,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         }
       />
       <FileDropZone
-        dropText={t('Drop the file here ...')}
+        dropText={t('drop the file')}
         text={t('upload an ID photo')}
         uploadedText={t('photo uploaded')}
       />

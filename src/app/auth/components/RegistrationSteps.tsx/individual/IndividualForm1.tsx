@@ -121,7 +121,7 @@ const Frame = styled.div`
   gap: 16px;
 `
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
