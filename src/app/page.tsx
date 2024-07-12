@@ -10,7 +10,9 @@ import { useRouter } from 'next/navigation'
 import AuthLanding from './auth/components/AuthLanding'
 
 export default function Page() {
-  return <main></main>
+  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
+
+  return <main>{isMobile ? <BurgerHeader /> : <Header />}</main>
 }
 
 Page.getStaticProps = () => ({
