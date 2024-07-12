@@ -1,26 +1,46 @@
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/InputElements/TextInput'
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
-import useForm from '../../hooks/useForm'
+import { useRegisterFormContext } from '../../hooks/useRegistrationForm'
 
-import { number } from 'yup'
 import ValidateTextBox from '@/common/components/passwordValidateTextBox/ValidateTextBox'
 import usePasswordValidation from '../../hooks/usePasswordValidation'
 
-type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
+type Props = { setFormStep: Dispatch<SetStateAction<number>> }
 
 const FormStep3 = ({ setFormStep }: Props) => {
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, handleSubmit } = useForm()
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    errors,
+    validateForm,
+    touched,
+  } = useRegisterFormContext()
 
   const criteria = usePasswordValidation(values.password)
 
+  const onNextClick = async () => {
+    const validated = await validateForm()
+    if (!validated.email && !validated.password && !validated.repeatPassword) {
+      handleSubmit()
+    }
+  }
+
+  const isButtonDisabled =
+    values.email.length === 0 ||
+    values.password.length === 0 ||
+    values.repeatPassword.length === 0 ||
+    !Object.values(criteria).every((value) => value === true)
+
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm>
       <TextInput
         type='email'
         name='email'
@@ -28,6 +48,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
         value={values.email}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={errors.email && touched.email ? errors.email : ''}
       />
       <TextInput
         type='password'
@@ -36,6 +57,9 @@ const FormStep3 = ({ setFormStep }: Props) => {
         value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.password && touched.password ? errors.password : ''
+        }
       />
 
       <PasswordErrorBox>
@@ -64,8 +88,8 @@ const FormStep3 = ({ setFormStep }: Props) => {
       <AppButton
         text={t('register')}
         type='filled'
-        disabled={false}
-        onClick={() => {}}
+        disabled={isButtonDisabled}
+        onClick={onNextClick}
       />
     </StyledForm>
   )
@@ -73,7 +97,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
 
 export default FormStep3
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,33 +110,3 @@ const PasswordErrorBox = styled.div`
   width: 350px;
   gap: 12px;
 `
-// const TextBox = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   /* justify-content: center; */
-//   gap: 2.5px;
-//   margin-top: 8px;
-//   margin-bottom: 0;
-//   height: 20px;
-// `
-
-// type TextProps = {
-//   checked?: boolean
-// }
-
-// const Text = styled.p<TextProps>`
-//   ${({ checked }) =>
-//     checked
-//       ? css`
-//           color: rgba(32, 32, 32, 1);
-//         `
-//       : css`
-//           color: rgba(207, 52, 31, 1);
-//         `}
-
-//   font-size: 11px;
-//   padding: 4px;
-//   font-weight: 400;
-//   margin: 0;
-// `

@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import useForm from '../../hooks/useForm'
+import { useRegisterFormContext } from '../../hooks/useRegistrationForm'
 
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/InputElements/TextInput'
@@ -15,10 +15,29 @@ type Props = {
 
 const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, handleSubmit } = useForm()
+
+  const { values, handleBlur, handleChange, errors, touched, validateForm } =
+    useRegisterFormContext()
+
+  const onNextClick = async () => {
+    const validated = await validateForm()
+    if (
+      !validated.companyName &&
+      !validated.identificationCode &&
+      !validated.address &&
+      !validated.website
+    ) {
+      setFormStep((prev) => prev + 1)
+    }
+  }
+
+  const isButtonDisabled =
+    values.companyName.length === 0 ||
+    values.identificationCode.length === 0 ||
+    values.address.length === 0
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm>
       <TextInput
         type='text'
         name='companyName'
@@ -26,7 +45,11 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         value={values.companyName}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.companyName && touched.companyName ? errors.companyName : ''
+        }
       />
+
       <TextInput
         type='text'
         name='identificationCode'
@@ -34,14 +57,20 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         value={values.identificationCode}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.identificationCode && touched.identificationCode
+            ? errors.identificationCode
+            : ''
+        }
       />
       <TextInput
         type='text'
-        name='adress'
-        placeholder={t('adress')}
-        value={values.adress}
+        name='address'
+        placeholder={t('address')}
+        value={values.address}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={errors.address && touched.address ? errors.address : ''}
       />
       <TextInput
         type='text'
@@ -50,6 +79,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         value={values.website}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={errors.website && touched.website ? errors.website : ''}
       />
       <FileDropZone
         dropText={t('Drop the files here ...')}
@@ -59,19 +89,12 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
       <AppButton
         text={t('next')}
         type='filled'
-        disabled={false}
-        onClick={() => {
-          setFormStep((step) => step + 1)
-        }}
+        disabled={isButtonDisabled}
+        onClick={onNextClick}
       />
       <div>
         <StyledP>{t('already registered?')}</StyledP>
-        <AppButton
-          type='outlined'
-          text={t('login')}
-          disabled={false}
-          onClick={goToLogin}
-        />
+        <AppButton type='outlined' text={t('login')} onClick={goToLogin} />
       </div>
     </StyledForm>
   )
@@ -79,7 +102,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
 
 export default LegalPersonForm1
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

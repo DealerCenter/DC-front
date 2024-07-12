@@ -6,7 +6,7 @@ type ButtonTypes = 'filled' | 'outlined'
 type Props = {
   text: string
   type: ButtonTypes
-  disabled: boolean
+  disabled?: boolean
   onClick: () => void
   isSmall?: boolean
 }
@@ -22,7 +22,7 @@ const AppButton = ({
     <StyledButton
       disabled={disabled}
       type={type}
-      onClick={onClick}
+      onClick={!disabled ? onClick : () => {}}
       isSmall={isSmall}
     >
       {text}
@@ -39,26 +39,26 @@ const StyledButton = styled.button<ButtonProps>`
     props.disabled && props.type === 'filled'
       ? 'rgba(32, 32, 32, 0.26)'
       : props.disabled && props.type === 'outlined'
-        ? 'transparent'
-        : !props.disabled && props.type === 'filled'
-          ? 'rgba(32, 32, 32, 1)'
-          : !props.disabled && props.type === 'outlined'
-            ? 'transparent'
-            : ''};
+      ? 'transparent'
+      : !props.disabled && props.type === 'filled'
+      ? 'rgba(32, 32, 32, 1)'
+      : !props.disabled && props.type === 'outlined'
+      ? 'transparent'
+      : ''};
 
   border: ${(props) =>
     props.type === 'filled'
       ? 'none'
       : props.type === 'outlined'
-        ? '1px solid rgba(32, 32, 32, 0.56)'
-        : 'red'};
+      ? '1px solid rgba(32, 32, 32, 0.56)'
+      : 'red'};
 
   color: ${(props) =>
     props.type === 'filled'
       ? 'white'
       : !props.disabled && props.type === 'outlined'
-        ? 'rgba(32, 32, 32, 1)'
-        : 'rgba(32, 32, 32, 0.56)'};
+      ? 'rgba(32, 32, 32, 1)'
+      : 'rgba(32, 32, 32, 0.56)'};
 
   ${({ isSmall }) =>
     isSmall

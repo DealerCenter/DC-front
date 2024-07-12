@@ -7,7 +7,6 @@ import checkboxFilled from '@/assets/icons/checkboxFilled.svg'
 type Props = { checked: boolean; value: string }
 
 const Checkbox = ({ checked, value }: Props) => {
-  console.log(value)
   return (
     <Container>
       {checked ? (
