@@ -6,7 +6,8 @@ import { useTranslations } from 'next-intl'
 import Checkbox from '@/common/components/checkbox/Checkbox'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/InputElements/TextInput'
-import useForm from '../hooks/useForm'
+import useLoginForm from '../hooks/useLoginForm'
+
 import Image from 'next/image'
 import emailIcon from '@/assets/icons/email.svg'
 import passwordIcon from '@/assets/icons/password.svg'
@@ -17,7 +18,7 @@ type Props = {
 
 const LoginForm = ({ goToRegistration }: Props) => {
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, handleSubmit } = useForm()
+  const { values, handleBlur, handleChange, handleSubmit } = useLoginForm()
 
   return (
     <Container>

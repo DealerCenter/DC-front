@@ -9,6 +9,7 @@ import LegalPersonForm2 from './RegistrationSteps.tsx/LegalPersonForm2'
 import FormStep3 from './RegistrationSteps.tsx/FormStep3'
 
 import stepArrow from '@/assets/icons/stepArrow.svg'
+import { useRegisterFormContext } from '../hooks/useRegistrationForm'
 
 type Props = {
   goToLogin: () => void
@@ -16,6 +17,7 @@ type Props = {
 
 function InputFormLegalPerson({ goToLogin }: Props) {
   const t = useTranslations('')
+  const { handleSubmit } = useRegisterFormContext()
   const [formStep, setFormStep] = useState(1)
 
   const steps = [
@@ -43,27 +45,35 @@ function InputFormLegalPerson({ goToLogin }: Props) {
   return (
     <StyledDiv>
       <H2Bold>{t('register')}</H2Bold>
-      <StepsContainer>
-        {steps.map((step, i) => (
-          <>
-            {i > 0 && (
-              <Image src={stepArrow} alt='step arrow' width={20} height={20} />
-            )}
-            <TextNav
-              done={step.stepNumber < activeStep.stepNumber}
-              onClick={() => {
-                if (step.stepNumber < activeStep.stepNumber) {
-                  setFormStep(step.stepNumber)
-                }
-              }}
-              key={step.stepNumber}
-              active={step.stepNumber === formStep}
-            >
-              {step.stepNumber.toString()}
-            </TextNav>
-          </>
-        ))}
-      </StepsContainer>
+      <form onSubmit={handleSubmit}>
+        <StepsContainer>
+          {steps.map((step, i) => (
+            <>
+              {i > 0 && (
+                <Image
+                  src={stepArrow}
+                  alt='step arrow'
+                  width={20}
+                  height={20}
+                />
+              )}
+              <TextNav
+                done={step.stepNumber < activeStep.stepNumber}
+                onClick={() => {
+                  if (step.stepNumber < activeStep.stepNumber) {
+                    setFormStep(step.stepNumber)
+                  }
+                }}
+                key={step.stepNumber}
+                active={step.stepNumber === formStep}
+              >
+                {step.stepNumber.toString()}
+              </TextNav>
+            </>
+          ))}
+        </StepsContainer>
+      </form>
+
       {activeStep.component}
     </StyledDiv>
   )
