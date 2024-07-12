@@ -1,10 +1,11 @@
-import TextInput from '@/common/components/InputElements/TextInput'
-import { useTranslations } from 'next-intl'
 import React from 'react'
-import { useRegisterFormContext } from '../../hooks/useRegistrationForm'
+import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
+
+import { useRegisterFormContextIndividual } from '../../../hooks/useRegistrationFormIndividual'
 
 import AppButton from '@/common/components/appButton/AppButton'
-import styled from 'styled-components'
+import TextInput from '@/common/components/InputElements/TextInput'
 
 type Props = {
   setFormStep: React.Dispatch<React.SetStateAction<number>>
@@ -13,11 +14,31 @@ type Props = {
 
 const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, handleSubmit } =
-    useRegisterFormContext()
+  const { values, handleBlur, handleChange, errors, touched, validateForm } =
+    useRegisterFormContextIndividual()
+
+  const onNextClick = async () => {
+    const validated = await validateForm()
+    if (
+      !validated.name &&
+      !validated.surname &&
+      !validated.dateOfBirth &&
+      !validated.actualAddress &&
+      !validated.contactNumber
+    ) {
+      setFormStep((prev) => prev + 1)
+    }
+  }
+
+  const isButtonDisabled =
+    values.name.length === 0 ||
+    values.surname.length === 0 ||
+    values.dateOfBirth.length === 0 ||
+    values.actualAddress.length === 0 ||
+    values.contactNumber.length === 0
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm>
       <Frame>
         <TextInput
           type='text'
@@ -27,6 +48,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
           onChange={handleChange}
           onBlur={handleBlur}
           isHalfSize={true}
+          errorMessage={errors.name && touched.name ? errors.name : ''}
         />
         <TextInput
           type='text'
@@ -36,15 +58,19 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
           onChange={handleChange}
           onBlur={handleBlur}
           isHalfSize={true}
+          errorMessage={errors.surname && touched.surname ? errors.surname : ''}
         />
       </Frame>
       <TextInput
-        type='text'
+        type='date'
         name='dateOfBirth'
         placeholder={t('date of birth')}
         value={values.dateOfBirth}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.dateOfBirth && touched.dateOfBirth ? errors.dateOfBirth : ''
+        }
       />
       <TextInput
         type='text'
@@ -53,6 +79,11 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         value={values.actualAddress}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.actualAddress && touched.actualAddress
+            ? errors.actualAddress
+            : ''
+        }
       />
       <TextInput
         type='text'
@@ -61,23 +92,21 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         value={values.contactNumber}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.contactNumber && touched.contactNumber
+            ? errors.contactNumber
+            : ''
+        }
       />
       <AppButton
         text={t('next')}
         type='filled'
-        disabled={false}
-        onClick={() => {
-          setFormStep((step) => step + 1)
-        }}
+        disabled={isButtonDisabled}
+        onClick={onNextClick}
       />
       <div>
         <StyledP>{t('already registered?')}</StyledP>
-        <AppButton
-          type='outlined'
-          text={t('login')}
-          disabled={false}
-          onClick={goToLogin}
-        />
+        <AppButton type='outlined' text={t('login')} onClick={goToLogin} />
       </div>
     </StyledForm>
   )

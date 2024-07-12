@@ -1,14 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
-import { RegisterFormProvider } from '../hooks/useRegistrationForm'
+import { RegisterFormProviderLegalPerson } from '../hooks/useRegistrationFormLegalPerson'
+import { RegisterFormProviderIndividual } from '../hooks/useRegistrationFormIndividual'
 
 type Props = { children: JSX.Element }
 
 const RegistrationForm = ({ children }: Props) => {
   return (
-    <RegisterFormProvider>
-      <Container>{children}</Container>
-    </RegisterFormProvider>
+    <RegisterFormProviderIndividual>
+      <RegisterFormProviderLegalPerson>
+        <Container>{children}</Container>
+      </RegisterFormProviderLegalPerson>
+    </RegisterFormProviderIndividual>
   )
 }
 

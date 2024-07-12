@@ -5,7 +5,11 @@ import { useTranslations } from 'next-intl'
 
 const FormikContext = createContext<FormikValues | null>(null)
 
-export const RegisterFormProvider = ({ children }: { children: ReactNode }) => {
+export const RegisterFormProviderLegalPerson = ({
+  children,
+}: {
+  children: ReactNode
+}) => {
   const t = useTranslations('useForm')
 
   const initialValues = {
@@ -80,9 +84,9 @@ export const RegisterFormProvider = ({ children }: { children: ReactNode }) => {
   )
 }
 
-export const useRegisterFormContext = <
+export const useRegisterFormContextLegalPerson = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {}
+  ExtraProps = {},
 >() => {
   const context = useContext(FormikContext)
   if (!context) {

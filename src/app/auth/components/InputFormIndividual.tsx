@@ -4,9 +4,9 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import TextNav from '@/common/components/textNav/TextNav'
-import IndividualForm1 from './RegistrationSteps.tsx/IndividualForm1'
-import IndividualForm2 from './RegistrationSteps.tsx/IndividualForm2'
-import FormStep3 from './RegistrationSteps.tsx/FormStep3'
+import IndividualForm1 from './RegistrationSteps.tsx/individual/IndividualForm1'
+import IndividualForm2 from './RegistrationSteps.tsx/individual/IndividualForm2'
+import FormStep3 from './RegistrationSteps.tsx/legalPerson/LegalPersonForm3'
 
 import stepArrow from '@/assets/icons/stepArrow.svg'
 

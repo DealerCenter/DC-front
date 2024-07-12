@@ -5,15 +5,16 @@ import React, { Dispatch, SetStateAction } from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
-import { useRegisterFormContext } from '../../hooks/useRegistrationForm'
+import { useRegisterFormContextIndividual } from '@/app/auth/hooks/useRegistrationFormIndividual'
 
 import ValidateTextBox from '@/common/components/passwordValidateTextBox/ValidateTextBox'
-import usePasswordValidation from '../../hooks/usePasswordValidation'
+import usePasswordValidation from '../../../hooks/usePasswordValidation'
 
 type Props = { setFormStep: Dispatch<SetStateAction<number>> }
 
 const FormStep3 = ({ setFormStep }: Props) => {
   const t = useTranslations('')
+
   const {
     values,
     handleBlur,
@@ -22,7 +23,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
     errors,
     validateForm,
     touched,
-  } = useRegisterFormContext()
+  } = useRegisterFormContextIndividual()
 
   const criteria = usePasswordValidation(values.password)
 
@@ -61,7 +62,6 @@ const FormStep3 = ({ setFormStep }: Props) => {
           errors.password && touched.password ? errors.password : ''
         }
       />
-
       <PasswordErrorBox>
         <ValidateTextBox text={t('use numbers')} isChecked={criteria.number} />
         <ValidateTextBox

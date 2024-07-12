@@ -1,20 +1,30 @@
 import React from 'react'
-import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
 
-import useForm from '../../hooks/useRegistrationForm'
+import { useRegisterFormContextIndividual } from '../../../hooks/useRegistrationFormIndividual'
+import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/InputElements/TextInput'
 import FileDropZone from '@/common/components/InputElements/FileDropZone'
-import AppButton from '@/common/components/appButton/AppButton'
 
 type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
 
 const IndividualForm2 = ({ setFormStep }: Props) => {
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, handleSubmit } = useForm()
+  const { values, handleBlur, handleChange, errors, touched, validateForm } =
+    useRegisterFormContextIndividual()
+
+  const onNextClick = async () => {
+    const validated = await validateForm()
+    if (!validated.personalNumber) {
+      setFormStep((prev) => prev + 1)
+    }
+  }
+
+  const isButtonDisabled = values.personalNumber.length === 0
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm>
       <TextInput
         type='text'
         name='personalNumber'
@@ -22,6 +32,11 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
         value={values.personalNumber}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.personalNumber && touched.personalNumber
+            ? errors.personalNumber
+            : ''
+        }
       />{' '}
       <FileDropZone
         dropText={t('Drop the file here ...')}
@@ -31,10 +46,8 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
       <AppButton
         text={t('next')}
         type='filled'
-        disabled={values.personalNumber === ''}
-        onClick={() => {
-          setFormStep((step) => step + 1)
-        }}
+        disabled={isButtonDisabled}
+        onClick={onNextClick}
       />
     </StyledForm>
   )

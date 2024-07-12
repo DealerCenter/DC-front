@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import { useRegisterFormContext } from '../../hooks/useRegistrationForm'
-
+import { useRegisterFormContextLegalPerson } from '../../../hooks/useRegistrationFormLegalPerson'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/InputElements/TextInput'
 import FileDropZone from '@/common/components/InputElements/FileDropZone'
@@ -15,9 +14,8 @@ type Props = {
 
 const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
   const t = useTranslations('')
-
   const { values, handleBlur, handleChange, errors, touched, validateForm } =
-    useRegisterFormContext()
+    useRegisterFormContextLegalPerson()
 
   const onNextClick = async () => {
     const validated = await validateForm()

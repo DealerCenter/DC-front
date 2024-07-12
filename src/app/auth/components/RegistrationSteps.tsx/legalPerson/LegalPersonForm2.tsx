@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import { useRegisterFormContext } from '../../hooks/useRegistrationForm'
+import { useRegisterFormContextLegalPerson } from '../../../hooks/useRegistrationFormLegalPerson'
 
 import TextInput from '@/common/components/InputElements/TextInput'
 import FileDropZone from '@/common/components/InputElements/FileDropZone'
@@ -13,7 +13,7 @@ type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
 const LegalPersonForm2 = ({ setFormStep }: Props) => {
   const t = useTranslations('')
   const { values, handleBlur, handleChange, validateForm, errors, touched } =
-    useRegisterFormContext()
+    useRegisterFormContextLegalPerson()
 
   const onNextClick = async () => {
     const validated = await validateForm()
