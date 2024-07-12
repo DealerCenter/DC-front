@@ -13,7 +13,9 @@ const page = (props: Props) => {
       <Header />
       <Frame>
         <SideBar />
-        <UsersListBox />
+        <ContentContainer>
+          <UsersListBox />
+        </ContentContainer>
       </Frame>
     </Container>
   )
@@ -30,4 +32,8 @@ const Frame = styled.div`
   flex-direction: row;
   gap: 24px;
   margin-top: 8px;
+`
+
+const ContentContainer = styled.div`
+  align-items: flex-start;
 `

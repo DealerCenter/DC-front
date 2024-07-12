@@ -23,7 +23,9 @@ const InfoBox = ({ refreshDate, name, notificationCount }: Props) => {
         <BellBox>
           <Image src={notificationBell} alt='notification bell icon' />
           <DotBox>
-            <Image src={notificationDot} alt='notification Dot icon' />
+            <DotBox1>
+              <Image src={notificationDot} alt='notification Dot icon' />
+            </DotBox1>
             <DotNumber>{notificationCount}</DotNumber>
           </DotBox>
         </BellBox>
@@ -36,8 +38,8 @@ export default InfoBox
 
 const Container = styled.div`
   box-sizing: border-box;
-  position: relative;
   display: flex;
+  justify-content: space-between;
   width: 286px;
   height: 135px;
   padding: 16px;
@@ -69,11 +71,8 @@ const DateText = styled.p`
   font-weight: 400;
   color: rgba(32, 32, 32, 0.56);
 `
-const IconBox = styled.div`
-  position: absolute;
-  top: 16px;
-  right: 16px;
-`
+const IconBox = styled.div``
+
 const BellBox = styled.div`
   position: relative;
   display: flex;
@@ -86,11 +85,16 @@ const DotBox = styled.div`
   position: absolute;
   right: 0px;
   top: 0px;
+
+  display: grid;
+  place-items: center;
 `
+const DotBox1 = styled.div`
+  display: flex;
+`
+
 const DotNumber = styled.span`
   position: absolute;
-  right: 3.3px;
-  top: 2.2px;
   font-size: 10px;
   font-weight: 700;
   color: white;

@@ -1,13 +1,13 @@
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
-import BalanceContainer from './BalanceContainer'
-import InfoBox from './InfoBox'
+import BalanceContainer from './components/BalanceContainer'
+import InfoBox from './components/InfoBox'
 import clockIcon from '@/assets/icons/clock.svg'
 import personSettings from '@/assets/icons/personSettings.svg'
 import personList from '@/assets/icons/personList.svg'
 import bellIcon from '@/assets/icons/bell.svg'
-import BarButton from './BarButton'
+import BarButton from './components/BarButton'
 
 type Props = {}
 

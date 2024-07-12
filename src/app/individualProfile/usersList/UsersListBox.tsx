@@ -1,8 +1,9 @@
-import AppButton from '@/common/components/appButton/AppButton'
-import { useTranslations } from 'next-intl'
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
+
 import UsersList from './UsersList'
+import AppButton from '@/common/components/appButton/AppButton'
 
 type Props = {}
 
@@ -42,7 +43,8 @@ const Container = styled.div`
   box-sizing: border-box;
   padding: 24px;
   width: 836px;
-  height: 569px;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border-radius: 16px;
 `

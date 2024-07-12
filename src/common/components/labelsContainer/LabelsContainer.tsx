@@ -1,7 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
-type Props = { labels: string[] }
+type Props = {
+  labels:
+    | [string, string, string, string]
+    | [string, string, string, string, string]
+}
 
 const LabelsContainer = ({ labels }: Props) => {
   return (
@@ -9,10 +13,6 @@ const LabelsContainer = ({ labels }: Props) => {
       {labels.map((label, i) => (
         <Label key={i}>{label}</Label>
       ))}
-      {/* <Label>SomeThing</Label>
-      <Label>SomeThing</Label>
-      <Label>SomeThing</Label>
-      <Label>SomeThing</Label> */}
     </Container>
   )
 }
@@ -20,10 +20,10 @@ const LabelsContainer = ({ labels }: Props) => {
 export default LabelsContainer
 
 const Container = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   gap: 32px;
-  box-sizing: border-box;
   width: 788px;
   height: 75px;
   background-color: rgba(32, 32, 32, 1);

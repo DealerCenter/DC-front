@@ -118,6 +118,6 @@ const UserTypeText = styled.div`
   padding: 16px;
 `
 const StyledCheckbox = styled(Checkbox)`
-  position: absolute;
-  right: 16px;
+  /* position: absolute; */
+  /* right: 16px; */
 `
