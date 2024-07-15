@@ -50,7 +50,7 @@ const SideBar = (props: Props) => {
             }
             width={20}
             height={20}
-            href=''
+            href={routeName.PersonalInformation}
           />
           <BarButton
             active={pathname === routeName.usersList}
@@ -62,7 +62,7 @@ const SideBar = (props: Props) => {
             }
             width={20}
             height={20}
-            href=''
+            href={routeName.usersList}
           />
           <BarButton
             active={pathname === routeName.manageNotifications}

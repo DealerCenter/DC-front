@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
-import UsersList from './UsersList'
+import UsersList from './components/UsersList'
 import AppButton from '@/common/components/appButton/AppButton'
 
 type Props = {}

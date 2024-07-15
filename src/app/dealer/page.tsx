@@ -10,6 +10,7 @@ import PersonalInformation from './personal-information/PersonalInformation'
 import DealerFrame from './DealerLayout'
 import { usePathname } from 'next/navigation'
 import { routeName } from '@/common/helpers/constants'
+import EmptyPlaceHolder from './components/EmptyPlaceHolder'
 
 type Props = {}
 
@@ -23,21 +24,17 @@ const Page = (props: Props) => {
         return <OrderHistory />
       case routeName.manageNotifications:
         return <ManageNotifications />
+      case routeName.PersonalInformation:
+        return <PersonalInformation />
+      case routeName.usersList:
+        return <UsersListBox />
       default:
-        return null
+        return <EmptyPlaceHolder />
         break
     }
   }
 
-  return (
-    <>
-      {renderComponent()}
-      {/* <OrderHistory />
-      <ManageNotifications />
-      <PersonalInformation /> */}
-      {/* <UsersListBox /> */}
-    </>
-  )
+  return <>{renderComponent()}</>
 }
 
 export default Page
