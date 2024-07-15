@@ -4,8 +4,8 @@ import SideBar from './components/sideBar/SideBar'
 import Header from '@/common/components/header/Header'
 import styled from 'styled-components'
 import OrderHistory from './order-history/OrderHistory'
-import ManageNotifications from './manageNotifications/ManageNotifications'
-import PersonalInformation from './personalInformation/PersonalInformation'
+import ManageNotifications from './manage-notifications/ManageNotifications'
+import PersonalInformation from './personal-information/PersonalInformation'
 
 type Props = { children: React.JSX.Element }
 

@@ -3,10 +3,14 @@ import React from 'react'
 import styled from 'styled-components'
 import BalanceContainer from './components/BalanceContainer'
 import InfoBox from './components/InfoBox'
-import clockIcon from '@/assets/icons/clock.svg'
-import personSettings from '@/assets/icons/personSettings.svg'
-import personList from '@/assets/icons/personList.svg'
-import bellIcon from '@/assets/icons/bell.svg'
+import clockBlack from '@/assets/icons/clock/clock-black.svg'
+import clockWhite from '@/assets/icons/clock/clock-white.svg'
+import personSettingsBlack from '@/assets/icons/personSettings/personSettings-black.svg'
+import personSettingsWhite from '@/assets/icons/personSettings/personSettings-white.svg'
+import personListBlack from '@/assets/icons/personList/personList-black.svg'
+import personListWhite from '@/assets/icons/personList/personList-white.svg'
+import bellIconBlack from '@/assets/icons/bell/bell-black.svg'
+import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import BarButton from './components/BarButton'
 import OrderHistory from '../../order-history/OrderHistory'
 import { routeName } from '@/common/helpers/constants'
@@ -31,23 +35,31 @@ const SideBar = (props: Props) => {
           <BarButton
             active={pathname === routeName.orderHistory}
             text={t('order history')}
-            icon={clockIcon}
+            icon={pathname === routeName.orderHistory ? clockWhite : clockBlack}
             width={20}
             height={20}
             href={routeName.orderHistory}
           />
           <BarButton
-            active={false}
+            active={pathname === routeName.PersonalInformation}
             text={t('personal information')}
-            icon={personSettings}
+            icon={
+              pathname === routeName.PersonalInformation
+                ? personSettingsWhite
+                : personSettingsBlack
+            }
             width={20}
             height={20}
             href=''
           />
           <BarButton
-            active={false}
+            active={pathname === routeName.usersList}
             text={t('list of recipients')}
-            icon={personList}
+            icon={
+              pathname === routeName.usersList
+                ? personListWhite
+                : personListBlack
+            }
             width={20}
             height={20}
             href=''
@@ -55,9 +67,13 @@ const SideBar = (props: Props) => {
           <BarButton
             active={pathname === routeName.manageNotifications}
             text={t('manage notifications')}
-            icon={bellIcon}
-            width={18}
-            height={19.5}
+            icon={
+              pathname === routeName.manageNotifications
+                ? bellIconWhite
+                : bellIconBlack
+            }
+            width={20}
+            height={20}
             href={routeName.manageNotifications}
           />
         </ButtonFrame>
