@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import styled, { css } from 'styled-components'
 
@@ -8,11 +9,12 @@ type Props = {
   active: boolean
   width: number
   height: number
+  href: string
 }
 
-const BarButton = ({ text, active, icon, width, height }: Props) => {
+const BarButton = ({ text, active, icon, width, height, href }: Props) => {
   return (
-    <Container>
+    <Container href={href}>
       <StyledButton active={active}>
         {text}
         <IconBox>
@@ -25,7 +27,7 @@ const BarButton = ({ text, active, icon, width, height }: Props) => {
 
 export default BarButton
 
-const Container = styled.div`
+const Container = styled(Link)`
   position: relative;
 `
 

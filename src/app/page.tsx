@@ -1,5 +1,4 @@
 'use client'
-import 'normalize.css/normalize.css'
 
 import Header from '@/common/components/header/Header'
 

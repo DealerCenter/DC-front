@@ -8,6 +8,8 @@ import personSettings from '@/assets/icons/personSettings.svg'
 import personList from '@/assets/icons/personList.svg'
 import bellIcon from '@/assets/icons/bell.svg'
 import BarButton from './components/BarButton'
+import OrderHistory from '../../order-history/OrderHistory'
+import { routeName } from '@/common/helpers/constants'
 
 type Props = {}
 
@@ -30,6 +32,7 @@ const SideBar = (props: Props) => {
             icon={clockIcon}
             width={20}
             height={20}
+            href={routeName.orderHistory}
           />
           <BarButton
             active={false}
@@ -37,6 +40,7 @@ const SideBar = (props: Props) => {
             icon={personSettings}
             width={20}
             height={20}
+            href=''
           />
           <BarButton
             active={true}
@@ -44,6 +48,7 @@ const SideBar = (props: Props) => {
             icon={personList}
             width={20}
             height={20}
+            href=''
           />
           <BarButton
             active={false}
@@ -51,6 +56,7 @@ const SideBar = (props: Props) => {
             icon={bellIcon}
             width={18}
             height={19.5}
+            href=''
           />
         </ButtonFrame>
       </Frame>

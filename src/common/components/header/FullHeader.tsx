@@ -4,12 +4,17 @@ import styled from 'styled-components'
 import search from '@/assets/icons/search.svg'
 import person from '@/assets/icons/person.svg'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 type Props = {}
 
 const FullHeader = (props: Props) => {
+  const router = useRouter()
+
   return (
     <Container>
+      <Link href={'/auth'}>auth</Link>
       <HeaderBox>
         <Logo>DUX</Logo>
         <Frame>
@@ -22,7 +27,7 @@ const FullHeader = (props: Props) => {
           <Item>
             <Image width={20} height={20} src={search} alt='search icon' />
           </Item>
-          <Item>
+          <Item onClick={() => router.push('/auth')}>
             <Image width={20} height={20} src={person} alt='person icon' />
           </Item>
           <Item>
