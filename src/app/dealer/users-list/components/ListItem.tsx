@@ -8,7 +8,7 @@ import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 
 type Props = {
-  recipientInfo: {
+  userData: {
     fullName: string
     id: string
     mobile: string
@@ -18,7 +18,7 @@ type Props = {
 }
 
 const ListItem = ({
-  recipientInfo: { fullName, id, mobile, dateOfAddition, isVerified },
+  userData: { fullName, id, mobile, dateOfAddition, isVerified },
 }: Props) => {
   return (
     <Container>
@@ -67,7 +67,7 @@ const Container = styled.div`
   flex-direction: row;
   height: 72px;
   gap: 32px;
-  padding: 16px 16px 16px 32px;
+  padding: 0 16px 0 32px;
 
   border: 1px solid rgba(32, 32, 32, 0.04);
 `
@@ -75,12 +75,14 @@ const Container = styled.div`
 const LabelBox = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 8px;
 `
 
 const IconBox = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 8px;
 `
 
@@ -97,7 +99,7 @@ const Label = styled.label`
 const NameLabel = styled(Label)`
   font-weight: 700;
   justify-content: start;
-  align-items: unset;
+  text-align: start;
 `
 
 const IdLabel = styled(Label)`
