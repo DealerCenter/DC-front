@@ -50,6 +50,7 @@ const UsersListBox = (props: Props) => {
       <Frame>
         <ButtonFrame>
           <AppButton
+            height='medium'
             type='outlined'
             text={t('search')}
             disabled={false}
@@ -57,6 +58,7 @@ const UsersListBox = (props: Props) => {
             isSmall={true}
           />
           <AppButton
+            height='medium'
             type='outlined'
             text={t('add recipient')}
             disabled={false}

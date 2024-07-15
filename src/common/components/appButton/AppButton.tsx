@@ -3,12 +3,15 @@ import styled, { css } from 'styled-components'
 
 type ButtonTypes = 'filled' | 'outlined'
 
+type ButtonHeight = 'medium' | 'large'
+
 type Props = {
   text: string
   type: ButtonTypes
   disabled?: boolean
   onClick: () => void
   isSmall?: boolean
+  height?: ButtonHeight
 }
 
 const AppButton = ({
@@ -16,7 +19,8 @@ const AppButton = ({
   type,
   disabled,
   onClick,
-  isSmall = false,
+  isSmall,
+  height = 'large',
 }: Props) => {
   return (
     <StyledButton
@@ -24,6 +28,7 @@ const AppButton = ({
       type={type}
       onClick={!disabled ? onClick : () => {}}
       isSmall={isSmall}
+      height={height}
     >
       {text}
     </StyledButton>
@@ -32,33 +37,33 @@ const AppButton = ({
 
 export default AppButton
 
-type ButtonProps = { type?: string; isSmall?: boolean }
+type ButtonProps = { type?: string; isSmall?: boolean; height: string }
 
 const StyledButton = styled.button<ButtonProps>`
   background-color: ${(props) =>
     props.disabled && props.type === 'filled'
       ? 'rgba(32, 32, 32, 0.26)'
       : props.disabled && props.type === 'outlined'
-      ? 'transparent'
-      : !props.disabled && props.type === 'filled'
-      ? 'rgba(32, 32, 32, 1)'
-      : !props.disabled && props.type === 'outlined'
-      ? 'transparent'
-      : ''};
+        ? 'transparent'
+        : !props.disabled && props.type === 'filled'
+          ? 'rgba(32, 32, 32, 1)'
+          : !props.disabled && props.type === 'outlined'
+            ? 'transparent'
+            : ''};
 
   border: ${(props) =>
     props.type === 'filled'
       ? 'none'
       : props.type === 'outlined'
-      ? '1px solid rgba(32, 32, 32, 0.56)'
-      : 'red'};
+        ? '1px solid rgba(32, 32, 32, 0.56)'
+        : 'red'};
 
   color: ${(props) =>
     props.type === 'filled'
       ? 'white'
       : !props.disabled && props.type === 'outlined'
-      ? 'rgba(32, 32, 32, 1)'
-      : 'rgba(32, 32, 32, 0.56)'};
+        ? 'rgba(32, 32, 32, 1)'
+        : 'rgba(32, 32, 32, 0.56)'};
 
   ${({ isSmall }) =>
     isSmall
@@ -69,8 +74,16 @@ const StyledButton = styled.button<ButtonProps>`
           width: 350px;
         `}
 
-  height: 56px;
-  /* width: 350px; */
+  ${({ height }) =>
+    height === 'medium'
+      ? css`
+          height: 44px;
+        `
+      : height === 'large' &&
+        css`
+          height: 56px;
+        `}      
+
   font-size: 16px;
   line-height: 33.6px;
   font-weight: 700;

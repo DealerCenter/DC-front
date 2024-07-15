@@ -16,10 +16,10 @@ const BarButton = ({ text, active, icon, width, height, href }: Props) => {
   return (
     <Container href={href}>
       <StyledButton active={active.toString()}>
-        {text}
         <IconBox>
           <Image src={icon} alt='icon' width={width} height={height} />
         </IconBox>
+        {text}
       </StyledButton>
     </Container>
   )
@@ -29,11 +29,12 @@ export default BarButton
 
 const Container = styled(Link)`
   position: relative;
+  text-decoration: none;
 `
 
 type ButtonProps = { active: string }
 
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled.div<ButtonProps>`
   ${({ active }) =>
     active === 'true'
       ? css`
@@ -49,12 +50,14 @@ const StyledButton = styled.button<ButtonProps>`
           }
         `}
 
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
   text-align: left;
-  padding-left: 48px;
   height: 56px;
   width: 286px;
   font-size: 16px;
-  line-height: 33.6px;
   font-weight: 700;
   border-radius: 12px;
   border: none;
@@ -65,7 +68,5 @@ const IconBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 17px;
-  left: 17px;
+  margin: 0 10px 0 18px;
 `
