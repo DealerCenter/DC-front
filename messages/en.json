@@ -50,20 +50,20 @@
   "verification": "Verification",
 
   "useForm": {
-    "must be valid email": "must be a valid email",
+    "must be valid email": "Must be a valid email",
 
-    "email required": "email is required",
-    "password required": "password is required",
-    "company name required": "company name is required",
-    "identification code required": "identification code is required",
-    "address required": "address is required",
-    "name of representative required": "name of the representative is required",
-    "surname of representative required": "surname of the representative is required",
-    "contact number required": "contact number is required",
-    "date of birth required": "date of birth is required",
-    "personal number required": "personal number is required",
-    "name required": "name is required",
-    "surname required": "surname is required",
-    "actual address required": "actual address is required"
+    "email required": "Email is required",
+    "password required": "Password is required",
+    "company name required": "Company name is required",
+    "identification code required": "Identification code is required",
+    "address required": "Address is required",
+    "name of representative required": "Name of the representative is required",
+    "surname of representative required": "Surname of the representative is required",
+    "contact number required": "Contact number is required",
+    "date of birth required": "Date of birth is required",
+    "personal number required": "Personal number is required",
+    "name required": "Name is required",
+    "surname required": "Surname is required",
+    "actual address required": "Actual address is required"
   }
 }

@@ -4,6 +4,7 @@ import React from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
 import landingPicture from '@/assets/images/landingPicture.svg'
+import Image from 'next/image'
 
 type Props = { goToLogin: () => void; goToRegistration: () => void }
 
@@ -36,15 +37,14 @@ const AuthLanding = ({ goToLogin, goToRegistration }: Props) => {
         </ButtonFrame>
       </Frame>
       {!isMobile && (
-        <ImageFrame>
-          {/* <Image src={landingPicture} alt='landing picture' /> */}
-          <img
-            // src={'.}
-            src='https://static.vecteezy.com/system/resources/previews/025/220/125/non_2x/picture-a-captivating-scene-of-a-tranquil-lake-at-sunset-ai-generative-photo.jpg'
+        <ImageWrapper>
+          <Image
+            src={landingPicture}
             alt='landing picture'
-            style={{ width: '200px', height: '100vh' }}
+            layout='fill'
+            objectFit='cover'
           />
-        </ImageFrame>
+        </ImageWrapper>
       )}
     </Container>
   )
@@ -54,14 +54,9 @@ export default AuthLanding
 
 const Container = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 90vh;
-`
-const ImageFrame = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
 `
 
 const ButtonFrame = styled.div`
@@ -73,14 +68,11 @@ const ButtonFrame = styled.div`
 `
 
 const Frame = styled.div`
-  position: absolute;
-  left: 120px;
-  /* top: 419px; */
-  top: 230px;
   display: flex;
   flex-direction: column;
   gap: 24px;
   z-index: 999;
+  margin-left: 120px;
 `
 const TextFrame = styled.div`
   width: 703px;
@@ -91,4 +83,11 @@ const Text = styled.p`
   font-weight: 500;
   padding: 10px 0;
   margin: 0;
+`
+const ImageWrapper = styled.div`
+  height: 100vh;
+  width: 40%;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
 `
