@@ -14,7 +14,6 @@ const FullHeader = (props: Props) => {
 
   return (
     <Container>
-      <Link href={'/auth'}>auth</Link>
       <HeaderBox>
         <Logo>DUX</Logo>
         <Frame>

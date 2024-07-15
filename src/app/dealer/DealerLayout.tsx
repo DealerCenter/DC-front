@@ -9,7 +9,7 @@ import PersonalInformation from './personalInformation/PersonalInformation'
 
 type Props = { children: React.JSX.Element }
 
-const DealerFrame = ({ children }: Props) => {
+const DealerLayout = ({ children }: Props) => {
   return (
     <Container>
       <Header />
@@ -21,7 +21,7 @@ const DealerFrame = ({ children }: Props) => {
   )
 }
 
-export default DealerFrame
+export default DealerLayout
 
 const Container = styled.div`
   background-color: #2020200a;

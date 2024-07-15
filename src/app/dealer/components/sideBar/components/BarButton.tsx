@@ -15,7 +15,7 @@ type Props = {
 const BarButton = ({ text, active, icon, width, height, href }: Props) => {
   return (
     <Container href={href}>
-      <StyledButton active={active}>
+      <StyledButton active={active.toString()}>
         {text}
         <IconBox>
           <Image src={icon} alt='icon' width={width} height={height} />
@@ -31,11 +31,11 @@ const Container = styled(Link)`
   position: relative;
 `
 
-type ButtonProps = { active: boolean }
+type ButtonProps = { active: string }
 
 const StyledButton = styled.button<ButtonProps>`
   ${({ active }) =>
-    active
+    active === 'true'
       ? css`
           background-color: rgba(32, 32, 32, 1);
           color: white;

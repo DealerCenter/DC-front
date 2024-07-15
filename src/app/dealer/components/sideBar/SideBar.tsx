@@ -10,11 +10,13 @@ import bellIcon from '@/assets/icons/bell.svg'
 import BarButton from './components/BarButton'
 import OrderHistory from '../../order-history/OrderHistory'
 import { routeName } from '@/common/helpers/constants'
+import { usePathname } from 'next/navigation'
 
 type Props = {}
 
 const SideBar = (props: Props) => {
   const t = useTranslations('')
+  const pathname = usePathname()
 
   return (
     <BarContainer>
@@ -27,7 +29,7 @@ const SideBar = (props: Props) => {
         <BalanceContainer text={t('balance')} balance={'$ 9873.32'} />
         <ButtonFrame>
           <BarButton
-            active={false}
+            active={pathname === routeName.orderHistory}
             text={t('order history')}
             icon={clockIcon}
             width={20}
@@ -43,7 +45,7 @@ const SideBar = (props: Props) => {
             href=''
           />
           <BarButton
-            active={true}
+            active={false}
             text={t('list of recipients')}
             icon={personList}
             width={20}
@@ -51,12 +53,12 @@ const SideBar = (props: Props) => {
             href=''
           />
           <BarButton
-            active={false}
+            active={pathname === routeName.manageNotifications}
             text={t('manage notifications')}
             icon={bellIcon}
             width={18}
             height={19.5}
-            href=''
+            href={routeName.manageNotifications}
           />
         </ButtonFrame>
       </Frame>

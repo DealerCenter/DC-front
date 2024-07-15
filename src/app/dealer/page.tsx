@@ -5,7 +5,7 @@ import Header from '@/common/components/header/Header'
 import styled from 'styled-components'
 import UsersListBox from './components/usersList/UsersListBox'
 import OrderHistory from './order-history/OrderHistory'
-import ManageNotifications from './manageNotifications/ManageNotifications'
+import ManageNotifications from './manage-notifications/ManageNotifications'
 import PersonalInformation from './personalInformation/PersonalInformation'
 import DealerFrame from './DealerLayout'
 import { usePathname } from 'next/navigation'
@@ -30,13 +30,13 @@ const Page = (props: Props) => {
   }
 
   return (
-    <DealerFrame>
+    <>
       {renderComponent()}
       {/* <OrderHistory />
       <ManageNotifications />
       <PersonalInformation /> */}
       {/* <UsersListBox /> */}
-    </DealerFrame>
+    </>
   )
 }
 
