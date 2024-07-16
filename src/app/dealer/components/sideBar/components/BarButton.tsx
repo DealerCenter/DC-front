@@ -18,8 +18,8 @@ const BarButton = ({ text, active, icon, width, height, href }: Props) => {
 
   return (
     <StyledLink href={href}>
-      <Container active={active} isMobile={isMobile}>
-        <IconBox isMobile={isMobile}>
+      <Container active={active}>
+        <IconBox>
           <Image src={icon} alt='icon' width={width} height={height} />
         </IconBox>
         {!isMobile && text}
@@ -35,9 +35,17 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `
 
-type ButtonProps = { active: boolean; isMobile: boolean }
+type ButtonProps = { active: boolean }
 
 const Container = styled.div<ButtonProps>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+
   ${({ active }) =>
     active
       ? css`
@@ -53,46 +61,28 @@ const Container = styled.div<ButtonProps>`
           }
         `}
 
-  ${({ isMobile }) =>
-    isMobile
-      ? css`
-          height: 52px;
-          width: 52px;
-          border-radius: 18px;
-          justify-content: center;
-        `
-      : css`
-          height: 56px;
-          width: 286px;
-          border-radius: 12px;
-          justify-content: start;
-        `}
+  @media (max-width: 500px) {
+    height: 52px;
+    width: 52px;
+    border-radius: 18px;
+    justify-content: center;
+  }
 
-     
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: left;
-  font-size: 16px;
-  font-weight: 700;
-  border: none;
+  height: 56px;
+  width: 286px;
+  border-radius: 12px;
+  justify-content: start;
 `
 
-type IconBoxProps = { isMobile: boolean }
-
-const IconBox = styled.div<IconBoxProps>`
+const IconBox = styled.div`
   width: 24px;
   height: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  ${({ isMobile }) =>
-    isMobile
-      ? css`
-          margin: 0;
-        `
-      : css`
-          margin: 0 10px 0 18px;
-        `}
+  @media (max-width: 500px) {
+    margin: 0;
+  }
+  margin: 0 10px 0 18px;
 `

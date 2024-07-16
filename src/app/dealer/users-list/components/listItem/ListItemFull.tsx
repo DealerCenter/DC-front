@@ -8,17 +8,19 @@ import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 
 type Props = {
-  userData: {
-    fullName: string
-    id: string
-    mobile: string
-    dateOfAddition: string
-    isVerified: boolean
-  }
+  fullName: string
+  id: string
+  mobile: string
+  dateOfAddition: string
+  isVerified: boolean
 }
 
-const ListItem = ({
-  userData: { fullName, id, mobile, dateOfAddition, isVerified },
+const ListItemFull = ({
+  fullName,
+  id,
+  mobile,
+  dateOfAddition,
+  isVerified,
 }: Props) => {
   return (
     <Container>
@@ -59,7 +61,7 @@ const ListItem = ({
   )
 }
 
-export default ListItem
+export default ListItemFull
 
 const Container = styled.div`
   box-sizing: border-box;

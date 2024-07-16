@@ -3,7 +3,8 @@ import LabelsContainer from '@/common/components/labelsContainer/LabelsContainer
 import { useTranslations } from 'next-intl'
 
 import styled from 'styled-components'
-import ListItem from './ListItem'
+import ListItem from './listItem/ListItem'
+import { useMediaQuery } from 'react-responsive'
 
 type Props = {
   usersData: {
@@ -16,20 +17,23 @@ type Props = {
 }
 
 const UserList = ({ usersData }: Props) => {
+  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
   const t = useTranslations('')
 
   return (
     <Container>
       {usersData.length !== 0 && (
         <>
-          <LabelsContainer
-            labels={[
-              t('recipient'),
-              t('mobile'),
-              t('the date of addition'),
-              t('verification'),
-            ]}
-          />
+          {!isMobile && (
+            <LabelsContainer
+              labels={[
+                t('recipient'),
+                t('mobile'),
+                t('the date of addition'),
+                t('verification'),
+              ]}
+            />
+          )}
           {usersData.map((data) => (
             <ListItem userData={data} key={data.id} />
           ))}
@@ -42,5 +46,8 @@ const UserList = ({ usersData }: Props) => {
 export default UserList
 
 const Container = styled.div`
+  @media (max-width: 500px) {
+    width: 390px;
+  }
   width: 788px;
 `

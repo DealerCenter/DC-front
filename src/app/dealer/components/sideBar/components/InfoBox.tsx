@@ -4,18 +4,16 @@ import styled, { css } from 'styled-components'
 import notificationBell from '@/assets/icons/notificatonBell.svg'
 import notificationDot from '@/assets/icons/notificationDot.svg'
 import { useTranslations } from 'next-intl'
-import { useMediaQuery } from 'react-responsive'
 
 type Props = { refreshDate: string; name: string; notificationCount: number }
 
 const InfoBox = ({ refreshDate, name, notificationCount }: Props) => {
-  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
   const t = useTranslations('')
 
   return (
-    <Container isMobile={isMobile}>
+    <Container>
       <Frame>
-        <TextBox isMobile={isMobile}>
+        <TextBox>
           <Text>{t('hello')}, &nbsp;</Text>
           <TextName>{name}</TextName>
         </TextBox>
@@ -38,25 +36,19 @@ const InfoBox = ({ refreshDate, name, notificationCount }: Props) => {
 
 export default InfoBox
 
-type ContainerProps = { isMobile: boolean }
-
-const Container = styled.div<ContainerProps>`
+const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
 
   padding: 16px;
 
-  ${({ isMobile }) =>
-    isMobile
-      ? css`
-          width: 358px;
-          height: 115px;
-        `
-      : css`
-          width: 286px;
-          height: 135px;
-        `}
+  @media (max-width: 500px) {
+    width: 358px;
+    height: 115px;
+  }
+  width: 286px;
+  height: 135px;
 `
 const Frame = styled.div`
   display: flex;
@@ -64,18 +56,13 @@ const Frame = styled.div`
   gap: 16px;
 `
 
-type TextBoxProps = { isMobile: boolean }
-
-const TextBox = styled.div<TextBoxProps>`
-  ${({ isMobile }) =>
-    isMobile
-      ? css`
-          flex-direction: row;
-        `
-      : css`
-          flex-direction: column;
-        `}
+const TextBox = styled.div`
   display: flex;
+
+  @media (max-width: 500px) {
+    flex-direction: row;
+  }
+  flex-direction: column;
 `
 
 const Text = styled.p`

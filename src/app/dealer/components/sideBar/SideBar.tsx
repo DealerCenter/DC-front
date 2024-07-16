@@ -29,7 +29,7 @@ const SideBar = (props: Props) => {
   const pathname = usePathname()
 
   return (
-    <BarContainer isMobile={isMobile}>
+    <BarContainer>
       <Frame>
         <InfoBox
           name='Givi'
@@ -41,7 +41,7 @@ const SideBar = (props: Props) => {
           text={t('balance')}
           balance={'$ 9873.32'}
         />
-        <ButtonFrame isMobile={isMobile}>
+        <ButtonFrame>
           <BarButton
             active={pathname === routeName.orderHistory}
             text={t('order history')}
@@ -97,9 +97,7 @@ const SideBar = (props: Props) => {
 
 export default SideBar
 
-type BarProps = { isMobile: boolean }
-
-const BarContainer = styled.div<BarProps>`
+const BarContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -107,21 +105,18 @@ const BarContainer = styled.div<BarProps>`
   justify-content: space-between;
   background-color: white;
   border-radius: 16px;
+  gap: 32px;
 
-  ${({ isMobile }) =>
-    isMobile
-      ? css`
-          width: 358px;
-          padding: 16px;
-          border: 1px solid rgba(32, 32, 32, 0.1);
-          gap: 32px;
-        `
-      : css`
-          width: 334px;
-          padding: 24px;
-          height: 902px;
-          gap: 60px;
-        `}
+  @media (max-width: 500px) {
+    width: 358px;
+    padding: 16px;
+    border: 1px solid rgba(32, 32, 32, 0.1);
+    height: unset;
+  }
+  border: unset;
+  width: 334px;
+  padding: 24px;
+  height: 902px;
 `
 
 const Frame = styled.div`
@@ -131,24 +126,16 @@ const Frame = styled.div`
   gap: 32px;
 `
 
-type ButtonFrameProps = { isMobile: boolean }
-
-const ButtonFrame = styled.div<ButtonFrameProps>`
+const ButtonFrame = styled.div`
   box-sizing: border-box;
   display: flex;
-  /* flex-direction: column; */
-  /* gap: 4px; */
 
-  ${({ isMobile }) =>
-    isMobile
-      ? css`
-          flex-direction: row;
-          justify-content: space-between;
-          width: 358px;
+  @media (max-width: 500px) {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 358px;
+    padding: 0px 16px;
+  }
 
-          padding: 0px 16px;
-        `
-      : css`
-          flex-direction: column;
-        `}
+  flex-direction: column;
 `

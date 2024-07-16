@@ -14,34 +14,34 @@ import plusIcon from '@/assets/icons/plus.svg'
 type Props = {}
 
 const DummyData = [
-  // {
-  //   fullName: 'Luka Tsilosani',
-  //   id: '09138409387',
-  //   mobile: '098 028 07 77',
-  //   dateOfAddition: '24/07/11',
-  //   isVerified: true,
-  // },
-  // {
-  //   fullName: 'Zuka Jakeli',
-  //   id: '02189491234',
-  //   mobile: '098 028 11 11',
-  //   dateOfAddition: '24/04/11',
-  //   isVerified: true,
-  // },
-  // {
-  //   fullName: 'Elon Musk',
-  //   id: '06060600000',
-  //   mobile: '000 06 06 06',
-  //   dateOfAddition: '00/11/11',
-  //   isVerified: false,
-  // },
-  // {
-  //   fullName: 'Siddhartha Gautama',
-  //   id: '0000000001',
-  //   mobile: '000 00 00 01',
-  //   dateOfAddition: '00/00/01',
-  //   isVerified: true,
-  // },
+  {
+    fullName: 'Luka Tsilosani',
+    id: '09138409387',
+    mobile: '098 028 07 77',
+    dateOfAddition: '24/07/11',
+    isVerified: true,
+  },
+  {
+    fullName: 'Zuka Jakeli',
+    id: '02189491234',
+    mobile: '098 028 11 11',
+    dateOfAddition: '24/04/11',
+    isVerified: true,
+  },
+  {
+    fullName: 'Elon Musk',
+    id: '06060600000',
+    mobile: '000 06 06 06',
+    dateOfAddition: '00/11/11',
+    isVerified: false,
+  },
+  {
+    fullName: 'Siddhartha Gautama',
+    id: '0000000001',
+    mobile: '000 00 00 01',
+    dateOfAddition: '00/00/01',
+    isVerified: true,
+  },
 ]
 
 const UsersListBox = (props: Props) => {
@@ -88,6 +88,7 @@ const Container = styled.div`
     width: 390px;
     padding: 0px;
   }
+  align-items: unset;
   width: 836px;
   padding: 24px;
 `
@@ -96,8 +97,6 @@ const Frame = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 16px;
 
   @media (max-width: 500px) {
     align-items: flex-start;
@@ -105,6 +104,10 @@ const Frame = styled.div`
     width: 358px;
     margin-top: 32px;
   }
+  align-items: unset;
+  gap: 16px;
+  width: unset;
+  margin-top: unset;
 `
 
 const ButtonFrame = styled.div`

@@ -2,7 +2,6 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import wallet from '@/assets/icons/wallet.svg'
 import Image from 'next/image'
-import { useMediaQuery } from 'react-responsive'
 
 type Props = {
   text: string
@@ -13,10 +12,8 @@ type Props = {
 }
 
 const GrayContainer = ({ text, balance, height, icon, onClick }: Props) => {
-  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
-
   return (
-    <Container height={height} onClick={onClick} isMobile={isMobile}>
+    <Container height={height} onClick={onClick}>
       <IconBox>
         <Image src={icon} alt='icon' />
       </IconBox>
@@ -30,7 +27,7 @@ const GrayContainer = ({ text, balance, height, icon, onClick }: Props) => {
 
 export default GrayContainer
 
-type ContainerProps = { height?: string; isMobile: boolean }
+type ContainerProps = { height?: string }
 
 const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
@@ -44,21 +41,21 @@ const Container = styled.div<ContainerProps>`
   gap: 19px;
   padding: 24px 16px 24px 16px;
 
-  ${({ isMobile, height }) =>
-    isMobile
+  ${({ height }) =>
+    height
       ? css`
-          width: 326px;
-          height: 85px;
+          width: 286px;
+          height: ${height};
         `
-      : height
-        ? css`
-            width: 286px;
-            height: ${height};
-          `
-        : css`
-            width: 286px;
-            height: 101px;
-          `}
+      : css`
+          width: 286px;
+          height: 101px;
+        `}
+
+  @media (max-width: 500px) {
+    width: 326px;
+    height: 85px;
+  }
 `
 const Frame = styled.div`
   display: flex;
