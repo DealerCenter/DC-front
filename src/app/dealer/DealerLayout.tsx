@@ -2,20 +2,23 @@
 import React, { JSXElementConstructor } from 'react'
 import SideBar from './components/sideBar/SideBar'
 import Header from '@/common/components/header/Header'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import OrderHistory from './order-history/OrderHistory'
 import ManageNotifications from './manage-notifications/ManageNotifications'
 import PersonalInformation from './personal-information/PersonalInformation'
+import { useMediaQuery } from 'react-responsive'
 
 type Props = { children: React.JSX.Element }
 
 const DealerLayout = ({ children }: Props) => {
+  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
+
   return (
-    <Container>
+    <Container isMobile={isMobile}>
       <Header />
-      <Frame>
+      <Frame isMobile={isMobile}>
         <SideBar />
-        <ContentContainer>{children}</ContentContainer>
+        {/* <ContentContainer>{children}</ContentContainer> */}
       </Frame>
     </Container>
   )
@@ -23,15 +26,36 @@ const DealerLayout = ({ children }: Props) => {
 
 export default DealerLayout
 
-const Container = styled.div`
-  background-color: #2020200a;
+type ContainerProps = { isMobile: boolean }
+
+const Container = styled.div<ContainerProps>`
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          background-color: white;
+        `
+      : css`
+          background-color: #2020200a;
+        `}
 `
-const Frame = styled.div`
+
+type FrameProps = { isMobile: boolean }
+
+const Frame = styled.div<FrameProps>`
   display: flex;
-  justify-content: center;
-  flex-direction: row;
   gap: 24px;
   margin-top: 8px;
+
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          flex-direction: column;
+          align-items: center;
+        `
+      : css`
+          flex-direction: row;
+          justify-content: center;
+        `}
 `
 
 const ContentContainer = styled.div`

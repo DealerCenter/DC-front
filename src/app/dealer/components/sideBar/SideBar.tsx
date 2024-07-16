@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import BalanceContainer from './components/GrayContainer'
 import InfoBox from './components/InfoBox'
 import BarButton from './components/BarButton'
@@ -19,15 +19,17 @@ import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
 import GrayContainer from './components/GrayContainer'
+import { useMediaQuery } from 'react-responsive'
 
 type Props = {}
 
 const SideBar = (props: Props) => {
+  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
   const t = useTranslations('')
   const pathname = usePathname()
 
   return (
-    <BarContainer>
+    <BarContainer isMobile={isMobile}>
       <Frame>
         <InfoBox
           name='Givi'
@@ -39,7 +41,7 @@ const SideBar = (props: Props) => {
           text={t('balance')}
           balance={'$ 9873.32'}
         />
-        <ButtonFrame>
+        <ButtonFrame isMobile={isMobile}>
           <BarButton
             active={pathname === routeName.orderHistory}
             text={t('order history')}
@@ -86,35 +88,67 @@ const SideBar = (props: Props) => {
           />
         </ButtonFrame>
       </Frame>
-      <GrayContainer icon={exitIcon} text={t('exit')} height='71px' />
+      {!isMobile && (
+        <GrayContainer icon={exitIcon} text={t('exit')} height='71px' />
+      )}
     </BarContainer>
   )
 }
 
 export default SideBar
 
-const BarContainer = styled.div`
+type BarProps = { isMobile: boolean }
+
+const BarContainer = styled.div<BarProps>`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  width: 334px;
-  height: 902px;
   border-radius: 16px;
-  padding: 24px;
-  gap: 60px;
+
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          width: 358px;
+          padding: 16px;
+          border: 1px solid rgba(32, 32, 32, 0.1);
+          gap: 32px;
+        `
+      : css`
+          width: 334px;
+          padding: 24px;
+          height: 902px;
+          gap: 60px;
+        `}
 `
 
 const Frame = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 32px;
 `
 
-const ButtonFrame = styled.div`
+type ButtonFrameProps = { isMobile: boolean }
+
+const ButtonFrame = styled.div<ButtonFrameProps>`
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  /* flex-direction: column; */
+  /* gap: 4px; */
+
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          flex-direction: row;
+          justify-content: space-between;
+          width: 358px;
+
+          padding: 0px 16px;
+        `
+      : css`
+          flex-direction: column;
+        `}
 `
