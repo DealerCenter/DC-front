@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
+
+import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 
 import personListBig from '@/assets/icons/personList/personListBig.svg'
-import AppButton from '@/common/components/appButton/AppButton'
-import { useTranslations } from 'next-intl'
+import plusIcon from '@/assets/icons/plus.svg'
 
 type Props = { onClick: () => void }
 
@@ -22,11 +24,10 @@ const PlaceHolderForList = ({ onClick }: Props) => {
           შეავსეთ მიმღების მონაცემები და შემდგომში მარტივად მიუთითეთ რაღაც რაღაც
           რაღაცა
         </Text>
-        <AppButton
-          type='outlined'
+        <SecondaryButton
           text={t('add recipient')}
-          disabled={false}
           onClick={onClick}
+          icon={plusIcon}
         />
       </Frame>
     </Container>

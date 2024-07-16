@@ -6,38 +6,42 @@ import UsersList from './components/UsersList'
 import AppButton from '@/common/components/appButton/AppButton'
 import PlaceHolderForList from './components/PlaceHolderForList'
 import HeaderH4Bold from '../components/HeaderH4Bold'
+import SecondaryButton from '@/common/components/appButton/SecondaryButton'
+
+import searchIcon from '@/assets/icons/searchForButton.svg'
+import plusIcon from '@/assets/icons/plus.svg'
 
 type Props = {}
 
 const DummyData = [
-  {
-    fullName: 'Luka Tsilosani',
-    id: '09138409387',
-    mobile: '098 028 07 77',
-    dateOfAddition: '24/07/11',
-    isVerified: true,
-  },
-  {
-    fullName: 'Zuka Jakeli',
-    id: '02189491234',
-    mobile: '098 028 11 11',
-    dateOfAddition: '24/04/11',
-    isVerified: true,
-  },
-  {
-    fullName: 'Elon Musk',
-    id: '06060600000',
-    mobile: '000 06 06 06',
-    dateOfAddition: '00/11/11',
-    isVerified: false,
-  },
-  {
-    fullName: 'Siddhartha Gautama',
-    id: '0000000001',
-    mobile: '000 00 00 01',
-    dateOfAddition: '00/00/01',
-    isVerified: true,
-  },
+  // {
+  //   fullName: 'Luka Tsilosani',
+  //   id: '09138409387',
+  //   mobile: '098 028 07 77',
+  //   dateOfAddition: '24/07/11',
+  //   isVerified: true,
+  // },
+  // {
+  //   fullName: 'Zuka Jakeli',
+  //   id: '02189491234',
+  //   mobile: '098 028 11 11',
+  //   dateOfAddition: '24/04/11',
+  //   isVerified: true,
+  // },
+  // {
+  //   fullName: 'Elon Musk',
+  //   id: '06060600000',
+  //   mobile: '000 06 06 06',
+  //   dateOfAddition: '00/11/11',
+  //   isVerified: false,
+  // },
+  // {
+  //   fullName: 'Siddhartha Gautama',
+  //   id: '0000000001',
+  //   mobile: '000 00 00 01',
+  //   dateOfAddition: '00/00/01',
+  //   isVerified: true,
+  // },
 ]
 
 const UsersListBox = (props: Props) => {
@@ -48,20 +52,15 @@ const UsersListBox = (props: Props) => {
       <HeaderH4Bold text={t('list of users')} />
       <Frame>
         <ButtonFrame>
-          <AppButton
-            height='medium'
-            type='outlined'
+          <SecondaryButton
             text={t('search')}
-            disabled={false}
             onClick={() => {}}
-            isSmall={true}
+            icon={searchIcon}
           />
-          <AppButton
-            height='medium'
-            type='outlined'
+          <SecondaryButton
             text={t('add recipient')}
-            disabled={false}
             onClick={() => {}}
+            icon={plusIcon}
           />
         </ButtonFrame>
         {DummyData.length === 0 ? (
