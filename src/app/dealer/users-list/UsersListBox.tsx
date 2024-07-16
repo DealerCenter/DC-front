@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import UsersList from './components/UsersList'
 import AppButton from '@/common/components/appButton/AppButton'
 import PlaceHolderForList from './components/PlaceHolderForList'
+import HeaderH4Bold from '../components/HeaderH4Bold'
 
 type Props = {}
 
@@ -44,9 +45,7 @@ const UsersListBox = (props: Props) => {
 
   return (
     <Container>
-      <H2Box>
-        <StyledH2>მომხმარებლების სია</StyledH2>
-      </H2Box>
+      <HeaderH4Bold text={t('list of users')} />
       <Frame>
         <ButtonFrame>
           <AppButton
@@ -99,18 +98,4 @@ const ButtonFrame = styled.div`
   flex-direction: row;
   gap: 10px;
   padding: 8px 0;
-`
-
-const H2Box = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 372px;
-  height: 82px;
-`
-
-const StyledH2 = styled.div`
-  color: rgba(32, 32, 32, 1);
-  font-size: 28px;
-  font-weight: 700;
 `

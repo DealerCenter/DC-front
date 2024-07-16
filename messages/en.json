@@ -41,6 +41,7 @@
   "hello": "Hello",
   "personal information": "Personal information",
   "list of recipients": "List of recipients",
+  "list of users": "List of users",
   "manage notifications": "Manage notifications",
   "search": "Search",
   "add recipient": "Add recipient",
@@ -49,6 +50,12 @@
   "the date of addition": "The date of addition",
   "verification": "Verification",
   "exit": "Exit",
+  "contact information": "Contact information",
+  "change the password": "Change the password",
+  "cell phone": "Cell phone",
+  "current password": "Current password",
+  "new password": "New password",
+  "repeat new password": "Repeat the new password",
 
   "useForm": {
     "must be valid email": "Must be a valid email",

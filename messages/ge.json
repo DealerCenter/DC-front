@@ -39,6 +39,7 @@
   "hello": "გამარჯობა",
   "personal information": "პირადი მონაცემები",
   "list of recipients": "მიმღებთა სია",
+  "list of users": "მომხმარებლების სია",
   "manage notifications": "შეტყობინებების მართვა",
   "search": "ძებნა",
   "add recipient": "მიმღების დამატება",
@@ -47,6 +48,12 @@
   "the date of addition": "დამატების თარიღი",
   "verification": "ვერიფიკაცია",
   "exit": "გასვლა",
+  "contact information": "საკონტაქტო ინფორმაცია",
+  "change the password": "პაროლის შეცვლა",
+  "cell phone": "მობილური ტელეფონი",
+  "current password": "მიმდინარე პაროლი",
+  "new password": "ახალი პაროლი",
+  "repeat new password": "გაიმეორეთ ახალი პაროლი",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
