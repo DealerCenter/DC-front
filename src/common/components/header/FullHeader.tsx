@@ -4,10 +4,14 @@ import styled from 'styled-components'
 import search from '@/assets/icons/search.svg'
 import person from '@/assets/icons/person.svg'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 type Props = {}
 
 const FullHeader = (props: Props) => {
+  const router = useRouter()
+
   return (
     <Container>
       <HeaderBox>
@@ -22,7 +26,7 @@ const FullHeader = (props: Props) => {
           <Item>
             <Image width={20} height={20} src={search} alt='search icon' />
           </Item>
-          <Item>
+          <Item onClick={() => router.push('/auth')}>
             <Image width={20} height={20} src={person} alt='person icon' />
           </Item>
           <Item>
@@ -37,7 +41,6 @@ const FullHeader = (props: Props) => {
 export default FullHeader
 
 const Container = styled.div`
-  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,8 +48,6 @@ const Container = styled.div`
 `
 
 const HeaderBox = styled.div`
-  /* background-color: red; */
-
   @media (min-width: 500px) {
     box-sizing: border-box;
     border-radius: 28px;
@@ -56,7 +57,7 @@ const HeaderBox = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
+    /* margin: 0; */
     background-color: rgba(18, 18, 20, 1);
   }
 `

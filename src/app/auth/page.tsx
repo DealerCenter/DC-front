@@ -6,15 +6,12 @@ import InputFormIndividual from './components/InputFormIndividual'
 import ChooseUserType from './components/ChooseUserType'
 import InputFormLegalPerson from './components/InputFormLegalPerson'
 import AppButton from '@/common/components/appButton/AppButton'
-import { useMediaQuery } from 'react-responsive'
-import BurgerHeader from '@/common/components/header/BurgerHeader'
 import Header from '@/common/components/header/Header'
 import AuthLanding from './components/AuthLanding'
 
 type Props = {}
 
 const Page = (props: Props) => {
-  // const [isLogin, setIsLogin] = useState<null | boolean>(null)
   const [authStep, setAuthStep] = useState<
     'landing' | 'registration' | 'login'
   >('landing')
@@ -34,12 +31,17 @@ const Page = (props: Props) => {
       />
     )
 
+  const handleGoToRegistration = () => {
+    setType('chooseType')
+    setAuthStep('registration')
+  }
+
   return (
     <>
       {authStep === 'login' ? (
         <>
           <Header />
-          <LoginForm goToRegistration={() => setAuthStep('registration')} />
+          <LoginForm goToRegistration={handleGoToRegistration} />
         </>
       ) : authStep === 'registration' ? (
         <>
@@ -61,7 +63,7 @@ const Page = (props: Props) => {
       ) : (
         <AuthLanding
           goToLogin={() => setAuthStep('login')}
-          goToRegistration={() => setAuthStep('registration')}
+          goToRegistration={handleGoToRegistration}
         />
       )}
     </>

@@ -10,19 +10,23 @@ const Checkbox = ({ checked, value }: Props) => {
   return (
     <Container>
       {checked ? (
-        <Image
-          src={checkboxFilled}
-          alt='checkbox filled'
-          width={24}
-          height={24}
-        />
+        <Icon>
+          <Image
+            src={checkboxFilled}
+            alt='checkbox filled'
+            width={24}
+            height={24}
+          />
+        </Icon>
       ) : (
-        <Image
-          src={checkboxEmpty}
-          alt='checkbox empty'
-          width={24}
-          height={24}
-        />
+        <Icon>
+          <Image
+            src={checkboxEmpty}
+            alt='checkbox empty'
+            width={24}
+            height={24}
+          />
+        </Icon>
       )}
       <StyledInput type='checkbox' value={value} checked={checked} />
     </Container>
@@ -42,3 +46,5 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `
+
+const Icon = styled.div``

@@ -31,7 +31,6 @@ const ChooseUserType = ({ setType, goToLogin }: Props) => {
 
   const handleCheckboxChange = (value: 'individual' | 'legalPerson') => {
     setSelectedOption((prev) => (prev === value ? null : value))
-    // setSelectedOption(value)
   }
 
   return (
@@ -121,6 +120,7 @@ const UserTypeText = styled.div`
   line-height: 19.2px;
   padding: 16px;
 `
+
 const StyledCheckbox = styled.div`
   align-self: flex-end;
 `

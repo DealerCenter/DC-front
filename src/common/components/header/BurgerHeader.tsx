@@ -30,14 +30,14 @@ const BurgerHeader = (props: Props) => {
 export default BurgerHeader
 
 const Container = styled.div`
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-sizing: border-box;
   padding: 0px 8px;
   background-color: rgba(18, 18, 20, 1);
   width: 355px;
-  margin: 10px auto;
+  margin: 16px auto;
   border-radius: 16px;
   min-height: 52px;
 `

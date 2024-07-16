@@ -4,12 +4,12 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import TextNav from '@/common/components/textNav/TextNav'
-import LegalPersonForm1 from './RegistrationSteps.tsx/LegalPersonForm1'
-import LegalPersonForm2 from './RegistrationSteps.tsx/LegalPersonForm2'
-import FormStep3 from './RegistrationSteps.tsx/FormStep3'
+import LegalPersonForm1 from './RegistrationSteps.tsx/legalPerson/LegalPersonForm1'
+import LegalPersonForm2 from './RegistrationSteps.tsx/legalPerson/LegalPersonForm2'
+import FormStep3 from './RegistrationSteps.tsx/legalPerson/LegalPersonForm3'
 
 import stepArrow from '@/assets/icons/stepArrow.svg'
-import { useRegisterFormContext } from '../hooks/useRegistrationForm'
+import { useRegisterFormContextLegalPerson } from '../hooks/useRegistrationFormLegalPerson'
 
 type Props = {
   goToLogin: () => void
@@ -17,7 +17,7 @@ type Props = {
 
 function InputFormLegalPerson({ goToLogin }: Props) {
   const t = useTranslations('')
-  const { handleSubmit } = useRegisterFormContext()
+  const { handleSubmit } = useRegisterFormContextLegalPerson()
   const [formStep, setFormStep] = useState(1)
 
   const steps = [
