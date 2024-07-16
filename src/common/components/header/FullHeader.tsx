@@ -41,7 +41,6 @@ const FullHeader = (props: Props) => {
 export default FullHeader
 
 const Container = styled.div`
-  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,8 +48,6 @@ const Container = styled.div`
 `
 
 const HeaderBox = styled.div`
-  /* background-color: red; */
-
   @media (min-width: 500px) {
     box-sizing: border-box;
     border-radius: 28px;
@@ -60,7 +57,7 @@ const HeaderBox = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
+    /* margin: 0; */
     background-color: rgba(18, 18, 20, 1);
   }
 `
