@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
 
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
@@ -41,27 +41,42 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 794px;
   height: 276px;
+  gap: 32px;
+
+  @media (max-width: 500px) {
+    width: 390px;
+  }
+  width: 794px;
 `
 
 const Icon = styled.div`
-  margin: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
 `
 const Frame = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 520px;
-  height: 196px;
   padding: 16px 0px;
   gap: 24px;
+
+  @media (max-width: 500px) {
+    width: 358px;
+    height: 246px;
+  }
+  width: 520px;
+  height: 196px;
 `
 const H5Bold = styled.h5`
   font-size: 23px;
   font-weight: 700;
   margin: 0;
+  text-align: center;
 `
 
 const Text = styled.p`

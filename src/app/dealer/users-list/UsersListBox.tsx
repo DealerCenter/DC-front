@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslations } from 'next-intl'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import UsersList from './components/UsersList'
 import AppButton from '@/common/components/appButton/AppButton'
@@ -49,8 +49,8 @@ const UsersListBox = (props: Props) => {
 
   return (
     <Container>
-      <HeaderH4Bold text={t('list of users')} />
       <Frame>
+        <HeaderH4Bold text={t('list of users')} />
         <ButtonFrame>
           <SecondaryButton
             text={t('search')}
@@ -63,12 +63,12 @@ const UsersListBox = (props: Props) => {
             icon={plusIcon}
           />
         </ButtonFrame>
-        {DummyData.length === 0 ? (
-          <PlaceHolderForList onClick={() => {}} />
-        ) : (
-          <UsersList usersData={DummyData} />
-        )}
       </Frame>
+      {DummyData.length === 0 ? (
+        <PlaceHolderForList onClick={() => {}} />
+      ) : (
+        <UsersList usersData={DummyData} />
+      )}
     </Container>
   )
 }
@@ -77,18 +77,34 @@ export default UsersListBox
 
 const Container = styled.div`
   box-sizing: border-box;
-  padding: 24px;
-  width: 836px;
   display: flex;
   flex-direction: column;
   background-color: white;
   border-radius: 16px;
+  gap: 16px;
+
+  @media (max-width: 500px) {
+    align-items: center;
+    width: 390px;
+    padding: 0px;
+  }
+  width: 836px;
+  padding: 24px;
 `
 
 const Frame = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 16px;
+
+  @media (max-width: 500px) {
+    align-items: flex-start;
+    gap: unset;
+    width: 358px;
+    margin-top: 32px;
+  }
 `
 
 const ButtonFrame = styled.div`
@@ -96,5 +112,5 @@ const ButtonFrame = styled.div`
   justify-content: flex-end;
   flex-direction: row;
   gap: 10px;
-  padding: 8px 0;
+  padding: 8px 0 24px 0;
 `
