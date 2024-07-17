@@ -15,7 +15,6 @@ export default ManageNotifications
 const Container = styled.div`
   box-sizing: border-box;
   padding: 24px;
-  width: 836px;
   display: flex;
   flex-direction: column;
   background-color: white;

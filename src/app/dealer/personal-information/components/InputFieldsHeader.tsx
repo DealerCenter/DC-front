@@ -25,21 +25,21 @@ const InputFieldsHeader = ({ text, onEdit, onArrowDown }: Props) => {
 export default InputFieldsHeader
 
 const Container = styled.div`
-  width: 802px;
   height: 84px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0px;
   border-radius: 12px;
   background-color: rgba(32, 32, 32, 0.04);
 `
+
 const StyledH5 = styled.h5`
   font-size: 23px;
   font-weight: 700;
   padding: 16px 32px;
   margin: 0;
 `
+
 const Icon = styled.div`
   display: flex;
   justify-content: center;

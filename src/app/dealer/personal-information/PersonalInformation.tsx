@@ -49,7 +49,8 @@ export default PersonalInformation
 const Container = styled.div`
   box-sizing: border-box;
   padding: 24px;
-  /* width: 850px; */
+
+  flex: 1;
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -66,11 +67,11 @@ const Frame = styled.div`
 const InputFieldsBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 802px;
+  /* width: 802px; */
   gap: 24px;
 `
 const InputFieldsFrame = styled.div`
-  width: 528px;
+  /* width: 528px; */
   padding: 0px 32px;
   display: flex;
   flex-direction: column;

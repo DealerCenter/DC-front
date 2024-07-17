@@ -51,13 +51,12 @@ const HeaderBox = styled.div`
   @media (min-width: 500px) {
     box-sizing: border-box;
     border-radius: 28px;
-    width: 1200px;
+    width: 100%;
     height: 74px;
     padding: 8px 24px 8px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* margin: 0; */
     background-color: rgba(18, 18, 20, 1);
   }
 `

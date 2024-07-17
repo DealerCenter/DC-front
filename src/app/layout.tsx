@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 import 'normalize.css/normalize.css'
+import '@/styles/styles.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +21,7 @@ export default async function RootLayout({
   const locale = await getLocale()
   const messages = await getMessages()
   return (
-    <html lang={locale}>
+    <html>
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>

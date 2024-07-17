@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 import UsersList from './components/UsersList'
 import AppButton from '@/common/components/appButton/AppButton'
-import PlaceHolderForList from './components/PlaceHolderForList'
+import PlaceHolderForList from './components/UserListEmpty'
 import HeaderH4Bold from '../components/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 
@@ -85,11 +85,11 @@ const Container = styled.div`
 
   @media (max-width: 500px) {
     align-items: center;
-    width: 390px;
+    /* width: 390px; */
     padding: 0px;
   }
   align-items: unset;
-  width: 836px;
+  /* width: 836px; */
   padding: 24px;
 `
 

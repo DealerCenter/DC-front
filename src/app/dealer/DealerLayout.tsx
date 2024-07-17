@@ -13,7 +13,7 @@ const DealerLayout = ({ children }: Props) => {
       <Header />
       <Frame>
         <SideBar />
-        {children}
+        <div style={{ flex: 1 }}>{children}</div>
       </Frame>
     </Container>
   )
@@ -22,10 +22,7 @@ const DealerLayout = ({ children }: Props) => {
 export default DealerLayout
 
 const Container = styled.div`
-  @media (max-width: 500px) {
-    background-color: white;
-  }
-  background-color: #2020200a;
+  padding: 0 8%;
 `
 
 const Frame = styled.div`
@@ -38,5 +35,5 @@ const Frame = styled.div`
     align-items: center;
   }
   flex-direction: row;
-  justify-content: center;
+  justify-content: unset;
 `

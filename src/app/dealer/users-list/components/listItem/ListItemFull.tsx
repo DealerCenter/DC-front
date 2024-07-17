@@ -67,8 +67,8 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   height: 72px;
-  gap: 32px;
   padding: 0 16px 0 32px;
 
   border: 1px solid rgba(32, 32, 32, 0.04);
@@ -85,7 +85,9 @@ const IconBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  width: 120px;
 `
 
 const Label = styled.label`
