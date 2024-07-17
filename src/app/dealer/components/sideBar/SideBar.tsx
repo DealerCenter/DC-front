@@ -51,16 +51,16 @@ const SideBar = (props: Props) => {
             href={routeName.orderHistory}
           />
           <BarButton
-            active={pathname === routeName.PersonalInformation}
+            active={pathname === routeName.personalInformation}
             text={t('personal information')}
             icon={
-              pathname === routeName.PersonalInformation
+              pathname === routeName.personalInformation
                 ? personSettingsWhite
                 : personSettingsBlack
             }
             width={20}
             height={20}
-            href={routeName.PersonalInformation}
+            href={routeName.personalInformation}
           />
           <BarButton
             active={pathname === routeName.usersList}

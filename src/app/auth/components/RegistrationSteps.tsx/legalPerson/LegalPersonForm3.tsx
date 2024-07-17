@@ -85,6 +85,11 @@ const FormStep3 = ({ setFormStep }: Props) => {
         value={values.repeatPassword}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.repeatPassword && touched.repeatPassword
+            ? errors.repeatPassword
+            : ''
+        }
       />
       <AppButton
         text={t('register')}

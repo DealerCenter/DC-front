@@ -6,9 +6,10 @@ import Image from 'next/image'
 import TextNav from '@/common/components/textNav/TextNav'
 import IndividualForm1 from './RegistrationSteps.tsx/individual/IndividualForm1'
 import IndividualForm2 from './RegistrationSteps.tsx/individual/IndividualForm2'
-import FormStep3 from './RegistrationSteps.tsx/legalPerson/LegalPersonForm3'
 
 import stepArrow from '@/assets/icons/stepArrow.svg'
+import { useRegisterFormContextIndividual } from '../hooks/useRegistrationFormIndividual'
+import IndividualForm3 from './RegistrationSteps.tsx/individual/IndividualForm3'
 
 type Props = {
   goToLogin: () => void
@@ -17,6 +18,7 @@ type Props = {
 function InputsIndividual({ goToLogin }: Props) {
   const t = useTranslations('')
   const [formStep, setFormStep] = useState(1)
+  const { handleSubmit } = useRegisterFormContextIndividual()
 
   const steps = [
     {
@@ -34,7 +36,7 @@ function InputsIndividual({ goToLogin }: Props) {
     {
       stepNumber: 3,
       stepName: 'legalPerson3',
-      component: <FormStep3 setFormStep={setFormStep} />,
+      component: <IndividualForm3 setFormStep={setFormStep} />,
     },
   ]
 
@@ -64,7 +66,7 @@ function InputsIndividual({ goToLogin }: Props) {
           </>
         ))}
       </StepsContainer>
-      {activeStep.component}
+      <form onSubmit={handleSubmit}>{activeStep.component}</form>
     </StyledDiv>
   )
 }

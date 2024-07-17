@@ -12,7 +12,7 @@ import usePasswordValidation from '../../../hooks/usePasswordValidation'
 
 type Props = { setFormStep: Dispatch<SetStateAction<number>> }
 
-const FormStep3 = ({ setFormStep }: Props) => {
+const IndividualForm3 = ({ setFormStep }: Props) => {
   const t = useTranslations('')
 
   const {
@@ -84,6 +84,11 @@ const FormStep3 = ({ setFormStep }: Props) => {
         value={values.repeatPassword}
         onChange={handleChange}
         onBlur={handleBlur}
+        errorMessage={
+          errors.repeatPassword && touched.repeatPassword
+            ? errors.repeatPassword
+            : ''
+        }
       />
       <AppButton
         text={t('register')}
@@ -95,7 +100,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
   )
 }
 
-export default FormStep3
+export default IndividualForm3
 
 const StyledForm = styled.div`
   display: flex;

@@ -49,7 +49,7 @@ export default PersonalInformation
 const Container = styled.div`
   box-sizing: border-box;
   padding: 24px;
-  width: 850px;
+  /* width: 850px; */
   display: flex;
   flex-direction: column;
   background-color: white;

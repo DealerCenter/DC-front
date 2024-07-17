@@ -115,7 +115,7 @@ const ErrorMessage = styled.p`
   color: #cf341f;
   position: absolute;
   font-size: 10px;
-  top: 44px;
+  top: 48px;
   left: 12px;
 `
 

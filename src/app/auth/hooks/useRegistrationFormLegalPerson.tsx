@@ -39,7 +39,9 @@ export const RegisterFormProviderLegalPerson = ({
         .email(t('must be valid email'))
         .required(t('email required')),
       password: yup.string().required(t('password required')),
-      repeatPassword: yup.string().required(t('password required')),
+      repeatPassword: yup
+        .string()
+        .oneOf([yup.ref('password'), ''], 'Passwords must match'),
       identificationCode: yup
         .string()
         .required(t('identification code required')),
@@ -86,7 +88,7 @@ export const RegisterFormProviderLegalPerson = ({
 
 export const useRegisterFormContextLegalPerson = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {},
+  ExtraProps = {}
 >() => {
   const context = useContext(FormikContext)
   if (!context) {

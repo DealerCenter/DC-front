@@ -1,5 +1,5 @@
 import React, { ReactNode, createContext, useContext } from 'react'
-import { useFormik, FormikValues, Formik } from 'formik'
+import { useFormik, FormikValues } from 'formik'
 import * as yup from 'yup'
 import { useTranslations } from 'next-intl'
 
@@ -18,9 +18,7 @@ export const RegisterFormProviderIndividual = ({
     dateOfBirth: '',
     actualAddress: '',
     contactNumber: '',
-
     personalNumber: '',
-
     email: '',
     password: '',
     repeatPassword: '',
@@ -37,15 +35,15 @@ export const RegisterFormProviderIndividual = ({
       dateOfBirth: yup.date().required(t('date of birth required')),
       actualAddress: yup.string().required(t('actual address required')),
       contactNumber: yup.string().required(t('contact number required')),
-
       personalNumber: yup.number().required(t('personal number required')),
-
       email: yup
         .string()
         .email(t('must be valid email'))
         .required(t('email required')),
       password: yup.string().required(t('password required')),
-      repeatPassword: yup.string().required(t('password required')),
+      repeatPassword: yup
+        .string()
+        .oneOf([yup.ref('password'), ''], 'Passwords must match'),
     }),
   })
 
@@ -78,7 +76,7 @@ export const RegisterFormProviderIndividual = ({
 
 export const useRegisterFormContextIndividual = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {},
+  ExtraProps = {}
 >() => {
   const context = useContext(FormikContext)
   if (!context) {
