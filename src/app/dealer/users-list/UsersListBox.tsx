@@ -3,13 +3,12 @@ import { useTranslations } from 'next-intl'
 import styled, { css } from 'styled-components'
 
 import UsersList from './components/UsersList'
-import AppButton from '@/common/components/appButton/AppButton'
-import PlaceHolderForList from './components/UserListEmpty'
 import HeaderH4Bold from '../components/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 
 import searchIcon from '@/assets/icons/searchForButton.svg'
 import plusIcon from '@/assets/icons/plus.svg'
+import UserListEmpty from './components/UserListEmpty'
 
 type Props = {}
 
@@ -65,7 +64,7 @@ const UsersListBox = (props: Props) => {
         </ButtonFrame>
       </Frame>
       {DummyData.length === 0 ? (
-        <PlaceHolderForList onClick={() => {}} />
+        <UserListEmpty onClick={() => {}} />
       ) : (
         <UsersList usersData={DummyData} />
       )}
@@ -83,13 +82,9 @@ const Container = styled.div`
   border-radius: 16px;
   gap: 16px;
 
-  border: 1px solid red;
-
   @media (max-width: 500px) {
-    align-items: center;
     padding: 0px;
   }
-  align-items: unset;
   padding: 24px;
 `
 
@@ -101,13 +96,16 @@ const Frame = styled.div`
   @media (max-width: 500px) {
     align-items: flex-start;
     gap: unset;
-    width: 358px;
     margin-top: 32px;
+    min-width: 270px;
+    padding: 0 8%;
   }
   align-items: unset;
   gap: 16px;
   width: unset;
   margin-top: unset;
+  min-width: unset;
+  padding: unset;
 `
 
 const ButtonFrame = styled.div`

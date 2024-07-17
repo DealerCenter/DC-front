@@ -51,9 +51,11 @@
   "contact information": "საკონტაქტო ინფორმაცია",
   "change the password": "პაროლის შეცვლა",
   "cell phone": "მობილური ტელეფონი",
+  "mobile number": "მობილური ნომერი",
   "current password": "მიმდინარე პაროლი",
   "new password": "ახალი პაროლი",
   "repeat new password": "გაიმეორეთ ახალი პაროლი",
+  "added": "დაემატა",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

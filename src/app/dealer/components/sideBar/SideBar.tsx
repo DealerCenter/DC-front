@@ -32,7 +32,7 @@ const SideBar = (props: Props) => {
     <BarContainer>
       <Frame>
         <InfoBox
-          name='Givi'
+          name='Joshua'
           refreshDate='last refresh jul 11 2034'
           notificationCount={9}
         />
@@ -144,8 +144,10 @@ const ButtonFrame = styled.div`
   @media (max-width: 500px) {
     flex-direction: row;
     justify-content: space-between;
+    gap: unset;
   }
 
   flex-direction: column;
   justify-content: unset;
+  gap: 4px;
 `

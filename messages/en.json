@@ -53,9 +53,11 @@
   "contact information": "Contact information",
   "change the password": "Change the password",
   "cell phone": "Cell phone",
+  "mobile number": "Mobile number",
   "current password": "Current password",
   "new password": "New password",
   "repeat new password": "Repeat the new password",
+  "added": "Added",
 
   "useForm": {
     "must be valid email": "Must be a valid email",

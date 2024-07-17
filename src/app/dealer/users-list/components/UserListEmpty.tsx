@@ -10,7 +10,7 @@ import plusIcon from '@/assets/icons/plus.svg'
 
 type Props = { onClick: () => void }
 
-const PlaceHolderForList = ({ onClick }: Props) => {
+const UserListEmpty = ({ onClick }: Props) => {
   const t = useTranslations('')
 
   return (
@@ -34,9 +34,10 @@ const PlaceHolderForList = ({ onClick }: Props) => {
   )
 }
 
-export default PlaceHolderForList
+export default UserListEmpty
 
 const Container = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,6 +52,7 @@ const Icon = styled.div`
   width: 48px;
   height: 48px;
 `
+
 const Frame = styled.div`
   display: flex;
   flex-direction: column;
@@ -58,14 +60,8 @@ const Frame = styled.div`
   align-items: center;
   padding: 16px 0px;
   gap: 24px;
-
-  @media (max-width: 500px) {
-    width: 358px;
-    height: 246px;
-  }
-  width: 520px;
-  height: 196px;
 `
+
 const H5Bold = styled.h5`
   font-size: 23px;
   font-weight: 700;

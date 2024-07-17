@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { useTransition } from 'react'
 import styled, { css } from 'styled-components'
-import notificationBell from '@/assets/icons/notificatonBell.svg'
+import notificationBell from '@/assets/icons/notificationBell.svg'
 import notificationDot from '@/assets/icons/notificationDot.svg'
 import { useTranslations } from 'next-intl'
 
