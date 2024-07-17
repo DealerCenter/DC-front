@@ -83,13 +83,13 @@ const Container = styled.div`
   border-radius: 16px;
   gap: 16px;
 
+  border: 1px solid red;
+
   @media (max-width: 500px) {
     align-items: center;
-    /* width: 390px; */
     padding: 0px;
   }
   align-items: unset;
-  /* width: 836px; */
   padding: 24px;
 `
 

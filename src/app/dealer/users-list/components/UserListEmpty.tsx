@@ -41,13 +41,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 276px;
   gap: 32px;
-
-  @media (max-width: 500px) {
-    width: 390px;
-  }
-  width: 794px;
 `
 
 const Icon = styled.div`

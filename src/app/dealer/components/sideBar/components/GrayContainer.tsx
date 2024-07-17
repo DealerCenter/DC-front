@@ -53,7 +53,7 @@ const Container = styled.div<ContainerProps>`
         `}
 
   @media (max-width: 500px) {
-    width: 326px;
+    width: 100%;
     height: 85px;
   }
 `

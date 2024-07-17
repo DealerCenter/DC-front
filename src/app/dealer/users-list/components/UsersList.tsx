@@ -45,9 +45,4 @@ const UserList = ({ usersData }: Props) => {
 
 export default UserList
 
-const Container = styled.div`
-  @media (max-width: 500px) {
-    /* width: 390px; */
-  }
-  /* width: 788px; */
-`
+const Container = styled.div``

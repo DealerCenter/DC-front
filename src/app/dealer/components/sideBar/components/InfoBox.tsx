@@ -40,15 +40,16 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-
   padding: 16px;
 
   @media (max-width: 500px) {
-    width: 358px;
+    width: 100%;
     height: 115px;
+    flex: 1;
   }
   width: 286px;
   height: 135px;
+  flex: unset;
 `
 const Frame = styled.div`
   display: flex;

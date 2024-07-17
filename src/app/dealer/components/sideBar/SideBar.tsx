@@ -106,13 +106,17 @@ const BarContainer = styled.div`
   background-color: white;
   border-radius: 16px;
   gap: 32px;
+  flex: unset;
 
   @media (max-width: 500px) {
-    width: 358px;
+    min-width: 300px;
+    width: 100%;
+    flex: 1;
     padding: 16px;
     border: 1px solid rgba(32, 32, 32, 0.1);
     height: unset;
   }
+  min-width: unset;
   border: unset;
   width: 334px;
   padding: 24px;
@@ -124,18 +128,24 @@ const Frame = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 32px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+  width: unset;
 `
 
 const ButtonFrame = styled.div`
   box-sizing: border-box;
   display: flex;
+  flex: 1;
+  width: 100%;
 
   @media (max-width: 500px) {
     flex-direction: row;
     justify-content: space-between;
-    width: 358px;
-    padding: 0px 16px;
   }
 
   flex-direction: column;
+  justify-content: unset;
 `
