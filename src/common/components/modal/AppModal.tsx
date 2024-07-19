@@ -20,6 +20,9 @@ const AppModal = ({
   children,
 }: Props) => {
   const customStyles = {
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    },
     content: {
       top: '50%',
       left: '50%',

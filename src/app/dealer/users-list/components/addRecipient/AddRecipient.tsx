@@ -9,7 +9,7 @@ import TextInput from '@/common/components/InputElements/TextInput'
 import ChooseButton from './components/ChooseButton'
 
 import closeIcon from '@/assets/icons/closeX.svg'
-import CloseAddRecipient from './components/CloseAddRecipient'
+import CloseAddRecipient from './components/DeleteWarning'
 
 type Props = { onClose: () => void }
 

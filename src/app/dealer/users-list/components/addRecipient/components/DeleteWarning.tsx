@@ -6,14 +6,14 @@ import Image from 'next/image'
 
 import closeIcon from '@/assets/icons/closeX.svg'
 
-type Props = {}
+type Props = { onCancel: () => void; onDelete: () => void }
 
-const CloseAddRecipient = (props: Props) => {
+const DeleteWarning = ({ onCancel, onDelete }: Props) => {
   const t = useTranslations('')
 
   return (
     <Container>
-      <Icon onClick={() => {}}>
+      <Icon onClick={onCancel}>
         <Image src={closeIcon} alt='close icon' width={12} height={12} />
       </Icon>
       <FrameTop>
@@ -21,14 +21,14 @@ const CloseAddRecipient = (props: Props) => {
         <Label>{t('delete data warning')}</Label>
       </FrameTop>
       <ButtonsFrame>
-        <ChooseButton text={t('cancel')} isActive={true} onClick={() => {}} />
-        <ChooseButton text={t('delete')} isActive={true} onClick={() => {}} />
+        <ChooseButton text={t('cancel')} isActive={true} onClick={onCancel} />
+        <ChooseButton text={t('delete')} isActive={true} onClick={onDelete} />
       </ButtonsFrame>
     </Container>
   )
 }
 
-export default CloseAddRecipient
+export default DeleteWarning
 
 const Icon = styled.div`
   position: absolute;
@@ -75,6 +75,7 @@ const Container = styled.div`
   border-radius: 24px;
   padding: 32px;
   gap: 24px;
+  margin-top: 200px;
 
   background-color: white;
   border: 1px solid rgba(32, 32, 32, 0.1);

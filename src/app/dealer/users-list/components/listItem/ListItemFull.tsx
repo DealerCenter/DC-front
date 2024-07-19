@@ -1,11 +1,13 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
+import AppModal from '@/common/components/modal/AppModal'
+import DeleteWarning from '../addRecipient/components/DeleteWarning'
 
 type Props = {
   fullName: string
@@ -22,42 +24,53 @@ const ListItemFull = ({
   dateOfAddition,
   isVerified,
 }: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
-    <Container>
-      <LabelBox>
-        <NameLabel>{fullName}</NameLabel>
-        <IdLabel>{id}</IdLabel>
-      </LabelBox>
-      <Label>{mobile}</Label>
-      <Label>{dateOfAddition}</Label>
-      <Label>
-        {isVerified ? (
-          <Image src={checkedGreen} alt='checked icon' />
-        ) : (
-          <Image src={uncheckedRed} alt='unchecked icon' />
-        )}
-      </Label>
-      <IconBox>
-        <Icon>
-          <Image
-            src={editPencil}
-            alt='edit icon'
-            onClick={() => {
-              console.log('edit')
-            }}
-          />
-        </Icon>
-        <Icon>
-          <Image
-            src={trashCan}
-            alt='trash icon'
-            onClick={() => {
-              console.log('delete')
-            }}
-          />
-        </Icon>
-      </IconBox>
-    </Container>
+    <>
+      <Container>
+        <LabelBox>
+          <NameLabel>{fullName}</NameLabel>
+          <IdLabel>{id}</IdLabel>
+        </LabelBox>
+        <Label>{mobile}</Label>
+        <Label>{dateOfAddition}</Label>
+        <Label>
+          {isVerified ? (
+            <Image src={checkedGreen} alt='checked icon' />
+          ) : (
+            <Image src={uncheckedRed} alt='unchecked icon' />
+          )}
+        </Label>
+        <IconBox>
+          <Icon>
+            <Image
+              src={editPencil}
+              alt='edit icon'
+              onClick={() => {
+                console.log('edit')
+              }}
+            />
+          </Icon>
+          <Icon>
+            <Image
+              src={trashCan}
+              alt='trash icon'
+              onClick={() => setIsModalOpen(true)}
+            />
+          </Icon>
+        </IconBox>
+      </Container>
+      <AppModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <DeleteWarning
+          onCancel={() => setIsModalOpen(false)}
+          onDelete={() => console.log('delete')}
+        />
+      </AppModal>
+    </>
   )
 }
 
