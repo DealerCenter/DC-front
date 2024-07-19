@@ -42,7 +42,11 @@
   "list of users": "მომხმარებლების სია",
   "manage notifications": "შეტყობინებების მართვა",
   "search": "ძებნა",
+  "add": "დამატება",
+  "added": "დაემატა",
   "add recipient": "მიმღების დამატება",
+  "delete recipient": "მიმღების წაშლა",
+  "add an id photo": "დაამატეთ პირადობის ფოტო, რათა შეავსო მიმღების ყველა მონაცემი",
   "recipient": "მიმღები პირი",
   "mobile": "მობილური",
   "the date of addition": "დამატების თარიღი",
@@ -55,7 +59,10 @@
   "current password": "მიმდინარე პაროლი",
   "new password": "ახალი პაროლი",
   "repeat new password": "გაიმეორეთ ახალი პაროლი",
-  "added": "დაემატა",
+  "enter recipient data": "შეიყვანეთ მიმღების მონაცემები",
+  "cancel": "გაუქმება",
+  "delete": "წაშლა",
+  "delete data warning": "მოცემული აქტივობის შესრულების შემდეგ მოხდება მიმღების ყველა მონაცემის წაშლა",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

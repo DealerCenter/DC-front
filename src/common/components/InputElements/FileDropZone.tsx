@@ -1,12 +1,18 @@
 import React, { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styled, { css } from 'styled-components'
-import uploadIcon from '@/assets/icons/FileUpload.svg'
 import Image from 'next/image'
+import uploadIcon from '@/assets/icons/FileUpload.svg'
+import warningIcon from '@/assets/icons/warningEmpty.svg'
 
-type Props = { text: string; dropText: string; uploadedText: string }
+type Props = {
+  text: string
+  dropText: string
+  uploadedText: string
+  warningText: string
+}
 
-const FileDropZone = ({ text, dropText, uploadedText }: Props) => {
+const FileDropZone = ({ text, dropText, uploadedText, warningText }: Props) => {
   const [isDropped, setIsDropped] = useState(false)
 
   const onDrop = useCallback(<T extends File>(acceptedFiles: T[]) => {
@@ -18,23 +24,51 @@ const FileDropZone = ({ text, dropText, uploadedText }: Props) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   return (
-    <Container {...getRootProps()}>
-      <IconBox>
-        <Image src={uploadIcon} alt='upload icon' width={22.95} height={25} />
-      </IconBox>
-      <input {...getInputProps()} />
-      {isDropped ? (
-        <StyledLabel isDropped={isDropped}>{uploadedText}</StyledLabel>
-      ) : isDragActive ? (
-        <StyledLabel>{dropText}</StyledLabel>
-      ) : (
-        <StyledLabel>{text}</StyledLabel>
+    <>
+      <Container {...getRootProps()}>
+        <IconBox>
+          <Image src={uploadIcon} alt='upload icon' width={22.95} height={25} />
+        </IconBox>
+        <input {...getInputProps()} />
+        {isDropped ? (
+          <StyledLabel isDropped={isDropped}>{uploadedText}</StyledLabel>
+        ) : isDragActive ? (
+          <StyledLabel>{dropText}</StyledLabel>
+        ) : (
+          <StyledLabel>{text}</StyledLabel>
+        )}
+      </Container>
+      {warningText && (
+        <UploadIdTextBox>
+          <Image
+            src={warningIcon}
+            alt='warning icon'
+            width={24}
+            height={24}
+          ></Image>
+          <Text>{warningText}</Text>
+        </UploadIdTextBox>
       )}
-    </Container>
+    </>
   )
 }
 
 export default FileDropZone
+
+const Text = styled.div`
+  color: rgba(32, 32, 32, 0.56);
+  font-size: 13px;
+  line-height: 15.6px;
+  font-weight: 400;
+`
+
+const UploadIdTextBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  width: 350px;
+`
 
 const Container = styled.div`
   box-sizing: border-box;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import styled, { css } from 'styled-components'
 
@@ -9,6 +9,7 @@ import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import searchIcon from '@/assets/icons/searchForButton.svg'
 import plusIcon from '@/assets/icons/plus.svg'
 import UserListEmpty from './components/UserListEmpty'
+import AddRecipient from './components/addRecipient/AddRecipient'
 
 type Props = {}
 
@@ -45,30 +46,42 @@ const DummyData = [
 
 const UsersListBox = (props: Props) => {
   const t = useTranslations('')
+  const [isAddRecipient, setIsAddRecipient] = useState(false)
 
   return (
-    <Container>
-      <Frame>
-        <HeaderH4Bold text={t('list of users')} />
-        <ButtonFrame>
-          <SecondaryButton
-            text={t('search')}
-            onClick={() => {}}
-            icon={searchIcon}
+    <>
+      <Container>
+        <Frame>
+          <HeaderH4Bold text={t('list of users')} />
+          <ButtonFrame>
+            <SecondaryButton
+              text={t('search')}
+              onClick={() => {}}
+              icon={searchIcon}
+            />
+            <SecondaryButton
+              text={t('add recipient')}
+              onClick={() => {
+                setIsAddRecipient(true)
+              }}
+              icon={plusIcon}
+            />
+          </ButtonFrame>
+        </Frame>
+        {DummyData.length === 0 ? (
+          <UserListEmpty
+            onClick={() => {
+              setIsAddRecipient(true)
+            }}
           />
-          <SecondaryButton
-            text={t('add recipient')}
-            onClick={() => {}}
-            icon={plusIcon}
-          />
-        </ButtonFrame>
-      </Frame>
-      {DummyData.length === 0 ? (
-        <UserListEmpty onClick={() => {}} />
-      ) : (
-        <UsersList usersData={DummyData} />
+        ) : (
+          <UsersList usersData={DummyData} />
+        )}
+      </Container>
+      {isAddRecipient && (
+        <AddRecipient onClose={() => setIsAddRecipient(false)} />
       )}
-    </Container>
+    </>
   )
 }
 

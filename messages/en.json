@@ -44,7 +44,11 @@
   "list of users": "List of users",
   "manage notifications": "Manage notifications",
   "search": "Search",
+  "add": "Add",
+  "added": "Added",
   "add recipient": "Add recipient",
+  "delete recipient": "Delete recipient",
+  "add an id photo": "Add an ID photo to fill in all recipient details",
   "recipient": "Recipient",
   "mobile": "Mobile",
   "the date of addition": "The date of addition",
@@ -57,7 +61,10 @@
   "current password": "Current password",
   "new password": "New password",
   "repeat new password": "Repeat the new password",
-  "added": "Added",
+  "enter recipient data": "Enter recipient data",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "delete data warning": "After performing this activity, all the recipient's data will be deleted",
 
   "useForm": {
     "must be valid email": "Must be a valid email",

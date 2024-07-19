@@ -25,8 +25,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* gap: 32px; */
-  /* width: 788px; */
   height: 75px;
   background-color: rgba(32, 32, 32, 1);
   border-radius: 16px 16px 0px 0px;

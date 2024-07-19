@@ -68,7 +68,7 @@ const StyledInput = styled.input<InputProps>`
   box-sizing: border-box;
   background-color: white;
   border: none;
-  outline: 1px solid rgba(32, 32, 32, 0.04);
+  outline: 2px solid rgba(32, 32, 32, 0.04);
   outline-offset: 1px;
   width: 350px;
   height: 52px;
