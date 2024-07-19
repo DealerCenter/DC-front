@@ -129,8 +129,6 @@ const OptionalText = styled.p`
 
 const IconBox = styled.div`
   position: absolute;
-  align-self: center;
-  justify-self: center;
   left: 16px;
   top: 17px;
   z-index: 1000;
