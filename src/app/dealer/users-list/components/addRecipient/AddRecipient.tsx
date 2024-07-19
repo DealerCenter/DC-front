@@ -16,6 +16,7 @@ type Props = { onClose: () => void }
 const AddRecipient = ({ onClose }: Props) => {
   const t = useTranslations('')
   const [type, setType] = useState<'individual' | 'legalPerson'>('individual')
+  const [isClosing, setIsClosing] = useState(false)
   const dummyValue = 'something'
 
   const handleClose = () => {
@@ -125,7 +126,7 @@ const AddRecipient = ({ onClose }: Props) => {
           height='medium'
         ></AppButton>
       </Container>
-      <CloseAddRecipient />
+      {/* <CloseAddRecipient /> */}
     </Overlay>
   )
 }
