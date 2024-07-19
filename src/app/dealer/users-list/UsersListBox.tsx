@@ -80,6 +80,7 @@ const UsersListBox = (props: Props) => {
           <UsersList usersData={DummyData} />
         )}
       </Container>
+
       <AppModal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
@@ -91,6 +92,12 @@ const UsersListBox = (props: Props) => {
 }
 
 export default UsersListBox
+
+const HideScrollbar = styled.div`
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`
 
 const Container = styled.div`
   box-sizing: border-box;

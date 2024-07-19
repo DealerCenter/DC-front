@@ -176,16 +176,14 @@ const FrameTop = styled.div`
 `
 
 const Container = styled.div`
-  overflow: scroll;
   position: relative;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
   max-height: 715px;
-  /* height: 80%; */
   padding: 32px;
   gap: 24px;
-  margin-top: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 
   border-radius: 24px;
   border: 1px solid rgba(32, 32, 32, 0.1);

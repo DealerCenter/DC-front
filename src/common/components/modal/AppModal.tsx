@@ -31,6 +31,7 @@ const AppModal = ({
       height: '100%',
       border: 'unset',
       backgroundColor: 'transparent',
+
       ...style,
     },
   }
