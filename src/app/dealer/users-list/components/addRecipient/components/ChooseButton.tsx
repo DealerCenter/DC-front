@@ -2,11 +2,21 @@ import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 
-type Props = { text: string; isActive: boolean; onClick: () => void }
+type Props = {
+  text: string
+  isActive: boolean
+  onClick: () => void
+  withBorder?: boolean
+}
 
-const ChooseButton = ({ text, isActive, onClick }: Props) => {
+const ChooseButton = ({
+  text,
+  isActive,
+  onClick,
+  withBorder = false,
+}: Props) => {
   return (
-    <Container isActive={isActive} onClick={onClick}>
+    <Container isActive={isActive} onClick={onClick} withBorder={withBorder}>
       {text}
     </Container>
   )
@@ -14,7 +24,7 @@ const ChooseButton = ({ text, isActive, onClick }: Props) => {
 
 export default ChooseButton
 
-type ButtonProps = { isActive: boolean }
+type ButtonProps = { isActive: boolean; withBorder: boolean }
 
 const Container = styled.div<ButtonProps>`
   flex-direction: row;
@@ -27,6 +37,15 @@ const Container = styled.div<ButtonProps>`
   border: none;
   width: 143px;
   height: 48px;
+
+  ${({ withBorder }) =>
+    withBorder
+      ? css`
+          border: 1px solid rgba(32, 32, 32, 0.56);
+        `
+      : css`
+          border: unset;
+        `}
 
   ${({ isActive }) =>
     isActive
