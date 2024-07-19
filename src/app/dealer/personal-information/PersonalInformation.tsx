@@ -1,8 +1,8 @@
-import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
+
 import InputFieldsHeader from './components/InputFieldsHeader'
-import TextInput from '@/common/components/InputElements/TextInput'
 import TextInputField from './components/TextInputField'
 import HeaderH4Bold from '../components/HeaderH4Bold'
 
@@ -49,7 +49,6 @@ export default PersonalInformation
 const Container = styled.div`
   box-sizing: border-box;
   padding: 24px;
-
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -67,11 +66,9 @@ const Frame = styled.div`
 const InputFieldsBox = styled.div`
   display: flex;
   flex-direction: column;
-  /* width: 802px; */
   gap: 24px;
 `
 const InputFieldsFrame = styled.div`
-  /* width: 528px; */
   padding: 0px 32px;
   display: flex;
   flex-direction: column;

@@ -143,6 +143,7 @@ const BarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   background-color: white;
   border-radius: 16px;
   gap: 32px;
@@ -160,13 +161,14 @@ const BarContainer = styled.div`
   }
 
   @media (max-width: 1440px) and (min-width: 500px) {
-    transition: width 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
     position: absolute;
     width: 112px;
     align-items: flex-start;
 
     &:hover {
       width: 334px;
+      box-shadow: 0px 10px 45px rgba(0, 0, 0, 0.15);
     }
   }
 

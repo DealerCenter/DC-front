@@ -28,7 +28,7 @@ const InputLabel = styled.label`
 
 const InputField = styled.input`
   box-sizing: border-box;
-  width: 464px;
+  max-width: 464px;
   height: 51px;
   font-size: 16px;
   font-weight: 400;

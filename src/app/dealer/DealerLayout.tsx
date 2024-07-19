@@ -29,6 +29,10 @@ export default DealerLayout
 
 const Container = styled.div`
   padding: 0 8%;
+
+  @media (max-width: 1440px) and (min-width: 500px) {
+    padding: 0 3%;
+  }
 `
 
 const Frame = styled.div`
