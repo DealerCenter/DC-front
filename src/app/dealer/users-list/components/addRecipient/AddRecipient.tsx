@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
@@ -19,115 +19,108 @@ const AddRecipient = ({ onClose }: Props) => {
   const [isClosing, setIsClosing] = useState(false)
   const dummyValue = 'something'
 
-  const handleClose = () => {
-    onClose()
-  }
-
   return (
-    <Overlay>
-      <Container>
-        <Icon onClick={handleClose}>
-          <Image src={closeIcon} alt='close icon' width={12} height={12} />
-        </Icon>
-        <FrameTop>
-          <H3Bold>{t('add recipient')}</H3Bold>
-          <Label>{t('enter recipient data')}</Label>
-          <ChooseTypeFrame>
-            <ChooseButton
-              text={t('individual')}
-              isActive={type === 'individual'}
-              onClick={() => setType('individual')}
-            />
-            <SplitElement />
-            <ChooseButton
-              text={t('legal person')}
-              isActive={type === 'legalPerson'}
-              onClick={() => setType('legalPerson')}
-            />
-          </ChooseTypeFrame>
-        </FrameTop>
-        {type === 'individual' && (
-          <InputFieldsFrame>
-            <TextInput
-              type='text'
-              name='name'
-              placeholder='name'
-              value={dummyValue}
-              onChange={() => {}}
-              onBlur={() => {}}
-            ></TextInput>
-            <TextInput
-              type='text'
-              name='surname'
-              placeholder='surname'
-              value={dummyValue}
-              onChange={() => {}}
-              onBlur={() => {}}
-            ></TextInput>
-            <TextInput
-              type='text'
-              name='personalNumber'
-              placeholder='personalNumber'
-              value={dummyValue}
-              onChange={() => {}}
-              onBlur={() => {}}
-            ></TextInput>
-            <TextInput
-              type='text'
-              name='mobileNumber'
-              placeholder='mobileNumber'
-              value={dummyValue}
-              onChange={() => {}}
-              onBlur={() => {}}
-            ></TextInput>
-            <FileDropZone
-              dropText={t('drop the file')}
-              text={t('upload an ID photo')}
-              uploadedText={t('photo uploaded')}
-              warningText={t('add an id photo')}
-            />
-          </InputFieldsFrame>
-        )}
-        {type === 'legalPerson' && (
-          <InputFieldsFrame>
-            <TextInput
-              type='text'
-              name='companyName'
-              placeholder='companyName'
-              value={'companyName'}
-              onChange={() => {}}
-              onBlur={() => {}}
-            ></TextInput>
-            <TextInput
-              type='text'
-              name='contactNumber'
-              placeholder='contactNumber'
-              value={'contactNumber'}
-              onChange={() => {}}
-              onBlur={() => {}}
-            ></TextInput>
-            <TextInput
-              type='text'
-              name='identificationNumber'
-              placeholder='identificationNumber'
-              value={'identificationNumber'}
-              onChange={() => {}}
-              onBlur={() => {}}
-            ></TextInput>
-          </InputFieldsFrame>
-        )}
+    <Container>
+      <Icon onClick={onClose}>
+        <Image src={closeIcon} alt='close icon' width={12} height={12} />
+      </Icon>
+      <FrameTop>
+        <H3Bold>{t('add recipient')}</H3Bold>
+        <Label>{t('enter recipient data')}</Label>
+        <ChooseTypeFrame>
+          <ChooseButton
+            text={t('individual')}
+            isActive={type === 'individual'}
+            onClick={() => setType('individual')}
+          />
+          <SplitElement />
+          <ChooseButton
+            text={t('legal person')}
+            isActive={type === 'legalPerson'}
+            onClick={() => setType('legalPerson')}
+          />
+        </ChooseTypeFrame>
+      </FrameTop>
+      {type === 'individual' && (
+        <InputFieldsFrame>
+          <TextInput
+            type='text'
+            name='name'
+            placeholder='name'
+            value={dummyValue}
+            onChange={() => {}}
+            onBlur={() => {}}
+          ></TextInput>
+          <TextInput
+            type='text'
+            name='surname'
+            placeholder='surname'
+            value={dummyValue}
+            onChange={() => {}}
+            onBlur={() => {}}
+          ></TextInput>
+          <TextInput
+            type='text'
+            name='personalNumber'
+            placeholder='personalNumber'
+            value={dummyValue}
+            onChange={() => {}}
+            onBlur={() => {}}
+          ></TextInput>
+          <TextInput
+            type='text'
+            name='mobileNumber'
+            placeholder='mobileNumber'
+            value={dummyValue}
+            onChange={() => {}}
+            onBlur={() => {}}
+          ></TextInput>
+          <FileDropZone
+            dropText={t('drop the file')}
+            text={t('upload an ID photo')}
+            uploadedText={t('photo uploaded')}
+            warningText={t('add an id photo')}
+          />
+        </InputFieldsFrame>
+      )}
+      {type === 'legalPerson' && (
+        <InputFieldsFrame>
+          <TextInput
+            type='text'
+            name='companyName'
+            placeholder='companyName'
+            value={'companyName'}
+            onChange={() => {}}
+            onBlur={() => {}}
+          ></TextInput>
+          <TextInput
+            type='text'
+            name='contactNumber'
+            placeholder='contactNumber'
+            value={'contactNumber'}
+            onChange={() => {}}
+            onBlur={() => {}}
+          ></TextInput>
+          <TextInput
+            type='text'
+            name='identificationNumber'
+            placeholder='identificationNumber'
+            value={'identificationNumber'}
+            onChange={() => {}}
+            onBlur={() => {}}
+          ></TextInput>
+        </InputFieldsFrame>
+      )}
 
-        <AppButton
-          text={t('add')}
-          type='filled'
-          disabled={false}
-          onClick={() => {}}
-          isSmall={false}
-          height='medium'
-        ></AppButton>
-      </Container>
-      {/* <CloseAddRecipient /> */}
-    </Overlay>
+      <AppButton
+        text={t('add')}
+        type='filled'
+        disabled={false}
+        onClick={() => {}}
+        isSmall={false}
+        height='medium'
+      ></AppButton>
+    </Container>
   )
 }
 
@@ -183,34 +176,24 @@ const FrameTop = styled.div`
 `
 
 const Container = styled.div`
+  overflow: scroll;
   position: relative;
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
   max-height: 715px;
   /* height: 80%; */
-  border-radius: 24px;
   padding: 32px;
   gap: 24px;
+  margin-top: 100px;
 
-  background-color: white;
+  border-radius: 24px;
   border: 1px solid rgba(32, 32, 32, 0.1);
+  background-color: white;
 
   @media (max-width: 1440px) and (min-width: 500px) {
   }
   @media (max-width: 500px) {
     padding: 32px 16px;
   }
-`
-const Overlay = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100%; // BUG
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  padding-top: 35px;
-  /* align-items: center; */
-  background-color: rgba(0, 0, 0, 0.1);
 `

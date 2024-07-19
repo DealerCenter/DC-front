@@ -11,5 +11,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactElement
 }>) {
-  return <DealerLayout>{children}</DealerLayout>
+  return (
+    <section className='dealer-layout'>
+      <DealerLayout>{children}</DealerLayout>
+    </section>
+  )
 }

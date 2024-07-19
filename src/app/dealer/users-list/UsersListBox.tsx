@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import styled, { css } from 'styled-components'
+import Modal from 'react-modal'
 
 import UsersList from './components/UsersList'
 import HeaderH4Bold from '../components/HeaderH4Bold'
@@ -10,6 +11,7 @@ import searchIcon from '@/assets/icons/searchForButton.svg'
 import plusIcon from '@/assets/icons/plus.svg'
 import UserListEmpty from './components/UserListEmpty'
 import AddRecipient from './components/addRecipient/AddRecipient'
+import AppModal from '@/common/components/modal/AppModal'
 
 type Props = {}
 
@@ -46,7 +48,7 @@ const DummyData = [
 
 const UsersListBox = (props: Props) => {
   const t = useTranslations('')
-  const [isAddRecipient, setIsAddRecipient] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <>
@@ -62,7 +64,7 @@ const UsersListBox = (props: Props) => {
             <SecondaryButton
               text={t('add recipient')}
               onClick={() => {
-                setIsAddRecipient(true)
+                setIsModalOpen(true)
               }}
               icon={plusIcon}
             />
@@ -71,16 +73,19 @@ const UsersListBox = (props: Props) => {
         {DummyData.length === 0 ? (
           <UserListEmpty
             onClick={() => {
-              setIsAddRecipient(true)
+              setIsModalOpen(true)
             }}
           />
         ) : (
           <UsersList usersData={DummyData} />
         )}
       </Container>
-      {isAddRecipient && (
-        <AddRecipient onClose={() => setIsAddRecipient(false)} />
-      )}
+      <AppModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <AddRecipient onClose={() => setIsModalOpen(false)} />
+      </AppModal>
     </>
   )
 }
