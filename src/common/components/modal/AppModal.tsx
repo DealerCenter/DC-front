@@ -34,6 +34,9 @@ const AppModal = ({
       height: '100%',
       border: 'unset',
       backgroundColor: 'transparent',
+      scrollbarWidth: 'none',
+      '-ms-overflow-style': 'none',
+      WebkitOverflowScrolling: 'touch',
 
       ...style,
     },
@@ -49,6 +52,7 @@ const AppModal = ({
       isOpen={isOpen}
       onAfterOpen={onAfterOpen}
       onRequestClose={onRequestClose}
+      // @ts-ignore
       style={customStyles}
       contentLabel={contentLabel}
     >

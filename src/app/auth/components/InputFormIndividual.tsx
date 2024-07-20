@@ -47,7 +47,7 @@ function InputsIndividual({ goToLogin }: Props) {
       <H2Bold>{t('register')}</H2Bold>
       <StepsContainer>
         {steps.map((step, i) => (
-          <>
+          <React.Fragment key={`steps ${i}`}>
             {i > 0 && (
               <Image src={stepArrow} alt='step arrow' width={20} height={20} />
             )}
@@ -63,7 +63,7 @@ function InputsIndividual({ goToLogin }: Props) {
             >
               {step.stepNumber.toString()}
             </TextNav>
-          </>
+          </React.Fragment>
         ))}
       </StepsContainer>
       <form onSubmit={handleSubmit}>{activeStep.component}</form>

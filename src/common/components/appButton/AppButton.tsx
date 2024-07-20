@@ -25,7 +25,7 @@ const AppButton = ({
   return (
     <StyledButton
       disabled={disabled}
-      type={type}
+      customType={type}
       onClick={!disabled ? onClick : () => {}}
       isSmall={isSmall}
       height={height}
@@ -37,52 +37,52 @@ const AppButton = ({
 
 export default AppButton
 
-type ButtonProps = { type?: string; isSmall?: boolean; height: string }
+type ButtonProps = { customType?: string; isSmall?: boolean; height: string }
 
 const StyledButton = styled.button<ButtonProps>`
-  ${({ disabled, type }) =>
-    disabled && type === 'filled'
+  ${({ disabled, customType }) =>
+    disabled && customType === 'filled'
       ? css`
           background-color: rgba(32, 32, 32, 0.26);
         `
-      : !disabled && type === 'filled'
-        ? css`
-            background-color: rgba(32, 32, 32, 1);
-            &:hover {
-              background-color: rgba(18, 18, 20, 0.9);
-            }
-          `
-        : type === 'outlined' &&
-          css`
-            background-color: transparent;
-            &:hover {
-              background-color: rgba(32, 32, 32, 0.1);
-              border: 1px solid rgba(32, 32, 32, 1);
-            }
-          `};
+      : !disabled && customType === 'filled'
+      ? css`
+          background-color: rgba(32, 32, 32, 1);
+          &:hover {
+            background-color: rgba(18, 18, 20, 0.9);
+          }
+        `
+      : customType === 'outlined' &&
+        css`
+          background-color: transparent;
+          &:hover {
+            background-color: rgba(32, 32, 32, 0.1);
+            border: 1px solid rgba(32, 32, 32, 1);
+          }
+        `};
 
-  ${({ type }) =>
-    type === 'filled'
+  ${({ customType }) =>
+    customType === 'filled'
       ? css`
           border: none;
         `
-      : type === 'outlined' &&
+      : customType === 'outlined' &&
         css`
           border: 1px solid rgba(32, 32, 32, 0.56);
         `};
 
-  ${({ disabled, type }) =>
-    type === 'filled'
+  ${({ disabled, customType }) =>
+    customType === 'filled'
       ? css`
           color: white;
         `
-      : !disabled && type === 'outlined'
-        ? css`
-            color: rgba(32, 32, 32, 1);
-          `
-        : css`
-            color: rgba(32, 32, 32, 0.56);
-          `};
+      : !disabled && customType === 'outlined'
+      ? css`
+          color: rgba(32, 32, 32, 1);
+        `
+      : css`
+          color: rgba(32, 32, 32, 0.56);
+        `};
 
   ${({ isSmall }) =>
     isSmall
@@ -110,8 +110,10 @@ const StyledButton = styled.button<ButtonProps>`
   border-radius: 12px;
 
   &:active {
-    background-color: ${({ type }) =>
-      type === 'filled' ? 'rgba(32, 32, 32, 0.68)' : 'rgba(32, 32, 32, 0.1)'};
+    background-color: ${({ customType }) =>
+      customType === 'filled'
+        ? 'rgba(32, 32, 32, 0.68)'
+        : 'rgba(32, 32, 32, 0.1)'};
   }
 
   &:focus {

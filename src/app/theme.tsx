@@ -10,8 +10,9 @@ const theme = {
     light_gray: 'rgba(32, 32, 32, 0.1);',
   },
   media: {
-    mobile: 'max-width: 500px',
-    desktop: 'min-width: 500px',
+    sm: '(max-width: 500px)',
+    md: '(max-width: 1440px) and (min-width: 500px)',
+    lg: '(min-width: 1440px)',
   },
 
   fonts: {

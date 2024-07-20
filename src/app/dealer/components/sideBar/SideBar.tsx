@@ -157,10 +157,10 @@ const BarContainer = styled.div`
     width: 100%;
     flex: 1;
     padding: 16px;
-    border: 1px solid rgba(32, 32, 32, 0.1);
+    border: 1px solid ${({ theme }) => theme.colors?.light_gray};
   }
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media ${({ theme }) => theme.media?.md} {
     transition: all 0.5s ease-in-out;
     position: absolute;
     width: 112px;
@@ -189,7 +189,7 @@ const Frame = styled.div`
   }
   width: unset;
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media ${({ theme }) => theme.media?.md} {
     align-items: flex-start;
   }
 `

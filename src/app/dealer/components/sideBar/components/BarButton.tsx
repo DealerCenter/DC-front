@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled, { css } from 'styled-components'
@@ -59,15 +60,15 @@ const Container = styled.div<ButtonProps>`
   border: none;
   width: 64px;
 
-  ${({ active }) =>
+  ${({ active, theme }) =>
     active
       ? css`
-          background-color: rgba(32, 32, 32, 1);
+          background-color: ${theme.colors?.active_black};
           color: white;
         `
       : css`
           background-color: white;
-          color: rgba(32, 32, 32, 1);
+          color: ${theme.colors?.active_black};
 
           &:hover {
             background-color: rgba(32, 32, 32, 0.04);
