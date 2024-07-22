@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 import ListItem from './listItem/ListItem'
 import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/theme'
 
 type Props = {
   usersData: {
@@ -17,7 +18,7 @@ type Props = {
 }
 
 const UserList = ({ usersData }: Props) => {
-  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
   return (

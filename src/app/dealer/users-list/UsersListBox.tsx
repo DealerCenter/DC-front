@@ -62,21 +62,15 @@ const UsersListBox = (props: Props) => {
 
 export default UsersListBox
 
-const HideScrollbar = styled.div`
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`
-
 const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors?.white};
   border-radius: 16px;
   gap: 16px;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     padding: 0px;
   }
   padding: 24px;
@@ -87,7 +81,7 @@ const Frame = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     align-items: flex-start;
     gap: unset;
     margin-top: 32px;

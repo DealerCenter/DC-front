@@ -4,19 +4,17 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import AppButton from '@/common/components/appButton/AppButton'
-import FileDropZone from '@/common/components/InputElements/FileDropZone'
-import TextInput from '@/common/components/InputElements/TextInput'
+import FileDropZone from '@/common/components/inputElements/FileDropZone'
+import TextInput from '@/common/components/inputElements/TextInput'
 import ChooseButton from './components/ChooseButton'
 
 import closeIcon from '@/assets/icons/closeX.svg'
-import CloseAddRecipient from './components/DeleteWarning'
 
 type Props = { onClose: () => void }
 
 const AddRecipient = ({ onClose }: Props) => {
   const t = useTranslations('')
   const [type, setType] = useState<'individual' | 'legalPerson'>('individual')
-  const [isClosing, setIsClosing] = useState(false)
   const dummyValue = 'something'
 
   return (
@@ -140,7 +138,6 @@ const Icon = styled.div`
 const InputFieldsFrame = styled.div`
   display: flex;
   flex-direction: column;
-  /* flex: 0 0; */
   gap: 12px;
 `
 
@@ -159,7 +156,7 @@ const SplitElement = styled.div`
   width: 1px;
   height: 26px;
   border-radius: 20px;
-  background-color: rgba(32, 32, 32, 0.1);
+  background-color: ${({ theme }) => theme.colors.light_gray};
 `
 
 const ChooseTypeFrame = styled.div`
@@ -186,12 +183,10 @@ const Container = styled.div`
   margin-bottom: 50px;
 
   border-radius: 24px;
-  border: 1px solid rgba(32, 32, 32, 0.1);
-  background-color: white;
+  border: 1px solid ${({ theme }) => theme.colors.light_gray};
+  background-color: ${({ theme }) => theme.colors.white};
 
-  @media (max-width: 1440px) and (min-width: 500px) {
-  }
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     padding: 32px 16px;
   }
 `

@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 
 import Checkbox from '@/common/components/checkbox/Checkbox'
 import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/InputElements/TextInput'
+import TextInput from '@/common/components/inputElements/TextInput'
 import useLoginForm from '../hooks/useLoginForm'
 
 import Image from 'next/image'
@@ -99,7 +99,7 @@ const Container = styled.div`
   gap: 48px;
   margin-top: 63px;
 
-  @media (${({ theme }) => theme.media?.desktop}) {
+  @media ${({ theme }) => theme.media?.lg} {
     width: 47%;
     max-width: 682px;
     padding: 42px 120px 42px 120px;

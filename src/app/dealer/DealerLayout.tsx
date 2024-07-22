@@ -5,11 +5,12 @@ import styled from 'styled-components'
 import Header from '@/common/components/header/Header'
 import SideBar from './components/sideBar/SideBar'
 import { useMediaQuery } from 'react-responsive'
+import theme from '../theme'
 
 type Props = { children: React.JSX.Element }
 
 const DealerLayout = ({ children }: Props) => {
-  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   return (
     <>
@@ -30,7 +31,7 @@ export default DealerLayout
 const Container = styled.div`
   padding: 0 8%;
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media ${({ theme }) => theme.media?.md} {
     padding: 0 3%;
   }
 `
@@ -40,7 +41,7 @@ const Frame = styled.div`
   gap: 24px;
   margin-top: 8px;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;
   }
   flex-direction: row;

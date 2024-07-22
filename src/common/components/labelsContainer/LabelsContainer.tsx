@@ -26,7 +26,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
   height: 75px;
-  background-color: rgba(32, 32, 32, 1);
+  background-color: ${({ theme }) => theme.colors?.active_black};
   border-radius: 16px 16px 0px 0px;
   padding: 16px 16px 16px 32px;
 `
@@ -36,5 +36,5 @@ const Label = styled.label`
   align-items: center;
   text-align: center;
   width: 120px;
-  color: white;
+  color: ${({ theme }) => theme.colors?.white};
 `

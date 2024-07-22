@@ -1,10 +1,13 @@
-import Image from 'next/image'
 import React from 'react'
+import Image from 'next/image'
 import styled, { css } from 'styled-components'
-import notificationBell from '@/assets/icons/notificationBell.svg'
-import notificationDot from '@/assets/icons/notificationDot.svg'
 import { useTranslations } from 'next-intl'
 import { useMediaQuery } from 'react-responsive'
+
+import theme from '@/app/theme'
+
+import notificationBell from '@/assets/icons/notificationBell.svg'
+import notificationDot from '@/assets/icons/notificationDot.svg'
 
 type Props = {
   refreshDate: string
@@ -20,7 +23,7 @@ const InfoBox = ({
   isHovered,
 }: Props) => {
   const isTablet = useMediaQuery({
-    query: '(max-width: 1440px) and (min-width: 500px)',
+    query: theme.media?.md,
   })
   const t = useTranslations('')
 
@@ -62,13 +65,13 @@ const Container = styled.div<ContainerProps>`
   width: 286px;
   height: 135px;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     width: 100%;
     height: 115px;
     flex: 1;
   }
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
       isHovered
         ? css`
@@ -91,7 +94,7 @@ const Frame = styled.div`
 const TextBox = styled.div`
   display: flex;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     flex-direction: row;
   }
   flex-direction: column;
@@ -102,7 +105,7 @@ const Text = styled.p<ContainerProps>`
   font-size: 28px;
   font-weight: 400;
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
       isHovered
         ? css`
@@ -120,7 +123,7 @@ const TextName = styled.span<ContainerProps>`
   font-size: 28px;
   font-weight: 700;
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
       isHovered
         ? css`
@@ -139,9 +142,9 @@ const DateText = styled.p<ContainerProps>`
   margin: 0;
   font-size: 16px;
   font-weight: 400;
-  color: rgba(32, 32, 32, 0.56);
+  color: ${({ theme }) => theme.colors?.disabled_gray};
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
       isHovered
         ? css`
@@ -181,5 +184,5 @@ const DotNumber = styled.span`
   position: absolute;
   font-size: 10px;
   font-weight: 700;
-  color: white;
+  color: ${({ theme }) => theme.colors?.white};
 `

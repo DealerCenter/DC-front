@@ -64,13 +64,13 @@ const ButtonFrame = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 416px;
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing?.md};
 `
 
 const Frame = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: ${({ theme }) => theme.spacing?.lg};
   z-index: 999;
   margin-left: 120px;
 `

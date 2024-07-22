@@ -29,8 +29,8 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 12px;
-  background-color: rgba(32, 32, 32, 0.04);
+  border-radius: ${({ theme }) => theme.radius?.lg};
+  background-color: ${({ theme }) => theme.colors?.mist_gray};
 `
 
 const StyledH5 = styled.h5`

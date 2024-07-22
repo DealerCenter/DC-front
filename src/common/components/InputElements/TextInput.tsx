@@ -66,15 +66,15 @@ type InputProps = {
 const StyledInput = styled.input<InputProps>`
   position: relative;
   box-sizing: border-box;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors?.white};
   border: none;
-  outline: 2px solid rgba(32, 32, 32, 0.04);
+  outline: 2px solid ${({ theme }) => theme.colors?.mist_gray};
   outline-offset: 1px;
   width: 350px;
   height: 52px;
   padding: 10px 10px 10px 16px;
-  border-radius: 12px;
-  font-size: 16px;
+  border-radius: ${({ theme }) => theme.radius?.lg};
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
 
   ${({ isHalfSize }) =>
     isHalfSize
@@ -92,12 +92,12 @@ const StyledInput = styled.input<InputProps>`
     `}
 
   &::placeholder {
-    color: rgba(18, 18, 20, 0.56);
+    color: ${({ theme }) => theme.colors?.disabled_gray};
   }
 
   &:focus {
     border: none;
-    outline: 4px solid rgba(216, 226, 244, 1);
+    outline: 4px solid ${({ theme }) => theme.colors?.sky_blue};
   }
 `
 
@@ -112,16 +112,16 @@ const TextBox = styled.div`
 `
 
 const ErrorMessage = styled.p`
-  color: #cf341f;
+  color: ${({ theme }) => theme.colors?.red};
   position: absolute;
-  font-size: 10px;
+  font-size: ${({ theme }) => theme.fontSizes?.extraSmall};
   top: 48px;
   left: 12px;
 `
 
 const OptionalText = styled.p`
   font-size: 11px;
-  color: rgba(32, 32, 32, 0.56);
+  color: ${({ theme }) => theme.colors?.disabled_gray};
   padding: 4px;
   font-weight: 400;
   margin: 0;

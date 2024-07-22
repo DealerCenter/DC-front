@@ -37,23 +37,22 @@ const StyledDiv = styled.div<StyledDivProps>`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  border: 2px solid rgba(32, 32, 32, 0.42);
-  /* padding: 12px 16px 12px 16px; */
+  border: 2px solid ${({ theme }) => theme.colors?.haze_gray};
   width: 32px;
   height: 32px;
   cursor: pointer;
 
-  ${({ done, active }) =>
+  ${({ done, active, theme }) =>
     done
       ? css`
-          background-color: rgba(32, 32, 32, 1);
+          background-color: ${theme.colors?.active_black};
         `
       : active
         ? css`
-            border-color: rgba(32, 32, 32, 1);
+            border-color: ${theme.colors?.active_black};
           `
         : css`
-            border-color: rgba(32, 32, 32, 0.42);
+            border-color: ${theme.colors?.haze_gray};
           `}
 `
 
@@ -61,16 +60,16 @@ const StyledP = styled.p<StyledPProps>`
   font-size: 14px;
   font-weight: 700;
 
-  ${({ done, active }) =>
+  ${({ done, active, theme }) =>
     done
       ? css`
-          color: white;
+          color: ${theme.colors?.white};
         `
       : active
         ? css`
-            color: rgba(18, 18, 20, 1);
+            color: ${theme.colors?.button_black};
           `
         : css`
-            color: rgba(32, 32, 32, 0.42);
+            color: ${theme.colors?.haze_gray};
           `}
 `

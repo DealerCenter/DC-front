@@ -1,3 +1,4 @@
+import theme from '@/app/theme'
 import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
@@ -41,7 +42,7 @@ const Container = styled.div<ButtonProps>`
   ${({ withBorder }) =>
     withBorder
       ? css`
-          border: 1px solid rgba(32, 32, 32, 0.56);
+          border: 1px solid ${theme.colors?.disabled_gray};
         `
       : css`
           border: unset;
@@ -50,15 +51,15 @@ const Container = styled.div<ButtonProps>`
   ${({ isActive }) =>
     isActive
       ? css`
-          background-color: rgba(32, 32, 32, 1);
-          color: white;
+          background-color: ${theme.colors?.active_black};
+          color: ${theme.colors?.white};
         `
       : css`
-          background-color: white;
-          color: rgba(32, 32, 32, 1);
+          background-color: ${theme.colors?.white}
+          color: ${theme.colors?.active_black};
 
           &:hover {
-            background-color: rgba(32, 32, 32, 0.04);
+            background-color: ${theme.colors?.mist_gray};
           }
         `}
 `

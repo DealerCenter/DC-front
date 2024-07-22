@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl'
 
 import { useRegisterFormContextLegalPerson } from '../../../hooks/useRegistrationFormLegalPerson'
 
-import TextInput from '@/common/components/InputElements/TextInput'
-import FileDropZone from '@/common/components/InputElements/FileDropZone'
+import TextInput from '@/common/components/inputElements/TextInput'
+import FileDropZone from '@/common/components/inputElements/FileDropZone'
 import AppButton from '@/common/components/appButton/AppButton'
 
 type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
@@ -122,5 +122,5 @@ const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: ${({ theme }) => theme.spacing?.lg};
 `

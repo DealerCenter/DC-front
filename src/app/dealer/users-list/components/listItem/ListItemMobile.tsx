@@ -6,6 +6,7 @@ import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
+import calendarIcon from '@/assets/icons/calendar.svg'
 import { useTranslations } from 'next-intl'
 
 type Props = {
@@ -76,7 +77,7 @@ const ListItemMobile = ({
         </DetailsBox>
       </DetailsFrame>
       <LabelAndIconBox>
-        <Image src={uncheckedRed} alt='unchecked icon' />
+        <Image src={calendarIcon} alt='calendar icon' />
         <Label>
           {t('added')} {dateOfAddition}
         </Label>
@@ -97,7 +98,7 @@ const Container = styled.div`
   gap: 16px;
   padding: 16px;
 
-  border: 1px solid rgba(32, 32, 32, 0.04);
+  border: 1px solid ${({ theme }) => theme.colors?.mist_gray};
 `
 
 const NameFrame = styled.div`
@@ -125,18 +126,15 @@ const Label = styled.label`
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* width: 120px; */
-  color: rgba(32, 32, 32, 1);
+  color: ${({ theme }) => theme.colors?.active_black};
   font-size: 14px;
 `
 
 const ValueLabel = styled.label`
   align-items: start;
   justify-content: start;
-  color: green;
-
-  font-size: 13px;
-  color: rgba(32, 32, 32, 0.7);
+  font-size: ${({ theme }) => theme.fontSizes?.small};
+  color: ${({ theme }) => theme.colors?.smoke_gray};
 `
 
 const IconBox = styled.div`

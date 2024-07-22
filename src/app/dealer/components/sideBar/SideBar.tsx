@@ -127,15 +127,13 @@ const SideBar = (props: Props) => {
 export default SideBar
 
 const EmptyContainer = styled.div`
-  @media (max-width: 1440px) and (min-width: 500px) {
+  display: none;
+
+  @media ${({ theme }) => theme.media?.md} {
     width: 112px;
     height: 902px;
     display: unset;
   }
-  @media (max-width: 500px) {
-    display: none;
-  }
-  display: none;
 `
 
 const BarContainer = styled.div`
@@ -144,7 +142,7 @@ const BarContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors?.white};
   border-radius: 16px;
   gap: 32px;
   flex: unset;
@@ -152,7 +150,7 @@ const BarContainer = styled.div`
   position: unset;
   width: 334px;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     min-width: 300px;
     width: 100%;
     flex: 1;
@@ -184,7 +182,7 @@ const Frame = styled.div`
   align-items: center;
   gap: 32px;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     width: 100%;
   }
   width: unset;
@@ -200,7 +198,7 @@ const ButtonFrame = styled.div`
   flex: 1;
   width: 100%;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     flex-direction: row;
     justify-content: space-between;
     gap: unset;

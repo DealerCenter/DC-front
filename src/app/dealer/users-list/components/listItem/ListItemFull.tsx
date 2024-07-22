@@ -84,7 +84,7 @@ const Container = styled.div`
   height: 72px;
   padding: 0 16px 0 32px;
 
-  border: 1px solid rgba(32, 32, 32, 0.04);
+  border: 1px solid ${({ theme }) => theme.colors?.mist_gray};
 `
 
 const LabelBox = styled.div`
@@ -109,7 +109,7 @@ const Label = styled.label`
   align-items: center;
   text-align: center;
   width: 120px;
-  color: rgba(32, 32, 32, 1);
+  color: ${({ theme }) => theme.colors?.active_black};
   font-size: 13px;
 `
 

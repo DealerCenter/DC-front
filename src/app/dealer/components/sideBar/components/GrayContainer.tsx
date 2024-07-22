@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import Image from 'next/image'
+import theme from '@/app/theme'
 
 type Props = {
   text: string
@@ -21,7 +22,7 @@ const GrayContainer = ({
   isHovered,
 }: Props) => {
   const isTablet = useMediaQuery({
-    query: '(max-width: 1440px) and (min-width: 500px)',
+    query: theme.media?.md,
   })
 
   return (
@@ -50,8 +51,8 @@ const Container = styled.div<ContainerProps>`
   text-align: left;
   justify-content: start;
   /* justify-content: flex-start; */
-  background-color: rgba(32, 32, 32, 0.04);
-  border: 0.5px solid rgba(32, 32, 32, 0.1);
+  background-color: ${({ theme }) => theme.colors?.mist_gray};
+  border: 0.5px solid ${({ theme }) => theme.colors?.light_gray};
   border-radius: 16px;
   gap: 19px;
   padding: 24px 16px 24px 16px;
@@ -66,7 +67,7 @@ const Container = styled.div<ContainerProps>`
           height: 101px;
         `}
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media  ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
       isHovered
         ? css`
@@ -78,7 +79,7 @@ const Container = styled.div<ContainerProps>`
           `}
   }
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     width: 100%;
     height: 85px;
   }
@@ -94,7 +95,7 @@ const Text = styled.p<IsHoveredProps>`
   font-size: 16px;
   font-weight: 700;
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
       isHovered
         ? css`
@@ -113,7 +114,7 @@ const Balance = styled.p<IsHoveredProps>`
   font-size: 18px;
   font-weight: 400;
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
       isHovered
         ? css`

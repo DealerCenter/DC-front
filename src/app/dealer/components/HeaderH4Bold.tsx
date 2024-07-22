@@ -14,7 +14,7 @@ const HeaderH4Bold = ({ text }: Props) => {
 export default HeaderH4Bold
 
 const StyledH4 = styled.h4`
-  color: rgba(32, 32, 32, 1);
+  color: ${({ theme }) => theme.colors?.active_black};
   font-size: 28px;
   font-weight: 700;
   margin: 0;
@@ -24,7 +24,7 @@ const H4Box = styled.div`
   display: flex;
   align-items: center;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     padding-left: 0;
     height: 60px;
   }

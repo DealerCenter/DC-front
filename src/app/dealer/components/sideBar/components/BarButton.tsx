@@ -4,6 +4,7 @@ import { useMediaQuery } from 'react-responsive'
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
 import Link from 'next/link'
+import theme from '@/app/theme'
 
 type Props = {
   icon: string
@@ -24,7 +25,7 @@ const BarButton = ({
   href,
   isHovered,
 }: Props) => {
-  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   return (
     <StyledLink href={href}>
@@ -64,18 +65,18 @@ const Container = styled.div<ButtonProps>`
     active
       ? css`
           background-color: ${theme.colors?.active_black};
-          color: white;
+          color: ${theme.colors?.white};
         `
       : css`
-          background-color: white;
+          background-color: ${theme.colors?.white};
           color: ${theme.colors?.active_black};
 
           &:hover {
-            background-color: rgba(32, 32, 32, 0.04);
+            background-color: ${theme.colors?.mist_gray};
           }
         `}
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media  ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
       isHovered
         ? css`
@@ -87,7 +88,7 @@ const Container = styled.div<ButtonProps>`
           `}
   }
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     height: 52px;
     width: 52px;
     border-radius: 18px;
@@ -107,7 +108,7 @@ const IconBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     margin: 0;
   }
   margin: 0 10px 0 18px;
@@ -116,7 +117,7 @@ const IconBox = styled.div`
 const Label = styled.label<IsHoveredProps>`
   opacity: 1;
 
-  @media (max-width: 1440px) and (min-width: 500px) {
+  @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
       isHovered
         ? css`

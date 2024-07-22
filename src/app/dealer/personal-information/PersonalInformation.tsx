@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import InputFieldsHeader from './components/InputFieldsHeader'
+import InputFieldsHeader from '../../../common/components/inputFieldsHeader/InputFieldsHeader'
 import TextInputField from './components/TextInputField'
 import HeaderH4Bold from '../components/HeaderH4Bold'
 
@@ -52,7 +52,7 @@ const Container = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors?.white};
   border-radius: 16px;
   gap: 24px;
 `

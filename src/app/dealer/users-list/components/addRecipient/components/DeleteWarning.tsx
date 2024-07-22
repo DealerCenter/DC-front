@@ -82,10 +82,10 @@ const Container = styled.div`
   gap: 24px;
   margin-top: 200px;
 
-  background-color: white;
-  border: 1px solid rgba(32, 32, 32, 0.1);
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.light_gray};
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     padding: 32px 16px;
   }
 `

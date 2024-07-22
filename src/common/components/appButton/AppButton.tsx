@@ -40,49 +40,49 @@ export default AppButton
 type ButtonProps = { customType?: string; isSmall?: boolean; height: string }
 
 const StyledButton = styled.button<ButtonProps>`
-  ${({ disabled, customType }) =>
+  ${({ disabled, customType, theme }) =>
     disabled && customType === 'filled'
       ? css`
-          background-color: rgba(32, 32, 32, 0.26);
+          background-color: ${theme.colors?.fog_gray};
         `
       : !disabled && customType === 'filled'
-      ? css`
-          background-color: rgba(32, 32, 32, 1);
-          &:hover {
-            background-color: rgba(18, 18, 20, 0.9);
-          }
-        `
-      : customType === 'outlined' &&
-        css`
-          background-color: transparent;
-          &:hover {
-            background-color: rgba(32, 32, 32, 0.1);
-            border: 1px solid rgba(32, 32, 32, 1);
-          }
-        `};
+        ? css`
+            background-color: ${theme.colors?.button_black};
+            &:hover {
+              background-color: ${theme.colors?.button_hover_black};
+            }
+          `
+        : customType === 'outlined' &&
+          css`
+            background-color: transparent;
+            &:hover {
+              background-color: ${theme.colors?.light_gray};
+              border: 1px solid ${theme.colors?.active_black};
+            }
+          `};
 
-  ${({ customType }) =>
+  ${({ customType, theme }) =>
     customType === 'filled'
       ? css`
           border: none;
         `
       : customType === 'outlined' &&
         css`
-          border: 1px solid rgba(32, 32, 32, 0.56);
+          border: 1px solid ${theme.colors?.disabled_gray};
         `};
 
-  ${({ disabled, customType }) =>
+  ${({ disabled, customType, theme }) =>
     customType === 'filled'
       ? css`
-          color: white;
+          color: ${theme.colors?.white};
         `
       : !disabled && customType === 'outlined'
-      ? css`
-          color: rgba(32, 32, 32, 1);
-        `
-      : css`
-          color: rgba(32, 32, 32, 0.56);
-        `};
+        ? css`
+            color: ${theme.colors?.active_black};
+          `
+        : css`
+            color: ${theme.colors?.disabled_gray};
+          `};
 
   ${({ isSmall }) =>
     isSmall
@@ -110,14 +110,14 @@ const StyledButton = styled.button<ButtonProps>`
   border-radius: 12px;
 
   &:active {
-    background-color: ${({ customType }) =>
+    background-color: ${({ customType, theme }) =>
       customType === 'filled'
-        ? 'rgba(32, 32, 32, 0.68)'
-        : 'rgba(32, 32, 32, 0.1)'};
+        ? theme.colors?.smoke_gray
+        : theme.colors?.active_black};
   }
 
   &:focus {
     border: none;
-    outline: 4px solid rgba(216, 226, 244, 1);
+    outline: 4px solid ${({ theme }) => theme.colors?.sky_blue};
   }
 `
