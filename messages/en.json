@@ -65,6 +65,12 @@
   "cancel": "Cancel",
   "delete": "Delete",
   "delete data warning": "After performing this activity, all the recipient's data will be deleted",
+  "email notifications": "E-mail notifications",
+  "sms notifications": "SMS notifications",
+  "order acceptance": "Order acceptance",
+  "existence of debt": "Existence of debt",
+  "incomplete information": "Incomplete information",
+  "company news and changes": "Company news and changes to the service",
 
   "useForm": {
     "must be valid email": "Must be a valid email",

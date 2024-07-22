@@ -63,6 +63,12 @@
   "cancel": "გაუქმება",
   "delete": "წაშლა",
   "delete data warning": "მოცემული აქტივობის შესრულების შემდეგ მოხდება მიმღების ყველა მონაცემის წაშლა",
+  "email notifications": "E-mail შეტყობინებები",
+  "sms notifications": "SMS შეტყობინებები",
+  "order acceptance": "შეკვეთის მიღება",
+  "existence of debt": "დავალიანების არსებობა",
+  "incomplete information": "არასრული ინფორმაცია",
+  "company news and changes": "კომპანიის სიახლეები და სერვისის ცვლილებები",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

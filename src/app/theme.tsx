@@ -35,6 +35,7 @@ const theme = {
     lg: '12px',
   },
   spacing: {
+    sm: '12px',
     md: '16px',
     lg: '24px',
     xl: '32px',
