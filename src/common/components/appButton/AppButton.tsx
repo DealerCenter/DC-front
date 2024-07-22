@@ -8,8 +8,8 @@ type ButtonHeight = 'medium' | 'large'
 type Props = {
   text: string
   type: ButtonTypes
-  disabled?: boolean
   onClick: () => void
+  disabled?: boolean
   isSmall?: boolean
   height?: ButtonHeight
 }
@@ -17,8 +17,8 @@ type Props = {
 const AppButton = ({
   text,
   type,
-  disabled,
   onClick,
+  disabled,
   isSmall,
   height = 'large',
 }: Props) => {
@@ -26,7 +26,7 @@ const AppButton = ({
     <StyledButton
       disabled={disabled}
       customType={type}
-      onClick={!disabled ? onClick : () => {}}
+      onClick={onClick}
       isSmall={isSmall}
       height={height}
     >
@@ -37,7 +37,11 @@ const AppButton = ({
 
 export default AppButton
 
-type ButtonProps = { customType?: string; isSmall?: boolean; height: string }
+type ButtonProps = {
+  customType?: string
+  isSmall?: boolean
+  height: string
+}
 
 const StyledButton = styled.button<ButtonProps>`
   ${({ disabled, customType, theme }) =>
@@ -56,7 +60,7 @@ const StyledButton = styled.button<ButtonProps>`
           css`
             background-color: transparent;
             &:hover {
-              background-color: ${theme.colors?.light_gray};
+              background-color: '${theme.colors?.light_gray}';
               border: 1px solid ${theme.colors?.active_black};
             }
           `};
@@ -103,11 +107,12 @@ const StyledButton = styled.button<ButtonProps>`
           height: 56px;
         `}      
 
+
   transition: all 300ms ease-out;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
   line-height: 33.6px;
   font-weight: 700;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.radius?.lg};
 
   &:active {
     background-color: ${({ customType, theme }) =>

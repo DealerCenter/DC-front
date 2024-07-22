@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import HeaderH4Bold from '../components/HeaderH4Bold'
 import OptionField from './components/OptionField'
 import AppButton from '@/common/components/appButton/AppButton'
+import FormSaveButton from '@/common/components/appButton/FormSaveButton'
 
 type Props = {}
 
@@ -12,6 +13,13 @@ const ManageNotifications = (props: Props) => {
   const [isEmailSaved, setIsEmailSaved] = useState(true)
   const [isSmsSaved, setIsSmsSaved] = useState(true)
   const t = useTranslations('')
+
+  const handleEmailChange = () => {
+    setIsEmailSaved(false)
+  }
+  const handleSmsChange = () => {
+    setIsSmsSaved(false)
+  }
 
   return (
     <Container>
@@ -26,28 +34,30 @@ const ManageNotifications = (props: Props) => {
           <InputFieldsFrame>
             <OptionField
               text={t('order acceptance')}
-              onToggle={() => setIsEmailSaved(false)}
+              onChange={handleEmailChange}
+              isChecked={false}
             />
             <OptionField
               text={t('existence of debt')}
-              onToggle={() => setIsEmailSaved(false)}
+              onChange={handleEmailChange}
+              isChecked={true}
             />
             <OptionField
               text={t('incomplete information')}
-              onToggle={() => setIsEmailSaved(false)}
+              onChange={handleEmailChange}
+              isChecked={false}
             />
             <OptionField
               text={t('company news and changes')}
-              onToggle={() => setIsEmailSaved(false)}
+              onChange={handleEmailChange}
+              isChecked={false}
             />
           </InputFieldsFrame>
           {!isEmailSaved && (
             <ButtonFrame>
-              <AppButton
+              <FormSaveButton
                 text={t('save')}
-                type='filled'
                 onClick={() => setIsEmailSaved(true)}
-                isSmall={true}
               />
             </ButtonFrame>
           )}
@@ -61,19 +71,23 @@ const ManageNotifications = (props: Props) => {
           <InputFieldsFrame>
             <OptionField
               text={t('order acceptance')}
-              onToggle={() => setIsSmsSaved(false)}
+              onChange={handleSmsChange}
+              isChecked={false}
             />
             <OptionField
               text={t('existence of debt')}
-              onToggle={() => setIsSmsSaved(false)}
+              onChange={handleSmsChange}
+              isChecked={false}
             />
             <OptionField
               text={t('incomplete information')}
-              onToggle={() => setIsSmsSaved(false)}
+              onChange={handleSmsChange}
+              isChecked={true}
             />
             <OptionField
               text={t('company news and changes')}
-              onToggle={() => setIsSmsSaved(false)}
+              onChange={handleSmsChange}
+              isChecked={true}
             />
           </InputFieldsFrame>
           {!isSmsSaved && (

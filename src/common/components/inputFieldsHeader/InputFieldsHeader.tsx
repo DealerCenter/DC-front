@@ -38,6 +38,10 @@ const StyledH5 = styled.h5`
   font-weight: 700;
   padding: 16px 32px;
   margin: 0;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    font-size: ${({ theme }) => theme.fontSizes?.medium};
+  }
 `
 
 const Icon = styled.div`
