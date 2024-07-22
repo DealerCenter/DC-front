@@ -5,11 +5,15 @@ import search from '@/assets/icons/search.svg'
 import person from '@/assets/icons/person.svg'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+
+import arrowDownIcon from '@/assets/icons/arrow/arrowDownWhite.svg'
+import SearchElement from './components/SearchElement'
 
 type Props = {}
 
 const FullHeader = (props: Props) => {
+  const t = useTranslations('')
   const router = useRouter()
 
   return (
@@ -17,20 +21,25 @@ const FullHeader = (props: Props) => {
       <HeaderBox>
         <Logo>DUX</Logo>
         <Frame>
-          <Title2>ავტომობილის ძიება</Title2>
-          <Title2>ჩვენი სერვისები</Title2>
-          <Title2>ჩვენს შესახებ</Title2>
-          <Title2>კონტაქტი</Title2>
+          <Title2>
+            <Label>{t('search for vehicle')}</Label>
+          </Title2>
+          <Title2>
+            <Label>{t('our services')}</Label>
+            <Icon>
+              <Image src={arrowDownIcon} alt='icon' />
+            </Icon>
+          </Title2>
+          <Title2>{t('about us')}</Title2>
+          <Title2>{t('contact')}</Title2>
         </Frame>
         <Menu>
-          <Item>
-            <Image width={20} height={20} src={search} alt='search icon' />
-          </Item>
+          <SearchElement onClick={() => {}} />
           <Item onClick={() => router.push('/auth')}>
             <Image width={20} height={20} src={person} alt='person icon' />
           </Item>
           <Item>
-            <Label>GE</Label>
+            <Ge>GE</Ge>
           </Item>
         </Menu>
       </HeaderBox>
@@ -57,29 +66,38 @@ const HeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(18, 18, 20, 1);
+  background-color: ${({ theme }) => theme.colors?.button_black};
 `
 
 const Frame = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
+
+  @media ${({ theme }) => theme.media?.lg} {
+    gap: ${({ theme }) => theme.spacing?.lg};
+  }
 `
 
 const Title2 = styled.div`
-  color: white;
-  font-size: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors?.white};
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
   line-height: 19.2px;
   font-weight: 400;
-  padding: 16px;
+  padding: ${({ theme }) => theme.spacing?.md};
+  border-radius: ${({ theme }) => theme.radius?.lg};
+  height: 56px;
 
-  @media (min-width: 500px) {
-    &:hover {
-      color: blue;
-    }
+  &:hover {
+    background-color: ${({ theme }) => theme.colors?.hover_white};
   }
   &:active {
-    color: black;
+    background-color: ${({ theme }) => theme.colors?.active_black};
   }
 `
 
@@ -91,23 +109,45 @@ const Logo = styled.h2`
   margin: 0;
 `
 
+const Label = styled.div`
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+`
+
 const Menu = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
+  padding-left: ${({ theme }) => theme.spacing?.sm};
 `
 
 const Item = styled.div`
   height: 44px;
   width: 56px;
-  border: 2px solid gray;
-  border-radius: 12px;
-  color: white;
+  border: 2px solid ${({ theme }) => theme.colors?.border_white};
+  border-radius: ${({ theme }) => theme.radius?.lg};
+  color: ${({ theme }) => theme.colors?.white};
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors?.hover_white};
+    border: 2px solid ${({ theme }) => theme.colors?.button_black};
+  }
 `
-const Label = styled.label`
+const Ge = styled.label`
   font-size: 16px;
   font-weight: 500;
+`
+const Icon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
 `

@@ -35,14 +35,11 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0px 8px;
-  background-color: rgba(18, 18, 20, 1);
+  background-color: ${({ theme }) => theme.colors?.button_black};
   min-width: 300px;
   margin: 16px 0;
   border-radius: 16px;
   min-height: 52px;
-
-  @media (max-width: 500px) {
-  }
 `
 
 const Frame = styled.div`
@@ -55,7 +52,7 @@ const Frame = styled.div`
 `
 
 const Logo = styled.h2`
-  color: white;
+  color: ${({ theme }) => theme.colors?.white};
   font-size: 23px;
   font-weight: bold;
   padding: 12px 8px 12px 8px;
@@ -68,6 +65,6 @@ const Item = styled.div`
   justify-content: center;
   height: 40px;
   width: 40px;
-  border: 2px solid rgba(255, 255, 255, 0.24);
-  border-radius: 12px;
+  border: 2px solid ${({ theme }) => theme.colors?.border_white};
+  border-radius: ${({ theme }) => theme.radius?.lg};
 `

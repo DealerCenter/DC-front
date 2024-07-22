@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import pencilIcon from '@/assets/icons/editPencil.svg'
-import arrowDown from '@/assets/icons/arrowDown.svg'
+import arrowDown from '@/assets/icons/arrow/arrowDownBlack.svg'
 import Image from 'next/image'
 
 type Props = { text: string; onEdit: () => void; onArrowDown: () => void }

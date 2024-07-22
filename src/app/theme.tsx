@@ -3,6 +3,8 @@ const theme = {
     background: '#2020200A',
     text: '#000000',
     white: '#FFFFFF',
+    hover_white: 'rgba(255, 255, 255, 0.1)',
+    border_white: 'rgba(255, 255, 255, 0.24)',
     red: '#CF341F',
     gray: '#20202042',
     button_black: 'rgba(18, 18, 20, 1)',
