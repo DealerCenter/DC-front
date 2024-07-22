@@ -64,6 +64,7 @@
   "enter recipient data": "Enter recipient data",
   "cancel": "Cancel",
   "delete": "Delete",
+  "save": "Save",
   "delete data warning": "After performing this activity, all the recipient's data will be deleted",
   "email notifications": "E-mail notifications",
   "sms notifications": "SMS notifications",

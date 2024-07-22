@@ -1,13 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
-type Props = { label: string }
+type Props = { label: string; onChange?: () => void }
 
-const TextInputField = ({ label }: Props) => {
+const TextInputField = ({ label, onChange }: Props) => {
   return (
     <InputBox>
       <InputLabel>{label}</InputLabel>
-      <InputField type='text' placeholder='Something something'></InputField>
+      <InputField
+        type='text'
+        placeholder='Something something'
+        onChange={onChange}
+      ></InputField>
     </InputBox>
   )
 }

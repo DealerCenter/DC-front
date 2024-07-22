@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
 import InputFieldsHeader from '../../../common/components/inputFieldsHeader/InputFieldsHeader'
 import TextInputField from './components/TextInputField'
 import HeaderH4Bold from '../components/HeaderH4Bold'
+import AppButton from '@/common/components/appButton/AppButton'
 
 type Props = {}
 
 const PersonalInformation = (props: Props) => {
+  const [isInfoSaved, setIsInfoSaved] = useState(true)
+  const [isPasswordSaved, setIsPasswordSaved] = useState(true)
   const t = useTranslations('')
 
   return (
@@ -22,10 +25,29 @@ const PersonalInformation = (props: Props) => {
             onArrowDown={() => {}}
           />
           <InputFieldsFrame>
-            <TextInputField label={t('email')} />
-            <TextInputField label={t('cell phone')} />
-            <TextInputField label={t('address')} />
+            <TextInputField
+              label={t('email')}
+              onChange={() => setIsInfoSaved(false)}
+            />
+            <TextInputField
+              label={t('cell phone')}
+              onChange={() => setIsInfoSaved(false)}
+            />
+            <TextInputField
+              label={t('address')}
+              onChange={() => setIsInfoSaved(false)}
+            />
           </InputFieldsFrame>
+          {!isInfoSaved && (
+            <ButtonFrame>
+              <AppButton
+                text={t('save')}
+                type='filled'
+                onClick={() => setIsInfoSaved(true)}
+                isSmall={true}
+              />
+            </ButtonFrame>
+          )}
         </InputFieldsBox>
         <InputFieldsBox>
           <InputFieldsHeader
@@ -34,10 +56,29 @@ const PersonalInformation = (props: Props) => {
             onArrowDown={() => {}}
           />
           <InputFieldsFrame>
-            <TextInputField label={t('current password')} />
-            <TextInputField label={t('new password')} />
-            <TextInputField label={t('repeat new password')} />
+            <TextInputField
+              label={t('current password')}
+              onChange={() => setIsPasswordSaved(false)}
+            />
+            <TextInputField
+              label={t('new password')}
+              onChange={() => setIsPasswordSaved(false)}
+            />
+            <TextInputField
+              label={t('repeat new password')}
+              onChange={() => setIsPasswordSaved(false)}
+            />
           </InputFieldsFrame>
+          {!isPasswordSaved && (
+            <ButtonFrame>
+              <AppButton
+                text={t('save')}
+                type='filled'
+                onClick={() => setIsPasswordSaved(true)}
+                isSmall={true}
+              />
+            </ButtonFrame>
+          )}
         </InputFieldsBox>
       </Frame>
     </Container>
@@ -73,4 +114,9 @@ const InputFieldsFrame = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
+`
+
+const ButtonFrame = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `

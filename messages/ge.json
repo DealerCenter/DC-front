@@ -62,6 +62,7 @@
   "enter recipient data": "შეიყვანეთ მიმღების მონაცემები",
   "cancel": "გაუქმება",
   "delete": "წაშლა",
+  "save": "შენახვა",
   "delete data warning": "მოცემული აქტივობის შესრულების შემდეგ მოხდება მიმღების ყველა მონაცემის წაშლა",
   "email notifications": "E-mail შეტყობინებები",
   "sms notifications": "SMS შეტყობინებები",

@@ -1,13 +1,16 @@
 import InputFieldsHeader from '@/common/components/inputFieldsHeader/InputFieldsHeader'
 import { useTranslations } from 'next-intl'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import HeaderH4Bold from '../components/HeaderH4Bold'
 import OptionField from './components/OptionField'
+import AppButton from '@/common/components/appButton/AppButton'
 
 type Props = {}
 
 const ManageNotifications = (props: Props) => {
+  const [isEmailSaved, setIsEmailSaved] = useState(true)
+  const [isSmsSaved, setIsSmsSaved] = useState(true)
   const t = useTranslations('')
 
   return (
@@ -21,11 +24,33 @@ const ManageNotifications = (props: Props) => {
             onArrowDown={() => {}}
           />
           <InputFieldsFrame>
-            <OptionField text={t('order acceptance')} />
-            <OptionField text={t('existence of debt')} />
-            <OptionField text={t('incomplete information')} />
-            <OptionField text={t('company news and changes')} />
+            <OptionField
+              text={t('order acceptance')}
+              onToggle={() => setIsEmailSaved(false)}
+            />
+            <OptionField
+              text={t('existence of debt')}
+              onToggle={() => setIsEmailSaved(false)}
+            />
+            <OptionField
+              text={t('incomplete information')}
+              onToggle={() => setIsEmailSaved(false)}
+            />
+            <OptionField
+              text={t('company news and changes')}
+              onToggle={() => setIsEmailSaved(false)}
+            />
           </InputFieldsFrame>
+          {!isEmailSaved && (
+            <ButtonFrame>
+              <AppButton
+                text={t('save')}
+                type='filled'
+                onClick={() => setIsEmailSaved(true)}
+                isSmall={true}
+              />
+            </ButtonFrame>
+          )}
         </InputFieldsBox>
         <InputFieldsBox>
           <InputFieldsHeader
@@ -34,12 +59,33 @@ const ManageNotifications = (props: Props) => {
             onArrowDown={() => {}}
           />
           <InputFieldsFrame>
-            {' '}
-            <OptionField text={t('order acceptance')} />
-            <OptionField text={t('existence of debt')} />
-            <OptionField text={t('incomplete information')} />
-            <OptionField text={t('company news and changes')} />
+            <OptionField
+              text={t('order acceptance')}
+              onToggle={() => setIsSmsSaved(false)}
+            />
+            <OptionField
+              text={t('existence of debt')}
+              onToggle={() => setIsSmsSaved(false)}
+            />
+            <OptionField
+              text={t('incomplete information')}
+              onToggle={() => setIsSmsSaved(false)}
+            />
+            <OptionField
+              text={t('company news and changes')}
+              onToggle={() => setIsSmsSaved(false)}
+            />
           </InputFieldsFrame>
+          {!isSmsSaved && (
+            <ButtonFrame>
+              <AppButton
+                text={t('save')}
+                type='filled'
+                onClick={() => setIsSmsSaved(true)}
+                isSmall={true}
+              />
+            </ButtonFrame>
+          )}
         </InputFieldsBox>
       </Frame>
     </Container>
@@ -72,4 +118,9 @@ const InputFieldsFrame = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.sm};
+`
+
+const ButtonFrame = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `

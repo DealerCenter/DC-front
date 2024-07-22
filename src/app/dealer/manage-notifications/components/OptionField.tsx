@@ -6,13 +6,13 @@ import toggleBaseOff from '@/assets/icons/toggle/ToggleBaseOff.svg'
 import toggleBaseOn from '@/assets/icons/toggle/ToggleBaseOn.svg'
 import toggleCircle from '@/assets/icons/toggle/ToggleCircle.svg'
 
-type Props = { text: string; isOn?: boolean }
+type Props = { text: string; isOn?: boolean; onToggle: () => void }
 
-const OptionField = ({ text, isOn }: Props) => {
+const OptionField = ({ text, isOn, onToggle }: Props) => {
   return (
     <Container>
       <Label>{text}</Label>
-      <Image src={toggleBaseOff} alt='toggle icon' />
+      <Image src={toggleBaseOff} alt='toggle icon' onClick={onToggle} />
     </Container>
   )
 }
