@@ -3,6 +3,7 @@ const theme = {
     background: '#2020200A',
     text: '#000000',
     white: '#FFFFFF',
+    soft_white: 'rgba(255, 255, 255, 0.72)',
     red: '#CF341F',
     gray: '#20202042',
     button_black: 'rgba(18, 18, 20, 1)',
@@ -15,6 +16,7 @@ const theme = {
     light_gray: 'rgba(32, 32, 32, 0.1);',
     mist_gray: 'rgba(32, 32, 32, 0.04)',
     sky_blue: 'rgba(216, 226, 244, 1)',
+    footer_black: 'rgba(21, 21, 21, 1)',
   },
   media: {
     sm: '(max-width: 500px)',

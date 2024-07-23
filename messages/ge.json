@@ -70,6 +70,12 @@
   "existence of debt": "დავალიანების არსებობა",
   "incomplete information": "არასრული ინფორმაცია",
   "company news and changes": "კომპანიის სიახლეები და სერვისის ცვლილებები",
+  "shipping company text": "საერთაშორისო გადამზიდავი კომპანია, რომელსაც მოაქვს მანქანები ამერიკიდან თქვენს კარამდე",
+  "search for vehicle": "ავტომობილის ძიება",
+  "our services": "ჩვენი სერვისები",
+  "about us": "ჩვენ შესახებ",
+  "contact": "კონტაქტი",
+  "rights reserved": "© 2024. DUX. ყველა უფლება დაცულია.",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

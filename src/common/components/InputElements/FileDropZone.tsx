@@ -2,7 +2,8 @@ import React, { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
-import uploadIcon from '@/assets/icons/FileUpload.svg'
+import uploadIcon from '@/assets/icons/fileUpload/fileUploadEmpty.svg'
+import uploadedIcon from '@/assets/icons/fileUpload/fileUploadedEmpty.svg'
 import warningIcon from '@/assets/icons/warningEmpty.svg'
 
 type Props = {
@@ -27,7 +28,12 @@ const FileDropZone = ({ text, dropText, uploadedText, warningText }: Props) => {
     <>
       <Container {...getRootProps()}>
         <IconBox>
-          <Image src={uploadIcon} alt='upload icon' width={22.95} height={25} />
+          <Image
+            src={isDropped ? uploadedIcon : uploadIcon}
+            alt='upload icon'
+            width={23}
+            height={25}
+          />
         </IconBox>
         <input {...getInputProps()} />
         {isDropped ? (

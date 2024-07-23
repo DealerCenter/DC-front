@@ -6,6 +6,7 @@ import Header from '@/common/components/header/Header'
 import SideBar from './components/sideBar/SideBar'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../theme'
+import Footer from '@/common/components/footer/Footer'
 
 type Props = { children: React.JSX.Element }
 
@@ -22,6 +23,7 @@ const DealerLayout = ({ children }: Props) => {
         </Frame>
       </Container>
       {isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
+      {!isMobile && <Footer />}
     </>
   )
 }
@@ -34,6 +36,8 @@ const Container = styled.div`
   @media ${({ theme }) => theme.media?.md} {
     padding: 0 3%;
   }
+
+  margin-bottom: 100px;
 `
 
 const Frame = styled.div`
