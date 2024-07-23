@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import InputFieldsHeader from '../../../common/components/inputFieldsHeader/InputFieldsHeader'
+import InputFieldsHeader from '../../../../common/components/inputFieldsHeader/InputFieldsHeader'
 import TextInputField from './components/TextInputField'
 import HeaderH4Bold from '../components/HeaderH4Bold'
 import AppButton from '@/common/components/appButton/AppButton'

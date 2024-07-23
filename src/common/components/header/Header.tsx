@@ -3,7 +3,7 @@ import React from 'react'
 import FullHeader from './FullHeader'
 import { useMediaQuery } from 'react-responsive'
 import BurgerHeader from './BurgerHeader'
-import theme from '@/app/theme'
+import theme from '@/app/[locale]/theme'
 
 type Props = {}
 

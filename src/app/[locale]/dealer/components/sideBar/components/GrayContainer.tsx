@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import Image from 'next/image'
-import theme from '@/app/theme'
+import theme from '@/app/[locale]/theme'
 
 type Props = {
   text: string

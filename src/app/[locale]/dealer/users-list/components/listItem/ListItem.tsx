@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import ListItemMobile from './ListItemMobile'
 import ListItemFull from './ListItemFull'
-import theme from '@/app/theme'
+import theme from '@/app/[locale]/theme'
 
 type Props = {
   userData: {
