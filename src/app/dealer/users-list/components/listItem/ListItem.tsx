@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import ListItemMobile from './ListItemMobile'
 import ListItemFull from './ListItemFull'
+import theme from '@/app/theme'
 
 type Props = {
   userData: {
@@ -19,7 +20,7 @@ type Props = {
 const ListItem = ({
   userData: { fullName, id, mobile, dateOfAddition, isVerified },
 }: Props) => {
-  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   return (
     <>

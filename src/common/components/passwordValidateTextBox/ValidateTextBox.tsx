@@ -37,13 +37,13 @@ type TextProps = {
 }
 
 const Text = styled.p<TextProps>`
-  ${({ isChecked }) =>
+  ${({ isChecked, theme }) =>
     isChecked
       ? css`
-          color: rgba(32, 32, 32, 1);
+          color: ${theme.colors?.active_black};
         `
       : css`
-          color: rgba(207, 52, 31, 1);
+          color: ${theme.colors?.red};
         `}
 
   font-size: 11px;

@@ -3,18 +3,18 @@ import styled from 'styled-components'
 
 type Props = {}
 
-const EmptyPlaceHolder = (props: Props) => {
+const DealerComponentEmpty = (props: Props) => {
   return <Container></Container>
 }
 
-export default EmptyPlaceHolder
+export default DealerComponentEmpty
 
 const Container = styled.div`
   box-sizing: border-box;
-  padding: 24px;
+  padding: ${({ theme }) => theme.spacing?.lg};
   width: 836px;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors?.white};
   border-radius: 16px;
 `

@@ -1,75 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import UsersList from './components/UsersList'
-import AppButton from '@/common/components/appButton/AppButton'
-import PlaceHolderForList from './components/PlaceHolderForList'
 import HeaderH4Bold from '../components/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 
 import searchIcon from '@/assets/icons/searchForButton.svg'
 import plusIcon from '@/assets/icons/plus.svg'
+import UserListEmpty from './components/UserListEmpty'
+import AddRecipient from './components/addRecipient/AddRecipient'
+import AppModal from '@/common/components/modal/AppModal'
+import { users } from '@/assets/DummyData'
 
 type Props = {}
 
-const DummyData = [
-  {
-    fullName: 'Luka Tsilosani',
-    id: '09138409387',
-    mobile: '098 028 07 77',
-    dateOfAddition: '24/07/11',
-    isVerified: true,
-  },
-  {
-    fullName: 'Zuka Jakeli',
-    id: '02189491234',
-    mobile: '098 028 11 11',
-    dateOfAddition: '24/04/11',
-    isVerified: true,
-  },
-  {
-    fullName: 'Elon Musk',
-    id: '06060600000',
-    mobile: '000 06 06 06',
-    dateOfAddition: '00/11/11',
-    isVerified: false,
-  },
-  {
-    fullName: 'Siddhartha Gautama',
-    id: '0000000001',
-    mobile: '000 00 00 01',
-    dateOfAddition: '00/00/01',
-    isVerified: true,
-  },
-]
-
 const UsersListBox = (props: Props) => {
   const t = useTranslations('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <Container>
-      <Frame>
-        <HeaderH4Bold text={t('list of users')} />
-        <ButtonFrame>
-          <SecondaryButton
-            text={t('search')}
-            onClick={() => {}}
-            icon={searchIcon}
+    <>
+      <Container>
+        <Frame>
+          <HeaderH4Bold text={t('list of users')} />
+          <ButtonFrame>
+            <SecondaryButton
+              text={t('search')}
+              onClick={() => {}}
+              icon={searchIcon}
+            />
+            <SecondaryButton
+              text={t('add recipient')}
+              onClick={() => {
+                setIsModalOpen(true)
+              }}
+              icon={plusIcon}
+            />
+          </ButtonFrame>
+        </Frame>
+        {users.length === 0 ? (
+          <UserListEmpty
+            onClick={() => {
+              setIsModalOpen(true)
+            }}
           />
-          <SecondaryButton
-            text={t('add recipient')}
-            onClick={() => {}}
-            icon={plusIcon}
-          />
-        </ButtonFrame>
-      </Frame>
-      {DummyData.length === 0 ? (
-        <PlaceHolderForList onClick={() => {}} />
-      ) : (
-        <UsersList usersData={DummyData} />
-      )}
-    </Container>
+        ) : (
+          <UsersList usersData={users} />
+        )}
+      </Container>
+
+      <AppModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <AddRecipient onClose={() => setIsModalOpen(false)} />
+      </AppModal>
+    </>
   )
 }
 
@@ -79,17 +66,13 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors?.white};
   border-radius: 16px;
   gap: 16px;
 
-  @media (max-width: 500px) {
-    align-items: center;
-    width: 390px;
+  @media ${({ theme }) => theme.media?.sm} {
     padding: 0px;
   }
-  align-items: unset;
-  width: 836px;
   padding: 24px;
 `
 
@@ -98,16 +81,19 @@ const Frame = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     align-items: flex-start;
     gap: unset;
-    width: 358px;
     margin-top: 32px;
+    min-width: 270px;
+    padding: 0 8%;
   }
   align-items: unset;
   gap: 16px;
   width: unset;
   margin-top: unset;
+  min-width: unset;
+  padding: unset;
 `
 
 const ButtonFrame = styled.div`

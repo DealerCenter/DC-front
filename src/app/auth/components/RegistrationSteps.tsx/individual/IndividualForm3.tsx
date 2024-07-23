@@ -1,5 +1,5 @@
 import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/InputElements/TextInput'
+import TextInput from '@/common/components/inputElements/TextInput'
 import React, { Dispatch, SetStateAction } from 'react'
 
 import Image from 'next/image'
@@ -106,7 +106,7 @@ const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: ${({ theme }) => theme.spacing?.lg};
 `
 
 const PasswordErrorBox = styled.div`

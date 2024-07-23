@@ -4,28 +4,40 @@ import styled from 'styled-components'
 
 import Header from '@/common/components/header/Header'
 import SideBar from './components/sideBar/SideBar'
+import { useMediaQuery } from 'react-responsive'
+import theme from '../theme'
+import Footer from '@/common/components/footer/Footer'
 
 type Props = { children: React.JSX.Element }
 
 const DealerLayout = ({ children }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   return (
-    <Container>
-      <Header />
-      <Frame>
-        <SideBar />
-        {children}
-      </Frame>
-    </Container>
+    <>
+      <Container>
+        <Header />
+        <Frame>
+          <SideBar />
+          {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
+        </Frame>
+      </Container>
+      {isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
+      {!isMobile && <Footer />}
+    </>
   )
 }
 
 export default DealerLayout
 
 const Container = styled.div`
-  @media (max-width: 500px) {
-    background-color: white;
+  padding: 0 8%;
+
+  @media ${({ theme }) => theme.media?.md} {
+    padding: 0 3%;
   }
-  background-color: #2020200a;
+
+  margin-bottom: 100px;
 `
 
 const Frame = styled.div`
@@ -33,10 +45,11 @@ const Frame = styled.div`
   gap: 24px;
   margin-top: 8px;
 
-  @media (max-width: 500px) {
+  @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;
-    align-items: center;
   }
   flex-direction: row;
-  justify-content: center;
+`
+const ChildrenContainer = styled.div`
+  flex: 1;
 `

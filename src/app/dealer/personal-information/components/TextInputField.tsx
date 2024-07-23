@@ -1,13 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
-type Props = { label: string }
+type Props = { label: string; onChange?: () => void }
 
-const TextInputField = ({ label }: Props) => {
+const TextInputField = ({ label, onChange }: Props) => {
   return (
     <InputBox>
       <InputLabel>{label}</InputLabel>
-      <InputField type='text' placeholder='Something something'></InputField>
+      <InputField
+        type='text'
+        placeholder='Something something'
+        onChange={onChange}
+      ></InputField>
     </InputBox>
   )
 }
@@ -28,11 +32,11 @@ const InputLabel = styled.label`
 
 const InputField = styled.input`
   box-sizing: border-box;
-  width: 464px;
+  max-width: 464px;
   height: 51px;
   font-size: 16px;
   font-weight: 400;
   border-radius: 12px;
-  border: 2px solid rgba(32, 32, 32, 0.04);
+  border: 2px solid ${({ theme }) => theme.colors?.mist_gray};
   padding: 10px 10px 10px 18px;
 `

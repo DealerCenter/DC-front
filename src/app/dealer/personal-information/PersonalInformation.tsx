@@ -1,14 +1,20 @@
-import { useTranslations } from 'next-intl'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import InputFieldsHeader from './components/InputFieldsHeader'
-import TextInput from '@/common/components/InputElements/TextInput'
+import { useTranslations } from 'next-intl'
+
+import InputFieldsHeader from '../../../common/components/inputFieldsHeader/InputFieldsHeader'
 import TextInputField from './components/TextInputField'
 import HeaderH4Bold from '../components/HeaderH4Bold'
+import AppButton from '@/common/components/appButton/AppButton'
+import FormSaveButton from '@/common/components/appButton/FormSaveButton'
 
 type Props = {}
 
 const PersonalInformation = (props: Props) => {
+  const DummyUserType = 'legalPerson'
+  const [isInfoSaved, setIsInfoSaved] = useState(true)
+  const [isPasswordSaved, setIsPasswordSaved] = useState(true)
+  const [isContactInfoSaved, setIsContactInfoSaved] = useState(true)
   const t = useTranslations('')
 
   return (
@@ -22,11 +28,59 @@ const PersonalInformation = (props: Props) => {
             onArrowDown={() => {}}
           />
           <InputFieldsFrame>
-            <TextInputField label={t('email')} />
-            <TextInputField label={t('cell phone')} />
-            <TextInputField label={t('address')} />
+            <TextInputField
+              label={t('email')}
+              onChange={() => setIsInfoSaved(false)}
+            />
+            <TextInputField
+              label={t('cell phone')}
+              onChange={() => setIsInfoSaved(false)}
+            />
+            <TextInputField
+              label={t('address')}
+              onChange={() => setIsInfoSaved(false)}
+            />
           </InputFieldsFrame>
+          {!isInfoSaved && (
+            <ButtonFrame>
+              <FormSaveButton
+                text={t('save')}
+                onClick={() => setIsInfoSaved(true)}
+              />
+            </ButtonFrame>
+          )}
         </InputFieldsBox>
+        {DummyUserType === 'legalPerson' && (
+          <InputFieldsBox>
+            <InputFieldsHeader
+              text={t('contact info of representative')}
+              onEdit={() => {}}
+              onArrowDown={() => {}}
+            />
+            <InputFieldsFrame>
+              <TextInputField
+                label={t('email')}
+                onChange={() => setIsContactInfoSaved(false)}
+              />
+              <TextInputField
+                label={t('cell phone')}
+                onChange={() => setIsContactInfoSaved(false)}
+              />
+              <TextInputField
+                label={t('address')}
+                onChange={() => setIsContactInfoSaved(false)}
+              />
+            </InputFieldsFrame>
+            {!isContactInfoSaved && (
+              <ButtonFrame>
+                <FormSaveButton
+                  text={t('save')}
+                  onClick={() => setIsContactInfoSaved(true)}
+                />
+              </ButtonFrame>
+            )}
+          </InputFieldsBox>
+        )}
         <InputFieldsBox>
           <InputFieldsHeader
             text={t('change the password')}
@@ -34,10 +88,27 @@ const PersonalInformation = (props: Props) => {
             onArrowDown={() => {}}
           />
           <InputFieldsFrame>
-            <TextInputField label={t('current password')} />
-            <TextInputField label={t('new password')} />
-            <TextInputField label={t('repeat new password')} />
+            <TextInputField
+              label={t('current password')}
+              onChange={() => setIsPasswordSaved(false)}
+            />
+            <TextInputField
+              label={t('new password')}
+              onChange={() => setIsPasswordSaved(false)}
+            />
+            <TextInputField
+              label={t('repeat new password')}
+              onChange={() => setIsPasswordSaved(false)}
+            />
           </InputFieldsFrame>
+          {!isPasswordSaved && (
+            <ButtonFrame>
+              <FormSaveButton
+                text={t('save')}
+                onClick={() => setIsPasswordSaved(true)}
+              />
+            </ButtonFrame>
+          )}
         </InputFieldsBox>
       </Frame>
     </Container>
@@ -49,10 +120,10 @@ export default PersonalInformation
 const Container = styled.div`
   box-sizing: border-box;
   padding: 24px;
-  /* width: 850px; */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors?.white};
   border-radius: 16px;
   gap: 24px;
 `
@@ -66,13 +137,16 @@ const Frame = styled.div`
 const InputFieldsBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 802px;
   gap: 24px;
 `
 const InputFieldsFrame = styled.div`
-  width: 528px;
   padding: 0px 32px;
   display: flex;
   flex-direction: column;
   gap: 32px;
+`
+
+const ButtonFrame = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `

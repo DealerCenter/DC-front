@@ -18,8 +18,7 @@ const RegistrationForm = ({ children }: Props) => {
 export default RegistrationForm
 
 const Container = styled.div`
-  /* background-color: ${({ theme }) => theme.colors?.background}; */
-  background-color: #2020200a;
+  background-color: ${({ theme }) => theme.colors?.background};
   margin: auto;
   width: 374px;
   min-height: 617px;
@@ -31,7 +30,7 @@ const Container = styled.div`
   gap: 48px;
   margin-top: 2rem;
 
-  @media (${({ theme }) => theme.media?.desktop}) {
+  @media ${({ theme }) => theme.media?.lg} {
     width: 65%;
     max-width: 560px;
     padding: 42px 120px 42px 120px;
