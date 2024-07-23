@@ -1,8 +1,10 @@
-import StyledComponentsRegistry from '@/lib/registry'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
+import StyledComponentsRegistry from '@/lib/registry'
+import ThemeClient from '../lib/ThemeClient'
+import '@/styles/styles.css'
 import 'normalize.css/normalize.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,10 +22,12 @@ export default async function RootLayout({
   const locale = await getLocale()
   const messages = await getMessages()
   return (
-    <html lang={locale}>
+    <html>
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          <StyledComponentsRegistry>
+            <ThemeClient>{children}</ThemeClient>
+          </StyledComponentsRegistry>
         </NextIntlClientProvider>
       </body>
     </html>

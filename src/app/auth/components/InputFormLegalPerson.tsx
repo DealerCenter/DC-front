@@ -48,7 +48,7 @@ function InputFormLegalPerson({ goToLogin }: Props) {
       <form onSubmit={handleSubmit}>
         <StepsContainer>
           {steps.map((step, i) => (
-            <>
+            <React.Fragment key={`stepsLegal${i}`}>
               {i > 0 && (
                 <Image
                   src={stepArrow}
@@ -69,7 +69,7 @@ function InputFormLegalPerson({ goToLogin }: Props) {
               >
                 {step.stepNumber.toString()}
               </TextNav>
-            </>
+            </React.Fragment>
           ))}
         </StepsContainer>
       </form>
@@ -90,7 +90,7 @@ const H2Bold = styled.h2`
 const StepsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing?.md};
   align-items: center;
 `
 

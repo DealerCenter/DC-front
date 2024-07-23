@@ -8,8 +8,8 @@ type ButtonHeight = 'medium' | 'large'
 type Props = {
   text: string
   type: ButtonTypes
-  disabled?: boolean
   onClick: () => void
+  disabled?: boolean
   isSmall?: boolean
   height?: ButtonHeight
 }
@@ -17,16 +17,16 @@ type Props = {
 const AppButton = ({
   text,
   type,
-  disabled,
   onClick,
+  disabled,
   isSmall,
   height = 'large',
 }: Props) => {
   return (
     <StyledButton
       disabled={disabled}
-      type={type}
-      onClick={!disabled ? onClick : () => {}}
+      customType={type}
+      onClick={onClick}
       isSmall={isSmall}
       height={height}
     >
@@ -37,51 +37,55 @@ const AppButton = ({
 
 export default AppButton
 
-type ButtonProps = { type?: string; isSmall?: boolean; height: string }
+type ButtonProps = {
+  customType?: string
+  isSmall?: boolean
+  height: string
+}
 
 const StyledButton = styled.button<ButtonProps>`
-  ${({ disabled, type }) =>
-    disabled && type === 'filled'
+  ${({ disabled, customType, theme }) =>
+    disabled && customType === 'filled'
       ? css`
-          background-color: rgba(32, 32, 32, 0.26);
+          background-color: ${theme.colors?.fog_gray};
         `
-      : !disabled && type === 'filled'
+      : !disabled && customType === 'filled'
         ? css`
-            background-color: rgba(32, 32, 32, 1);
+            background-color: ${theme.colors?.button_black};
             &:hover {
-              background-color: rgba(18, 18, 20, 0.9);
+              background-color: ${theme.colors?.button_hover_black};
             }
           `
-        : type === 'outlined' &&
+        : customType === 'outlined' &&
           css`
             background-color: transparent;
             &:hover {
-              background-color: rgba(32, 32, 32, 0.1);
-              border: 1px solid rgba(32, 32, 32, 1);
+              background-color: '${theme.colors?.light_gray}';
+              border: 1px solid ${theme.colors?.active_black};
             }
           `};
 
-  ${({ type }) =>
-    type === 'filled'
+  ${({ customType, theme }) =>
+    customType === 'filled'
       ? css`
           border: none;
         `
-      : type === 'outlined' &&
+      : customType === 'outlined' &&
         css`
-          border: 1px solid rgba(32, 32, 32, 0.56);
+          border: 1px solid ${theme.colors?.disabled_gray};
         `};
 
-  ${({ disabled, type }) =>
-    type === 'filled'
+  ${({ disabled, customType, theme }) =>
+    customType === 'filled'
       ? css`
-          color: white;
+          color: ${theme.colors?.white};
         `
-      : !disabled && type === 'outlined'
+      : !disabled && customType === 'outlined'
         ? css`
-            color: rgba(32, 32, 32, 1);
+            color: ${theme.colors?.active_black};
           `
         : css`
-            color: rgba(32, 32, 32, 0.56);
+            color: ${theme.colors?.disabled_gray};
           `};
 
   ${({ isSmall }) =>
@@ -103,19 +107,22 @@ const StyledButton = styled.button<ButtonProps>`
           height: 56px;
         `}      
 
+
   transition: all 300ms ease-out;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
   line-height: 33.6px;
   font-weight: 700;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.radius?.lg};
 
   &:active {
-    background-color: ${({ type }) =>
-      type === 'filled' ? 'rgba(32, 32, 32, 0.68)' : 'rgba(32, 32, 32, 0.1)'};
+    background-color: ${({ customType, theme }) =>
+      customType === 'filled'
+        ? theme.colors?.smoke_gray
+        : theme.colors?.active_black};
   }
 
   &:focus {
     border: none;
-    outline: 4px solid rgba(216, 226, 244, 1);
+    outline: 4px solid ${({ theme }) => theme.colors?.sky_blue};
   }
 `

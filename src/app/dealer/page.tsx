@@ -10,7 +10,7 @@ import PersonalInformation from './personal-information/PersonalInformation'
 import DealerFrame from './DealerLayout'
 import { redirect, usePathname } from 'next/navigation'
 import { routeName } from '@/common/helpers/constants'
-import EmptyPlaceHolder from './components/EmptyPlaceHolder'
+import EmptyPlaceHolder from './components/DealerComponentEmpty'
 
 type Props = {}
 

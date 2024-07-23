@@ -2,7 +2,7 @@
 import Header from '@/common/components/header/Header'
 import { Inter } from 'next/font/google'
 import SideBar from './components/sideBar/SideBar'
-import DealerFrame from './DealerLayout'
+import DealerLayout from './DealerLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,5 +11,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactElement
 }>) {
-  return <DealerFrame>{children}</DealerFrame>
+  return (
+    <section className='dealer-layout'>
+      <DealerLayout>{children}</DealerLayout>
+    </section>
+  )
 }

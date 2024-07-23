@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { useRegisterFormContextIndividual } from '../../../hooks/useRegistrationFormIndividual'
 
 import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/InputElements/TextInput'
+import TextInput from '@/common/components/inputElements/TextInput'
 
 type Props = {
   setFormStep: React.Dispatch<React.SetStateAction<number>>
@@ -118,14 +118,14 @@ const Frame = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing?.md};
 `
 
 const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: ${({ theme }) => theme.spacing?.lg};
 `
 
 const StyledP = styled.p`

@@ -28,7 +28,6 @@ const Checkbox = ({ checked, value }: Props) => {
           />
         </Icon>
       )}
-      <StyledInput type='checkbox' value={value} checked={checked} />
     </Container>
   )
 }

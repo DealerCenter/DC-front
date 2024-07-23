@@ -89,7 +89,7 @@ const Frame = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 24px;
+  gap: ${({ theme }) => theme.spacing?.lg};
 `
 
 type UserTypeProps = {
@@ -98,10 +98,10 @@ type UserTypeProps = {
 
 const UserType = styled.div<UserTypeProps>`
   position: relative;
-  border: 2px solid rgba(32, 32, 32, 0.1);
+  border: 2px solid ${({ theme }) => theme.colors?.light_gray};
   width: 148px;
   height: 120px;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.radius?.lg};
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -110,15 +110,15 @@ const UserType = styled.div<UserTypeProps>`
   ${({ selected }) =>
     selected &&
     css`
-      border-color: rgba(32, 32, 32, 1);
+      border-color: ${({ theme }) => theme.colors?.active_black};
     `};
 `
 
 const UserTypeText = styled.div`
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 700;
   line-height: 19.2px;
-  padding: 16px;
+  padding: ${({ theme }) => theme.spacing?.md};
 `
 
 const StyledCheckbox = styled.div`

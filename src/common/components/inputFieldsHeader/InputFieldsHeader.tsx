@@ -25,21 +25,25 @@ const InputFieldsHeader = ({ text, onEdit, onArrowDown }: Props) => {
 export default InputFieldsHeader
 
 const Container = styled.div`
-  width: 802px;
   height: 84px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0px;
-  border-radius: 12px;
-  background-color: rgba(32, 32, 32, 0.04);
+  border-radius: ${({ theme }) => theme.radius?.lg};
+  background-color: ${({ theme }) => theme.colors?.mist_gray};
 `
+
 const StyledH5 = styled.h5`
   font-size: 23px;
   font-weight: 700;
   padding: 16px 32px;
   margin: 0;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    font-size: ${({ theme }) => theme.fontSizes?.medium};
+  }
 `
+
 const Icon = styled.div`
   display: flex;
   justify-content: center;
