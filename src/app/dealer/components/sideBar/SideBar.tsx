@@ -20,11 +20,12 @@ import bellIconBlack from '@/assets/icons/bell/bell-black.svg'
 import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
+import theme from '@/app/theme'
 
 type Props = {}
 
 const SideBar = (props: Props) => {
-  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const pathname = usePathname()
 
@@ -172,7 +173,7 @@ const BarContainer = styled.div`
 
   min-width: unset;
   border: unset;
-  padding: 24px;
+  padding: ${({ theme }) => theme.spacing?.lg};
   height: 902px;
 `
 
@@ -180,7 +181,7 @@ const Frame = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: ${({ theme }) => theme.spacing?.xl};
 
   @media ${({ theme }) => theme.media?.sm} {
     width: 100%;
