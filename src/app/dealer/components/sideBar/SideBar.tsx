@@ -150,6 +150,7 @@ const BarContainer = styled.div`
   transition: unset;
   position: unset;
   width: 334px;
+  z-index: 10;
 
   @media ${({ theme }) => theme.media?.sm} {
     min-width: 300px;
