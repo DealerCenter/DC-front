@@ -20,11 +20,12 @@ import bellIconBlack from '@/assets/icons/bell/bell-black.svg'
 import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
+import theme from '@/app/theme'
 
 type Props = {}
 
 const SideBar = (props: Props) => {
-  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
+  const isMobile = useMediaQuery({ query: `${theme.media?.sm}` })
   const t = useTranslations('')
   const pathname = usePathname()
 

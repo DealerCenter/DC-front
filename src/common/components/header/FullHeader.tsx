@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import search from '@/assets/icons/search.svg'
 import person from '@/assets/icons/person.svg'
@@ -7,8 +7,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
-import arrowDownIcon from '@/assets/icons/arrow/arrowDownWhite.svg'
 import SearchElement from './components/SearchElement'
+import DropdownMenu from './components/DropdownMenu'
 
 type Props = {}
 
@@ -26,9 +26,7 @@ const FullHeader = (props: Props) => {
           </Title2>
           <Title2>
             <Label>{t('our services')}</Label>
-            <Icon>
-              <Image src={arrowDownIcon} alt='icon' />
-            </Icon>
+            <DropdownMenu items={['სტატუსის შემოწმება', 'საბუთის შემოწმება']} />
           </Title2>
           <Title2>{t('about us')}</Title2>
           <Title2>{t('contact')}</Title2>
@@ -102,7 +100,7 @@ const Title2 = styled.div`
 `
 
 const Logo = styled.h2`
-  color: white;
+  color: ${({ theme }) => theme.colors?.white};
   font-size: 40px;
   font-weight: bold;
   padding: 12px 16px 12px 16px;
@@ -141,13 +139,6 @@ const Item = styled.div`
   }
 `
 const Ge = styled.label`
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 500;
-`
-const Icon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
 `
