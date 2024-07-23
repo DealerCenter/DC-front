@@ -6,12 +6,15 @@ import InputFieldsHeader from '../../../common/components/inputFieldsHeader/Inpu
 import TextInputField from './components/TextInputField'
 import HeaderH4Bold from '../components/HeaderH4Bold'
 import AppButton from '@/common/components/appButton/AppButton'
+import FormSaveButton from '@/common/components/appButton/FormSaveButton'
 
 type Props = {}
 
 const PersonalInformation = (props: Props) => {
+  const DummyUserType = 'legalPerson'
   const [isInfoSaved, setIsInfoSaved] = useState(true)
   const [isPasswordSaved, setIsPasswordSaved] = useState(true)
+  const [isContactInfoSaved, setIsContactInfoSaved] = useState(true)
   const t = useTranslations('')
 
   return (
@@ -40,15 +43,44 @@ const PersonalInformation = (props: Props) => {
           </InputFieldsFrame>
           {!isInfoSaved && (
             <ButtonFrame>
-              <AppButton
+              <FormSaveButton
                 text={t('save')}
-                type='filled'
                 onClick={() => setIsInfoSaved(true)}
-                isSmall={true}
               />
             </ButtonFrame>
           )}
         </InputFieldsBox>
+        {DummyUserType === 'legalPerson' && (
+          <InputFieldsBox>
+            <InputFieldsHeader
+              text={t('contact info of representative')}
+              onEdit={() => {}}
+              onArrowDown={() => {}}
+            />
+            <InputFieldsFrame>
+              <TextInputField
+                label={t('email')}
+                onChange={() => setIsContactInfoSaved(false)}
+              />
+              <TextInputField
+                label={t('cell phone')}
+                onChange={() => setIsContactInfoSaved(false)}
+              />
+              <TextInputField
+                label={t('address')}
+                onChange={() => setIsContactInfoSaved(false)}
+              />
+            </InputFieldsFrame>
+            {!isContactInfoSaved && (
+              <ButtonFrame>
+                <FormSaveButton
+                  text={t('save')}
+                  onClick={() => setIsContactInfoSaved(true)}
+                />
+              </ButtonFrame>
+            )}
+          </InputFieldsBox>
+        )}
         <InputFieldsBox>
           <InputFieldsHeader
             text={t('change the password')}
@@ -71,11 +103,9 @@ const PersonalInformation = (props: Props) => {
           </InputFieldsFrame>
           {!isPasswordSaved && (
             <ButtonFrame>
-              <AppButton
+              <FormSaveButton
                 text={t('save')}
-                type='filled'
                 onClick={() => setIsPasswordSaved(true)}
-                isSmall={true}
               />
             </ButtonFrame>
           )}
