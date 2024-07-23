@@ -1,13 +1,15 @@
 /* html {
   background-color: #2020200a;
 } */
+.dealer-layout {
+  background-color: #2020200a;
+}
 
 @media only screen and (max-width: 500px) {
   html {
     background-color: white;
   }
-}
-
-.dealer-layout {
-  background-color: #2020200a;
+  .dealer-layout {
+    background-color: white;
+  }
 }

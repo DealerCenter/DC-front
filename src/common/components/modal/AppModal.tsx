@@ -22,6 +22,7 @@ const AppModal = ({
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.3)',
+      zIndex: '100',
     },
     content: {
       top: '50%',

@@ -22,8 +22,8 @@ const theme = {
     footer_black: 'rgba(21, 21, 21, 1)',
   },
   media: {
-    sm: '(max-width: 500px)',
-    md: '(max-width: 1440px) and (min-width: 500px)',
+    sm: '(max-width: 900px)',
+    md: '(max-width: 1440px) and (min-width: 900px)',
     lg: '(min-width: 1440px)',
   },
   fonts: {
