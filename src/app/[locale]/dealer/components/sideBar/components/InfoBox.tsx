@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
 import { useMediaQuery } from 'react-responsive'
 
-import theme from '@/app/theme'
+import theme from '@/app/[locale]/theme'
 
 import notificationBell from '@/assets/icons/notificationBell.svg'
 import notificationDot from '@/assets/icons/notificationDot.svg'

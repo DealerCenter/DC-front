@@ -3,9 +3,10 @@ import { Inter } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 import StyledComponentsRegistry from '@/lib/registry'
-import ThemeClient from '../lib/ThemeClient'
+import ThemeClient from '../../lib/ThemeClient'
 import '@/styles/styles.css'
 import 'normalize.css/normalize.css'
+import { Locale } from '@/lib/config'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,13 +17,14 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode
+  params: { locale: Locale }
 }>) {
-  const locale = await getLocale()
   const messages = await getMessages()
   return (
-    <html>
+    <html lang={locale}>
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
           <StyledComponentsRegistry>
