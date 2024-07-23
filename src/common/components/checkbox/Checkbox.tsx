@@ -28,8 +28,6 @@ const Checkbox = ({ checked, value }: Props) => {
           />
         </Icon>
       )}
-      //ეს კონსოლში ერორს აგდებდა და ჩავაკომენტე, თუ დაგჭირდა მერე გავიაროთ
-      {/* <StyledInput type='checkbox' readOnly value={value} checked={checked} /> */}
     </Container>
   )
 }
