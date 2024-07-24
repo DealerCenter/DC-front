@@ -23,13 +23,13 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 44px;
-  border: 1px solid ${({ theme }) => theme.colors?.disabled_gray};
+  border: 1px solid ${({ theme }) => theme.colors?.main_gray_56};
   border-radius: 12px;
   padding: 0 20px 0 14px;
   gap: 6px;
 `
 const Label = styled.label`
-  color: ${({ theme }) => theme.colors?.active_black};
+  color: ${({ theme }) => theme.colors?.main_gray_100};
   font-size: 16px;
   font-weight: 700;
 `

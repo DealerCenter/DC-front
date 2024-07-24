@@ -25,6 +25,6 @@ const Container = styled.div`
   border: 0px;
   border-bottom: 1px;
   border-style: solid;
-  border-color: ${({ theme }) => theme.colors?.mist_gray};
+  border-color: ${({ theme }) => theme.colors?.main_gray_04};
   padding: ${({ theme }) => theme.spacing?.md};
 `

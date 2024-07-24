@@ -68,7 +68,7 @@ const StyledInput = styled.input<InputProps>`
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors?.white};
   border: none;
-  outline: 2px solid ${({ theme }) => theme.colors?.mist_gray};
+  outline: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
   outline-offset: 1px;
   width: 350px;
   height: 52px;
@@ -92,7 +92,7 @@ const StyledInput = styled.input<InputProps>`
     `}
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors?.disabled_gray};
+    color: ${({ theme }) => theme.colors?.main_gray_56};
   }
 
   &:focus {
@@ -121,7 +121,7 @@ const ErrorMessage = styled.p`
 
 const OptionalText = styled.p`
   font-size: 11px;
-  color: ${({ theme }) => theme.colors?.disabled_gray};
+  color: ${({ theme }) => theme.colors?.main_gray_56};
   padding: 4px;
   font-weight: 400;
   margin: 0;

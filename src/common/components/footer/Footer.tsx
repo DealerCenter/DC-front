@@ -87,7 +87,7 @@ const Logo = styled.h2`
 
 const LeftBoxText = styled.p`
   margin: 0;
-  color: ${({ theme }) => theme.colors?.soft_white};
+  color: ${({ theme }) => theme.colors?.white_72};
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 400;
   width: 300px;
@@ -112,7 +112,7 @@ const Item = styled.div`
 `
 
 const Label = styled.label`
-  color: ${({ theme }) => theme.colors?.soft_white};
+  color: ${({ theme }) => theme.colors?.white_72};
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 400;
 `

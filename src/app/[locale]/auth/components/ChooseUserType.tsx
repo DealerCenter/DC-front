@@ -98,7 +98,7 @@ type UserTypeProps = {
 
 const UserType = styled.div<UserTypeProps>`
   position: relative;
-  border: 2px solid ${({ theme }) => theme.colors?.light_gray};
+  border: 2px solid ${({ theme }) => theme.colors?.main_gray_10};
   width: 148px;
   height: 120px;
   border-radius: ${({ theme }) => theme.radius?.lg};
@@ -110,7 +110,7 @@ const UserType = styled.div<UserTypeProps>`
   ${({ selected }) =>
     selected &&
     css`
-      border-color: ${({ theme }) => theme.colors?.active_black};
+      border-color: ${({ theme }) => theme.colors?.main_gray_100};
     `};
 `
 

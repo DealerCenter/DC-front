@@ -83,7 +83,7 @@ const Container = styled.div`
   margin-top: 200px;
 
   background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.light_gray};
+  border: 1px solid ${({ theme }) => theme.colors.main_gray_10};
 
   @media ${({ theme }) => theme.media?.sm} {
     padding: 32px 16px;

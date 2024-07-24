@@ -30,7 +30,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: ${({ theme }) => theme.radius?.lg};
-  background-color: ${({ theme }) => theme.colors?.mist_gray};
+  background-color: ${({ theme }) => theme.colors?.main_gray_04};
 `
 
 const StyledH5 = styled.h5`

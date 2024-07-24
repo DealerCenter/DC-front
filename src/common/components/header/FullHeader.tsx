@@ -177,7 +177,7 @@ const Label = styled.label`
 `
 const LangDropdown = styled.div`
   width: 100px;
-  background-color: ${({ theme }) => theme.colors?.active_black};
+  background-color: ${({ theme }) => theme.colors?.main_gray_100};
   position: absolute;
   bottom: -100px;
   display: flex;

@@ -157,7 +157,7 @@ const BarContainer = styled.div`
     width: 100%;
     flex: 1;
     padding: 16px;
-    border: 1px solid ${({ theme }) => theme.colors?.light_gray};
+    border: 1px solid ${({ theme }) => theme.colors?.main_gray_10};
   }
 
   @media ${({ theme }) => theme.media?.md} {

@@ -62,7 +62,7 @@ const FileDropZone = ({ text, dropText, uploadedText, warningText }: Props) => {
 export default FileDropZone
 
 const Text = styled.div`
-  color: ${({ theme }) => theme.colors?.disabled_gray};
+  color: ${({ theme }) => theme.colors?.main_gray_56};
   font-size: ${({ theme }) => theme.fontSizes?.small};
   line-height: 15.6px;
   font-weight: 400;
@@ -85,7 +85,7 @@ const Container = styled.div`
   justify-content: center;
 
   background-color: ${({ theme }) => theme.colors?.white};
-  border: 2px dashed ${({ theme }) => theme.colors?.mist_gray};
+  border: 2px dashed ${({ theme }) => theme.colors?.main_gray_04};
   border-radius: ${({ theme }) => theme.radius?.lg};
   padding: 16px;
 
@@ -105,10 +105,10 @@ const StyledLabel = styled.label<LabelProps>`
   ${({ isDropped, theme }) =>
     isDropped
       ? css`
-          color: ${theme.colors?.active_black};
+          color: ${theme.colors?.main_gray_100};
         `
       : css`
-          color: ${theme.colors?.disabled_gray};
+          color: ${theme.colors?.main_gray_56};
         `}
 
   font-size: ${({ theme }) => theme.fontSizes?.medium};
@@ -126,7 +126,7 @@ const IconBox = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: ${({ theme }) => theme.radius?.lg};
-  background-color: ${({ theme }) => theme.colors?.mist_gray};
+  background-color: ${({ theme }) => theme.colors?.main_gray_04};
   width: 60px;
   height: 60px;
 `

@@ -47,21 +47,21 @@ const StyledButton = styled.button<ButtonProps>`
   ${({ disabled, customType, theme }) =>
     disabled && customType === 'filled'
       ? css`
-          background-color: ${theme.colors?.fog_gray};
+          background-color: ${theme.colors?.main_gray_26};
         `
       : !disabled && customType === 'filled'
         ? css`
             background-color: ${theme.colors?.button_black};
             &:hover {
-              background-color: ${theme.colors?.button_hover_black};
+              background-color: ${theme.colors?.button_black_90};
             }
           `
         : customType === 'outlined' &&
           css`
             background-color: transparent;
             &:hover {
-              background-color: '${theme.colors?.light_gray}';
-              border: 1px solid ${theme.colors?.active_black};
+              background-color: '${theme.colors?.main_gray_10}';
+              border: 1px solid ${theme.colors?.main_gray_100};
             }
           `};
 
@@ -72,7 +72,7 @@ const StyledButton = styled.button<ButtonProps>`
         `
       : customType === 'outlined' &&
         css`
-          border: 1px solid ${theme.colors?.disabled_gray};
+          border: 1px solid ${theme.colors?.main_gray_56};
         `};
 
   ${({ disabled, customType, theme }) =>
@@ -82,10 +82,10 @@ const StyledButton = styled.button<ButtonProps>`
         `
       : !disabled && customType === 'outlined'
         ? css`
-            color: ${theme.colors?.active_black};
+            color: ${theme.colors?.main_gray_100};
           `
         : css`
-            color: ${theme.colors?.disabled_gray};
+            color: ${theme.colors?.main_gray_56};
           `};
 
   ${({ isSmall }) =>
@@ -117,8 +117,8 @@ const StyledButton = styled.button<ButtonProps>`
   &:active {
     background-color: ${({ customType, theme }) =>
       customType === 'filled'
-        ? theme.colors?.smoke_gray
-        : theme.colors?.active_black};
+        ? theme.colors?.main_gray_68
+        : theme.colors?.main_gray_100};
   }
 
   &:focus {

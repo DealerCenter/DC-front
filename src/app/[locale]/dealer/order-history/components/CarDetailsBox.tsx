@@ -72,7 +72,7 @@ const TextGray = styled.p`
   margin: 0;
   font-size: 13px;
   font-weight: 400;
-  color: ${({ theme }) => theme.colors?.disabled_gray};
+  color: ${({ theme }) => theme.colors?.main_gray_56};
 `
 
 const Text = styled.p`

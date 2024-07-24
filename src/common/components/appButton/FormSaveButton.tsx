@@ -27,7 +27,7 @@ const StyledButton = styled.button<ButtonProps>`
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.colors?.smoke_gray};
+    background-color: ${({ theme }) => theme.colors?.main_gray_68};
   }
 
   &:focus {
