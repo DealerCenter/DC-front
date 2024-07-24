@@ -64,12 +64,6 @@ const Text = styled.div`
   color: ${({ theme }) => theme.colors?.text};
 `
 
-const Link = styled.div`
-  font-size: 13px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.colors?.link_blue};
-`
-
 const IconBox = styled.div`
   display: flex;
   justify-content: center;

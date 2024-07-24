@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
@@ -7,12 +7,18 @@ import Link from 'next/link'
 
 import search from '@/assets/icons/search.svg'
 import person from '@/assets/icons/person.svg'
-import closeIcon from '@/assets/icons/c'
+import Image from 'next/image'
+import { Link, useRouter, usePathname } from '@/navigation'
+import { useLocale } from 'next-intl'
 
 type Props = {}
 
 const FullHeader = (props: Props) => {
   const router = useRouter()
+  const pathname = usePathname()
+  const locale = useLocale()
+
+  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false)
 
   return (
     <Container>
@@ -32,17 +38,23 @@ const FullHeader = (props: Props) => {
             <Image width={20} height={20} src={person} alt='person icon' />
           </Item>
           <Item>
-            <Label>GE</Label>
-          </Item> */}
-          <SearchBoxContainer>
-            <IconBox>
-              <Image width={20} height={20} src={search} alt='search icon' />
-            </IconBox>
-            <CloseButton>
-              <Image width={14} height={14} src={search} alt='search icon' />
-            </CloseButton>
-            <SearchBox type='text' placeholder='Vin კოდი'></SearchBox>
-          </SearchBoxContainer>
+            <Label onClick={() => setIsLangDropdownOpen((prev) => !prev)}>
+              {locale.toUpperCase()}
+            </Label>
+            {isLangDropdownOpen && (
+              <LangDropdown>
+                <Link href={pathname} locale='ge'>
+                  <Label>Ge</Label>
+                </Link>
+                <Link href={pathname} locale='en'>
+                  <Label>En</Label>
+                </Link>
+                <Link href={pathname} locale='ru'>
+                  <Label>Ru</Label>
+                </Link>
+              </LangDropdown>
+            )}
+          </Item>
         </Menu>
       </HeaderBox>
     </Container>
@@ -157,8 +169,19 @@ const Item = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 `
 const Label = styled.label`
   font-size: 16px;
   font-weight: 500;
+`
+const LangDropdown = styled.div`
+  width: 100px;
+  background-color: ${({ theme }) => theme.colors?.active_black};
+  position: absolute;
+  bottom: -100px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  gap: ${({ theme }) => theme.spacing?.md};
 `

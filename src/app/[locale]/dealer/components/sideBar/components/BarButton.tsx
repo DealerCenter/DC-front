@@ -3,8 +3,8 @@ import React from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
-import Link from 'next/link'
-import theme from '@/app/theme'
+import { Link } from '@/navigation'
+import theme from '@/app/[locale]/theme'
 
 type Props = {
   icon: string

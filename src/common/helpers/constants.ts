@@ -5,3 +5,5 @@ export const routeName = {
   personalInformation: '/dealer/personal-information',
   dealer: '/dealer',
 }
+
+export const locales = ['en', 'ge', 'ru']
