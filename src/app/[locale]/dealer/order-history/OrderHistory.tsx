@@ -58,6 +58,11 @@ const Container = styled.div`
 const TopFrame = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    gap: 16px;
+    padding: 0 5%;
+  }
 `
 
 const ButtonFrame = styled.div`
@@ -66,6 +71,10 @@ const ButtonFrame = styled.div`
   justify-content: flex-start;
   gap: 10px;
   padding: 0 32px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    padding: 0;
+  }
 `
 const ListFrame = styled.div`
   display: flex;

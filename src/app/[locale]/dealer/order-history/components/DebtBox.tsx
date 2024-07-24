@@ -42,8 +42,8 @@ const Container = styled.div`
 
   @media ${({ theme }) => theme.media?.sm} {
     height: unset;
-
-    flex-direction: row;
+    flex-direction: row-reverse;
+    align-items: center;
   }
 `
 const Frame = styled.div`
