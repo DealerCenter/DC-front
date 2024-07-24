@@ -47,6 +47,7 @@ const DetailsBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 150px;
 `
 
 const CarBrandFrame = styled.div`

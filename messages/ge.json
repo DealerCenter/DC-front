@@ -68,6 +68,13 @@
   "debt": "დავალიანება",
   "arrived": "ჩამოსული",
   "in warehouse": "საწყობში",
+
+  "on auction": "აუქციონზე",
+  "usa warehouse": "აშშ საწყობში",
+  "on the way": "გზაში",
+  "in poti port": "ფოთის პორტში",
+  "has arrived": "ჩამოსულია",
+  
   "delete data warning": "მოცემული აქტივობის შესრულების შემდეგ მოხდება მიმღების ყველა მონაცემის წაშლა",
   "email notifications": "E-mail შეტყობინებები",
   "sms notifications": "SMS შეტყობინებები",

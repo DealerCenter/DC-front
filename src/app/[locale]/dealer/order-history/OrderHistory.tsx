@@ -34,6 +34,9 @@ const OrderHistory = (props: Props) => {
       </TopFrame>
       <ListFrame>
         <OrderListItem imageLink={DummyImage.src} isArrived={true} />
+        <OrderListItem imageLink={DummyImage.src} isArrived={true} />
+        <OrderListItem imageLink={DummyImage.src} isArrived={false} />
+        <OrderListItem imageLink={DummyImage.src} isArrived={false} />
         <OrderListItem imageLink={DummyImage.src} isArrived={false} />
       </ListFrame>
     </Container>

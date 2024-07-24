@@ -70,6 +70,13 @@
   "debt": "Debt",
   "arrived": "Arrived",
   "in warehouse": "In warehouse",
+
+  "on auction": "On auction",
+  "usa warehouse": "USA warehouse",
+  "on the way": "On the way",
+  "in poti port": "In Poti port",
+  "has arrived": "Has arrived",
+
   "delete data warning": "After performing this activity, all the recipient's data will be deleted",
   "email notifications": "E-mail notifications",
   "sms notifications": "SMS notifications",
