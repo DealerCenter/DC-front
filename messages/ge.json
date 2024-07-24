@@ -83,6 +83,11 @@
   "rights reserved": "© 2024. DUX. ყველა უფლება დაცულია.",
   "contact info of representative": "წარმომადგენლის საკონტაქტო ინფორმაცია",
 
+  "status check": "სტატუსის შემოწმება",
+  "document check": "საბუთის შემოწმება",
+  "history check": "ისტორიის შემოწმება",
+  "transportation calculator": "ტრანსპორტირების კალკულატორი",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 

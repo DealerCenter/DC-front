@@ -85,6 +85,11 @@
   "rights reserved": "© 2024. DUX. All rights reserved.",
   "contact info of representative": "Contact information of the representative",
 
+  "status check": "Status check",
+  "document check": "Document check",
+  "history check": "History check",
+  "transportation calculator": "Transportation calculator",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 
