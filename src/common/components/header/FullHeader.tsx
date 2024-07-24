@@ -1,19 +1,17 @@
 'use client'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useRouter } from 'next/navigation'
+import { Link, useRouter, usePathname } from '@/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import search from '@/assets/icons/search.svg'
 import person from '@/assets/icons/person.svg'
-import Image from 'next/image'
-import { Link, useRouter, usePathname } from '@/navigation'
-import { useLocale } from 'next-intl'
 
 type Props = {}
 
 const FullHeader = (props: Props) => {
+  const t = useTranslations('')
   const router = useRouter()
   const pathname = usePathname()
   const locale = useLocale()
@@ -25,22 +23,20 @@ const FullHeader = (props: Props) => {
       <HeaderBox>
         <Logo>DUX</Logo>
         <Frame>
-          <Title2>ავტომობილის ძიება</Title2>
-          <Title2>ჩვენი სერვისები</Title2>
-          <Title2>ჩვენს შესახებ</Title2>
-          <Title2>კონტაქტი</Title2>
+          <Title2>{t('search for vehicle')}</Title2>
+          <Title2>{t('our services')}</Title2>
+          <Title2>{t('about us')}</Title2>
+          <Title2>{t('contact')}</Title2>
         </Frame>
         <Menu>
-          {/* <Item>
+          <Item>
             <Image width={20} height={20} src={search} alt='search icon' />
           </Item>
           <Item onClick={() => router.push('/auth')}>
             <Image width={20} height={20} src={person} alt='person icon' />
           </Item>
-          <Item>
-            <Label onClick={() => setIsLangDropdownOpen((prev) => !prev)}>
-              {locale.toUpperCase()}
-            </Label>
+          <Item onClick={() => setIsLangDropdownOpen((prev) => !prev)}>
+            <Label>{locale.toUpperCase()}</Label>
             {isLangDropdownOpen && (
               <LangDropdown>
                 <Link href={pathname} locale='ge'>
@@ -67,8 +63,8 @@ const CloseButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  background-color: ${({ theme }) => theme.colors?.white_10};
+  border-radius: ${({ theme }) => theme.radius?.lg};
 `
 
 const IconBox = styled.div`
@@ -82,9 +78,9 @@ const SearchBox = styled.input`
   box-sizing: border-box;
   height: 44px;
   width: 200px;
-  border: 2px solid rgba(255, 255, 255, 0.24);
-  border-radius: 12px;
-  color: white;
+  border: 2px solid ${({ theme }) => theme.colors?.white_24};
+  border-radius: ${({ theme }) => theme.radius?.lg};
+  color: ${({ theme }) => theme.colors?.white};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,7 +109,7 @@ const HeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(18, 18, 20, 1);
+  background-color: ${({ theme }) => theme.colors?.button_black};
 `
 
 const Frame = styled.div`
@@ -127,26 +123,27 @@ const Title2 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: ${({ theme }) => theme.colors?.white};
   font-size: 16px;
   line-height: 19.2px;
   font-weight: 400;
   padding: 16px;
   max-height: 56px;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.radius?.lg};
 
-  @media (min-width: 500px) {
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors?.white_10};
   }
+
   &:active {
-    color: black;
+    color: ${({ theme }) => theme.colors?.button_black};
   }
 `
 
 const Logo = styled.h2`
-  color: white;
+  color: ${({ theme }) => theme.colors?.white};
   font-size: 40px;
   font-weight: bold;
   padding: 12px 16px 12px 16px;
@@ -163,14 +160,15 @@ const Menu = styled.div`
 const Item = styled.div`
   height: 44px;
   width: 56px;
-  border: 2px solid rgba(255, 255, 255, 0.24);
-  border-radius: 12px;
-  color: white;
+  border: 2px solid ${({ theme }) => theme.colors?.white_24};
+  border-radius: ${({ theme }) => theme.radius?.lg};
+  color: ${({ theme }) => theme.colors?.white};
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 `
+
 const Label = styled.label`
   font-size: 16px;
   font-weight: 500;
@@ -181,7 +179,8 @@ const LangDropdown = styled.div`
   position: absolute;
   bottom: -100px;
   display: flex;
+  color: ${({ theme }) => theme.colors?.white};
   flex-direction: column;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.radius?.lg};
   gap: ${({ theme }) => theme.spacing?.md};
 `

@@ -55,13 +55,13 @@ const Box = styled.div`
 const TextBold = styled.div`
   font-size: 13px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text};
+  color: ${({ theme }) => theme.colors?.text_black};
 `
 
 const Text = styled.div`
   font-size: 13px;
   font-weight: 400;
-  color: ${({ theme }) => theme.colors?.text};
+  color: ${({ theme }) => theme.colors?.text_black};
 `
 
 const IconBox = styled.div`

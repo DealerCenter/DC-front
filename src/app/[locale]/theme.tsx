@@ -6,11 +6,13 @@ const theme = {
     link_blue: 'rgba(12, 140, 233, 1)',
     sky_blue: 'rgba(216, 226, 244, 1)',
 
-    text: '#000000',
+    text_black: '#000000',
     background: '#2020200A',
 
     white: '#FFFFFF',
     white_72: 'rgba(255, 255, 255, 0.72)',
+    white_24: 'rgba(255, 255, 255, 0.24)',
+    white_10: 'rgba(255, 255, 255, 0.1)',
 
     button_black: 'rgba(18, 18, 20, 1)',
     button_black_90: 'rgba(18, 18, 20, 0.9)',
