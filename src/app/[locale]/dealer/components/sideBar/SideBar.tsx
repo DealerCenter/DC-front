@@ -8,7 +8,7 @@ import BarButton from './components/BarButton'
 import GrayContainer from './components/GrayContainer'
 
 import { routeName } from '@/common/helpers/constants'
-import { usePathname } from 'next/navigation'
+import { usePathname } from '@/navigation'
 
 import clockBlack from '@/assets/icons/clock/clock-black.svg'
 import clockWhite from '@/assets/icons/clock/clock-white.svg'
@@ -20,7 +20,7 @@ import bellIconBlack from '@/assets/icons/bell/bell-black.svg'
 import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
-import theme from '@/app/theme'
+import theme from '@/app/[locale]/theme'
 
 type Props = {}
 

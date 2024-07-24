@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 import ListItem from './listItem/ListItem'
 import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/theme'
+import theme from '@/app/[locale]/theme'
 
 type Props = {
   usersData: {

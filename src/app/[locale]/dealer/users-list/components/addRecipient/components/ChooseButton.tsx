@@ -1,4 +1,4 @@
-import theme from '@/app/theme'
+import theme from '@/app/[locale]/theme'
 import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
