@@ -40,7 +40,11 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 
-  /* border: 1px solid red; */
+  @media ${({ theme }) => theme.media?.sm} {
+    height: unset;
+
+    flex-direction: row;
+  }
 `
 const Frame = styled.div`
   width: 140px;

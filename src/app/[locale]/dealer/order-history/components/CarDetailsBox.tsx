@@ -32,6 +32,10 @@ const ImageFrame = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.md};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    justify-content: space-between;
+  }
 `
 
 const ImageBox = styled.div`
