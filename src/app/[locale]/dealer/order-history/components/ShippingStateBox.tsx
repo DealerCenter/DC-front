@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl'
 
 type Props = {}
 
-const SippingStateBox = (props: Props) => {
+const ShippingStateBox = (props: Props) => {
   const t = useTranslations('')
 
   return (
@@ -75,7 +75,7 @@ const SippingStateBox = (props: Props) => {
   )
 }
 
-export default SippingStateBox
+export default ShippingStateBox
 
 const Reminder = styled.div`
   color: red;

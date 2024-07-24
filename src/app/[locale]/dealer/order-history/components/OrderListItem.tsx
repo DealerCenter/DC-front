@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import CarDetailsBox from './CarDetailsBox'
 import DebtBox from './DebtBox'
 import UserInfoBox from './UserInfoBox'
-import SippingStateBox from './SippingStateBox'
+import ShippingStateBox from './ShippingStateBox'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 
@@ -14,7 +14,6 @@ const OrderListItem = ({ imageLink, isArrived }: Props) => {
   const isHiddenCustom = useMediaQuery({
     query: '(max-width: 1250px) and (min-width: 900px)',
   })
-  const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   return (
     <Container>
@@ -22,7 +21,7 @@ const OrderListItem = ({ imageLink, isArrived }: Props) => {
         <CarDetailsBox imageLink={imageLink} />
         <MiddleFrame>
           <UserInfoBox isArrived={isArrived} />
-          {isHiddenCustom || <SippingStateBox />}
+          {isHiddenCustom || <ShippingStateBox />}
         </MiddleFrame>
       </Frame>
       <DebtBox amount={5750} isArrived={isArrived} />
@@ -43,8 +42,6 @@ const Container = styled.div`
   border-color: ${({ theme }) => theme.colors?.main_gray_04};
   padding: ${({ theme }) => theme.spacing?.md};
   flex: 1;
-
-  /* padding: 0 15%; */
 
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column-reverse;
