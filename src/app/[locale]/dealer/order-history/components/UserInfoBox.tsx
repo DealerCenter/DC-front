@@ -15,7 +15,7 @@ const UserInfoBox = ({ isArrived }: Props) => {
         <Container>
           <Frame>
             <IconBox>
-              <Image src={checkmarkGreen} alt='icon' />
+              <Image src={checkmarkGreen} alt='icon' width={16} height={16} />
             </IconBox>
             <Box>
               <TextBold>ლუკა წილოსანი</TextBold>
@@ -24,7 +24,7 @@ const UserInfoBox = ({ isArrived }: Props) => {
           </Frame>
           <Frame>
             <IconBox>
-              <Image src={boxIcon} alt='icon' />
+              <Image src={boxIcon} alt='icon' width={16} height={16} />
             </IconBox>
             <Box>
               <TextBold>Maerski something</TextBold>
