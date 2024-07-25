@@ -5,9 +5,8 @@ import Image from 'next/image'
 import checkedGreen from '@/assets/icons/shippingStateIcons/checkedGreen.svg'
 import lineGreen from '@/assets/icons/shippingStateIcons/lineGreen.svg'
 import lineGray from '@/assets/icons/shippingStateIcons/lineGray.svg'
-import CircleGreenEmptySmall from '@/assets/icons/shippingStateIcons/CircleGreenEmptySmall.svg'
-import CircleGreenEmpty from '@/assets/icons/shippingStateIcons/CircleGreenEmpty.svg'
 import circleSmallGray from '@/assets/icons/shippingStateIcons/circleSmallGray.svg'
+import pendingGreen from '@/assets/icons/shippingStateIcons/pendingGreen.svg'
 
 type Props = {}
 
@@ -20,12 +19,9 @@ export const DoneIcon = (props: Props) => {
 }
 export const CurrentIcon = (props: Props) => {
   return (
-    <Icon1>
-      <Image src={CircleGreenEmpty} alt='icon' height={16} />
-      <Icon2>
-        <Image src={CircleGreenEmptySmall} alt='icon' height={6} />
-      </Icon2>
-    </Icon1>
+    <Icon>
+      <Image src={pendingGreen} alt='icon' height={16} />
+    </Icon>
   )
 }
 export const PendingIcon = (props: Props) => {
@@ -56,16 +52,4 @@ const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
-const Icon1 = styled.div`
-  position: relative;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-const Icon2 = styled.div`
-  display: flex;
-  position: absolute;
 `

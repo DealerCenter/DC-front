@@ -9,7 +9,6 @@ import OrderListItem from './components/OrderListItem'
 import filterIconBlack from '@/assets/icons/filterBlack.svg'
 import sortIconBlack from '@/assets/icons/sortBlack.svg'
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
-import Image from 'next/image'
 import { orderedCars } from '@/assets/DummyData'
 
 type Props = {}
@@ -43,19 +42,12 @@ const OrderHistory = (props: Props) => {
             index={i}
           />
         ))}
-        {/* <OrderListItem imageLink={DummyImage.src} isArrived={true} />
-        <OrderListItem imageLink={DummyImage.src} isArrived={true} />
-        <OrderListItem imageLink={DummyImage.src} isArrived={false} />
-        <OrderListItem imageLink={DummyImage.src} isArrived={false} />
-        <OrderListItem imageLink={DummyImage.src} isArrived={false} /> */}
       </ListFrame>
     </Container>
   )
 }
 
 export default OrderHistory
-
-const Line = styled.div``
 
 const Container = styled.div`
   box-sizing: border-box;

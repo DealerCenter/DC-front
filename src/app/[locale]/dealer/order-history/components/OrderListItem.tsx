@@ -6,8 +6,6 @@ import DebtBox from './DebtBox'
 import UserInfoBox from './UserInfoBox'
 import ShippingStateBox from './ShippingStateBox'
 import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/theme'
-import { boolean } from 'yup'
 
 type Props = {
   imageLink: string
@@ -45,7 +43,7 @@ const OrderListItem = ({ imageLink, item, index }: Props) => {
             buyerFullName={item.buyerFullName}
             buyerPhoneNumber={item.buyerPhoneNumber}
           />
-          {isHiddenCustom || <ShippingStateBox />}
+          {isHiddenCustom || <ShippingStateBox currentStep={4} />}
         </MiddleFrame>
       </Frame>
       <DebtBox amount={item.debt} isArrived={item.isArrived} />

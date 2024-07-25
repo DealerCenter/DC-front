@@ -45,6 +45,7 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 160px;
   height: 150px;
   visibility: ${({ isArrived }) => (isArrived ? 'unset' : 'hidden')};
 `
