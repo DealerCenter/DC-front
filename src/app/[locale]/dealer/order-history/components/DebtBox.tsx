@@ -40,7 +40,11 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 
-  /* border: 1px solid red; */
+  @media ${({ theme }) => theme.media?.sm} {
+    height: unset;
+    flex-direction: row-reverse;
+    align-items: center;
+  }
 `
 const Frame = styled.div`
   width: 140px;
@@ -55,13 +59,13 @@ const Text = styled.p`
   margin: 0;
   font-size: 13px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text};
+  color: ${({ theme }) => theme.colors?.text_black};
 `
 const Money = styled.p`
   margin: 0;
   font-size: 23px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text};
+  color: ${({ theme }) => theme.colors?.text_black};
 `
 type ArrivedProps = { isArrived: boolean }
 

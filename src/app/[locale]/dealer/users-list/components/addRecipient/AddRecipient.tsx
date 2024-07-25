@@ -156,7 +156,7 @@ const SplitElement = styled.div`
   width: 1px;
   height: 26px;
   border-radius: 20px;
-  background-color: ${({ theme }) => theme.colors.light_gray};
+  background-color: ${({ theme }) => theme.colors.main_gray_10};
 `
 
 const ChooseTypeFrame = styled.div`
@@ -182,8 +182,8 @@ const Container = styled.div`
   margin-top: 50px;
   margin-bottom: 50px;
 
-  border-radius: 24px;
-  border: 1px solid ${({ theme }) => theme.colors.light_gray};
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.colors.main_gray_10};
   background-color: ${({ theme }) => theme.colors.white};
 
   @media ${({ theme }) => theme.media?.sm} {

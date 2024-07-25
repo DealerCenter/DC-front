@@ -37,6 +37,6 @@ const InputField = styled.input`
   font-size: 16px;
   font-weight: 400;
   border-radius: 12px;
-  border: 2px solid ${({ theme }) => theme.colors?.mist_gray};
+  border: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
   padding: 10px 10px 10px 18px;
 `

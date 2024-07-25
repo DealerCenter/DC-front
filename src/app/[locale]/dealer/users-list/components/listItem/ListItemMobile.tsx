@@ -98,7 +98,7 @@ const Container = styled.div`
   gap: 16px;
   padding: 16px;
 
-  border: 1px solid ${({ theme }) => theme.colors?.mist_gray};
+  border: 1px solid ${({ theme }) => theme.colors?.main_gray_04};
 `
 
 const NameFrame = styled.div`
@@ -126,7 +126,7 @@ const Label = styled.label`
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: ${({ theme }) => theme.colors?.active_black};
+  color: ${({ theme }) => theme.colors?.main_gray_100};
   font-size: 14px;
 `
 
@@ -134,7 +134,7 @@ const ValueLabel = styled.label`
   align-items: start;
   justify-content: start;
   font-size: ${({ theme }) => theme.fontSizes?.small};
-  color: ${({ theme }) => theme.colors?.smoke_gray};
+  color: ${({ theme }) => theme.colors?.main_gray_68};
 `
 
 const IconBox = styled.div`

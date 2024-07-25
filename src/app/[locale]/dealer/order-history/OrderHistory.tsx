@@ -9,6 +9,8 @@ import OrderListItem from './components/OrderListItem'
 import filterIconBlack from '@/assets/icons/filterBlack.svg'
 import sortIconBlack from '@/assets/icons/sortBlack.svg'
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
+import Image from 'next/image'
+import { orderedCars } from '@/assets/DummyData'
 
 type Props = {}
 
@@ -33,14 +35,27 @@ const OrderHistory = (props: Props) => {
         </ButtonFrame>
       </TopFrame>
       <ListFrame>
+        {orderedCars.map((car, i) => (
+          <OrderListItem
+            imageLink={DummyImage.src}
+            item={car}
+            key={`${car.serialNumber}82kj32$${i}`}
+            index={i}
+          />
+        ))}
+        {/* <OrderListItem imageLink={DummyImage.src} isArrived={true} />
         <OrderListItem imageLink={DummyImage.src} isArrived={true} />
         <OrderListItem imageLink={DummyImage.src} isArrived={false} />
+        <OrderListItem imageLink={DummyImage.src} isArrived={false} />
+        <OrderListItem imageLink={DummyImage.src} isArrived={false} /> */}
       </ListFrame>
     </Container>
   )
 }
 
 export default OrderHistory
+
+const Line = styled.div``
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -55,6 +70,11 @@ const Container = styled.div`
 const TopFrame = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    gap: 16px;
+    padding: 0 5%;
+  }
 `
 
 const ButtonFrame = styled.div`
@@ -63,8 +83,13 @@ const ButtonFrame = styled.div`
   justify-content: flex-start;
   gap: 10px;
   padding: 0 32px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    padding: 0;
+  }
 `
-const ListFrame = styled.div`
+const ListFrame = styled.ul`
   display: flex;
   flex-direction: column;
+  padding: 0;
 `

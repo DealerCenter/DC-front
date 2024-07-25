@@ -37,6 +37,11 @@ const Container = styled.div`
     padding: 0 3%;
   }
 
+  @media ${({ theme }) => theme.media?.sm} {
+    padding: 0 5%;
+    margin-bottom: unset;
+  }
+
   margin-bottom: 100px;
 `
 

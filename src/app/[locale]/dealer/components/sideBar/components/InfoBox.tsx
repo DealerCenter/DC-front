@@ -142,7 +142,7 @@ const DateText = styled.p<ContainerProps>`
   margin: 0;
   font-size: 16px;
   font-weight: 400;
-  color: ${({ theme }) => theme.colors?.disabled_gray};
+  color: ${({ theme }) => theme.colors?.main_gray_56};
 
   @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>

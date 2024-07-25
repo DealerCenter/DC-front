@@ -37,9 +37,19 @@ const ListItemFull = ({
         <Label>{dateOfAddition}</Label>
         <Label>
           {isVerified ? (
-            <Image src={checkedGreen} alt='checked icon' />
+            <Image
+              src={checkedGreen}
+              alt='checked icon'
+              width={20}
+              height={20}
+            />
           ) : (
-            <Image src={uncheckedRed} alt='unchecked icon' />
+            <Image
+              src={uncheckedRed}
+              alt='unchecked icon'
+              width={20}
+              height={20}
+            />
           )}
         </Label>
         <IconBox>
@@ -84,7 +94,7 @@ const Container = styled.div`
   height: 72px;
   padding: 0 16px 0 32px;
 
-  border: 1px solid ${({ theme }) => theme.colors?.mist_gray};
+  border: 1px solid ${({ theme }) => theme.colors?.main_gray_04};
 `
 
 const LabelBox = styled.div`
@@ -109,7 +119,7 @@ const Label = styled.label`
   align-items: center;
   text-align: center;
   width: 120px;
-  color: ${({ theme }) => theme.colors?.active_black};
+  color: ${({ theme }) => theme.colors?.main_gray_100};
   font-size: 13px;
 `
 
@@ -130,3 +140,4 @@ const Icon = styled.div`
   width: 40px;
   height: 40px;
 `
+const CheckmarkBox = styled.div``

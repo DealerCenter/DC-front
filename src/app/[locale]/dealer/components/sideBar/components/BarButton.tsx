@@ -64,15 +64,15 @@ const Container = styled.div<ButtonProps>`
   ${({ active, theme }) =>
     active
       ? css`
-          background-color: ${theme.colors?.active_black};
+          background-color: ${theme.colors?.main_gray_100};
           color: ${theme.colors?.white};
         `
       : css`
           background-color: ${theme.colors?.white};
-          color: ${theme.colors?.active_black};
+          color: ${theme.colors?.main_gray_100};
 
           &:hover {
-            background-color: ${theme.colors?.mist_gray};
+            background-color: ${theme.colors?.main_gray_04};
           }
         `}
 

@@ -37,7 +37,7 @@ const StyledDiv = styled.div<StyledDivProps>`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  border: 2px solid ${({ theme }) => theme.colors?.haze_gray};
+  border: 2px solid ${({ theme }) => theme.colors?.main_gray_42};
   width: 32px;
   height: 32px;
   cursor: pointer;
@@ -45,14 +45,14 @@ const StyledDiv = styled.div<StyledDivProps>`
   ${({ done, active, theme }) =>
     done
       ? css`
-          background-color: ${theme.colors?.active_black};
+          background-color: ${theme.colors?.main_gray_100};
         `
       : active
         ? css`
-            border-color: ${theme.colors?.active_black};
+            border-color: ${theme.colors?.main_gray_100};
           `
         : css`
-            border-color: ${theme.colors?.haze_gray};
+            border-color: ${theme.colors?.main_gray_42};
           `}
 `
 
@@ -70,6 +70,6 @@ const StyledP = styled.p<StyledPProps>`
             color: ${theme.colors?.button_black};
           `
         : css`
-            color: ${theme.colors?.haze_gray};
+            color: ${theme.colors?.main_gray_42};
           `}
 `

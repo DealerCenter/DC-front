@@ -27,11 +27,13 @@ const StyledButton = styled.button<ButtonProps>`
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.colors?.smoke_gray};
+    background-color: ${({ theme }) => theme.colors?.main_gray_68};
   }
 
   &:focus {
     border: none;
     outline: 4px solid ${({ theme }) => theme.colors?.sky_blue};
   }
+
+  cursor: pointer;
 `

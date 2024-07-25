@@ -40,7 +40,7 @@ const Text = styled.p<TextProps>`
   ${({ isChecked, theme }) =>
     isChecked
       ? css`
-          color: ${theme.colors?.active_black};
+          color: ${theme.colors?.main_gray_100};
         `
       : css`
           color: ${theme.colors?.red};

@@ -14,7 +14,7 @@ const HeaderH4Bold = ({ text }: Props) => {
 export default HeaderH4Bold
 
 const StyledH4 = styled.h4`
-  color: ${({ theme }) => theme.colors?.active_black};
+  color: ${({ theme }) => theme.colors?.main_gray_100};
   font-size: 28px;
   font-weight: 700;
   margin: 0;

@@ -51,8 +51,8 @@ const Container = styled.div<ContainerProps>`
   text-align: left;
   justify-content: start;
   /* justify-content: flex-start; */
-  background-color: ${({ theme }) => theme.colors?.mist_gray};
-  border: 0.5px solid ${({ theme }) => theme.colors?.light_gray};
+  background-color: ${({ theme }) => theme.colors?.main_gray_04};
+  border: 0.5px solid ${({ theme }) => theme.colors?.main_gray_10};
   border-radius: 16px;
   gap: 19px;
   padding: 24px 16px 24px 16px;
