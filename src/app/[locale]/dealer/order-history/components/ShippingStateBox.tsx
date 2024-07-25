@@ -1,10 +1,14 @@
 import Image from 'next/image'
 import React from 'react'
 import styled from 'styled-components'
-
-import checkmarkDone from '@/assets/icons/checkedGreen.svg'
-import lineGreen from '@/assets/icons/verticalLIneGreen.svg'
 import { useTranslations } from 'next-intl'
+import {
+  CurrentIcon,
+  DoneIcon,
+  LineGray,
+  LineGreen,
+  PendingIcon,
+} from './Icons'
 
 type Props = {}
 
@@ -16,57 +20,39 @@ const ShippingStateBox = (props: Props) => {
       <Line>
         <Date>22/04/2022</Date>
         <IconBox>
-          <Icon>
-            <Image src={checkmarkDone} alt='icon' />
-          </Icon>
-          <Icon>
-            <Image src={lineGreen} alt='icon' />
-          </Icon>
+          <DoneIcon />
+          <LineGreen />
         </IconBox>
         <Label>{t('on auction')}</Label>
       </Line>
       <Line>
         <Date>22/04/2022</Date>
         <IconBox>
-          <Icon>
-            <Image src={checkmarkDone} alt='icon' />
-          </Icon>
-          <Icon>
-            <Image src={lineGreen} alt='icon' />
-          </Icon>
+          <DoneIcon />
+          <LineGreen />
         </IconBox>
         <Label>{t('usa warehouse')}</Label>
       </Line>
       <Line>
         <Date>22/04/2022</Date>
         <IconBox>
-          <Icon>
-            <Image src={checkmarkDone} alt='icon' />
-          </Icon>
-          <Icon>
-            <Image src={lineGreen} alt='icon' />
-          </Icon>
+          <CurrentIcon />
+          <LineGray />
         </IconBox>
         <Label>{t('on the way')}</Label>
       </Line>
       <Line>
         <Date>22/04/2022</Date>
         <IconBox>
-          <Icon>
-            <Image src={checkmarkDone} alt='icon' />
-          </Icon>
-          <Icon>
-            <Image src={lineGreen} alt='icon' />
-          </Icon>
+          <PendingIcon />
+          <LineGray />
         </IconBox>
         <Label>{t('in poti port')}</Label>
       </Line>
       <Line>
         <Date>22/04/2022</Date>
         <IconBox>
-          <Icon>
-            <Image src={checkmarkDone} alt='icon' />
-          </Icon>
+          <PendingIcon />
         </IconBox>
         <Label>{t('has arrived')}</Label>
       </Line>
@@ -108,12 +94,4 @@ const Date = styled.label`
 const IconBox = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const Icon = styled.div`
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `
