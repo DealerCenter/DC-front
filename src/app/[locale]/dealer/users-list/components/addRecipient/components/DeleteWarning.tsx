@@ -21,12 +21,18 @@ const DeleteWarning = ({ onCancel, onDelete }: Props) => {
         <Label>{t('delete data warning')}</Label>
       </FrameTop>
       <ButtonsFrame>
-        <ChooseButton text={t('cancel')} isActive={true} onClick={onCancel} />
+        <ChooseButton
+          text={t('cancel')}
+          isActive={true}
+          onClick={onCancel}
+          fontSize={'16px'}
+        />
         <ChooseButton
           text={t('delete')}
           isActive={false}
           onClick={onDelete}
           withBorder={true}
+          fontSize={'16px'}
         />
       </ButtonsFrame>
     </Container>
