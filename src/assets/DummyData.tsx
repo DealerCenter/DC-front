@@ -28,3 +28,36 @@ export const users = [
     isVerified: true,
   },
 ]
+
+export const orderedCars = [
+  {
+    brand: 'Mercedes Benz',
+    model: 'E class, Diezel',
+    year: '2020',
+    serialNumber: 'WD4PG2EE1J3371314',
+    buyerFullName: 'Luka Tsilosani',
+    buyerPhoneNumber: '+995 000 070 707',
+    debt: 5780,
+    isArrived: false,
+  },
+  {
+    brand: 'Mercedes Benz',
+    model: 'X class',
+    year: '2022',
+    serialNumber: 'WD4PG2EE1J2342434',
+    buyerFullName: 'Zuka Jakeli',
+    buyerPhoneNumber: '+995 000 111 111',
+    debt: 5780,
+    isArrived: true,
+  },
+  {
+    brand: 'Mercedes Benz',
+    model: 'air',
+    year: '500 BC',
+    serialNumber: 'WD4PG2EE1J3373424',
+    buyerFullName: 'Siddhartha Gautama',
+    buyerPhoneNumber: '+000 000 000 000',
+    debt: 5780,
+    isArrived: true,
+  },
+]

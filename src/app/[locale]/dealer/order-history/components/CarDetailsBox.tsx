@@ -2,9 +2,21 @@ import Image from 'next/image'
 import React from 'react'
 import styled from 'styled-components'
 
-type Props = { imageLink: string }
+type Props = {
+  imageLink: string
+  brand: string
+  model: string
+  year: string
+  serialNumber: string
+}
 
-const CarDetailsBox = ({ imageLink }: Props) => {
+const CarDetailsBox = ({
+  imageLink,
+  brand,
+  model,
+  year,
+  serialNumber,
+}: Props) => {
   return (
     <ImageFrame>
       <ImageBox>
@@ -13,13 +25,13 @@ const CarDetailsBox = ({ imageLink }: Props) => {
       <DetailsBox>
         <CarBrandFrame>
           <CarBrandBox>
-            <CarBrand>Mercedes Benz</CarBrand>
-            <TextGray>2020</TextGray>
+            <CarBrand>{brand}</CarBrand>
+            <TextGray>{year}</TextGray>
           </CarBrandBox>
-          <TextGray>E class, Diezel</TextGray>
+          <TextGray>{model}</TextGray>
         </CarBrandFrame>
         <SerialNumberBox>
-          <Text>WD4PG2EE1J3371314</Text>
+          <Text>{serialNumber}</Text>
         </SerialNumberBox>
       </DetailsBox>
     </ImageFrame>
