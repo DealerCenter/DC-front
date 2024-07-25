@@ -20,7 +20,13 @@ const CarDetailsBox = ({
   return (
     <ImageFrame>
       <ImageBox>
-        <Image src={imageLink} alt='image' width={168} height={150} />
+        <Image
+          src={imageLink}
+          alt='image'
+          width={168}
+          height={150}
+          style={{ objectFit: 'cover' }}
+        />
       </ImageBox>
       <DetailsBox>
         <CarBrandFrame>

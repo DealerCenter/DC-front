@@ -14,42 +14,39 @@ type Props = {
 
 const UserInfoBox = ({ isArrived, buyerFullName, buyerPhoneNumber }: Props) => {
   return (
-    <>
-      {isArrived ? (
-        <Container>
-          <Frame>
-            <IconBox>
-              <Image src={checkmarkGreen} alt='icon' width={16} height={16} />
-            </IconBox>
-            <Box>
-              <TextBold>{buyerFullName}</TextBold>
-              <Text>{buyerPhoneNumber}</Text>
-            </Box>
-          </Frame>
-          <Frame>
-            <IconBox>
-              <Image src={boxIcon} alt='icon' width={16} height={16} />
-            </IconBox>
-            <Box>
-              <TextBold>Maerski something</TextBold>
-              <StyledLink>maerski.com/your tracking code</StyledLink>
-            </Box>
-          </Frame>
-        </Container>
-      ) : (
-        <Container></Container>
-      )}
-    </>
+    <Container isArrived={isArrived}>
+      <Frame>
+        <IconBox>
+          <Image src={checkmarkGreen} alt='icon' width={16} height={16} />
+        </IconBox>
+        <Box>
+          <TextBold>{buyerFullName}</TextBold>
+          <Text>{buyerPhoneNumber}</Text>
+        </Box>
+      </Frame>
+      <Frame>
+        <IconBox>
+          <Image src={boxIcon} alt='icon' width={16} height={16} />
+        </IconBox>
+        <Box>
+          <TextBold>Maerski something</TextBold>
+          <StyledLink>maerski.com/your tracking code</StyledLink>
+        </Box>
+      </Frame>
+    </Container>
   )
 }
 
 export default UserInfoBox
 
-const Container = styled.div`
+type ContainerProps = { isArrived: boolean }
+
+const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 150px;
+  visibility: ${({ isArrived }) => (isArrived ? 'unset' : 'hidden')};
 `
 
 const Frame = styled.div`
