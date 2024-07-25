@@ -34,4 +34,6 @@ const StyledButton = styled.button<ButtonProps>`
     border: none;
     outline: 4px solid ${({ theme }) => theme.colors?.sky_blue};
   }
+
+  cursor: pointer;
 `

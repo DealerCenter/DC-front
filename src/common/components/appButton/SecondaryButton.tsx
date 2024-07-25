@@ -27,6 +27,8 @@ const Container = styled.div`
   border-radius: 12px;
   padding: 0 20px 0 14px;
   gap: 6px;
+
+  cursor: pointer;
 `
 const Label = styled.label`
   color: ${({ theme }) => theme.colors?.main_gray_100};
