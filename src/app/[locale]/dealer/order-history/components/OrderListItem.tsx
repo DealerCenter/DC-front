@@ -20,6 +20,7 @@ type Props = {
     buyerPhoneNumber: string
     debt: number
     isArrived: boolean
+    arrivalState: string
   }
   onClick: () => void
 }
@@ -35,26 +36,38 @@ const OrderListItem = ({
     query: '(max-width: 1250px) and (min-width: 900px)',
   })
 
+  const {
+    brand,
+    model,
+    year,
+    serialNumber,
+    buyerFullName,
+    buyerPhoneNumber,
+    debt,
+    isArrived,
+    arrivalState,
+  } = item
+
   return (
     <Container index={index} onClick={onClick}>
       <Frame>
         <CarDetailsBox
           imageLink={imageLink}
-          brand={item.brand}
-          model={item.model}
-          year={item.year}
-          serialNumber={item.serialNumber}
+          brand={brand}
+          model={model}
+          year={year}
+          serialNumber={serialNumber}
         />
         <MiddleFrame>
           <UserInfoBox
-            isArrived={item.isArrived}
-            buyerFullName={item.buyerFullName}
-            buyerPhoneNumber={item.buyerPhoneNumber}
+            isArrived={isArrived}
+            buyerFullName={buyerFullName}
+            buyerPhoneNumber={buyerPhoneNumber}
           />
           {isHiddenCustom || <ShippingStateBox currentStep={shippingStep} />}
         </MiddleFrame>
       </Frame>
-      <DebtBox amount={item.debt} isArrived={item.isArrived} />
+      <DebtBox amount={debt} arrivalState={arrivalState} />
     </Container>
   )
 }

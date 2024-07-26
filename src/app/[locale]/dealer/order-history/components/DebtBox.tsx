@@ -6,13 +6,14 @@ import styled, { css } from 'styled-components'
 
 import checkmarkIcon from '@/assets/icons/checkmarkCircleWhite.svg'
 import boxIcon from '@/assets/icons/boxBlack.svg'
+import ArrivalStateBox from './ArrivalStateBox'
 
 type Props = {
   amount: number
-  isArrived: boolean
+  arrivalState: string
 }
 
-const DebtBox = ({ amount, isArrived }: Props) => {
+const DebtBox = ({ amount, arrivalState }: Props) => {
   const t = useTranslations('')
 
   return (
@@ -21,12 +22,7 @@ const DebtBox = ({ amount, isArrived }: Props) => {
         <Text>{t('debt')}</Text>
         <Money>$ {amount.toString()}</Money>
       </Frame>
-      <ArrivalStateBox isArrived={isArrived}>
-        <IconBox>
-          <Image src={isArrived ? checkmarkIcon : boxIcon} alt='icon' />
-        </IconBox>
-        <Label>{isArrived ? t('arrived') : t('in warehouse')}</Label>
-      </ArrivalStateBox>
+      <ArrivalStateBox arrivalState={arrivalState} />
     </Container>
   )
 }
@@ -66,40 +62,4 @@ const Money = styled.p`
   font-size: 23px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors?.text_black};
-`
-type ArrivedProps = { isArrived: boolean }
-
-const ArrivalStateBox = styled.div<ArrivedProps>`
-  box-sizing: border-box;
-  height: 42px;
-  border-radius: ${({ theme }) => theme.radius?.lg};
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-
-  ${({ isArrived, theme }) =>
-    isArrived
-      ? css`
-          background-color: ${theme.colors?.green};
-        `
-      : css`
-          background-color: ${theme.colors?.yellow};
-        `};
-`
-
-const Label = styled.label`
-  color: ${({ theme }) => theme.colors?.white};
-  font-size: 13px;
-  font-weight: 700;
-  padding: 8px;
-`
-
-const IconBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
 `

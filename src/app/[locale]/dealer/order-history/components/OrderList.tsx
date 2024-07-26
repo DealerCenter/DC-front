@@ -17,6 +17,7 @@ type Props = {
     buyerPhoneNumber: string
     debt: number
     isArrived: boolean
+    arrivalState: string
   }[]
 }
 
