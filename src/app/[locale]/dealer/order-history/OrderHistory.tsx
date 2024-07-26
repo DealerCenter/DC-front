@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
@@ -12,10 +12,12 @@ import DummyImage from '@/assets/images/DummyCarImage.jpg'
 import { orderedCars } from '@/assets/DummyData'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
+import Pagination from '@/common/components/pagination/Pagination'
 
 type Props = {}
 
 const OrderHistory = (props: Props) => {
+  const [currentPage, setCurrentPage] = useState(1)
   const t = useTranslations('')
   const router = useRouter()
 
@@ -48,6 +50,13 @@ const OrderHistory = (props: Props) => {
           />
         ))}
       </ListFrame>
+      <PaginationFrame>
+        <Pagination
+          currentPage={currentPage}
+          numOfPages={3}
+          setCurrentPage={setCurrentPage}
+        />
+      </PaginationFrame>
     </Container>
   )
 }
@@ -89,4 +98,9 @@ const ListFrame = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0;
+`
+const PaginationFrame = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: ${({ theme }) => theme.spacing?.md};
 `
