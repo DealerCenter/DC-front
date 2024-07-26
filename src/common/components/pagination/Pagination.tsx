@@ -76,10 +76,18 @@ const Box = styled.div<BoxProps>`
       ? css`
           color: ${({ theme }) => theme.colors?.white};
           background-color: ${({ theme }) => theme.colors?.main_gray_100};
+
+          &:hover {
+            background-color: ${({ theme }) => theme.colors?.main_gray_90};
+          }
         `
       : css`
           color: ${({ theme }) => theme.colors?.text_black};
-          background-color: unset;
+          background-color: ${({ theme }) => theme.colors?.white};
+
+          &:hover {
+            background-color: ${({ theme }) => theme.colors?.main_gray_04};
+          }
         `}
 
   cursor: pointer;

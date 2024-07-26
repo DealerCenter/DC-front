@@ -22,42 +22,44 @@ const OrderHistory = (props: Props) => {
   const router = useRouter()
 
   return (
-    <Container>
-      <TopFrame>
-        <HeaderH4Bold text={t('order history')} />
-        <ButtonFrame>
-          <SecondaryButton
-            text={t('filter')}
-            onClick={() => {}}
-            icon={filterIconBlack}
-          ></SecondaryButton>
-          <SecondaryButton
-            text={t('sort')}
-            onClick={() => {}}
-            icon={sortIconBlack}
-          ></SecondaryButton>
-        </ButtonFrame>
-      </TopFrame>
-      <ListFrame>
-        {orderedCars.map((car, i) => (
-          <OrderListItem
-            onClick={() => router.push(routeName.order)}
-            imageLink={DummyImage.src}
-            item={car}
-            key={`${car.serialNumber}82kj32$${i}`}
-            index={i}
-            shippingStep={2}
+    <>
+      <Container>
+        <TopFrame>
+          <HeaderH4Bold text={t('order history')} />
+          <ButtonFrame>
+            <SecondaryButton
+              text={t('filter')}
+              onClick={() => {}}
+              icon={filterIconBlack}
+            ></SecondaryButton>
+            <SecondaryButton
+              text={t('sort')}
+              onClick={() => {}}
+              icon={sortIconBlack}
+            ></SecondaryButton>
+          </ButtonFrame>
+        </TopFrame>
+        <ListFrame>
+          {orderedCars.map((car, i) => (
+            <OrderListItem
+              onClick={() => router.push(routeName.order)}
+              imageLink={DummyImage.src}
+              item={car}
+              key={`${car.serialNumber}82kj32$${i}`}
+              index={i}
+              shippingStep={2}
+            />
+          ))}
+        </ListFrame>
+        <PaginationFrame>
+          <Pagination
+            currentPage={currentPage}
+            numOfPages={3}
+            setCurrentPage={setCurrentPage}
           />
-        ))}
-      </ListFrame>
-      <PaginationFrame>
-        <Pagination
-          currentPage={currentPage}
-          numOfPages={3}
-          setCurrentPage={setCurrentPage}
-        />
-      </PaginationFrame>
-    </Container>
+        </PaginationFrame>
+      </Container>
+    </>
   )
 }
 
