@@ -10,6 +10,7 @@ import { useMediaQuery } from 'react-responsive'
 type Props = {
   imageLink: string
   index: number
+  shippingStep: 0 | 1 | 2 | 3 | 4
   item: {
     brand: string
     model: string
@@ -20,15 +21,22 @@ type Props = {
     debt: number
     isArrived: boolean
   }
+  onClick: () => void
 }
 
-const OrderListItem = ({ imageLink, item, index }: Props) => {
+const OrderListItem = ({
+  imageLink,
+  item,
+  index,
+  shippingStep,
+  onClick,
+}: Props) => {
   const isHiddenCustom = useMediaQuery({
     query: '(max-width: 1250px) and (min-width: 900px)',
   })
 
   return (
-    <Container index={index}>
+    <Container index={index} onClick={onClick}>
       <Frame>
         <CarDetailsBox
           imageLink={imageLink}
@@ -43,7 +51,7 @@ const OrderListItem = ({ imageLink, item, index }: Props) => {
             buyerFullName={item.buyerFullName}
             buyerPhoneNumber={item.buyerPhoneNumber}
           />
-          {isHiddenCustom || <ShippingStateBox currentStep={4} />}
+          {isHiddenCustom || <ShippingStateBox currentStep={shippingStep} />}
         </MiddleFrame>
       </Frame>
       <DebtBox amount={item.debt} isArrived={item.isArrived} />

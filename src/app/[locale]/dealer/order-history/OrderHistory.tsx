@@ -10,11 +10,14 @@ import filterIconBlack from '@/assets/icons/filterBlack.svg'
 import sortIconBlack from '@/assets/icons/sortBlack.svg'
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
 import { orderedCars } from '@/assets/DummyData'
+import { useRouter } from '@/navigation'
+import { routeName } from '@/common/helpers/constants'
 
 type Props = {}
 
 const OrderHistory = (props: Props) => {
   const t = useTranslations('')
+  const router = useRouter()
 
   return (
     <Container>
@@ -36,10 +39,12 @@ const OrderHistory = (props: Props) => {
       <ListFrame>
         {orderedCars.map((car, i) => (
           <OrderListItem
+            onClick={() => router.push(routeName.order)}
             imageLink={DummyImage.src}
             item={car}
             key={`${car.serialNumber}82kj32$${i}`}
             index={i}
+            shippingStep={2}
           />
         ))}
       </ListFrame>
