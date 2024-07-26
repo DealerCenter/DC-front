@@ -12,6 +12,10 @@ import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 import Pagination from '@/common/components/pagination/Pagination'
 import OrderList from './components/OrderList'
+import AppDropdown from '@/common/components/appDropdown/AppDropdown'
+
+import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
+import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
 
 const itemsPerPage = 8
 const totalPages = Math.ceil(orderedCars.length / 8)
@@ -22,6 +26,13 @@ const OrderHistory = (props: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const t = useTranslations('')
   const router = useRouter()
+
+  const sortOptions = [
+    { label: 'date descending', icon: arrowDown },
+    { label: 'date ascending', icon: arrowUp },
+    { label: 'price descending', icon: arrowDown },
+    { label: 'price ascending', icon: arrowUp },
+  ]
 
   return (
     <>
@@ -34,11 +45,13 @@ const OrderHistory = (props: Props) => {
               onClick={() => {}}
               icon={filterIconBlack}
             ></SecondaryButton>
-            <SecondaryButton
-              text={t('sort')}
-              onClick={() => {}}
-              icon={sortIconBlack}
-            ></SecondaryButton>
+            <AppDropdown items={sortOptions} modalStyle='white'>
+              <SecondaryButton
+                text={t('sort')}
+                onClick={() => {}}
+                icon={sortIconBlack}
+              ></SecondaryButton>
+            </AppDropdown>
           </ButtonFrame>
         </TopFrame>
         <OrderList

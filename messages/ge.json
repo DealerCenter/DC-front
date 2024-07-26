@@ -74,7 +74,12 @@
   "on the way": "გზაში",
   "in poti port": "ფოთის პორტში",
   "has arrived": "ჩამოსულია",
-  
+
+  "date descending": "თარიღი კლებადი",
+  "date ascending": "თარიღი ზრდადი",
+  "price descending": "ფასი კლებადი",
+  "price ascending": "ფასი ზრდადი",
+
   "delete data warning": "მოცემული აქტივობის შესრულების შემდეგ მოხდება მიმღების ყველა მონაცემის წაშლა",
   "email notifications": "E-mail შეტყობინებები",
   "sms notifications": "SMS შეტყობინებები",

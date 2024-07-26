@@ -6,15 +6,23 @@ import DropdownItem from './DropdownItem'
 
 type Props = {
   children: ReactNode
+  modalStyle: 'white' | 'black'
   items:
     | { href: { pathname: string }; locale: string; label: string }[]
+    | { label: string; icon: string }[]
     | { label: string }[]
 
   left?: number
   top?: number
 }
 
-const AppDropdown = ({ children, items, left, top }: Props) => {
+const AppDropdown = ({
+  children,
+  items,
+  left,
+  top,
+  modalStyle = 'black',
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -42,9 +50,13 @@ const AppDropdown = ({ children, items, left, top }: Props) => {
     <Dropdown ref={dropdownRef}>
       <DropdownTrigger onClick={toggleDropdown}>{children}</DropdownTrigger>
       {isOpen && (
-        <DropdownMenu left={left} top={top}>
+        <DropdownMenu modalStyle={modalStyle} left={left} top={top}>
           {items.map((item, i) => (
-            <DropdownItem item={item} key={`${item.label}12ij${i}`} />
+            <DropdownItem
+              item={item}
+              key={`${item.label}12ij${i}`}
+              modalStyle={modalStyle}
+            />
           ))}
         </DropdownMenu>
       )}
@@ -55,22 +67,34 @@ const AppDropdown = ({ children, items, left, top }: Props) => {
 export default AppDropdown
 
 const Dropdown = styled.div`
-  border-radius: 10px;
   position: relative;
 `
 const DropdownTrigger = styled.div``
 
-type DropdownMenuProps = { left?: number; top?: number }
+type DropdownMenuProps = {
+  left?: number
+  top?: number
+  modalStyle: 'white' | 'black'
+}
 
 const DropdownMenu = styled.div<DropdownMenuProps>`
   position: absolute;
-  background-color: ${({ theme }) => theme.colors?.main_gray_100};
   padding: 0;
-  border-radius: 10px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   padding: 6px;
-  gap: 6px;
+  z-index: 100;
+
+  box-shadow: 0 8px 42px 0 ${({ theme }) => theme.colors?.main_gray_10};
+  ${({ modalStyle }) =>
+    modalStyle === 'white'
+      ? css`
+          background-color: ${({ theme }) => theme.colors?.white};
+        `
+      : css`
+          background-color: ${({ theme }) => theme.colors?.main_gray_100};
+        `}
 
   ${({ left }) =>
     left

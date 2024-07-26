@@ -77,6 +77,11 @@
   "in poti port": "In Poti port",
   "has arrived": "Has arrived",
 
+  "date descending": "Date descending",
+  "date ascending": "Date ascending",
+  "price descending": "Price descending",
+  "price ascending": "Price ascending",
+
   "delete data warning": "After performing this activity, all the recipient's data will be deleted",
   "email notifications": "E-mail notifications",
   "sms notifications": "SMS notifications",
