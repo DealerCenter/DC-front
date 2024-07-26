@@ -4,15 +4,17 @@ import { useTranslations } from 'next-intl'
 
 import HeaderH4Bold from '../components/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
-import OrderListItem from './components/OrderListItem'
 
 import filterIconBlack from '@/assets/icons/filterBlack.svg'
 import sortIconBlack from '@/assets/icons/sortBlack.svg'
-import DummyImage from '@/assets/images/DummyCarImage.jpg'
 import { orderedCars } from '@/assets/DummyData'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 import Pagination from '@/common/components/pagination/Pagination'
+import OrderList from './components/OrderList'
+
+const itemsPerPage = 8
+const totalPages = Math.ceil(orderedCars.length / 8)
 
 type Props = {}
 
@@ -39,22 +41,16 @@ const OrderHistory = (props: Props) => {
             ></SecondaryButton>
           </ButtonFrame>
         </TopFrame>
-        <ListFrame>
-          {orderedCars.map((car, i) => (
-            <OrderListItem
-              onClick={() => router.push(routeName.order)}
-              imageLink={DummyImage.src}
-              item={car}
-              key={`${car.serialNumber}82kj32$${i}`}
-              index={i}
-              shippingStep={2}
-            />
-          ))}
-        </ListFrame>
+        <OrderList
+          onClick={() => router.push(routeName.order)}
+          list={orderedCars}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+        />
         <PaginationFrame>
           <Pagination
             currentPage={currentPage}
-            numOfPages={3}
+            numOfPages={totalPages}
             setCurrentPage={setCurrentPage}
           />
         </PaginationFrame>
@@ -96,11 +92,7 @@ const ButtonFrame = styled.div`
     padding: 0;
   }
 `
-const ListFrame = styled.ul`
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-`
+
 const PaginationFrame = styled.div`
   display: flex;
   justify-content: center;
