@@ -26,6 +26,7 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
   return (
     <StyledForm>
       <TextInput
+        width={442}
         type='text'
         name='personalNumber'
         placeholder={t('personal number')}
@@ -39,11 +40,13 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
         }
       />{' '}
       <FileDropZone
+        width={442}
         dropText={t('drop the file here')}
         text={t('upload an ID photo')}
         uploadedText={t('photo uploaded')}
       />
       <AppButton
+        width={442}
         text={t('next')}
         type='filled'
         disabled={isButtonDisabled}

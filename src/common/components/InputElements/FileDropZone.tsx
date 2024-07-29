@@ -11,9 +11,16 @@ type Props = {
   dropText: string
   uploadedText: string
   warningText?: string
+  width?: number
 }
 
-const FileDropZone = ({ text, dropText, uploadedText, warningText }: Props) => {
+const FileDropZone = ({
+  text,
+  dropText,
+  uploadedText,
+  warningText,
+  width,
+}: Props) => {
   const [isDropped, setIsDropped] = useState(false)
 
   const onDrop = useCallback(<T extends File>(acceptedFiles: T[]) => {
@@ -26,7 +33,7 @@ const FileDropZone = ({ text, dropText, uploadedText, warningText }: Props) => {
 
   return (
     <>
-      <Container {...getRootProps()}>
+      <Container {...getRootProps()} width={width}>
         <IconBox>
           <Image
             src={isDropped ? uploadedIcon : uploadIcon}
@@ -76,10 +83,11 @@ const UploadIdTextBox = styled.div`
   width: 350px;
 `
 
-const Container = styled.div`
+type ContainerProps = { width: number }
+
+const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
   position: relative;
-  width: 350px;
   height: 161px;
   display: flex;
   justify-content: center;
@@ -88,6 +96,19 @@ const Container = styled.div`
   border: 2px dashed ${({ theme }) => theme.colors?.main_gray_04};
   border-radius: ${({ theme }) => theme.radius?.lg};
   padding: 16px;
+
+  ${({ width }) =>
+    width
+      ? css`
+          width: ${width}px;
+        `
+      : css`
+          width: 350px;
+        `}
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 350px;
+  }
 
   cursor: pointer;
 
