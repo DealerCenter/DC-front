@@ -11,6 +11,7 @@ const theme = {
 
     white: '#FFFFFF',
     white_72: 'rgba(255, 255, 255, 0.72)',
+    white_68: 'rgba(255, 255, 255, 0.68)',
     white_24: 'rgba(255, 255, 255, 0.24)',
     white_10: 'rgba(255, 255, 255, 0.1)',
 

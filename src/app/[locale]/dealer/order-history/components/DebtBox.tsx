@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components'
 
 import checkmarkIcon from '@/assets/icons/checkmarkCircleWhite.svg'
 import boxIcon from '@/assets/icons/boxBlack.svg'
-import ArrivalStateBox from './ArrivalStateBox'
+import ArrivalStateBox from '../../../../../common/components/arrivalState/ArrivalStateBox'
 
 type Props = {
   amount: number

@@ -75,6 +75,15 @@
   "in poti port": "ფოთის პორტში",
   "has arrived": "ჩამოსულია",
 
+  "auction id": "აუქციონის ID",
+  "order id": "შეკვეთის ID",
+  "date of purchase": "ყიდვის თარიღი",
+
+  "evacuator": "ევაკუატორი",
+  "usa port": "აშშ პორტი",
+  "container": "კონტეინერი",
+  "georgian port": "საქართველოს პორტი",
+
   "date descending": "თარიღი კლებადი",
   "date ascending": "თარიღი ზრდადი",
   "price descending": "ფასი კლებადი",

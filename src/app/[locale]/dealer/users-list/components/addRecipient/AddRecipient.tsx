@@ -9,6 +9,7 @@ import TextInput from '@/common/components/inputElements/TextInput'
 import ChooseButton from './components/ChooseButton'
 
 import closeIcon from '@/assets/icons/closeX.svg'
+import splitGrayLine from '@/assets/icons/splitGrayLine.svg'
 
 type Props = { onClose: () => void }
 
@@ -31,7 +32,7 @@ const AddRecipient = ({ onClose }: Props) => {
             isActive={type === 'individual'}
             onClick={() => setType('individual')}
           />
-          <SplitElement />
+          <Image src={splitGrayLine} alt='line icon' />
           <ChooseButton
             text={t('legal person')}
             isActive={type === 'legalPerson'}
@@ -150,13 +151,6 @@ const H3Bold = styled.h3`
   font-size: 19px;
   font-weight: 700;
   margin: 0;
-`
-
-const SplitElement = styled.div`
-  width: 1px;
-  height: 26px;
-  border-radius: 20px;
-  background-color: ${({ theme }) => theme.colors.main_gray_10};
 `
 
 const ChooseTypeFrame = styled.div`

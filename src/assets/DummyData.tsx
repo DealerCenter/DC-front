@@ -64,3 +64,7 @@ export const orderedCars = [
     arrivalState: 'arrived',
   },
 ]
+
+const CarImages = [
+  'https://hips.hearstapps.com/hmg-prod/images/bmw-m5-touring-rendering-6578b8a34ce4b.jpg?crop=1.00xw:0.994xh;0,0.00562xh&resize=980:*',
+]

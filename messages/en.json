@@ -77,6 +77,15 @@
   "in poti port": "In Poti port",
   "has arrived": "Has arrived",
 
+  "auction id": "Auction id",
+  "order id": "Order id",
+  "date of purchase": "Date of purchase",
+
+  "evacuator": "Evacuator",
+  "usa port": "USA Port",
+  "container": "Container",
+  "georgian port": "Georgian port",
+
   "date descending": "Date descending",
   "date ascending": "Date ascending",
   "price descending": "Price descending",
