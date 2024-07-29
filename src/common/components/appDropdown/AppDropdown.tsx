@@ -6,7 +6,7 @@ import DropdownItem from './DropdownItem'
 
 type Props = {
   children: ReactNode
-  modalStyle: 'white' | 'black'
+  modalStyle?: 'white' | 'black'
   items:
     | { href: { pathname: string }; locale: string; label: string }[]
     | { label: string; icon: string }[]

@@ -33,35 +33,33 @@ const FullHeader = (props: Props) => {
 
   return (
     <Container>
-      <HeaderBox>
-        <Logo>DUX</Logo>
-        <Frame>
-          <Title2>{t('search for vehicle')}</Title2>
-          <Title2>
-            {t('our services')}
-            <AppDropdown items={servicesItems} left={-200} top={55}>
-              <Icon>
-                <Image src={downIcon} alt='down arrow icon' />
-              </Icon>
-            </AppDropdown>
-          </Title2>
-          <Title2>{t('about us')}</Title2>
-          <Title2>{t('contact')}</Title2>
-        </Frame>
-        <Menu>
-          <Item>
-            <Image width={20} height={20} src={search} alt='search icon' />
-          </Item>
-          <Item onClick={() => router.push('/auth')}>
-            <Image width={20} height={20} src={person} alt='person icon' />
-          </Item>
-          <AppDropdown items={items} left={-3} top={66}>
-            <Item>
-              <Label>{locale.toUpperCase()}</Label>
-            </Item>
+      <Logo>DUX</Logo>
+      <Frame>
+        <Title2>{t('search for vehicle')}</Title2>
+        <Title2>
+          {t('our services')}
+          <AppDropdown items={servicesItems} left={-200} top={55}>
+            <Icon>
+              <Image src={downIcon} alt='down arrow icon' />
+            </Icon>
           </AppDropdown>
-        </Menu>
-      </HeaderBox>
+        </Title2>
+        <Title2>{t('about us')}</Title2>
+        <Title2>{t('contact')}</Title2>
+      </Frame>
+      <Menu>
+        <Item>
+          <Image width={20} height={20} src={search} alt='search icon' />
+        </Item>
+        <Item onClick={() => router.push('/auth')}>
+          <Image width={20} height={20} src={person} alt='person icon' />
+        </Item>
+        <AppDropdown items={items} left={-3} top={66}>
+          <Item>
+            <Label>{locale.toUpperCase()}</Label>
+          </Item>
+        </AppDropdown>
+      </Menu>
     </Container>
   )
 }
@@ -69,17 +67,10 @@ const FullHeader = (props: Props) => {
 export default FullHeader
 
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px 0px 16px 0px;
-`
-
-const HeaderBox = styled.div`
   max-width: 1200px;
   box-sizing: border-box;
   border-radius: 28px;
-  width: 100%;
+  width: 90%;
   height: 74px;
   padding: 8px 24px 8px 24px;
   display: flex;
