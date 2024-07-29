@@ -12,7 +12,7 @@ type Props = {
     brand: string
     model: string
     year: string
-    serialNumber: string
+    vinCode: string
     buyerFullName: string
     buyerPhoneNumber: string
     debt: number
@@ -33,7 +33,7 @@ const OrderList = ({ list, onClick, currentPage, itemsPerPage }: Props) => {
           onClick={onClick}
           imageLink={DummyImage.src}
           item={car}
-          key={`${car.serialNumber}82kj32${i}`}
+          key={`${car.vinCode}82kj32${i}`}
           index={i}
           shippingStep={2}
         />

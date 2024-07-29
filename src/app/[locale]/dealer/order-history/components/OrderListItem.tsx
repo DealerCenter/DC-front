@@ -15,7 +15,7 @@ type Props = {
     brand: string
     model: string
     year: string
-    serialNumber: string
+    vinCode: string
     buyerFullName: string
     buyerPhoneNumber: string
     debt: number
@@ -40,7 +40,7 @@ const OrderListItem = ({
     brand,
     model,
     year,
-    serialNumber,
+    vinCode,
     buyerFullName,
     buyerPhoneNumber,
     debt,
@@ -56,7 +56,7 @@ const OrderListItem = ({
           brand={brand}
           model={model}
           year={year}
-          serialNumber={serialNumber}
+          vinCode={vinCode}
         />
         <MiddleFrame>
           <UserInfoBox

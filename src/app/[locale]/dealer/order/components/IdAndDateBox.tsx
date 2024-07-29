@@ -43,6 +43,11 @@ const Container = styled.div`
   padding: 0 50px 0 8px;
   border-radius: 16px;
 
+  @media ${({ theme }) => theme.media?.sm} {
+    width: unset;
+    padding: 8px;
+  }
+
   box-shadow: 0 10px 45px 0 ${({ theme }) => theme.colors?.main_gray_16};
 `
 
@@ -51,6 +56,9 @@ const Frame = styled.div`
   flex-direction: column;
   gap: 8px;
   padding: 8px;
+  @media ${({ theme }) => theme.media?.sm} {
+    flex: 1;
+  }
 `
 const Title = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.medium};

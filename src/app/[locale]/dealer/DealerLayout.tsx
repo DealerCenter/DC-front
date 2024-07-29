@@ -18,7 +18,7 @@ const DealerLayout = ({ children }: Props) => {
       <Header />
       <Container>
         <Frame>
-          <SideBar />
+          {/* <SideBar /> */}
           {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
         </Frame>
       </Container>

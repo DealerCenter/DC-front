@@ -91,6 +91,11 @@
   "price descending": "Price descending",
   "price ascending": "Price ascending",
 
+  "cost of transportation": "Cost of transportation",
+  "cost of the car": "Cost of the car",
+  "total cost": "Total cost",
+  "current debt": "Current debt",
+
   "delete data warning": "After performing this activity, all the recipient's data will be deleted",
   "email notifications": "E-mail notifications",
   "sms notifications": "SMS notifications",

@@ -7,16 +7,10 @@ type Props = {
   brand: string
   model: string
   year: string
-  serialNumber: string
+  vinCode: string
 }
 
-const CarDetailsBox = ({
-  imageLink,
-  brand,
-  model,
-  year,
-  serialNumber,
-}: Props) => {
+const CarDetailsBox = ({ imageLink, brand, model, year, vinCode }: Props) => {
   return (
     <ImageFrame>
       <ImageBox>
@@ -36,9 +30,9 @@ const CarDetailsBox = ({
           </CarBrandBox>
           <TextGray>{model}</TextGray>
         </CarBrandFrame>
-        <SerialNumberBox>
-          <Text>{serialNumber}</Text>
-        </SerialNumberBox>
+        <vinCodeBox>
+          <Text>{vinCode}</Text>
+        </vinCodeBox>
       </DetailsBox>
     </ImageFrame>
   )
@@ -104,6 +98,6 @@ const Text = styled.p`
   font-weight: 400;
   color: ${({ theme }) => theme.colors?.text_black};
 `
-const SerialNumberBox = styled.div`
+const vinCodeBox = styled.div`
   padding: 10px 0px;
 `

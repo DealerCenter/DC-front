@@ -89,6 +89,11 @@
   "price descending": "ფასი კლებადი",
   "price ascending": "ფასი ზრდადი",
 
+  "cost of transportation": "ტრანსპორტირების ღირებულება",
+  "cost of the car": "მანქანის ღირებულება",
+  "total cost": "ჯამური ღირებულება",
+  "current debt": "მიმდინარე დავალიანება",
+
   "delete data warning": "მოცემული აქტივობის შესრულების შემდეგ მოხდება მიმღების ყველა მონაცემის წაშლა",
   "email notifications": "E-mail შეტყობინებები",
   "sms notifications": "SMS შეტყობინებები",

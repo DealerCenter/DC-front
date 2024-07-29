@@ -5,13 +5,18 @@ import Image from 'next/image'
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
 import arrowLeft from '@/assets/icons/arrows/arrowLeftBlack.svg'
 import arrowRight from '@/assets/icons/arrows/arrowRightBlack.svg'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
 type Props = {}
 
-const itemsPerPage = 12
-
 const ImagesComponent = (props: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const isTablet = useMediaQuery({ query: theme.media?.md })
+
   const [currentPage, setCurrentPage] = useState(1)
+
+  const itemsPerPage = isMobile ? 1 : isTablet ? 8 : 12
 
   const items = Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`)
 
@@ -35,17 +40,17 @@ const ImagesComponent = (props: Props) => {
           <Image
             src={DummyImage}
             alt='image'
-            width={180}
-            height={180}
+            width={isMobile ? 343 : 180}
+            height={isMobile ? 260 : 180}
             style={{ objectFit: 'cover' }}
           />
         </ImageBox>
       ))}
-      <Button left={-30} onClick={handleMoveLeft}>
-        <Image src={arrowLeft} alt='arrow left' height={25} />
+      <Button left={isMobile ? 10 : -30} onClick={handleMoveLeft}>
+        <Image src={arrowLeft} alt='arrow left' height={isMobile ? 16 : 25} />
       </Button>
-      <Button right={-30} onClick={handleMoveRight}>
-        <Image src={arrowRight} alt='arrow right' height={25} />
+      <Button right={isMobile ? 10 : -30} onClick={handleMoveRight}>
+        <Image src={arrowRight} alt='arrow right' height={isMobile ? 16 : 25} />
       </Button>
     </ImageFrame>
   )
@@ -54,12 +59,16 @@ const ImagesComponent = (props: Props) => {
 export default ImagesComponent
 
 const ImageBox = styled.div`
-  position: relative;
   width: 100%;
   width: 180px;
   height: 180px;
   overflow: hidden;
   border-radius: 18px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 343px;
+    height: 260px;
+  }
 `
 
 const ImageFrame = styled.div`
@@ -67,8 +76,19 @@ const ImageFrame = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: ${({ theme }) => theme.spacing?.sm};
-
   width: 1140px;
+
+  @media ${({ theme }) => theme.media?.md} {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 756px;
+  }
+
+  @media ${({ theme }) => theme.media?.sm} {
+    display: unset;
+    grid-template-columns: unset;
+    gap: unset;
+    width: unset;
+  }
 
   border: 1px solid blue;
 `
@@ -93,6 +113,12 @@ const Button = styled.button<ButtonProps>`
     left: ${left}px;
     right: ${right}px;
   `};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 38px;
+    height: 38px;
+    top: 115px;
+  }
 
   cursor: pointer;
 `
