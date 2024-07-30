@@ -13,7 +13,7 @@ const CarImagesAndDetailsBox = (props: Props) => {
   return (
     <Container>
       <ImagesComponent />
-      {/* <ButtonsRow /> */}
+      <ButtonsRow />
       <DetailsRow />
     </Container>
   )
