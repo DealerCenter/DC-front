@@ -9,6 +9,7 @@ import Image from 'next/image'
 import AppSelect from './AppSelect'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import BasicButton from '@/common/components/appButton/BasicButton'
 
 type Props = {}
 
@@ -45,32 +46,16 @@ const ButtonsRow = (props: Props) => {
         />
       ) : (
         <ButtonsFrame>
-          <AppButton
-            text={t('evacuator')}
-            type='filled'
-            onClick={() => {}}
-            width={150}
-          />
+          <BasicButton text={t('evacuator')} onClick={() => {}} height={48} />
           <Image src={splitGrayLine} alt='line icon' />
-          <AppButton
-            text={t('usa port')}
-            type='filled'
-            onClick={() => {}}
-            width={135}
-          />
+          <BasicButton text={t('usa port')} onClick={() => {}} height={48} />
           <Image src={splitGrayLine} alt='line icon' />
-          <AppButton
-            text={t('container')}
-            type='filled'
-            onClick={() => {}}
-            width={150}
-          />
+          <BasicButton text={t('container')} onClick={() => {}} height={48} />
           <Image src={splitGrayLine} alt='line icon' />
-          <AppButton
+          <BasicButton
             text={t('georgian port')}
-            type='filled'
             onClick={() => {}}
-            width={220}
+            height={48}
           />
         </ButtonsFrame>
       )}

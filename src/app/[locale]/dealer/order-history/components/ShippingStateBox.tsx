@@ -12,39 +12,24 @@ import {
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 
-type Props = { currentStep: 0 | 1 | 2 | 3 | 4 }
+type Props = {
+  shippingSteps: { stepName: string }[]
+  currentStep: 0 | 1 | 2 | 3 | 4
+}
 
-const steps = [
-  {
-    stepName: 'on auction',
-  },
-  {
-    stepName: 'usa warehouse',
-  },
-  {
-    stepName: 'on the way',
-  },
-  {
-    stepName: 'in poti port',
-  },
-  {
-    stepName: 'has arrived',
-  },
-]
-
-const ShippingStateBox = ({ currentStep }: Props) => {
+const ShippingStateBox = ({ currentStep, shippingSteps }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
   return (
     <Container>
-      {steps.map((step, i) => (
+      {shippingSteps.map((step, i) => (
         <Line key={`shippingStateBoxLine${i}`}>
           <Date>{i <= currentStep && `22/04${!isMobile ? '/2022' : ''}`}</Date>
           <IconBox>
-            {i === currentStep ? (
+            {i - currentStep === 1 ? (
               <CurrentIcon />
-            ) : i < currentStep ? (
+            ) : i <= currentStep ? (
               <DoneIcon />
             ) : (
               <PendingIcon />
@@ -53,7 +38,7 @@ const ShippingStateBox = ({ currentStep }: Props) => {
             {i < currentStep ? (
               <LineGreen />
             ) : (
-              i < steps.length - 1 && <LineGray />
+              i < shippingSteps.length - 1 && <LineGray />
             )}
           </IconBox>
           <Label>{t(step.stepName)}</Label>
@@ -65,14 +50,7 @@ const ShippingStateBox = ({ currentStep }: Props) => {
 
 export default ShippingStateBox
 
-const Container = styled.div`
-  width: 222px;
-  height: 180px;
-
-  @media ${({ theme }) => theme.media?.sm} {
-    width: 180px;
-  }
-`
+const Container = styled.div``
 
 const Label = styled.label`
   font-size: 13px;

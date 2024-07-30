@@ -13,8 +13,7 @@
   "legal person": "Legal person",
   "company name": "Company name",
   "identification code": "Identification code",
-  "address": "Address",
-  "website": "Website",
+
   "upload a certificate": " Upload a certificate of commercial activity from the public register",
   "drop the files here": "Drop the files here ...",
   "drop the file here": "Drop the file here ...",
@@ -91,6 +90,32 @@
   "price descending": "Price descending",
   "price ascending": "Price ascending",
 
+  "location": "Location",
+  "state": "State",
+  "address": "Address",
+  "parameters": "Parameters",
+  "insurance": "Insurance",
+  "manufacturer": "Manufacturer",
+  "model": "Model",
+  "year": "Year",
+  "category": "Category",
+  "mileage": "Mileage",
+  "more details": "More details",
+  "description": "Description",
+
+  "status": "Status",
+  "is in American warehouse": "It is in the American warehouse",
+  "in container": "It's in the container",
+  "undergoes customs procedures": "Undergoes customs procedures",
+  "was sent": "Was sent",
+
+  "container data": "Container data",
+  "data of the recipient": "Data of the recipient",
+  "dealer data": "Dealer data",
+
+  "website": "Website",
+  "yes": "Yes",
+
   "cost of transportation": "Cost of transportation",
   "cost of the car": "Cost of the car",
   "total cost": "Total cost",
@@ -134,5 +159,6 @@
     "name required": "Name is required",
     "surname required": "Surname is required",
     "actual address required": "Actual address is required"
-  }
+  },
+  "not added recipient data": "You have not added recipient data yet"
 }

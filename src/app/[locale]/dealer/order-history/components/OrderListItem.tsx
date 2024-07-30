@@ -6,6 +6,7 @@ import DebtBox from './DebtBox'
 import UserInfoBox from './UserInfoBox'
 import ShippingStateBox from './ShippingStateBox'
 import { useMediaQuery } from 'react-responsive'
+import { dummyShippingSteps } from '@/assets/DummyData'
 
 type Props = {
   imageLink: string
@@ -64,7 +65,14 @@ const OrderListItem = ({
             buyerFullName={buyerFullName}
             buyerPhoneNumber={buyerPhoneNumber}
           />
-          {isHiddenCustom || <ShippingStateBox currentStep={shippingStep} />}
+          <ShippingStateBoxFrame>
+            {isHiddenCustom || (
+              <ShippingStateBox
+                shippingSteps={dummyShippingSteps}
+                currentStep={shippingStep}
+              />
+            )}
+          </ShippingStateBoxFrame>
         </MiddleFrame>
       </Frame>
       <DebtBox amount={debt} arrivalState={arrivalState} />
@@ -120,5 +128,14 @@ const Frame = styled.div`
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;
     gap: 24px;
+  }
+`
+
+const ShippingStateBoxFrame = styled.div`
+  width: 222px;
+  height: 180px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 180px;
   }
 `

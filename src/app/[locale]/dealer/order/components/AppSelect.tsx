@@ -109,7 +109,7 @@ const OptionItem = styled.div`
   border-radius: 8px;
 `
 const OptionLabel = styled.label`
-  font-size: ${({ theme }) => theme.fontSizes?.small13};
+  font-size: ${({ theme }) => theme.fontSizes?.small_13};
   font-weight: ${({ theme }) => theme.fontWeight?.normal};
 `
 

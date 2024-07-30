@@ -31,15 +31,20 @@ const StyledButton = styled.button<ButtonProps>`
     `}
 
   ${({ height }) =>
-    height &&
-    css`
-      height: ${height}px;
-    `}      
+    height
+      ? css`
+          height: ${height}px;
+        `
+      : css`
+          height: 44px;
+        `}      
   
   
     @media ${({ theme }) => theme.media?.sm} {
   }
 
+  box-sizing: border-box;
+  padding: 0 ${({ theme }) => theme.spacing?.xl};
   transition: all 300ms ease-out;
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 700;

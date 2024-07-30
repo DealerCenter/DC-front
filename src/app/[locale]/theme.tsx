@@ -44,13 +44,14 @@ const theme = {
   fontSizes: {
     extraSmall: '10px',
     small: '12px',
-    small13: '13px',
+    small_13: '13px',
     medium: '16px',
     large: '20px',
   },
   fontWeight: { normal: '400', bold: '700' },
   radius: {
     lg: '12px',
+    xl: '16px',
   },
   spacing: {
     sm: '12px',

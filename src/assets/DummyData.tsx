@@ -64,3 +64,36 @@ export const orderedCars = [
     arrivalState: 'arrived',
   },
 ]
+
+export const dummyShippingSteps = [
+  {
+    stepName: 'on auction',
+  },
+  {
+    stepName: 'usa warehouse',
+  },
+  {
+    stepName: 'on the way',
+  },
+  {
+    stepName: 'in poti port',
+  },
+  {
+    stepName: 'has arrived',
+  },
+]
+
+export const dummyShippingSteps2 = [
+  {
+    stepName: 'is in American warehouse',
+  },
+  {
+    stepName: 'in container',
+  },
+  {
+    stepName: 'undergoes customs procedures',
+  },
+  {
+    stepName: 'was sent',
+  },
+]

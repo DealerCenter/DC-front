@@ -89,6 +89,32 @@
   "price descending": "ფასი კლებადი",
   "price ascending": "ფასი ზრდადი",
 
+  "location": "მდებარეობა",
+  "state": "შტატი",
+  "address": "მისამართი",
+  "parameters": "პარამეტრები",
+  "insurance": "დაზღვევა",
+  "manufacturer": "მწარმოებელი",
+  "model": "მოდელი",
+  "year": "წელი",
+  "category": "კატეგორია",
+  "mileage": "გარბენი",
+  "more details": "დამატებითი დეტალები",
+  "description": "აღწერა",
+
+  "status": "სტატუსი",
+  "is in American warehouse": "ამერიკის საწყობშია",
+  "in container": "კონტეინერშია",
+  "undergoes customs procedures": "გადის საბაჟო პროცედურებს",
+  "was sent": "გამოიგზავნა",
+
+  "container data": "კონტეინერის მონაცემები",
+  "data of the recipient": "მიმღები პირის მონაცემები",
+  "dealer data": "დილერის მონაცემები",
+
+  "website": "ვებგვერდი",
+  "yes": "დიახ",
+
   "cost of transportation": "ტრანსპორტირების ღირებულება",
   "cost of the car": "მანქანის ღირებულება",
   "total cost": "ჯამური ღირებულება",
@@ -132,5 +158,6 @@
     "name required": "სახელი აუცილებელია",
     "surname required": "გვარი აუცილებელია",
     "actual address required": "ფაქტობრივი მისამართი აუცილებელია"
-  }
+  },
+  "not added recipient data": "მიმღები პირის მონაცემები ჯერ არ გაქვს დამატებული "
 }

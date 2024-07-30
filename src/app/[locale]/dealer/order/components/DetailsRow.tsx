@@ -70,7 +70,7 @@ const DetailsRow = (props: Props) => {
           <BasicButton
             text='dafarva'
             onClick={() => {}}
-            width={140}
+            // width={140}
             height={56}
           />
         </DebtBox>
