@@ -1,14 +1,17 @@
 import Image from 'next/image'
 import React, { useTransition } from 'react'
 import styled from 'styled-components'
-
-import copyIcon from '@/assets/icons/copy.svg'
-import pdfIcon from '@/assets/icons/pdf.svg'
-import infoIcon from '@/assets/icons/infoIconEmpty.svg'
-import BasicButton from '@/common/components/appButton/BasicButton'
 import { useTranslations } from 'next-intl'
 
+import BasicButton from '@/common/components/appButton/BasicButton'
+import CopyButton from '@/common/components/copyToClipboard/CopyButton'
+
+import pdfIcon from '@/assets/icons/pdf.svg'
+import infoIcon from '@/assets/icons/infoIconEmpty.svg'
+
 type Props = {}
+
+const DummyVinCode = 'WD4PG2EE1J3371314'
 
 const DetailsRow = (props: Props) => {
   const t = useTranslations('')
@@ -18,15 +21,13 @@ const DetailsRow = (props: Props) => {
       <CarDetailsBox>
         <BrandLabelBox>
           <BrandLabel>Mercedes Benz</BrandLabel>
-          <Text23Bold>2020</Text23Bold>
+          <YearLabel>2020</YearLabel>
         </BrandLabelBox>
-        <Text19GrayBold>E class, Diezel</Text19GrayBold>
+        <CarModel>E class, Diezel</CarModel>
         <VinCodeBox>
-          <Text16Bold>VIN:</Text16Bold>
-          <Text16>WD4PG2EE1J3371314</Text16>
-          <IconBox>
-            <Image src={copyIcon} alt='copy icon' />
-          </IconBox>
+          <VinLabel>VIN:</VinLabel>
+          <VinCode>{DummyVinCode}</VinCode>
+          <CopyButton textToCopy={DummyVinCode} />
         </VinCodeBox>
       </CarDetailsBox>
       <OnMobileFlipFrame>
@@ -84,7 +85,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  /* width: 100%; */
+  gap: 16px;
 
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;
@@ -96,6 +98,7 @@ const OnMobileFlipFrame = styled.div`
   display: flex;
   flex-direction: row;
   gap: 16px;
+  /* width: 100%; */
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column-reverse;
     gap: 8px;
@@ -111,15 +114,37 @@ const CarDetailsBox = styled.div`
   border-radius: ${({ theme }) => theme.radius?.lg};
   padding: 32px;
   gap: ${({ theme }) => theme.spacing?.sm};
+
+  @media ${({ theme }) => theme.media?.md} {
+    width: 350px;
+  }
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 343px;
+    padding: 24px 16px;
+  }
 `
 const BrandLabelBox = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 `
 const BrandLabel = styled.label`
   font-size: 40px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors?.text_black};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    font-size: 23px;
+  }
+`
+const YearLabel = styled.label`
+  font-size: 23px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors?.text_black};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    font-size: 16px;
+  }
 `
 const Text23Bold = styled.label`
   font-size: 23px;
@@ -128,10 +153,14 @@ const Text23Bold = styled.label`
   white-space: nowrap;
 `
 
-const Text19GrayBold = styled.label`
+const CarModel = styled.label`
   font-size: 19px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors?.main_gray_68};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    color: ${({ theme }) => theme.colors?.main_gray_42};
+  }
 `
 const VinCodeBox = styled.div`
   display: flex;
@@ -141,29 +170,29 @@ const VinCodeBox = styled.div`
   gap: ${({ theme }) => theme.spacing?.sm};
 `
 
-const Text16 = styled.label`
+const VinCode = styled.label`
   font-size: 16px;
   font-weight: 400;
   color: ${({ theme }) => theme.colors?.text_black};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    font-size: 13px;
+  }
 `
-const Text16Bold = styled.label`
+const VinLabel = styled.label`
   font-size: 16px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors?.text_black};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    font-size: 13px;
+    font-weight: 400;
+  }
 `
 const Text16BoldGray = styled.label`
   font-size: 16px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors?.main_gray_68};
-`
-const IconBox = styled.div`
-  width: 56px;
-  height: 44px;
-  background-color: ${({ theme }) => theme.colors?.main_gray_10};
-  border-radius: ${({ theme }) => theme.radius?.lg};
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `
 
 const CostsBox = styled.div`
@@ -175,9 +204,16 @@ const CostsBox = styled.div`
   border-radius: ${({ theme }) => theme.radius?.lg};
   padding: 32px;
   gap: 8px;
+
+  @media ${({ theme }) => theme.media?.md} {
+    width: 378px;
+  }
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 343px;
+    padding: 16px;
+  }
 `
 const Line = styled.div`
-  width: 356px;
   height: 1px;
   background-color: ${({ theme }) => theme.colors?.main_gray_10};
   border-radius: 20px;
@@ -187,7 +223,6 @@ const CostFrame = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 0 0 8px;
 `
 const CostLabelsFrame = styled.div`
   width: 320px;
@@ -205,17 +240,24 @@ const IconBoxPdf = styled.div`
 `
 const DebtBox = styled.div`
   box-sizing: border-box;
-  /* width: 328px; */
+  width: 328px;
   display: flex;
+  align-items: flex-start;
+
   flex-direction: column;
-  align-items: center;
   background-color: ${({ theme }) => theme.colors?.white};
   border-radius: ${({ theme }) => theme.radius?.lg};
   padding: 32px;
   justify-content: space-between;
 
+  @media ${({ theme }) => theme.media?.md} {
+    width: 200px;
+  }
   @media ${({ theme }) => theme.media?.sm} {
+    align-items: center;
+    padding: 16px;
     flex-direction: row;
+    width: 343px;
   }
 `
 const DebtFrame = styled.div`

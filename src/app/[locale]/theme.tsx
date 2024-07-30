@@ -35,6 +35,7 @@ const theme = {
     sm: '(max-width: 900px)',
     md: '(max-width: 1440px) and (min-width: 900px)',
     lg: '(min-width: 1440px)',
+    notSm: '(min-width: 900px)',
   },
   fonts: {
     main: 'Arial, sans-serif',

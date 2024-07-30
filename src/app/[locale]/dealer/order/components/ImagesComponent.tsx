@@ -16,7 +16,7 @@ const ImagesComponent = (props: Props) => {
 
   const [currentPage, setCurrentPage] = useState(1)
 
-  const itemsPerPage = isMobile ? 1 : isTablet ? 8 : 12
+  const itemsPerPage = isMobile ? 1 : isTablet ? 10 : 12
 
   const items = Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`)
 
@@ -79,8 +79,8 @@ const ImageFrame = styled.div`
   width: 1140px;
 
   @media ${({ theme }) => theme.media?.md} {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    width: 756px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 960px;
   }
 
   @media ${({ theme }) => theme.media?.sm} {
@@ -89,8 +89,6 @@ const ImageFrame = styled.div`
     gap: unset;
     width: unset;
   }
-
-  border: 1px solid blue;
 `
 
 type ButtonProps = { left?: number; right?: number }
