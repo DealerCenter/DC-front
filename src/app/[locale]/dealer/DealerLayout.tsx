@@ -7,18 +7,24 @@ import SideBar from './components/sideBar/SideBar'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../theme'
 import Footer from '@/common/components/footer/Footer'
+import { usePathname } from '@/navigation'
+import { routeName } from '@/common/helpers/constants'
 
 type Props = { children: React.JSX.Element }
 
 const DealerLayout = ({ children }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
+  const pathname = usePathname()
+
+  const isSideBarVisible = pathname !== routeName.order
+
   return (
     <>
       <Header />
       <Container>
         <Frame>
-          {/* <SideBar /> */}
+          {isSideBarVisible && <SideBar />}
           {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
         </Frame>
       </Container>
