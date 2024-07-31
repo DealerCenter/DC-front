@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { ReactHTMLElement } from 'react'
 import styled, { css } from 'styled-components'
 
 type Props = {
-  text: string
+  children: React.ReactNode
   height?: number
   width?: number
   onClick: () => void
 }
 
-const BasicButton = ({ text, height, width, onClick }: Props) => {
+const BasicButton = ({ children, height, width, onClick }: Props) => {
   return (
     <StyledButton width={width} height={height} onClick={onClick}>
-      {text}
+      {children}
     </StyledButton>
   )
 }

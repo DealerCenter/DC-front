@@ -67,12 +67,9 @@ const DetailsRow = (props: Props) => {
               <Image src={infoIcon} alt='info icon' />
             </DebtLabelBox>
           </DebtFrame>
-          <BasicButton
-            text='dafarva'
-            onClick={() => {}}
-            // width={140}
-            height={56}
-          />
+          <BasicButton onClick={() => {}} height={56}>
+            {t('repay debt')}
+          </BasicButton>
         </DebtBox>
       </OnMobileFlipFrame>
     </Container>

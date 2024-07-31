@@ -19,8 +19,6 @@ type Props = {}
 const RightFrame = (props: Props) => {
   const t = useTranslations('')
 
-  console.log(dummyUserData.length)
-
   return (
     <Container>
       <Box>
@@ -60,14 +58,13 @@ const RightFrame = (props: Props) => {
           <AddPersonFrame>
             <Image src={addPersonIcon} alt='add person icon' />
             <Value>{t('not added recipient data')}</Value>
-            <BasicButton text={t('add recipient')} onClick={() => {}} />
+            <BasicButton onClick={() => {}}>{t('add recipient')}</BasicButton>
           </AddPersonFrame>
         )}
       </Box>
       <Box>
-        <Header>{t('dealer data')}</Header> <Line />{' '}
+        <Header>{t('dealer data')}</Header> <Line />
         <DataFrame>
-          {' '}
           <Name>Luka Tsilosani</Name>
           <Value>98237 293847 298</Value>
           <IconBox>
@@ -91,6 +88,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.md};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    gap: 8px;
+    /* min-width: 343px; */
+  }
 
   border: 1px solid blue;
 `
@@ -123,6 +125,7 @@ const DataFrame = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 4px;
 `
 
 const Name = styled.label`

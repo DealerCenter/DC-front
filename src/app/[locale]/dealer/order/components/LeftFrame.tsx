@@ -4,12 +4,15 @@ import React from 'react'
 import styled from 'styled-components'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
 const DummyData = [{ label: 'dazgveva' }]
 
 type Props = {}
 
 const LeftFrame = (props: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
   return (
@@ -43,7 +46,7 @@ const LeftFrame = (props: Props) => {
           </LabelPair>
           <LabelPair>
             <Label>{t('manufacturer')}</Label>
-            <Value>Beverly hills, 235</Value>
+            <Value>dummy text</Value>
           </LabelPair>
           <LabelPair>
             <Label>{t('model')}</Label>
@@ -63,11 +66,13 @@ const LeftFrame = (props: Props) => {
           </LabelPair>
         </LabelsFrame>
       </Box>
-      <Box>
-        <Header>{t('more details')}</Header>
-        <Line />
-        <TextArea placeholder={t('description')} />
-      </Box>
+      {!isMobile && (
+        <Box>
+          <Header>{t('more details')}</Header>
+          <Line />
+          <TextArea placeholder={t('description')} />
+        </Box>
+      )}
     </Container>
   )
 }
@@ -83,6 +88,14 @@ const Container = styled.div`
   @media ${({ theme }) => theme.media?.md} {
     flex: 5;
   }
+
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column-reverse;
+    gap: 8px;
+    /* min-width: 343px; */
+  }
+
+  border: 1px solid blue;
 `
 
 const Box = styled.div`

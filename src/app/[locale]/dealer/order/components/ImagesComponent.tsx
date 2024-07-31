@@ -3,10 +3,42 @@ import styled, { css } from 'styled-components'
 import Image from 'next/image'
 
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
+import DummyImage2 from '@/assets/images/DummyCarImage2.jpg'
+import DummyImage3 from '@/assets/images/DummyCarImage3.jpg'
 import arrowLeft from '@/assets/icons/arrows/arrowLeftBlack.svg'
 import arrowRight from '@/assets/icons/arrows/arrowRightBlack.svg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+
+const dummyImagesArray = [
+  DummyImage,
+  DummyImage2,
+  DummyImage3,
+  DummyImage,
+  DummyImage2,
+  DummyImage3,
+  DummyImage,
+  DummyImage2,
+  DummyImage3,
+  DummyImage,
+  DummyImage2,
+  DummyImage3,
+  DummyImage,
+  DummyImage2,
+  DummyImage3,
+  DummyImage,
+  DummyImage2,
+  DummyImage3,
+  DummyImage,
+  DummyImage2,
+  DummyImage3,
+  DummyImage,
+  DummyImage2,
+  DummyImage3,
+  DummyImage,
+  DummyImage2,
+  DummyImage3,
+]
 
 type Props = {}
 
@@ -15,10 +47,12 @@ const ImagesComponent = (props: Props) => {
   const isTablet = useMediaQuery({ query: theme.media?.md })
 
   const [currentPage, setCurrentPage] = useState(1)
+  const [isImageOpen, setIsImageOpen] = useState(false)
 
   const itemsPerPage = isMobile ? 1 : isTablet ? 10 : 12
 
-  const items = Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`)
+  // const items = Array.from({ length: 23 }, (_, i) => `Item ${i + 1}`)
+  const items = dummyImagesArray
 
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
@@ -27,18 +61,24 @@ const ImagesComponent = (props: Props) => {
   const totalPages = Math.ceil(items.length / itemsPerPage)
 
   const handleMoveRight = () => {
-    if (currentPage < totalPages) setCurrentPage((cur) => cur + 1)
+    if (currentPage < totalPages) {
+      console.log('moved right')
+      setCurrentPage((cur) => cur + 1)
+    }
   }
   const handleMoveLeft = () => {
-    if (currentPage > 1) setCurrentPage((cur) => cur - 1)
+    if (currentPage > 1) {
+      console.log('moved left')
+      setCurrentPage((cur) => cur - 1)
+    }
   }
 
   return (
     <ImageFrame>
-      {currentItems.map((item) => (
-        <ImageBox key={item}>
+      {currentItems.map((item, i) => (
+        <ImageBox key={`image398jk${i}`}>
           <Image
-            src={DummyImage}
+            src={item}
             alt='image'
             width={isMobile ? 343 : 180}
             height={isMobile ? 260 : 180}

@@ -25,29 +25,32 @@ const OrderProfile = (props: Props) => {
 
   return (
     <Container>
-      <IdAndDateFrame>
-        <IdAndDateBox
-          auctionId='932874929'
-          orderId='2387498739'
-          dateOfPurchase='20/04/2025'
-        />
-      </IdAndDateFrame>
-      {!isMobile && (
-        <>
-          <StateBoxFrame>
-            <ArrivalStateBox arrivalState='arrived' />
-          </StateBoxFrame>
-          <BackToOrderButton
-            onClick={() => router.push(routeName.orderHistory)}
-          >
-            <Image src={leftArrow} alt='left arrow icon' height={20} />
-            <BackToOrderLabel>{t('back to orders')}</BackToOrderLabel>
-          </BackToOrderButton>
-        </>
-      )}
-      <CarImagesAndDetailsBox />
+      <TopFrame>
+        <IdAndDateFrame>
+          <IdAndDateBox
+            auctionId='932874929'
+            orderId='2387498739'
+            dateOfPurchase='20/04/2025'
+          />
+        </IdAndDateFrame>
+        {!isMobile && (
+          <>
+            <StateBoxFrame>
+              <ArrivalStateBox arrivalState='arrived' />
+            </StateBoxFrame>
+            <BackToOrderButton
+              onClick={() => router.push(routeName.orderHistory)}
+            >
+              <Image src={leftArrow} alt='left arrow icon' height={20} />
+              <BackToOrderLabel>{t('back to orders')}</BackToOrderLabel>
+            </BackToOrderButton>
+          </>
+        )}
+        <CarImagesAndDetailsBox />
+      </TopFrame>
       <BottomFrame>
-        <LeftFrame /> <RightFrame />
+        <LeftFrame />
+        <RightFrame />
       </BottomFrame>
     </Container>
   )
@@ -58,6 +61,9 @@ export default OrderProfile
 const Container = styled.div`
   position: relative;
   max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing?.md};
 
   @media ${({ theme }) => theme.media?.sm} {
     display: flex;
@@ -65,6 +71,7 @@ const Container = styled.div`
     margin-top: 24px;
     gap: 8px;
     padding: 0 5%;
+    width: 100%;
   }
 `
 
@@ -115,9 +122,16 @@ const IdAndDateFrame = styled.div`
 
   z-index: 10;
 `
+const TopFrame = styled.div``
+
 const BottomFrame = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.md};
-  margin-top: ${({ theme }) => theme.spacing?.md};
+  /* margin-top: ${({ theme }) => theme.spacing?.md}; */
+
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
+    gap: 8px;
+  }
 `

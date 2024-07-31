@@ -46,17 +46,21 @@ const ButtonsRow = (props: Props) => {
         />
       ) : (
         <ButtonsFrame>
-          <BasicButton text={t('evacuator')} onClick={() => {}} height={48} />
+          <BasicButton onClick={() => {}} height={48}>
+            {t('evacuator')}
+          </BasicButton>
           <Image src={splitGrayLine} alt='line icon' />
-          <BasicButton text={t('usa port')} onClick={() => {}} height={48} />
+          <BasicButton onClick={() => {}} height={48}>
+            {t('usa port')}
+          </BasicButton>
           <Image src={splitGrayLine} alt='line icon' />
-          <BasicButton text={t('container')} onClick={() => {}} height={48} />
+          <BasicButton onClick={() => {}} height={48}>
+            {t('container')}
+          </BasicButton>
           <Image src={splitGrayLine} alt='line icon' />
-          <BasicButton
-            text={t('georgian port')}
-            onClick={() => {}}
-            height={48}
-          />
+          <BasicButton onClick={() => {}} height={48}>
+            {t('georgian port')}
+          </BasicButton>
         </ButtonsFrame>
       )}
     </>
