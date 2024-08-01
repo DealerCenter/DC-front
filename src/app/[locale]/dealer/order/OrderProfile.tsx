@@ -15,6 +15,7 @@ import { useMediaQuery } from 'react-responsive'
 import theme from '../../theme'
 import LeftFrame from './components/LeftFrame'
 import RightFrame from './components/RightFrame'
+import Gallery from '@/common/components/gallery/Gallery'
 
 type Props = {}
 
@@ -25,6 +26,7 @@ const OrderProfile = (props: Props) => {
 
   return (
     <Container>
+      <Gallery />
       <TopFrame>
         <IdAndDateFrame>
           <IdAndDateBox
