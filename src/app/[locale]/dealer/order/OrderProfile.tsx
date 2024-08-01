@@ -13,8 +13,8 @@ import IdAndDateBox from './components/IdAndDateBox'
 import leftArrow from '@/assets/icons/arrows/arrowLeftThinBlack.svg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../../theme'
-import LeftFrame from './components/LeftFrame'
-import RightFrame from './components/RightFrame'
+import LeftColumn from './components/LeftColumn'
+import RightColumn from './components/RightColumn'
 import Gallery from '@/common/components/gallery/Gallery'
 
 type Props = {}
@@ -51,8 +51,8 @@ const OrderProfile = (props: Props) => {
         <CarImagesAndDetailsBox />
       </TopFrame>
       <BottomFrame>
-        <LeftFrame />
-        <RightFrame />
+        <LeftColumn />
+        <RightColumn />
       </BottomFrame>
     </Container>
   )
@@ -130,7 +130,6 @@ const BottomFrame = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.md};
-  /* margin-top: ${({ theme }) => theme.spacing?.md}; */
 
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;
