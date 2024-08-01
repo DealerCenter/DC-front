@@ -7,6 +7,7 @@ import BasicButton from '@/common/components/appButton/BasicButton'
 
 import infoIcon from '@/assets/icons/infoIconEmpty.svg'
 import { useTranslations } from 'next-intl'
+import DebtTooltipContainer from './DebtTooltipContainer'
 
 type Props = {}
 
@@ -19,7 +20,7 @@ const DebtBox = (props: Props) => {
         <Text16BoldGray>{t('current debt')}</Text16BoldGray>
         <DebtLabelBox>
           <DebtLabel>$ 1,600</DebtLabel>
-          <AppTooltip tooltipValue={<DebtLabel>$ 1,600</DebtLabel>}>
+          <AppTooltip tooltipValue={<DebtTooltipContainer />} radius={20}>
             <Image src={infoIcon} alt='info icon' />
           </AppTooltip>
         </DebtLabelBox>
@@ -86,7 +87,7 @@ const DebtLabel = styled.label`
 `
 
 const Text16BoldGray = styled.label`
-  font-size: 16px;
-  font-weight: 700;
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
   color: ${({ theme }) => theme.colors?.main_gray_68};
 `
