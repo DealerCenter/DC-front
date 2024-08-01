@@ -91,10 +91,7 @@ const Container = styled.div`
 
   @media ${({ theme }) => theme.media?.sm} {
     gap: 8px;
-    /* min-width: 343px; */
   }
-
-  border: 1px solid blue;
 `
 
 const Line = styled.div`

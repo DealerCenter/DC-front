@@ -30,6 +30,4 @@ const Container = styled.div`
   @media ${({ theme }) => theme.media?.sm} {
     gap: 8px;
   }
-
-  border: 1px solid red;
 `

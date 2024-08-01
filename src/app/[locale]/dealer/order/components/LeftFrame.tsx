@@ -92,10 +92,7 @@ const Container = styled.div`
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column-reverse;
     gap: 8px;
-    /* min-width: 343px; */
   }
-
-  border: 1px solid blue;
 `
 
 const Box = styled.div`
