@@ -26,7 +26,7 @@ const OrderProfile = (props: Props) => {
 
   return (
     <Container>
-      <Gallery />
+      {/* <Gallery /> */}
       <TopFrame>
         <IdAndDateFrame>
           <IdAndDateBox

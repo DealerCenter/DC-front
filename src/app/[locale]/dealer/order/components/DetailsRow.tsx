@@ -8,6 +8,7 @@ import CopyButton from '@/common/components/copyToClipboard/CopyButton'
 
 import pdfIcon from '@/assets/icons/pdf.svg'
 import infoIcon from '@/assets/icons/infoIconEmpty.svg'
+import AppTooltip from '@/common/components/appTooltip/AppTooltip'
 
 type Props = {}
 
@@ -64,7 +65,9 @@ const DetailsRow = (props: Props) => {
             <Text16BoldGray>{t('current debt')}</Text16BoldGray>
             <DebtLabelBox>
               <DebtLabel>$ 1,600</DebtLabel>
-              <Image src={infoIcon} alt='info icon' />
+              <AppTooltip tooltipValue={<DebtLabel>$ 1,600</DebtLabel>}>
+                <Image src={infoIcon} alt='info icon' />
+              </AppTooltip>
             </DebtLabelBox>
           </DebtFrame>
           <BasicButton onClick={() => {}} height={56}>
@@ -82,7 +85,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* width: 100%; */
   gap: 16px;
 
   @media ${({ theme }) => theme.media?.sm} {
