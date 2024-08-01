@@ -4,6 +4,7 @@ export const routeName = {
   usersList: '/dealer/users-list',
   personalInformation: '/dealer/personal-information',
   dealer: '/dealer',
+  order: '/dealer/order',
 }
 
 export const locales = ['en', 'ge', 'ru']

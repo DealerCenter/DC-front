@@ -46,19 +46,7 @@ const Page = (props: Props) => {
       ) : authStep === 'registration' ? (
         <>
           <Header />
-          <RegistrationForm>
-            <>
-              {activeStep}
-              {type !== 'chooseType' && (
-                <AppButton
-                  text='Back to Choose Type'
-                  type='filled'
-                  disabled={false}
-                  onClick={() => setType('chooseType')}
-                ></AppButton>
-              )}
-            </>
-          </RegistrationForm>
+          <RegistrationForm>{activeStep}</RegistrationForm>
         </>
       ) : (
         <AuthLanding

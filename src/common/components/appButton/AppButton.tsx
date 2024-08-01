@@ -12,6 +12,7 @@ type Props = {
   disabled?: boolean
   isSmall?: boolean
   height?: ButtonHeight
+  width?: number
 }
 
 const AppButton = ({
@@ -21,9 +22,11 @@ const AppButton = ({
   disabled,
   isSmall,
   height = 'large',
+  width,
 }: Props) => {
   return (
     <StyledButton
+      width={width}
       disabled={disabled}
       customType={type}
       onClick={onClick}
@@ -41,6 +44,7 @@ type ButtonProps = {
   customType?: string
   isSmall?: boolean
   height: string
+  width?: number
 }
 
 const StyledButton = styled.button<ButtonProps>`
@@ -88,14 +92,18 @@ const StyledButton = styled.button<ButtonProps>`
             color: ${theme.colors?.main_gray_56};
           `};
 
-  ${({ isSmall }) =>
+  ${({ isSmall, width }) =>
     isSmall
       ? css`
           width: 200px;
         `
-      : css`
-          width: 350px;
-        `}
+      : width
+        ? css`
+            width: ${width}px;
+          `
+        : css`
+            width: 350px;
+          `}
 
   ${({ height }) =>
     height === 'medium'
@@ -107,6 +115,18 @@ const StyledButton = styled.button<ButtonProps>`
           height: 56px;
         `}      
 
+
+
+  @media ${({ theme }) => theme.media?.sm} {
+    ${({ isSmall }) =>
+      isSmall
+        ? css`
+            width: 200px;
+          `
+        : css`
+            width: 350px;
+          `}
+  }
 
   transition: all 300ms ease-out;
   font-size: ${({ theme }) => theme.fontSizes?.medium};

@@ -38,6 +38,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
   return (
     <StyledForm>
       <TextInput
+        width={442}
         type='text'
         name='nameOfRepresentative'
         placeholder={t('name of representative')}
@@ -51,6 +52,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         }
       />
       <TextInput
+        width={442}
         type='text'
         name='surnameOfRepresentative'
         placeholder={t('surname of representative')}
@@ -64,6 +66,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         }
       />
       <TextInput
+        width={442}
         type='text'
         name='contactNumber'
         placeholder={t('contact number')}
@@ -77,6 +80,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         }
       />
       <TextInput
+        width={442}
         type='date'
         name='dateOfBirth'
         placeholder={t('date of birth')}
@@ -89,6 +93,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         }
       />
       <TextInput
+        width={442}
         type='text'
         name='personalNumber'
         placeholder={t('personal number')}
@@ -102,11 +107,13 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         }
       />
       <FileDropZone
+        width={442}
         dropText={t('drop the file')}
         text={t('upload an ID photo')}
         uploadedText={t('photo uploaded')}
       />
       <AppButton
+        width={442}
         text={t('next')}
         type='filled'
         disabled={isButtonDisabled}

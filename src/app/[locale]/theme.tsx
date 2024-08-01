@@ -11,6 +11,7 @@ const theme = {
 
     white: '#FFFFFF',
     white_72: 'rgba(255, 255, 255, 0.72)',
+    white_68: 'rgba(255, 255, 255, 0.68)',
     white_24: 'rgba(255, 255, 255, 0.24)',
     white_10: 'rgba(255, 255, 255, 0.1)',
 
@@ -34,6 +35,7 @@ const theme = {
     sm: '(max-width: 900px)',
     md: '(max-width: 1440px) and (min-width: 900px)',
     lg: '(min-width: 1440px)',
+    notSm: '(min-width: 900px)',
   },
   fonts: {
     main: 'Arial, sans-serif',
@@ -42,11 +44,14 @@ const theme = {
   fontSizes: {
     extraSmall: '10px',
     small: '12px',
+    small_13: '13px',
     medium: '16px',
     large: '20px',
   },
+  fontWeight: { normal: '400', bold: '700' },
   radius: {
     lg: '12px',
+    xl: '16px',
   },
   spacing: {
     sm: '12px',

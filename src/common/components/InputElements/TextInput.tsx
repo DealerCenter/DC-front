@@ -14,6 +14,7 @@ type Props = {
   optionalInfo?: string | null
   isHalfSize?: boolean | undefined
   errorMessage?: string
+  width?: number
 }
 
 const TextInput = ({
@@ -27,11 +28,13 @@ const TextInput = ({
   optionalInfo = null,
   isHalfSize = false,
   errorMessage,
+  width,
 }: Props) => {
   return (
     <Container>
       {icon ? <IconBox>{icon}</IconBox> : null}
       <StyledInput
+        width={width}
         type={type}
         name={name}
         placeholder={placeholder}
@@ -61,6 +64,7 @@ const Container = styled.div`
 type InputProps = {
   icon: any
   isHalfSize: boolean
+  width?: number
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -76,20 +80,35 @@ const StyledInput = styled.input<InputProps>`
   border-radius: ${({ theme }) => theme.radius?.lg};
   font-size: ${({ theme }) => theme.fontSizes?.medium};
 
-  ${({ isHalfSize }) =>
+  ${({ isHalfSize, width }) =>
     isHalfSize
       ? css`
-          width: 167.5px;
+          width: 213px;
         `
-      : css`
-          width: 350px;
-        `}
+      : width
+        ? css`
+            width: ${width}px;
+          `
+        : css`
+            width: 350px;
+          `}
 
   ${({ icon }) =>
     icon &&
     css`
       padding-left: 50px;
     `}
+
+    @media ${({ theme }) => theme.media?.sm} {
+    ${({ isHalfSize }) =>
+      isHalfSize
+        ? css`
+            width: 167.5px;
+          `
+        : css`
+            width: 350px;
+          `}
+  }
 
   &::placeholder {
     color: ${({ theme }) => theme.colors?.main_gray_56};

@@ -34,30 +34,66 @@ export const orderedCars = [
     brand: 'Mercedes Benz',
     model: 'E class, Diezel',
     year: '2020',
-    serialNumber: 'WD4PG2EE1J3371314',
+    vinCode: 'WD4PG2EE1J3371314',
     buyerFullName: 'Luka Tsilosani',
     buyerPhoneNumber: '+995 000 070 707',
     debt: 5780,
     isArrived: false,
+    arrivalState: 'inWarehouse',
   },
   {
     brand: 'Mercedes Benz',
     model: 'X class',
     year: '2022',
-    serialNumber: 'WD4PG2EE1J2342434',
+    vinCode: 'WD4PG2EE1J2342434',
     buyerFullName: 'Zuka Jakeli',
     buyerPhoneNumber: '+995 000 111 111',
     debt: 5780,
     isArrived: true,
+    arrivalState: 'onTheWay',
   },
   {
     brand: 'Mercedes Benz',
     model: 'air',
     year: '500 BC',
-    serialNumber: 'WD4PG2EE1J3373424',
+    vinCode: 'WD4PG2EE1J3373424',
     buyerFullName: 'Siddhartha Gautama',
     buyerPhoneNumber: '+000 000 000 000',
     debt: 5780,
     isArrived: true,
+    arrivalState: 'arrived',
+  },
+]
+
+export const dummyShippingSteps = [
+  {
+    stepName: 'on auction',
+  },
+  {
+    stepName: 'usa warehouse',
+  },
+  {
+    stepName: 'on the way',
+  },
+  {
+    stepName: 'in poti port',
+  },
+  {
+    stepName: 'has arrived',
+  },
+]
+
+export const dummyShippingSteps2 = [
+  {
+    stepName: 'is in American warehouse',
+  },
+  {
+    stepName: 'in container',
+  },
+  {
+    stepName: 'undergoes customs procedures',
+  },
+  {
+    stepName: 'was sent',
   },
 ]

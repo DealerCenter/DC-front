@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import Modal from 'react-modal'
-import { string } from 'yup'
 
 type Props = {
   isOpen: boolean

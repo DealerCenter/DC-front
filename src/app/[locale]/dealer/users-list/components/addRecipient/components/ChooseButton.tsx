@@ -8,6 +8,7 @@ type Props = {
   isActive: boolean
   onClick: () => void
   withBorder?: boolean
+  fontSize?: string
 }
 
 const ChooseButton = ({
@@ -15,9 +16,15 @@ const ChooseButton = ({
   isActive,
   onClick,
   withBorder = false,
+  fontSize = '13px',
 }: Props) => {
   return (
-    <Container isActive={isActive} onClick={onClick} withBorder={withBorder}>
+    <Container
+      isActive={isActive}
+      onClick={onClick}
+      withBorder={withBorder}
+      fontSize={fontSize}
+    >
       {text}
     </Container>
   )
@@ -25,19 +32,26 @@ const ChooseButton = ({
 
 export default ChooseButton
 
-type ButtonProps = { isActive: boolean; withBorder: boolean }
+type ButtonProps = {
+  isActive: boolean
+  withBorder: boolean
+  fontSize: string
+}
 
 const Container = styled.div<ButtonProps>`
   flex-direction: row;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
   font-weight: 700;
-  border-radius: 12px;
+  border-radius: ${theme.radius?.lg};
   border: none;
   width: 143px;
   height: 48px;
+
+  ${({ fontSize }) => css`
+    font-size: ${fontSize};
+  `}
 
   ${({ withBorder }) =>
     withBorder
@@ -47,7 +61,7 @@ const Container = styled.div<ButtonProps>`
       : css`
           border: unset;
         `}
-
+          
   ${({ isActive }) =>
     isActive
       ? css`
@@ -62,4 +76,6 @@ const Container = styled.div<ButtonProps>`
             background-color: ${theme.colors?.main_gray_04};
           }
         `}
+
+  cursor: pointer;
 `

@@ -6,49 +6,76 @@ import DebtBox from './DebtBox'
 import UserInfoBox from './UserInfoBox'
 import ShippingStateBox from './ShippingStateBox'
 import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/theme'
-import { boolean } from 'yup'
+import { dummyShippingSteps } from '@/assets/DummyData'
 
 type Props = {
   imageLink: string
   index: number
+  shippingStep: 0 | 1 | 2 | 3 | 4
   item: {
     brand: string
     model: string
     year: string
-    serialNumber: string
+    vinCode: string
     buyerFullName: string
     buyerPhoneNumber: string
     debt: number
     isArrived: boolean
+    arrivalState: string
   }
+  onClick: () => void
 }
 
-const OrderListItem = ({ imageLink, item, index }: Props) => {
+const OrderListItem = ({
+  imageLink,
+  item,
+  index,
+  shippingStep,
+  onClick,
+}: Props) => {
   const isHiddenCustom = useMediaQuery({
     query: '(max-width: 1250px) and (min-width: 900px)',
   })
 
+  const {
+    brand,
+    model,
+    year,
+    vinCode,
+    buyerFullName,
+    buyerPhoneNumber,
+    debt,
+    isArrived,
+    arrivalState,
+  } = item
+
   return (
-    <Container index={index}>
+    <Container index={index} onClick={onClick}>
       <Frame>
         <CarDetailsBox
           imageLink={imageLink}
-          brand={item.brand}
-          model={item.model}
-          year={item.year}
-          serialNumber={item.serialNumber}
+          brand={brand}
+          model={model}
+          year={year}
+          vinCode={vinCode}
         />
         <MiddleFrame>
           <UserInfoBox
-            isArrived={item.isArrived}
-            buyerFullName={item.buyerFullName}
-            buyerPhoneNumber={item.buyerPhoneNumber}
+            isArrived={isArrived}
+            buyerFullName={buyerFullName}
+            buyerPhoneNumber={buyerPhoneNumber}
           />
-          {isHiddenCustom || <ShippingStateBox />}
+          <ShippingStateBoxFrame>
+            {isHiddenCustom || (
+              <ShippingStateBox
+                shippingSteps={dummyShippingSteps}
+                currentStep={shippingStep}
+              />
+            )}
+          </ShippingStateBoxFrame>
         </MiddleFrame>
       </Frame>
-      <DebtBox amount={item.debt} isArrived={item.isArrived} />
+      <DebtBox amount={debt} arrivalState={arrivalState} />
     </Container>
   )
 }
@@ -101,5 +128,14 @@ const Frame = styled.div`
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;
     gap: 24px;
+  }
+`
+
+const ShippingStateBoxFrame = styled.div`
+  width: 222px;
+  height: 180px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 180px;
   }
 `

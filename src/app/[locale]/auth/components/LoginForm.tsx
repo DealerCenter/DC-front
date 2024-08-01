@@ -35,6 +35,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
             icon={
               <Image src={emailIcon} alt='email icon' width={20} height={16} />
             }
+            width={442}
           />
         </TextInputContainer>
         <div>
@@ -54,6 +55,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
                   height={22}
                 />
               }
+              width={442}
             />
           </TextInputContainer>
           <LabelContainer>
@@ -69,6 +71,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
           text={t('login')}
           disabled={false}
           onClick={() => {}}
+          width={442}
         />
       </StyledForm>
       <div>
@@ -78,6 +81,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
           text={t('register')}
           disabled={false}
           onClick={goToRegistration}
+          width={442}
         />
       </div>
     </Container>
@@ -87,22 +91,23 @@ const LoginForm = ({ goToRegistration }: Props) => {
 export default LoginForm
 
 const Container = styled.div`
+  box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors?.background};
   margin: auto;
-  width: 374px;
-  min-height: 617px;
   border-radius: 28px;
-  padding: 42px 12px 42px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 48px;
   margin-top: 63px;
 
-  @media ${({ theme }) => theme.media?.lg} {
-    width: 47%;
-    max-width: 682px;
-    padding: 42px 120px 42px 120px;
+  max-width: 682px;
+  padding: 42px 120px 42px 120px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    min-width: 375px;
+    width: 90%;
+    padding: 42px 12px 42px 12px;
   }
 `
 

@@ -1,61 +1,78 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import { useRouter } from '@/navigation'
+import { routeName } from '@/common/helpers/constants'
 
 import HeaderH4Bold from '../components/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
-import OrderListItem from './components/OrderListItem'
+import AppDropdown from '@/common/components/appDropdown/AppDropdown'
+import OrderList from './components/OrderList'
+import { orderedCars } from '@/assets/DummyData'
 
 import filterIconBlack from '@/assets/icons/filterBlack.svg'
 import sortIconBlack from '@/assets/icons/sortBlack.svg'
-import DummyImage from '@/assets/images/DummyCarImage.jpg'
-import Image from 'next/image'
-import { orderedCars } from '@/assets/DummyData'
+import Pagination from '@/common/components/pagination/Pagination'
+
+import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
+import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
+
+const itemsPerPage = 8
+const totalPages = Math.ceil(orderedCars.length / 8)
 
 type Props = {}
 
 const OrderHistory = (props: Props) => {
+  const [currentPage, setCurrentPage] = useState(1)
   const t = useTranslations('')
+  const router = useRouter()
+
+  const sortOptions = [
+    { label: 'date descending', icon: arrowDown },
+    { label: 'date ascending', icon: arrowUp },
+    { label: 'price descending', icon: arrowDown },
+    { label: 'price ascending', icon: arrowUp },
+  ]
 
   return (
-    <Container>
-      <TopFrame>
-        <HeaderH4Bold text={t('order history')} />
-        <ButtonFrame>
-          <SecondaryButton
-            text={t('filter')}
-            onClick={() => {}}
-            icon={filterIconBlack}
-          ></SecondaryButton>
-          <SecondaryButton
-            text={t('sort')}
-            onClick={() => {}}
-            icon={sortIconBlack}
-          ></SecondaryButton>
-        </ButtonFrame>
-      </TopFrame>
-      <ListFrame>
-        {orderedCars.map((car, i) => (
-          <OrderListItem
-            imageLink={DummyImage.src}
-            item={car}
-            key={`${car.serialNumber}82kj32$${i}`}
-            index={i}
+    <>
+      <Container>
+        <TopFrame>
+          <HeaderH4Bold text={t('order history')} />
+          <ButtonFrame>
+            <SecondaryButton
+              text={t('filter')}
+              onClick={() => {}}
+              icon={filterIconBlack}
+            ></SecondaryButton>
+            <AppDropdown items={sortOptions} modalStyle='white'>
+              <SecondaryButton
+                text={t('sort')}
+                onClick={() => {}}
+                icon={sortIconBlack}
+              ></SecondaryButton>
+            </AppDropdown>
+          </ButtonFrame>
+        </TopFrame>
+        <OrderList
+          onClick={() => router.push(routeName.order)}
+          list={orderedCars}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+        />
+        <PaginationFrame>
+          <Pagination
+            currentPage={currentPage}
+            numOfPages={totalPages}
+            setCurrentPage={setCurrentPage}
           />
-        ))}
-        {/* <OrderListItem imageLink={DummyImage.src} isArrived={true} />
-        <OrderListItem imageLink={DummyImage.src} isArrived={true} />
-        <OrderListItem imageLink={DummyImage.src} isArrived={false} />
-        <OrderListItem imageLink={DummyImage.src} isArrived={false} />
-        <OrderListItem imageLink={DummyImage.src} isArrived={false} /> */}
-      </ListFrame>
-    </Container>
+        </PaginationFrame>
+      </Container>
+    </>
   )
 }
 
 export default OrderHistory
-
-const Line = styled.div``
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -88,8 +105,9 @@ const ButtonFrame = styled.div`
     padding: 0;
   }
 `
-const ListFrame = styled.ul`
+
+const PaginationFrame = styled.div`
   display: flex;
-  flex-direction: column;
-  padding: 0;
+  justify-content: center;
+  padding: ${({ theme }) => theme.spacing?.md};
 `

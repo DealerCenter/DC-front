@@ -1,90 +1,56 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-
-import checkmarkDone from '@/assets/icons/checkedGreen.svg'
-import lineGreen from '@/assets/icons/verticalLIneGreen.svg'
 import { useTranslations } from 'next-intl'
+import {
+  CurrentIcon,
+  DoneIcon,
+  LineGray,
+  LineGreen,
+  PendingIcon,
+} from './Icons'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
-type Props = {}
+type Props = {
+  shippingSteps: { stepName: string }[]
+  currentStep: 0 | 1 | 2 | 3 | 4
+}
 
-const ShippingStateBox = (props: Props) => {
+const ShippingStateBox = ({ currentStep, shippingSteps }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
   return (
     <Container>
-      <Line>
-        <Date>22/04/2022</Date>
-        <IconBox>
-          <Icon>
-            <Image src={checkmarkDone} alt='icon' />
-          </Icon>
-          <Icon>
-            <Image src={lineGreen} alt='icon' />
-          </Icon>
-        </IconBox>
-        <Label>{t('on auction')}</Label>
-      </Line>
-      <Line>
-        <Date>22/04/2022</Date>
-        <IconBox>
-          <Icon>
-            <Image src={checkmarkDone} alt='icon' />
-          </Icon>
-          <Icon>
-            <Image src={lineGreen} alt='icon' />
-          </Icon>
-        </IconBox>
-        <Label>{t('usa warehouse')}</Label>
-      </Line>
-      <Line>
-        <Date>22/04/2022</Date>
-        <IconBox>
-          <Icon>
-            <Image src={checkmarkDone} alt='icon' />
-          </Icon>
-          <Icon>
-            <Image src={lineGreen} alt='icon' />
-          </Icon>
-        </IconBox>
-        <Label>{t('on the way')}</Label>
-      </Line>
-      <Line>
-        <Date>22/04/2022</Date>
-        <IconBox>
-          <Icon>
-            <Image src={checkmarkDone} alt='icon' />
-          </Icon>
-          <Icon>
-            <Image src={lineGreen} alt='icon' />
-          </Icon>
-        </IconBox>
-        <Label>{t('in poti port')}</Label>
-      </Line>
-      <Line>
-        <Date>22/04/2022</Date>
-        <IconBox>
-          <Icon>
-            <Image src={checkmarkDone} alt='icon' />
-          </Icon>
-        </IconBox>
-        <Label>{t('has arrived')}</Label>
-      </Line>
-      <Reminder>No Logic</Reminder>
+      {shippingSteps.map((step, i) => (
+        <Line key={`shippingStateBoxLine${i}`}>
+          <Date>{i <= currentStep && `22/04${!isMobile ? '/2022' : ''}`}</Date>
+          <IconBox>
+            {i - currentStep === 1 ? (
+              <CurrentIcon />
+            ) : i <= currentStep ? (
+              <DoneIcon />
+            ) : (
+              <PendingIcon />
+            )}
+
+            {i < currentStep ? (
+              <LineGreen />
+            ) : (
+              i < shippingSteps.length - 1 && <LineGray />
+            )}
+          </IconBox>
+          <Label>{t(step.stepName)}</Label>
+        </Line>
+      ))}
     </Container>
   )
 }
 
 export default ShippingStateBox
 
-const Reminder = styled.div`
-  color: red;
-`
-
-const Container = styled.div`
-  width: 222px;
-  height: 180px;
-`
+const Container = styled.div``
 
 const Label = styled.label`
   font-size: 13px;
@@ -99,6 +65,11 @@ const Line = styled.div`
   gap: 5px;
 `
 const Date = styled.label`
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 40px;
+  }
+
+  width: 75px;
   font-size: 13px;
   font-weight: 400;
   color: ${({ theme }) => theme.colors?.main_gray_56};
@@ -108,12 +79,4 @@ const Date = styled.label`
 const IconBox = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const Icon = styled.div`
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `

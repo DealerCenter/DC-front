@@ -18,21 +18,23 @@ const RegistrationForm = ({ children }: Props) => {
 export default RegistrationForm
 
 const Container = styled.div`
+  box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors?.background};
   margin: auto;
-  width: 374px;
-  min-height: 617px;
+  /* min-height: 617px; */
   border-radius: 28px;
-  padding: 42px 12px 42px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 48px;
-  margin-top: 2rem;
+  margin-top: 63px;
 
-  @media ${({ theme }) => theme.media?.lg} {
-    width: 65%;
-    max-width: 560px;
-    padding: 42px 120px 42px 120px;
+  max-width: 682px;
+  padding: 42px 120px 42px 120px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    min-width: 375px;
+    width: 90%;
+    padding: 42px 12px 42px 12px;
   }
 `

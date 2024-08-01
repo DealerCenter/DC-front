@@ -36,13 +36,12 @@ const Container = styled.div`
   align-items: center;
   padding: 0px 8px;
   background-color: rgba(18, 18, 20, 1);
-  min-width: 300px;
-  margin: 16px 0;
+  min-width: 350px;
+  /* margin: 16px 0; */
   border-radius: 16px;
   min-height: 52px;
 
-  @media (max-width: 500px) {
-  }
+  width: 90%;
 `
 
 const Frame = styled.div`

@@ -37,6 +37,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
   return (
     <StyledForm>
       <TextInput
+        width={442}
         type='text'
         name='companyName'
         placeholder={t('company name')}
@@ -47,8 +48,8 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
           errors.companyName && touched.companyName ? errors.companyName : ''
         }
       />
-
       <TextInput
+        width={442}
         type='text'
         name='identificationCode'
         placeholder={t('identification code')}
@@ -62,6 +63,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         }
       />
       <TextInput
+        width={442}
         type='text'
         name='address'
         placeholder={t('address')}
@@ -71,6 +73,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         errorMessage={errors.address && touched.address ? errors.address : ''}
       />
       <TextInput
+        width={442}
         type='text'
         name='website'
         placeholder={t('website')}
@@ -80,11 +83,13 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         errorMessage={errors.website && touched.website ? errors.website : ''}
       />
       <FileDropZone
+        width={442}
         dropText={t('Drop the files here ...')}
         text={t('upload a certificate')}
         uploadedText={t('file uploaded')}
       />
       <AppButton
+        width={442}
         text={t('next')}
         type='filled'
         disabled={isButtonDisabled}
@@ -92,7 +97,12 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
       />
       <div>
         <StyledP>{t('already registered?')}</StyledP>
-        <AppButton type='outlined' text={t('login')} onClick={goToLogin} />
+        <AppButton
+          type='outlined'
+          text={t('login')}
+          onClick={goToLogin}
+          width={442}
+        />
       </div>
     </StyledForm>
   )

@@ -62,6 +62,7 @@
   "enter recipient data": "შეიყვანეთ მიმღების მონაცემები",
   "cancel": "გაუქმება",
   "delete": "წაშლა",
+  "repay debt": "დაფარვა",
   "save": "შენახვა",
   "filter": "ფილტრი",
   "sort": "სორტირება",
@@ -74,7 +75,52 @@
   "on the way": "გზაში",
   "in poti port": "ფოთის პორტში",
   "has arrived": "ჩამოსულია",
-  
+
+  "auction id": "აუქციონის ID",
+  "order id": "შეკვეთის ID",
+  "date of purchase": "ყიდვის თარიღი",
+
+  "evacuator": "ევაკუატორი",
+  "usa port": "აშშ პორტი",
+  "container": "კონტეინერი",
+  "georgian port": "საქართველოს პორტი",
+
+  "date descending": "თარიღი კლებადი",
+  "date ascending": "თარიღი ზრდადი",
+  "price descending": "ფასი კლებადი",
+  "price ascending": "ფასი ზრდადი",
+
+  "location": "მდებარეობა",
+  "state": "შტატი",
+  "address": "მისამართი",
+  "parameters": "პარამეტრები",
+  "insurance": "დაზღვევა",
+  "manufacturer": "მწარმოებელი",
+  "model": "მოდელი",
+  "year": "წელი",
+  "category": "კატეგორია",
+  "mileage": "გარბენი",
+  "more details": "დამატებითი დეტალები",
+  "description": "აღწერა",
+
+  "status": "სტატუსი",
+  "is in American warehouse": "ამერიკის საწყობშია",
+  "in container": "კონტეინერშია",
+  "undergoes customs procedures": "გადის საბაჟო პროცედურებს",
+  "was sent": "გამოიგზავნა",
+
+  "container data": "კონტეინერის მონაცემები",
+  "data of the recipient": "მიმღები პირის მონაცემები",
+  "dealer data": "დილერის მონაცემები",
+
+  "website": "ვებგვერდი",
+  "yes": "დიახ",
+
+  "cost of transportation": "ტრანსპორტირების ღირებულება",
+  "cost of the car": "მანქანის ღირებულება",
+  "total cost": "ჯამური ღირებულება",
+  "current debt": "მიმდინარე დავალიანება",
+
   "delete data warning": "მოცემული აქტივობის შესრულების შემდეგ მოხდება მიმღების ყველა მონაცემის წაშლა",
   "email notifications": "E-mail შეტყობინებები",
   "sms notifications": "SMS შეტყობინებები",
@@ -95,6 +141,8 @@
   "history check": "ისტორიის შემოწმება",
   "transportation calculator": "ტრანსპორტირების კალკულატორი",
 
+  "back to orders": "შეკვეთებში დაბრუნება",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 
@@ -111,5 +159,6 @@
     "name required": "სახელი აუცილებელია",
     "surname required": "გვარი აუცილებელია",
     "actual address required": "ფაქტობრივი მისამართი აუცილებელია"
-  }
+  },
+  "not added recipient data": "მიმღები პირის მონაცემები ჯერ არ გაქვს დამატებული "
 }

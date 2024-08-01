@@ -43,6 +43,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
   return (
     <StyledForm>
       <TextInput
+        width={442}
         type='email'
         name='email'
         placeholder={t('email')}
@@ -52,6 +53,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
         errorMessage={errors.email && touched.email ? errors.email : ''}
       />
       <TextInput
+        width={442}
         type='password'
         name='password'
         placeholder={t('password')}
@@ -79,6 +81,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
         />
       </PasswordErrorBox>
       <TextInput
+        width={442}
         type='password'
         name='repeatPassword'
         placeholder={t('repeat password')}
@@ -92,6 +95,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
         }
       />
       <AppButton
+        width={442}
         text={t('register')}
         type='filled'
         disabled={isButtonDisabled}
@@ -113,6 +117,10 @@ const StyledForm = styled.div`
 const PasswordErrorBox = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 350px;
+  width: 442px;
   gap: 12px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 350px;
+  }
 `

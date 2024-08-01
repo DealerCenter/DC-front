@@ -41,6 +41,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
     <StyledForm>
       <Frame>
         <TextInput
+          width={442}
           type='text'
           name='name'
           placeholder={t('name')}
@@ -51,6 +52,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
           errorMessage={errors.name && touched.name ? errors.name : ''}
         />
         <TextInput
+          width={442}
           type='text'
           name='surname'
           placeholder={t('surname')}
@@ -62,6 +64,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         />
       </Frame>
       <TextInput
+        width={442}
         type='date'
         name='dateOfBirth'
         placeholder={t('date of birth')}
@@ -73,6 +76,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         }
       />
       <TextInput
+        width={442}
         type='text'
         name='actualAddress'
         placeholder={t('actual address')}
@@ -86,6 +90,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         }
       />
       <TextInput
+        width={442}
         type='text'
         name='contactNumber'
         placeholder={t('contact number')}
@@ -99,6 +104,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         }
       />
       <AppButton
+        width={442}
         text={t('next')}
         type='filled'
         disabled={isButtonDisabled}
@@ -106,7 +112,12 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
       />
       <div>
         <StyledP>{t('already registered?')}</StyledP>
-        <AppButton type='outlined' text={t('login')} onClick={goToLogin} />
+        <AppButton
+          type='outlined'
+          text={t('login')}
+          onClick={goToLogin}
+          width={442}
+        />
       </div>
     </StyledForm>
   )
