@@ -1,28 +1,31 @@
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
 
 type Props = {}
 
 const DebtTooltipContainer = (props: Props) => {
+  const t = useTranslations('')
+
   return (
     <Container>
-      <Text16Bold>დავალიანება</Text16Bold>
+      <Text16Bold>{t('debt')}</Text16Bold>
       <LabelsBox>
-        <TextGray>ტრანსპორტირება</TextGray>
+        <TextGray>{t('transportation')}</TextGray>
         <TextGray>$7,500</TextGray>
       </LabelsBox>
       <LabelsBox>
-        <TextGray>ტრანსპორტირება</TextGray>
-        <TextGray>$7,500</TextGray>
+        <TextGray>{t('cost of vehicle')}</TextGray>
+        <TextGray>$3,800</TextGray>
       </LabelsBox>
       <LabelsBox>
-        <TextGray>ტრანსპორტირება</TextGray>
-        <TextGray>$7,500</TextGray>
+        <TextGray>თუ არის რაიმე კიდევ იმის ღირებულება</TextGray>
+        <TextGray>$0</TextGray>
       </LabelsBox>
       <Line />
       <LabelsBox>
-        <TextGray>ტრანსპორტირება</TextGray>
-        <TextGray>$7,500</TextGray>
+        <TextGray>{t('total debt')}</TextGray>
+        <TextGray>$10,800</TextGray>
       </LabelsBox>
     </Container>
   )

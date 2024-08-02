@@ -104,6 +104,10 @@
   "more details": "More details",
   "description": "Description",
 
+  "transportation": "Transportation",
+  "cost of vehicle": "The cost of the vehicle",
+  "total debt": "Total debt",
+
   "status": "Status",
   "is in American warehouse": "It is in the American warehouse",
   "in container": "It's in the container",

@@ -7,26 +7,35 @@ type Props = {
   children: React.ReactNode
   tooltipValue: React.ReactNode
   radius?: number
+  maxWidth?: number
+  trigger?: 'click' | 'hover'
 }
 
-const AppTooltip = ({ children, tooltipValue, radius }: Props) => {
-  const borderRadius = radius ? radius : 8
+const AppTooltip = ({
+  children,
+  tooltipValue,
+  radius,
+  maxWidth,
+  trigger,
+}: Props) => {
+  const appRadius = radius ? radius : 8
+  const appMaxWidth = maxWidth ? maxWidth : 320
 
   return (
     <ConfigProvider
       theme={{
         token: {
-          borderRadius: borderRadius,
+          borderRadius: appRadius,
         },
       }}
     >
       <Tooltip
-        // title={tooltipValue}
         title={<TooltipValueBox>{tooltipValue}</TooltipValueBox>}
         color={theme.colors?.white}
-        width={'320px'}
+        trigger={trigger}
+        overlayStyle={{ maxWidth: appMaxWidth }}
       >
-        {children}
+        <ChildrenFrame>{children}</ChildrenFrame>
       </Tooltip>
     </ConfigProvider>
   )
@@ -36,6 +45,8 @@ export default AppTooltip
 
 const TooltipValueBox = styled.div`
   padding: 8px 12px;
-  width: 320px;
-  background-color: red;
+`
+
+const ChildrenFrame = styled.div`
+  cursor: pointer;
 `
