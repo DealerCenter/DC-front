@@ -116,6 +116,7 @@ const ImageFrame = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: ${({ theme }) => theme.spacing?.sm};
   width: 1140px;
+  height: 372px;
 
   @media ${({ theme }) => theme.media?.md} {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -127,6 +128,7 @@ const ImageFrame = styled.div`
     grid-template-columns: unset;
     gap: unset;
     width: unset;
+    height: unset;
   }
 `
 
