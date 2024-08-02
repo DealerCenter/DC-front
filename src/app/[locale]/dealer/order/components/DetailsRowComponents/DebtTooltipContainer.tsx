@@ -38,6 +38,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 17px;
+  background-color: ${({ theme }) => theme.colors?.white};
+  padding: 20px;
+  border-radius: 16px;
 `
 
 const LabelsBox = styled.div`

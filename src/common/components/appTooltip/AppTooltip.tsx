@@ -6,9 +6,11 @@ import styled from 'styled-components'
 type Props = {
   children: React.ReactNode
   tooltipValue: React.ReactNode
+  arrow?: boolean
   radius?: number
   maxWidth?: number
   trigger?: 'click' | 'hover'
+  backgroundColor?: string
 }
 
 const AppTooltip = ({
@@ -17,9 +19,15 @@ const AppTooltip = ({
   radius,
   maxWidth,
   trigger,
+  arrow,
+  backgroundColor,
 }: Props) => {
-  const appRadius = radius ? radius : 8
+  const appRadius = radius ? radius : 30
   const appMaxWidth = maxWidth ? maxWidth : 320
+  const appBackgroundColor = backgroundColor
+    ? backgroundColor
+    : theme.colors?.white
+  const appArrow = arrow ? arrow : true
 
   return (
     <ConfigProvider
@@ -30,10 +38,12 @@ const AppTooltip = ({
       }}
     >
       <Tooltip
-        title={<TooltipValueBox>{tooltipValue}</TooltipValueBox>}
-        color={theme.colors?.white}
+        title={tooltipValue}
+        color={appBackgroundColor}
         trigger={trigger}
         overlayStyle={{ maxWidth: appMaxWidth }}
+        overlayInnerStyle={{ padding: 0 }}
+        arrow={appArrow}
       >
         <ChildrenFrame>{children}</ChildrenFrame>
       </Tooltip>
@@ -42,10 +52,6 @@ const AppTooltip = ({
 }
 
 export default AppTooltip
-
-const TooltipValueBox = styled.div`
-  padding: 8px 12px;
-`
 
 const ChildrenFrame = styled.div`
   cursor: pointer;
