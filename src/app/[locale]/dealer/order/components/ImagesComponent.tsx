@@ -9,6 +9,7 @@ import arrowLeft from '@/assets/icons/arrows/arrowLeftBlack.svg'
 import arrowRight from '@/assets/icons/arrows/arrowRightBlack.svg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import AppGallery from '@/common/components/gallery/AppGallery'
 
 const dummyImagesArray = [
   DummyImage,
@@ -72,26 +73,36 @@ const ImagesComponent = (props: Props) => {
     }
   }
 
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <ImageFrame>
-      {currentItems.map((item, i) => (
-        <ImageBox key={`image398jk${i}`}>
+    <>
+      {isOpen && <AppGallery isOpen={isOpen} setIsOpen={setIsOpen} />}
+      <ImageFrame>
+        {currentItems.map((item, i) => (
+          <ImageBox key={`image398jk${i}`}>
+            <Image
+              onClick={() => setIsOpen(!isOpen)}
+              src={item}
+              alt='image'
+              width={isMobile ? 343 : 180}
+              height={isMobile ? 260 : 180}
+              style={{ objectFit: 'cover' }}
+            />
+          </ImageBox>
+        ))}
+        <Button left={isMobile ? 10 : -30} onClick={handleMoveLeft}>
+          <Image src={arrowLeft} alt='arrow left' height={isMobile ? 16 : 25} />
+        </Button>
+        <Button right={isMobile ? 10 : -30} onClick={handleMoveRight}>
           <Image
-            src={item}
-            alt='image'
-            width={isMobile ? 343 : 180}
-            height={isMobile ? 260 : 180}
-            style={{ objectFit: 'cover' }}
+            src={arrowRight}
+            alt='arrow right'
+            height={isMobile ? 16 : 25}
           />
-        </ImageBox>
-      ))}
-      <Button left={isMobile ? 10 : -30} onClick={handleMoveLeft}>
-        <Image src={arrowLeft} alt='arrow left' height={isMobile ? 16 : 25} />
-      </Button>
-      <Button right={isMobile ? 10 : -30} onClick={handleMoveRight}>
-        <Image src={arrowRight} alt='arrow right' height={isMobile ? 16 : 25} />
-      </Button>
-    </ImageFrame>
+        </Button>
+      </ImageFrame>
+    </>
   )
 }
 
