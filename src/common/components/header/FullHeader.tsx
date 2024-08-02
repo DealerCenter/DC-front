@@ -19,6 +19,9 @@ const FullHeader = (props: Props) => {
   const handleDropdownOpen = () => {
     setIsOpenDropdown((is) => !is)
   }
+  const handleDropdownClose = () => {
+    setIsOpenDropdown(false)
+  }
 
   const t = useTranslations('')
   const router = useRouter()
@@ -49,7 +52,8 @@ const FullHeader = (props: Props) => {
             items={servicesItems}
             left={-200}
             top={55}
-            handleOpen={handleDropdownOpen}
+            handleToggle={handleDropdownOpen}
+            handleClose={handleDropdownClose}
           >
             <Icon isOpen={isOpenDropdown}>
               <Image src={downIcon} alt='down arrow icon' />

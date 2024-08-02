@@ -13,7 +13,8 @@ type Props = {
 
   left?: number
   top?: number
-  handleOpen?: () => void
+  handleToggle?: () => void
+  handleClose?: () => void
 }
 
 const AppDropdown = ({
@@ -22,7 +23,8 @@ const AppDropdown = ({
   left,
   top,
   modalStyle = 'black',
-  handleOpen,
+  handleToggle,
+  handleClose,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -30,7 +32,7 @@ const AppDropdown = ({
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
     {
-      handleOpen && handleOpen()
+      handleToggle && handleToggle()
     }
   }
 
@@ -40,6 +42,9 @@ const AppDropdown = ({
       !dropdownRef.current.contains(event.target as Node)
     ) {
       setIsOpen(false)
+      {
+        handleClose && handleClose()
+      }
     }
   }
 
