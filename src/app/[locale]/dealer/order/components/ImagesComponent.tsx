@@ -51,7 +51,6 @@ const ImagesComponent = (props: Props) => {
 
   const itemsPerPage = isMobile ? 1 : isTablet ? 10 : 12
 
-  // const items = Array.from({ length: 23 }, (_, i) => `Item ${i + 1}`)
   const items = dummyImagesArray
 
   const startIndex = (currentPage - 1) * itemsPerPage
