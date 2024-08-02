@@ -9,10 +9,17 @@ import search from '@/assets/icons/search.svg'
 import person from '@/assets/icons/person.svg'
 import AppDropdown from '../appDropdown/AppDropdown'
 import downIcon from '@/assets/icons/arrowDownWhite.svg'
+import { css } from 'styled-components'
 
 type Props = {}
 
 const FullHeader = (props: Props) => {
+  const [isOpenDropdown, setIsOpenDropdown] = useState(false)
+
+  const handleDropdownOpen = () => {
+    setIsOpenDropdown((is) => !is)
+  }
+
   const t = useTranslations('')
   const router = useRouter()
   const pathname = usePathname()
@@ -38,8 +45,13 @@ const FullHeader = (props: Props) => {
         <Title2>{t('search for vehicle')}</Title2>
         <Title2>
           {t('our services')}
-          <AppDropdown items={servicesItems} left={-200} top={55}>
-            <Icon>
+          <AppDropdown
+            items={servicesItems}
+            left={-200}
+            top={55}
+            handleOpen={handleDropdownOpen}
+          >
+            <Icon isOpen={isOpenDropdown}>
               <Image src={downIcon} alt='down arrow icon' />
             </Icon>
           </AppDropdown>
@@ -142,10 +154,19 @@ const Label = styled.label`
   font-weight: 500;
 `
 
-const Icon = styled.div`
+type IconProps = { isOpen: boolean }
+
+const Icon = styled.div<IconProps>`
   width: 24px;
   height: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: transform 0.3s ease-in-out;
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      transform: rotate(180deg);
+    `}
 `
