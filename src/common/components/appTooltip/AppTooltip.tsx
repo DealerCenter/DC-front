@@ -16,34 +16,27 @@ type Props = {
 const AppTooltip = ({
   children,
   tooltipValue,
-  radius,
-  maxWidth,
+  radius = 30,
+  maxWidth = 320,
   trigger,
-  arrow,
-  backgroundColor,
+  arrow = true,
+  backgroundColor = theme.colors?.white,
 }: Props) => {
-  const appRadius = radius ? radius : 30
-  const appMaxWidth = maxWidth ? maxWidth : 320
-  const appBackgroundColor = backgroundColor
-    ? backgroundColor
-    : theme.colors?.white
-  const appArrow = arrow ? arrow : true
-
   return (
     <ConfigProvider
       theme={{
         token: {
-          borderRadius: appRadius,
+          borderRadius: radius,
         },
       }}
     >
       <Tooltip
         title={tooltipValue}
-        color={appBackgroundColor}
+        color={backgroundColor}
         trigger={trigger}
-        overlayStyle={{ maxWidth: appMaxWidth }}
+        overlayStyle={{ maxWidth: maxWidth }}
         overlayInnerStyle={{ padding: 0 }}
-        arrow={appArrow}
+        arrow={arrow}
       >
         <ChildrenFrame>{children}</ChildrenFrame>
       </Tooltip>

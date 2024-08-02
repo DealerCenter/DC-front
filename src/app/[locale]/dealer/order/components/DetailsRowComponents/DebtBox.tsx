@@ -8,22 +8,29 @@ import BasicButton from '@/common/components/appButton/BasicButton'
 import infoIcon from '@/assets/icons/infoIconEmpty.svg'
 import { useTranslations } from 'next-intl'
 import DebtTooltipContainer from './DebtTooltipContainer'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
 type Props = {}
 
 const DebtBox = (props: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
   return (
     <Container>
       <DebtFrame>
         <Text16BoldGray>{t('current debt')}</Text16BoldGray>
-        <DebtLabelBox>
-          <DebtLabel>$ 1,600</DebtLabel>
-          <AppTooltip tooltipValue={<DebtTooltipContainer />} maxWidth={500}>
+        <AppTooltip
+          tooltipValue={<DebtTooltipContainer />}
+          maxWidth={500}
+          trigger={isMobile ? 'click' : 'hover'}
+        >
+          <DebtLabelBox>
+            <DebtLabel>$ 1,600</DebtLabel>
             <Image src={infoIcon} alt='info icon' />
-          </AppTooltip>
-        </DebtLabelBox>
+          </DebtLabelBox>
+        </AppTooltip>
       </DebtFrame>
       <BasicButton onClick={() => {}} height={56}>
         {t('repay debt')}
