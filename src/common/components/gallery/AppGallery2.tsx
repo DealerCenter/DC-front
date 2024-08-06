@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import { useMediaQuery } from 'react-responsive'
 import { useTranslations } from 'next-intl'
 
@@ -9,48 +9,56 @@ import theme from '@/app/[locale]/theme'
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
 import DummyImage2 from '@/assets/images/DummyCarImage2.jpg'
 import DummyImage3 from '@/assets/images/DummyCarImage3.jpg'
+import ImageNotFound from '@/assets/images/ImageNotFound404.jpg'
 
 import { CloseButton, LeftButton, RightButton } from './components/Buttons'
 
 const dummyImagesArray = [
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
+  { image: DummyImage, id: '1' },
+  { image: DummyImage2, id: '2' },
+  { image: DummyImage3, id: '3' },
+  { image: DummyImage, id: '12' },
+  { image: DummyImage2, id: '22' },
+  { image: DummyImage3, id: '32' },
+  { image: DummyImage, id: '13' },
+  { image: DummyImage2, id: '23' },
+  { image: DummyImage3, id: '33' },
+  { image: DummyImage, id: '14' },
+  { image: DummyImage2, id: '24' },
+  { image: DummyImage3, id: '34' },
+  { image: DummyImage, id: '15' },
+  { image: DummyImage2, id: '25' },
+  { image: DummyImage3, id: '35' },
+  { image: DummyImage, id: '16' },
+  { image: DummyImage2, id: '26' },
+  { image: DummyImage3, id: '36' },
+  { image: DummyImage, id: '17' },
+  { image: DummyImage2, id: '27' },
+  { image: DummyImage3, id: '37' },
+  { image: DummyImage, id: '18' },
+  { image: DummyImage2, id: '28' },
+  { image: DummyImage3, id: '38' },
 ]
 
-type Props = { isOpen: boolean; handleClose: () => void; imageNum: number }
+type Props = {
+  isOpen: boolean
+  handleClose: () => void
+  currentImageId: string
+  setCurrentImageId: (id: string) => void
+}
 
-const AppGallery2 = ({ isOpen, handleClose, imageNum }: Props) => {
+const AppGallery2 = ({
+  isOpen,
+  handleClose,
+  currentImageId,
+  setCurrentImageId,
+}: Props) => {
   const isTablet = useMediaQuery({ query: theme.media?.md })
 
   const t = useTranslations('')
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [currentImage, setCurrentImage] = useState(imageNum)
+  // const [currentImage, setCurrentImage] = useState(imageNum)
 
   const itemsPerPage = isTablet ? 3 : 5
 
@@ -73,6 +81,14 @@ const AppGallery2 = ({ isOpen, handleClose, imageNum }: Props) => {
     }
   }
 
+  const findItemById = (id: string) => {
+    const itemFound = items.find((item) => item.id === id)
+    if (itemFound) return itemFound.image
+    else return ImageNotFound
+  }
+
+  const currentImage = findItemById(currentImageId)
+
   return (
     <>
       {isOpen && (
@@ -84,7 +100,7 @@ const AppGallery2 = ({ isOpen, handleClose, imageNum }: Props) => {
             <ImageFrame>
               <ImageBox>
                 <Image
-                  src={DummyImage}
+                  src={currentImage}
                   alt='car image'
                   height={450}
                   objectFit='cover'
@@ -96,7 +112,12 @@ const AppGallery2 = ({ isOpen, handleClose, imageNum }: Props) => {
                   {currentItems.map((item, i) => (
                     <ImageBox key={`image398jk${i}`}>
                       <Image
-                        src={item}
+                        id={item.id}
+                        onClick={() => {
+                          setCurrentImageId(item.id)
+                          console.log('clicked', item.id)
+                        }}
+                        src={item.image}
                         alt='image'
                         width={180}
                         height={180}

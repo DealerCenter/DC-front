@@ -13,33 +13,30 @@ import AppGallery from '@/common/components/gallery/AppGallery'
 import AppGallery2 from '@/common/components/gallery/AppGallery2'
 
 const dummyImagesArray = [
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
-  DummyImage,
-  DummyImage2,
-  DummyImage3,
+  { image: DummyImage, id: '4' },
+  { image: DummyImage2, id: '2' },
+  { image: DummyImage3, id: '3' },
+  { image: DummyImage, id: '12' },
+  { image: DummyImage2, id: '22' },
+  { image: DummyImage3, id: '32' },
+  { image: DummyImage, id: '13' },
+  { image: DummyImage2, id: '23' },
+  { image: DummyImage3, id: '33' },
+  { image: DummyImage, id: '14' },
+  { image: DummyImage2, id: '24' },
+  { image: DummyImage3, id: '34' },
+  { image: DummyImage, id: '15' },
+  { image: DummyImage2, id: '25' },
+  { image: DummyImage3, id: '35' },
+  { image: DummyImage, id: '16' },
+  { image: DummyImage2, id: '26' },
+  { image: DummyImage3, id: '36' },
+  { image: DummyImage, id: '17' },
+  { image: DummyImage2, id: '27' },
+  { image: DummyImage3, id: '37' },
+  { image: DummyImage, id: '18' },
+  { image: DummyImage2, id: '28' },
+  { image: DummyImage3, id: '38' },
 ]
 
 type Props = {}
@@ -50,6 +47,8 @@ const ImagesComponent = (props: Props) => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [isImageOpen, setIsImageOpen] = useState(false)
+
+  const [currentImageId, setCurrentImageId] = useState('')
 
   const itemsPerPage = isMobile ? 1 : isTablet ? 10 : 12
 
@@ -76,20 +75,31 @@ const ImagesComponent = (props: Props) => {
 
   const [isOpen, setIsOpen] = useState(false)
 
+  const handleImageClick = (id: string) => {
+    setCurrentImageId(id)
+    setIsOpen(!isOpen)
+  }
+
   return (
     <>
       {/* {!isMobile && isOpen && (
         <AppGallery isOpen={isOpen} setIsOpen={setIsOpen} />
       )} */}
       {!isMobile && isOpen && (
-        <AppGallery2 isOpen={isOpen} handleClose={() => setIsOpen(false)} />
+        <AppGallery2
+          isOpen={isOpen}
+          handleClose={() => setIsOpen(false)}
+          currentImageId={currentImageId}
+          setCurrentImageId={setCurrentImageId}
+        />
       )}
       <ImageFrame>
         {currentItems.map((item, i) => (
           <ImageBox key={`image398jk${i}`}>
             <Image
-              onClick={() => setIsOpen(!isOpen)}
-              src={item}
+              id={item.id}
+              onClick={() => handleImageClick(item.id)}
+              src={item.image}
               alt='image'
               width={isMobile ? 343 : 180}
               height={isMobile ? 260 : 180}
