@@ -89,7 +89,7 @@ const DebtLabelBox = styled.div`
 const DebtLabel = styled.label`
   font-size: 28px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
   white-space: nowrap;
   cursor: pointer;
 `

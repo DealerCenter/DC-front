@@ -82,7 +82,7 @@ const Box = styled.div<BoxProps>`
           }
         `
       : css`
-          color: ${({ theme }) => theme.colors?.text_black};
+          color: ${({ theme }) => theme.colors?.black};
           background-color: ${({ theme }) => theme.colors?.white};
 
           &:hover {

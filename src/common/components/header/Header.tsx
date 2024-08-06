@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
-import FullHeader from './FullHeader'
+import FullHeader from './components/FullHeader'
 import { useMediaQuery } from 'react-responsive'
-import BurgerHeader from './BurgerHeader'
+import BurgerHeader from './components/BurgerHeader'
 import theme from '@/app/[locale]/theme'
 import styled from 'styled-components'
 

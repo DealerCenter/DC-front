@@ -99,7 +99,7 @@ const BackToOrderButton = styled.button`
 const BackToOrderLabel = styled.div`
   font-size: 19px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 `
 
 const StateBoxFrame = styled.div`

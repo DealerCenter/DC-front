@@ -55,7 +55,7 @@ const BrandLabelBox = styled.div`
 const BrandLabel = styled.label`
   font-size: 40px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 
   @media ${({ theme }) => theme.media?.sm} {
     font-size: 23px;
@@ -64,7 +64,7 @@ const BrandLabel = styled.label`
 const YearLabel = styled.label`
   font-size: 23px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 
   @media ${({ theme }) => theme.media?.sm} {
     font-size: 16px;
@@ -92,7 +92,7 @@ const VinCodeBox = styled.div`
 const VinCode = styled.label`
   font-size: 16px;
   font-weight: 400;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 
   @media ${({ theme }) => theme.media?.sm} {
     font-size: 13px;
@@ -102,7 +102,7 @@ const VinCode = styled.label`
 const VinLabel = styled.label`
   font-size: 16px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 
   @media ${({ theme }) => theme.media?.sm} {
     font-size: 13px;

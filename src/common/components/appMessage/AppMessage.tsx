@@ -22,7 +22,7 @@ const AppMessage = ({ children, messageText }: Props) => {
           </Icon>
         ),
         style: {
-          color: theme.colors?.text_black,
+          color: theme.colors?.black,
           fontSize: theme.fontSizes?.medium,
           fontWeight: theme.fontWeight?.bold,
         },

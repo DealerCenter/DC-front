@@ -51,7 +51,7 @@ const OnMobileFlipFrame = styled.div`
 const Text23Bold = styled.label`
   font-size: 23px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
   white-space: nowrap;
 `
 

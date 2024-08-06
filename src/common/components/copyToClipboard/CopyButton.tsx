@@ -71,7 +71,7 @@ const Bubble = styled.div`
   align-items: center;
   width: 70px;
   height: 30px;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
   background-color: ${({ theme }) => theme.colors?.main_gray_16};
   border-radius: ${({ theme }) => theme.radius?.lg};
   font-size: 13px;
