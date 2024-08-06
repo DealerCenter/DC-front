@@ -47,9 +47,6 @@ const StyledButton = styled.button<ButtonProps>`
       ? css`
           background-color: ${({ theme }) => theme.colors?.white};
           color: ${({ theme }) => theme.colors?.main_gray_100};
-          &:hover {
-            background-color: ${({ theme }) => theme.colors?.main_gray_04};
-          }
         `
       : color === 'black'
         ? css`
@@ -69,6 +66,9 @@ const StyledButton = styled.button<ButtonProps>`
   
 
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
   padding: 0 ${({ theme }) => theme.spacing?.xl};
   transition: all 300ms ease-out;

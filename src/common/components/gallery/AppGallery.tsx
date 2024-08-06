@@ -19,7 +19,7 @@ const images = [
   },
 ]
 
-type Props = { isOpen: boolean; setIsOpen: (arg: boolean) => {} }
+type Props = { isOpen: boolean; setIsOpen: (arg: boolean) => void }
 
 const AppGallery = ({ isOpen, setIsOpen }: Props) => {
   const renderLeftNav = (
@@ -46,7 +46,6 @@ const AppGallery = ({ isOpen, setIsOpen }: Props) => {
 
   return (
     <Container>
-      <Button>sdfadsfs</Button>
       <ImageGallery
         items={images}
         showPlayButton={false}
@@ -68,9 +67,3 @@ const AppGallery = ({ isOpen, setIsOpen }: Props) => {
 export default AppGallery
 
 const Container = styled.div``
-
-const Button = styled.div`
-  background-color: red;
-
-  z-index: 1000;
-`

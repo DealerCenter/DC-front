@@ -50,9 +50,16 @@ const ButtonsRow = (props: Props) => {
       ) : (
         <ButtonsFrame>
           {options.map((option, i) => (
-            <React.Fragment key={`shippingOptionButton${i}`}>
-              {i !== 0 && <Image src={splitGrayLine} alt='line icon' />}
+            <React.Fragment key={`shippingOptionButtonFragment${i}`}>
+              {i !== 0 && (
+                <Image
+                  src={splitGrayLine}
+                  alt='line icon'
+                  key={`splitGrayLine${i}`}
+                />
+              )}
               <BasicButton
+                key={`shippingOptionButton${i}`}
                 onClick={() => {
                   setSelectedOption(option.value)
                 }}

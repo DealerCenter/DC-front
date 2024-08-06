@@ -91,6 +91,7 @@ const DebtLabel = styled.label`
   font-weight: 700;
   color: ${({ theme }) => theme.colors?.text_black};
   white-space: nowrap;
+  cursor: pointer;
 `
 
 const Text16BoldGray = styled.label`

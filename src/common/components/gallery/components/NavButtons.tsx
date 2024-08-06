@@ -13,7 +13,7 @@ type Props = {
 export const LeftNav = ({ onClick, disabled }: Props) => {
   return (
     <StyledLeftButton onClick={onClick} disabled={disabled}>
-      <Image src={arrowLeft} alt='arrow right' height={25} />
+      <Image src={arrowLeft} alt='arrow left' height={25} />
     </StyledLeftButton>
   )
 }

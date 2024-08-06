@@ -10,6 +10,7 @@ import arrowRight from '@/assets/icons/arrows/arrowRightBlack.svg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 import AppGallery from '@/common/components/gallery/AppGallery'
+import AppGallery2 from '@/common/components/gallery/AppGallery2'
 
 const dummyImagesArray = [
   DummyImage,
@@ -77,7 +78,12 @@ const ImagesComponent = (props: Props) => {
 
   return (
     <>
-      {isOpen && <AppGallery isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {/* {!isMobile && isOpen && (
+        <AppGallery isOpen={isOpen} setIsOpen={setIsOpen} />
+      )} */}
+      {!isMobile && isOpen && (
+        <AppGallery2 isOpen={isOpen} handleClose={() => setIsOpen(false)} />
+      )}
       <ImageFrame>
         {currentItems.map((item, i) => (
           <ImageBox key={`image398jk${i}`}>
@@ -154,7 +160,6 @@ const Button = styled.button<ButtonProps>`
   align-items: center;
   border-radius: 100px;
   background-color: ${({ theme }) => theme.colors?.white_68};
-  /* background-color: red; */
   top: 159px;
 
   border: none;
