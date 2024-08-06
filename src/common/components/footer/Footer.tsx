@@ -57,9 +57,14 @@ const Container = styled.div`
   height: 377px;
   padding: 64px 120px 62px 120px;
   justify-content: space-between;
+  gap: 32px;
 
   @media ${({ theme }) => theme.media?.md} {
     padding: 64px;
+  }
+  @media ${({ theme }) => theme.media?.sm} {
+    padding: 64px 40px;
+    height: unset;
   }
 `
 
@@ -69,12 +74,24 @@ const TopFrame = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   height: 112px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
+    gap: 60px;
+    align-items: flex-start;
+    height: unset;
+  }
 `
+
 const LeftBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 112px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    height: unset;
+  }
 `
 
 const Logo = styled.h2`
@@ -90,7 +107,7 @@ const LeftBoxText = styled.p`
   color: ${({ theme }) => theme.colors?.white_72};
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 400;
-  width: 300px;
+  max-width: 300px;
 `
 
 const RightBox = styled.div`
@@ -98,6 +115,12 @@ const RightBox = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
+    gap: 24px;
+    height: unset;
+  }
 `
 
 const Item = styled.div`
@@ -109,6 +132,13 @@ const Item = styled.div`
   @media ${({ theme }) => theme.media?.md} {
     padding: 0 16px;
   }
+
+  @media ${({ theme }) => theme.media?.sm} {
+    align-items: flex-start;
+    padding: unset;
+  }
+
+  cursor: pointer;
 `
 
 const Label = styled.label`
@@ -128,6 +158,13 @@ const BottomFrame = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 24px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    height: unset;
+  }
 `
 
 const Text = styled.p`
