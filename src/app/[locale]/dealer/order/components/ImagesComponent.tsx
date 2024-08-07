@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
 
@@ -10,10 +10,9 @@ import arrowRight from '@/assets/icons/arrows/arrowRightBlack.svg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 import AppGallery from '@/common/components/gallery/AppGallery'
-import AppGallery2 from '@/common/components/gallery/AppGallery2'
 
 const dummyImagesArray = [
-  { image: DummyImage, id: '4' },
+  { image: DummyImage, id: '1' },
   { image: DummyImage2, id: '2' },
   { image: DummyImage3, id: '3' },
   { image: DummyImage, id: '12' },
@@ -45,8 +44,8 @@ const ImagesComponent = (props: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
 
+  const [isOpen, setIsOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const [isImageOpen, setIsImageOpen] = useState(false)
 
   const [currentImageId, setCurrentImageId] = useState('')
 
@@ -73,20 +72,19 @@ const ImagesComponent = (props: Props) => {
     }
   }
 
-  const [isOpen, setIsOpen] = useState(false)
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto'
+  }, [isOpen])
 
   const handleImageClick = (id: string) => {
     setCurrentImageId(id)
-    setIsOpen(!isOpen)
+    setIsOpen(true)
   }
 
   return (
     <>
-      {/* {!isMobile && isOpen && (
-        <AppGallery isOpen={isOpen} setIsOpen={setIsOpen} />
-      )} */}
       {!isMobile && isOpen && (
-        <AppGallery2
+        <AppGallery
           isOpen={isOpen}
           handleClose={() => setIsOpen(false)}
           currentImageId={currentImageId}
