@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Image, { StaticImageData } from 'next/image'
 import { useMediaQuery } from 'react-responsive'
 import { useTranslations } from 'next-intl'
@@ -98,19 +98,22 @@ const AppGallery2 = ({
               <CloseButton text={t('close')} onClick={handleClose} />
             </ButtonBox>
             <ImageFrame>
-              <ImageBox>
+              <ImageBoxMain>
                 <Image
                   src={currentImage}
                   alt='car image'
                   height={450}
                   objectFit='cover'
                 />
-              </ImageBox>
+              </ImageBoxMain>
               <CarouselFrame>
                 <LeftButton onClick={handleMoveLeft} />
                 <CarouselBox>
                   {currentItems.map((item, i) => (
-                    <ImageBox key={`image398jk${i}`}>
+                    <ImageBox
+                      key={`image398jk${i}`}
+                      isActive={item.id === currentImageId}
+                    >
                       <Image
                         id={item.id}
                         onClick={() => {
@@ -119,8 +122,8 @@ const AppGallery2 = ({
                         }}
                         src={item.image}
                         alt='image'
-                        width={180}
-                        height={180}
+                        width={160}
+                        height={160}
                         style={{ objectFit: 'cover' }}
                       />
                     </ImageBox>
@@ -154,9 +157,33 @@ const CarouselFrame = styled.div`
   width: 100%;
 `
 
-const ImageBox = styled.div`
+const ImageBoxMain = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   border-radius: 18px;
+`
+
+type ImageBoxProps = { isActive: boolean }
+
+const ImageBox = styled.div<ImageBoxProps>`
+  height: 160px;
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 18px;
+
+  ${({ isActive }) =>
+    isActive
+      ? css`
+          border: 3px solid ${({ theme }) => theme.colors?.link_blue};
+        `
+      : css`
+          border: 3px solid ${({ theme }) => theme.colors?.black};
+        `}
 `
 
 const ImageFrame = styled.div`

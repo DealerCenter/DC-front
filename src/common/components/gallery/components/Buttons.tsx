@@ -51,6 +51,8 @@ const Container = styled.div`
   gap: 24px;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 `
 
 const ButtonLabel = styled.label`
