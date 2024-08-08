@@ -1,37 +1,34 @@
-'use client'
-import React from 'react'
-import styled from 'styled-components'
-
 import Header from '@/common/components/header/Header'
-import SideBar from '../../../common/components/sideBar/SideBar'
+import React from 'react'
 import { useMediaQuery } from 'react-responsive'
+import styled from 'styled-components'
 import theme from '../theme'
 import Footer from '@/common/components/footer/Footer'
-import { usePathname } from '@/navigation'
+import SideBar from '../../../common/components/sideBar/SideBar'
 import { routeName } from '@/common/helpers/constants'
+
+const routeNames = {
+  orderHistory: routeName.adminOrderHistory,
+  personalInformation: routeName.adminManageNotifications,
+  usersList: routeName.adminUsersList,
+  manageNotifications: routeName.adminPersonalInformation,
+}
 
 type Props = { children: React.JSX.Element }
 
-const routeNames = {
-  orderHistory: routeName.dealerOrderHistory,
-  personalInformation: routeName.dealerManageNotifications,
-  usersList: routeName.dealerUsersList,
-  manageNotifications: routeName.dealerPersonalInformation,
-}
-
-const DealerLayout = ({ children }: Props) => {
+const AdminLayout = ({ children }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
-  const pathname = usePathname()
-
-  const isSideBarVisible = pathname !== routeName.order
+  //   const pathname = usePathname()
+  //   const isSideBarVisible = pathname !== routeName.order
 
   return (
     <>
       <Header />
       <Container>
         <Frame>
-          {isSideBarVisible && <SideBar routes={routeNames} />}
+          <SideBar routes={routeNames} />
+          {/* {isSideBarVisible     && <SideBar />} */}
           {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
         </Frame>
       </Container>
@@ -41,7 +38,7 @@ const DealerLayout = ({ children }: Props) => {
   )
 }
 
-export default DealerLayout
+export default AdminLayout
 
 const Container = styled.div`
   padding: 0 8%;

@@ -4,12 +4,18 @@
 .dealer-layout {
   background-color: #2020200a;
 }
+.admin-layout {
+  background-color: #2020200a;
+}
 
 @media only screen and (max-width: 900px) {
   html {
     background-color: white;
   }
   .dealer-layout {
+    background-color: white;
+  }
+  .admin-layout {
     background-color: white;
   }
 }

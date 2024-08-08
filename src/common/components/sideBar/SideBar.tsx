@@ -22,9 +22,16 @@ import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
 import theme from '@/app/[locale]/theme'
 
-type Props = {}
+type Props = {
+  routes: {
+    orderHistory: string
+    personalInformation: string
+    usersList: string
+    manageNotifications: string
+  }
+}
 
-const SideBar = (props: Props) => {
+const SideBar = ({ routes }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const pathname = usePathname()
@@ -61,53 +68,51 @@ const SideBar = (props: Props) => {
           <ButtonFrame>
             <BarButton
               isHovered={isHovered}
-              active={pathname === routeName.orderHistory}
+              active={pathname === routes.orderHistory}
               text={t('order history')}
-              icon={
-                pathname === routeName.orderHistory ? clockWhite : clockBlack
-              }
+              icon={pathname === routes.orderHistory ? clockWhite : clockBlack}
               width={20}
               height={20}
-              href={routeName.orderHistory}
+              href={routes.orderHistory}
             />
             <BarButton
               isHovered={isHovered}
-              active={pathname === routeName.personalInformation}
+              active={pathname === routes.personalInformation}
               text={t('personal information')}
               icon={
-                pathname === routeName.personalInformation
+                pathname === routes.personalInformation
                   ? personSettingsWhite
                   : personSettingsBlack
               }
               width={20}
               height={20}
-              href={routeName.personalInformation}
+              href={routes.personalInformation}
             />
             <BarButton
               isHovered={isHovered}
-              active={pathname === routeName.usersList}
+              active={pathname === routes.usersList}
               text={t('list of recipients')}
               icon={
-                pathname === routeName.usersList
+                pathname === routes.usersList
                   ? personListWhite
                   : personListBlack
               }
               width={20}
               height={20}
-              href={routeName.usersList}
+              href={routes.usersList}
             />
             <BarButton
               isHovered={isHovered}
-              active={pathname === routeName.manageNotifications}
+              active={pathname === routes.manageNotifications}
               text={t('manage notifications')}
               icon={
-                pathname === routeName.manageNotifications
+                pathname === routes.manageNotifications
                   ? bellIconWhite
                   : bellIconBlack
               }
               width={20}
               height={20}
-              href={routeName.manageNotifications}
+              href={routes.manageNotifications}
             />
           </ButtonFrame>
         </Frame>
