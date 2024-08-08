@@ -19,9 +19,16 @@ type Props = {
     isArrived: boolean
     arrivalState: string
   }[]
+  isEditing: boolean
 }
 
-const OrderList = ({ list, onClick, currentPage, itemsPerPage }: Props) => {
+const OrderList = ({
+  list,
+  onClick,
+  currentPage,
+  itemsPerPage,
+  isEditing,
+}: Props) => {
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
   const currentItems = list.slice(startIndex, endIndex)
@@ -35,7 +42,7 @@ const OrderList = ({ list, onClick, currentPage, itemsPerPage }: Props) => {
           item={car}
           key={`${car.vinCode}82kj32${i}`}
           index={i}
-          shippingStep={2}
+          isEditing={isEditing}
         />
       ))}
     </ListFrame>

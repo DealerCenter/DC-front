@@ -16,6 +16,8 @@ import Pagination from '@/common/components/pagination/Pagination'
 
 import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
 import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
+import addIcon from '@/assets/icons/plusInCircle.svg'
+import pencilIcon from '@/assets/icons/pencilFull.svg'
 
 const itemsPerPage = 8
 const totalPages = Math.ceil(orderedCars.length / 8)
@@ -24,6 +26,7 @@ type Props = {}
 
 const OrderHistory = (props: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
+  const [isEditing, setIsEditing] = useState(false)
   const t = useTranslations('')
   const router = useRouter()
 
@@ -40,25 +43,41 @@ const OrderHistory = (props: Props) => {
         <TopFrame>
           <HeaderH4Bold text={t('order history')} />
           <ButtonFrame>
-            <SecondaryButton
-              text={t('filter')}
-              onClick={() => {}}
-              icon={filterIconBlack}
-            ></SecondaryButton>
-            <AppDropdown items={sortOptions} modalStyle='white'>
+            <ButtonPairFrame>
               <SecondaryButton
-                text={t('sort')}
+                text={t('filter')}
                 onClick={() => {}}
-                icon={sortIconBlack}
+                icon={filterIconBlack}
               ></SecondaryButton>
-            </AppDropdown>
+              <AppDropdown items={sortOptions} modalStyle='white'>
+                <SecondaryButton
+                  text={t('sort')}
+                  onClick={() => {}}
+                  icon={sortIconBlack}
+                ></SecondaryButton>
+              </AppDropdown>
+            </ButtonPairFrame>
+            <ButtonPairFrame>
+              <SecondaryButton
+                text={t('add')}
+                onClick={() => {}}
+                icon={addIcon}
+              ></SecondaryButton>
+              <SecondaryButton
+                text={t('edit')}
+                onClick={() => setIsEditing((is) => !is)}
+                icon={pencilIcon}
+              ></SecondaryButton>
+            </ButtonPairFrame>
           </ButtonFrame>
         </TopFrame>
         <OrderList
-          onClick={() => router.push(routeName.order)}
+          // onClick={() => router.push(routeName.adminOrder)}
+          onClick={() => {}}
           list={orderedCars}
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
+          isEditing={isEditing}
         />
         <PaginationFrame>
           <Pagination
@@ -97,13 +116,18 @@ const TopFrame = styled.div`
 const ButtonFrame = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  gap: 10px;
+  justify-content: space-between;
   padding: 0 32px;
 
   @media ${({ theme }) => theme.media?.sm} {
     padding: 0;
   }
+`
+
+const ButtonPairFrame = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 `
 
 const PaginationFrame = styled.div`

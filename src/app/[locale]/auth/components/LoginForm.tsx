@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import Checkbox from '@/common/components/checkbox/Checkbox'
+import CheckBox from '@/common/components/checkbox/CheckBox'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
 import useLoginForm from '../hooks/useLoginForm'
@@ -139,7 +139,7 @@ const StyledP = styled.p`
   margin-top: 24px;
 `
 
-const StyledCheckbox = styled(Checkbox)`
+const StyledCheckbox = styled(CheckBox)`
   margin: 8px;
   padding: 10px;
 `

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 
-import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
+import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import AppDropdown from '@/common/components/appDropdown/AppDropdown'
 import OrderList from './components/OrderList'
@@ -55,7 +55,7 @@ const OrderHistory = (props: Props) => {
           </ButtonFrame>
         </TopFrame>
         <OrderList
-          onClick={() => router.push(routeName.order)}
+          onClick={() => router.push(routeName.dealerOrder)}
           list={orderedCars}
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}

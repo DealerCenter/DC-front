@@ -1,49 +1,113 @@
 import Image from 'next/image'
-import React from 'react'
-import styled from 'styled-components'
-import checkboxEmpty from '@/assets/icons/checkboxEmpty.svg'
-import checkboxFilled from '@/assets/icons/checkboxFilled.svg'
+import React, { useState } from 'react'
+import styled, { css } from 'styled-components'
 
-type Props = { checked: boolean; value: string }
+import checkWhite from '@/assets/icons/checkBoxIcons/checkWhite.svg'
+import checkGray from '@/assets/icons/checkBoxIcons/checkGray.svg'
+import checkDarkGray from '@/assets/icons/checkBoxIcons/checkDarkGray.svg'
+import deleteWhite from '@/assets/icons/checkBoxIcons/deleteWhite.svg'
+import deleteGray from '@/assets/icons/checkBoxIcons/deleteGray.svg'
+import deleteDarkGray from '@/assets/icons/checkBoxIcons/deleteDarkGray.svg'
 
-const Checkbox = ({ checked, value }: Props) => {
+type Props = {
+  isChecked: boolean
+  disabled?: boolean
+  type?: 'check' | 'delete'
+  shape?: 'circle' | 'square'
+}
+
+const CheckBox = ({
+  isChecked,
+  disabled = false,
+  type = 'check',
+  shape = 'square',
+}: Props) => {
+  const [isActive, setIsActive] = useState(false)
+
   return (
-    <Container>
-      {checked ? (
-        <Icon>
-          <Image
-            src={checkboxFilled}
-            alt='checkbox filled'
-            width={24}
-            height={24}
-          />
-        </Icon>
-      ) : (
-        <Icon>
-          <Image
-            src={checkboxEmpty}
-            alt='checkbox empty'
-            width={24}
-            height={24}
-          />
-        </Icon>
+    <Box
+      shape={shape}
+      isChecked={!disabled && isChecked}
+      disabled={disabled}
+      onMouseDown={() => setIsActive(true)}
+      onMouseUp={() => setIsActive(false)}
+    >
+      {isChecked && type === 'check' && (
+        <Image
+          src={isActive ? checkGray : checkWhite}
+          alt='check icon'
+          width={12}
+        />
       )}
-    </Container>
+      {isChecked && type === 'delete' && (
+        <Image
+          src={isActive ? deleteGray : deleteWhite}
+          alt='check icon'
+          width={12}
+        />
+      )}
+    </Box>
   )
 }
 
-export default Checkbox
+export default CheckBox
 
-const StyledInput = styled.input`
-  display: none;
-`
+type BoxProps = {
+  isChecked: boolean
+  disabled: boolean
+  shape?: 'circle' | 'square'
+}
 
-const Container = styled.div`
-  width: 48px;
-  height: 48px;
+const Box = styled.div<BoxProps>`
+  width: 24px;
+  height: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
-`
 
-const Icon = styled.div``
+  border: 1px solid ${({ theme }) => theme.colors?.main_gray_16};
+  ${({ shape }) =>
+    shape === 'square'
+      ? css`
+          border-radius: 6px;
+        `
+      : shape === 'circle' &&
+        css`
+          border-radius: 20px;
+        `}
+
+  ${({ isChecked, disabled }) =>
+    disabled && isChecked
+      ? css`
+          background-color: ${({ theme }) => theme.colors?.main_gray_16};
+          border: unset;
+        `
+      : !disabled && isChecked
+        ? css`
+            background-color: ${({ theme }) => theme.colors?.main_gray_100};
+            &:hover {
+              background-color: ${({ theme }) => theme.colors?.main_gray_90};
+            }
+            &:active {
+              background-color: ${({ theme }) => theme.colors?.main_gray_68};
+            }
+          `
+        : !disabled && !isChecked
+          ? css`
+              background-color: unset;
+              &:hover {
+                background-color: ${({ theme }) => theme.colors?.main_gray_04};
+              }
+              &:active {
+                background-color: ${({ theme }) => theme.colors?.main_gray_10};
+              }
+            `
+          : disabled &&
+            !isChecked &&
+            css`
+              background-color: unset;
+              border: 1px solid ${({ theme }) => theme.colors?.main_gray_04};
+            `}
+
+  cursor: pointer;
+`

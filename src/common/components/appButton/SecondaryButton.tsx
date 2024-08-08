@@ -18,6 +18,7 @@ const SecondaryButton = ({ text, onClick, icon }: Props) => {
 export default SecondaryButton
 
 const Container = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -28,12 +29,20 @@ const Container = styled.div`
   padding: 0 20px 0 14px;
   gap: 6px;
 
+  &:hover {
+    background-color: ${({ theme }) => theme.colors?.main_gray_04};
+  }
+  &:active {
+    background-color: ${({ theme }) => theme.colors?.main_gray_16};
+  }
+
   cursor: pointer;
 `
 const Label = styled.label`
   color: ${({ theme }) => theme.colors?.main_gray_100};
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
 `
 const IconBox = styled.div`
   display: flex;

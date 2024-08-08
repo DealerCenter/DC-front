@@ -134,6 +134,8 @@ const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 `
 
 const InputFieldsFrame = styled.div`

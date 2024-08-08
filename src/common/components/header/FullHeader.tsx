@@ -36,14 +36,14 @@ const FullHeader = (props: Props) => {
       <Logo>DUX</Logo>
       <Frame>
         <Title2>{t('search for vehicle')}</Title2>
-        <Title2>
-          {t('our services')}
-          <AppDropdown items={servicesItems} left={-200} top={55}>
+        <AppDropdown items={servicesItems} left={0} top={70}>
+          <Title2>
+            {t('our services')}
             <Icon>
               <Image src={downIcon} alt='down arrow icon' />
             </Icon>
-          </AppDropdown>
-        </Title2>
+          </Title2>
+        </AppDropdown>
         <Title2>{t('about us')}</Title2>
         <Title2>{t('contact')}</Title2>
       </Frame>
@@ -54,7 +54,7 @@ const FullHeader = (props: Props) => {
         <Item onClick={() => router.push('/auth')}>
           <Image width={20} height={20} src={person} alt='person icon' />
         </Item>
-        <AppDropdown items={items} left={-3} top={66}>
+        <AppDropdown items={items} left={-3} top={65}>
           <Item>
             <Label>{locale.toUpperCase()}</Label>
           </Item>

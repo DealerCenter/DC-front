@@ -1,86 +1,94 @@
-import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
-import CarDetailsBox from './CarDetailsBox'
-import DebtBox from './DebtBox'
-import UserInfoBox from './UserInfoBox'
-import ShippingStateBox from './ShippingStateBox'
-import { useMediaQuery } from 'react-responsive'
-import { dummyShippingSteps } from '@/assets/DummyData'
+import DetailsBox from './DetailsBox'
+import CarImageAndModelBox from './CarImageAndModelBox'
+import Image from 'next/image'
+
+import grabHandle from '@/assets/icons/GrabHandle2x3Dots.svg'
+import CheckBox from '@/common/components/checkbox/CheckBox'
 
 type Props = {
   imageLink: string
   index: number
-  shippingStep: 0 | 1 | 2 | 3 | 4
   item: {
     brand: string
-    model: string
     year: string
     vinCode: string
     buyerFullName: string
     buyerPhoneNumber: string
     debt: number
-    isArrived: boolean
     arrivalState: string
   }
   onClick: () => void
+  isEditing: boolean
 }
 
 const OrderListItem = ({
   imageLink,
   item,
   index,
-  shippingStep,
   onClick,
+  isEditing,
 }: Props) => {
-  const isHiddenCustom = useMediaQuery({
-    query: '(max-width: 1250px) and (min-width: 900px)',
-  })
+  const [isChecked, setIsChecked] = useState(false)
 
   const {
     brand,
-    model,
     year,
     vinCode,
     buyerFullName,
     buyerPhoneNumber,
     debt,
-    isArrived,
     arrivalState,
   } = item
 
+  const handleClick = () => {
+    onClick()
+  }
+
   return (
-    <Container index={index} onClick={onClick}>
+    <Container index={index} onClick={handleClick}>
       <Frame>
-        <CarDetailsBox
-          imageLink={imageLink}
-          brand={brand}
-          model={model}
-          year={year}
-          vinCode={vinCode}
-        />
-        <MiddleFrame>
-          <UserInfoBox
-            isArrived={isArrived}
-            buyerFullName={buyerFullName}
-            buyerPhoneNumber={buyerPhoneNumber}
-          />
-          <ShippingStateBoxFrame>
-            {isHiddenCustom || (
-              <ShippingStateBox
-                shippingSteps={dummyShippingSteps}
-                currentStep={shippingStep}
-              />
-            )}
-          </ShippingStateBoxFrame>
-        </MiddleFrame>
+        <CheckboxFrame>
+          {isEditing && (
+            <>
+              <IconBox>
+                <Image src={grabHandle} alt='grab handle icon' />
+              </IconBox>
+              <IconBox onClick={() => setIsChecked((is) => !is)}>
+                <CheckBox isChecked={isChecked} />
+              </IconBox>
+            </>
+          )}
+        </CheckboxFrame>
+        <CarImageAndModelBox imageLink={imageLink} brand={brand} year={year} />
       </Frame>
-      <DebtBox amount={debt} arrivalState={arrivalState} />
+      <DetailsBox
+        amount={debt}
+        arrivalState={arrivalState}
+        buyerFullName={buyerFullName}
+        buyerPhoneNumber={buyerPhoneNumber}
+        vinCode={vinCode}
+      />
     </Container>
   )
 }
 
 export default OrderListItem
+
+const CheckboxFrame = styled.div`
+  width: 56px;
+  display: flex;
+  flex-direction: row;
+`
+
+const IconBox = styled.div`
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 type IndexProp = { index: number }
 
@@ -89,7 +97,7 @@ const Container = styled.li<IndexProp>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 212px;
+  height: 100px;
 
   padding: ${({ theme }) => theme.spacing?.md};
   flex: 1;
@@ -112,30 +120,15 @@ const Container = styled.li<IndexProp>`
     gap: 24px;
   }
 `
-const MiddleFrame = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 24px;
-  flex: 0.8;
-`
+
 const Frame = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  flex: 0.9;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing?.sm};
 
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;
     gap: 24px;
-  }
-`
-
-const ShippingStateBoxFrame = styled.div`
-  width: 222px;
-  height: 180px;
-
-  @media ${({ theme }) => theme.media?.sm} {
-    width: 180px;
   }
 `

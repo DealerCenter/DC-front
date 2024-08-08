@@ -4,12 +4,12 @@ export const routeName = {
   dealerUsersList: '/dealer/users-list',
   dealerPersonalInformation: '/dealer/personal-information',
   dealer: '/dealer',
-  order: '/dealer/order',
+  dealerOrder: '/dealer/order',
   adminOrderHistory: '/admin/order-history',
   adminManageNotifications: '/admin/manage-notifications',
   adminUsersList: '/admin/users-list',
   adminPersonalInformation: '/admin/personal-information',
-  admin: '/admin',
+  adminOrder: '/admin/order',
 }
 
 export const locales = ['en', 'ge', 'ru']
