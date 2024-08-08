@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import InputFieldsHeader from '../../../../common/components/inputFieldsHeader/InputFieldsHeader'
 import TextInputField from './components/TextInputField'
-import HeaderH4Bold from '../components/HeaderH4Bold'
+import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import AppButton from '@/common/components/appButton/AppButton'
 import FormSaveButton from '@/common/components/appButton/FormSaveButton'
 

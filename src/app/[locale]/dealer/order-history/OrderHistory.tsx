@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 
-import HeaderH4Bold from '../components/HeaderH4Bold'
+import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import AppDropdown from '@/common/components/appDropdown/AppDropdown'
 import OrderList from './components/OrderList'

@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
 import UsersList from './components/UsersList'
-import HeaderH4Bold from '../components/HeaderH4Bold'
+import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 
 import searchIcon from '@/assets/icons/searchForButton.svg'

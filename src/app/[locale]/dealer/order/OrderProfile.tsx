@@ -39,7 +39,7 @@ const OrderProfile = (props: Props) => {
               <ArrivalStateBox arrivalState='arrived' />
             </StateBoxFrame>
             <BackToOrderButton
-              onClick={() => router.push(routeName.orderHistory)}
+              onClick={() => router.push(routeName.dealerOrderHistory)}
             >
               <Image src={leftArrow} alt='left arrow icon' height={20} />
               <BackToOrderLabel>{t('back to orders')}</BackToOrderLabel>
