@@ -20,10 +20,7 @@ const CarImageAndModelBox = ({ imageLink, brand, year }: Props) => {
           style={{ objectFit: 'cover' }}
         />
       </ImageBox>
-      <Text>
-        {brand}
-        {year}
-      </Text>
+      <Text>{`${brand} ${year}`}</Text>
     </ImageFrame>
   )
 }
@@ -48,8 +45,9 @@ const ImageBox = styled.div`
   border-radius: 18px;
 `
 
-const Text = styled.div`
+const Text = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: ${({ theme }) => theme.fontWeight?.normal};
   color: ${({ theme }) => theme.colors?.text_black};
+  width: 180px;
 `

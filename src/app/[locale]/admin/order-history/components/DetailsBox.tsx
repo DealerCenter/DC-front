@@ -37,7 +37,9 @@ const DetailsBox = ({
           <Text>{buyerPhoneNumber}</Text>
         </Box>
       </Frame>
-      <ArrivalStateBox arrivalState={arrivalState} />
+      <ArrivalStateBoxFrame>
+        <ArrivalStateBox arrivalState={arrivalState} />
+      </ArrivalStateBoxFrame>
       <Money>$ {amount.toString()}</Money>
     </Container>
   )
@@ -51,10 +53,18 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 660px;
-  /* gap: 42px; */
 `
 
-const Money = styled.p`
+const ArrivalStateBoxFrame = styled.div`
+  width: 140px;
+  display: flex;
+  justify-content: center;
+`
+
+const Money = styled.label`
+  width: 120px;
+  display: flex;
+  justify-content: center;
   margin: 0;
   font-size: 23px;
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
@@ -62,6 +72,7 @@ const Money = styled.p`
 `
 
 const Frame = styled.div`
+  width: 160px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -74,13 +85,13 @@ const Box = styled.div`
   justify-content: space-between;
   gap: 8px;
 `
-const TextBold = styled.div`
+const TextBold = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.small_13};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   color: ${({ theme }) => theme.colors?.text_black};
 `
 
-const Text = styled.div`
+const Text = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.small_13};
   font-weight: ${({ theme }) => theme.fontWeight?.normal};
   color: ${({ theme }) => theme.colors?.text_black};
@@ -95,5 +106,6 @@ const IconBox = styled.div`
 `
 
 const VinCodeBox = styled.div`
+  width: 160px;
   padding: 10px 0px;
 `

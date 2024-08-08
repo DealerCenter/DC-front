@@ -6,11 +6,26 @@ type Props = {
   height?: number
   width?: number
   onClick: () => void
+  color?: 'black' | 'white'
+  padding?: number
 }
 
-const BasicButton = ({ children, height, width, onClick }: Props) => {
+const BasicButton = ({
+  children,
+  height,
+  width,
+  onClick,
+  color = 'black',
+  padding,
+}: Props) => {
   return (
-    <StyledButton width={width} height={height} onClick={onClick}>
+    <StyledButton
+      width={width}
+      height={height}
+      onClick={onClick}
+      color={color}
+      padding={padding}
+    >
       {children}
     </StyledButton>
   )
@@ -21,6 +36,8 @@ export default BasicButton
 type ButtonProps = {
   width?: number
   height?: number
+  color?: 'black' | 'white'
+  padding?: number
 }
 
 const StyledButton = styled.button<ButtonProps>`
@@ -43,23 +60,42 @@ const StyledButton = styled.button<ButtonProps>`
     @media ${({ theme }) => theme.media?.sm} {
   }
 
+  ${({ color }) =>
+    color === 'white'
+      ? css`
+          background-color: ${({ theme }) => theme.colors?.white};
+          color: ${({ theme }) => theme.colors?.text_black};
+          &:hover {
+            background-color: ${({ theme }) => theme.colors?.main_gray_04};
+          }
+          &:active {
+            background-color: ${({ theme }) => theme.colors?.main_gray_16};
+          }
+        `
+      : color === 'black' &&
+        css`
+          background-color: ${({ theme }) => theme.colors?.button_black};
+          color: ${({ theme }) => theme.colors?.white};
+          &:active {
+            background-color: ${({ theme }) => theme.colors?.button_black_90};
+          }
+        `}
+
+  ${({ padding }) =>
+    padding
+      ? css`
+          padding: 0 ${padding}px;
+        `
+      : css`
+          padding: 0 ${({ theme }) => theme.spacing?.xl};
+        `}
+
   box-sizing: border-box;
-  padding: 0 ${({ theme }) => theme.spacing?.xl};
+
   transition: all 300ms ease-out;
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 700;
   border-radius: ${({ theme }) => theme.radius?.lg};
-  background-color: ${({ theme }) => theme.colors?.button_black};
-  color: ${({ theme }) => theme.colors?.white};
-
-  &:active {
-    background-color: ${({ theme }) => theme.colors?.button_black_90};
-  }
-
-  &:focus {
-    border: none;
-    outline: 4px solid ${({ theme }) => theme.colors?.sky_blue};
-  }
 
   cursor: pointer;
 `

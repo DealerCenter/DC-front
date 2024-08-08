@@ -44,6 +44,7 @@ const OrderListItem = ({
 
   const handleClick = () => {
     onClick()
+    isEditing && setIsChecked((is) => !is)
   }
 
   return (
@@ -55,7 +56,7 @@ const OrderListItem = ({
               <IconBox>
                 <Image src={grabHandle} alt='grab handle icon' />
               </IconBox>
-              <IconBox onClick={() => setIsChecked((is) => !is)}>
+              <IconBox>
                 <CheckBox isChecked={isChecked} />
               </IconBox>
             </>
@@ -98,6 +99,7 @@ const Container = styled.li<IndexProp>`
   flex-direction: row;
   justify-content: space-between;
   height: 100px;
+  border-radius: 12px;
 
   padding: ${({ theme }) => theme.spacing?.md};
   flex: 1;
@@ -118,6 +120,12 @@ const Container = styled.li<IndexProp>`
     flex-direction: column-reverse;
     height: unset;
     gap: 24px;
+  }
+  &:hover {
+    background-color: ${({ theme }) => theme.colors?.main_gray_04};
+  }
+  &:active {
+    background-color: ${({ theme }) => theme.colors?.main_gray_16};
   }
 `
 

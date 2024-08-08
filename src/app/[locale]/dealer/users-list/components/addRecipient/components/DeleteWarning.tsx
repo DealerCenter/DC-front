@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import ChooseButton from './ChooseButton'
+import ChooseButton from '../../../../../../../common/components/appButton/ChooseButton'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
