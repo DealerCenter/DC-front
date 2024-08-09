@@ -52,11 +52,11 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 660px;
+  flex: 1;
 `
 
 const ArrivalStateBoxFrame = styled.div`
-  width: 140px;
+  width: 120px;
   display: flex;
   justify-content: center;
 `

@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
 import UsersList from './components/UsersList'
-import HeaderH4Bold from '../components/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 
 import searchIcon from '@/assets/icons/searchForButton.svg'
@@ -12,6 +11,7 @@ import UserListEmpty from './components/UserListEmpty'
 import AddRecipient from './components/addRecipient/AddRecipient'
 import AppModal from '@/common/components/modal/AppModal'
 import { users } from '@/assets/DummyData'
+import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 
 type Props = {}
 

@@ -6,6 +6,7 @@ import theme from '../theme'
 import Footer from '@/common/components/footer/Footer'
 import SideBar from '../../../common/components/sideBar/SideBar'
 import { routeName } from '@/common/helpers/constants'
+import { usePathname } from '@/navigation'
 
 const routeNames = {
   orderHistory: routeName.adminOrderHistory,
@@ -19,16 +20,15 @@ type Props = { children: React.JSX.Element }
 const AdminLayout = ({ children }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
-  //   const pathname = usePathname()
-  //   const isSideBarVisible = pathname !== routeName.order
+  const pathname = usePathname()
+  const isSideBarVisible = pathname !== routeName.adminOrder
 
   return (
     <>
       <Header />
       <Container>
         <Frame>
-          <SideBar routes={routeNames} />
-          {/* {isSideBarVisible     && <SideBar />} */}
+          {isSideBarVisible && <SideBar routes={routeNames} />}
           {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
         </Frame>
       </Container>

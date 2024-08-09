@@ -3,6 +3,7 @@ import OrderListItem from './OrderListItem'
 import styled from 'styled-components'
 
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
+import OrderListHeader from './OrderListHeader'
 
 type Props = {
   onClick: () => void
@@ -35,6 +36,7 @@ const OrderList = ({
 
   return (
     <ListFrame>
+      {isEditing && <OrderListHeader />}
       {currentItems.map((car, i) => (
         <OrderListItem
           onClick={onClick}

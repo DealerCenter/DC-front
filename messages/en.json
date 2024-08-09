@@ -48,7 +48,7 @@
   "add recipient": "Add recipient",
   "delete recipient": "Delete recipient",
   "add an id photo": "Add an ID photo to fill in all recipient details",
-  "recipient": "Recipient",
+  "recipient person": "Recipient",
   "mobile": "Mobile",
   "the date of addition": "The date of addition",
   "verification": "Verification",
@@ -145,6 +145,11 @@
   "transportation calculator": "Transportation calculator",
 
   "back to orders": "Back to orders",
+
+  "vehicle data": "Vehicle data",
+  "recipient": "Recipient",
+  "dealer": "Dealer",
+  "amount": "Amount",
 
   "useForm": {
     "must be valid email": "Must be a valid email",

@@ -47,7 +47,7 @@
   "add recipient": "მიმღების დამატება",
   "delete recipient": "მიმღების წაშლა",
   "add an id photo": "დაამატეთ პირადობის ფოტო, რათა შეავსო მიმღების ყველა მონაცემი",
-  "recipient": "მიმღები პირი",
+  "recipient person": "მიმღები პირი",
   "mobile": "მობილური",
   "the date of addition": "დამატების თარიღი",
   "verification": "ვერიფიკაცია",
@@ -144,6 +144,11 @@
   "transportation calculator": "ტრანსპორტირების კალკულატორი",
 
   "back to orders": "შეკვეთებში დაბრუნება",
+
+  "vehicle data": "ავტომობილის მონაცემები",
+  "recipient": "მიმღები",
+  "dealer": "დილერი",
+  "amount": "თანხა",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
