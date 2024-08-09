@@ -2,6 +2,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import AdminLayout from './AdminLayout'
+import { AdminStateProvider } from './AdminStateContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,7 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <section className='admin-layout'>
-      <AdminLayout>{children}</AdminLayout>
+      <AdminStateProvider>
+        <AdminLayout>{children}</AdminLayout>
+      </AdminStateProvider>
     </section>
   )
 }
