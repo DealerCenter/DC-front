@@ -6,7 +6,7 @@ import lineIcon from '@/assets/icons/splitGrayLine.svg'
 import { useTranslations } from 'next-intl'
 
 type Props = {
-  activeOption: 'status' | 'recipient' | 'dealer'
+  activeOption: 'status' | 'recipient' | 'dealer' | null
   setActiveOption: (arg1: 'status' | 'recipient' | 'dealer') => void
 }
 

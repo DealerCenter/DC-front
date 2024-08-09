@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import OrderListItem from './OrderListItem'
 import styled from 'styled-components'
 
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
 import OrderListHeader from './OrderListHeader'
+import { useAdminState } from '../../AdminStateContext'
 
 type Props = {
   onClick: () => void
@@ -21,6 +22,8 @@ type Props = {
     arrivalState: string
   }[]
   isEditing: boolean
+  setTotalPages: (arg1: number) => void
+  setCurrentPage: (arg1: number) => void
 }
 
 const OrderList = ({
@@ -29,10 +32,24 @@ const OrderList = ({
   currentPage,
   itemsPerPage,
   isEditing,
+  setTotalPages,
+  setCurrentPage,
 }: Props) => {
+  const { activeOptionStatus } = useAdminState()
+
+  const filteredList = activeOptionStatus
+    ? list.filter((cur) => cur.arrivalState === activeOptionStatus)
+    : list
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [activeOptionStatus, setCurrentPage])
+
+  setTotalPages(Math.ceil(filteredList.length / itemsPerPage))
+
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
-  const currentItems = list.slice(startIndex, endIndex)
+  const currentItems = filteredList.slice(startIndex, endIndex)
 
   return (
     <ListFrame>

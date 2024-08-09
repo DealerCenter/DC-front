@@ -13,11 +13,12 @@ import ButtonsRow from './components/ButtonsRow'
 import { routeName } from '@/common/helpers/constants'
 
 const itemsPerPage = 8
-const totalPages = Math.ceil(orderedCars.length / 8)
+// const totalPages = Math.ceil(orderedCars.length / itemsPerPage)
 
 type Props = {}
 
 const OrderHistory = (props: Props) => {
+  const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [isEditing, setIsEditing] = useState(false)
   const t = useTranslations('')
@@ -36,8 +37,10 @@ const OrderHistory = (props: Props) => {
           // onClick={() => {}}
           list={orderedCars}
           currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
           itemsPerPage={itemsPerPage}
           isEditing={isEditing}
+          setTotalPages={setTotalPages}
         />
         <PaginationFrame>
           <Pagination

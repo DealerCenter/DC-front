@@ -26,7 +26,7 @@ const sortOptions = [
 ]
 
 const filterValues = {
-  status: ['arrived', 'on the way', 'in warehouse'],
+  status: ['arrived', 'onTheWay', 'inWarehouse'],
   recipient: [
     'Luka Tsilosani',
     'Ani Kviciani',

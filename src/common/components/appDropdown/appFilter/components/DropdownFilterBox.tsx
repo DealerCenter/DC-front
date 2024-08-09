@@ -1,8 +1,7 @@
 import { useTranslations } from 'next-intl'
 import React, { useCallback, useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-import Image from 'next/image'
 import OptionsBox from './OptionsBox'
 import CheckBox from '@/common/components/checkbox/CheckBox'
 import BasicButton from '@/common/components/appButton/BasicButton'
@@ -17,12 +16,12 @@ const DropdownFilterBox = ({ values, toggleDropdown }: Props) => {
   const {
     activeSetting,
     activeOptionStatus,
-    activeOptionRecipient,
-    activeOptionDealer,
     setActiveSetting,
     setActiveOptionStatus,
-    setActiveOptionRecipient,
-    setActiveOptionDealer,
+    // activeOptionRecipient,
+    // activeOptionDealer,
+    // setActiveOptionRecipient,
+    // setActiveOptionDealer,
   } = useAdminState()
 
   const t = useTranslations('')
@@ -37,18 +36,18 @@ const DropdownFilterBox = ({ values, toggleDropdown }: Props) => {
           activeOption: activeOptionStatus,
           setActiveOption: setActiveOptionStatus,
         }
-      case 'recipient':
-        return {
-          value: recipient,
-          activeOption: activeOptionRecipient,
-          setActiveOption: setActiveOptionRecipient,
-        }
-      case 'dealer':
-        return {
-          value: dealer,
-          activeOption: activeOptionDealer,
-          setActiveOption: setActiveOptionDealer,
-        }
+      // case 'recipient':
+      //   return {
+      //     value: recipient,
+      //     activeOption: activeOptionRecipient,
+      //     setActiveOption: setActiveOptionRecipient,
+      //   }
+      // case 'dealer':
+      //   return {
+      //     value: dealer,
+      //     activeOption: activeOptionDealer,
+      //     setActiveOption: setActiveOptionDealer,
+      //   }
       default:
         return {
           value: status,
@@ -59,14 +58,14 @@ const DropdownFilterBox = ({ values, toggleDropdown }: Props) => {
   }, [
     activeSetting,
     status,
-    recipient,
-    dealer,
     activeOptionStatus,
-    activeOptionRecipient,
-    activeOptionDealer,
     setActiveOptionStatus,
-    setActiveOptionRecipient,
-    setActiveOptionDealer,
+    // recipient,
+    // dealer,
+    // activeOptionRecipient,
+    // activeOptionDealer,
+    // setActiveOptionRecipient,
+    // setActiveOptionDealer,
   ])
 
   const [checkedOption, setCheckedOption] = useState(currentList().activeOption)
@@ -76,11 +75,24 @@ const DropdownFilterBox = ({ values, toggleDropdown }: Props) => {
   }, [activeSetting, currentList])
 
   const handleCancel = () => {
+    currentList().setActiveOption(null)
     toggleDropdown()
   }
   const handleSave = () => {
     currentList().setActiveOption(checkedOption)
     toggleDropdown()
+  }
+
+  const updateShipmentStatus = (status: string) => {
+    if (
+      status === 'inWarehouse' ||
+      status === 'onTheWay' ||
+      status === 'arrived'
+    ) {
+      setCheckedOption(status)
+    } else {
+      console.error('Invalid status:', status)
+    }
   }
 
   return (
@@ -94,10 +106,18 @@ const DropdownFilterBox = ({ values, toggleDropdown }: Props) => {
           {currentList().value.map((value, i) => (
             <ListItem
               key={`DropdownFilterBoxListItem${i}`}
-              onClick={() => setCheckedOption(i)}
+              onClick={() => updateShipmentStatus(value)}
             >
-              <CheckBox isChecked={i === checkedOption} />
-              <Text>{value}</Text>
+              <CheckBox isChecked={value === checkedOption} />
+              <Text>
+                {t(
+                  value === 'inWarehouse'
+                    ? 'in warehouse'
+                    : value === 'onTheWay'
+                      ? 'on the way'
+                      : value === 'arrived' && 'arrived'
+                )}
+              </Text>
             </ListItem>
           ))}
         </List>
