@@ -35,11 +35,30 @@ const OrderList = ({
   setTotalPages,
   setCurrentPage,
 }: Props) => {
-  const { activeOptionStatus } = useAdminState()
+  const { activeOptionStatus, sortOption } = useAdminState()
 
   const filteredList = activeOptionStatus
     ? list.filter((cur) => cur.arrivalState === activeOptionStatus)
     : list
+
+  // const OrderedFilteredList = sortOption
+  //   ? filteredList.sort((a, b) => a.debt - b.debt)
+  //   : filteredList
+
+  const OrderedFilteredList = () => {
+    switch (sortOption) {
+      case 'price ascending':
+        return sortOption
+          ? filteredList.sort((a, b) => a.debt - b.debt)
+          : filteredList
+      case 'price descending':
+        return sortOption
+          ? filteredList.sort((a, b) => b.debt - a.debt)
+          : filteredList
+      default:
+        return filteredList
+    }
+  }
 
   useEffect(() => {
     setCurrentPage(1)
@@ -49,7 +68,7 @@ const OrderList = ({
 
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
-  const currentItems = filteredList.slice(startIndex, endIndex)
+  const currentItems = OrderedFilteredList().slice(startIndex, endIndex)
 
   return (
     <ListFrame>

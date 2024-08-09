@@ -12,13 +12,33 @@ type Props = {
     locale?: string
     icon?: string
   }
+  onSortClick?: (
+    arg1:
+      | 'price ascending'
+      | 'price descending'
+      | 'date ascending'
+      | 'date descending'
+  ) => void
 }
 
-const DropdownItem = ({ item, modalStyle }: Props) => {
+const DropdownItem = ({ item, modalStyle, onSortClick }: Props) => {
   const pathname = usePathname()
   const t = useTranslations('')
 
   const { label, href, locale, icon } = item
+
+  const handleClick = (value: string) => {
+    if (
+      value === 'price ascending' ||
+      value === 'price descending' ||
+      value === 'date ascending' ||
+      value === 'date descending'
+    ) {
+      onSortClick && onSortClick(value)
+    } else {
+      console.error('Invalid value:', value)
+    }
+  }
 
   return (
     <Container
@@ -26,6 +46,7 @@ const DropdownItem = ({ item, modalStyle }: Props) => {
       locale={locale && locale}
       modalStyle={modalStyle}
       isIcon={icon ? true : false}
+      onClick={() => handleClick(label)}
     >
       <Frame>
         {icon && (

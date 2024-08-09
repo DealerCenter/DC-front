@@ -13,6 +13,13 @@ type Props = {
 
   left?: number
   top?: number
+  onSortClick?: (
+    arg1:
+      | 'price ascending'
+      | 'price descending'
+      | 'date ascending'
+      | 'date descending'
+  ) => void
 }
 
 const AppDropdown = ({
@@ -21,6 +28,7 @@ const AppDropdown = ({
   left,
   top,
   modalStyle = 'black',
+  onSortClick,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -49,12 +57,18 @@ const AppDropdown = ({
     <Dropdown ref={dropdownRef}>
       <DropdownTrigger onClick={toggleDropdown}>{children}</DropdownTrigger>
       {isOpen && (
-        <DropdownMenu modalStyle={modalStyle} left={left} top={top}>
+        <DropdownMenu
+          modalStyle={modalStyle}
+          left={left}
+          top={top}
+          onClick={() => setIsOpen(false)}
+        >
           {items.map((item, i) => (
             <DropdownItem
               item={item}
               key={`${item.label}12ij${i}`}
               modalStyle={modalStyle}
+              onSortClick={onSortClick}
             />
           ))}
         </DropdownMenu>

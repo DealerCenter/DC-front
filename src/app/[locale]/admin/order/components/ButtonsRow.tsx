@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import AppButton from '@/common/components/appButton/AppButton'
-
 import splitGrayLine from '@/assets/icons/splitGrayLine.svg'
 import Image from 'next/image'
 import AppSelect from './AppSelect'

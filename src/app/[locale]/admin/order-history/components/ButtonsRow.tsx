@@ -15,6 +15,7 @@ import sortIconBlack from '@/assets/icons/sortBlack.svg'
 import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
 import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
 import AppDropdownFilter from '@/common/components/appDropdown/appFilter/AppDropDownFilter'
+import { useAdminState } from '../../AdminStateContext'
 
 type Props = { isEditing: boolean; setIsEditing: (arg1: boolean) => void }
 
@@ -47,6 +48,8 @@ const filterValues = {
 
 const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
   const t = useTranslations('')
+
+  const { setSortOption } = useAdminState()
 
   const handleEditButton = () => {
     isEditing ? setIsEditing(false) : setIsEditing(true)
@@ -82,7 +85,11 @@ const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
                 icon={filterIconBlack}
               ></SecondaryButton>
             </AppDropdownFilter>
-            <AppDropdown items={sortOptions} modalStyle='white'>
+            <AppDropdown
+              items={sortOptions}
+              modalStyle='white'
+              onSortClick={setSortOption}
+            >
               <SecondaryButton
                 text={t('sort')}
                 onClick={() => {}}

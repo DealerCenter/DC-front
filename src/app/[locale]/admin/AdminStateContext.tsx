@@ -9,6 +9,20 @@ type AdminState = {
   setActiveOptionStatus: (
     arg1: 'arrived' | 'onTheWay' | 'inWarehouse' | null
   ) => void
+  sortOption:
+    | 'price ascending'
+    | 'price descending'
+    | 'date ascending'
+    | 'date descending'
+    | null
+  setSortOption: (
+    arg1:
+      | 'price ascending'
+      | 'price descending'
+      | 'date ascending'
+      | 'date descending'
+      | null
+  ) => void
   // activeOptionRecipient: number
   // setActiveOptionRecipient: (arg1: number) => void
   // activeOptionDealer: number
@@ -24,6 +38,13 @@ export const AdminStateProvider = ({ children }: { children: ReactNode }) => {
   const [activeOptionStatus, setActiveOptionStatus] = useState<
     'arrived' | 'onTheWay' | 'inWarehouse' | null
   >(null)
+  const [sortOption, setSortOption] = useState<
+    | 'price ascending'
+    | 'price descending'
+    | 'date ascending'
+    | 'date descending'
+    | null
+  >(null)
   // const [activeOptionRecipient, setActiveOptionRecipient] = useState(0)
   // const [activeOptionDealer, setActiveOptionDealer] = useState(0)
 
@@ -34,6 +55,9 @@ export const AdminStateProvider = ({ children }: { children: ReactNode }) => {
         setActiveSetting,
         activeOptionStatus,
         setActiveOptionStatus,
+        sortOption,
+        setSortOption,
+
         // activeOptionRecipient,
         // setActiveOptionRecipient,
         // activeOptionDealer,
