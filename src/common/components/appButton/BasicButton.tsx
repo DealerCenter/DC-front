@@ -65,6 +65,7 @@ const StyledButton = styled.button<ButtonProps>`
       ? css`
           background-color: ${({ theme }) => theme.colors?.white};
           color: ${({ theme }) => theme.colors?.text_black};
+          border: 1px solid ${({ theme }) => theme.colors?.main_gray_56};
           &:hover {
             background-color: ${({ theme }) => theme.colors?.main_gray_04};
           }
@@ -76,6 +77,8 @@ const StyledButton = styled.button<ButtonProps>`
         css`
           background-color: ${({ theme }) => theme.colors?.button_black};
           color: ${({ theme }) => theme.colors?.white};
+          border: unset;
+
           &:active {
             background-color: ${({ theme }) => theme.colors?.button_black_90};
           }

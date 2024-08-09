@@ -14,6 +14,7 @@ import filterIconBlack from '@/assets/icons/filterBlack.svg'
 import sortIconBlack from '@/assets/icons/sortBlack.svg'
 import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
 import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
+import AppDropdownFilter from '@/common/components/appDropdown/appFilter/AppDropDownFilter'
 
 type Props = { isEditing: boolean; setIsEditing: (arg1: boolean) => void }
 
@@ -23,6 +24,26 @@ const sortOptions = [
   { label: 'price descending', icon: arrowDown },
   { label: 'price ascending', icon: arrowUp },
 ]
+
+const filterValues = {
+  status: ['arrived', 'on the way', 'in warehouse'],
+  recipient: [
+    'Luka Tsilosani',
+    'Ani Kviciani',
+    'Zuka Jakeli',
+    'Luka Tsilosani',
+    'Ani Kviciani',
+    'Zuka Jakeli',
+  ],
+  dealer: [
+    'Ani Kviciani',
+    'Ani Kviciani',
+    'Zuka Jakeli',
+    'Zuka Jakeli',
+    'Luka Tsilosani',
+    'Luka Tsilosani',
+  ],
+}
 
 const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
   const t = useTranslations('')
@@ -54,11 +75,13 @@ const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
       ) : (
         <ButtonFrame>
           <ButtonPairFrame>
-            <SecondaryButton
-              text={t('filter')}
-              onClick={() => {}}
-              icon={filterIconBlack}
-            ></SecondaryButton>
+            <AppDropdownFilter values={filterValues}>
+              <SecondaryButton
+                text={t('filter')}
+                onClick={() => {}}
+                icon={filterIconBlack}
+              ></SecondaryButton>
+            </AppDropdownFilter>
             <AppDropdown items={sortOptions} modalStyle='white'>
               <SecondaryButton
                 text={t('sort')}

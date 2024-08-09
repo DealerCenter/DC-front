@@ -43,8 +43,7 @@ const OrderListItem = ({
   } = item
 
   const handleClick = () => {
-    onClick()
-    isEditing && setIsChecked((is) => !is)
+    isEditing ? setIsChecked((is) => !is) : onClick()
   }
 
   return (
@@ -99,7 +98,6 @@ const Container = styled.li<IndexProp>`
   flex-direction: row;
   justify-content: space-between;
   height: 100px;
-  /* border-radius: 12px; */
 
   padding: ${({ theme }) => theme.spacing?.md};
   flex: 1;

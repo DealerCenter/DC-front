@@ -59,6 +59,7 @@ type BoxProps = {
 }
 
 const Box = styled.div<BoxProps>`
+  box-sizing: border-box;
   width: 24px;
   height: 24px;
   display: flex;
