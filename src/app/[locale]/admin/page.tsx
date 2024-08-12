@@ -15,7 +15,7 @@ const Page = (props: Props) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (pathname === routeName.dealer) router.push(routeName.adminOrderHistory)
+    if (pathname === routeName.admin) router.push(routeName.adminOrderHistory)
   }, [pathname, router])
 
   const renderComponent = () => {

@@ -9,6 +9,7 @@ export const routeName = {
   adminManageNotifications: '/admin/manage-notifications',
   adminUsersList: '/admin/users-list',
   adminPersonalInformation: '/admin/personal-information',
+  admin: '/admin',
   adminOrder: '/admin/order',
 }
 

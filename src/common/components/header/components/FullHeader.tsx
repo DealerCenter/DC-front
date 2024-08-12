@@ -39,20 +39,21 @@ const FullHeader = (props: Props) => {
         <Logo>DUX</Logo>
         <Frame>
           <Title2>{t('search for vehicle')}</Title2>
-          <Title2>
-            {t('our services')}
-            <AppDropdown
-              items={servicesItems}
-              left={-200}
-              top={55}
-              handleToggle={handleDropdownOpen}
-              handleClose={handleDropdownClose}
-            >
+          <AppDropdown
+            items={servicesItems}
+            left={-50}
+            top={70}
+            // isOpen={isOpenDropdown}
+            handleToggle={handleDropdownOpen}
+            handleClose={handleDropdownClose}
+          >
+            <Title2>
+              {t('our services')}
               <Icon isOpen={isOpenDropdown}>
                 <Image src={downIcon} alt='down arrow icon' />
               </Icon>
-            </AppDropdown>
-          </Title2>
+            </Title2>
+          </AppDropdown>
           <Title2>{t('about us')}</Title2>
           <Title2>{t('contact')}</Title2>
         </Frame>

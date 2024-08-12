@@ -56,6 +56,11 @@ const AppDropdown = ({
     }
   }
 
+  const handleItemClick = () => {
+    setIsOpen(false)
+    handleClose && handleClose()
+  }
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
@@ -72,7 +77,7 @@ const AppDropdown = ({
           modalStyle={modalStyle}
           left={left}
           top={top}
-          onClick={() => setIsOpen(false)}
+          onClick={handleItemClick}
         >
           {items.map((item, i) => (
             <DropdownItem

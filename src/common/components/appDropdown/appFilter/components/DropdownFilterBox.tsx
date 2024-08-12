@@ -128,6 +128,7 @@ const DropdownFilterBox = ({ values, toggleDropdown }: Props) => {
           height={36}
           width={157}
           color='white'
+          isBorder={true}
         >
           <TextBold>{t('cancel')}</TextBold>
         </BasicButton>

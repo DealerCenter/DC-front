@@ -8,6 +8,7 @@ type Props = {
   onClick: () => void
   color?: 'black' | 'white'
   padding?: number
+  isBorder?: boolean
 }
 
 const BasicButton = ({
@@ -17,6 +18,7 @@ const BasicButton = ({
   onClick,
   color = 'black',
   padding,
+  isBorder = false,
 }: Props) => {
   return (
     <StyledButton
@@ -25,6 +27,7 @@ const BasicButton = ({
       onClick={onClick}
       color={color}
       padding={padding}
+      isBorder={isBorder}
     >
       {children}
     </StyledButton>
@@ -38,6 +41,7 @@ type ButtonProps = {
   height?: number
   color?: 'black' | 'white'
   padding?: number
+  isBorder?: boolean
 }
 
 const StyledButton = styled.button<ButtonProps>`
@@ -61,7 +65,6 @@ const StyledButton = styled.button<ButtonProps>`
       ? css`
           background-color: ${({ theme }) => theme.colors?.white};
           color: ${({ theme }) => theme.colors?.black};
-          border: 1px solid ${({ theme }) => theme.colors?.main_gray_56};
           &:hover {
             background-color: ${({ theme }) => theme.colors?.main_gray_04};
           }
@@ -87,6 +90,15 @@ const StyledButton = styled.button<ButtonProps>`
         `
       : css`
           padding: 0 ${({ theme }) => theme.spacing?.xl};
+        `}
+
+  ${({ isBorder }) =>
+    isBorder
+      ? css`
+          border: 1px solid ${({ theme }) => theme.colors?.main_gray_56};
+        `
+      : css`
+          border: none;
         `}
 
   box-sizing: border-box;

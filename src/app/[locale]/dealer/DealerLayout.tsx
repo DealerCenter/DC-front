@@ -24,7 +24,7 @@ const DealerLayout = ({ children }: Props) => {
 
   const pathname = usePathname()
 
-  const isSideBarVisible = pathname !== routeName.order
+  const isSideBarVisible = pathname !== routeName.dealerOrder
 
   return (
     <>

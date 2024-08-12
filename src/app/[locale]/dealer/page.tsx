@@ -16,7 +16,7 @@ const Page = (props: Props) => {
 
   useEffect(() => {
     if (pathname === routeName.dealer) router.push(routeName.dealerOrderHistory)
-  }, [pathname])
+  }, [pathname, router])
 
   const renderComponent = () => {
     switch (pathname) {
