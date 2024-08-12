@@ -53,6 +53,7 @@ const AppDropdown = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
+    //eslint-disable-next-line
   }, [])
 
   return (

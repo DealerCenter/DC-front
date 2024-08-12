@@ -46,15 +46,13 @@ const AppSelect = ({
       {isOpen && (
         <SelectOptions>
           {options.map((option, i) => (
-            <>
-              <OptionItem
-                key={`selectedOptionsDropdownListValue${i}`}
-                onClick={() => handleOptionClick(option.value)}
-              >
-                <AppCheckmarkCircle isOn={option.value === selectedOption} />
-                <OptionLabel>{t(option.value)}</OptionLabel>
-              </OptionItem>
-            </>
+            <OptionItem
+              key={`selectedOptionsDropdownListValue${i}`}
+              onClick={() => handleOptionClick(option.value)}
+            >
+              <AppCheckmarkCircle isOn={option.value === selectedOption} />
+              <OptionLabel>{t(option.value)}</OptionLabel>
+            </OptionItem>
           ))}
         </SelectOptions>
       )}

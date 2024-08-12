@@ -49,6 +49,8 @@ const Item = styled.div<ItemProps>`
           width: 56px;
           padding: unset;
         `}
+
+  cursor: pointer
 `
 const Text = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.medium};

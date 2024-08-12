@@ -30,9 +30,9 @@ const CarDetailsBox = ({ imageLink, brand, model, year, vinCode }: Props) => {
           </CarBrandBox>
           <TextGray>{model}</TextGray>
         </CarBrandFrame>
-        <vinCodeBox>
+        <VinCodeBox>
           <Text>{vinCode}</Text>
-        </vinCodeBox>
+        </VinCodeBox>
       </DetailsBox>
     </ImageFrame>
   )
@@ -98,6 +98,6 @@ const Text = styled.p`
   font-weight: 400;
   color: ${({ theme }) => theme.colors?.black};
 `
-const vinCodeBox = styled.div`
+const VinCodeBox = styled.div`
   padding: 10px 0px;
 `

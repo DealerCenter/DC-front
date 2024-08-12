@@ -157,5 +157,5 @@ const Icon = styled.div<IconProps>`
     isOpen &&
     css`
       transform: rotate(180deg);
-    `}
+    `}/* cursor: pointer */
 `

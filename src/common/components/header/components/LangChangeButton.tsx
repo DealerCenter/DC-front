@@ -55,4 +55,5 @@ const Item = styled.div<ItemProps>`
 const Label = styled.label`
   font-size: 16px;
   font-weight: 500;
+  cursor: pointer;
 `
