@@ -35,40 +35,38 @@ const OrderHistory = (props: Props) => {
   ]
 
   return (
-    <>
-      <Container>
-        <TopFrame>
-          <HeaderH4Bold text={t('order history')} />
-          <ButtonFrame>
+    <Container>
+      <TopFrame>
+        <HeaderH4Bold text={t('order history')} />
+        <ButtonFrame>
+          <SecondaryButton
+            text={t('filter')}
+            onClick={() => {}}
+            icon={filterIconBlack}
+          ></SecondaryButton>
+          <AppDropdown items={sortOptions} modalStyle='white'>
             <SecondaryButton
-              text={t('filter')}
+              text={t('sort')}
               onClick={() => {}}
-              icon={filterIconBlack}
+              icon={sortIconBlack}
             ></SecondaryButton>
-            <AppDropdown items={sortOptions} modalStyle='white'>
-              <SecondaryButton
-                text={t('sort')}
-                onClick={() => {}}
-                icon={sortIconBlack}
-              ></SecondaryButton>
-            </AppDropdown>
-          </ButtonFrame>
-        </TopFrame>
-        <OrderList
-          onClick={() => router.push(routeName.dealerOrder)}
-          list={orderedCars}
+          </AppDropdown>
+        </ButtonFrame>
+      </TopFrame>
+      <OrderList
+        onClick={() => router.push(routeName.dealerOrder)}
+        list={orderedCars}
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+      />
+      <PaginationFrame>
+        <Pagination
           currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
+          numOfPages={totalPages}
+          setCurrentPage={setCurrentPage}
         />
-        <PaginationFrame>
-          <Pagination
-            currentPage={currentPage}
-            numOfPages={totalPages}
-            setCurrentPage={setCurrentPage}
-          />
-        </PaginationFrame>
-      </Container>
-    </>
+      </PaginationFrame>
+    </Container>
   )
 }
 

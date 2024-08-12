@@ -41,10 +41,6 @@ const OrderList = ({
     ? list.filter((cur) => cur.arrivalState === activeOptionStatus)
     : list
 
-  // const OrderedFilteredList = sortOption
-  //   ? filteredList.sort((a, b) => a.debt - b.debt)
-  //   : filteredList
-
   const OrderedFilteredList = () => {
     switch (sortOption) {
       case 'price ascending':
@@ -72,7 +68,7 @@ const OrderList = ({
 
   return (
     <ListFrame>
-      {isEditing && <OrderListHeader />}
+      <OrderListHeader />
       {currentItems.map((car, i) => (
         <OrderListItem
           onClick={onClick}

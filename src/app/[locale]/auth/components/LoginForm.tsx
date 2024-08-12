@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import CheckBox from '@/common/components/checkbox/CheckBox'
+import CheckBox from '@/common/components/appCheckBox/Checkbox'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
 import useLoginForm from '../hooks/useLoginForm'

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import arrowDown from '@/assets/icons/arrowDown.svg'
 import Image from 'next/image'
-import AppCheckmarkCircle from '@/common/components/checkbox/AppCheckmarkCircle'
+import AppCheckmarkCircle from '@/common/components/appCheckBox/AppCheckmarkCircle'
 
 type Option = {
   value: string

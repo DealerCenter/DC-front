@@ -26,31 +26,28 @@ const OrderHistory = (props: Props) => {
   const router = useRouter()
 
   return (
-    <>
-      <Container>
-        <TopFrame>
-          <HeaderH4Bold text={t('order history')} />
-          <ButtonsRow isEditing={isEditing} setIsEditing={setIsEditing} />
-        </TopFrame>
-        <OrderList
-          onClick={() => router.push(routeName.adminOrder)}
-          // onClick={() => {}}
-          list={orderedCars}
+    <Container>
+      <TopFrame>
+        <HeaderH4Bold text={t('order history')} />
+        <ButtonsRow isEditing={isEditing} setIsEditing={setIsEditing} />
+      </TopFrame>
+      <OrderList
+        onClick={() => router.push(routeName.adminOrder)}
+        list={orderedCars}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        itemsPerPage={itemsPerPage}
+        isEditing={isEditing}
+        setTotalPages={setTotalPages}
+      />
+      <PaginationFrame>
+        <Pagination
           currentPage={currentPage}
+          numOfPages={totalPages}
           setCurrentPage={setCurrentPage}
-          itemsPerPage={itemsPerPage}
-          isEditing={isEditing}
-          setTotalPages={setTotalPages}
         />
-        <PaginationFrame>
-          <Pagination
-            currentPage={currentPage}
-            numOfPages={totalPages}
-            setCurrentPage={setCurrentPage}
-          />
-        </PaginationFrame>
-      </Container>
-    </>
+      </PaginationFrame>
+    </Container>
   )
 }
 

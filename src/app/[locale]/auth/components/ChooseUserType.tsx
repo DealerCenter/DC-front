@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import AppButton from '@/common/components/appButton/AppButton'
-import CheckBox from '@/common/components/checkbox/CheckBox'
+import CheckBox from '@/common/components/appCheckBox/Checkbox'
 
 type CheckboxOption = {
   title: string

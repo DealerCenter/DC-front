@@ -3,9 +3,10 @@ import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import OptionsBox from './OptionsBox'
-import CheckBox from '@/common/components/checkbox/CheckBox'
+// import CheckBox from '@/common/components/checkBox/CheckBox'
 import BasicButton from '@/common/components/appButton/BasicButton'
 import { useAdminState } from '@/app/[locale]/admin/AdminStateContext'
+import CheckBox from '@/common/components/appCheckBox/Checkbox'
 
 type Props = {
   values: { status: string[]; recipient: string[]; dealer: string[] }

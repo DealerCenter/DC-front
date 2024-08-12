@@ -5,7 +5,7 @@ import CarImageAndModelBox from './CarImageAndModelBox'
 import Image from 'next/image'
 
 import grabHandle from '@/assets/icons/GrabHandle2x3Dots.svg'
-import CheckBox from '@/common/components/checkbox/CheckBox'
+import CheckBox from '@/common/components/appCheckBox/Checkbox'
 
 type Props = {
   imageLink: string
@@ -61,7 +61,12 @@ const OrderListItem = ({
             </>
           )}
         </CheckboxFrame>
-        <CarImageAndModelBox imageLink={imageLink} brand={brand} year={year} />
+        <CarImageAndModelBox
+          imageLink={imageLink}
+          brand={brand}
+          year={year}
+          vinCode={vinCode}
+        />
       </Frame>
       <DetailsBox
         amount={debt}
@@ -97,22 +102,11 @@ const Container = styled.li<IndexProp>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 100px;
+  height: 128px;
 
   padding: ${({ theme }) => theme.spacing?.md};
-  flex: 1;
 
-  ${({ index }) =>
-    index !== 0
-      ? css`
-          border: 0px;
-          border-top: 1px;
-          border-style: solid;
-          border-color: ${({ theme }) => theme.colors?.main_gray_04};
-        `
-      : css`
-          border: none;
-        `}
+  border: 1px solid ${({ theme }) => theme.colors?.main_gray_04};
 
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column-reverse;
