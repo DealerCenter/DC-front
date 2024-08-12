@@ -4,33 +4,40 @@ import styled, { css } from 'styled-components'
 import arrowDown from '@/assets/icons/arrowDown.svg'
 import Image from 'next/image'
 import AppCheckmarkCircle from '@/common/components/checkbox/AppCheckmarkCircle'
+import { useTranslations } from 'next-intl'
 
 type Option = {
-  value: string
-  label: string
+  value: stateOptions
 }
+
+type stateOptions = 'evacuator' | 'usa port' | 'container' | 'georgian port'
 
 type Props = {
   options: Option[]
-  onChange: (value: string) => void
   placeholder?: string
+  selectedOption: stateOptions
+  setSelectedOption: (arg: stateOptions) => void
 }
 
-const AppSelect = ({ options, onChange, placeholder }: Props) => {
+const AppSelect = ({
+  options,
+  placeholder,
+  selectedOption,
+  setSelectedOption,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedValue, setSelectedValue] = useState<string | null>(null)
+  const t = useTranslations('')
 
-  const handleOptionClick = (value: string) => {
-    setSelectedValue(value)
-    onChange(value)
+  const handleOptionClick = (value: stateOptions) => {
+    setSelectedOption(value)
     setIsOpen(false)
   }
 
   return (
     <SelectContainer>
       <SelectHeader onClick={() => setIsOpen(!isOpen)}>
-        {selectedValue
-          ? options.find((option) => option.value === selectedValue)?.label
+        {selectedOption
+          ? t(options.find((option) => option.value === selectedOption)?.value)
           : placeholder}
         <Icon isOpen={isOpen}>
           <Image src={arrowDown} alt='arrow down' />
@@ -38,16 +45,14 @@ const AppSelect = ({ options, onChange, placeholder }: Props) => {
       </SelectHeader>
       {isOpen && (
         <SelectOptions>
-          {options.map((option) => (
-            <>
-              <OptionItem
-                key={option.value}
-                onClick={() => handleOptionClick(option.value)}
-              >
-                <AppCheckmarkCircle isOn={option.value === selectedValue} />
-                <OptionLabel>{option.label}</OptionLabel>
-              </OptionItem>
-            </>
+          {options.map((option, i) => (
+            <OptionItem
+              key={`selectedOptionsDropdownListValue${i}`}
+              onClick={() => handleOptionClick(option.value)}
+            >
+              <AppCheckmarkCircle isOn={option.value === selectedOption} />
+              <OptionLabel>{t(option.value)}</OptionLabel>
+            </OptionItem>
           ))}
         </SelectOptions>
       )}

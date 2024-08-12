@@ -55,11 +55,11 @@ const Text = styled.p`
   margin: 0;
   font-size: 13px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 `
 const Money = styled.p`
   margin: 0;
   font-size: 23px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 `

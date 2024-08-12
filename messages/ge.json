@@ -69,6 +69,7 @@
   "debt": "დავალიანება",
   "arrived": "ჩამოსული",
   "in warehouse": "საწყობში",
+  "close": "დახურვა",
 
   "on auction": "აუქციონზე",
   "usa warehouse": "აშშ საწყობში",
@@ -102,6 +103,10 @@
   "mileage": "გარბენი",
   "more details": "დამატებითი დეტალები",
   "description": "აღწერა",
+
+  "transportation": "ტრანსპორტირება",
+  "cost of vehicle": "ავტომობილის ღირებულება",
+  "total debt": "ჯამური დავალიანება",
 
   "status": "სტატუსი",
   "is in American warehouse": "ამერიკის საწყობშია",

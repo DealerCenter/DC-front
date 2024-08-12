@@ -30,9 +30,9 @@ const CarDetailsBox = ({ imageLink, brand, model, year, vinCode }: Props) => {
           </CarBrandBox>
           <TextGray>{model}</TextGray>
         </CarBrandFrame>
-        <vinCodeBox>
+        <VinCodeBox>
           <Text>{vinCode}</Text>
-        </vinCodeBox>
+        </VinCodeBox>
       </DetailsBox>
     </ImageFrame>
   )
@@ -83,7 +83,7 @@ const CarBrand = styled.h3`
   margin: 0;
   font-size: 19px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 `
 const TextGray = styled.p`
   margin: 0;
@@ -96,8 +96,8 @@ const Text = styled.p`
   margin: 0;
   font-size: 13px;
   font-weight: 400;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 `
-const vinCodeBox = styled.div`
+const VinCodeBox = styled.div`
   padding: 10px 0px;
 `
