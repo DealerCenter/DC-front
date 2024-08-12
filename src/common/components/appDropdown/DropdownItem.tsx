@@ -89,7 +89,7 @@ const Container = styled(Link)<ContainerProps>`
   ${({ modalStyle }) =>
     modalStyle === 'white'
       ? css`
-          color: ${({ theme }) => theme.colors?.text_black};
+          color: ${({ theme }) => theme.colors?.black};
           &:hover {
             background-color: ${({ theme }) => theme.colors?.main_gray_04};
           }

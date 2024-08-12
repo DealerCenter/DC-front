@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import AppButton from '@/common/components/appButton/AppButton'
-
 import splitGrayLine from '@/assets/icons/splitGrayLine.svg'
 import Image from 'next/image'
 import AppSelect from './AppSelect'
@@ -13,54 +11,65 @@ import BasicButton from '@/common/components/appButton/BasicButton'
 
 type Props = {}
 
+type stateOptions = 'evacuator' | 'usa port' | 'container' | 'georgian port'
+
+type Option = {
+  value: stateOptions
+}
+
+const options: Option[] = [
+  {
+    value: 'evacuator',
+  },
+  {
+    value: 'usa port',
+  },
+  {
+    value: 'container',
+  },
+  {
+    value: 'georgian port',
+  },
+]
+
 const ButtonsRow = (props: Props) => {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null)
+  const [selectedOption, setSelectedOption] =
+    useState<stateOptions>('container')
+
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
-
-  const options = [
-    {
-      value: 'evacuator',
-      label: t('evacuator'),
-    },
-    {
-      value: 'usa port',
-      label: t('usa port'),
-    },
-    {
-      value: 'container',
-      label: t('container'),
-    },
-    {
-      value: 'georgian port',
-      label: t('georgian port'),
-    },
-  ]
 
   return (
     <>
       {isMobile ? (
         <AppSelect
           options={options}
-          onChange={(value) => setSelectedOption(value)}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
         />
       ) : (
         <ButtonsFrame>
-          <BasicButton onClick={() => {}} height={48}>
-            {t('evacuator')}
-          </BasicButton>
-          <Image src={splitGrayLine} alt='line icon' />
-          <BasicButton onClick={() => {}} height={48}>
-            {t('usa port')}
-          </BasicButton>
-          <Image src={splitGrayLine} alt='line icon' />
-          <BasicButton onClick={() => {}} height={48}>
-            {t('container')}
-          </BasicButton>
-          <Image src={splitGrayLine} alt='line icon' />
-          <BasicButton onClick={() => {}} height={48}>
-            {t('georgian port')}
-          </BasicButton>
+          {options.map((option, i) => (
+            <React.Fragment key={`shippingOptionButtonFragment${i}`}>
+              {i !== 0 && (
+                <Image
+                  src={splitGrayLine}
+                  alt='line icon'
+                  key={`splitGrayLine${i}`}
+                />
+              )}
+              <BasicButton
+                key={`shippingOptionButton${i}`}
+                onClick={() => {
+                  setSelectedOption(option.value)
+                }}
+                height={48}
+                color={option.value === selectedOption ? 'black' : 'white'}
+              >
+                {t(option.value)}
+              </BasicButton>
+            </React.Fragment>
+          ))}
         </ButtonsFrame>
       )}
     </>
@@ -74,5 +83,9 @@ const ButtonsFrame = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  width: 721px;
+  background-color: ${({ theme }) => theme.colors?.white};
+  border-radius: ${({ theme }) => theme.radius?.lg};
+  padding: 6px;
+
+  gap: 8px;
 `

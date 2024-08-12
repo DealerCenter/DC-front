@@ -36,7 +36,7 @@ const DealerLayout = ({ children }: Props) => {
         </Frame>
       </Container>
       {isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
-      {!isMobile && <Footer />}
+      <Footer />
     </>
   )
 }
@@ -45,6 +45,7 @@ export default DealerLayout
 
 const Container = styled.div`
   padding: 0 8%;
+  margin-bottom: 100px;
 
   @media ${({ theme }) => theme.media?.md} {
     padding: 0 3%;
@@ -54,8 +55,6 @@ const Container = styled.div`
     padding: 0 5%;
     margin-bottom: unset;
   }
-
-  margin-bottom: 100px;
 `
 
 const Frame = styled.div`
@@ -70,4 +69,8 @@ const Frame = styled.div`
 `
 const ChildrenContainer = styled.div`
   flex: 1;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    margin-bottom: 150px;
+  }
 `

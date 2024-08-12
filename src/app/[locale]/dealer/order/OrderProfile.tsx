@@ -13,8 +13,8 @@ import IdAndDateBox from './components/IdAndDateBox'
 import leftArrow from '@/assets/icons/arrows/arrowLeftThinBlack.svg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../../theme'
-import LeftFrame from './components/LeftFrame'
-import RightFrame from './components/RightFrame'
+import LeftColumn from './components/LeftColumn'
+import RightColumn from './components/RightColumn'
 
 type Props = {}
 
@@ -49,8 +49,8 @@ const OrderProfile = (props: Props) => {
         <CarImagesAndDetailsBox />
       </TopFrame>
       <BottomFrame>
-        <LeftFrame />
-        <RightFrame />
+        <LeftColumn />
+        <RightColumn />
       </BottomFrame>
     </Container>
   )
@@ -99,7 +99,7 @@ const BackToOrderButton = styled.button`
 const BackToOrderLabel = styled.div`
   font-size: 19px;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 `
 
 const StateBoxFrame = styled.div`
@@ -128,7 +128,6 @@ const BottomFrame = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.md};
-  /* margin-top: ${({ theme }) => theme.spacing?.md}; */
 
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;

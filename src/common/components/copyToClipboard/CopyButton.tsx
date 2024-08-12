@@ -22,7 +22,6 @@ const CopyButton = ({ textToCopy }: Props) => {
 
   return (
     <IconBox onClick={copyToClipboard} isActive={isActive}>
-      {isActive && <Bubble>Copied!</Bubble>}
       {isActive ? (
         <Image src={copyIconFull} alt='copy icon' />
       ) : (
@@ -45,6 +44,8 @@ const IconBox = styled.div<IconBoxProps>`
   justify-content: center;
   align-items: center;
 
+  transition: all 300ms ease-in-out;
+
   @media ${({ theme }) => theme.media?.notSm} {
     &:hover {
       background-color: ${({ theme }) => theme.colors?.main_gray_10};
@@ -54,7 +55,7 @@ const IconBox = styled.div<IconBoxProps>`
   ${({ isActive }) =>
     isActive
       ? css`
-          background-color: ${({ theme }) => theme.colors?.main_gray_16};
+          background-color: ${({ theme }) => theme.colors?.main_gray_10};
         `
       : css`
           background-color: ${({ theme }) => theme.colors?.white};
@@ -70,7 +71,7 @@ const Bubble = styled.div`
   align-items: center;
   width: 70px;
   height: 30px;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
   background-color: ${({ theme }) => theme.colors?.main_gray_16};
   border-radius: ${({ theme }) => theme.radius?.lg};
   font-size: 13px;

@@ -20,6 +20,8 @@ type Props = {
       | 'date ascending'
       | 'date descending'
   ) => void
+  handleToggle?: () => void
+  handleClose?: () => void
 }
 
 const AppDropdown = ({
@@ -29,12 +31,17 @@ const AppDropdown = ({
   top,
   modalStyle = 'black',
   onSortClick,
+  handleToggle,
+  handleClose,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
+    {
+      handleToggle && handleToggle()
+    }
   }
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -43,6 +50,9 @@ const AppDropdown = ({
       !dropdownRef.current.contains(event.target as Node)
     ) {
       setIsOpen(false)
+      {
+        handleClose && handleClose()
+      }
     }
   }
 
@@ -51,6 +61,7 @@ const AppDropdown = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
+    //eslint-disable-next-line
   }, [])
 
   return (

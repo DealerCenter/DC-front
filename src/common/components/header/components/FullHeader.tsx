@@ -6,23 +6,25 @@ import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import search from '@/assets/icons/search.svg'
-import person from '@/assets/icons/person.svg'
-import AppDropdown from '../appDropdown/AppDropdown'
+import AppDropdown from '../../appDropdown/AppDropdown'
 import downIcon from '@/assets/icons/arrowDownWhite.svg'
+import { css } from 'styled-components'
+import LangChangeButton from './LangChangeButton'
+import LoginButton from './LoginButton'
 
 type Props = {}
 
 const FullHeader = (props: Props) => {
-  const t = useTranslations('')
-  const router = useRouter()
-  const pathname = usePathname()
-  const locale = useLocale()
+  const [isOpenDropdown, setIsOpenDropdown] = useState(false)
 
-  const items = [
-    { href: { pathname }, locale: 'ge', label: 'Ge' },
-    { href: { pathname }, locale: 'en', label: 'En' },
-    { href: { pathname }, locale: 'ru', label: 'Ru' },
-  ]
+  const handleDropdownOpen = () => {
+    setIsOpenDropdown((is) => !is)
+  }
+  const handleDropdownClose = () => {
+    setIsOpenDropdown(false)
+  }
+
+  const t = useTranslations('')
 
   const servicesItems = [
     { label: `${t('status check')}` },
@@ -32,35 +34,37 @@ const FullHeader = (props: Props) => {
   ]
 
   return (
-    <Container>
-      <Logo>DUX</Logo>
-      <Frame>
-        <Title2>{t('search for vehicle')}</Title2>
-        <AppDropdown items={servicesItems} left={0} top={70}>
+    <>
+      <Container>
+        <Logo>DUX</Logo>
+        <Frame>
+          <Title2>{t('search for vehicle')}</Title2>
           <Title2>
             {t('our services')}
-            <Icon>
-              <Image src={downIcon} alt='down arrow icon' />
-            </Icon>
+            <AppDropdown
+              items={servicesItems}
+              left={-200}
+              top={55}
+              handleToggle={handleDropdownOpen}
+              handleClose={handleDropdownClose}
+            >
+              <Icon isOpen={isOpenDropdown}>
+                <Image src={downIcon} alt='down arrow icon' />
+              </Icon>
+            </AppDropdown>
           </Title2>
-        </AppDropdown>
-        <Title2>{t('about us')}</Title2>
-        <Title2>{t('contact')}</Title2>
-      </Frame>
-      <Menu>
-        <Item>
-          <Image width={20} height={20} src={search} alt='search icon' />
-        </Item>
-        <Item onClick={() => router.push('/auth')}>
-          <Image width={20} height={20} src={person} alt='person icon' />
-        </Item>
-        <AppDropdown items={items} left={-3} top={65}>
+          <Title2>{t('about us')}</Title2>
+          <Title2>{t('contact')}</Title2>
+        </Frame>
+        <Menu>
           <Item>
-            <Label>{locale.toUpperCase()}</Label>
+            <Image width={20} height={20} src={search} alt='search icon' />
           </Item>
-        </AppDropdown>
-      </Menu>
-    </Container>
+          <LoginButton />
+          <LangChangeButton left={-3} top={66} />
+        </Menu>
+      </Container>
+    </>
   )
 }
 
@@ -116,6 +120,8 @@ const Logo = styled.h2`
   font-weight: bold;
   padding: 12px 16px 12px 16px;
   margin: 0;
+
+  cursor: default;
 `
 
 const Menu = styled.div`
@@ -135,17 +141,23 @@ const Item = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+
+  cursor: pointer;
 `
 
-const Label = styled.label`
-  font-size: 16px;
-  font-weight: 500;
-`
+type IconProps = { isOpen: boolean }
 
-const Icon = styled.div`
+const Icon = styled.div<IconProps>`
   width: 24px;
   height: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: transform 0.3s ease-in-out;
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      transform: rotate(180deg);
+    `}/* cursor: pointer */
 `

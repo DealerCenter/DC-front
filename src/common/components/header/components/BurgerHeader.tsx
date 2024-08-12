@@ -1,15 +1,23 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import search from '@/assets/icons/search.svg'
 import person from '@/assets/icons/person.svg'
 import burger from '@/assets/icons/burger.svg'
+import BurgerHeaderMenu from './BurgerHeaderMenu'
 
 type Props = {}
 
 const BurgerHeader = (props: Props) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   return (
     <Container>
+      <BurgerHeaderMenu
+        isOpen={isMenuOpen}
+        handleClose={() => setIsMenuOpen(false)}
+      />
+
       <Logo>DUX</Logo>
       <Frame>
         <Item>
@@ -18,7 +26,7 @@ const BurgerHeader = (props: Props) => {
         <Item>
           <Image width={16} height={20} src={person} alt='person icon' />
         </Item>
-        <Item>
+        <Item onClick={() => setIsMenuOpen(true)}>
           <Image width={18} height={13.5} src={burger} alt='burger icon' />
         </Item>
         {/* ამაზე აღარ ვიწვალე, რომ გავარკვევთ მერე დავამთავრებ  */}
@@ -35,12 +43,10 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0px 8px;
-  background-color: rgba(18, 18, 20, 1);
+  background-color: ${({ theme }) => theme.colors?.button_black};
   min-width: 350px;
-  /* margin: 16px 0; */
   border-radius: 16px;
   min-height: 52px;
-
   width: 90%;
 `
 
@@ -54,9 +60,9 @@ const Frame = styled.div`
 `
 
 const Logo = styled.h2`
-  color: white;
+  color: ${({ theme }) => theme.colors?.white};
   font-size: 23px;
-  font-weight: bold;
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
   padding: 12px 8px 12px 8px;
   margin: 0;
 `
@@ -67,6 +73,8 @@ const Item = styled.div`
   justify-content: center;
   height: 40px;
   width: 40px;
-  border: 2px solid rgba(255, 255, 255, 0.24);
+  border: 2px solid ${({ theme }) => theme.colors?.white_24};
   border-radius: 12px;
+
+  cursor: pointer;
 `

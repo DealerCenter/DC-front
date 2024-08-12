@@ -63,7 +63,7 @@ const Frame = styled.div`
 const Title = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 700;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 `
 const Value = styled.label`
   font-size: 13px;
