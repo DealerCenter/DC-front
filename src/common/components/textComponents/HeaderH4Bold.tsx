@@ -1,23 +1,38 @@
+import theme from '@/app/[locale]/theme'
 import React from 'react'
-import styled from 'styled-components'
+import { useMediaQuery } from 'react-responsive'
+import styled, { css } from 'styled-components'
 
 type Props = { text: string }
 
 const HeaderH4Bold = ({ text }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   return (
     <H4Box>
-      <StyledH4>{text}</StyledH4>
+      <StyledH4 isMobile={isMobile}>{text}</StyledH4>
     </H4Box>
   )
 }
 
 export default HeaderH4Bold
 
-const StyledH4 = styled.h4`
+type StyledH4Props = { isMobile: boolean }
+
+const StyledH4 = styled.h4<StyledH4Props>`
   color: ${({ theme }) => theme.colors?.main_gray_100};
-  font-size: 28px;
+
   font-weight: 700;
   margin: 0;
+
+  ${({ isMobile }) =>
+    isMobile
+      ? css`
+          font-size: 23px;
+        `
+      : css`
+          font-size: 28px;
+        `}
 `
 
 const H4Box = styled.div`

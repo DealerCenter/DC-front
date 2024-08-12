@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import OrderListItem from './OrderListItem'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
 import OrderListHeader from './OrderListHeader'
 import { useAdminState } from '../../AdminStateContext'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
 type Props = {
   onClick: () => void
@@ -35,6 +37,7 @@ const OrderList = ({
   setTotalPages,
   setCurrentPage,
 }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const { activeOptionStatus, sortOption } = useAdminState()
 
   const filteredList = activeOptionStatus
@@ -68,14 +71,13 @@ const OrderList = ({
 
   return (
     <ListFrame>
-      <OrderListHeader />
+      {!isMobile && <OrderListHeader />}
       {currentItems.map((car, i) => (
         <OrderListItem
           onClick={onClick}
           imageLink={DummyImage.src}
           item={car}
           key={`${car.vinCode}82kj32${i}`}
-          index={i}
           isEditing={isEditing}
         />
       ))}
@@ -89,4 +91,10 @@ const ListFrame = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0;
+  margin: 0;
+  gap: unset;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    gap: 16px;
+  }
 `

@@ -21,13 +21,18 @@ const DetailsBox = ({
   arrivalState,
   buyerFullName,
   buyerPhoneNumber,
-  vinCode,
 }: Props) => {
   return (
     <Container>
-      <VinCodeBox>
-        <Text>{vinCode}</Text>
-      </VinCodeBox>
+      <Frame>
+        <IconBox>
+          <Image src={checkmarkGreen} alt='icon' width={16} height={16} />
+        </IconBox>
+        <Box>
+          <TextBold>{buyerFullName}</TextBold>
+          <Text>{buyerPhoneNumber}</Text>
+        </Box>
+      </Frame>
       <Frame>
         <IconBox>
           <Image src={checkmarkGreen} alt='icon' width={16} height={16} />
@@ -40,7 +45,7 @@ const DetailsBox = ({
       <ArrivalStateBoxFrame>
         <ArrivalStateBox arrivalState={arrivalState} />
       </ArrivalStateBoxFrame>
-      <Money>$ {amount.toString()}</Money>
+      <Money>{`$ ${amount.toString()}`}</Money>
     </Container>
   )
 }
@@ -56,7 +61,7 @@ const Container = styled.div`
 `
 
 const ArrivalStateBoxFrame = styled.div`
-  width: 120px;
+  width: 145px;
   display: flex;
   justify-content: center;
 `
@@ -68,7 +73,7 @@ const Money = styled.label`
   margin: 0;
   font-size: 23px;
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 `
 
 const Frame = styled.div`
@@ -88,13 +93,13 @@ const Box = styled.div`
 const TextBold = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.small_13};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 `
 
 const Text = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.small_13};
   font-weight: ${({ theme }) => theme.fontWeight?.normal};
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 `
 
 const IconBox = styled.div`
@@ -103,9 +108,4 @@ const IconBox = styled.div`
   align-items: center;
   width: 24px;
   height: 24px;
-`
-
-const VinCodeBox = styled.div`
-  width: 160px;
-  padding: 10px 0px;
 `

@@ -69,7 +69,7 @@ const CarDetails = styled.div`
   align-items: center;
   flex-direction: row;
   gap: 8px;
-  width: 320px;
+  width: 348px;
 `
 const BoxesFrame = styled.div`
   display: flex;
@@ -100,7 +100,7 @@ const StatusBox = styled.div`
   align-items: center;
   flex-direction: row;
   gap: 8px;
-  width: 120px;
+  width: 145px;
 `
 const MoneyBox = styled.div`
   display: flex;

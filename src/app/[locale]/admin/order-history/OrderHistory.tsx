@@ -69,7 +69,6 @@ const TopFrame = styled.div`
 
   @media ${({ theme }) => theme.media?.sm} {
     gap: 16px;
-    padding: 0 5%;
   }
 `
 

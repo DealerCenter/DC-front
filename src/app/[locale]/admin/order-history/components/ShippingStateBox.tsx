@@ -55,7 +55,7 @@ const Container = styled.div``
 const Label = styled.label`
   font-size: 13px;
   font-weight: 400;
-  color: ${({ theme }) => theme.colors?.text_black};
+  color: ${({ theme }) => theme.colors?.black};
 `
 
 const Line = styled.div`
