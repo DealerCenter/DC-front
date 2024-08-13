@@ -76,6 +76,7 @@
   "close": "Close",
   "select": "Select",
   "add field": "Add a field",
+  "provide a link": "Provide a link",
 
   "on auction": "On auction",
   "usa warehouse": "USA warehouse",
@@ -109,6 +110,8 @@
   "mileage": "Mileage",
   "more details": "More details",
   "description": "Description",
+  "full name": "Full name",
+  "mob. number": "Mobile number",
 
   "transportation": "Transportation",
   "cost of vehicle": "The cost of the vehicle",
@@ -121,7 +124,7 @@
   "was sent": "Was sent",
 
   "container data": "Container data",
-  "data of the recipient": "Data of the recipient",
+  "recipient data": "Recipient data",
   "dealer data": "Dealer data",
 
   "website": "Website",

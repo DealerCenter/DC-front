@@ -64,7 +64,7 @@ const OrderProfile = (props: Props) => {
       </TopFrame>
       <BottomFrame>
         <LeftFrame isEditing={isEditing} />
-        <RightFrame />
+        <RightFrame isEditing={isEditing} />
       </BottomFrame>
     </Container>
   )

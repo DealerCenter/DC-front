@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
 import {
   CurrentIcon,
@@ -10,21 +10,33 @@ import {
 } from './Icons'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import { DatePicker, DatePickerProps } from 'antd'
 
 type Props = {
   shippingSteps: { stepName: string }[]
   currentStep: 0 | 1 | 2 | 3 | 4
+  isEditing: boolean
 }
 
-const ShippingStateBox = ({ currentStep, shippingSteps }: Props) => {
+const ShippingStateBox = ({ currentStep, shippingSteps, isEditing }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+    console.log(date, dateString)
+  }
+
   return (
-    <Container>
+    <Container isEditing={isEditing}>
       {shippingSteps.map((step, i) => (
         <Line key={`shippingStateBoxLine${i}`}>
-          <Date>{i <= currentStep && `22/04${!isMobile ? '/2022' : ''}`}</Date>
+          {isEditing ? (
+            <DatePicker onChange={onChange} />
+          ) : (
+            <Date>
+              {i <= currentStep && `22/04${!isMobile ? '/2022' : ''}`}
+            </Date>
+          )}
           <IconBox>
             {i - currentStep === 1 ? (
               <CurrentIcon />
@@ -34,7 +46,7 @@ const ShippingStateBox = ({ currentStep, shippingSteps }: Props) => {
               <PendingIcon />
             )}
 
-            {i < currentStep ? (
+            {i <= currentStep ? (
               <LineGreen />
             ) : (
               i < shippingSteps.length - 1 && <LineGray />
@@ -49,7 +61,21 @@ const ShippingStateBox = ({ currentStep, shippingSteps }: Props) => {
 
 export default ShippingStateBox
 
-const Container = styled.div``
+type ContainerProps = { isEditing: boolean }
+
+const Container = styled.div<ContainerProps>`
+  display: flex;
+  flex-direction: column;
+
+  ${({ isEditing }) =>
+    isEditing
+      ? css`
+          gap: 8px;
+        `
+      : css`
+          gap: unset;
+        `}
+`
 
 const Label = styled.label`
   font-size: 13px;

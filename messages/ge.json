@@ -75,6 +75,7 @@
   "close": "დახურვა",
   "select": "მონიშნე",
   "add field": "დაამატე ველი",
+  "provide a link": "მიუთითე ლინკი",
 
   "on auction": "აუქციონზე",
   "usa warehouse": "აშშ საწყობში",
@@ -108,6 +109,8 @@
   "mileage": "გარბენი",
   "more details": "დამატებითი დეტალები",
   "description": "აღწერა",
+  "full name": "სახელი და გვარი",
+  "mob. number": "მობ. ნომერი",
 
   "transportation": "ტრანსპორტირება",
   "cost of vehicle": "ავტომობილის ღირებულება",
@@ -120,7 +123,7 @@
   "was sent": "გამოიგზავნა",
 
   "container data": "კონტეინერის მონაცემები",
-  "data of the recipient": "მიმღები პირის მონაცემები",
+  "recipient data": "მიმღები პირის მონაცემები",
   "dealer data": "დილერის მონაცემები",
 
   "website": "ვებგვერდი",
