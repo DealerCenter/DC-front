@@ -36,30 +36,27 @@ const OrderProfile = (props: Props) => {
             dateOfPurchase='20/04/2025'
           />
         </IdAndDateFrame>
-        {!isMobile && (
-          <>
-            <StateBoxFrame>
-              <ArrivalStateBox arrivalState='arrived' />
-            </StateBoxFrame>
-            <TopButtonsFrame>
-              <BackToOrderButton
-                onClick={() => router.push(routeName.adminOrderHistory)}
-              >
-                <Image src={leftArrow} alt='left arrow icon' height={20} />
-                <BackToOrderLabel>{t('back to orders')}</BackToOrderLabel>
-              </BackToOrderButton>
-              <BasicButton
-                onClick={() => setIsEditing((is) => !is)}
-                padding={16}
-              >
-                <ButtonIcon>
-                  <Image src={editIcon} alt='check icon' width={15} />
-                </ButtonIcon>
-                <ButtonText>{t('edit')}</ButtonText>
-              </BasicButton>
-            </TopButtonsFrame>
-          </>
-        )}
+
+        <StateBoxFrame>
+          <ArrivalStateBox arrivalState='arrived' />
+        </StateBoxFrame>
+        <TopButtonsFrame>
+          <BackToOrderButton
+            onClick={() => router.push(routeName.adminOrderHistory)}
+          >
+            <Image src={leftArrow} alt='left arrow icon' height={20} />
+            {!isMobile && (
+              <BackToOrderLabel>{t('back to orders')}</BackToOrderLabel>
+            )}
+          </BackToOrderButton>
+          <BasicButton onClick={() => setIsEditing((is) => !is)} padding={16}>
+            <ButtonIcon>
+              <Image src={editIcon} alt='check icon' width={15} />
+            </ButtonIcon>
+            <ButtonText>{t('edit')}</ButtonText>
+          </BasicButton>
+        </TopButtonsFrame>
+
         <CarImagesAndDetailsBox isEditing={isEditing} />
       </TopFrame>
       <BottomFrame>
@@ -131,11 +128,6 @@ const StateBoxFrame = styled.div`
 `
 
 const IdAndDateFrame = styled.div`
-  @media ${({ theme }) => theme.media?.sm} {
-    position: unset;
-    top: unset;
-    right: unset;
-  }
   position: absolute;
   top: 95px;
   right: 0;

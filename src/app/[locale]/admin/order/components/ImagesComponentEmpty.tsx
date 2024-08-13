@@ -81,9 +81,7 @@ const Container = styled.div`
   }
 
   @media ${({ theme }) => theme.media?.sm} {
-    display: unset;
-    gap: unset;
-    width: unset;
+    width: 343px;
   }
 
   //CSS for Dashed border

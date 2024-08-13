@@ -8,10 +8,11 @@ import styled from 'styled-components'
 type Props = {}
 
 const CarDetailsBoxEmpty = (props: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
 
-  const textInputWidth = isTablet ? 242 : 356
+  const textInputWidth = isMobile ? 311 : isTablet ? 242 : 356
 
   return (
     <CarDetailsBox>

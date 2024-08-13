@@ -121,14 +121,18 @@ const StyledInput = styled.input<InputProps>`
     `}
 
     @media ${({ theme }) => theme.media?.sm} {
-    ${({ isHalfSize }) =>
+    ${({ isHalfSize, width }) =>
       isHalfSize
         ? css`
             width: 167.5px;
           `
-        : css`
-            width: 350px;
-          `}
+        : width
+          ? css`
+              width: ${width}px;
+            `
+          : css`
+              width: 350px;
+            `}
   }
 
   &::placeholder {

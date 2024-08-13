@@ -3,9 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ImagesComponent from './ImagesComponent'
 
-import { useTranslations } from 'next-intl'
 import DetailsRow from './detailsRow/DetailsRow'
-import ButtonsRow from './ButtonsRow'
 import ImagesComponentEmpty from './ImagesComponentEmpty'
 
 type Props = { isEditing: boolean }

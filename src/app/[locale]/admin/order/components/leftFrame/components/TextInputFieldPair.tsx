@@ -8,6 +8,8 @@ import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import { css } from 'styled-components'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
 type Props = {
   isEditing: boolean
@@ -24,6 +26,7 @@ const TextInputFieldPair = ({
   selectItems,
   isYes,
 }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
   return (
@@ -31,7 +34,7 @@ const TextInputFieldPair = ({
       {isEditing ? (
         <LabelPair isEditing={isEditing}>
           <TextInput
-            width={240}
+            width={isMobile ? 160 : 240}
             height={48}
             type='text'
             name={title}
@@ -50,7 +53,7 @@ const TextInputFieldPair = ({
             />
           ) : (
             <TextInput
-              width={220}
+              width={isMobile ? 143 : 220}
               height={48}
               type='text'
               name={`value of ${title}`}
