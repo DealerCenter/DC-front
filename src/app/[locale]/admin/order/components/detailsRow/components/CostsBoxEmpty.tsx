@@ -17,13 +17,15 @@ const CostsBoxEmpty = (props: Props) => {
       <CostFrame>
         <Text16BoldGray>{t('cost of transportation')}</Text16BoldGray>
         <TextInput
-          width={100}
+          width={100}     height={48}
           type='text'
           name='cost of transportation'
           placeholder={t('')}
           value={''}
           onChange={() => {}}
           onBlur={() => {}}
+          fontWeight='bold'
+          fontSize={13}
         />
         <IconBox>
           <Image src={paperClip} alt='pdf icon' />
@@ -32,15 +34,16 @@ const CostsBoxEmpty = (props: Props) => {
       <CostFrame>
         <Text16BoldGray>{t('cost of the car')}</Text16BoldGray>
         <TextInput
-          width={100}
+          width={100}     height={48}
           type='text'
           name='cost of the car'
           placeholder={t('')}
           value={''}
           onChange={() => {}}
           onBlur={() => {}}
+          fontWeight='bold'
+          fontSize={13}
         />
-
         <IconBox>
           <Image src={paperClip} alt='pdf icon' />
         </IconBox>
@@ -49,13 +52,15 @@ const CostsBoxEmpty = (props: Props) => {
       <CostFrame>
         <Text16BoldGray>{t('total cost')}</Text16BoldGray>
         <TextInput
-          width={100}
+          width={100}     height={48}
           type='text'
           name='total cost'
           placeholder={t('')}
           value={''}
           onChange={() => {}}
           onBlur={() => {}}
+          fontWeight='bold'
+          fontSize={13}
         />
         <IconBox />
       </CostFrame>

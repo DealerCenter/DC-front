@@ -20,12 +20,15 @@ const DebtBox = ({ isEditing }: Props) => {
           {isEditing ? (
             <TextInput
               width={100}
+              height={48}
               type='text'
               name='current debt'
               placeholder={t('')}
               value={''}
               onChange={() => {}}
               onBlur={() => {}}
+              fontWeight='bold'
+              fontSize={13}
             />
           ) : (
             <DebtLabel>$ 1,600</DebtLabel>

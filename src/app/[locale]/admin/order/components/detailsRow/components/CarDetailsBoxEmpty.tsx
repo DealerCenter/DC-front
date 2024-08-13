@@ -17,39 +17,51 @@ const CarDetailsBoxEmpty = (props: Props) => {
     <CarDetailsBox>
       <TextInput
         width={textInputWidth}
+        height={48}
         type='text'
         name='name of vehicle'
         placeholder={t('name of vehicle')}
         value={''}
         onChange={() => {}}
         onBlur={() => {}}
+        fontWeight='bold'
+        fontSize={13}
       />
       <TextInput
         width={textInputWidth}
+        height={48}
         type='text'
         name='release year'
         placeholder={t('release year')}
         value={''}
         onChange={() => {}}
         onBlur={() => {}}
+        fontWeight='bold'
+        fontSize={13}
       />
       <TextInput
         width={textInputWidth}
+        height={48}
         type='text'
         name='vehicle feature'
         placeholder={t('vehicle feature')}
         value={''}
         onChange={() => {}}
         onBlur={() => {}}
+        fontWeight='bold'
+        fontSize={13}
       />
       <TextInput
         width={textInputWidth}
+        height={48}
         type='text'
         name='vin code'
         placeholder={t('vin code')}
         value={''}
         onChange={() => {}}
         onBlur={() => {}}
+        fontWeight='bold'
+        fontSize={13}
       />
     </CarDetailsBox>
   )

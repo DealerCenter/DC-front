@@ -10,8 +10,8 @@ import theme from '../../theme'
 
 import CarImagesAndDetailsBox from './components/CarImagesAndDetailsBox'
 import IdAndDateBox from './components/IdAndDateBox'
-import LeftFrame from './components/LeftFrame'
-import RightFrame from './components/RightFrame'
+import LeftFrame from './components/leftFrame/LeftFrame'
+import RightFrame from './components/rightFrame/RightFrame'
 import BasicButton from '@/common/components/appButton/BasicButton'
 import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
 
@@ -63,7 +63,7 @@ const OrderProfile = (props: Props) => {
         <CarImagesAndDetailsBox isEditing={isEditing} />
       </TopFrame>
       <BottomFrame>
-        <LeftFrame />
+        <LeftFrame isEditing={isEditing} />
         <RightFrame />
       </BottomFrame>
     </Container>

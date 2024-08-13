@@ -15,6 +15,9 @@ type Props = {
   isHalfSize?: boolean | undefined
   errorMessage?: string
   width?: number
+  height?: number
+  fontWeight?: 'normal' | 'bold'
+  fontSize?: number
 }
 
 const TextInput = ({
@@ -29,12 +32,16 @@ const TextInput = ({
   isHalfSize = false,
   errorMessage,
   width,
+  height,
+  fontWeight = 'normal',
+  fontSize = 16,
 }: Props) => {
   return (
     <Container>
       {icon ? <IconBox>{icon}</IconBox> : null}
       <StyledInput
         width={width}
+        height={height}
         type={type}
         name={name}
         placeholder={placeholder}
@@ -43,6 +50,8 @@ const TextInput = ({
         onBlur={onBlur}
         icon={icon}
         isHalfSize={isHalfSize}
+        fontWeight={fontWeight}
+        fontSize={fontSize}
       />
       {optionalInfo && (
         <TextBox>
@@ -65,6 +74,9 @@ type InputProps = {
   icon: any
   isHalfSize: boolean
   width?: number
+  height?: number
+  fontWeight?: 'normal' | 'bold'
+  fontSize?: number
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -75,10 +87,10 @@ const StyledInput = styled.input<InputProps>`
   outline: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
   outline-offset: 1px;
   width: 350px;
-  height: 52px;
+
   padding: 10px 10px 10px 16px;
   border-radius: ${({ theme }) => theme.radius?.lg};
-  font-size: ${({ theme }) => theme.fontSizes?.medium};
+  font-size: ${({ fontSize }) => `${fontSize}px`};
 
   ${({ isHalfSize, width }) =>
     isHalfSize
@@ -92,6 +104,15 @@ const StyledInput = styled.input<InputProps>`
         : css`
             width: 350px;
           `}
+
+  ${({ height }) =>
+    height
+      ? css`
+          height: ${height}px;
+        `
+      : css`
+          height: 52px;
+        `}       
 
   ${({ icon }) =>
     icon &&
@@ -112,6 +133,7 @@ const StyledInput = styled.input<InputProps>`
 
   &::placeholder {
     color: ${({ theme }) => theme.colors?.main_gray_56};
+    font-weight: ${({ fontWeight }) => (fontWeight === 'bold' ? 700 : 400)};
   }
 
   &:focus {
