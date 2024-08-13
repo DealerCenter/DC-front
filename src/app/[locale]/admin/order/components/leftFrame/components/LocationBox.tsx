@@ -1,8 +1,10 @@
 import React from 'react'
-import Box from '../../common/Box'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+
+import Box from '../../common/Box'
 import TextInputFieldPair from './TextInputFieldPair'
+import AddFiledButton from './AddFiledButton'
 
 type Props = { isEditing: boolean }
 
@@ -25,6 +27,7 @@ const LocationBox = ({ isEditing }: Props) => {
           isEditing={isEditing}
         />
       </LabelsFrame>
+      {isEditing && <AddFiledButton onClick={() => {}} />}
     </Box>
   )
 }

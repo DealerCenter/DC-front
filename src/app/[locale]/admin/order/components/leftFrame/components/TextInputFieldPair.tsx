@@ -64,7 +64,7 @@ const TextInputFieldPair = ({
           )}
         </LabelPair>
       ) : (
-        <LabelPair>
+        <LabelPair isEditing={isEditing}>
           <Label>{t(title)}</Label>
           {selectItems ? (
             <IconLabelBox>

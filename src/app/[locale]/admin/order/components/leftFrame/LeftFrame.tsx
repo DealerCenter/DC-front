@@ -1,7 +1,7 @@
-import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
+import { useTranslations } from 'next-intl'
 
 import theme from '@/app/[locale]/theme'
 import Box from '../common/Box'
