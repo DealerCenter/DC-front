@@ -4,17 +4,17 @@ import styled from 'styled-components'
 import ImagesComponent from './ImagesComponent'
 
 import { useTranslations } from 'next-intl'
-import DetailsRow from './DetailsRow'
+import DetailsRow from './detailsRow/DetailsRow'
 import ButtonsRow from './ButtonsRow'
+import ImagesComponentEmpty from './ImagesComponentEmpty'
 
-type Props = {}
+type Props = { isEditing: boolean }
 
-const CarImagesAndDetailsBox = (props: Props) => {
+const CarImagesAndDetailsBox = ({ isEditing }: Props) => {
   return (
     <Container>
-      <ImagesComponent />
-      <ButtonsRow />
-      <DetailsRow />
+      {isEditing ? <ImagesComponentEmpty /> : <ImagesComponent />}
+      <DetailsRow isEditing={isEditing} />
     </Container>
   )
 }

@@ -142,7 +142,6 @@ const Button = styled.button<ButtonProps>`
   align-items: center;
   border-radius: 100px;
   background-color: ${({ theme }) => theme.colors?.white_68};
-  /* background-color: red; */
   top: 159px;
 
   border: none;

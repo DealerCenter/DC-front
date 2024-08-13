@@ -102,6 +102,9 @@ const StyledButton = styled.button<ButtonProps>`
         `}
 
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   transition: all 300ms ease-out;
   font-size: ${({ theme }) => theme.fontSizes?.medium};

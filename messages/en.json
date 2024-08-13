@@ -28,6 +28,7 @@
   "name": "Name",
   "surname": "Surname",
   "actual address": "Actual address",
+  "upload": "Upload",
   "file uploaded": "File uploaded",
   "photo uploaded": "Photo uploaded",
   "use numbers": "Use numbers",
@@ -155,6 +156,13 @@
   "recipient": "Recipient",
   "dealer": "Dealer",
   "amount": "Amount",
+
+  "add photos of vehicle": "Add photos of the vehicle",
+
+  "name of vehicle": "Name of the vehicle",
+  "release year": "Release year",
+  "vehicle feature": "Vehicle feature",
+  "vin code": "Vin code",
 
   "useForm": {
     "must be valid email": "Must be a valid email",

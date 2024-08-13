@@ -1,24 +1,27 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
+import { useMediaQuery } from 'react-responsive'
 
 import { routeName } from '@/common/helpers/constants'
+import theme from '../../theme'
 
 import CarImagesAndDetailsBox from './components/CarImagesAndDetailsBox'
-import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
 import IdAndDateBox from './components/IdAndDateBox'
-
-import leftArrow from '@/assets/icons/arrows/arrowLeftThinBlack.svg'
-import { useMediaQuery } from 'react-responsive'
-import theme from '../../theme'
 import LeftFrame from './components/LeftFrame'
 import RightFrame from './components/RightFrame'
+import BasicButton from '@/common/components/appButton/BasicButton'
+import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
+
+import leftArrow from '@/assets/icons/arrows/arrowLeftThinBlack.svg'
+import editIcon from '@/assets/icons/editPencilWhite.svg'
 
 type Props = {}
 
 const OrderProfile = (props: Props) => {
+  const [isEditing, setIsEditing] = useState(false)
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const router = useRouter()
@@ -38,15 +41,26 @@ const OrderProfile = (props: Props) => {
             <StateBoxFrame>
               <ArrivalStateBox arrivalState='arrived' />
             </StateBoxFrame>
-            <BackToOrderButton
-              onClick={() => router.push(routeName.adminOrderHistory)}
-            >
-              <Image src={leftArrow} alt='left arrow icon' height={20} />
-              <BackToOrderLabel>{t('back to orders')}</BackToOrderLabel>
-            </BackToOrderButton>
+            <TopButtonsFrame>
+              <BackToOrderButton
+                onClick={() => router.push(routeName.adminOrderHistory)}
+              >
+                <Image src={leftArrow} alt='left arrow icon' height={20} />
+                <BackToOrderLabel>{t('back to orders')}</BackToOrderLabel>
+              </BackToOrderButton>
+              <BasicButton
+                onClick={() => setIsEditing((is) => !is)}
+                padding={16}
+              >
+                <ButtonIcon>
+                  <Image src={editIcon} alt='check icon' width={15} />
+                </ButtonIcon>
+                <ButtonText>{t('edit')}</ButtonText>
+              </BasicButton>
+            </TopButtonsFrame>
           </>
         )}
-        <CarImagesAndDetailsBox />
+        <CarImagesAndDetailsBox isEditing={isEditing} />
       </TopFrame>
       <BottomFrame>
         <LeftFrame />
@@ -75,6 +89,14 @@ const Container = styled.div`
   }
 `
 
+const TopButtonsFrame = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 64px;
+`
+
 const BackToOrderButton = styled.button`
   height: 68px;
   display: flex;
@@ -92,8 +114,6 @@ const BackToOrderButton = styled.button`
   }
 
   cursor: pointer;
-
-  margin-bottom: 64px;
 `
 
 const BackToOrderLabel = styled.div`
@@ -128,10 +148,22 @@ const BottomFrame = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.md};
-  /* margin-top: ${({ theme }) => theme.spacing?.md}; */
 
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;
     gap: 8px;
   }
+`
+
+const ButtonIcon = styled.label`
+  margin-right: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`
+const ButtonText = styled.label`
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
+  cursor: pointer;
 `

@@ -27,6 +27,7 @@
   "name": "სახელი",
   "surname": "გვარი",
   "actual address": "ფაქტობრივი მისამართი",
+  "upload": "ატვირთვა",
   "file uploaded": "ფაილი ატვირთულია",
   "photo uploaded": "ფოტო ატვირთულია",
   "use numbers": "გამოიყენეთ რიცხვები",
@@ -154,6 +155,13 @@
   "recipient": "მიმღები",
   "dealer": "დილერი",
   "amount": "თანხა",
+
+  "add photos of vehicle": "დაამატე ავტომობილის ფოტოები",
+
+  "name of vehicle": "ავტომობილის დასახელება",
+  "release year": "გამოშვების წელი",
+  "vehicle feature": "ავტომობილის მახასიათებელი",
+  "vin code": "Vin კოდი",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
