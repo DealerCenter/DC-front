@@ -1,7 +1,7 @@
 import BasicButton from '@/common/components/appButton/BasicButton'
 import Image from 'next/image'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import infoIcon from '@/assets/icons/infoIconEmpty.svg'
 import { useTranslations } from 'next-intl'
@@ -13,7 +13,7 @@ const DebtBox = ({ isEditing }: Props) => {
   const t = useTranslations('')
 
   return (
-    <Container>
+    <Container isEditing={isEditing}>
       <DebtFrame>
         <Text16BoldGray>{t('current debt')}</Text16BoldGray>
         <DebtLabelBox>
@@ -53,7 +53,9 @@ const Text16BoldGray = styled.label`
   color: ${({ theme }) => theme.colors?.main_gray_68};
 `
 
-const Container = styled.div`
+type ContainerProps = { isEditing: boolean }
+
+const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
   width: 328px;
   display: flex;
@@ -66,7 +68,14 @@ const Container = styled.div`
   justify-content: space-between;
 
   @media ${({ theme }) => theme.media?.md} {
-    width: 226px;
+    ${({ isEditing }) =>
+      isEditing
+        ? css`
+            width: 226px;
+          `
+        : css`
+            width: 200px;
+          `}
   }
 
   @media ${({ theme }) => theme.media?.sm} {

@@ -1,3 +1,4 @@
+import AppMessage from '@/common/components/appMessage/AppMessage'
 import CopyButton from '@/common/components/copyToClipboard/CopyButton'
 import React from 'react'
 import styled from 'styled-components'
@@ -17,7 +18,9 @@ const CarDetailsBox = (props: Props) => {
       <VinCodeBox>
         <VinLabel>VIN:</VinLabel>
         <VinCode>{DummyVinCode}</VinCode>
-        <CopyButton textToCopy={DummyVinCode} />
+        <AppMessage messageText='Text copied'>
+          <CopyButton textToCopy={DummyVinCode} />
+        </AppMessage>
       </VinCodeBox>
     </Container>
   )
@@ -36,7 +39,7 @@ const Container = styled.div`
   gap: ${({ theme }) => theme.spacing?.sm};
 
   @media ${({ theme }) => theme.media?.md} {
-    width: 306px;
+    width: 332px;
   }
   @media ${({ theme }) => theme.media?.sm} {
     width: 343px;
