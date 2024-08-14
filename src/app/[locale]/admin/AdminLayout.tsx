@@ -21,7 +21,9 @@ const AdminLayout = ({ children }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   const pathname = usePathname()
-  const isSideBarVisible = pathname !== routeName.adminOrder
+  const isSideBarVisible =
+    pathname !== routeName.adminOrder &&
+    pathname !== routeName.adminOrderImageUpload
 
   return (
     <>
@@ -33,7 +35,7 @@ const AdminLayout = ({ children }: Props) => {
         </Frame>
       </Container>
       {isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
-      {!isMobile && <Footer />}
+      <Footer />
     </>
   )
 }

@@ -13,7 +13,7 @@ import LeftFrame from './components/leftFrame/LeftFrame'
 import RightFrame from './components/rightFrame/RightFrame'
 import BasicButton from '@/common/components/appButton/BasicButton'
 import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
-import ImagesComponentEmpty from './components/ImagesComponentEmpty'
+import ImagesUploadComponent from './components/common/ImagesUploadComponent'
 import ImagesComponent from './components/ImagesComponent'
 import DetailsRow from './components/detailsRow/DetailsRow'
 
@@ -25,6 +25,7 @@ type Props = {}
 const OrderProfile = (props: Props) => {
   const [isEditing, setIsEditing] = useState(false)
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
   const router = useRouter()
 
@@ -41,7 +42,7 @@ const OrderProfile = (props: Props) => {
         </BackToOrderButton>
         <BasicButton onClick={() => setIsEditing((is) => !is)} padding={16}>
           <ButtonIcon>
-            <Image src={editIcon} alt='check icon' width={15} />
+            <Image src={editIcon} alt='edit icon' width={15} />
           </ButtonIcon>
           <ButtonText>{t('edit')}</ButtonText>
         </BasicButton>
@@ -60,7 +61,15 @@ const OrderProfile = (props: Props) => {
           <ArrivalStateBox arrivalState='arrived' />
         </StateBoxFrame>
 
-        {isEditing ? <ImagesComponentEmpty /> : <ImagesComponent />}
+        {isEditing ? (
+          <ImagesUploadComponent
+            onClick={() => router.push(routeName.adminOrderImageUpload)}
+            width={isMobile ? 343 : isTablet ? 960 : 1200}
+            height={372}
+          />
+        ) : (
+          <ImagesComponent />
+        )}
         <DetailsRow isEditing={isEditing} />
       </ImageFrame>
 

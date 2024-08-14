@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import arrowDown from '@/assets/icons/arrowDown.svg'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 type Option = {
   value: string
@@ -12,11 +13,24 @@ type Props = {
   options: Option[]
   onChange: (value: string) => void
   placeholder?: string
+  width?: number
+  placeHolderIsBold?: boolean
+  placeHolderIsGray?: boolean
 }
 
-const AppSelectBasic = ({ options, onChange, placeholder }: Props) => {
+const AppSelectBasic = ({
+  options,
+  onChange,
+  placeholder,
+  width,
+  placeHolderIsBold,
+  placeHolderIsGray,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedValue, setSelectedValue] = useState<string | null>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  const t = useTranslations('')
 
   const handleOptionClick = (value: string) => {
     setSelectedValue(value)
@@ -24,9 +38,31 @@ const AppSelectBasic = ({ options, onChange, placeholder }: Props) => {
     setIsOpen(false)
   }
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+    //eslint-disable-next-line
+  }, [])
+
   return (
-    <SelectContainer>
-      <SelectHeader onClick={() => setIsOpen(!isOpen)}>
+    <SelectContainer ref={dropdownRef}>
+      <SelectHeader
+        onClick={() => setIsOpen(!isOpen)}
+        width={width}
+        placeHolderIsBold={placeHolderIsBold}
+        placeHolderIsGray={placeHolderIsGray}
+      >
         {selectedValue
           ? options.find((option) => option.value === selectedValue)?.value
           : placeholder}
@@ -42,7 +78,7 @@ const AppSelectBasic = ({ options, onChange, placeholder }: Props) => {
                 key={option.value}
                 onClick={() => handleOptionClick(option.value)}
               >
-                <OptionLabel>{option.value}</OptionLabel>
+                <OptionLabel>{t(option.value)}</OptionLabel>
               </OptionItem>
             </>
           ))}
@@ -60,16 +96,16 @@ const SelectContainer = styled.div`
   cursor: pointer;
 `
 
-const SelectHeader = styled.div`
+type SelectHeaderProps = {
+  width?: number
+  placeHolderIsBold?: boolean
+  placeHolderIsGray?: boolean
+}
+
+const SelectHeader = styled.div<SelectHeaderProps>`
   box-sizing: border-box;
   height: 48px;
-  width: 220px;
-
-  @media ${({ theme }) => theme.media?.sm} {
-    width: 143px;
-  }
-
-  padding: 4px 4px 4px 14px;
+  padding: 4px 40px 4px 14px;
   border: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
   border-radius: 4px;
   background-color: ${({ theme }) => theme.colors?.white};
@@ -78,7 +114,44 @@ const SelectHeader = styled.div`
   align-items: center;
   border-radius: ${({ theme }) => theme.radius?.lg};
   font-size: ${({ theme }) => theme.fontSizes?.small_13};
-  font-weight: ${({ theme }) => theme.fontWeight?.normal};
+
+  ${({ placeHolderIsBold }) =>
+    placeHolderIsBold
+      ? css`
+          color: ${({ theme }) => theme.colors?.main_gray_56};
+        `
+      : css`
+          color: ${({ theme }) => theme.colors?.main_gray_100};
+        `}
+
+  ${({ placeHolderIsGray }) =>
+    placeHolderIsGray
+      ? css`
+          font-weight: ${({ theme }) => theme.fontWeight?.bold};
+        `
+      : css`
+          font-weight: ${({ theme }) => theme.fontWeight?.normal};
+        `}
+
+  ${({ width }) =>
+    width
+      ? css`
+          width: ${width}px;
+        `
+      : css`
+          width: 220px;
+        `}
+
+  @media ${({ theme }) => theme.media?.sm} {
+    ${({ width }) =>
+      width
+        ? css`
+            width: ${width}px;
+          `
+        : css`
+            width: 143px;
+          `}
+  }
 `
 
 const SelectOptions = styled.div`
@@ -91,7 +164,7 @@ const SelectOptions = styled.div`
   border-radius: ${({ theme }) => theme.radius?.lg};
   background-color: ${({ theme }) => theme.colors?.white};
   overflow-y: auto;
-  z-index: 1;
+  z-index: 2;
   padding: 6px;
 
   box-shadow: 0 8px 22px 0 ${({ theme }) => theme.colors?.main_gray_10};

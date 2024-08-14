@@ -1,6 +1,6 @@
 import FileDropZone from '@/common/components/inputElements/FileDropZone'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
@@ -9,25 +9,19 @@ import BasicButton from '@/common/components/appButton/BasicButton'
 import uploadIcon from '@/assets/icons/fileUpload/uploadIconWithArrow.svg'
 import plusIcon from '@/assets/icons/plusIconWhite.svg'
 
-type Props = {}
+type Props = { onClick: () => void; width: number; height: number }
 
-const ImagesComponentEmpty = (props: Props) => {
+const ImagesUploadComponent = ({ onClick, width, height }: Props) => {
   const t = useTranslations('')
 
   return (
-    <Container>
+    <Container width={width} height={height}>
       <Frame>
         <IconBox>
           <Image src={uploadIcon} alt='upload icon' />
         </IconBox>
         <Text>{t('add photos of vehicle')}</Text>{' '}
-        <BasicButton
-          onClick={() => {
-            console.log('button clicked')
-          }}
-          padding={16}
-          width={155}
-        >
+        <BasicButton onClick={onClick} padding={16} width={155}>
           <ButtonIcon>
             <Image src={plusIcon} alt='check icon' width={15} />
           </ButtonIcon>
@@ -38,7 +32,7 @@ const ImagesComponentEmpty = (props: Props) => {
   )
 }
 
-export default ImagesComponentEmpty
+export default ImagesUploadComponent
 
 const Text = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.medium};
@@ -60,10 +54,15 @@ const Frame = styled.div`
   flex-direction: column;
   align-items: center;
   height: 174px;
-  z-index: 10;
+  z-index: 1;
 `
 
-const Container = styled.div`
+type ContainerProps = {
+  width: number
+  height: number
+}
+
+const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors?.white};
 
@@ -72,17 +71,12 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 1200px;
-  height: 372px;
   border-radius: ${({ theme }) => theme.radius?.lg};
 
-  @media ${({ theme }) => theme.media?.md} {
-    width: 960px;
-  }
-
-  @media ${({ theme }) => theme.media?.sm} {
-    width: 343px;
-  }
+  ${({ width, height }) => css`
+    width: ${width}px;
+    height: ${height}px;
+  `}
 
   //CSS for Dashed border
 

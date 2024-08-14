@@ -128,6 +128,7 @@
 
   "website": "ვებგვერდი",
   "yes": "დიახ",
+  "no": "არა",
 
   "cost of transportation": "ტრანსპორტირების ღირებულება",
   "cost of the car": "მანქანის ღირებულება",
@@ -167,6 +168,9 @@
   "release year": "გამოშვების წელი",
   "vehicle feature": "ავტომობილის მახასიათებელი",
   "vin code": "Vin კოდი",
+
+  "mark photo location": "მონიშნე ფოტოს გადაღების ადგილმდებარეობა",
+  "go back": "უკან დაბრუნება",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

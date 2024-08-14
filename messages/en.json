@@ -129,6 +129,7 @@
 
   "website": "Website",
   "yes": "Yes",
+  "no": "No",
 
   "cost of transportation": "Cost of transportation",
   "cost of the car": "Cost of the car",
@@ -168,6 +169,9 @@
   "release year": "Release year",
   "vehicle feature": "Vehicle feature",
   "vin code": "Vin code",
+
+  "mark photo location": "Mark the photo location",
+  "go back": "Go back",
 
   "useForm": {
     "must be valid email": "Must be a valid email",

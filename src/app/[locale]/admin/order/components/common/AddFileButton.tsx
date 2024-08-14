@@ -6,7 +6,7 @@ import plusIcon from '@/assets/icons/plus.svg'
 
 type Props = { onClick: () => void }
 
-const AddFiledButton = ({ onClick }: Props) => {
+const AddFileButton = ({ onClick }: Props) => {
   const t = useTranslations('')
 
   return (
@@ -19,4 +19,4 @@ const AddFiledButton = ({ onClick }: Props) => {
   )
 }
 
-export default AddFiledButton
+export default AddFileButton
