@@ -54,26 +54,3 @@ const LabelsFrame = styled.div<LabelsFrameProps>`
   flex-direction: column;
   gap: ${({ isEditing }) => (isEditing ? `8px` : `4px`)};
 `
-
-const LabelPair = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing?.xl};
-  min-height: 36px;
-`
-
-const Label = styled.label`
-  font-size: ${({ theme }) => theme.fontSizes?.small_13};
-  font-weight: ${({ theme }) => theme.fontWeight?.bold};
-  color: ${({ theme }) => theme.colors?.main_gray_68};
-
-  width: 180px;
-`
-
-const Value = styled.label`
-  font-size: ${({ theme }) => theme.fontSizes?.small_13};
-  font-weight: ${({ theme }) => theme.fontWeight?.normal};
-  color: ${({ theme }) => theme.colors?.main_gray_100};
-`

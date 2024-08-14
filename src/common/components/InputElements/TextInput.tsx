@@ -18,6 +18,7 @@ type Props = {
   height?: number
   fontWeight?: 'normal' | 'bold'
   fontSize?: number
+  isOutline?: boolean
 }
 
 const TextInput = ({
@@ -35,6 +36,7 @@ const TextInput = ({
   height,
   fontWeight = 'normal',
   fontSize = 16,
+  isOutline = true,
 }: Props) => {
   return (
     <Container>
@@ -52,6 +54,7 @@ const TextInput = ({
         isHalfSize={isHalfSize}
         fontWeight={fontWeight}
         fontSize={fontSize}
+        isOutline={isOutline}
       />
       {optionalInfo && (
         <TextBox>
@@ -77,20 +80,39 @@ type InputProps = {
   height?: number
   fontWeight?: 'normal' | 'bold'
   fontSize?: number
+  isOutline?: boolean
 }
 
 const StyledInput = styled.input<InputProps>`
   position: relative;
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors?.white};
-  border: none;
-  outline: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
+
   outline-offset: 1px;
   width: 350px;
 
   padding: 10px 10px 10px 16px;
   border-radius: ${({ theme }) => theme.radius?.lg};
-  font-size: ${({ fontSize }) => `${fontSize}px`};
+
+  ${({ isOutline }) =>
+    isOutline
+      ? css`
+          outline: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
+          border: none;
+        `
+      : css`
+          border: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
+          outline: none;
+        `}
+
+  ${({ fontSize }) =>
+    fontSize
+      ? css`
+          font-size: ${fontSize}px;
+        `
+      : css`
+          font-size: unset;
+        `};
 
   ${({ isHalfSize, width }) =>
     isHalfSize
@@ -138,11 +160,6 @@ const StyledInput = styled.input<InputProps>`
   &::placeholder {
     color: ${({ theme }) => theme.colors?.main_gray_56};
     font-weight: ${({ fontWeight }) => (fontWeight === 'bold' ? 700 : 400)};
-  }
-
-  &:focus {
-    border: none;
-    outline: 4px solid ${({ theme }) => theme.colors?.sky_blue};
   }
 `
 

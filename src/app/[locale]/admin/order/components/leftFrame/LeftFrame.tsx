@@ -36,14 +36,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.md};
+  width: unset;
 
   @media ${({ theme }) => theme.media?.md} {
     flex: 5;
+    width: unset;
   }
 
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column-reverse;
     gap: 8px;
+    width: 343px;
   }
 `
 

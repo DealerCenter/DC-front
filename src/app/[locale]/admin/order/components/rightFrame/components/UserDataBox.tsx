@@ -11,17 +11,29 @@ import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import checkedEmpty from '@/assets/icons/checkedIconEmpty.svg'
 import editIcon from '@/assets/icons/editPencil.svg'
 import addPersonIcon from '@/assets/icons/addPersonBlack.svg'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
 type Props = { header: string; fullName: string; value: string }
 
 const UserDataBox = ({ header, fullName, value }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const isTablet = useMediaQuery({ query: theme.media?.md })
   const [isEditing, setIsEditing] = useState(false)
 
   const t = useTranslations('')
 
   return (
     <Box>
-      <Header>{t(header)}</Header> <Line />
+      <HeaderFrame>
+        <Header>{t(header)}</Header>
+        {isMobile && isEditing && (
+          <Icon onClick={() => setIsEditing(false)}>
+            <Image src={checkedEmpty} alt='checked icon' />
+          </Icon>
+        )}
+      </HeaderFrame>
+      <Line />
       {fullName === '' ? (
         <AddPersonFrame>
           <Image src={addPersonIcon} alt='add person icon' />
@@ -33,7 +45,7 @@ const UserDataBox = ({ header, fullName, value }: Props) => {
           {isEditing ? (
             <DataFrame>
               <TextInput
-                width={156}
+                width={isMobile ? 160 : isTablet ? 156 : 180}
                 height={48}
                 type='text'
                 name='full name'
@@ -43,9 +55,10 @@ const UserDataBox = ({ header, fullName, value }: Props) => {
                 onBlur={() => {}}
                 fontWeight='bold'
                 fontSize={13}
+                isOutline={false}
               />
               <TextInput
-                width={160}
+                width={isMobile ? 143 : 160}
                 height={48}
                 type='text'
                 name='mob. number'
@@ -55,10 +68,13 @@ const UserDataBox = ({ header, fullName, value }: Props) => {
                 onBlur={() => {}}
                 fontWeight='bold'
                 fontSize={13}
+                isOutline={false}
               />
-              <Icon onClick={() => setIsEditing(false)}>
-                <Image src={checkedEmpty} alt='checked icon' />
-              </Icon>
+              {!isMobile && (
+                <Icon onClick={() => setIsEditing(false)}>
+                  <Image src={checkedEmpty} alt='checked icon' />
+                </Icon>
+              )}
             </DataFrame>
           ) : (
             <DataFrame>
@@ -81,6 +97,12 @@ const UserDataBox = ({ header, fullName, value }: Props) => {
 }
 
 export default UserDataBox
+
+const HeaderFrame = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
 
 const Header = styled.h6`
   margin: 0;

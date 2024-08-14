@@ -65,8 +65,12 @@ const SelectHeader = styled.div`
   height: 48px;
   width: 220px;
 
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 143px;
+  }
+
   padding: 4px 4px 4px 14px;
-  border: 1px solid ${({ theme }) => theme.colors?.main_gray_04};
+  border: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
   border-radius: 4px;
   background-color: ${({ theme }) => theme.colors?.white};
   display: flex;

@@ -9,19 +9,22 @@ import boxIcon from '@/assets/icons/boxBlack.svg'
 import TextInput from '@/common/components/inputElements/TextInput'
 import UserDataBox from './components/UserDataBox'
 import Box from '../common/Box'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
 const dummyUserData = [
   { name: 'Luka Tsilosani', mobile: '+995 123 456 789' },
   { name: 'Ani Kviciani', mobile: '+995 342 433 777' },
 ]
-// const dummyUserData = []
 
 type Props = { isEditing: boolean }
 
 const RightFrame = ({ isEditing }: Props) => {
-  const [isEditingRecipient, setIsEditingRecipient] = useState(false)
-  const [isEditingDealer, setIsEditingDealer] = useState(false)
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
+
+  const textInputWidth = isMobile ? 311 : isTablet ? 356 : 391
 
   return (
     <Container>
@@ -40,7 +43,7 @@ const RightFrame = ({ isEditing }: Props) => {
           <Frame2>
             {isEditing ? (
               <TextInput
-                width={391}
+                width={textInputWidth}
                 height={48}
                 type='text'
                 name='provide a link'
@@ -50,6 +53,7 @@ const RightFrame = ({ isEditing }: Props) => {
                 onBlur={() => {}}
                 fontWeight='bold'
                 fontSize={13}
+                isOutline={false}
               />
             ) : (
               <>
@@ -84,9 +88,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.md};
+  width: unset;
 
   @media ${({ theme }) => theme.media?.sm} {
     gap: 8px;
+    width: 343px;
   }
 `
 

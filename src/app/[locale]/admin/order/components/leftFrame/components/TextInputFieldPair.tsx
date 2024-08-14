@@ -27,6 +27,7 @@ const TextInputFieldPair = ({
   isYes,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
 
   return (
@@ -34,7 +35,7 @@ const TextInputFieldPair = ({
       {isEditing ? (
         <LabelPair isEditing={isEditing}>
           <TextInput
-            width={isMobile ? 160 : 240}
+            width={isMobile ? 160 : isTablet ? 220 : 240}
             height={48}
             type='text'
             name={title}
@@ -44,6 +45,7 @@ const TextInputFieldPair = ({
             onBlur={() => {}}
             fontWeight='bold'
             fontSize={13}
+            isOutline={false}
           />
           {selectItems ? (
             <AppSelectBasic
@@ -63,6 +65,7 @@ const TextInputFieldPair = ({
               onBlur={() => {}}
               fontWeight='bold'
               fontSize={13}
+              isOutline={false}
             />
           )}
         </LabelPair>
@@ -109,6 +112,17 @@ const LabelPair = styled.div<LabelPairProps>`
       : css`
           gap: ${({ theme }) => theme.spacing?.xl};
         `}
+
+  @media ${({ theme }) => theme.media?.sm} {
+    ${({ isEditing }) =>
+      isEditing
+        ? css`
+            gap: 8px;
+          `
+        : css`
+            gap: ${({ theme }) => theme.spacing?.md};
+          `}
+  }
 `
 
 const Label = styled.label`
@@ -117,6 +131,10 @@ const Label = styled.label`
   color: ${({ theme }) => theme.colors?.main_gray_68};
 
   width: 180px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 142px;
+  }
 `
 
 const Value = styled.label`

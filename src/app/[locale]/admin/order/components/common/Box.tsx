@@ -17,4 +17,8 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors?.white};
   border-radius: ${({ theme }) => theme.radius?.xl};
   padding: ${({ theme }) => theme.spacing?.xl};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    padding: ${({ theme }) => theme.spacing?.md};
+  }
 `
