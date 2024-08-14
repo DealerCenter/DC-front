@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive'
 
 import theme from '@/app/[locale]/theme'
 
-import ImagesUploadComponent from '../../components/common/ImagesUploadComponent'
+import ImagesUploadComponent from '../../../components/common/ImagesUploadComponent'
 import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
 
 type Props = { dropdownOptions: { value: string }[] }

@@ -6,9 +6,9 @@ import { useTranslations } from 'next-intl'
 
 import { routeName } from '@/common/helpers/constants'
 
-import Box from '../components/common/Box'
+import Box from '../../components/common/Box'
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
-import AddFileButton from '../components/common/AddFileButton'
+import AddFileButton from '../../components/common/AddFileButton'
 import BasicButton from '@/common/components/appButton/BasicButton'
 import InputFieldAndImageUploadPair from './components/InputFieldAndImageUploadPair'
 

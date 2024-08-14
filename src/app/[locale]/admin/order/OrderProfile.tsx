@@ -13,12 +13,12 @@ import LeftFrame from './components/leftFrame/LeftFrame'
 import RightFrame from './components/rightFrame/RightFrame'
 import BasicButton from '@/common/components/appButton/BasicButton'
 import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
-import ImagesUploadComponent from './components/common/ImagesUploadComponent'
+import ImagesUploadComponent from '../components/common/ImagesUploadComponent'
 import ImagesComponent from './components/ImagesComponent'
 import DetailsRow from './components/detailsRow/DetailsRow'
 
 import leftArrow from '@/assets/icons/arrows/arrowLeftThinBlack.svg'
-import editIcon from '@/assets/icons/editPencilWhite.svg'
+import EditButton from '../components/common/EditButton'
 
 type Props = {}
 
@@ -40,12 +40,7 @@ const OrderProfile = (props: Props) => {
             <BackToOrderLabel>{t('back to orders')}</BackToOrderLabel>
           )}
         </BackToOrderButton>
-        <BasicButton onClick={() => setIsEditing((is) => !is)} padding={16}>
-          <ButtonIcon>
-            <Image src={editIcon} alt='edit icon' width={15} />
-          </ButtonIcon>
-          <ButtonText>{t('edit')}</ButtonText>
-        </BasicButton>
+        <EditButton onClick={() => setIsEditing((is) => !is)} />
       </TopButtonsFrame>
 
       <ImageFrame>
@@ -189,17 +184,4 @@ const BottomFrame = styled.div`
     flex-direction: column;
     gap: 8px;
   }
-`
-
-const ButtonIcon = styled.label`
-  margin-right: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`
-const ButtonText = styled.label`
-  font-size: ${({ theme }) => theme.fontSizes?.medium};
-  font-weight: ${({ theme }) => theme.fontWeight?.bold};
-  cursor: pointer;
 `

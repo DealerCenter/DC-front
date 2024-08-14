@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import Box from '../../common/Box'
+import Box from '../../../../components/common/Box'
 import TextInputFieldPair from './TextInputFieldPair'
-import AddFileButton from '../../common/AddFileButton'
+import AddFileButton from '../../../../components/common/AddFileButton'
 
 type Props = { isEditing: boolean }
 

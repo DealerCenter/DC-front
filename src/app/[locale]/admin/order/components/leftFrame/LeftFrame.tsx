@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive'
 import { useTranslations } from 'next-intl'
 
 import theme from '@/app/[locale]/theme'
-import Box from '../common/Box'
+import Box from '../../../components/common/Box'
 import ParametersBox from './components/ParametersBox'
 import LocationBox from './components/LocationBox'
 

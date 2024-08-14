@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import ListItem from './listItem/ListItem'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import { useRouter } from '@/navigation'
+import { routeName } from '@/common/helpers/constants'
 
 type Props = {
   usersData: {
@@ -20,6 +22,7 @@ type Props = {
 const UserList = ({ usersData }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
+  const router = useRouter()
 
   return (
     <Container>
@@ -36,7 +39,11 @@ const UserList = ({ usersData }: Props) => {
             />
           )}
           {usersData.map((data) => (
-            <ListItem userData={data} key={data.id} />
+            <ListItem
+              userData={data}
+              key={`ListItem${data.id}`}
+              onClick={() => router.push(routeName.adminUserProfile)}
+            />
           ))}
         </>
       )}

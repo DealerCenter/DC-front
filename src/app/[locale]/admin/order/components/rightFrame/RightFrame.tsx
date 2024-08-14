@@ -8,7 +8,7 @@ import Image from 'next/image'
 import boxIcon from '@/assets/icons/boxBlack.svg'
 import TextInput from '@/common/components/inputElements/TextInput'
 import UserDataBox from './components/UserDataBox'
-import Box from '../common/Box'
+import Box from '../../../components/common/Box'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 

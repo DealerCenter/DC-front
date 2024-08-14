@@ -52,6 +52,7 @@
   "mobile": "მობილური",
   "the date of addition": "დამატების თარიღი",
   "verification": "ვერიფიკაცია",
+  "authentication": "ავთენტიფიკაცია",
   "exit": "გასვლა",
   "contact information": "საკონტაქტო ინფორმაცია",
   "change the password": "პაროლის შეცვლა",
@@ -125,6 +126,7 @@
   "container data": "კონტეინერის მონაცემები",
   "recipient data": "მიმღები პირის მონაცემები",
   "dealer data": "დილერის მონაცემები",
+  "date of joining": "გაწევრიანების თარიღი",
 
   "website": "ვებგვერდი",
   "yes": "დიახ",
@@ -134,6 +136,9 @@
   "cost of the car": "მანქანის ღირებულება",
   "total cost": "ჯამური ღირებულება",
   "current debt": "მიმდინარე დავალიანება",
+  "cars on the way": "ავტომობილები გზაში",
+  "total imported cars": "სულ ჩამოყვანილი ავტომობილები",
+  "click document to download": "დააჭირეთ დოკუმენტს გადმოსაწერად",
 
   "delete data warning": "მოცემული აქტივობის შესრულების შემდეგ მოხდება მიმღების ყველა მონაცემის წაშლა",
   "email notifications": "E-mail შეტყობინებები",
@@ -171,6 +176,7 @@
 
   "mark photo location": "მონიშნე ფოტოს გადაღების ადგილმდებარეობა",
   "go back": "უკან დაბრუნება",
+  "return to dealers list": "დილერების სიაში დაბრუნება",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

@@ -8,6 +8,7 @@ import ListItemFull from './ListItemFull'
 import theme from '@/app/[locale]/theme'
 
 type Props = {
+  onClick: () => void
   userData: {
     fullName: string
     id: string
@@ -18,6 +19,7 @@ type Props = {
 }
 
 const ListItem = ({
+  onClick,
   userData: { fullName, id, mobile, dateOfAddition, isVerified },
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
@@ -26,6 +28,7 @@ const ListItem = ({
     <>
       {isMobile ? (
         <ListItemMobile
+          onClick={onClick}
           fullName={fullName}
           id={id}
           mobile={mobile}
@@ -34,6 +37,7 @@ const ListItem = ({
         />
       ) : (
         <ListItemFull
+          onClick={onClick}
           fullName={fullName}
           id={id}
           mobile={mobile}

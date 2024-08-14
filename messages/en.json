@@ -53,6 +53,7 @@
   "mobile": "Mobile",
   "the date of addition": "The date of addition",
   "verification": "Verification",
+  "authentication": "Authentication",
   "exit": "Exit",
   "contact information": "Contact information",
   "change the password": "Change the password",
@@ -126,6 +127,7 @@
   "container data": "Container data",
   "recipient data": "Recipient data",
   "dealer data": "Dealer data",
+  "date of joining": "Date of joining",
 
   "website": "Website",
   "yes": "Yes",
@@ -135,6 +137,9 @@
   "cost of the car": "Cost of the car",
   "total cost": "Total cost",
   "current debt": "Current debt",
+  "cars on the way": "Cars on the way",
+  "total imported cars": "Total imported cars",
+  "click document to download": "Click on the document to download",
 
   "delete data warning": "After performing this activity, all the recipient's data will be deleted",
   "email notifications": "E-mail notifications",
@@ -172,6 +177,7 @@
 
   "mark photo location": "Mark the photo location",
   "go back": "Go back",
+  "return to dealers list": "Return to dealers list",
 
   "useForm": {
     "must be valid email": "Must be a valid email",

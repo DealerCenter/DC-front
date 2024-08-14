@@ -15,6 +15,7 @@ type Props = {
   mobile: string
   dateOfAddition: string
   isVerified: boolean
+  onClick: () => void
 }
 
 const ListItemFull = ({
@@ -23,12 +24,13 @@ const ListItemFull = ({
   mobile,
   dateOfAddition,
   isVerified,
+  onClick,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <>
-      <Container>
+      <Container onClick={onClick}>
         <LabelBox>
           <NameLabel>{fullName}</NameLabel>
           <IdLabel>{id}</IdLabel>

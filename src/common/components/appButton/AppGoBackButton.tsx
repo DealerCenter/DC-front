@@ -3,14 +3,20 @@ import React from 'react'
 import styled from 'styled-components'
 
 import leftArrow from '@/assets/icons/arrows/arrowLeftThinBlack.svg'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
-type Props = { onClick: () => void; text: string }
+type Props = { onClick: () => void; text: string; noTextOnMobile?: boolean }
 
-const AppGoBackButton = ({ onClick, text }: Props) => {
+const AppGoBackButton = ({ onClick, text, noTextOnMobile = false }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   return (
     <BackToOrderButton onClick={onClick}>
       <Image src={leftArrow} alt='left arrow icon' height={20} />
-      <BackToOrderLabel>{text}</BackToOrderLabel>
+      {!(noTextOnMobile && isMobile) && (
+        <BackToOrderLabel>{text}</BackToOrderLabel>
+      )}
     </BackToOrderButton>
   )
 }

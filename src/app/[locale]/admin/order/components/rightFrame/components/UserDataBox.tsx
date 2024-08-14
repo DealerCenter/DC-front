@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Box from '../../common/Box'
+import Box from '../../../../components/common/Box'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'

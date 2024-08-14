@@ -15,6 +15,7 @@ type Props = {
   mobile: string
   dateOfAddition: string
   isVerified: boolean
+  onClick: () => void
 }
 
 const ListItemMobile = ({
@@ -23,11 +24,12 @@ const ListItemMobile = ({
   mobile,
   dateOfAddition,
   isVerified,
+  onClick,
 }: Props) => {
   const t = useTranslations('')
 
   return (
-    <Container>
+    <Container onClick={onClick}>
       <NameFrame>
         <LabelAndIconBox>
           <NameLabel>{fullName}</NameLabel>
