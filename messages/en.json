@@ -179,6 +179,9 @@
   "go back": "Go back",
   "return to dealers list": "Return to dealers list",
 
+  "current orders": "Current orders",
+  "archive": "Archive",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 

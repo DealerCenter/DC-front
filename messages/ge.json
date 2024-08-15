@@ -178,6 +178,9 @@
   "go back": "უკან დაბრუნება",
   "return to dealers list": "დილერების სიაში დაბრუნება",
 
+  "current orders": "მიმდინარე შეკვეთები",
+  "archive": "არქივი",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 

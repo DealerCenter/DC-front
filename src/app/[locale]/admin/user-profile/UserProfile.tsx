@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 import { useRouter } from '@/navigation'
@@ -14,6 +14,7 @@ import LabelValueBox from './components/LabelValueBox'
 import PdfAndImageBox from './components/PdfAndImageBox'
 
 import userImage from '@/assets/images/userImage.png'
+import OrderListBox from './components/OrderListBox'
 
 type Props = {}
 
@@ -42,6 +43,7 @@ const UserProfile = (props: Props) => {
         </MiddleFrame>
         {!isMobile && <PdfAndImageBox image={userImage.src} />}
       </Frame>
+      <OrderListBox />
     </Container>
   )
 }
@@ -64,8 +66,8 @@ const Container = styled.div`
     flex-direction: column;
     margin-top: 24px;
     margin-bottom: 50px;
-    gap: 8px;
-    padding: 0 5%;
+    gap: 18px;
+    /* padding: 0 5%; */
     width: 100%;
   }
 `

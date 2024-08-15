@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
 import styled, { css } from 'styled-components'
-import CarDetailsBox from './CarDetailsBox'
-import DebtBox from './DebtBox'
-import UserInfoBox from './UserInfoBox'
-import ShippingStateBox from './ShippingStateBox'
+import CarDetailsBox from '../../../app/[locale]/dealer/order-history/components/CarDetailsBox'
+import DebtBox from '../../../app/[locale]/dealer/order-history/components/DebtBox'
+import UserInfoBox from '../../../app/[locale]/dealer/order-history/components/UserInfoBox'
+import ShippingStateBox from '../../../app/[locale]/dealer/order-history/components/ShippingStateBox'
 import { useMediaQuery } from 'react-responsive'
 import { dummyShippingSteps } from '@/assets/DummyData'
 
@@ -65,14 +65,14 @@ const OrderListItem = ({
             buyerFullName={buyerFullName}
             buyerPhoneNumber={buyerPhoneNumber}
           />
-          <ShippingStateBoxFrame>
-            {isHiddenCustom || (
+          {isHiddenCustom || (
+            <ShippingStateBoxFrame>
               <ShippingStateBox
                 shippingSteps={dummyShippingSteps}
                 currentStep={shippingStep}
               />
-            )}
-          </ShippingStateBoxFrame>
+            </ShippingStateBoxFrame>
+          )}
         </MiddleFrame>
       </Frame>
       <DebtBox amount={debt} arrivalState={arrivalState} />
@@ -119,6 +119,7 @@ const MiddleFrame = styled.div`
   gap: 24px;
   flex: 0.8;
 `
+
 const Frame = styled.div`
   display: flex;
   flex-direction: row;
