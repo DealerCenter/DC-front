@@ -1,16 +1,15 @@
 'use client'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Link, useRouter, usePathname } from '@/navigation'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import search from '@/assets/icons/search.svg'
-import AppDropdown from '../../appDropdown/AppDropdown'
+import AppDropdown from '../../../appDropdown/AppDropdown'
 import downIcon from '@/assets/icons/arrowDownWhite.svg'
 import { css } from 'styled-components'
-import LangChangeButton from './LangChangeButton'
-import LoginButton from './LoginButton'
+import LangChangeButton from './components/LangChangeButton'
+import LoginButton from './components/LoginButton'
 
 type Props = {}
 

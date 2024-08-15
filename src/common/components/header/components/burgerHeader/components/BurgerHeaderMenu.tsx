@@ -3,9 +3,9 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import LangChangeButton from './LangChangeButton'
-import MiddleBox from './burgerHeaderComponents/MiddleBox'
-import LoginButton from './LoginButton'
+import MiddleBox from './MiddleBox'
+import LoginButton from '../../fullHeader/components/LoginButton'
+import LangChangeButton from '../../fullHeader/components/LangChangeButton'
 
 import closeX from '@/assets/icons/closeXWhite.svg'
 import search from '@/assets/icons/search.svg'

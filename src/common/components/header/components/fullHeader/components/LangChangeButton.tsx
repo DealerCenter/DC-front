@@ -1,5 +1,5 @@
 import React from 'react'
-import AppDropdown from '../../appDropdown/AppDropdown'
+import AppDropdown from '../../../../appDropdown/AppDropdown'
 import { usePathname } from '@/navigation'
 import { useLocale } from 'next-intl'
 import styled, { css } from 'styled-components'

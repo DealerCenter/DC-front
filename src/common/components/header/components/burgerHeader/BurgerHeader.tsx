@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import search from '@/assets/icons/search.svg'
 import person from '@/assets/icons/person.svg'
 import burger from '@/assets/icons/burger.svg'
-import BurgerHeaderMenu from './BurgerHeaderMenu'
+import BurgerHeaderMenu from './components/BurgerHeaderMenu'
 
 type Props = {}
 
