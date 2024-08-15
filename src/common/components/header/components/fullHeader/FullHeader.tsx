@@ -1,15 +1,12 @@
 'use client'
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
-import search from '@/assets/icons/search.svg'
 import AppDropdown from '../../../appDropdown/AppDropdown'
 import downIcon from '@/assets/icons/arrowDownWhite.svg'
-import { css } from 'styled-components'
-import LangChangeButton from './components/LangChangeButton'
-import LoginButton from './components/LoginButton'
+import MenuButtons from './components/MenuButtons'
 
 type Props = {}
 
@@ -56,13 +53,7 @@ const FullHeader = (props: Props) => {
           <Title2>{t('about us')}</Title2>
           <Title2>{t('contact')}</Title2>
         </Frame>
-        <Menu>
-          <Item>
-            <Image width={20} height={20} src={search} alt='search icon' />
-          </Item>
-          <LoginButton />
-          <LangChangeButton left={-3} top={66} />
-        </Menu>
+        <MenuButtons />
       </Container>
     </>
   )
@@ -122,27 +113,6 @@ const Logo = styled.h2`
   margin: 0;
 
   cursor: default;
-`
-
-const Menu = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  margin-left: 16px;
-`
-
-const Item = styled.div`
-  height: 44px;
-  width: 56px;
-  border: 2px solid ${({ theme }) => theme.colors?.white_24};
-  border-radius: ${({ theme }) => theme.radius?.lg};
-  color: ${({ theme }) => theme.colors?.white};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-
-  cursor: pointer;
 `
 
 type IconProps = { isOpen: boolean }

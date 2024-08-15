@@ -30,8 +30,8 @@ export default LangChangeButton
 type ItemProps = { width?: number }
 
 const Item = styled.div<ItemProps>`
+  box-sizing: border-box;
   height: 44px;
-
   border: 2px solid ${({ theme }) => theme.colors?.white_24};
   border-radius: ${({ theme }) => theme.radius?.lg};
   color: ${({ theme }) => theme.colors?.white};
