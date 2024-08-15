@@ -97,6 +97,8 @@ const Container = styled.div`
   padding: 0 16px 0 32px;
 
   border: 1px solid ${({ theme }) => theme.colors?.main_gray_04};
+
+  cursor: pointer;
 `
 
 const LabelBox = styled.div`
@@ -113,6 +115,7 @@ const IconBox = styled.div`
   justify-content: center;
   gap: 8px;
   width: 120px;
+  cursor: pointer;
 `
 
 const Label = styled.label`
@@ -123,6 +126,7 @@ const Label = styled.label`
   width: 120px;
   color: ${({ theme }) => theme.colors?.main_gray_100};
   font-size: 13px;
+  cursor: pointer;
 `
 
 const NameLabel = styled(Label)`

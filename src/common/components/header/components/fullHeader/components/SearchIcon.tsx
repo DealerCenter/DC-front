@@ -142,6 +142,7 @@ const IconBox = styled.div`
   position: absolute;
   left: 17px;
 `
+
 const CloseIconBox = styled.div`
   display: flex;
   align-items: center;
@@ -152,6 +153,4 @@ const CloseIconBox = styled.div`
   right: 3px;
   border-radius: ${({ theme }) => theme.radius?.lg};
   background-color: ${({ theme }) => theme.colors?.white_10};
-
-  z-index: 5;
 `

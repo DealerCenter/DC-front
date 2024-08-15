@@ -45,6 +45,7 @@ export default AdminLayout
 
 const Container = styled.div`
   padding: 0 8%;
+  margin-bottom: 100px;
 
   @media ${({ theme }) => theme.media?.md} {
     padding: 0 3%;
@@ -54,8 +55,6 @@ const Container = styled.div`
     padding: 0 5%;
     margin-bottom: unset;
   }
-
-  margin-bottom: 100px;
 `
 
 const Frame = styled.div`

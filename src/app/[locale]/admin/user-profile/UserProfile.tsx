@@ -2,18 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 import { useRouter } from '@/navigation'
-import Image from 'next/image'
+import { useMediaQuery } from 'react-responsive'
 
 import { routeName } from '@/common/helpers/constants'
+import theme from '../../theme'
 
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
 import EditButton from '../components/common/EditButton'
 import DealerDataBox from './components/DealerDataBox'
 import LabelValueBox from './components/LabelValueBox'
-import DashedContainer from '@/common/components/emptyComponents/DashedContainer'
 import PdfAndImageBox from './components/PdfAndImageBox'
-import { useMediaQuery } from 'react-responsive'
-import theme from '../../theme'
+
+import userImage from '@/assets/images/userImage.png'
 
 type Props = {}
 
@@ -33,14 +33,14 @@ const UserProfile = (props: Props) => {
         <EditButton onClick={() => {}} />
       </TopButtonsFrame>
       <Frame>
-        {isMobile && <PdfAndImageBox />}
+        {isMobile && <PdfAndImageBox image={userImage.src} />}
         <DealerDataBox />
         <MiddleFrame>
           <LabelValueBox label={t('current debt')} value={'$ 5,750'} />
           <LabelValueBox label={t('cars on the way')} value={'12'} />
           <LabelValueBox label={t('total imported cars')} value={'24'} />
         </MiddleFrame>
-        {!isMobile && <PdfAndImageBox />}
+        {!isMobile && <PdfAndImageBox image={userImage.src} />}
       </Frame>
     </Container>
   )
@@ -48,19 +48,7 @@ const UserProfile = (props: Props) => {
 
 export default UserProfile
 
-const Frame = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 18px;
-
-  align-items: center;
-  @media ${({ theme }) => theme.media?.sm} {
-    flex-direction: column;
-  }
-`
-
 const Container = styled.div`
-  box-sizing: border-box;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
@@ -79,6 +67,17 @@ const Container = styled.div`
     gap: 8px;
     padding: 0 5%;
     width: 100%;
+  }
+`
+
+const Frame = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+
+  align-items: center;
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
   }
 `
 

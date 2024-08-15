@@ -1,12 +1,14 @@
 import React from 'react'
-import Box from '../../components/common/Box'
-import HeaderH5Bold from '@/common/components/textComponents/HeaderH5Bold'
-import { useTranslations } from 'next-intl'
-import styled from 'styled-components'
-import LabelValuePair from './LabelValuePair'
-import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/theme'
 import Image from 'next/image'
+import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
+import { useMediaQuery } from 'react-responsive'
+
+import theme from '@/app/[locale]/theme'
+
+import Box from '../../components/common/Box'
+import LabelValuePair from './LabelValuePair'
+import HeaderH5Bold from '@/common/components/textComponents/HeaderH5Bold'
 
 import checkedIcon from '@/assets/icons/checkedGreen.svg'
 
@@ -25,7 +27,7 @@ const DealerDataBox = (props: Props) => {
         <LabelValuePair label={t('full name')} value='Ani Kviciani' />
         <LabelValuePair label={t('mobile number')} value='555 555 555' />
         <LabelValuePair label={t('personal number')} value='555 555 555' />
-        <LabelValuePair label={t('date of joining')} value='555 555 555' />
+        <LabelValuePair label={t('date of joining')} value='24/04/2023' />
         <LabelFrame>
           <Label>{t('authentication')}</Label>
           <Icon>

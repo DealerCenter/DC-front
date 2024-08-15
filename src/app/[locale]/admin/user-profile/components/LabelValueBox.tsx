@@ -51,4 +51,6 @@ const Value = styled.label`
   font-size: 23px;
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   color: ${({ theme }) => theme.colors?.main_gray_100};
+
+  white-space: nowrap;
 `
