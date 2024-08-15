@@ -26,25 +26,28 @@ const Pagination = ({ currentPage, numOfPages, setCurrentPage }: Props) => {
     <>
       {numOfPages > 1 && (
         <Container>
-          <Box onClick={handlePageDown}>
-            <Image src={arrowLeft} alt='arrow left' />
+          <Box onClick={handlePageDown} isVisible={currentPage > 1}>
+            {currentPage !== 1 && <Image src={arrowLeft} alt='arrow left' />}
           </Box>
           {pages.map((page) =>
             page === currentPage ? (
-              <Box done={true} key={`paginationKDJ${page}`}>
+              <Box done={true} key={`paginationKDJ${page}`} isVisible={true}>
                 <Num>{page}</Num>
               </Box>
             ) : (
               <Box
                 key={`paginationKDG${page}`}
                 onClick={() => setCurrentPage(page)}
+                isVisible={true}
               >
                 <Num>{page}</Num>
               </Box>
             )
           )}
-          <Box onClick={handlePageUp}>
-            <Image src={arrowRight} alt='arrow right' />
+          <Box onClick={handlePageUp} isVisible={currentPage < numOfPages}>
+            {currentPage < numOfPages && (
+              <Image src={arrowRight} alt='arrow right' />
+            )}
           </Box>
         </Container>
       )}
@@ -60,15 +63,15 @@ const Container = styled.div`
   gap: 8px;
 `
 
-type BoxProps = { done?: boolean }
+type BoxProps = { done?: boolean; isVisible: boolean }
 
 const Box = styled.div<BoxProps>`
+  box-sizing: border-box;
   width: 42px;
   height: 42px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid ${({ theme }) => theme.colors?.main_gray_56};
   border-radius: ${({ theme }) => theme.radius?.lg};
 
   ${({ done }) =>
@@ -76,17 +79,33 @@ const Box = styled.div<BoxProps>`
       ? css`
           color: ${({ theme }) => theme.colors?.white};
           background-color: ${({ theme }) => theme.colors?.main_gray_100};
-
-          &:hover {
-            background-color: ${({ theme }) => theme.colors?.main_gray_90};
+          @media ${({ theme }) => theme.media?.notSm} {
+            &:hover {
+              background-color: ${({ theme }) => theme.colors?.main_gray_90};
+            }
           }
         `
       : css`
           color: ${({ theme }) => theme.colors?.black};
           background-color: ${({ theme }) => theme.colors?.white};
+          @media ${({ theme }) => theme.media?.notSm} {
+            &:hover {
+              background-color: ${({ theme }) => theme.colors?.main_gray_04};
+            }
+          }
+        `}
 
-          &:hover {
-            background-color: ${({ theme }) => theme.colors?.main_gray_04};
+  ${({ isVisible }) =>
+    isVisible
+      ? css`
+          border: 1px solid ${({ theme }) => theme.colors?.main_gray_56};
+        `
+      : css`
+          border: none;
+          @media ${({ theme }) => theme.media?.notSm} {
+            &:hover {
+              background-color: white;
+            }
           }
         `}
 
