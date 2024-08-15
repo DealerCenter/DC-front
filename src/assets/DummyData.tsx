@@ -196,3 +196,34 @@ export const dummyShippingSteps2 = [
     stepName: 'was sent',
   },
 ]
+
+export const containers = [
+  {
+    brandName: 'Maerski',
+    link: 'maerski.com/your tracking code',
+    departureDate: '24/04/2022',
+    arrivalDate: '24/04/2022',
+    numberOfCars: '3/4',
+  },
+  {
+    brandName: 'Maerski',
+    link: 'maerski.com/your tracking code',
+    departureDate: '24/04/2022',
+    arrivalDate: '24/04/2022',
+    numberOfCars: '3/4',
+  },
+  {
+    brandName: 'Maerski',
+    link: 'maerski.com/your tracking code',
+    departureDate: '24/04/2022',
+    arrivalDate: '24/04/2022',
+    numberOfCars: '3/4',
+  },
+  {
+    brandName: 'Maerski',
+    link: 'maerski.com/your tracking code',
+    departureDate: '24/04/2022',
+    arrivalDate: '24/04/2022',
+    numberOfCars: '3/4',
+  },
+]

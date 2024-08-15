@@ -182,6 +182,20 @@
   "current orders": "Current orders",
   "archive": "Archive",
 
+  "containers": "Containers",
+  "brand name": "Brand name",
+  "link": "Link",
+  "departure date": "Departure date",
+  "arrival date": "Arrival date",
+  "number of cars": "Number of cars",
+  "add container": "Add container",
+  "change status": "Change status",
+  "bind container": "Bind container",
+  "choose from list": "Choose from the list",
+  "specify container link": "Specify the container link",
+  "add new": "Add new",
+  "or": "Or",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 

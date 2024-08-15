@@ -13,6 +13,7 @@ export const routeName = {
   adminOrder: '/admin/order',
   adminOrderImageUpload: '/admin/order/image-upload',
   adminUserProfile: '/admin/user-profile',
+  adminUserContainers: '/admin/shipping-containers',
 }
 
 export const locales = ['en', 'ge', 'ru']

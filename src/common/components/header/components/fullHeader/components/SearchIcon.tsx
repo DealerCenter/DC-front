@@ -109,6 +109,7 @@ const Container = styled.div<IsActiveProp>`
 
   cursor: pointer;
 `
+
 const StyledInput = styled.input<IsActiveProp>`
   box-sizing: border-box;
 
