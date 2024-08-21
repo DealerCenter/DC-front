@@ -54,6 +54,7 @@ const theme = {
     xl: '16px',
   },
   spacing: {
+    xsm: '8px',
     sm: '12px',
     md: '16px',
     lg: '24px',

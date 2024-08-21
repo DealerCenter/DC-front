@@ -15,6 +15,10 @@ type Props = {
   isHalfSize?: boolean | undefined
   errorMessage?: string
   width?: number
+  height?: number
+  fontWeight?: 'normal' | 'bold'
+  fontSize?: number
+  isOutline?: boolean
 }
 
 const TextInput = ({
@@ -29,12 +33,17 @@ const TextInput = ({
   isHalfSize = false,
   errorMessage,
   width,
+  height,
+  fontWeight = 'normal',
+  fontSize = 16,
+  isOutline = true,
 }: Props) => {
   return (
     <Container>
       {icon ? <IconBox>{icon}</IconBox> : null}
       <StyledInput
         width={width}
+        height={height}
         type={type}
         name={name}
         placeholder={placeholder}
@@ -43,6 +52,9 @@ const TextInput = ({
         onBlur={onBlur}
         icon={icon}
         isHalfSize={isHalfSize}
+        fontWeight={fontWeight}
+        fontSize={fontSize}
+        isOutline={isOutline}
       />
       {optionalInfo && (
         <TextBox>
@@ -65,20 +77,42 @@ type InputProps = {
   icon: any
   isHalfSize: boolean
   width?: number
+  height?: number
+  fontWeight?: 'normal' | 'bold'
+  fontSize?: number
+  isOutline?: boolean
 }
 
 const StyledInput = styled.input<InputProps>`
   position: relative;
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors?.white};
-  border: none;
-  outline: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
+
   outline-offset: 1px;
   width: 350px;
-  height: 52px;
+
   padding: 10px 10px 10px 16px;
   border-radius: ${({ theme }) => theme.radius?.lg};
-  font-size: ${({ theme }) => theme.fontSizes?.medium};
+
+  ${({ isOutline }) =>
+    isOutline
+      ? css`
+          outline: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
+          border: none;
+        `
+      : css`
+          border: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
+          outline: none;
+        `}
+
+  ${({ fontSize }) =>
+    fontSize
+      ? css`
+          font-size: ${fontSize}px;
+        `
+      : css`
+          font-size: unset;
+        `};
 
   ${({ isHalfSize, width }) =>
     isHalfSize
@@ -93,6 +127,15 @@ const StyledInput = styled.input<InputProps>`
             width: 350px;
           `}
 
+  ${({ height }) =>
+    height
+      ? css`
+          height: ${height}px;
+        `
+      : css`
+          height: 52px;
+        `}       
+
   ${({ icon }) =>
     icon &&
     css`
@@ -100,23 +143,23 @@ const StyledInput = styled.input<InputProps>`
     `}
 
     @media ${({ theme }) => theme.media?.sm} {
-    ${({ isHalfSize }) =>
+    ${({ isHalfSize, width }) =>
       isHalfSize
         ? css`
             width: 167.5px;
           `
-        : css`
-            width: 350px;
-          `}
+        : width
+          ? css`
+              width: ${width}px;
+            `
+          : css`
+              width: 350px;
+            `}
   }
 
   &::placeholder {
     color: ${({ theme }) => theme.colors?.main_gray_56};
-  }
-
-  &:focus {
-    border: none;
-    outline: 4px solid ${({ theme }) => theme.colors?.sky_blue};
+    font-weight: ${({ fontWeight }) => (fontWeight === 'bold' ? 700 : 400)};
   }
 `
 

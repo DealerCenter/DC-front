@@ -1,10 +1,12 @@
 'use client'
 import React from 'react'
-import FullHeader from './components/FullHeader'
-import { useMediaQuery } from 'react-responsive'
-import BurgerHeader from './components/BurgerHeader'
-import theme from '@/app/[locale]/theme'
 import styled from 'styled-components'
+import { useMediaQuery } from 'react-responsive'
+
+import theme from '@/app/[locale]/theme'
+
+import FullHeader from './components/fullHeader/FullHeader'
+import BurgerHeader from './components/burgerHeader/BurgerHeader'
 
 type Props = {}
 

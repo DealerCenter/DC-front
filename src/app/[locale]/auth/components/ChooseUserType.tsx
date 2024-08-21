@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import AppButton from '@/common/components/appButton/AppButton'
-import Checkbox from '@/common/components/checkbox/Checkbox'
+import CheckBox from '@/common/components/appCheckBox/Checkbox'
 
 type CheckboxOption = {
   title: string
@@ -43,10 +43,10 @@ const ChooseUserType = ({ setType, goToLogin }: Props) => {
             onClick={() => handleCheckboxChange(option.value)}
             selected={selectedOption === option.value}
           >
-            <StyledCheckbox style={{ alignSelf: 'flex-end' }}>
-              <Checkbox
-                value={option.value}
-                checked={selectedOption === option.value}
+            <StyledCheckbox>
+              <CheckBox
+                isChecked={selectedOption === option.value}
+                shape='circle'
               />
             </StyledCheckbox>
             <UserTypeText>{t(`${option.title}`)}</UserTypeText>
@@ -123,4 +123,10 @@ const UserTypeText = styled.div`
 
 const StyledCheckbox = styled.div`
   align-self: flex-end;
+
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

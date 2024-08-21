@@ -1,34 +1,57 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 type Props = {
   labels:
     | [string, string, string, string]
     | [string, string, string, string, string]
+
+  height?: number
 }
 
-const LabelsContainer = ({ labels }: Props) => {
+const LabelsContainer = ({ labels, height }: Props) => {
+  const is4Labels = labels.length === 4
+
   return (
-    <Container>
+    <Container height={height} is4Labels={is4Labels}>
       {labels.map((label, i) => (
         <Label key={i}>{label}</Label>
       ))}
-      {labels.length === 4 && <Label></Label>}
+      {is4Labels && <Label></Label>}
     </Container>
   )
 }
 
 export default LabelsContainer
 
-const Container = styled.div`
+type ContainerProps = { height?: number; is4Labels: boolean }
+
+const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 75px;
+
   background-color: ${({ theme }) => theme.colors?.main_gray_100};
   border-radius: 16px 16px 0px 0px;
-  padding: 16px 16px 16px 32px;
+
+  ${({ height }) =>
+    height
+      ? css`
+          height: ${height}px;
+        `
+      : css`
+          height: 75px;
+        `}
+
+  ${({ is4Labels }) =>
+    is4Labels
+      ? css`
+          padding: 16px 16px 16px 32px;
+        `
+      : css`
+          padding: 16px 50px;
+        `}
 `
 const Label = styled.label`
   display: flex;

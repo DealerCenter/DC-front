@@ -4,10 +4,10 @@ import { useTranslations } from 'next-intl'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 
-import HeaderH4Bold from '../components/HeaderH4Bold'
+import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import AppDropdown from '@/common/components/appDropdown/AppDropdown'
-import OrderList from './components/OrderList'
+import OrderList from '../../../../common/components/orderList/OrderList'
 import { orderedCars } from '@/assets/DummyData'
 
 import filterIconBlack from '@/assets/icons/filterBlack.svg'
@@ -35,40 +35,38 @@ const OrderHistory = (props: Props) => {
   ]
 
   return (
-    <>
-      <Container>
-        <TopFrame>
-          <HeaderH4Bold text={t('order history')} />
-          <ButtonFrame>
+    <Container>
+      <TopFrame>
+        <HeaderH4Bold text={t('order history')} />
+        <ButtonFrame>
+          <SecondaryButton
+            text={t('filter')}
+            onClick={() => {}}
+            icon={filterIconBlack}
+          ></SecondaryButton>
+          <AppDropdown items={sortOptions} modalStyle='white'>
             <SecondaryButton
-              text={t('filter')}
+              text={t('sort')}
               onClick={() => {}}
-              icon={filterIconBlack}
+              icon={sortIconBlack}
             ></SecondaryButton>
-            <AppDropdown items={sortOptions} modalStyle='white'>
-              <SecondaryButton
-                text={t('sort')}
-                onClick={() => {}}
-                icon={sortIconBlack}
-              ></SecondaryButton>
-            </AppDropdown>
-          </ButtonFrame>
-        </TopFrame>
-        <OrderList
-          onClick={() => router.push(routeName.order)}
-          list={orderedCars}
+          </AppDropdown>
+        </ButtonFrame>
+      </TopFrame>
+      <OrderList
+        onClick={() => router.push(routeName.dealerOrder)}
+        list={orderedCars}
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+      />
+      <PaginationFrame>
+        <Pagination
           currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
+          numOfPages={totalPages}
+          setCurrentPage={setCurrentPage}
         />
-        <PaginationFrame>
-          <Pagination
-            currentPage={currentPage}
-            numOfPages={totalPages}
-            setCurrentPage={setCurrentPage}
-          />
-        </PaginationFrame>
-      </Container>
-    </>
+      </PaginationFrame>
+    </Container>
   )
 }
 

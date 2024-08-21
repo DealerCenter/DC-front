@@ -6,7 +6,7 @@ import Image from 'next/image'
 import AppButton from '@/common/components/appButton/AppButton'
 import FileDropZone from '@/common/components/inputElements/FileDropZone'
 import TextInput from '@/common/components/inputElements/TextInput'
-import ChooseButton from './components/ChooseButton'
+import ChooseButton from '../../../../../../common/components/appButton/ChooseButton'
 
 import closeIcon from '@/assets/icons/closeX.svg'
 import splitGrayLine from '@/assets/icons/splitGrayLine.svg'
@@ -134,6 +134,8 @@ const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 `
 
 const InputFieldsFrame = styled.div`

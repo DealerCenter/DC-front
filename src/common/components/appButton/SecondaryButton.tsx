@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import React from 'react'
 import styled from 'styled-components'
+import { css } from 'styled-components'
 
-type Props = { text: string; onClick: () => void; icon: string }
+type Props = { text: string; onClick: () => void; icon: string; width?: number }
 
-const SecondaryButton = ({ text, onClick, icon }: Props) => {
+const SecondaryButton = ({ text, onClick, icon, width }: Props) => {
   return (
-    <Container onClick={onClick}>
+    <Container onClick={onClick} width={width}>
       <IconBox>
         <Image src={icon} alt='icon' />
       </IconBox>
@@ -17,7 +18,10 @@ const SecondaryButton = ({ text, onClick, icon }: Props) => {
 
 export default SecondaryButton
 
-const Container = styled.div`
+type ContainerProps = { width?: number }
+
+const Container = styled.div<ContainerProps>`
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -28,12 +32,29 @@ const Container = styled.div`
   padding: 0 20px 0 14px;
   gap: 6px;
 
+  ${({ width }) =>
+    width
+      ? css`
+          width: ${width}px;
+        `
+      : css`
+          width: unset;
+        `};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors?.main_gray_04};
+  }
+  &:active {
+    background-color: ${({ theme }) => theme.colors?.main_gray_16};
+  }
+
   cursor: pointer;
 `
 const Label = styled.label`
   color: ${({ theme }) => theme.colors?.main_gray_100};
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
 `
 const IconBox = styled.div`
   display: flex;

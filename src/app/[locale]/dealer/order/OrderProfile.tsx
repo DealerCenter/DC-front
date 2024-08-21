@@ -15,6 +15,7 @@ import { useMediaQuery } from 'react-responsive'
 import theme from '../../theme'
 import LeftColumn from './components/LeftColumn'
 import RightColumn from './components/RightColumn'
+import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
 
 type Props = {}
 
@@ -38,11 +39,11 @@ const OrderProfile = (props: Props) => {
             <StateBoxFrame>
               <ArrivalStateBox arrivalState='arrived' />
             </StateBoxFrame>
-            <BackToOrderButton
-              onClick={() => router.push(routeName.orderHistory)}
-            >
-              <Image src={leftArrow} alt='left arrow icon' height={20} />
-              <BackToOrderLabel>{t('back to orders')}</BackToOrderLabel>
+            <BackToOrderButton>
+              <AppGoBackButton
+                onClick={() => router.push(routeName.dealerOrderHistory)}
+                text={t('back to orders')}
+              />
             </BackToOrderButton>
           </>
         )}
@@ -76,30 +77,7 @@ const Container = styled.div`
 `
 
 const BackToOrderButton = styled.button`
-  height: 68px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 16px;
-  gap: 40px;
-
-  background-color: unset;
-  border: none;
-  border-radius: ${({ theme }) => theme.radius?.lg};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors?.main_gray_04};
-  }
-
-  cursor: pointer;
-
   margin-bottom: 64px;
-`
-
-const BackToOrderLabel = styled.div`
-  font-size: 19px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors?.black};
 `
 
 const StateBoxFrame = styled.div`

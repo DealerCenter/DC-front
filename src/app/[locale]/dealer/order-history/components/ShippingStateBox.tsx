@@ -35,7 +35,7 @@ const ShippingStateBox = ({ currentStep, shippingSteps }: Props) => {
               <PendingIcon />
             )}
 
-            {i < currentStep ? (
+            {i <= currentStep ? (
               <LineGreen />
             ) : (
               i < shippingSteps.length - 1 && <LineGray />

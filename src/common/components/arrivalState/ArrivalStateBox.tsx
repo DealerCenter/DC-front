@@ -33,7 +33,7 @@ const ArrivalStateBox = ({ arrivalState }: Props) => {
       <IconBox>
         <Image src={icon} alt='icon' />
       </IconBox>
-      <Label>{t(label)}</Label>
+      <Label isArrived={arrivalState === 'arrived'}>{t(label)}</Label>
     </Container>
   )
 }
@@ -62,11 +62,20 @@ const Container = styled.div<ArrivedProps>`
         `};
 `
 
-const Label = styled.label`
+const Label = styled.label<ArrivedProps>`
   color: ${({ theme }) => theme.colors?.white};
   font-size: 13px;
   font-weight: 700;
   padding: 8px;
+
+  ${({ isArrived, theme }) =>
+    isArrived
+      ? css`
+          color: ${theme.colors?.white};
+        `
+      : css`
+          color: ${theme.colors?.main_gray_100};
+        `};
 `
 
 const IconBox = styled.div`

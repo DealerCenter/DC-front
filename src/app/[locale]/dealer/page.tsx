@@ -4,10 +4,9 @@ import UsersListBox from './users-list/UsersListBox'
 import OrderHistory from './order-history/OrderHistory'
 import ManageNotifications from './manage-notifications/ManageNotifications'
 import PersonalInformation from './personal-information/PersonalInformation'
-import DealerFrame from './DealerLayout'
 import { useRouter, usePathname } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
-import EmptyPlaceHolder from './components/DealerComponentEmpty'
+import DealerComponentEmpty from '../../../common/components/emptyComponents/DealerComponentEmpty'
 
 type Props = {}
 
@@ -16,22 +15,21 @@ const Page = (props: Props) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (pathname === routeName.dealer) router.push(routeName.orderHistory)
-  }, [pathname])
+    if (pathname === routeName.dealer) router.push(routeName.dealerOrderHistory)
+  }, [pathname, router])
 
   const renderComponent = () => {
     switch (pathname) {
-      case routeName.orderHistory:
+      case routeName.dealerOrderHistory:
         return <OrderHistory />
-      case routeName.manageNotifications:
+      case routeName.dealerManageNotifications:
         return <ManageNotifications />
-      case routeName.personalInformation:
+      case routeName.dealerPersonalInformation:
         return <PersonalInformation />
-      case routeName.usersList:
+      case routeName.dealerUsersList:
         return <UsersListBox />
       default:
-        return <EmptyPlaceHolder />
-        break
+        return <DealerComponentEmpty />
     }
   }
 

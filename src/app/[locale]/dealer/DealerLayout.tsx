@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Header from '@/common/components/header/Header'
-import SideBar from './components/sideBar/SideBar'
+import SideBar from '../../../common/components/sideBar/SideBar'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../theme'
 import Footer from '@/common/components/footer/Footer'
@@ -12,19 +12,26 @@ import { routeName } from '@/common/helpers/constants'
 
 type Props = { children: React.JSX.Element }
 
+const routeNames = {
+  orderHistory: routeName.dealerOrderHistory,
+  personalInformation: routeName.dealerManageNotifications,
+  usersList: routeName.dealerUsersList,
+  manageNotifications: routeName.dealerPersonalInformation,
+}
+
 const DealerLayout = ({ children }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   const pathname = usePathname()
 
-  const isSideBarVisible = pathname !== routeName.order
+  const isSideBarVisible = pathname !== routeName.dealerOrder
 
   return (
     <>
       <Header />
       <Container>
         <Frame>
-          {isSideBarVisible && <SideBar />}
+          {isSideBarVisible && <SideBar routes={routeNames} />}
           {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
         </Frame>
       </Container>

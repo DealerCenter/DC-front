@@ -28,6 +28,7 @@
   "name": "Name",
   "surname": "Surname",
   "actual address": "Actual address",
+  "upload": "Upload",
   "file uploaded": "File uploaded",
   "photo uploaded": "Photo uploaded",
   "use numbers": "Use numbers",
@@ -48,10 +49,11 @@
   "add recipient": "Add recipient",
   "delete recipient": "Delete recipient",
   "add an id photo": "Add an ID photo to fill in all recipient details",
-  "recipient": "Recipient",
+  "recipient person": "Recipient",
   "mobile": "Mobile",
   "the date of addition": "The date of addition",
   "verification": "Verification",
+  "authentication": "Authentication",
   "exit": "Exit",
   "contact information": "Contact information",
   "change the password": "Change the password",
@@ -62,7 +64,9 @@
   "repeat new password": "Repeat the new password",
   "enter recipient data": "Enter recipient data",
   "cancel": "Cancel",
+  "done": "Done",
   "delete": "Delete",
+  "edit": "Edit",
   "repay debt": "Repay debt",
   "save": "Save",
   "filter": "Filter",
@@ -71,6 +75,9 @@
   "arrived": "Arrived",
   "in warehouse": "In warehouse",
   "close": "Close",
+  "select": "Select",
+  "add field": "Add a field",
+  "provide a link": "Provide a link",
 
   "on auction": "On auction",
   "usa warehouse": "USA warehouse",
@@ -104,6 +111,8 @@
   "mileage": "Mileage",
   "more details": "More details",
   "description": "Description",
+  "full name": "Full name",
+  "mob. number": "Mobile number",
 
   "transportation": "Transportation",
   "cost of vehicle": "The cost of the vehicle",
@@ -116,16 +125,21 @@
   "was sent": "Was sent",
 
   "container data": "Container data",
-  "data of the recipient": "Data of the recipient",
+  "recipient data": "Recipient data",
   "dealer data": "Dealer data",
+  "date of joining": "Date of joining",
 
   "website": "Website",
   "yes": "Yes",
+  "no": "No",
 
   "cost of transportation": "Cost of transportation",
   "cost of the car": "Cost of the car",
   "total cost": "Total cost",
   "current debt": "Current debt",
+  "cars on the way": "Cars on the way",
+  "total imported cars": "Total imported cars",
+  "click document to download": "Click on the document to download",
 
   "delete data warning": "After performing this activity, all the recipient's data will be deleted",
   "email notifications": "E-mail notifications",
@@ -148,6 +162,39 @@
   "transportation calculator": "Transportation calculator",
 
   "back to orders": "Back to orders",
+
+  "vehicle data": "Vehicle data",
+  "recipient": "Recipient",
+  "dealer": "Dealer",
+  "amount": "Amount",
+
+  "add photos of vehicle": "Add photos of the vehicle",
+
+  "name of vehicle": "Name of the vehicle",
+  "release year": "Release year",
+  "vehicle feature": "Vehicle feature",
+  "vin code": "Vin code",
+
+  "mark photo location": "Mark the photo location",
+  "go back": "Go back",
+  "return to dealers list": "Return to dealers list",
+
+  "current orders": "Current orders",
+  "archive": "Archive",
+
+  "containers": "Containers",
+  "brand name": "Brand name",
+  "link": "Link",
+  "departure date": "Departure date",
+  "arrival date": "Arrival date",
+  "number of cars": "Number of cars",
+  "add container": "Add container",
+  "change status": "Change status",
+  "bind container": "Bind container",
+  "choose from list": "Choose from the list",
+  "specify container link": "Specify the container link",
+  "add new": "Add new",
+  "or": "Or",
 
   "useForm": {
     "must be valid email": "Must be a valid email",

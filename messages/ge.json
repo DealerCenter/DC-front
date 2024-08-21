@@ -27,6 +27,7 @@
   "name": "სახელი",
   "surname": "გვარი",
   "actual address": "ფაქტობრივი მისამართი",
+  "upload": "ატვირთვა",
   "file uploaded": "ფაილი ატვირთულია",
   "photo uploaded": "ფოტო ატვირთულია",
   "use numbers": "გამოიყენეთ რიცხვები",
@@ -47,10 +48,11 @@
   "add recipient": "მიმღების დამატება",
   "delete recipient": "მიმღების წაშლა",
   "add an id photo": "დაამატეთ პირადობის ფოტო, რათა შეავსო მიმღების ყველა მონაცემი",
-  "recipient": "მიმღები პირი",
+  "recipient person": "მიმღები პირი",
   "mobile": "მობილური",
   "the date of addition": "დამატების თარიღი",
   "verification": "ვერიფიკაცია",
+  "authentication": "ავთენტიფიკაცია",
   "exit": "გასვლა",
   "contact information": "საკონტაქტო ინფორმაცია",
   "change the password": "პაროლის შეცვლა",
@@ -61,7 +63,9 @@
   "repeat new password": "გაიმეორეთ ახალი პაროლი",
   "enter recipient data": "შეიყვანეთ მიმღების მონაცემები",
   "cancel": "გაუქმება",
+  "done": "დასრულება",
   "delete": "წაშლა",
+  "edit": "რედაქტირება",
   "repay debt": "დაფარვა",
   "save": "შენახვა",
   "filter": "ფილტრი",
@@ -70,6 +74,9 @@
   "arrived": "ჩამოსული",
   "in warehouse": "საწყობში",
   "close": "დახურვა",
+  "select": "მონიშნე",
+  "add field": "დაამატე ველი",
+  "provide a link": "მიუთითე ლინკი",
 
   "on auction": "აუქციონზე",
   "usa warehouse": "აშშ საწყობში",
@@ -103,6 +110,8 @@
   "mileage": "გარბენი",
   "more details": "დამატებითი დეტალები",
   "description": "აღწერა",
+  "full name": "სახელი და გვარი",
+  "mob. number": "მობ. ნომერი",
 
   "transportation": "ტრანსპორტირება",
   "cost of vehicle": "ავტომობილის ღირებულება",
@@ -115,16 +124,21 @@
   "was sent": "გამოიგზავნა",
 
   "container data": "კონტეინერის მონაცემები",
-  "data of the recipient": "მიმღები პირის მონაცემები",
+  "recipient data": "მიმღები პირის მონაცემები",
   "dealer data": "დილერის მონაცემები",
+  "date of joining": "გაწევრიანების თარიღი",
 
   "website": "ვებგვერდი",
   "yes": "დიახ",
+  "no": "არა",
 
   "cost of transportation": "ტრანსპორტირების ღირებულება",
   "cost of the car": "მანქანის ღირებულება",
   "total cost": "ჯამური ღირებულება",
   "current debt": "მიმდინარე დავალიანება",
+  "cars on the way": "ავტომობილები გზაში",
+  "total imported cars": "სულ ჩამოყვანილი ავტომობილები",
+  "click document to download": "დააჭირეთ დოკუმენტს გადმოსაწერად",
 
   "delete data warning": "მოცემული აქტივობის შესრულების შემდეგ მოხდება მიმღების ყველა მონაცემის წაშლა",
   "email notifications": "E-mail შეტყობინებები",
@@ -147,6 +161,39 @@
   "transportation calculator": "ტრანსპორტირების კალკულატორი",
 
   "back to orders": "შეკვეთებში დაბრუნება",
+
+  "vehicle data": "ავტომობილის მონაცემები",
+  "recipient": "მიმღები",
+  "dealer": "დილერი",
+  "amount": "თანხა",
+
+  "add photos of vehicle": "დაამატე ავტომობილის ფოტოები",
+
+  "name of vehicle": "ავტომობილის დასახელება",
+  "release year": "გამოშვების წელი",
+  "vehicle feature": "ავტომობილის მახასიათებელი",
+  "vin code": "Vin კოდი",
+
+  "mark photo location": "მონიშნე ფოტოს გადაღების ადგილმდებარეობა",
+  "go back": "უკან დაბრუნება",
+  "return to dealers list": "დილერების სიაში დაბრუნება",
+
+  "current orders": "მიმდინარე შეკვეთები",
+  "archive": "არქივი",
+
+  "containers": "კონტეინერები",
+  "brand name": "დასახელება",
+  "link": "ლინკი",
+  "departure date": "წამოსვლის თარიღი",
+  "arrival date": "ჩამოსვლის თარიღი",
+  "number of cars": "ავტომობილების რაოდენობა",
+  "add container": "კონტეინერის დამატება",
+  "change status": "სტატუსის შეცვლა",
+  "bind container": "კონტეინერის მიბმა",
+  "choose from list": "აირჩიე არსებული სიიდან",
+  "specify container link": "მიუთითე კონტეინერის ლინკი",
+  "add new": "დაამატე ახალი",
+  "or": "ან",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

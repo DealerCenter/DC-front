@@ -13,6 +13,13 @@ type Props = {
 
   left?: number
   top?: number
+  onSortClick?: (
+    arg1:
+      | 'price ascending'
+      | 'price descending'
+      | 'date ascending'
+      | 'date descending'
+  ) => void
   handleToggle?: () => void
   handleClose?: () => void
 }
@@ -23,6 +30,7 @@ const AppDropdown = ({
   left,
   top,
   modalStyle = 'black',
+  onSortClick,
   handleToggle,
   handleClose,
 }: Props) => {
@@ -48,6 +56,11 @@ const AppDropdown = ({
     }
   }
 
+  const handleItemClick = () => {
+    setIsOpen(false)
+    handleClose && handleClose()
+  }
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
@@ -60,12 +73,18 @@ const AppDropdown = ({
     <Dropdown ref={dropdownRef}>
       <DropdownTrigger onClick={toggleDropdown}>{children}</DropdownTrigger>
       {isOpen && (
-        <DropdownMenu modalStyle={modalStyle} left={left} top={top}>
+        <DropdownMenu
+          modalStyle={modalStyle}
+          left={left}
+          top={top}
+          onClick={handleItemClick}
+        >
           {items.map((item, i) => (
             <DropdownItem
               item={item}
               key={`${item.label}12ij${i}`}
               modalStyle={modalStyle}
+              onSortClick={onSortClick}
             />
           ))}
         </DropdownMenu>
