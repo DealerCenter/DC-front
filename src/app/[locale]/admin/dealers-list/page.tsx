@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import UsersListBox from './UsersListBox'
+import UsersListBox from './DealersListBox'
 
 type Props = {}
 

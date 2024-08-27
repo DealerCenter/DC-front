@@ -114,6 +114,12 @@
   "full name": "Full name",
   "mob. number": "Mobile number",
 
+  "dealers": "Dealers",
+  "orders": "Orders",
+  "settings": "Settings",
+
+  "add order": "Add order",
+
   "transportation": "Transportation",
   "cost of vehicle": "The cost of the vehicle",
   "total debt": "Total debt",

@@ -7,13 +7,13 @@ export const routeName = {
   dealerOrder: '/dealer/order',
   adminOrderHistory: '/admin/order-history',
   adminManageNotifications: '/admin/manage-notifications',
-  adminUsersList: '/admin/users-list',
+  adminDealersList: '/admin/dealers-list',
   adminPersonalInformation: '/admin/personal-information',
   admin: '/admin',
   adminOrder: '/admin/order',
   adminOrderImageUpload: '/admin/order/image-upload',
   adminUserProfile: '/admin/user-profile',
-  adminUserContainers: '/admin/shipping-containers',
+  adminContainers: '/admin/shipping-containers',
 }
 
 export const locales = ['en', 'ge', 'ru']
