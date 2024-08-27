@@ -19,6 +19,7 @@ import { useAdminState } from '../../AdminStateContext'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 import { css } from 'styled-components'
+import BindContainerBox from './bindContainer/BindContainerBox'
 
 type Props = { isEditing: boolean; setIsEditing: (arg1: boolean) => void }
 
@@ -27,6 +28,12 @@ const sortOptions = [
   { label: 'date ascending', icon: arrowUp },
   { label: 'price descending', icon: arrowDown },
   { label: 'price ascending', icon: arrowUp },
+]
+
+const changeStatusList = [
+  { label: 'arrived' },
+  { label: 'on the way' },
+  { label: 'in warehouse' },
 ]
 
 const filterValues = {
@@ -63,6 +70,30 @@ const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
     <>
       {isEditing ? (
         <ButtonFrameEdit>
+          <ButtonPairFrame>
+            <AppDropdown
+              items={changeStatusList}
+              modalStyle='white'
+              width={240}
+              top={48}
+              isBorder={true}
+            >
+              <BasicButton onClick={() => {}} color='white' isBorder={true}>
+                {t('change status')}
+              </BasicButton>
+            </AppDropdown>
+            <AppDropdown
+              ReadyComponent={<BindContainerBox />}
+              modalStyle='white'
+              // width={240}
+              top={48}
+              isBorder={true}
+            >
+              <BasicButton onClick={() => {}} color='white' isBorder={true}>
+                {t('bind container')}
+              </BasicButton>
+            </AppDropdown>
+          </ButtonPairFrame>
           <ButtonPairFrame>
             <BasicButton
               onClick={() => setIsEditing(false)}
@@ -144,7 +175,8 @@ const ButtonFrame = styled.div`
 const ButtonFrameEdit = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
+
   padding: 0 32px;
   height: unset;
   align-items: unset;

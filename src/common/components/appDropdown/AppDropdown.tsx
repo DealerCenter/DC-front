@@ -6,7 +6,7 @@ import DropdownItem from './DropdownItem'
 type Props = {
   children: ReactNode
   modalStyle?: 'white' | 'black'
-  items:
+  items?:
     | { href: { pathname: string }; locale: string; label: string }[]
     | { label: string; icon: string }[]
     | { label: string }[]
@@ -22,6 +22,9 @@ type Props = {
   ) => void
   handleToggle?: () => void
   handleClose?: () => void
+  width?: number
+  isBorder?: boolean
+  ReadyComponent?: ReactNode
 }
 
 const AppDropdown = ({
@@ -33,6 +36,9 @@ const AppDropdown = ({
   onSortClick,
   handleToggle,
   handleClose,
+  width,
+  isBorder,
+  ReadyComponent,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -78,15 +84,19 @@ const AppDropdown = ({
           left={left}
           top={top}
           onClick={handleItemClick}
+          width={width}
+          isBorder={isBorder}
         >
-          {items.map((item, i) => (
-            <DropdownItem
-              item={item}
-              key={`${item.label}12ij${i}`}
-              modalStyle={modalStyle}
-              onSortClick={onSortClick}
-            />
-          ))}
+          {items &&
+            items.map((item, i) => (
+              <DropdownItem
+                item={item}
+                key={`${item.label}12ij${i}`}
+                modalStyle={modalStyle}
+                onSortClick={onSortClick}
+              />
+            ))}
+          {ReadyComponent && ReadyComponent}
         </DropdownMenu>
       )}
     </Dropdown>
@@ -104,9 +114,12 @@ type DropdownMenuProps = {
   left?: number
   top?: number
   modalStyle: 'white' | 'black'
+  width?: number
+  isBorder?: boolean
 }
 
 const DropdownMenu = styled.div<DropdownMenuProps>`
+  box-sizing: border-box;
   position: absolute;
   padding: 0;
   border-radius: 12px;
@@ -141,5 +154,23 @@ const DropdownMenu = styled.div<DropdownMenuProps>`
         `
       : css`
           top: unset;
+        `}
+        
+  ${({ width }) =>
+    width
+      ? css`
+          width: ${width}px;
+        `
+      : css`
+          width: unset;
+        `}
+
+  ${({ isBorder }) =>
+    isBorder
+      ? css`
+          border: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
+        `
+      : css`
+          border: unset;
         `}
 `

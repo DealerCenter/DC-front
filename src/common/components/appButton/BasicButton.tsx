@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components'
 
 type Props = {
   children: React.ReactNode
+  onClick: () => void
   height?: number
   width?: number
-  onClick: () => void
   color?: 'black' | 'white'
   padding?: number
   isBorder?: boolean
