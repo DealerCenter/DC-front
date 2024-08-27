@@ -52,6 +52,7 @@
   "recipient person": "Recipient",
   "mobile": "Mobile",
   "the date of addition": "The date of addition",
+  "date of Joining": "Date of Joining",
   "verification": "Verification",
   "authentication": "Authentication",
   "exit": "Exit",
@@ -188,12 +189,15 @@
   "current orders": "Current orders",
   "archive": "Archive",
 
+  "dealers list": "Dealers list",
+
   "containers": "Containers",
   "brand name": "Brand name",
   "link": "Link",
   "departure date": "Departure date",
   "arrival date": "Arrival date",
   "number of cars": "Number of cars",
+  "num of cars": "Num of cars",
   "add container": "Add container",
   "change status": "Change status",
   "bind container": "Bind container",

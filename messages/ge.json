@@ -51,6 +51,7 @@
   "recipient person": "მიმღები პირი",
   "mobile": "მობილური",
   "the date of addition": "დამატების თარიღი",
+  "date of Joining": "გაწევრიანების თარიღი",
   "verification": "ვერიფიკაცია",
   "authentication": "ავთენტიფიკაცია",
   "exit": "გასვლა",
@@ -116,7 +117,7 @@
   "dealers": "დილერები",
   "orders": "შეკვეთები",
   "settings": "პარამეტრები",
-  
+
   "add order": "შეკვეთის დამატება",
 
   "transportation": "ტრანსპორტირება",
@@ -187,12 +188,15 @@
   "current orders": "მიმდინარე შეკვეთები",
   "archive": "არქივი",
 
+  "dealers list": "დილერების სია",
+
   "containers": "კონტეინერები",
   "brand name": "დასახელება",
   "link": "ლინკი",
   "departure date": "წამოსვლის თარიღი",
   "arrival date": "ჩამოსვლის თარიღი",
   "number of cars": "ავტომობილების რაოდენობა",
+  "num of cars": "ავტ. ოდენობა",
   "add container": "კონტეინერის დამატება",
   "change status": "სტატუსის შეცვლა",
   "bind container": "კონტეინერის მიბმა",

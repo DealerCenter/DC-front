@@ -7,6 +7,7 @@ import UserInfoBox from '../../../app/[locale]/dealer/order-history/components/U
 import ShippingStateBox from '../../../app/[locale]/dealer/order-history/components/ShippingStateBox'
 import { useMediaQuery } from 'react-responsive'
 import { dummyShippingSteps } from '@/assets/DummyData'
+import theme from '@/app/[locale]/theme'
 
 type Props = {
   imageLink: string
@@ -33,8 +34,8 @@ const OrderListItem = ({
   shippingStep,
   onClick,
 }: Props) => {
-  const isHiddenCustom = useMediaQuery({
-    query: '(max-width: 1250px) and (min-width: 900px)',
+  const isTablet = useMediaQuery({
+    query: theme.media?.md,
   })
 
   const {
@@ -65,7 +66,7 @@ const OrderListItem = ({
             buyerFullName={buyerFullName}
             buyerPhoneNumber={buyerPhoneNumber}
           />
-          {isHiddenCustom || (
+          {isTablet || (
             <ShippingStateBoxFrame>
               <ShippingStateBox
                 shippingSteps={dummyShippingSteps}

@@ -33,7 +33,7 @@ const ContainersList = ({ containersData }: Props) => {
                 t('link'),
                 t('departure date'),
                 t('arrival date'),
-                t('number of cars'),
+                t('num of cars'),
               ]}
               height={88}
             />

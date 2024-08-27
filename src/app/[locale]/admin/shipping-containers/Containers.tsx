@@ -18,28 +18,26 @@ const Containers = (props: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <>
-      <Container>
-        <Frame>
-          <HeaderH4Bold text={t('containers')} />
-          <ButtonFrame>
-            <SecondaryButton
-              text={t('search')}
-              onClick={() => {}}
-              icon={searchIcon}
-            />
-            <SecondaryButton
-              text={t('add container')}
-              onClick={() => {
-                setIsModalOpen(true)
-              }}
-              icon={plusIcon}
-            />
-          </ButtonFrame>
-        </Frame>
-        <ContainersList containersData={containers} />
-      </Container>
-    </>
+    <Container>
+      <Frame>
+        <HeaderH4Bold text={t('containers')} />
+        <ButtonFrame>
+          <SecondaryButton
+            text={t('search')}
+            onClick={() => {}}
+            icon={searchIcon}
+          />
+          <SecondaryButton
+            text={t('add container')}
+            onClick={() => {
+              setIsModalOpen(true)
+            }}
+            icon={plusIcon}
+          />
+        </ButtonFrame>
+      </Frame>
+      <ContainersList containersData={containers} />
+    </Container>
   )
 }
 

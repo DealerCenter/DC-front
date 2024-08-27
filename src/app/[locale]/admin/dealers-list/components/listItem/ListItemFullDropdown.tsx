@@ -2,15 +2,13 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import AppModal from '@/common/components/modal/AppModal'
-import DeleteWarning from '../DeleteWarning'
-
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 import dropDownIcon from '@/assets/icons/arrowDown.svg'
-import ListItemFullDropdown from './ListItemFullDropdown'
+import AppModal from '@/common/components/modal/AppModal'
+import DeleteWarning from '../DeleteWarning'
 
 type Props = {
   fullName: string
@@ -21,7 +19,7 @@ type Props = {
   onClick: () => void
 }
 
-const ListItemFull = ({
+const ListItemFullDropdown = ({
   fullName,
   id,
   mobile,
@@ -30,21 +28,11 @@ const ListItemFull = ({
   onClick,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   return (
     <>
       <Container>
         <LabelBox>
-          <DropdownIcon
-            isOpen={isDropdownOpen}
-            onClick={(e) => {
-              e.stopPropagation()
-              setIsDropdownOpen((is) => !is)
-            }}
-          >
-            <Image src={dropDownIcon} alt='down arrow icon' width={12} />
-          </DropdownIcon>
           <NameAndIdBox>
             <NameLabel>{fullName}</NameLabel>
             <IdLabel>{id}</IdLabel>
@@ -92,21 +80,11 @@ const ListItemFull = ({
           onDelete={() => console.log('delete')}
         />
       </AppModal>
-      {isDropdownOpen && (
-        <ListItemFullDropdown
-          onClick={onClick}
-          fullName={fullName}
-          id={id}
-          mobile={mobile}
-          dateOfAddition={dateOfAddition}
-          isVerified={isVerified}
-        />
-      )}
     </>
   )
 }
 
-export default ListItemFull
+export default ListItemFullDropdown
 
 const Container = styled.div`
   box-sizing: border-box;

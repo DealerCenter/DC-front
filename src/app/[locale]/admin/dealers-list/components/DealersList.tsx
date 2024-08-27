@@ -10,7 +10,7 @@ import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 
 type Props = {
-  usersData: {
+  dealersData: {
     fullName: string
     id: string
     mobile: string
@@ -19,26 +19,28 @@ type Props = {
   }[]
 }
 
-const UserList = ({ usersData }: Props) => {
+const DealersList = ({ dealersData }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const router = useRouter()
 
   return (
     <Container>
-      {usersData.length !== 0 && (
+      {dealersData.length !== 0 && (
         <>
           {!isMobile && (
             <LabelsContainer
               labels={[
-                t('recipient'),
+                t('full name'),
                 t('mobile'),
-                t('the date of addition'),
-                t('verification'),
+                t('date of Joining'),
+                t('debt'),
+                t('num of cars'),
               ]}
+              paddingRight={24}
             />
           )}
-          {usersData.map((data) => (
+          {dealersData.map((data) => (
             <ListItem
               userData={data}
               key={`ListItem${data.id}`}
@@ -51,6 +53,6 @@ const UserList = ({ usersData }: Props) => {
   )
 }
 
-export default UserList
+export default DealersList
 
 const Container = styled.div``

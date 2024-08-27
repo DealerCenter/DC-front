@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
-import UsersList from './components/UsersList'
 import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 
@@ -11,56 +10,40 @@ import plusIcon from '@/assets/icons/plus.svg'
 import UserListEmpty from './components/UserListEmpty'
 import AddRecipient from './components/addRecipient/AddRecipient'
 import AppModal from '@/common/components/modal/AppModal'
-import { users } from '@/assets/DummyData'
+import { users as dummyUsers } from '@/assets/DummyData'
+import DealersList from './components/DealersList'
 
 type Props = {}
 
-const UsersListBox = (props: Props) => {
+const DealersListBox = (props: Props) => {
   const t = useTranslations('')
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <>
-      <Container>
-        <Frame>
-          <HeaderH4Bold text={t('list of users')} />
-          <ButtonFrame>
-            <SecondaryButton
-              text={t('search')}
-              onClick={() => {}}
-              icon={searchIcon}
-            />
-            <SecondaryButton
-              text={t('add recipient')}
-              onClick={() => {
-                setIsModalOpen(true)
-              }}
-              icon={plusIcon}
-            />
-          </ButtonFrame>
-        </Frame>
-        {users.length === 0 ? (
-          <UserListEmpty
+    <Container>
+      <Frame>
+        <HeaderH4Bold text={t('dealers list')} />
+        <ButtonFrame>
+          <SecondaryButton
+            text={t('search')}
+            onClick={() => {}}
+            icon={searchIcon}
+          />
+          <SecondaryButton
+            text={t('add container')}
             onClick={() => {
               setIsModalOpen(true)
             }}
+            icon={plusIcon}
           />
-        ) : (
-          <UsersList usersData={users} />
-        )}
-      </Container>
-
-      <AppModal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-      >
-        <AddRecipient onClose={() => setIsModalOpen(false)} />
-      </AppModal>
-    </>
+        </ButtonFrame>
+      </Frame>
+      <DealersList dealersData={dummyUsers} />
+    </Container>
   )
 }
 
-export default UsersListBox
+export default DealersListBox
 
 const Container = styled.div`
   box-sizing: border-box;
