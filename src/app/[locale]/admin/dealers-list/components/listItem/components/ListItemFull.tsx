@@ -2,13 +2,15 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import AppModal from '@/common/components/modal/AppModal'
+import DeleteWarning from '../../DeleteWarning'
+
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 import dropDownIcon from '@/assets/icons/arrowDown.svg'
-import AppModal from '@/common/components/modal/AppModal'
-import DeleteWarning from '../DeleteWarning'
+import ListItemFullDropdown from './ListItemFullDropdown'
 
 type Props = {
   fullName: string
@@ -19,7 +21,7 @@ type Props = {
   onClick: () => void
 }
 
-const ListItemFullDropdown = ({
+const ListItemFull = ({
   fullName,
   id,
   mobile,
@@ -28,11 +30,21 @@ const ListItemFullDropdown = ({
   onClick,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   return (
     <>
       <Container>
         <LabelBox>
+          <DropdownIcon
+            isOpen={isDropdownOpen}
+            onClick={(e) => {
+              e.stopPropagation()
+              setIsDropdownOpen((is) => !is)
+            }}
+          >
+            <Image src={dropDownIcon} alt='down arrow icon' width={12} />
+          </DropdownIcon>
           <NameAndIdBox>
             <NameLabel>{fullName}</NameLabel>
             <IdLabel>{id}</IdLabel>
@@ -80,18 +92,38 @@ const ListItemFullDropdown = ({
           onDelete={() => console.log('delete')}
         />
       </AppModal>
+      {isDropdownOpen && (
+        <>
+          <ListItemFullDropdown
+            onClick={onClick}
+            fullName={fullName}
+            id={id}
+            mobile={mobile}
+            dateOfAddition={dateOfAddition}
+            isVerified={isVerified}
+          />
+          <ListItemFullDropdown
+            onClick={onClick}
+            fullName={fullName}
+            id={id}
+            mobile={mobile}
+            dateOfAddition={dateOfAddition}
+            isVerified={isVerified}
+          />
+        </>
+      )}
     </>
   )
 }
 
-export default ListItemFullDropdown
+export default ListItemFull
 
 const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 72px;
+  height: 75px;
   padding: 0 16px 0 8px;
 
   border: 1px solid ${({ theme }) => theme.colors?.main_gray_04};
@@ -134,6 +166,7 @@ const NameLabel = styled(Label)`
 const IdLabel = styled(Label)`
   align-items: start;
   justify-content: start;
+  color: ${({ theme }) => theme.colors?.main_gray_56};
 `
 const Icon = styled.div`
   display: flex;

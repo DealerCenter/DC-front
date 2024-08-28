@@ -3,8 +3,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { useMediaQuery } from 'react-responsive'
-import ListItemMobile from './ListItemMobile'
-import ListItemFull from './ListItemFull'
+import ListItemMobile from './components/ListItemMobile'
+import ListItemFull from './components/ListItemFull'
 import theme from '@/app/[locale]/theme'
 
 type Props = {

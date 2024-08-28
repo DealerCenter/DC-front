@@ -2,15 +2,14 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import DeleteWarning from '../../DeleteWarning'
 import AppModal from '@/common/components/modal/AppModal'
-import DeleteWarning from '../DeleteWarning'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
-import dropDownIcon from '@/assets/icons/arrowDown.svg'
-import ListItemFullDropdown from './ListItemFullDropdown'
+import dashedLine from '@/assets/icons/dashedLineGray.svg'
 
 type Props = {
   fullName: string
@@ -21,7 +20,7 @@ type Props = {
   onClick: () => void
 }
 
-const ListItemFull = ({
+const ListItemFullDropdown = ({
   fullName,
   id,
   mobile,
@@ -30,21 +29,15 @@ const ListItemFull = ({
   onClick,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   return (
     <>
       <Container>
+        <DottedLine>
+          <Image src={dashedLine} alt='dashed line' />
+        </DottedLine>
         <LabelBox>
-          <DropdownIcon
-            isOpen={isDropdownOpen}
-            onClick={(e) => {
-              e.stopPropagation()
-              setIsDropdownOpen((is) => !is)
-            }}
-          >
-            <Image src={dropDownIcon} alt='down arrow icon' width={12} />
-          </DropdownIcon>
+          <Circle />
           <NameAndIdBox>
             <NameLabel>{fullName}</NameLabel>
             <IdLabel>{id}</IdLabel>
@@ -52,7 +45,7 @@ const ListItemFull = ({
         </LabelBox>
         <Label>{mobile}</Label>
         <Label>{dateOfAddition}</Label>
-        <DebtLabel>{`$ 5750`}</DebtLabel>
+        <DebtLabel></DebtLabel>
         <IconBox>
           <Icon>
             {isVerified ? (
@@ -92,29 +85,34 @@ const ListItemFull = ({
           onDelete={() => console.log('delete')}
         />
       </AppModal>
-      {isDropdownOpen && (
-        <ListItemFullDropdown
-          onClick={onClick}
-          fullName={fullName}
-          id={id}
-          mobile={mobile}
-          dateOfAddition={dateOfAddition}
-          isVerified={isVerified}
-        />
-      )}
     </>
   )
 }
 
-export default ListItemFull
+export default ListItemFullDropdown
+
+const DottedLine = styled.div`
+  position: absolute;
+  top: -27px;
+  left: 30px;
+`
+
+const Circle = styled.div`
+  height: 8px;
+  width: 8px;
+  border-radius: 10px;
+  background-color: ${({ theme }) => theme.colors?.main_gray_16};
+`
 
 const Container = styled.div`
+  position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 72px;
-  padding: 0 16px 0 8px;
+  padding: 0 16px 0 42px;
+  background-color: ${({ theme }) => theme.colors?.main_gray_04};
 
   border: 1px solid ${({ theme }) => theme.colors?.main_gray_04};
 `
@@ -124,7 +122,7 @@ const LabelBox = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
 `
 
 const IconBox = styled.div`
@@ -156,6 +154,7 @@ const NameLabel = styled(Label)`
 const IdLabel = styled(Label)`
   align-items: start;
   justify-content: start;
+  color: ${({ theme }) => theme.colors?.main_gray_56};
 `
 const Icon = styled.div`
   display: flex;

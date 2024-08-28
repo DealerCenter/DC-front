@@ -30,7 +30,7 @@ const DealersListBox = (props: Props) => {
             icon={searchIcon}
           />
           <SecondaryButton
-            text={t('add container')}
+            text={t('add recipient')}
             onClick={() => {
               setIsModalOpen(true)
             }}
