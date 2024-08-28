@@ -111,7 +111,7 @@
   "more details": "დამატებითი დეტალები",
   "description": "აღწერა",
   "full name": "სახელი და გვარი",
-  "mob. number": "მობ. ნომერი",
+  "mob number": "მობ. ნომერი",
 
   "transportation": "ტრანსპორტირება",
   "cost of vehicle": "ავტომობილის ღირებულება",
@@ -194,6 +194,12 @@
   "specify container link": "მიუთითე კონტეინერის ლინკი",
   "add new": "დაამატე ახალი",
   "or": "ან",
+
+  "search for desired car": "მოძებნე სასურველი ავტომობილი",
+  "car": "მსუბუქი ავტომობილი",
+  "truck": "სატვირთო ავტომობილი",
+  "motorcycle": "მოტოციკლი",
+  "browse cars at America's two largest auctions": "დაათვალიერე ავტომობილები ამერიკის ორ უდიდეს აუქციონზე",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

@@ -14,6 +14,8 @@ export const routeName = {
   adminOrderImageUpload: '/admin/order/image-upload',
   adminUserProfile: '/admin/user-profile',
   adminUserContainers: '/admin/shipping-containers',
+
+  landingPage: '/landing-page',
 }
 
 export const locales = ['en', 'ge', 'ru']

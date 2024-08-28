@@ -10,6 +10,7 @@ const theme = {
     background: '#2020200A',
 
     white: '#FFFFFF',
+    white_86: 'rgba(255, 255, 255, 0.86)',
     white_72: 'rgba(255, 255, 255, 0.72)',
     white_68: 'rgba(255, 255, 255, 0.68)',
     white_24: 'rgba(255, 255, 255, 0.24)',
@@ -17,6 +18,10 @@ const theme = {
 
     button_black: 'rgba(18, 18, 20, 1)',
     button_black_90: 'rgba(18, 18, 20, 0.9)',
+    button_black_56: 'rgba(18, 18, 20, 0.56)',
+    button_black_16: 'rgba(18, 18, 20, 0.16)',
+    button_black_10: 'rgba(18, 18, 20, 0.1)',
+    button_black_04: 'rgba(18, 18, 20, 0.04)',
 
     footer_black: 'rgba(21, 21, 21, 1)',
 
