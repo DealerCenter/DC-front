@@ -7,6 +7,7 @@ import Image from 'next/image'
 import AppDropdown from '../../../appDropdown/AppDropdown'
 import downIcon from '@/assets/icons/arrowDownWhite.svg'
 import MenuButtons from './components/MenuButtons'
+import Logo from '../Logo'
 
 type Props = {}
 
@@ -32,7 +33,7 @@ const FullHeader = (props: Props) => {
   return (
     <>
       <Container>
-        <Logo>DUX</Logo>
+        <Logo />
         <Frame>
           <Title2>{t('search for vehicle')}</Title2>
           <AppDropdown
@@ -105,16 +106,6 @@ const Title2 = styled.div`
   }
 `
 
-const Logo = styled.h2`
-  color: ${({ theme }) => theme.colors?.white};
-  font-size: 40px;
-  font-weight: bold;
-  padding: 12px 16px 12px 16px;
-  margin: 0;
-
-  cursor: default;
-`
-
 type IconProps = { isOpen: boolean }
 
 const Icon = styled.div<IconProps>`
@@ -129,5 +120,5 @@ const Icon = styled.div<IconProps>`
     isOpen &&
     css`
       transform: rotate(180deg);
-    `}/* cursor: pointer */
+    `}
 `
