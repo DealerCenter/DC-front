@@ -47,6 +47,7 @@ const Container = styled.div`
 
   @media ${({ theme }) => theme.media?.sm} {
     top: 2000px;
+    padding: 42px 24px;
   }
 `
 

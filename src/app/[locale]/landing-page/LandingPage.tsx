@@ -16,7 +16,9 @@ const LandingPage = (props: Props) => {
         <PageHeader />
         <SearchComponent />
         <ContainersImage />
-        <CarsAtAuctionCarousel />
+        <CarsAtAuctionCarousel
+          onSeeAllClick={() => console.log('see all clicked')}
+        />
         <DecorativeLabelsBox />
       </TopContainer>
     </>
@@ -35,6 +37,7 @@ const TopContainer = styled.div`
   @media ${({ theme }) => theme.media?.md} {
     width: 960px;
   }
+  
   @media ${({ theme }) => theme.media?.sm} {
     width: 375px;
   }

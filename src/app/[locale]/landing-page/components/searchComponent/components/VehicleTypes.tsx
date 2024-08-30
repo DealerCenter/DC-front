@@ -4,12 +4,12 @@ import { useTranslations } from 'next-intl'
 
 import VehicleBox from './VehicleBox'
 
-import carIcon from '@/assets/icons/VehicleIcons/CarBlack.svg'
-import carIconSmall from '@/assets/icons/VehicleIcons/CarBlackSmall.svg'
-import TruckBlack from '@/assets/icons/VehicleIcons/TruckBlack.svg'
-import TruckBlackSmall from '@/assets/icons/VehicleIcons/TruckBlackSmall.svg'
-import MotorcycleBlack from '@/assets/icons/VehicleIcons/MotorcycleBlack.svg'
-import MotorcycleBlackSmall from '@/assets/icons/VehicleIcons/MotorcycleBlackSmall.svg'
+import carIcon from '@/assets/icons/vehicleIcons/CarBlack.svg'
+import carIconSmall from '@/assets/icons/vehicleIcons/CarBlackSmall.svg'
+import TruckBlack from '@/assets/icons/vehicleIcons/TruckBlack.svg'
+import TruckBlackSmall from '@/assets/icons/vehicleIcons/TruckBlackSmall.svg'
+import MotorcycleBlack from '@/assets/icons/vehicleIcons/MotorcycleBlack.svg'
+import MotorcycleBlackSmall from '@/assets/icons/vehicleIcons/MotorcycleBlackSmall.svg'
 
 type Props = {}
 
