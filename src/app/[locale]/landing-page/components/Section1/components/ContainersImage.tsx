@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import containersImage2 from '@/assets/images/containersImage2.png'
 import containersImage2Small from '@/assets/images/containersImage2Small.png'
 import { useMediaQuery } from 'react-responsive'
-import theme from '../../theme'
+import theme from '../../../../theme'
 
 type Props = {}
 

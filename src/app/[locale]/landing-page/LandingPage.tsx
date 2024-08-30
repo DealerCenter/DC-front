@@ -1,44 +1,17 @@
 import React from 'react'
-import SearchComponent from './components/searchComponent/SearchComponent'
+import SearchComponent from './components/Section1/components/searchComponent/SearchComponent'
 import styled from 'styled-components'
-import PageHeader from './components/pageHeader/PageHeader'
+import PageHeader from './components/Section1/components/pageHeader/PageHeader'
 import Image from 'next/image'
-import ContainersImage from './components/ContainersImage'
-import CarsAtAuctionCarousel from './components/CarsOnAuctionCarousel/CarsAtAuctionCarousel'
-import DecorativeLabelsBox from './components/searchComponent/components/DecorativeLabelsBox'
+import ContainersImage from './components/Section1/components/ContainersImage'
+import CarsAtAuctionCarousel from './components/Section1/components/CarsOnAuctionCarousel/CarsAtAuctionCarousel'
+import DecorativeLabelsBox from './components/Section1/components/searchComponent/components/DecorativeLabelsBox'
+import Section1 from './components/Section1/Section1'
 
 type Props = {}
 
 const LandingPage = (props: Props) => {
-  return (
-    <>
-      <TopContainer>
-        <PageHeader />
-        <SearchComponent />
-        <ContainersImage />
-        <CarsAtAuctionCarousel
-          onSeeAllClick={() => console.log('see all clicked')}
-        />
-        <DecorativeLabelsBox />
-      </TopContainer>
-    </>
-  )
+  return <Section1 />
 }
 
 export default LandingPage
-
-const TopContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-  padding: 80px 0;
-  width: 1200px;
-
-  @media ${({ theme }) => theme.media?.md} {
-    width: 960px;
-  }
-  
-  @media ${({ theme }) => theme.media?.sm} {
-    width: 375px;
-  }
-`
