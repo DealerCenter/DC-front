@@ -34,6 +34,13 @@ const Container = styled.div`
   border-radius: ${({ theme }) => theme.radius?.xl};
   padding: ${({ theme }) => theme.spacing?.xl};
   gap: 60px;
+
+  margin-bottom: 200px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    margin-bottom: 100px;
+    padding: ${({ theme }) => theme.spacing?.md};
+  }
 `
 
 const TopFrame = styled.div`

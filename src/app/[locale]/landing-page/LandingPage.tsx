@@ -2,15 +2,24 @@ import React from 'react'
 import SearchComponent from './components/searchComponent/SearchComponent'
 import styled from 'styled-components'
 import PageHeader from './components/pageHeader/PageHeader'
+import Image from 'next/image'
+import ContainersImage from './components/ContainersImage'
+import CarsAtAuctionCarousel from './components/CarsOnAuctionCarousel/CarsAtAuctionCarousel'
+import DecorativeLabelsBox from './components/searchComponent/components/DecorativeLabelsBox'
 
 type Props = {}
 
 const LandingPage = (props: Props) => {
   return (
-    <TopContainer>
-      <PageHeader />
-      <SearchComponent />
-    </TopContainer>
+    <>
+      <TopContainer>
+        <PageHeader />
+        <SearchComponent />
+        <ContainersImage />
+        <CarsAtAuctionCarousel />
+        <DecorativeLabelsBox />
+      </TopContainer>
+    </>
   )
 }
 
@@ -25,5 +34,8 @@ const TopContainer = styled.div`
 
   @media ${({ theme }) => theme.media?.md} {
     width: 960px;
+  }
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 375px;
   }
 `

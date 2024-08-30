@@ -22,7 +22,7 @@ const theme = {
     button_black_16: 'rgba(18, 18, 20, 0.16)',
     button_black_10: 'rgba(18, 18, 20, 0.1)',
     button_black_04: 'rgba(18, 18, 20, 0.04)',
-
+    
     footer_black: 'rgba(21, 21, 21, 1)',
 
     main_gray_100: 'rgba(32, 32, 32, 1)',
