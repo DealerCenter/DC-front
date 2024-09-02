@@ -1,17 +1,23 @@
 import React from 'react'
-import SearchComponent from './components/Section1/components/searchComponent/SearchComponent'
+import Section1 from './components/section1/Section1'
+import Section2 from './components/section2/Section2'
 import styled from 'styled-components'
-import PageHeader from './components/Section1/components/pageHeader/PageHeader'
-import Image from 'next/image'
-import ContainersImage from './components/Section1/components/ContainersImage'
-import CarsAtAuctionCarousel from './components/Section1/components/CarsOnAuctionCarousel/CarsAtAuctionCarousel'
-import DecorativeLabelsBox from './components/Section1/components/searchComponent/components/DecorativeLabelsBox'
-import Section1 from './components/Section1/Section1'
 
 type Props = {}
 
 const LandingPage = (props: Props) => {
-  return <Section1 />
+  return (
+    <Container>
+      <Section1 />
+      <Section2 />
+    </Container>
+  )
 }
 
 export default LandingPage
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`

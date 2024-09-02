@@ -31,6 +31,7 @@ const Container = styled.div`
   gap: 60px;
   padding: 80px 0;
   width: 1200px;
+  margin-bottom: 120px;
 
   @media ${({ theme }) => theme.media?.md} {
     width: 960px;

@@ -19,6 +19,8 @@ type Props = {
   fontWeight?: 'normal' | 'bold'
   fontSize?: number
   isOutline?: boolean
+  paddingLeft?: number
+  iconPaddingLeft?: number
 }
 
 const TextInput = ({
@@ -37,10 +39,14 @@ const TextInput = ({
   fontWeight = 'normal',
   fontSize = 16,
   isOutline = true,
+  paddingLeft,
+  iconPaddingLeft,
 }: Props) => {
   return (
     <Container>
-      {icon ? <IconBox>{icon}</IconBox> : null}
+      {icon ? (
+        <IconBox iconPaddingLeft={iconPaddingLeft}>{icon}</IconBox>
+      ) : null}
       <StyledInput
         width={width}
         height={height}
@@ -55,6 +61,7 @@ const TextInput = ({
         fontWeight={fontWeight}
         fontSize={fontSize}
         isOutline={isOutline}
+        paddingLeft={paddingLeft}
       />
       {optionalInfo && (
         <TextBox>
@@ -71,6 +78,10 @@ export default TextInput
 
 const Container = styled.div`
   position: relative;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `
 
 type InputProps = {
@@ -81,6 +92,7 @@ type InputProps = {
   fontWeight?: 'normal' | 'bold'
   fontSize?: number
   isOutline?: boolean
+  paddingLeft?: number
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -136,11 +148,15 @@ const StyledInput = styled.input<InputProps>`
           height: 52px;
         `}       
 
-  ${({ icon }) =>
-    icon &&
-    css`
-      padding-left: 50px;
-    `}
+  ${({ icon, paddingLeft }) =>
+    icon && !paddingLeft
+      ? css`
+          padding-left: 50px;
+        `
+      : paddingLeft &&
+        css`
+          padding-left: ${paddingLeft}px;
+        `}
 
     @media ${({ theme }) => theme.media?.sm} {
     ${({ isHalfSize, width }) =>
@@ -189,9 +205,22 @@ const OptionalText = styled.p`
   margin: 0;
 `
 
-const IconBox = styled.div`
+type IconBoxProps = { iconPaddingLeft?: number }
+
+const IconBox = styled.div<IconBoxProps>`
   position: absolute;
-  left: 16px;
-  top: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ${({ iconPaddingLeft }) =>
+    iconPaddingLeft
+      ? css`
+          left: ${iconPaddingLeft}px;
+        `
+      : css`
+          left: 16px;
+        `}
+
   z-index: 1000;
 `

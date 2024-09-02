@@ -203,6 +203,12 @@
 
   "cars at auction": "ავტომობილები აუქციონზე",
   "see all": "იხილეთ ყველა",
+  "check": "შემოწმება",
+
+  "not added recipient data": "მიმღები პირის მონაცემები ჯერ არ გაქვს დამატებული ",
+
+  "specify type of document and get detailed information": "მიუთითე საბუთის ტიპი და მიიღე დეტალური ინფორმაცია სასურველი ავტომობილის შესახებ.",
+  "find out if problematic and how good an investment it can be": "გაიგე, არის თუ არა პრობლემური და რამდენად კარგი ინვესტიცია შეიძლება იყოს",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
@@ -221,5 +227,13 @@
     "surname required": "გვარი აუცილებელია",
     "actual address required": "ფაქტობრივი მისამართი აუცილებელია"
   },
-  "not added recipient data": "მიმღები პირის მონაცემები ჯერ არ გაქვს დამატებული "
+
+  "infoBox": {
+    "enter the name of the document": "შეიყვანე საბუთის დასახელება",
+    "search for document and enter in search field": "მოძებნე საბუთის დასახელება და ეცადე სწორად შეიყვანო ძებნის გრაფაში",
+    "check status": "შეამოწმე სტატუსი",
+    "find status of vehicle and see whether it is problem-free": "იპოვე ავტომობილის სტატუსი და გაეცანი ინფორმაციას, რა სახის დაზიანება ან პრობლემა აქვს მას. ამასთანავე ნახავ, უპრობლემოა თუ არა ის.",
+    "make a wise decision": "მიიღე გონივრული გადაწყვეტილება",
+    "find out if it is necessary to contact the company": "გაიგე საჭიროა თუ არა კომპანიასთან დაკონტაქტება, რა ზომებს უნდა მიმართო"
+  }
 }

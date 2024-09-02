@@ -204,6 +204,12 @@
 
   "cars at auction": "Cars at auction",
   "see all": "See all",
+  "check": "Check",
+
+  "not added recipient data": "You have not added recipient data yet",
+
+  "specify type of document and get detailed information": "Specify the type of document and get detailed information about the desired vehicle.",
+  "find out if problematic and how good an investment it can be": "Find out if it's problematic and how good an investment it can be",
 
   "useForm": {
     "must be valid email": "Must be a valid email",
@@ -222,5 +228,13 @@
     "surname required": "Surname is required",
     "actual address required": "Actual address is required"
   },
-  "not added recipient data": "You have not added recipient data yet"
+
+  "infoBox": {
+    "enter the name of the document": "Enter the name of the document",
+    "search for document and enter in search field": "Search for the name of the document and try to enter it correctly in the search field",
+    "check status": "Check status",
+    "find status of vehicle and see whether it is problem-free": "Find the status of the vehicle and find out what kind of damage or problem it has. At the same time, you will see whether it is problem-free or not.",
+    "make a wise decision": "Make a wise decision",
+    "find out if it is necessary to contact the company": "Find out if it is necessary to contact the company and what measures to apply"
+  }
 }
