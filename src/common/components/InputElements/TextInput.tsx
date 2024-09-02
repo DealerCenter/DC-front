@@ -21,6 +21,7 @@ type Props = {
   isOutline?: boolean
   paddingLeft?: number
   iconPaddingLeft?: number
+  hasShadow?: boolean
 }
 
 const TextInput = ({
@@ -41,6 +42,7 @@ const TextInput = ({
   isOutline = true,
   paddingLeft,
   iconPaddingLeft,
+  hasShadow,
 }: Props) => {
   return (
     <Container>
@@ -62,6 +64,7 @@ const TextInput = ({
         fontSize={fontSize}
         isOutline={isOutline}
         paddingLeft={paddingLeft}
+        hasShadow={hasShadow}
       />
       {optionalInfo && (
         <TextBox>
@@ -93,6 +96,7 @@ type InputProps = {
   fontSize?: number
   isOutline?: boolean
   paddingLeft?: number
+  hasShadow?: boolean
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -157,6 +161,13 @@ const StyledInput = styled.input<InputProps>`
         css`
           padding-left: ${paddingLeft}px;
         `}
+
+  ${({ hasShadow }) =>
+    hasShadow
+      ? css`
+          box-shadow: 30px 30px 40px 0px rgba(0, 0, 0, 0.1);
+        `
+      : css``}
 
     @media ${({ theme }) => theme.media?.sm} {
     ${({ isHalfSize, width }) =>

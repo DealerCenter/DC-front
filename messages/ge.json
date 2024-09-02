@@ -219,6 +219,13 @@
   "which city/state is it coming from": "რომელი ქალაქი/შტატიდან მოდის",
   "what city/port does it arrive at": "რომელ ქალაქში/პორტში ჩამოდის",
 
+  "check vehicle status": "ავტომობილის სტატუსის შემოწმება",
+  "enter the vin code and see where your car is, etc": "ჩაწერე ვინ კოდი და ნახე სად არის შენი ავტომობილი, რა თანხა გაქვს გადასახდელი და ა.შ.",
+
+  "photos": "ფოტოები",
+  "registered user": "დარეგისტრირებული მომხმარებელი",
+  "car that arrived at the place": "ადგილზე ჩამოსული ავტომობილი",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 

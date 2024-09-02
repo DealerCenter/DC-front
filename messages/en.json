@@ -220,6 +220,13 @@
   "which city/state is it coming from": "Which city/state is it coming from?",
   "what city/port does it arrive at": "What city/port does it arrive at?",
 
+  "check vehicle status": "Check vehicle status",
+  "enter the vin code and see where your car is, etc": "Enter the vin code and see where your car is, how much money you have to pay, etc.",
+
+  "photos": "Photos",
+  "registered user": "Registered user",
+  "car that arrived at the place": "Car that arrived at the place",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 
