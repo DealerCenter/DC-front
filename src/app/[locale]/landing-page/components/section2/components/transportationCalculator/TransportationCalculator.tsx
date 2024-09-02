@@ -19,27 +19,25 @@ const TransportationCalculator = (props: Props) => {
 
   return (
     <>
-      {isMobile && (
-        <ImageFrame>
-          <Image src={shipImage} alt='ship image' layout='responsive' />
-        </ImageFrame>
-      )}
       <Container>
         <PageHeader
           headerText={t('transportation calculator')}
           text={t('specify details and calculate exact shipping cost')}
         />
         <Frame>
-          {!isMobile && (
-            <ImageFrame>
+          <ImageFrame>
+            {isMobile ? (
+              <Image src={shipImage} alt='ship image' layout='responsive' />
+            ) : (
               <Image
                 src={shipImage}
                 alt='ship image'
                 width={386}
                 height={292}
               />
-            </ImageFrame>
-          )}
+            )}
+          </ImageFrame>
+
           <Calculator />
         </Frame>
       </Container>
@@ -88,7 +86,7 @@ const ImageFrame = styled.div`
 
     position: absolute;
     left: 0;
-    top: 2955px;
+    top: 3010px;
     z-index: -1;
     width: 100%;
   }

@@ -13,6 +13,7 @@ type Props = { placeholder: string }
 
 const SearchComponent = ({ placeholder }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
 
   return (
@@ -21,16 +22,20 @@ const SearchComponent = ({ placeholder }: Props) => {
         type='text'
         placeholder={placeholder}
         name='search field'
-        value='search'
+        value=''
         onChange={() => {}}
         onBlur={() => {}}
         icon={<Image src={searchIcon} alt='search icon' />}
-        height={isMobile ? 40 : 50}
-        width={isMobile ? 343 : 672}
+        height={isTablet ? 70 : 50}
+        width={isMobile ? 343 : isTablet ? 311 : 431}
         paddingLeft={isMobile ? 34 : 50}
         iconPaddingLeft={isMobile ? 10 : 16}
       />
-      {!isMobile && <SearchButton>{t('check')}</SearchButton>}
+      {!isMobile && (
+        <SearchButton>
+          <ButtonLabel>{t('check')}</ButtonLabel>
+        </SearchButton>
+      )}
     </Container>
   )
 }
@@ -40,6 +45,7 @@ export default SearchComponent
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: ${({ theme }) => theme.spacing?.sm};
 `
 
@@ -48,9 +54,19 @@ const SearchButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 136px;
+
+  height: 56px;
 
   background-color: ${({ theme }) => theme.colors?.main_gray_100};
-  color: ${({ theme }) => theme.colors?.white};
   padding: ${({ theme }) => theme.spacing?.md};
   border-radius: ${({ theme }) => theme.radius?.lg};
+`
+
+const ButtonLabel = styled.label`
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
+  color: ${({ theme }) => theme.colors?.white};
+
+  cursor: pointer;
 `

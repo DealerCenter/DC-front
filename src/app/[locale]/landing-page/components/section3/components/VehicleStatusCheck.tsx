@@ -65,6 +65,9 @@ const Container = styled.div`
   align-items: center;
 
   padding: 120px 0;
+
+  border-bottom: 6px solid ${({ theme }) => theme.colors?.black};
+  width: 100%;
 `
 
 const HeaderBox = styled.div`
