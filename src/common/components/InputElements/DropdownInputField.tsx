@@ -1,15 +1,27 @@
 import Image from 'next/image'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import arrowDown from '@/assets/icons/arrowDown.svg'
 
-type Props = { placeholder: string }
+type Props = {
+  placeholder: string
+  width?: number
+  height?: number
+  backgroundColor?: string
+  fontSize?: number
+}
 
-const DropdownInputField = ({ placeholder }: Props) => {
+const DropdownInputField = ({
+  placeholder,
+  width,
+  height,
+  backgroundColor,
+  fontSize,
+}: Props) => {
   return (
-    <Container>
-      <Label>{placeholder}</Label>
+    <Container width={width} height={height} backgroundColor={backgroundColor}>
+      <Label fontSize={fontSize}>{placeholder}</Label>
       <Icon>
         <Image src={arrowDown} alt='arrow down icon' />
       </Icon>
@@ -19,23 +31,54 @@ const DropdownInputField = ({ placeholder }: Props) => {
 
 export default DropdownInputField
 
-const Container = styled.div`
+type ContainerProps = {
+  width?: number
+  height?: number
+  backgroundColor?: string
+}
+
+const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 275px;
-  height: 56px;
 
-  @media ${({ theme }) => theme.media?.md} {
-    width: 215px;
-  }
+  ${({ width }) =>
+    width
+      ? css`
+          width: ${width}px;
+        `
+      : css`
+          width: 275px;
+          @media ${({ theme }) => theme.media?.md} {
+            width: 215px;
+          }
+          @media ${({ theme }) => theme.media?.sm} {
+            width: 343px;
+          }
+        `}
 
-  @media ${({ theme }) => theme.media?.sm} {
-    width: 343px;
-    height: 48px;
-  }
+  ${({ height }) =>
+    height
+      ? css`
+          height: ${height}px;
+        `
+      : css`
+          height: 56px;
+          @media ${({ theme }) => theme.media?.sm} {
+            height: 48px;
+          }
+        `}
+
+  ${({ backgroundColor }) =>
+    backgroundColor
+      ? css`
+          background-color: ${backgroundColor};
+        `
+      : css`
+          background-color: unset;
+        `}
 
   border: 2px solid ${({ theme }) => theme.colors?.main_gray_10};
   border-radius: ${({ theme }) => theme.radius?.lg};
@@ -51,8 +94,18 @@ const Icon = styled.div`
   height: 24px;
 `
 
-const Label = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes?.medium};
+type LabelProps = { fontSize?: number }
+
+const Label = styled.div<LabelProps>`
   font-weight: ${({ theme }) => theme.fontWeight?.normal};
   color: ${({ theme }) => theme.colors?.main_gray_100};
+
+  ${({ fontSize }) =>
+    fontSize
+      ? css`
+          font-size: ${fontSize}px;
+        `
+      : css`
+          font-size: ${({ theme }) => theme.fontSizes?.medium};
+        `}
 `

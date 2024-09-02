@@ -1,20 +1,31 @@
 import React from 'react'
-import PageHeader from './components/PageHeader'
 import styled from 'styled-components'
-import SearchComponent from './components/SearchComponent'
-import InfoBox from './components/InfoBox'
 import { useTranslations } from 'next-intl'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
+
+import InfoBox from './components/InfoBox'
+import SearchComponent from './components/SearchComponent'
+import PageHeader from '../../../common/PageHeader'
 import ButtonsBox from './components/buttonsBox/ButtonsBox'
 
 type Props = {}
 
 const DocumentCheck = (props: Props) => {
-  const t = useTranslations('infoBox')
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const t = useTranslations('')
 
   return (
     <Container>
       <SearchFrame>
-        <PageHeader />
+        <PageHeader
+          headerText={t('document check')}
+          text={`${t('specify type of document and get detailed information')} ${
+            !isMobile &&
+            t('find out if problematic and how good an investment it can be')
+          }`}
+          textColor={theme.colors?.main_gray_42}
+        />
         <SearchBox>
           <SearchComponent placeholder='blalblabl' />
           <ButtonsBox />
@@ -44,25 +55,28 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 100px 0;
+  padding: 100px 0;
   gap: 100px;
 
   @media ${({ theme }) => theme.media?.md} {
-    margin: 64px 0;
+    padding: 64px 0;
   }
 
   @media ${({ theme }) => theme.media?.sm} {
     gap: ${({ theme }) => theme.spacing?.xl};
-    margin: 64px 0;
+    padding: 64px 0;
   }
 `
 
 const SearchFrame = styled.div`
-  width: 860px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 56px;
+
+  @media ${({ theme }) => theme.media?.notSm} {
+    width: 860px;
+  }
 `
 
 const SearchBox = styled.div`

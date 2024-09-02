@@ -209,6 +209,15 @@
 
   "specify type of document and get detailed information": "მიუთითე საბუთის ტიპი და მიიღე დეტალური ინფორმაცია სასურველი ავტომობილის შესახებ.",
   "find out if problematic and how good an investment it can be": "გაიგე, არის თუ არა პრობლემური და რამდენად კარგი ინვესტიცია შეიძლება იყოს",
+  "specify details and calculate exact shipping cost": "მიუთითეთ დეტალები და დათვალეთ ტრანსპორტირების ზუსტი ხარჯი",
+
+  "auction": "აუქციონი",
+  "vehicle type": "ავტომობილის ტიპი",
+  "from where": "საიდან",
+  "to where": "სად",
+
+  "which city/state is it coming from": "რომელი ქალაქი/შტატიდან მოდის",
+  "what city/port does it arrive at": "რომელ ქალაქში/პორტში ჩამოდის",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

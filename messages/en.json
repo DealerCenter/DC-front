@@ -210,6 +210,15 @@
 
   "specify type of document and get detailed information": "Specify the type of document and get detailed information about the desired vehicle.",
   "find out if problematic and how good an investment it can be": "Find out if it's problematic and how good an investment it can be",
+  "specify details and calculate exact shipping cost": "Specify the details and calculate the exact shipping cost",
+
+  "auction": "Auction",
+  "vehicle type": "Vehicle type",
+  "from where": "From where",
+  "to where": "To where",
+
+  "which city/state is it coming from": "Which city/state is it coming from?",
+  "what city/port does it arrive at": "What city/port does it arrive at?",
 
   "useForm": {
     "must be valid email": "Must be a valid email",
