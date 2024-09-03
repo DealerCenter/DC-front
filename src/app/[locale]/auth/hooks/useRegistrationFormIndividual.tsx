@@ -1,9 +1,27 @@
-import React, { ReactNode, createContext, useContext } from 'react'
+import React, { ReactNode, createContext, useContext, useState } from 'react'
 import { useFormik, FormikValues } from 'formik'
 import * as yup from 'yup'
 import { useTranslations } from 'next-intl'
+import axiosInstance from '@/api/apiClient'
+import { endpoints } from '@/api/endpoints'
+import { handleRegistrationResponse } from '@/common/helpers/utils'
+import { useRouter } from '@/navigation'
+import { routeName } from '@/common/helpers/constants'
 
 const FormikContext = createContext<FormikValues | null>(null)
+
+export const FIELD_NAMES = {
+  FIRST_NAME: 'firstName',
+  LAST_NAME: 'lastName',
+  BIRTH_DATE: 'birthDate',
+  ADDRESS: 'address',
+  CONTACT_NUMBER: 'phoneNumber',
+  PERSONAL_Id: 'personalId',
+  EMAIL: 'email',
+  PASSWORD: 'password',
+  REPEAT_PASSWORD: 'repeatPassword',
+  IMAGE: 'image',
+}
 
 export const RegisterFormProviderIndividual = ({
   children,
@@ -11,37 +29,65 @@ export const RegisterFormProviderIndividual = ({
   children: ReactNode
 }) => {
   const t = useTranslations('useForm')
+  const router = useRouter()
+  const [uploadFile, setUploadFile] = useState<Blob>()
 
   const initialValues = {
-    name: '',
-    surname: '',
-    dateOfBirth: '',
-    actualAddress: '',
-    contactNumber: '',
-    personalNumber: '',
-    email: '',
-    password: '',
-    repeatPassword: '',
+    [FIELD_NAMES.FIRST_NAME]: '',
+    [FIELD_NAMES.LAST_NAME]: '',
+    [FIELD_NAMES.BIRTH_DATE]: '',
+    [FIELD_NAMES.ADDRESS]: '',
+    [FIELD_NAMES.CONTACT_NUMBER]: '',
+    [FIELD_NAMES.PERSONAL_Id]: '',
+    [FIELD_NAMES.EMAIL]: '',
+    [FIELD_NAMES.PASSWORD]: '',
+    [FIELD_NAMES.REPEAT_PASSWORD]: '',
   }
+  const individualFormData = new FormData()
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (values) => {
-      console.log('formik', values)
+    onSubmit: async (values) => {
+      const body = { ...values }
+      delete body[FIELD_NAMES.REPEAT_PASSWORD]
+      Object.keys(body).forEach((key) =>
+        individualFormData.append(key, values[key])
+      )
+      uploadFile && individualFormData.append(FIELD_NAMES.IMAGE, uploadFile)
+
+      try {
+        const response = await axiosInstance.post<REGISTER>(
+          endpoints.REGISTER,
+          individualFormData
+        )
+        handleRegistrationResponse(response)
+        router.push(routeName.dealer)
+      } catch (error) {
+        console.error('Error:', error)
+      }
     },
+
     validationSchema: yup.object({
-      name: yup.string().required(t('name required')),
-      surname: yup.string().required(t('surname required')),
-      dateOfBirth: yup.date().required(t('date of birth required')),
-      actualAddress: yup.string().required(t('actual address required')),
-      contactNumber: yup.string().required(t('contact number required')),
-      personalNumber: yup.number().required(t('personal number required')),
-      email: yup
+      [FIELD_NAMES.FIRST_NAME]: yup.string().required(t('name required')),
+      [FIELD_NAMES.LAST_NAME]: yup.string().required(t('surname required')),
+      [FIELD_NAMES.BIRTH_DATE]: yup
+        .date()
+        .required(t('date of birth required')),
+      [FIELD_NAMES.ADDRESS]: yup
+        .string()
+        .required(t('actual address required')),
+      [FIELD_NAMES.CONTACT_NUMBER]: yup
+        .string()
+        .required(t('contact number required')),
+      [FIELD_NAMES.PERSONAL_Id]: yup
+        .number()
+        .required(t('personal number required')),
+      [FIELD_NAMES.EMAIL]: yup
         .string()
         .email(t('must be valid email'))
         .required(t('email required')),
-      password: yup.string().required(t('password required')),
-      repeatPassword: yup
+      [FIELD_NAMES.PASSWORD]: yup.string().required(t('password required')),
+      [FIELD_NAMES.REPEAT_PASSWORD]: yup
         .string()
         .oneOf([yup.ref('password'), ''], 'Passwords must match'),
     }),
@@ -67,6 +113,7 @@ export const RegisterFormProviderIndividual = ({
         touched,
         validateForm,
         handleSubmit,
+        setUploadFile,
       }}
     >
       {children}

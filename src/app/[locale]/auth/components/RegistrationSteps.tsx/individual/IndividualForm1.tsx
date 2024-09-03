@@ -2,7 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import { useRegisterFormContextIndividual } from '../../../hooks/useRegistrationFormIndividual'
+import {
+  FIELD_NAMES,
+  useRegisterFormContextIndividual,
+} from '../../../hooks/useRegistrationFormIndividual'
 
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
@@ -31,11 +34,11 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
   }
 
   const isButtonDisabled =
-    values.name.length === 0 ||
-    values.surname.length === 0 ||
-    values.dateOfBirth.length === 0 ||
-    values.actualAddress.length === 0 ||
-    values.contactNumber.length === 0
+    values[FIELD_NAMES.FIRST_NAME].length === 0 ||
+    values[FIELD_NAMES.LAST_NAME].length === 0 ||
+    values[FIELD_NAMES.BIRTH_DATE].length === 0 ||
+    values[FIELD_NAMES.ADDRESS].length === 0 ||
+    values[FIELD_NAMES.CONTACT_NUMBER].length === 0
 
   return (
     <StyledForm>
@@ -43,7 +46,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         <TextInput
           width={442}
           type='text'
-          name='name'
+          name={FIELD_NAMES.FIRST_NAME}
           placeholder={t('name')}
           value={values.name}
           onChange={handleChange}
@@ -54,7 +57,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         <TextInput
           width={442}
           type='text'
-          name='surname'
+          name={FIELD_NAMES.LAST_NAME}
           placeholder={t('surname')}
           value={values.surname}
           onChange={handleChange}
@@ -66,7 +69,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
       <TextInput
         width={442}
         type='date'
-        name='dateOfBirth'
+        name={FIELD_NAMES.BIRTH_DATE}
         placeholder={t('date of birth')}
         value={values.dateOfBirth}
         onChange={handleChange}
@@ -78,7 +81,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
       <TextInput
         width={442}
         type='text'
-        name='actualAddress'
+        name={FIELD_NAMES.ADDRESS}
         placeholder={t('actual address')}
         value={values.actualAddress}
         onChange={handleChange}
@@ -92,7 +95,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
       <TextInput
         width={442}
         type='text'
-        name='contactNumber'
+        name={FIELD_NAMES.CONTACT_NUMBER}
         placeholder={t('contact number')}
         value={values.contactNumber}
         onChange={handleChange}
