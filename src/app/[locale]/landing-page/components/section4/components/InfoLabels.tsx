@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 type Props = { header: string; label: string }
 
-const InfoBox = ({ header, label }: Props) => {
+const InfoLabels = ({ header, label }: Props) => {
   return (
     <Container>
       <Header>{header}</Header>
@@ -12,7 +12,7 @@ const InfoBox = ({ header, label }: Props) => {
   )
 }
 
-export default InfoBox
+export default InfoLabels
 
 const Container = styled.div`
   display: flex;
@@ -21,12 +21,12 @@ const Container = styled.div`
   border-left: 8px solid ${({ theme }) => theme.colors?.link_blue};
   padding-left: 20px;
 
-  width: 370px;
+  width: 570px;
 
   gap: 4px;
 
   @media ${({ theme }) => theme.media?.md} {
-    width: 290px;
+    width: 465px;
   }
 
   @media ${({ theme }) => theme.media?.sm} {
