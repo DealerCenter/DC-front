@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import OurServices from './components/OurServices'
 import SuccessStory from './components/SuccessStory'
+import WhatCostumersAreSaying from './components/WhatCostumersAreSaying'
 
 type Props = {}
 
@@ -10,6 +11,7 @@ const Section4 = (props: Props) => {
     <Container>
       <OurServices />
       <SuccessStory />
+      <WhatCostumersAreSaying onSeeAllClick={() => {}} />
     </Container>
   )
 }

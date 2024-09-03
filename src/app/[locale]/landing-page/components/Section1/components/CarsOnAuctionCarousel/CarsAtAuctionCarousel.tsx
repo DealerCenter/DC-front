@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useMediaQuery } from 'react-responsive'
+import { useTranslations } from 'next-intl'
 
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-import CarDetailsBox from './components/CarDetailsBox'
-import { useTranslations } from 'next-intl'
-import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import CarDetailsBox from './components/CarDetailsBox'
 import { NextArrow, PrevArrow } from './components/CustomArrows'
 
 type Props = { onSeeAllClick: () => void }
