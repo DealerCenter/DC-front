@@ -37,16 +37,11 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors?.footer_black};
   padding: 42px 90px;
 
-  position: absolute;
   width: 100%;
-  left: 0;
-
-  top: 1750px;
 
   overflow: hidden;
 
   @media ${({ theme }) => theme.media?.sm} {
-    top: 2000px;
     padding: 42px 24px;
   }
 `

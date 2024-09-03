@@ -2,7 +2,6 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import VehicleBox from './components/VehicleBox'
 import { useTranslations } from 'next-intl'
 
 import VehicleTypes from './components/VehicleTypes'
@@ -34,8 +33,6 @@ const Container = styled.div`
   border-radius: ${({ theme }) => theme.radius?.xl};
   padding: ${({ theme }) => theme.spacing?.xl};
   gap: 60px;
-
-  margin-bottom: 200px;
 
   @media ${({ theme }) => theme.media?.sm} {
     margin-bottom: 100px;

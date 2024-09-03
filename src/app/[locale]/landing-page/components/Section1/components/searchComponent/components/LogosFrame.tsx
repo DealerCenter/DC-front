@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 
 import iaaLogo from '@/assets/icons/logos/iaaLogo.svg'
 import copartLogo from '@/assets/icons/logos/copartLogo.svg'
+import ContainersImage from '../../ContainersImage'
 
 type Props = {}
 
@@ -18,6 +19,7 @@ const LogosFrame = (props: Props) => {
         {t("browse cars at America's two largest auctions")}
       </LogosText>
       <Image src={copartLogo} alt='copart logo' />
+      <ContainersImage />
     </BottomFrame>
   )
 }

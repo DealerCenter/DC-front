@@ -82,7 +82,15 @@ export default CarsAtAuctionCarousel
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  padding: 80px 0;
   gap: 64px;
+
+  @media ${({ theme }) => theme.media?.md} {
+    padding: 64px 0;
+    gap: 48px;
+  }
 
   @media ${({ theme }) => theme.media?.sm} {
     gap: 48px;
@@ -97,11 +105,28 @@ const MediaCutDiv = styled.div`
 `
 
 const CarsCarouselFrame = styled.div`
+  width: 1200px;
+
   @media ${({ theme }) => theme.media?.md} {
     width: 910px;
   }
   @media ${({ theme }) => theme.media?.sm} {
     width: 520px;
+  }
+`
+
+const TopFrame = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 1200px;
+
+  @media ${({ theme }) => theme.media?.md} {
+    width: 960px;
+  }
+  @media ${({ theme }) => theme.media?.sm} {
+    width: unset;
   }
 `
 
@@ -113,12 +138,6 @@ const Header = styled.label`
   @media ${({ theme }) => theme.media?.sm} {
     text-align: center;
   }
-`
-
-const TopFrame = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 `
 
 const SeeAllLabel = styled.div`

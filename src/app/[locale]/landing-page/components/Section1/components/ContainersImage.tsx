@@ -14,11 +14,13 @@ const ContainersImage = (props: Props) => {
 
   return (
     <Container>
-      <Image
-        src={isMobile ? containersImage2Small : containersImage2}
-        alt='containers image'
-        layout='responsive'
-      />
+      <ImageFrame>
+        <Image
+          src={isMobile ? containersImage2Small : containersImage2}
+          alt='containers image'
+          layout='responsive'
+        />
+      </ImageFrame>
     </Container>
   )
 }
@@ -28,14 +30,18 @@ export default ContainersImage
 const Container = styled.div`
   position: absolute;
   left: 0;
-  top: 670px;
-  width: 100%;
   z-index: -1;
 
-  height: 300px;
-  overflow: hidden;
+  width: 100%;
+
+  padding-top: 200px;
 
   @media ${({ theme }) => theme.media?.sm} {
-    top: 920px;
+    padding-top: 150px;
   }
+`
+
+const ImageFrame = styled.div`
+  height: 300px;
+  overflow: hidden;
 `
