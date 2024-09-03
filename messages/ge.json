@@ -231,6 +231,10 @@
   "vehicle history check": "ავტომობილის ისტორიის შემოწმება",
   "enter vin code and check history of vehicle, price, damage, etc": "ჩაწერე ვინ კოდი და შეამოწმე ავტომობილის ისტორია, რა ფასად გაიყიდა აუქციონზე, რა დაზიანება ჰქონდა ადგილზე და ა.შ.",
 
+  "help with auction": "დახმარება აუქციონზე",
+  "vehicle inspection": "ავტომობილის შემოწმება",
+  "reliable import": "სანდო იმპორტი",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 

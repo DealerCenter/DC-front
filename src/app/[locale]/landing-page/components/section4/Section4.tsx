@@ -16,4 +16,5 @@ export default Section4
 
 const Container = styled.div`
   display: flex;
+  width: 100%;
 `

@@ -232,6 +232,10 @@
   "vehicle history check": "Vehicle history check",
   "enter vin code and check history of vehicle, price, damage, etc": "Enter the vin code and check the history of the vehicle, the price it was sold at auction, the damage it had on the spot, etc.",
 
+  "help with auction": "Help with the auction",
+  "vehicle inspection": "Vehicle inspection",
+  "reliable import": "Reliable import",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 
