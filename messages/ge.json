@@ -242,6 +242,9 @@
   "have questions? Contact us": "კითხვები გაქვთ? დაგვიკავშირდით",
   "monday-friday 9-5": "ორშაბათი-პარასკევი 9-5 საათამდე",
 
+  "send message": "გააგზავნე შეტყობინება",
+  "message": "შეტყობინება",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 
@@ -267,5 +270,10 @@
     "find status of vehicle and see whether it is problem-free": "იპოვე ავტომობილის სტატუსი და გაეცანი ინფორმაციას, რა სახის დაზიანება ან პრობლემა აქვს მას. ამასთანავე ნახავ, უპრობლემოა თუ არა ის.",
     "make a wise decision": "მიიღე გონივრული გადაწყვეტილება",
     "find out if it is necessary to contact the company": "გაიგე საჭიროა თუ არა კომპანიასთან დაკონტაქტება, რა ზომებს უნდა მიმართო"
+  },
+
+  "contactPage": {
+    "to improve our services and functionalities together": "ერთად გავაუმჯობესოთ ჩვენი სერვისები და ფუნქციონალები",
+    "fill out the form and tell us what you would like to improve": "შეავსე ფორმა და მოგვწერე რის გაუმჯობესებას ისურვებდი"
   }
 }

@@ -244,6 +244,8 @@
   "have questions? Contact us": "Do you have questions? Contact us",
   "monday-friday 9-5": "Monday-Friday 9-5",
 
+  "message": "Message",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 
@@ -269,5 +271,10 @@
     "find status of vehicle and see whether it is problem-free": "Find the status of the vehicle and find out what kind of damage or problem it has. At the same time, you will see whether it is problem-free or not.",
     "make a wise decision": "Make a wise decision",
     "find out if it is necessary to contact the company": "Find out if it is necessary to contact the company and what measures to apply"
+  },
+
+  "contactPage": {
+    "to improve our services and functionalities together": "To improve our services and functionalities together",
+    "fill out the form and tell us what you would like to improve": "Fill out the form and tell us what you would like to improve"
   }
 }
