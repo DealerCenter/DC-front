@@ -37,6 +37,19 @@ const Container = styled.div`
   height: 332px;
 
   box-shadow: 35px 30px 48px 0px rgba(32, 32, 32, 0.05);
+
+  border: 1px solid rgba(229, 244, 242, 1);
+
+  @media ${({ theme }) => theme.media?.md} {
+    width: 309px;
+    height: 382px;
+  }
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 343px;
+    height: 289px;
+    padding: 24px 16px;
+  }
 `
 
 const TextBox = styled.div`
@@ -60,6 +73,8 @@ const Header = styled.h2`
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
 
   color: ${({ theme }) => theme.colors?.onboarding_background_grey};
+
+  text-align: center;
 `
 const Text = styled.p`
   margin: 0;
@@ -67,4 +82,6 @@ const Text = styled.p`
   font-weight: ${({ theme }) => theme.fontWeight?.normal};
 
   color: ${({ theme }) => theme.colors?.onboarding_background_grey};
+
+  text-align: center;
 `

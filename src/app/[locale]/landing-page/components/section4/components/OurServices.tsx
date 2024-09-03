@@ -77,6 +77,17 @@ const InfoBoxesFrame = styled.div`
   justify-content: space-between;
 
   width: 1200px;
+
+  @media ${({ theme }) => theme.media?.md} {
+    width: 960px;
+    gap: 16px;
+  }
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: unset;
+    gap: 16px;
+    flex-direction: column;
+  }
 `
 
 const BlackDiv = styled.div`
@@ -85,4 +96,8 @@ const BlackDiv = styled.div`
   height: 310px;
   position: absolute;
   z-index: -1;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    height: 375px;
+  }
 `
