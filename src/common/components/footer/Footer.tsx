@@ -1,22 +1,25 @@
 import Image from 'next/image'
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
+import { useRouter } from '@/navigation'
 
 import twitterIcon from '@/assets/icons/footer/twitter.svg'
 import linkedinIcon from '@/assets/icons/footer/linkedin.svg'
 import facebookIcon from '@/assets/icons/footer/facebook.svg'
-import { useTranslations } from 'next-intl'
+import { routeName } from '@/common/helpers/constants'
 
 type Props = {}
 
 const Footer = (props: Props) => {
+  const router = useRouter()
   const t = useTranslations('')
 
   return (
     <Container>
       <TopFrame>
         <LeftBox>
-          <Logo>DUX</Logo>
+          <Logo onClick={() => router.push('/')}>DUX</Logo>
           <LeftBoxText>{t('shipping company text')}</LeftBoxText>
         </LeftBox>
         <RightBox>
@@ -30,7 +33,9 @@ const Footer = (props: Props) => {
             <Label>{t('about us')}</Label>
           </Item>
           <Item>
-            <Label>{t('contact')}</Label>
+            <Label onClick={() => router.push(routeName.contact)}>
+              {t('contact')}
+            </Label>
           </Item>
         </RightBox>
       </TopFrame>
@@ -137,14 +142,23 @@ const Item = styled.div`
     align-items: flex-start;
     padding: unset;
   }
-
-  cursor: pointer;
 `
 
 const Label = styled.label`
   color: ${({ theme }) => theme.colors?.white_72};
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 400;
+
+  @media ${({ theme }) => theme.media?.notSm} {
+    &:hover {
+      color: ${({ theme }) => theme.colors?.white_86};
+    }
+    &:active {
+      color: ${({ theme }) => theme.colors?.white_42};
+    }
+  }
+
+  cursor: pointer;
 `
 
 const Line = styled.div`
