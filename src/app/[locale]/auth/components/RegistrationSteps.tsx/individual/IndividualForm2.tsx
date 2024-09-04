@@ -31,14 +31,14 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
     }
   }
 
-  const isButtonDisabled = values[FIELD_NAMES.PERSONAL_Id].length === 0
+  const isButtonDisabled = values[FIELD_NAMES.PERSONAL_ID].length === 0
 
   return (
     <StyledForm>
       <TextInput
         width={442}
         type='text'
-        name={FIELD_NAMES.PERSONAL_Id}
+        name={FIELD_NAMES.PERSONAL_ID}
         placeholder={t('personal number')}
         value={values.personalNumber}
         onChange={handleChange}
@@ -48,7 +48,7 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
             ? errors.personalNumber
             : ''
         }
-      />{' '}
+      />
       <FileDropZone
         width={442}
         dropText={t('drop the file here')}

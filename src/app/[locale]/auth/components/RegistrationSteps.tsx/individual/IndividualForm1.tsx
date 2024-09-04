@@ -23,11 +23,11 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
   const onNextClick = async () => {
     const validated = await validateForm()
     if (
-      !validated.name &&
-      !validated.surname &&
-      !validated.dateOfBirth &&
-      !validated.actualAddress &&
-      !validated.contactNumber
+      !validated[FIELD_NAMES.FIRST_NAME] &&
+      !validated[FIELD_NAMES.LAST_NAME] &&
+      !validated[FIELD_NAMES.BIRTH_DATE] &&
+      !validated[FIELD_NAMES.ADDRESS] &&
+      !validated[FIELD_NAMES.CONTACT_NUMBER]
     ) {
       setFormStep((prev) => prev + 1)
     }

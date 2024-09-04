@@ -2,7 +2,10 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import { useRegisterFormContextLegalPerson } from '../../../hooks/useRegistrationFormLegalPerson'
+import {
+  FIELD_NAMES,
+  useRegisterFormContextLegalPerson,
+} from '../../../hooks/useRegistrationFormLegalPerson'
 
 import TextInput from '@/common/components/inputElements/TextInput'
 import FileDropZone from '@/common/components/inputElements/FileDropZone'
@@ -18,29 +21,29 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
   const onNextClick = async () => {
     const validated = await validateForm()
     if (
-      !validated.nameOfRepresentative &&
-      !validated.surnameOfRepresentative &&
-      !validated.contactNumber &&
-      !validated.dateOfBirth &&
-      !validated.personalNumber
+      !validated[FIELD_NAMES.FIRST_NAME] &&
+      !validated[FIELD_NAMES.LAST_NAME] &&
+      !validated[FIELD_NAMES.CONTACT_NUMBER] &&
+      !validated[FIELD_NAMES.BIRTH_DATE] &&
+      !validated[FIELD_NAMES.PERSONAL_ID]
     ) {
       setFormStep((prev) => prev + 1)
     }
   }
 
   const isButtonDisabled =
-    values.nameOfRepresentative.length === 0 ||
-    values.surnameOfRepresentative.length === 0 ||
-    values.contactNumber.length === 0 ||
-    values.dateOfBirth.length === 0 ||
-    values.personalNumber.length === 0
+    values[FIELD_NAMES.FIRST_NAME].length === 0 ||
+    values[FIELD_NAMES.LAST_NAME].length === 0 ||
+    values[FIELD_NAMES.CONTACT_NUMBER].length === 0 ||
+    values[FIELD_NAMES.BIRTH_DATE].length === 0 ||
+    values[FIELD_NAMES.PERSONAL_ID].length === 0
 
   return (
     <StyledForm>
       <TextInput
         width={442}
         type='text'
-        name='nameOfRepresentative'
+        name={FIELD_NAMES.FIRST_NAME}
         placeholder={t('name of representative')}
         value={values.nameOfRepresentative}
         onChange={handleChange}
@@ -54,7 +57,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
       <TextInput
         width={442}
         type='text'
-        name='surnameOfRepresentative'
+        name={FIELD_NAMES.LAST_NAME}
         placeholder={t('surname of representative')}
         value={values.surnameOfRepresentative}
         onChange={handleChange}
@@ -68,7 +71,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
       <TextInput
         width={442}
         type='text'
-        name='contactNumber'
+        name={FIELD_NAMES.CONTACT_NUMBER}
         placeholder={t('contact number')}
         value={values.contactNumber}
         onChange={handleChange}
@@ -82,7 +85,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
       <TextInput
         width={442}
         type='date'
-        name='dateOfBirth'
+        name={FIELD_NAMES.BIRTH_DATE}
         placeholder={t('date of birth')}
         value={values.dateOfBirth}
         onChange={handleChange}
@@ -95,7 +98,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
       <TextInput
         width={442}
         type='text'
-        name='personalNumber'
+        name={FIELD_NAMES.PERSONAL_ID}
         placeholder={t('personal number')}
         value={values.personalNumber}
         onChange={handleChange}

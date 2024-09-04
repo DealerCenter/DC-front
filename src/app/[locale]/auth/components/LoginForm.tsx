@@ -1,12 +1,12 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
-import useLoginForm from '../hooks/useLoginForm'
+import useLoginForm, { FIELD_NAMES } from '../hooks/useLoginForm'
 
 import Image from 'next/image'
 import emailIcon from '@/assets/icons/email.svg'
@@ -17,8 +17,12 @@ type Props = {
 }
 
 const LoginForm = ({ goToRegistration }: Props) => {
+  const [isRemember, setIsRemember] = useState(false)
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, handleSubmit } = useLoginForm()
+  const { values, handleBlur, handleChange, handleSubmit, axiosError } =
+    useLoginForm()
+
+  console.log('axios error', axiosError)
 
   return (
     <Container>
@@ -27,7 +31,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
         <TextInputContainer>
           <TextInput
             type='email'
-            name='email'
+            name={FIELD_NAMES.EMAIL}
             placeholder='john@example.com'
             value={values.email}
             onChange={handleChange}
@@ -42,7 +46,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
           <TextInputContainer>
             <TextInput
               type='password'
-              name='password'
+              name={FIELD_NAMES.PASSWORD}
               placeholder='•••••••'
               value={values.password}
               onChange={handleChange}
@@ -56,13 +60,14 @@ const LoginForm = ({ goToRegistration }: Props) => {
                 />
               }
               width={442}
+              errorMessage={axiosError ? axiosError.message : ''}
             />
           </TextInputContainer>
           <LabelContainer>
-            <StyledLabel>
-              {/* <StyledCheckbox checked={false} /> */}
-              {t('remember')}
-            </StyledLabel>
+            <RememberPair onClick={() => setIsRemember((is) => !is)}>
+              <RememberCheckbox isChecked={isRemember} />
+              <StyledLabel>{t('remember')}</StyledLabel>
+            </RememberPair>
             <StyledLabel>{t('forgot password?')}</StyledLabel>
           </LabelContainer>
         </div>
@@ -139,7 +144,13 @@ const StyledP = styled.p`
   margin-top: 24px;
 `
 
-const StyledCheckbox = styled(CheckBox)`
+const RememberPair = styled.label`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+`
+
+const RememberCheckbox = styled(CheckBox)`
   margin: 8px;
   padding: 10px;
 `
@@ -147,4 +158,15 @@ const StyledCheckbox = styled(CheckBox)`
 const StyledLabel = styled.label`
   display: flex;
   align-items: center;
+
+  cursor: pointer;
+`
+
+const ErrorLabel = styled.label`
+  display: flex;
+  align-items: center;
+
+  color: ${({ theme }) => theme.colors?.red};
+
+  cursor: default;
 `

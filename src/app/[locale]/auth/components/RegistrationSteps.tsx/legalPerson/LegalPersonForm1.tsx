@@ -2,7 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import { useRegisterFormContextLegalPerson } from '../../../hooks/useRegistrationFormLegalPerson'
+import {
+  FIELD_NAMES,
+  useRegisterFormContextLegalPerson,
+} from '../../../hooks/useRegistrationFormLegalPerson'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
 import FileDropZone from '@/common/components/inputElements/FileDropZone'
@@ -14,32 +17,39 @@ type Props = {
 
 const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, errors, touched, validateForm } =
-    useRegisterFormContextLegalPerson()
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    errors,
+    touched,
+    validateForm,
+    setUploadDocument,
+  } = useRegisterFormContextLegalPerson()
 
   const onNextClick = async () => {
     const validated = await validateForm()
     if (
-      !validated.companyName &&
-      !validated.identificationCode &&
-      !validated.address &&
-      !validated.website
+      !validated[FIELD_NAMES.COMPANY_NAME] &&
+      !validated[FIELD_NAMES.IDENTIFICATION_CODE] &&
+      !validated[FIELD_NAMES.ADDRESS] &&
+      !validated[FIELD_NAMES.WEBSITE_URL]
     ) {
       setFormStep((prev) => prev + 1)
     }
   }
 
   const isButtonDisabled =
-    values.companyName.length === 0 ||
-    values.identificationCode.length === 0 ||
-    values.address.length === 0
+    values[FIELD_NAMES.COMPANY_NAME].length === 0 ||
+    values[FIELD_NAMES.IDENTIFICATION_CODE].length === 0 ||
+    values[FIELD_NAMES.ADDRESS].length === 0
 
   return (
     <StyledForm>
       <TextInput
         width={442}
         type='text'
-        name='companyName'
+        name={FIELD_NAMES.COMPANY_NAME}
         placeholder={t('company name')}
         value={values.companyName}
         onChange={handleChange}
@@ -51,7 +61,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
       <TextInput
         width={442}
         type='text'
-        name='identificationCode'
+        name={FIELD_NAMES.IDENTIFICATION_CODE}
         placeholder={t('identification code')}
         value={values.identificationCode}
         onChange={handleChange}
@@ -65,7 +75,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
       <TextInput
         width={442}
         type='text'
-        name='address'
+        name={FIELD_NAMES.ADDRESS}
         placeholder={t('address')}
         value={values.address}
         onChange={handleChange}
@@ -75,7 +85,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
       <TextInput
         width={442}
         type='text'
-        name='website'
+        name={FIELD_NAMES.WEBSITE_URL}
         placeholder={t('website')}
         value={values.website}
         onChange={handleChange}
@@ -87,6 +97,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         dropText={t('Drop the files here ...')}
         text={t('upload a certificate')}
         uploadedText={t('file uploaded')}
+        onDropAdditional={setUploadDocument}
       />
       <AppButton
         width={442}
