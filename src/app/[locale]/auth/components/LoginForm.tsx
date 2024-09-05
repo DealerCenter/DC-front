@@ -22,8 +22,6 @@ const LoginForm = ({ goToRegistration }: Props) => {
   const { values, handleBlur, handleChange, handleSubmit, axiosError } =
     useLoginForm()
 
-  console.log('axios error', axiosError)
-
   return (
     <Container>
       <StyledForm onSubmit={handleSubmit}>

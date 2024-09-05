@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
@@ -21,6 +21,7 @@ import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
 import theme from '@/app/[locale]/theme'
+import { useUserData } from '@/common/store/userDataStore'
 
 type Props = {
   routes: {
@@ -35,6 +36,7 @@ const SideBar = ({ routes }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const pathname = usePathname()
+  const { userData, loading, error } = useUserData()
 
   const [isHovered, setIsHovered] = useState(false)
 
@@ -55,7 +57,7 @@ const SideBar = ({ routes }: Props) => {
         <Frame>
           <InfoBox
             isHovered={isHovered}
-            name='Joshua'
+            name={userData ? userData?.firstName : ''}
             refreshDate='last refresh jul 11 2034'
             notificationCount={9}
           />

@@ -30,7 +30,8 @@
     "react-responsive": "^10.0.0",
     "react-switch": "^7.0.0",
     "styled-components": "5",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@types/node": "^20",

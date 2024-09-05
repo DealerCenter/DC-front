@@ -4,6 +4,7 @@ const BASE_URL = 'http://localhost:7070'
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
+  withCredentials: true,
 })
 
 export default axiosInstance

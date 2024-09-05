@@ -8,6 +8,8 @@ import { endpoints } from '@/api/endpoints'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 import { AxiosError } from 'axios'
+import { handleAuthResponse } from '@/common/helpers/utils'
+import { useUserData } from '@/common/store/userDataStore'
 
 export const FIELD_NAMES = {
   EMAIL: 'email',
@@ -27,14 +29,14 @@ const useLoginForm = () => {
       [FIELD_NAMES.PASSWORD]: '',
     },
     onSubmit: async (values) => {
-      console.log('login', values)
-
       try {
         const response = await axiosInstance.post<LOGIN_RES>(
           endpoints.LOGIN,
           values
         )
-        console.log(response)
+
+        handleAuthResponse(response)
+
         router.push(routeName.dealer)
       } catch (error) {
         if (error instanceof AxiosError) {

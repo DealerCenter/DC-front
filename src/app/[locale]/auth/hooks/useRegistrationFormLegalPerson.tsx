@@ -4,7 +4,7 @@ import * as yup from 'yup'
 import { useTranslations } from 'next-intl'
 import axiosInstance from '@/api/apiClient'
 import { endpoints } from '@/api/endpoints'
-import { handleRegistrationResponse } from '@/common/helpers/utils'
+import { handleAuthResponse } from '@/common/helpers/utils'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 
@@ -70,7 +70,7 @@ export const RegisterFormProviderLegalPerson = ({
           endpoints.REGISTER_LEGAL,
           legalFormData
         )
-        handleRegistrationResponse(response)
+        handleAuthResponse(response)
         router.push(routeName.dealer)
       } catch (error) {
         console.error('Error:', error)

@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
 import Header from '@/common/components/header/Header'
@@ -9,6 +9,8 @@ import theme from '../theme'
 import Footer from '@/common/components/footer/Footer'
 import { usePathname } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
+import { useUserData } from '@/common/store/userDataStore'
+import { fetchUserData } from '@/api/apiCalls'
 
 type Props = { children: React.JSX.Element }
 
@@ -21,8 +23,14 @@ const routeNames = {
 
 const DealerLayout = ({ children }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
-
   const pathname = usePathname()
+
+  const { fetchAndUpdateUser } = useUserData()
+
+  useEffect(() => {
+    fetchAndUpdateUser()
+    // eslint-disable-next-line
+  }, [])
 
   const isSideBarVisible = pathname !== routeName.dealerOrder
 
