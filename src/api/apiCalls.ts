@@ -20,3 +20,26 @@ export const logoutUser = async () => {
     console.error('Error logging out:', error)
   }
 }
+
+export const changeUserPassword = async (
+  oldPassword: string,
+  newPassword: string
+) => {
+  const passwordData = {
+    oldPassword: oldPassword,
+    newPassword: newPassword,
+  }
+
+  try {
+    const response = await axiosInstance.post(
+      endpoints.CHANGE_PASSWORD,
+      passwordData
+    )
+
+    console.log('successfully')
+    return true
+  } catch (error) {
+    console.error('Error with changing the password:', error)
+    return false
+  }
+}

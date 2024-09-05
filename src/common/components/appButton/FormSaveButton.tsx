@@ -1,10 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-type Props = { text: string; onClick: () => void }
+type Props = { text: string; onClick: () => void; disabled?: boolean }
 
-const FormSaveButton = ({ text, onClick }: Props) => {
-  return <StyledButton onClick={onClick}>{text}</StyledButton>
+const FormSaveButton = ({ text, onClick, disabled = false }: Props) => {
+  return (
+    <StyledButton onClick={onClick} disabled={disabled}>
+      {text}
+    </StyledButton>
+  )
 }
 
 export default FormSaveButton

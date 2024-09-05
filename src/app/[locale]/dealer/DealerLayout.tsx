@@ -16,9 +16,9 @@ type Props = { children: React.JSX.Element }
 
 const routeNames = {
   orderHistory: routeName.dealerOrderHistory,
-  personalInformation: routeName.dealerManageNotifications,
+  personalInformation: routeName.dealerPersonalInformation,
   usersList: routeName.dealerUsersList,
-  manageNotifications: routeName.dealerPersonalInformation,
+  manageNotifications: routeName.dealerManageNotifications,
 }
 
 const DealerLayout = ({ children }: Props) => {

@@ -13,6 +13,7 @@
   "legal person": "იურიდიული პირი",
   "company name": "კომპანიის სახელწოდება",
   "identification code": "საიდენტიფიკაციო კოდი",
+  "identification number": "საიდენტიფიკაციო ნომერი",
   "upload a certificate": "ატვირთეთ კომერციული საქმიანობის დამადასტურებელი ამონაწერი საჯარო რეესტრიდან",
   "drop the files here": "ფაილები ჩააგდეთ აქ ...",
   "drop the file here": "ფაილი ჩააგდეთ აქ ...",
@@ -194,6 +195,10 @@
   "specify container link": "მიუთითე კონტეინერის ლინკი",
   "add new": "დაამატე ახალი",
   "or": "ან",
+
+  "passwords do not match": "პაროლები არ ემთხვევა",
+  "password updated successfully": "პაროლი წარმატებით განახლდა",
+  "password could not be updated": "პაროლი ვერ განახლდა",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
