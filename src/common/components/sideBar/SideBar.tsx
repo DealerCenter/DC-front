@@ -22,6 +22,7 @@ import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
 import theme from '@/app/[locale]/theme'
 import { useUserData } from '@/common/store/userDataStore'
+import { logoutUser } from '@/api/apiCalls'
 
 type Props = {
   routes: {
@@ -124,6 +125,8 @@ const SideBar = ({ routes }: Props) => {
             text={t('exit')}
             height='71px'
             isHovered={isHovered}
+            onClick={() => logoutUser()}
+            isCursorPointer={true}
           />
         )}
       </BarContainer>

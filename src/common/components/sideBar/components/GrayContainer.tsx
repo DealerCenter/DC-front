@@ -11,6 +11,7 @@ type Props = {
   icon: string
   onClick?: () => void
   isHovered: boolean
+  isCursorPointer?: boolean
 }
 
 const GrayContainer = ({
@@ -20,19 +21,31 @@ const GrayContainer = ({
   icon,
   onClick,
   isHovered,
+  isCursorPointer,
 }: Props) => {
   const isTablet = useMediaQuery({
     query: theme.media?.md,
   })
 
   return (
-    <Container height={height} onClick={onClick} isHovered={isHovered}>
+    <Container
+      height={height}
+      onClick={onClick}
+      isHovered={isHovered}
+      isCursorPointer={isCursorPointer}
+    >
       <IconBox>
         <Image src={icon} alt='icon' />
       </IconBox>
       <Frame>
-        <Text isHovered={isHovered}>{text}</Text>
-        {balance && <Balance isHovered={isHovered}>{balance}</Balance>}
+        <Text isHovered={isHovered} isCursorPointer={isCursorPointer}>
+          {text}
+        </Text>
+        {balance && (
+          <Balance isHovered={isHovered} isCursorPointer={isCursorPointer}>
+            {balance}
+          </Balance>
+        )}
       </Frame>
     </Container>
   )
@@ -40,9 +53,13 @@ const GrayContainer = ({
 
 export default GrayContainer
 
-type ContainerProps = { height?: string; isHovered: boolean }
+type ContainerProps = {
+  height?: string
+  isHovered: boolean
+  isCursorPointer?: boolean
+}
 
-type IsHoveredProps = { isHovered: boolean }
+type TextProps = { isHovered: boolean; isCursorPointer?: boolean }
 
 const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
@@ -50,7 +67,6 @@ const Container = styled.div<ContainerProps>`
   align-items: center;
   text-align: left;
   justify-content: start;
-  /* justify-content: flex-start; */
   background-color: ${({ theme }) => theme.colors?.main_gray_04};
   border: 0.5px solid ${({ theme }) => theme.colors?.main_gray_10};
   border-radius: 16px;
@@ -65,6 +81,15 @@ const Container = styled.div<ContainerProps>`
         `
       : css`
           height: 101px;
+        `}
+
+  ${({ isCursorPointer }) =>
+    isCursorPointer
+      ? css`
+          cursor: pointer;
+        `
+      : css`
+          cursor: default;
         `}
 
   @media  ${({ theme }) => theme.media?.md} {
@@ -90,7 +115,7 @@ const Frame = styled.div`
   gap: 12px;
 `
 
-const Text = styled.p<IsHoveredProps>`
+const Text = styled.p<TextProps>`
   margin: 0;
   font-size: 16px;
   font-weight: 700;
@@ -108,8 +133,17 @@ const Text = styled.p<IsHoveredProps>`
             width: 0;
           `};
   }
+
+  ${({ isCursorPointer }) =>
+    isCursorPointer
+      ? css`
+          cursor: pointer;
+        `
+      : css`
+          cursor: default;
+        `}
 `
-const Balance = styled.p<IsHoveredProps>`
+const Balance = styled.p<TextProps>`
   margin: 0;
   font-size: 18px;
   font-weight: 400;
@@ -127,6 +161,15 @@ const Balance = styled.p<IsHoveredProps>`
             width: 0;
           `};
   }
+
+  ${({ isCursorPointer }) =>
+    isCursorPointer
+      ? css`
+          cursor: pointer;
+        `
+      : css`
+          cursor: default;
+        `}
 `
 
 const IconBox = styled.div`

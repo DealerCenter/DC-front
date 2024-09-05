@@ -9,6 +9,9 @@ interface UserDataState {
   error: string | null
   setUserData: (payload: ME_RES) => void
   fetchAndUpdateUser: () => void
+  clearUserData: () => void
+  setLoading: (isLoading: boolean) => void
+  setError: (error: string) => void
 }
 
 export const useUserData = create<UserDataState>((set) => ({
@@ -22,5 +25,15 @@ export const useUserData = create<UserDataState>((set) => ({
   fetchAndUpdateUser: async () => {
     const response = await fetchUserData()
     set({ userData: response?.data })
+  },
+  clearUserData: () => {
+    set({ userData: null })
+  },
+
+  setLoading: (isLoading) => {
+    set({ loading: isLoading })
+  },
+  setError: (error) => {
+    set({ error: error })
   },
 }))
