@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
 import MiddleBox from './MiddleBox'
-import LoginButton from '../../fullHeader/components/LoginButton'
+import LoginButton from '../../LoginButton'
 import LangChangeButton from '../../fullHeader/components/LangChangeButton'
 
 import closeX from '@/assets/icons/closeXWhite.svg'

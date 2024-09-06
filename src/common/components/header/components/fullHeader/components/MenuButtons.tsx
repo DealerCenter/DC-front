@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import SearchIcon from './SearchIcon'
-import LoginButton from './LoginButton'
+import LoginButton from '../../LoginButton'
 import LangChangeButton from './LangChangeButton'
 
 type Props = {}

@@ -49,6 +49,10 @@ const Item = styled.div<ItemProps>`
       : css`
           width: 56px;
           padding: unset;
+          @media ${({ theme }) => theme.media?.sm} {
+            height: 40px;
+            width: 40px;
+          }
         `}
 
   cursor: pointer
