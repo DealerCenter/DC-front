@@ -5,67 +5,31 @@ import { useTranslations } from 'next-intl'
 import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import ChangePasswordBox from './components/ChangePasswordBox'
 import { useUserData } from '@/common/store/userDataStore'
+import InputFieldsBox from './components/InputFieldsBox'
+import ContactInformationBox from './components/ContactInformationBox'
 
 type Props = {}
-
-// TEMPORARY
-const isJuridical = false
 
 const PersonalInformation = (props: Props) => {
   const t = useTranslations('')
   const { userData } = useUserData()
-  // const [isInfoSaved, setIsInfoSaved] = useState(true)
-  // const [isPasswordSaved, setIsPasswordSaved] = useState(true)
-  // const [isContactInfoSaved, setIsContactInfoSaved] = useState(true)
-
-  const [email, setEmail] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [address, setAddress] = useState('')
-
-  useEffect(() => {
-    if (userData) {
-      setEmail(userData?.email)
-      setPhoneNumber(userData?.phoneNumber)
-      setAddress(userData?.address)
-    }
-  }, [userData])
 
   if (!userData) {
-    return <div>Loading...</div>
+    return <Loading>Loading...</Loading>
   }
 
   return (
     <Container>
       <HeaderH4Bold text={t('personal information')} />
       <Frame>
-        {/* {isJuridical ? (
+        {userData?.isJuridical ? (
           <>
-            <InputFieldsBox
-              headerText={t('contact information')}
-              Label1={t('company name')}
-              Label2={t('identification number')}
-              Label3={t('address')}
-              initialValue1={email}
-            />
-            <InputFieldsBox
-              headerText={t('contact info of representative')}
-              Label1={t('email')}
-              Label2={t('cell phone')}
-              Label3={t('address')}
-              initialValue1={email}
-            />
+            <ContactInformationBox type='company' />
+            <ContactInformationBox type='representative' />
           </>
         ) : (
-          <InputFieldsBox
-            headerText={t('contact information')}
-            Label1={t('email')}
-            Label2={t('cell phone')}
-            Label3={t('address')}
-            initialValue1={email}
-            initialValue2={phoneNumber}
-            initialValue3={address}
-          />
-        )} */}
+          <ContactInformationBox type='individual' />
+        )}
         <ChangePasswordBox />
       </Frame>
     </Container>
@@ -91,7 +55,12 @@ const Frame = styled.div`
   gap: 32px;
 `
 
-const ButtonFrame = styled.div`
-  display: flex;
-  justify-content: flex-end;
+const Loading = styled.div`
+  margin: 10px;
+
+  color: ${({ theme }) => theme.colors?.main_gray_56};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    margin: 30px;
+  }
 `

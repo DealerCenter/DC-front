@@ -24,5 +24,14 @@ type ME_RES = {
   idImageVerificationStatus: string
   juridicalDocUrl: string | null
   juridicalDocVerificationStatus: string
-  juridicalInfo: string | null
+  juridicalInfo: {
+    companyAddress: string
+    id: number
+    createdAt: string
+    updatedAt: string
+    companyName: string
+    identificationCode: string
+    updatedAt: string
+    websiteUrl: string
+  } | null
 }

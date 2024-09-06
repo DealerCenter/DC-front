@@ -1,6 +1,7 @@
 import { fetchUserData } from '@/api/apiCalls'
 import axiosInstance from '@/api/apiClient'
 import { endpoints } from '@/api/endpoints'
+import UserDataBox from '@/app/[locale]/admin/order/components/rightFrame/components/UserDataBox'
 import { create } from 'zustand'
 
 interface UserDataState {

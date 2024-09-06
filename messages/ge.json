@@ -155,6 +155,7 @@
   "contact": "კონტაქტი",
   "rights reserved": "© 2024. DUX. ყველა უფლება დაცულია.",
   "contact info of representative": "წარმომადგენლის საკონტაქტო ინფორმაცია",
+  "contact info of company": "კომპანიის საკონტაქტო ინფორმაცია",
 
   "status check": "სტატუსის შემოწმება",
   "document check": "საბუთის შემოწმება",
@@ -199,6 +200,8 @@
   "passwords do not match": "პაროლები არ ემთხვევა",
   "password updated successfully": "პაროლი წარმატებით განახლდა",
   "password could not be updated": "პაროლი ვერ განახლდა",
+  "information updated successfully": "ინფორმაცია წარმატებით განახლდა",
+  "information not updated": "ინფორმაციის განახლება ვერ მოხერხდა",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

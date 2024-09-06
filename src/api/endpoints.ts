@@ -5,4 +5,5 @@ export const endpoints = {
   LOGOUT: '/auth/logout',
   ME: '/auth/me',
   CHANGE_PASSWORD: '/auth/change-password',
+  UPDATE_USER_DATA: '/api/dealers',
 }

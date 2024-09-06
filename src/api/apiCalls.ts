@@ -31,15 +31,35 @@ export const changeUserPassword = async (
   }
 
   try {
-    const response = await axiosInstance.post(
-      endpoints.CHANGE_PASSWORD,
-      passwordData
-    )
+    await axiosInstance.post(endpoints.CHANGE_PASSWORD, passwordData)
 
-    console.log('successfully')
     return true
   } catch (error) {
     console.error('Error with changing the password:', error)
+    return false
+  }
+}
+
+export const updateUserData = async (payload: {
+  email: string
+  phoneNumber: string
+  address: string
+  juridicalInfo: {
+    companyName: string
+    identificationCode: string
+    companyAddress: string
+    websiteUrl: string
+  }
+}) => {
+  try {
+    const response = await axiosInstance.patch(
+      endpoints.UPDATE_USER_DATA,
+      payload
+    )
+
+    return true
+  } catch (error) {
+    console.error('Error with updating the data:', error)
     return false
   }
 }

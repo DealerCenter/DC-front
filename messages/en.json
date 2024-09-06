@@ -155,6 +155,7 @@
   "contact": "Contact",
   "rights reserved": "© 2024. DUX. All rights reserved.",
   "contact info of representative": "Contact information of the representative",
+  "contact info of company": "Contact info of the company",
 
   "status check": "Status check",
   "document check": "Document check",
@@ -199,6 +200,8 @@
   "passwords do not match": "Passwords do not match",
   "password updated successfully": "Password updated successfully",
   "password could not be updated": "Password could not be updated",
+  "information updated successfully": "Information has been updated successfully",
+  "information not updated": "Information could not be updated",
 
   "useForm": {
     "must be valid email": "Must be a valid email",

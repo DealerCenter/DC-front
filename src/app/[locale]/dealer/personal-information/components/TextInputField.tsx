@@ -4,18 +4,16 @@ import styled from 'styled-components'
 
 type Props = {
   label: string
-  placeholder?: string
-  initialValue: string
   onChange: () => void
-  type?: string
   value: string
   setValue: (arg: string) => void
+  placeholder?: string
+  type?: string
 }
 
 const TextInputField = ({
   label,
   placeholder,
-  initialValue,
   onChange,
   type,
   value,
