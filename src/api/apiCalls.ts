@@ -40,17 +40,25 @@ export const changeUserPassword = async (
   }
 }
 
-export const updateUserData = async (payload: {
-  email: string
-  phoneNumber: string
-  address: string
-  juridicalInfo: {
-    companyName: string
-    identificationCode: string
-    companyAddress: string
-    websiteUrl: string
-  }
-}) => {
+export const updateUserData = async (
+  payload:
+    | {
+        email: string
+        phoneNumber: string
+        address: string
+        juridicalInfo: {
+          companyName: string
+          identificationCode: string
+          companyAddress: string
+          websiteUrl: string
+        }
+      }
+    | {
+        email: string
+        phoneNumber: string
+        address: string
+      }
+) => {
   try {
     const response = await axiosInstance.patch(
       endpoints.UPDATE_USER_DATA,

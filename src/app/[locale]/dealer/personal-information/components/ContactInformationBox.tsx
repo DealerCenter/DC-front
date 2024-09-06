@@ -41,66 +41,27 @@ const ContactInformationBox = ({ type }: Props) => {
     }
   }, [userData])
 
-  // const handleSave = async () => {
-  //   if (!userData) return
-
-  //   if (type === 'company' && userData.juridicalInfo) {
-  //     console.log('trying to save Company data')
-  //     const data = {
-  //       email: userData.email,
-  //       phoneNumber: userData.phoneNumber,
-  //       address: userData.address,
-  //       juridicalInfo: {
-  //         companyName:formData companyName,
-  //         identificationCode: identificationCode,
-  //         companyAddress: companyAddress,
-  //         websiteUrl: userData.juridicalInfo.websiteUrl,
-  //       },
-  //     }
-  //     await updateUserData(data).then(() => {
-  //       fetchAndUpdateUser()
-  //       console.log('everything done right')
-  //     })
-  //   }
-
-  //   if (type === 'representative' && userData.juridicalInfo) {
-  //     console.log('trying to save Email, Mobile, Address data')
-  //     const data = {
-  //       email: email,
-  //       phoneNumber: phoneNumber,
-  //       address: address,
-  //       juridicalInfo: {
-  //         companyName: companyName,
-  //         identificationCode: identificationCode,
-  //         companyAddress: companyAddress,
-  //         websiteUrl: userData.juridicalInfo.websiteUrl,
-  //       },
-  //     }
-  //     await updateUserData(data).then(() => {
-  //       fetchAndUpdateUser()
-  //       console.log('everything done right')
-  //     })
-  //   }
-
-  //   if (type === 'individual') {
-  //     console.log('NOT WORKING YET')
-  //   }
-  // }
-
   const handleSave = async () => {
     if (!userData) return
 
-    const data = {
-      email: formData.email,
-      phoneNumber: formData.phoneNumber,
-      address: formData.address,
-      juridicalInfo: {
-        companyName: formData.companyName,
-        identificationCode: formData.identificationCode,
-        companyAddress: formData.companyAddress,
-        websiteUrl: userData.juridicalInfo?.websiteUrl,
-      },
-    }
+    const data =
+      type === 'individual'
+        ? {
+            email: formData.email,
+            phoneNumber: formData.phoneNumber,
+            address: formData.address,
+          }
+        : {
+            email: formData.email,
+            phoneNumber: formData.phoneNumber,
+            address: formData.address,
+            juridicalInfo: {
+              companyName: formData.companyName,
+              identificationCode: formData.identificationCode,
+              companyAddress: formData.companyAddress,
+              websiteUrl: userData.juridicalInfo?.websiteUrl,
+            },
+          }
 
     const response = await updateUserData(data)
     fetchAndUpdateUser()
