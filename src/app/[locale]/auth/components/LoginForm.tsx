@@ -73,7 +73,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
           type='filled'
           text={t('login')}
           disabled={false}
-          onClick={() => {}}
+          onClick={handleSubmit}
           width={442}
         />
       </StyledForm>
