@@ -15,9 +15,10 @@ export const logoutUser = async () => {
   try {
     await axiosInstance.post(endpoints.LOGOUT)
     handleLogout()
-    console.log('user logged out')
+    return true
   } catch (error) {
     console.error('Error logging out:', error)
+    return false
   }
 }
 

@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
+import { usePathname, useRouter } from '@/navigation'
+
+import { useUserData } from '@/common/store/userDataStore'
+import { logoutUser } from '@/api/apiCalls'
+import theme from '@/app/[locale]/theme'
+import { routeName } from '@/common/helpers/constants'
 
 import InfoBox from './components/InfoBox'
 import BarButton from './components/BarButton'
 import GrayContainer from './components/GrayContainer'
-
-import { routeName } from '@/common/helpers/constants'
-import { usePathname } from '@/navigation'
 
 import clockBlack from '@/assets/icons/clock/clock-black.svg'
 import clockWhite from '@/assets/icons/clock/clock-white.svg'
@@ -20,9 +23,6 @@ import bellIconBlack from '@/assets/icons/bell/bell-black.svg'
 import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
-import theme from '@/app/[locale]/theme'
-import { useUserData } from '@/common/store/userDataStore'
-import { logoutUser } from '@/api/apiCalls'
 
 type Props = {
   routes: {
@@ -38,8 +38,10 @@ const SideBar = ({ routes }: Props) => {
   const t = useTranslations('')
   const pathname = usePathname()
   const { userData, loading, error } = useUserData()
+  const router = useRouter()
 
   const [isHovered, setIsHovered] = useState(false)
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
 
   const handleMouseEnter = () => {
     setIsHovered(true)
@@ -47,6 +49,13 @@ const SideBar = ({ routes }: Props) => {
 
   const handleMouseLeave = () => {
     setIsHovered(false)
+  }
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true)
+    await logoutUser()
+    setIsLoggingOut(false)
+    router.push(routeName.landing)
   }
 
   return (
@@ -125,8 +134,9 @@ const SideBar = ({ routes }: Props) => {
             text={t('exit')}
             height='71px'
             isHovered={isHovered}
-            onClick={() => logoutUser()}
+            onClick={handleLogout}
             isCursorPointer={true}
+            disabled={isLoggingOut}
           />
         )}
       </BarContainer>

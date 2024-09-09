@@ -1,8 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { useMediaQuery } from 'react-responsive'
 import Image from 'next/image'
-import theme from '@/app/[locale]/theme'
 
 type Props = {
   text: string
@@ -12,6 +10,7 @@ type Props = {
   onClick?: () => void
   isHovered: boolean
   isCursorPointer?: boolean
+  disabled?: boolean
 }
 
 const GrayContainer = ({
@@ -22,15 +21,12 @@ const GrayContainer = ({
   onClick,
   isHovered,
   isCursorPointer,
+  disabled = false,
 }: Props) => {
-  const isTablet = useMediaQuery({
-    query: theme.media?.md,
-  })
-
   return (
     <Container
       height={height}
-      onClick={onClick}
+      onClick={disabled ? () => {} : onClick}
       isHovered={isHovered}
       isCursorPointer={isCursorPointer}
     >
