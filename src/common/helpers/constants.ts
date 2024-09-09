@@ -15,6 +15,7 @@ export const routeName = {
   adminUserProfile: '/admin/user-profile',
   adminUserContainers: '/admin/shipping-containers',
   contact: '/contact',
+  searchVehicle: '/search-vehicle',
 }
 
 export const locales = ['en', 'ge', 'ru']
