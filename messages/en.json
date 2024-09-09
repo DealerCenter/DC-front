@@ -203,6 +203,8 @@
   "information updated successfully": "Information has been updated successfully",
   "information not updated": "Information could not be updated",
 
+  "loading": "Loading",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 

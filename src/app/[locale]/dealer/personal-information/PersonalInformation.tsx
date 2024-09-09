@@ -15,7 +15,12 @@ const PersonalInformation = (props: Props) => {
   const { userData } = useUserData()
 
   if (!userData) {
-    return <Loading>Loading...</Loading>
+    return (
+      <Loading>
+        {t('loading')}
+        {'...'}
+      </Loading>
+    )
   }
 
   return (

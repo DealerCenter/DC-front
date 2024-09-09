@@ -41,6 +41,14 @@ const ContactInformationBox = ({ type }: Props) => {
     }
   }, [userData])
 
+  // to ensure that messages do not appear if user starts to change the info again
+  useEffect(() => {
+    if (!isSaved) {
+      setErrorMessage(false)
+      setSuccessMessage(false)
+    }
+  }, [isSaved])
+
   const handleSave = async () => {
     if (!userData) return
 

@@ -203,6 +203,8 @@
   "information updated successfully": "ინფორმაცია წარმატებით განახლდა",
   "information not updated": "ინფორმაციის განახლება ვერ მოხერხდა",
 
+  "loading": "იტვირთება",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 
