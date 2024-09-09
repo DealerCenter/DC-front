@@ -1,17 +1,42 @@
 import InputFieldsHeader from '@/common/components/inputFieldsHeader/InputFieldsHeader'
 import { useTranslations } from 'next-intl'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import OptionField from './components/OptionField'
 import AppButton from '@/common/components/appButton/AppButton'
 import FormSaveButton from '@/common/components/appButton/FormSaveButton'
+import { getNotificationSettings } from '@/api/apiCalls'
+import { setSettingsData } from './helpers/setSettingsData'
+import { useUserData } from '@/common/store/userDataStore'
+import OptionFieldsFrame from './components/OptionFieldsFrame'
 
 type Props = {}
 
 const ManageNotifications = (props: Props) => {
+  const [isLoading, setIsLoading] = useState(true)
+
+  const [isOpenEmail, setIsOpenEmail] = useState(true)
+  const [isOpenSms, setIsOpenSms] = useState(true)
+
   const [isEmailSaved, setIsEmailSaved] = useState(true)
   const [isSmsSaved, setIsSmsSaved] = useState(true)
+
+  const [emailSettings, setEmailSettings] = useState({
+    OrderGet: true,
+    DebtExistence: true,
+    InfoMissing: true,
+    CompanyNewsAndServiceChange: true,
+  })
+  const [smsSettings, setSmsSettings] = useState({
+    OrderGet: true,
+    DebtExistence: false,
+    InfoMissing: true,
+    CompanyNewsAndServiceChange: false,
+  })
+
+  const { userData } = useUserData()
+
   const t = useTranslations('')
 
   const handleEmailChange = () => {
@@ -21,6 +46,24 @@ const ManageNotifications = (props: Props) => {
     setIsSmsSaved(false)
   }
 
+  const getSettings = async () => {
+    if (!userData) return
+
+    setIsLoading(true)
+    const notificationData = await getNotificationSettings(userData.id)
+
+    console.log(notificationData)
+
+    setIsLoading(!setSettingsData(notificationData, setEmailSettings, 'Email'))
+    setIsLoading(!setSettingsData(notificationData, setSmsSettings, 'Sms'))
+  }
+
+  // when userData updates and we have users' id, then we get the settings
+  useEffect(() => {
+    userData && getSettings()
+    // eslint-disable-next-line
+  }, [userData])
+
   return (
     <Container>
       <HeaderH4Bold text={t('manage notifications')} />
@@ -28,31 +71,16 @@ const ManageNotifications = (props: Props) => {
         <InputFieldsBox>
           <InputFieldsHeader
             text={t('email notifications')}
-            onEdit={() => {}}
-            onArrowDown={() => {}}
+            onEdit={() => setIsOpenEmail((is) => !is)}
+            onArrowDown={() => setIsOpenEmail((is) => !is)}
+            isOpen={isOpenEmail}
           />
-          <InputFieldsFrame>
-            <OptionField
-              text={t('order acceptance')}
+          {!isLoading && isOpenEmail && (
+            <OptionFieldsFrame
+              settingsState={emailSettings}
               onChange={handleEmailChange}
-              isChecked={false}
             />
-            <OptionField
-              text={t('existence of debt')}
-              onChange={handleEmailChange}
-              isChecked={true}
-            />
-            <OptionField
-              text={t('incomplete information')}
-              onChange={handleEmailChange}
-              isChecked={false}
-            />
-            <OptionField
-              text={t('company news and changes')}
-              onChange={handleEmailChange}
-              isChecked={false}
-            />
-          </InputFieldsFrame>
+          )}
           {!isEmailSaved && (
             <ButtonFrame>
               <FormSaveButton
@@ -65,31 +93,16 @@ const ManageNotifications = (props: Props) => {
         <InputFieldsBox>
           <InputFieldsHeader
             text={t('sms notifications')}
-            onEdit={() => {}}
-            onArrowDown={() => {}}
+            onEdit={() => setIsOpenSms((is) => !is)}
+            onArrowDown={() => setIsOpenSms((is) => !is)}
+            isOpen={isOpenSms}
           />
-          <InputFieldsFrame>
-            <OptionField
-              text={t('order acceptance')}
+          {!isLoading && isOpenSms && (
+            <OptionFieldsFrame
+              settingsState={smsSettings}
               onChange={handleSmsChange}
-              isChecked={false}
             />
-            <OptionField
-              text={t('existence of debt')}
-              onChange={handleSmsChange}
-              isChecked={false}
-            />
-            <OptionField
-              text={t('incomplete information')}
-              onChange={handleSmsChange}
-              isChecked={true}
-            />
-            <OptionField
-              text={t('company news and changes')}
-              onChange={handleSmsChange}
-              isChecked={true}
-            />
-          </InputFieldsFrame>
+          )}
           {!isSmsSaved && (
             <ButtonFrame>
               <AppButton
@@ -127,11 +140,6 @@ const InputFieldsBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.lg};
-`
-const InputFieldsFrame = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing?.sm};
 `
 
 const ButtonFrame = styled.div`

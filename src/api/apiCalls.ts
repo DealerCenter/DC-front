@@ -72,3 +72,15 @@ export const updateUserData = async (
     return false
   }
 }
+
+export const getNotificationSettings = async (id: number) => {
+  try {
+    const response = await axiosInstance.get(
+      `${endpoints.GET_NOTIFICATION_SETTING}${id}`
+    )
+
+    return response.data
+  } catch (error) {
+    console.error('Error getting notification settings:', error)
+  }
+}
