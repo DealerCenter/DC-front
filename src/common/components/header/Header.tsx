@@ -2,8 +2,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
+import { useRouter } from '@/navigation'
+import { useTranslations } from 'next-intl'
 
 import theme from '@/app/[locale]/theme'
+import { routeName } from '@/common/helpers/constants'
 
 import FullHeader from './components/fullHeader/FullHeader'
 import BurgerHeader from './components/burgerHeader/BurgerHeader'
@@ -12,7 +15,51 @@ type Props = {}
 
 const Header = (props: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
-  return <Container>{isMobile ? <BurgerHeader /> : <FullHeader />}</Container>
+  const t = useTranslations('')
+
+  const router = useRouter()
+
+  const servicesItems = [
+    { label: `${t('status check')}`, onClick: () => {} },
+    { label: `${t('document check')}`, onClick: () => {} },
+    { label: `${t('history check')}`, onClick: () => {} },
+    { label: `${t('transportation calculator')}`, onClick: () => {} },
+  ]
+
+  const mainItems = [
+    {
+      label: `${t('search for vehicle')}`,
+      onClick: () => {
+        router.push(routeName.searchVehicle)
+      },
+    },
+    {
+      label: `${t('our services')}`,
+      onClick: () => {},
+    },
+    {
+      label: `${t('about us')}`,
+      onClick: () => {
+        console.log('about us')
+      },
+    },
+    {
+      label: `${t('contact')}`,
+      onClick: () => {
+        router.push(routeName.contact)
+      },
+    },
+  ]
+
+  return (
+    <Container>
+      {isMobile ? (
+        <BurgerHeader mainItems={mainItems} servicesItems={servicesItems} />
+      ) : (
+        <FullHeader mainItems={mainItems} servicesItems={servicesItems} />
+      )}
+    </Container>
+  )
 }
 
 export default Header

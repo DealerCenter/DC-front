@@ -9,9 +9,12 @@ import search from '@/assets/icons/search.svg'
 import person from '@/assets/icons/person.svg'
 import burger from '@/assets/icons/burger.svg'
 
-type Props = {}
+type Props = {
+  mainItems: { label: string; onClick: () => void }[]
+  servicesItems: { label: string; onClick: () => void }[]
+}
 
-const BurgerHeader = (props: Props) => {
+const BurgerHeader = ({ mainItems, servicesItems }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
@@ -19,6 +22,8 @@ const BurgerHeader = (props: Props) => {
       <BurgerHeaderMenu
         isOpen={isMenuOpen}
         handleClose={() => setIsMenuOpen(false)}
+        mainItems={mainItems}
+        servicesItems={servicesItems}
       />
       <Logo />
       <Frame>

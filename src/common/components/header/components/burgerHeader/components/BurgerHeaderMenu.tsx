@@ -10,9 +10,19 @@ import LangChangeButton from '../../fullHeader/components/LangChangeButton'
 import closeX from '@/assets/icons/closeXWhite.svg'
 import search from '@/assets/icons/search.svg'
 
-type Props = { isOpen: boolean; handleClose: () => void }
+type Props = {
+  isOpen: boolean
+  handleClose: () => void
+  mainItems: { label: string; onClick: () => void }[]
+  servicesItems: { label: string; onClick: () => void }[]
+}
 
-const BurgerHeaderMenu = ({ isOpen, handleClose }: Props) => {
+const BurgerHeaderMenu = ({
+  isOpen,
+  handleClose,
+  mainItems,
+  servicesItems,
+}: Props) => {
   const t = useTranslations('')
 
   useEffect(() => {
@@ -31,7 +41,7 @@ const BurgerHeaderMenu = ({ isOpen, handleClose }: Props) => {
               </CloseButton>
             </TopFrame>
             <MiddleFrame>
-              <MiddleBox />
+              <MiddleBox mainItems={mainItems} servicesItems={servicesItems} />
               <Line />
             </MiddleFrame>
             <BottomFrame>
