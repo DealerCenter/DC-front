@@ -245,6 +245,12 @@
   "send message": "გააგზავნე შეტყობინება",
   "message": "შეტყობინება",
 
+  "statement": "განცხადება",
+  "price": "ფასი",
+  "pending": "ელოდება",
+  "sold": "გაიყიდა",
+  "not sold": "არ გაიყიდა",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 

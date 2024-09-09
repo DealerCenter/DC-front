@@ -3,22 +3,34 @@ import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 
-type Props = { text: string; onClick: () => void; icon: string; width?: number }
+type Props = {
+  text: string
+  onClick: () => void
+  icon: string
+  width?: number
+  withoutLabel?: boolean
+}
 
-const SecondaryButton = ({ text, onClick, icon, width }: Props) => {
+const SecondaryButton = ({
+  text,
+  onClick,
+  icon,
+  width,
+  withoutLabel,
+}: Props) => {
   return (
-    <Container onClick={onClick} width={width}>
+    <Container onClick={onClick} width={width} withoutLabel={withoutLabel}>
       <IconBox>
         <Image src={icon} alt='icon' />
       </IconBox>
-      <Label>{text}</Label>
+      {!withoutLabel && <Label>{text}</Label>}
     </Container>
   )
 }
 
 export default SecondaryButton
 
-type ContainerProps = { width?: number }
+type ContainerProps = { width?: number; withoutLabel?: boolean }
 
 const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
@@ -39,6 +51,15 @@ const Container = styled.div<ContainerProps>`
         `
       : css`
           width: unset;
+        `};
+
+  ${({ withoutLabel }) =>
+    withoutLabel
+      ? css`
+          padding: 0 16px 0 16px;
+        `
+      : css`
+          padding: 0 20px 0 14px;
         `};
 
   &:hover {

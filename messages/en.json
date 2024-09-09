@@ -244,7 +244,14 @@
   "have questions? Contact us": "Do you have questions? Contact us",
   "monday-friday 9-5": "Monday-Friday 9-5",
 
+  "send message": "Send message",
   "message": "Message",
+
+  "statement": "Statement",
+  "price": "Price",
+  "pending": "Pending",
+  "sold": "Sold",
+  "not sold": "Not sold",
 
   "useForm": {
     "must be valid email": "Must be a valid email",
