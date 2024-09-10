@@ -36,12 +36,12 @@ const SearchForVehicle = (props: Props) => {
             onClick={() => setIsFilterOn((is) => !is)}
             icon={isFilterOn ? filterIconWithCancel : filterIcon}
             withoutLabel={true}
-          ></SecondaryButton>
+          />
           <SecondaryButton
             text={t('sort')}
             onClick={() => {}}
             icon={sortIconBlack}
-          ></SecondaryButton>
+          />
         </SortBox>
         <SearchResultsList />
         <PaginationBox>
@@ -61,6 +61,7 @@ export default SearchForVehicle
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
   gap: ${({ theme }) => theme.spacing?.md};
 
   padding: 32px 0 80px 0;

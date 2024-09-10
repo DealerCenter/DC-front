@@ -253,6 +253,15 @@
   "sold": "Sold",
   "not sold": "Not sold",
 
+  "brand": "Brand",
+  "transmission": "Transmission",
+  "damage": "Damage",
+  "auction location": "Auction location",
+  "automatic": "Automatic",
+  "manual": "Manual",
+  "from": "From",
+  "up to": "Up to",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 

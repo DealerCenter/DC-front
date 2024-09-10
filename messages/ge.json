@@ -251,6 +251,15 @@
   "sold": "გაიყიდა",
   "not sold": "არ გაიყიდა",
 
+  "brand": "ბრენდი",
+  "transmission": "ტრანსმისია",
+  "damage": "დაზიანება",
+  "auction location": "აუქციონის ლოკაცია",
+  "automatic": "ავტომატიკა",
+  "manual": "მექანიკა",
+  "from": "დან",
+  "up to": "მდე",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 
