@@ -56,4 +56,5 @@ const Label = styled.label`
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
+  user-select: none;
 `

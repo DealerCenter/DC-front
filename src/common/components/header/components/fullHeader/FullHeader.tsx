@@ -96,6 +96,7 @@ const Title2 = styled.div`
   gap: 10px;
 
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors?.white_10};

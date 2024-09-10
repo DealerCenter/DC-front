@@ -15,7 +15,7 @@ const MenuButtons = (props: Props) => {
       {!isSearchActive && (
         <>
           <LoginButton />
-          <LangChangeButton left={-3} top={66} width={71} />
+          <LangChangeButton left={4} top={64} width={71} />
         </>
       )}
     </Container>
