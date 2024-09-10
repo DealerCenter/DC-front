@@ -41,8 +41,9 @@ const AuthLanding = ({ goToLogin, goToRegistration }: Props) => {
           <Image
             src={landingPicture}
             alt='landing picture'
-            layout='fill'
-            objectFit='cover'
+            style={{ objectFit: 'cover' }}
+            priority
+            fill
           />
         </ImageWrapper>
       )}

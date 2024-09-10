@@ -26,7 +26,7 @@ const ContactInformationBox = ({ type }: Props) => {
   })
 
   const t = useTranslations('')
-  const { userData, fetchAndUpdateUser } = useUserData()
+  const { userData, fetchUserData } = useUserData()
 
   useEffect(() => {
     if (userData) {
@@ -72,7 +72,7 @@ const ContactInformationBox = ({ type }: Props) => {
           }
 
     const response = await updateUserData(data)
-    fetchAndUpdateUser()
+    fetchUserData()
 
     if (response) {
       setSuccessMessage(true)

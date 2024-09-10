@@ -1,40 +1,36 @@
-import { fetchUserData } from '@/api/apiCalls'
-import axiosInstance from '@/api/apiClient'
-import { endpoints } from '@/api/endpoints'
-import UserDataBox from '@/app/[locale]/admin/order/components/rightFrame/components/UserDataBox'
+import { fetchMe } from '@/api/apiCalls'
 import { create } from 'zustand'
 
 interface UserDataState {
   userData: ME_RES | null
+  isAuthenticated: boolean
   loading: boolean
   error: string | null
   setUserData: (payload: ME_RES) => void
-  fetchAndUpdateUser: () => void
+  fetchUserData: () => void
   clearUserData: () => void
-  setLoading: (isLoading: boolean) => void
-  setError: (error: string) => void
 }
 
 export const useUserData = create<UserDataState>((set) => ({
   userData: null,
-  loading: false,
+  isAuthenticated: false,
+  loading: true,
   error: null,
   setUserData: (payload) => {
-    console.log('payload', payload)
     set({ userData: payload })
   },
-  fetchAndUpdateUser: async () => {
-    const response = await fetchUserData()
-    set({ userData: response?.data })
+  fetchUserData: async () => {
+    try {
+      set({ loading: true })
+      const response = await fetchMe()
+      set({ isAuthenticated: !!response })
+      set({ userData: response, loading: false })
+    } catch (error) {
+      console.error('Error fetching user:', error)
+      set({ userData: null, loading: false })
+    }
   },
   clearUserData: () => {
     set({ userData: null })
-  },
-
-  setLoading: (isLoading) => {
-    set({ loading: isLoading })
-  },
-  setError: (error) => {
-    set({ error: error })
   },
 }))

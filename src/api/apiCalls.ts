@@ -2,12 +2,12 @@ import { handleLogout } from '@/common/helpers/utils'
 import axiosInstance from './apiClient'
 import { endpoints } from './endpoints'
 
-export const fetchUserData = async () => {
+export const fetchMe = async () => {
   try {
     const response = await axiosInstance.get<ME_RES>(endpoints.ME)
-    return response
+    return response.data
   } catch (error) {
-    console.error('Error with fetching data:', error)
+    console.error('Failed to fetch user data:', error)
   }
 }
 
