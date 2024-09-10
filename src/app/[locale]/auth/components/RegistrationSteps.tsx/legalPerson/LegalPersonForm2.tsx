@@ -10,10 +10,13 @@ import {
 import TextInput from '@/common/components/inputElements/TextInput'
 import FileDropZone from '@/common/components/inputElements/FileDropZone'
 import AppButton from '@/common/components/appButton/AppButton'
+import theme from '@/app/[locale]/theme'
+import { useMediaQuery } from 'react-responsive'
 
 type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
 
 const LegalPersonForm2 = ({ setFormStep }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const { values, handleBlur, handleChange, validateForm, errors, touched } =
     useRegisterFormContextLegalPerson()
@@ -41,7 +44,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
   return (
     <StyledForm>
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.FIRST_NAME}
         placeholder={t('name of representative')}
@@ -55,7 +58,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         }
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.LAST_NAME}
         placeholder={t('surname of representative')}
@@ -69,7 +72,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         }
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.CONTACT_NUMBER}
         placeholder={t('contact number')}
@@ -83,7 +86,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         }
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='date'
         name={FIELD_NAMES.BIRTH_DATE}
         placeholder={t('date of birth')}
@@ -96,7 +99,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         }
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.PERSONAL_ID}
         placeholder={t('personal number')}

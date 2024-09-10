@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import { useMediaQuery } from 'react-responsive'
 
 import {
   FIELD_NAMES,
   useRegisterFormContextIndividual,
 } from '../../../hooks/useRegistrationFormIndividual'
+import theme from '@/app/[locale]/theme'
 
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
@@ -16,6 +18,7 @@ type Props = {
 }
 
 const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const { values, handleBlur, handleChange, errors, touched, validateForm } =
     useRegisterFormContextIndividual()
@@ -67,7 +70,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         />
       </Frame>
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='date'
         name={FIELD_NAMES.BIRTH_DATE}
         placeholder={t('date of birth')}
@@ -79,7 +82,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         }
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.ADDRESS}
         placeholder={t('actual address')}
@@ -93,7 +96,7 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         }
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.CONTACT_NUMBER}
         placeholder={t('contact number')}

@@ -12,10 +12,13 @@ import {
 
 import ValidateTextBox from '@/common/components/passwordValidateTextBox/ValidateTextBox'
 import usePasswordValidation from '../../../hooks/usePasswordValidation'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
 type Props = { setFormStep: Dispatch<SetStateAction<number>> }
 
 const FormStep3 = ({ setFormStep }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
   const {
@@ -50,7 +53,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
   return (
     <StyledForm>
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='email'
         name={FIELD_NAMES.EMAIL}
         placeholder={t('email')}
@@ -60,7 +63,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
         errorMessage={errors.email && touched.email ? errors.email : ''}
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='password'
         name={FIELD_NAMES.PASSWORD}
         placeholder={t('password')}
@@ -88,7 +91,7 @@ const FormStep3 = ({ setFormStep }: Props) => {
         />
       </PasswordErrorBox>
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='password'
         name={FIELD_NAMES.REPEAT_PASSWORD}
         placeholder={t('repeat password')}

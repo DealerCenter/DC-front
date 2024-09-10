@@ -11,12 +11,15 @@ import useLoginForm, { FIELD_NAMES } from '../hooks/useLoginForm'
 import Image from 'next/image'
 import emailIcon from '@/assets/icons/email.svg'
 import passwordIcon from '@/assets/icons/password.svg'
+import { useMediaQuery } from 'react-responsive'
+import theme from '../../theme'
 
 type Props = {
   goToRegistration: () => void
 }
 
 const LoginForm = ({ goToRegistration }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const [isRemember, setIsRemember] = useState(false)
   const t = useTranslations('')
   const { values, handleBlur, handleChange, handleSubmit, axiosError } =
@@ -37,7 +40,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
             icon={
               <Image src={emailIcon} alt='email icon' width={20} height={16} />
             }
-            width={442}
+            width={isMobile ? undefined : 442}
           />
         </TextInputContainer>
         <div>
@@ -57,7 +60,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
                   height={22}
                 />
               }
-              width={442}
+              width={isMobile ? undefined : 442}
               errorMessage={axiosError ? axiosError.message : ''}
             />
           </TextInputContainer>

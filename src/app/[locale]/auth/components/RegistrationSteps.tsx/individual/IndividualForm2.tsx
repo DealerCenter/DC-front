@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import { useMediaQuery } from 'react-responsive'
 
 import {
   FIELD_NAMES,
@@ -9,10 +10,13 @@ import {
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
 import FileDropZone from '@/common/components/inputElements/FileDropZone'
+import theme from '@/app/[locale]/theme'
 
 type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
 
 const IndividualForm2 = ({ setFormStep }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   const t = useTranslations('')
   const {
     values,
@@ -36,7 +40,7 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
   return (
     <StyledForm>
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.PERSONAL_ID}
         placeholder={t('personal number')}

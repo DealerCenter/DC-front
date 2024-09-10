@@ -9,6 +9,8 @@ import {
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
 import FileDropZone from '@/common/components/inputElements/FileDropZone'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
 type Props = {
   setFormStep: React.Dispatch<React.SetStateAction<number>>
@@ -16,6 +18,8 @@ type Props = {
 }
 
 const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   const t = useTranslations('')
   const {
     values,
@@ -47,7 +51,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
   return (
     <StyledForm>
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.COMPANY_NAME}
         placeholder={t('company name')}
@@ -59,7 +63,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         }
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.IDENTIFICATION_CODE}
         placeholder={t('identification code')}
@@ -73,7 +77,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         }
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.ADDRESS}
         placeholder={t('address')}
@@ -83,7 +87,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         errorMessage={errors.address && touched.address ? errors.address : ''}
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.WEBSITE_URL}
         placeholder={t('website')}
