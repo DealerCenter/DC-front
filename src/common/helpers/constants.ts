@@ -15,6 +15,7 @@ export const routeName = {
   adminUsersList: '/admin/users-list',
   adminPersonalInformation: '/admin/personal-information',
   adminOrder: '/admin/order',
+  adminCreateOrder: '/admin/create-order',
   adminOrderImageUpload: '/admin/order/image-upload',
   adminUserProfile: '/admin/user-profile',
   adminUserContainers: '/admin/shipping-containers',

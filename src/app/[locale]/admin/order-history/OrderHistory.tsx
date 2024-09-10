@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
-import { useRouter } from '@/navigation'
-
-import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 
 import OrderList from './components/OrderList'
-import { orderedCars } from '@/assets/DummyData'
-
+import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 import Pagination from '@/common/components/pagination/Pagination'
 import ButtonsRow from './components/ButtonsRow'
-import { routeName } from '@/common/helpers/constants'
+
+import { orderedCars } from '@/assets/DummyData'
 
 const itemsPerPage = 8
-// const totalPages = Math.ceil(orderedCars.length / itemsPerPage)
 
 type Props = {}
 
@@ -23,8 +19,6 @@ const OrderHistory = (props: Props) => {
   const [isEditing, setIsEditing] = useState(false)
   const t = useTranslations('')
 
-  const router = useRouter()
-
   return (
     <Container>
       <TopFrame>
@@ -32,7 +26,7 @@ const OrderHistory = (props: Props) => {
         <ButtonsRow isEditing={isEditing} setIsEditing={setIsEditing} />
       </TopFrame>
       <OrderList
-        onClick={() => router.push(routeName.adminOrder)}
+        onClick={() => {}}
         list={orderedCars}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

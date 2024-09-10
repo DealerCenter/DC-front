@@ -6,9 +6,9 @@ import Box from '../../../../components/common/Box'
 import TextInputFieldPair from './TextInputFieldPair'
 import AddFieldButton from '../../../../components/common/AddFieldButton'
 
-type Props = { isEditing: boolean }
+type Props = {}
 
-const ParametersBox = ({ isEditing }: Props) => {
+const ParametersBox = ({}: Props) => {
   const t = useTranslations('')
 
   return (
@@ -19,37 +19,15 @@ const ParametersBox = ({ isEditing }: Props) => {
         <TextInputFieldPair
           title='insurance'
           value=''
-          isEditing={isEditing}
           selectItems={[{ value: 'yes' }, { value: 'no' }]}
-          isYes={true}
         />
-        <TextInputFieldPair
-          title='manufacturer'
-          value='dummy text'
-          isEditing={isEditing}
-        />
-        <TextInputFieldPair
-          title='model'
-          value='dummy text'
-          isEditing={isEditing}
-        />
-        <TextInputFieldPair
-          title='year'
-          value='dummy text'
-          isEditing={isEditing}
-        />
-        <TextInputFieldPair
-          title='category'
-          value='dummy text'
-          isEditing={isEditing}
-        />
-        <TextInputFieldPair
-          title='mileage'
-          value='dummy text'
-          isEditing={isEditing}
-        />
+        <TextInputFieldPair title='manufacturer' value='dummy text' />
+        <TextInputFieldPair title='model' value='dummy text' />
+        <TextInputFieldPair title='year' value='dummy text' />
+        <TextInputFieldPair title='category' value='dummy text' />
+        <TextInputFieldPair title='mileage' value='dummy text' />
       </LabelsFrame>
-      {isEditing && <AddFieldButton onClick={() => {}} />}
+      <AddFieldButton onClick={() => {}} />
     </Box>
   )
 }

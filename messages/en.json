@@ -205,6 +205,8 @@
 
   "loading": "Loading",
 
+  "": "",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 

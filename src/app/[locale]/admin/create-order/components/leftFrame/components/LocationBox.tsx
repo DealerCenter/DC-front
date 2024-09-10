@@ -6,9 +6,9 @@ import Box from '../../../../components/common/Box'
 import TextInputFieldPair from './TextInputFieldPair'
 import AddFieldButton from '../../../../components/common/AddFieldButton'
 
-type Props = { isEditing: boolean }
+type Props = {}
 
-const LocationBox = ({ isEditing }: Props) => {
+const LocationBox = ({}: Props) => {
   const t = useTranslations('')
 
   return (
@@ -16,18 +16,10 @@ const LocationBox = ({ isEditing }: Props) => {
       <Header>{t('location')}</Header>
       <Line />
       <LabelsFrame>
-        <TextInputFieldPair
-          title='state'
-          value='California'
-          isEditing={isEditing}
-        />
-        <TextInputFieldPair
-          title='address'
-          value='Beverly hills, 235'
-          isEditing={isEditing}
-        />
+        <TextInputFieldPair title='state' value='California' />
+        <TextInputFieldPair title='address' value='Beverly hills, 235' />
       </LabelsFrame>
-      {isEditing && <AddFieldButton onClick={() => {}} />}
+      <AddFieldButton onClick={() => {}} />
     </Box>
   )
 }
