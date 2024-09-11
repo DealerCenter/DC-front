@@ -1,15 +1,22 @@
 import Image from 'next/image'
 import React from 'react'
 import styled from 'styled-components'
-
 import { useTranslations } from 'next-intl'
+
 import TextInput from '@/common/components/inputElements/TextInput'
+import {
+  FIELD_NAMES,
+  useCreateOrderContext,
+} from '../../../hooks/useCreateOrderContext'
 
 import paperClip from '@/assets/icons/paperClip.svg'
 
 type Props = {}
 
 const CostsBoxEmpty = (props: Props) => {
+  const { values, handleBlur, handleChange, errors, touched } =
+    useCreateOrderContext()
+
   const t = useTranslations('')
 
   return (
@@ -20,13 +27,19 @@ const CostsBoxEmpty = (props: Props) => {
           width={100}
           height={48}
           type='text'
-          name='cost of transportation'
-          placeholder={t('')}
-          value={''}
-          onChange={() => {}}
-          onBlur={() => {}}
+          placeholder=''
           fontWeight='bold'
           fontSize={13}
+          name={FIELD_NAMES.TRANSPORTATION_COST}
+          value={values[FIELD_NAMES.TRANSPORTATION_COST]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.TRANSPORTATION_COST] &&
+            touched[FIELD_NAMES.TRANSPORTATION_COST]
+              ? errors[FIELD_NAMES.TRANSPORTATION_COST]
+              : ''
+          }
         />
         <IconBox>
           <Image src={paperClip} alt='pdf icon' />
@@ -38,13 +51,18 @@ const CostsBoxEmpty = (props: Props) => {
           width={100}
           height={48}
           type='text'
-          name='cost of the car'
-          placeholder={t('')}
-          value={''}
-          onChange={() => {}}
-          onBlur={() => {}}
+          placeholder=''
           fontWeight='bold'
           fontSize={13}
+          name={FIELD_NAMES.CAR_COST}
+          value={values[FIELD_NAMES.CAR_COST]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.CAR_COST] && touched[FIELD_NAMES.CAR_COST]
+              ? errors[FIELD_NAMES.CAR_COST]
+              : ''
+          }
         />
         <IconBox>
           <Image src={paperClip} alt='pdf icon' />
@@ -58,8 +76,11 @@ const CostsBoxEmpty = (props: Props) => {
           height={48}
           type='text'
           name='total cost'
-          placeholder={t('')}
-          value={''}
+          placeholder=''
+          value={(
+            Number(values[FIELD_NAMES.CAR_COST]) +
+            Number(values[FIELD_NAMES.TRANSPORTATION_COST])
+          ).toString()}
           onChange={() => {}}
           onBlur={() => {}}
           fontWeight='bold'

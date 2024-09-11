@@ -205,6 +205,11 @@
 
   "loading": "იტვირთება",
 
+  "": "",
+
+  "dealer id": "დილერის ID",
+  "receiver id": "მიმღების ID",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 
@@ -222,5 +227,23 @@
     "surname required": "გვარი აუცილებელია",
     "actual address required": "ფაქტობრივი მისამართი აუცილებელია"
   },
-  "not added recipient data": "მიმღები პირის მონაცემები ჯერ არ გაქვს დამატებული "
+  "not added recipient data": "მიმღები პირის მონაცემები ჯერ არ გაქვს დამატებული ",
+
+  "createOrder": {
+    "manufacturer required": "მწარმოებელი აუცილებელია",
+    "manufacture year required": "მწარმოების წელი აუცილებელია",
+    "model required": "მოდელი აუცილებელია",
+    "vin required": "VIN კოდი აუცილებელია",
+    "transportation cost required": "ტრანსპორტირების ღირებულება აუცილებელია",
+    "car cost required": "ავტომობილის ღირებულება აუცილებელია",
+    "state required": "შტატი აუცილებელია",
+    "exact address required": "ზუსტი მისამართი აუცილებელია",
+    "insurance status required": "დაზღვევის სტატუსი აუცილებელია",
+    "car category required": "ავტომობილის კატეგორია აუცილებელია",
+    "mileage required": "გარბენი აუცილებელია",
+    "status required": "სტატუსი აუცილებელია",
+    "container ID required": "კონტეინერის ID აუცილებელია",
+    "dealer ID required": "დილერის ID აუცილებელია",
+    "receiver ID required": "მიმღების ID აუცილებელია"
+  }
 }

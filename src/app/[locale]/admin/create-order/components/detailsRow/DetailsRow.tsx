@@ -2,9 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import CarDetailsBoxEmpty from './components/CarDetailsBoxEmpty'
-import CarDetailsBox from './components/CarDetailsBox'
 import CostsBoxEmpty from './components/CostsBoxEmpty'
-import CostsBox from './components/CostsBox'
 import DebtBox from './components/DebtBox'
 
 type Props = {}

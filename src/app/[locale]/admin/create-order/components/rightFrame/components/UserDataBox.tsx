@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEventHandler, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
@@ -11,18 +11,46 @@ import TextInput from '@/common/components/inputElements/TextInput'
 
 import checkedEmpty from '@/assets/icons/checkedIconEmpty.svg'
 
-type Props = { header: string }
+type Props = {
+  header: string
+  name: string
+  value: string
+  onBlur: ChangeEventHandler<HTMLInputElement>
+  onChange: ChangeEventHandler<HTMLInputElement>
+  errorMessage: string
+  placeholder1: string
+  placeholder2: string
+}
 
-const UserDataBox = ({ header }: Props) => {
+const UserDataBox = ({
+  header,
+  name,
+  value,
+  onBlur,
+  onChange,
+  errorMessage,
+  placeholder1,
+  placeholder2,
+}: Props) => {
+  const [textInputWidth, setTextInputWidth] = useState(180)
+  const [textInputWidth2, setTextInputWidth2] = useState(160)
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
 
   const t = useTranslations('')
 
+  useEffect(() => {
+    setTextInputWidth(isMobile ? 160 : isTablet ? 156 : 180)
+  }, [isMobile, isTablet, setTextInputWidth])
+
+  useEffect(() => {
+    setTextInputWidth2(isMobile ? 143 : 160)
+  }, [isMobile, setTextInputWidth2])
+
   return (
     <Box>
       <HeaderFrame>
-        <Header>{t(header)}</Header>
+        <Header>{header}</Header>
         {isMobile && (
           <Icon onClick={() => {}}>
             <Image src={checkedEmpty} alt='checked icon' />
@@ -32,11 +60,11 @@ const UserDataBox = ({ header }: Props) => {
       <Line />
       <DataFrame>
         <TextInput
-          width={isMobile ? 160 : isTablet ? 156 : 180}
+          width={textInputWidth}
           height={48}
           type='text'
           name='full name'
-          placeholder={t('full name')}
+          placeholder={placeholder1}
           value={''}
           onChange={() => {}}
           onBlur={() => {}}
@@ -45,14 +73,14 @@ const UserDataBox = ({ header }: Props) => {
           isOutline={false}
         />
         <TextInput
-          width={isMobile ? 143 : 160}
+          width={textInputWidth2}
           height={48}
           type='text'
-          name='mob number'
-          placeholder={t('mob number')}
-          value={''}
-          onChange={() => {}}
-          onBlur={() => {}}
+          name={name}
+          placeholder={placeholder2}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
           fontWeight='bold'
           fontSize={13}
           isOutline={false}
@@ -63,6 +91,7 @@ const UserDataBox = ({ header }: Props) => {
           </Icon>
         )}
       </DataFrame>
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Box>
   )
 }
@@ -96,28 +125,6 @@ const DataFrame = styled.div`
   gap: 4px;
 `
 
-const Name = styled.label`
-  display: flex;
-  align-items: center;
-  font-size: ${({ theme }) => theme.fontSizes?.small_13};
-  font-weight: ${({ theme }) => theme.fontWeight?.bold};
-  color: ${({ theme }) => theme.colors?.main_gray_100};
-`
-
-const Value = styled.label`
-  display: flex;
-  align-items: center;
-  font-size: ${({ theme }) => theme.fontSizes?.small_13};
-  font-weight: ${({ theme }) => theme.fontWeight?.normal};
-  color: ${({ theme }) => theme.colors?.main_gray_100};
-`
-
-const IconBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing?.lg};
-`
 const Icon = styled.div`
   width: 24px;
   height: 24px;
@@ -126,10 +133,10 @@ const Icon = styled.div`
   align-items: center;
 `
 
-const AddPersonFrame = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
+const ErrorMessage = styled.p`
+  color: ${({ theme }) => theme.colors?.red};
+  position: absolute;
+  font-size: ${({ theme }) => theme.fontSizes?.extraSmall};
+  top: 48px;
+  left: 12px;
 `

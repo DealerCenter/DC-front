@@ -23,7 +23,7 @@ const DebtBox = ({}: Props) => {
             type='text'
             name='current debt'
             value=''
-            placeholder=''
+            placeholder='NOT WORKING'
             onChange={() => {}}
             onBlur={() => {}}
             fontWeight='bold'

@@ -61,11 +61,7 @@ export const updateUserData = async (
       }
 ) => {
   try {
-    const response = await axiosInstance.patch(
-      endpoints.UPDATE_USER_DATA,
-      payload
-    )
-
+    await axiosInstance.patch(endpoints.UPDATE_USER_DATA, payload)
     return true
   } catch (error) {
     console.error('Error with updating the data:', error)
@@ -82,5 +78,32 @@ export const getNotificationSettings = async (id: number) => {
     return response.data
   } catch (error) {
     console.error('Error getting notification settings:', error)
+  }
+}
+
+export const uploadOrder = async (payload: {
+  manufacturer: string
+  manufactureYear: number
+  model: string
+  vin: string
+  transportaionCost: number
+  carCost: number
+  stateId: number
+  exactAddress: string
+  isInsured: boolean
+  carCategory: string
+  mileage: number
+  status: string
+  containerId: number
+  dealerId: number
+  receiverId: number
+}) => {
+  try {
+    const response = await axiosInstance.post(
+      `${(endpoints.CREATE_ORDER, payload)}`
+    )
+    console.log(response)
+  } catch (error) {
+    console.error('Error creating new order:', error)
   }
 }

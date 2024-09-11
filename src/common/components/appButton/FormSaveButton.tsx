@@ -1,11 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 type Props = { text: string; onClick: () => void; disabled?: boolean }
 
 const FormSaveButton = ({ text, onClick, disabled = false }: Props) => {
   return (
-    <StyledButton onClick={onClick} disabled={disabled}>
+    <StyledButton onClick={onClick} disabled={disabled} isDisabled={disabled}>
       {text}
     </StyledButton>
   )
@@ -13,10 +13,9 @@ const FormSaveButton = ({ text, onClick, disabled = false }: Props) => {
 
 export default FormSaveButton
 
-type ButtonProps = {}
+type ButtonProps = { isDisabled?: boolean }
 
 const StyledButton = styled.button<ButtonProps>`
-  background-color: ${({ theme }) => theme.colors?.button_black};
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   border-radius: ${({ theme }) => theme.radius?.lg};
   color: ${({ theme }) => theme.colors?.white};
@@ -24,6 +23,16 @@ const StyledButton = styled.button<ButtonProps>`
   font-weight: 700;
   width: 200px;
   height: 56px;
+  border: 0;
+
+  ${({ isDisabled }) =>
+    isDisabled
+      ? css`
+          background-color: ${({ theme }) => theme.colors?.main_gray_26};
+        `
+      : css`
+          background-color: ${({ theme }) => theme.colors?.button_black};
+        `}
 
   @media ${({ theme }) => theme.media?.sm} {
     width: 142px;

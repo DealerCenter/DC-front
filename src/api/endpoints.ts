@@ -7,4 +7,5 @@ export const endpoints = {
   CHANGE_PASSWORD: '/auth/change-password',
   UPDATE_USER_DATA: '/api/dealers',
   GET_NOTIFICATION_SETTING: '/notifications/',
+  CREATE_ORDER: '/orders',
 }

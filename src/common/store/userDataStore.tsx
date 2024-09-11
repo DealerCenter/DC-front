@@ -23,14 +23,13 @@ export const useUserData = create<UserDataState>((set) => ({
     try {
       set({ loading: true })
       const response = await fetchMe()
-      set({ isAuthenticated: !!response })
-      set({ userData: response, loading: false })
+      set({ userData: response, isAuthenticated: !!response, loading: false })
     } catch (error) {
       console.error('Error fetching user:', error)
       set({ userData: null, loading: false })
     }
   },
   clearUserData: () => {
-    set({ userData: null })
+    set({ userData: null, isAuthenticated: false })
   },
 }))

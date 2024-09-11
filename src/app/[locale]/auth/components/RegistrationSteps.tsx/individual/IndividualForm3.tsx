@@ -35,7 +35,11 @@ const IndividualForm3 = ({ setFormStep }: Props) => {
 
   const onNextClick = async () => {
     const validated = await validateForm()
-    if (!validated.email && !validated.password && !validated.repeatPassword) {
+    if (
+      !validated[FIELD_NAMES.EMAIL] &&
+      !validated[FIELD_NAMES.PASSWORD] &&
+      !validated[FIELD_NAMES.REPEAT_PASSWORD]
+    ) {
       handleSubmit()
     }
   }

@@ -5,10 +5,16 @@ import { useTranslations } from 'next-intl'
 import Box from '../../../../components/common/Box'
 import TextInputFieldPair from './TextInputFieldPair'
 import AddFieldButton from '../../../../components/common/AddFieldButton'
+import {
+  FIELD_NAMES,
+  useCreateOrderContext,
+} from '../../../hooks/useCreateOrderContext'
 
 type Props = {}
 
 const LocationBox = ({}: Props) => {
+  const { values, handleBlur, handleChange, errors, touched } =
+    useCreateOrderContext()
   const t = useTranslations('')
 
   return (
@@ -16,8 +22,33 @@ const LocationBox = ({}: Props) => {
       <Header>{t('location')}</Header>
       <Line />
       <LabelsFrame>
-        <TextInputFieldPair title='state' value='California' />
-        <TextInputFieldPair title='address' value='Beverly hills, 235' />
+        <TextInputFieldPair
+          title='state'
+          placeholder='California'
+          name={FIELD_NAMES.STATE_ID}
+          value={values[FIELD_NAMES.STATE_ID]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.STATE_ID] && touched[FIELD_NAMES.STATE_ID]
+              ? errors[FIELD_NAMES.STATE_ID]
+              : ''
+          }
+        />
+        <TextInputFieldPair
+          title='address'
+          placeholder='Beverly hills, 235'
+          name={FIELD_NAMES.EXACT_ADDRESS}
+          value={values[FIELD_NAMES.EXACT_ADDRESS]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.EXACT_ADDRESS] &&
+            touched[FIELD_NAMES.EXACT_ADDRESS]
+              ? errors[FIELD_NAMES.EXACT_ADDRESS]
+              : ''
+          }
+        />
       </LabelsFrame>
       <AddFieldButton onClick={() => {}} />
     </Box>

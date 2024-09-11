@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEventHandler, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
@@ -13,18 +13,42 @@ import theme from '@/app/[locale]/theme'
 type Props = {
   title: string
   value: string
+  placeholder?: string
   selectItems?: { value: string }[]
+  name?: string
+  onBlur?: ChangeEventHandler<HTMLInputElement>
+  onChange?: ChangeEventHandler<HTMLInputElement>
+  errorMessage?: string
 }
 
-const TextInputFieldPair = ({ title, value, selectItems }: Props) => {
+const TextInputFieldPair = ({
+  title,
+  value,
+  selectItems,
+  placeholder,
+  name,
+  onBlur,
+  onChange,
+  errorMessage,
+}: Props) => {
+  const [textInputWidth, setTextInputWidth] = useState(220)
+  const [textInputWidth2, setTextInputWidth2] = useState(220)
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
 
+  useEffect(() => {
+    setTextInputWidth(isMobile ? 160 : isTablet ? 220 : 240)
+  }, [isMobile, isTablet, setTextInputWidth])
+
+  useEffect(() => {
+    setTextInputWidth2(isMobile ? 143 : 220)
+  }, [isMobile, setTextInputWidth2])
+
   return (
     <LabelPair>
       <TextInput
-        width={isMobile ? 160 : isTablet ? 220 : 240}
+        width={textInputWidth}
         height={48}
         type='text'
         name={title}
@@ -35,6 +59,7 @@ const TextInputFieldPair = ({ title, value, selectItems }: Props) => {
         fontWeight='bold'
         fontSize={13}
         isOutline={false}
+        isDisabled={true}
       />
       {selectItems ? (
         <AppSelectBasic
@@ -44,17 +69,18 @@ const TextInputFieldPair = ({ title, value, selectItems }: Props) => {
         />
       ) : (
         <TextInput
-          width={isMobile ? 143 : 220}
+          width={textInputWidth2}
           height={48}
           type='text'
-          name={`value of ${title}`}
-          placeholder={''}
+          name={name ? name : ''}
+          placeholder={placeholder ? placeholder : ''}
           value={value}
-          onChange={() => {}}
-          onBlur={() => {}}
+          onChange={onChange ? onChange : () => {}}
+          onBlur={onBlur ? onBlur : () => {}}
           fontWeight='bold'
           fontSize={13}
           isOutline={false}
+          errorMessage={errorMessage}
         />
       )}
     </LabelPair>

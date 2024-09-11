@@ -207,6 +207,9 @@
 
   "": "",
 
+  "dealer id": "Dealer ID",
+  "receiver id": "Receiver ID",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 
@@ -224,5 +227,23 @@
     "surname required": "Surname is required",
     "actual address required": "Actual address is required"
   },
-  "not added recipient data": "You have not added recipient data yet"
+  "not added recipient data": "You have not added recipient data yet",
+
+  "createOrder": {
+    "manufacturer required": "Manufacturer is required",
+    "manufacture year required": "Manufacture year is required",
+    "model required": "Model is required",
+    "vin required": "VIN is required",
+    "transportation cost required": "Transportation cost is required",
+    "car cost required": "Car cost is required",
+    "state required": "State is required",
+    "exact address required": "Exact address is required",
+    "insurance status required": "Insurance status is required",
+    "car category required": "Car category is required",
+    "mileage required": "Mileage is required",
+    "status required": "Status is required",
+    "container ID required": "Container ID is required",
+    "dealer ID required": "Dealer ID is required",
+    "receiver ID required": "Receiver ID is required"
+  }
 }

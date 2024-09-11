@@ -9,12 +9,17 @@ import TextInput from '@/common/components/inputElements/TextInput'
 import UserDataBox from './components/UserDataBox'
 import Box from '../../../components/common/Box'
 import { dummyShippingSteps2 } from '@/assets/DummyData'
+import {
+  FIELD_NAMES,
+  useCreateOrderContext,
+} from '../../hooks/useCreateOrderContext'
 
 type Props = {}
 
 const RightFrame = ({}: Props) => {
-  const [textInputWidth, setTextInputWidth] = useState(0)
-
+  const [textInputWidth, setTextInputWidth] = useState(333)
+  const { values, handleBlur, handleChange, errors, touched } =
+    useCreateOrderContext()
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
@@ -42,20 +47,52 @@ const RightFrame = ({}: Props) => {
               width={textInputWidth}
               height={48}
               type='text'
-              name='provide a link'
               placeholder={t('provide a link')}
-              value={''}
-              onChange={() => {}}
-              onBlur={() => {}}
               fontWeight='bold'
               fontSize={13}
               isOutline={false}
+              name={FIELD_NAMES.CONTAINER_ID}
+              value={values[FIELD_NAMES.CONTAINER_ID]}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              errorMessage={
+                errors[FIELD_NAMES.CONTAINER_ID] &&
+                touched[FIELD_NAMES.CONTAINER_ID]
+                  ? errors[FIELD_NAMES.CONTAINER_ID]
+                  : ''
+              }
             />
           </Frame2>
         </Frame>
       </Box>
-      <UserDataBox header='recipient data' />
-      <UserDataBox header='recipient data' />
+      <UserDataBox
+        header={t('recipient data')}
+        placeholder1={t('full name')}
+        placeholder2={t('receiver id')}
+        name={FIELD_NAMES.RECEIVER_ID}
+        value={values[FIELD_NAMES.RECEIVER_ID]}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errorMessage={
+          errors[FIELD_NAMES.RECEIVER_ID] && touched[FIELD_NAMES.RECEIVER_ID]
+            ? errors[FIELD_NAMES.RECEIVER_ID]
+            : ''
+        }
+      />
+      <UserDataBox
+        header={t('dealer data')}
+        placeholder1={t('full name')}
+        placeholder2={t('dealer id')}
+        name={FIELD_NAMES.DEALER_ID}
+        value={values[FIELD_NAMES.DEALER_ID]}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errorMessage={
+          errors[FIELD_NAMES.DEALER_ID] && touched[FIELD_NAMES.DEALER_ID]
+            ? errors[FIELD_NAMES.DEALER_ID]
+            : ''
+        }
+      />
     </Container>
   )
 }

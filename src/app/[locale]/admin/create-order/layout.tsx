@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { CreateOrderProvider } from './hooks/useCreateOrderContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,6 +15,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>{children}</div>
+    <CreateOrderProvider>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {children}
+      </div>
+    </CreateOrderProvider>
   )
 }

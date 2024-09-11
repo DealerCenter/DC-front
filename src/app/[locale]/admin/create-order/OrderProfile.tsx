@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -14,12 +15,42 @@ import ImagesUploadComponent from '../components/common/ImagesUploadComponent'
 import DetailsRow from './components/detailsRow/DetailsRow'
 import EditButton from '../components/common/EditButton'
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
+import FormSaveButton from '@/common/components/appButton/FormSaveButton'
+import {
+  FIELD_NAMES,
+  useCreateOrderContext,
+} from './hooks/useCreateOrderContext'
 
 type Props = {}
 
 const OrderProfile = (props: Props) => {
   const t = useTranslations('')
   const router = useRouter()
+
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    errors,
+    touched,
+    validateForm,
+    handleSubmit,
+  } = useCreateOrderContext()
+
+  const isButtonDisabled =
+    values[FIELD_NAMES.MANUFACTURER].length === 0 ||
+    values[FIELD_NAMES.MODEL].length === 0 ||
+    values[FIELD_NAMES.VIN].length === 0 ||
+    values[FIELD_NAMES.EXACT_ADDRESS].length === 0 ||
+    values[FIELD_NAMES.CAR_CATEGORY].length === 0 ||
+    values[FIELD_NAMES.STATUS].length === 0 ||
+    values[FIELD_NAMES.MILEAGE] === 0 ||
+    values[FIELD_NAMES.TRANSPORTATION_COST] === 0 ||
+    values[FIELD_NAMES.CAR_COST] === 0 ||
+    values[FIELD_NAMES.STATE_ID] === 0 ||
+    values[FIELD_NAMES.CONTAINER_ID] === 0 ||
+    values[FIELD_NAMES.DEALER_ID] === 0 ||
+    values[FIELD_NAMES.RECEIVER_ID] === 0
 
   return (
     <Container>
@@ -29,7 +60,11 @@ const OrderProfile = (props: Props) => {
           text={t('back to orders')}
           noTextOnMobile={true}
         />
-        <EditButton onClick={() => {}} />
+        <FormSaveButton
+          onClick={handleSubmit}
+          text={t('save')}
+          // disabled={isButtonDisabled}
+        />
       </TopButtonsFrame>
 
       <ImageFrame>

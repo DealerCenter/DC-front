@@ -30,7 +30,7 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
 
   const onNextClick = async () => {
     const validated = await validateForm()
-    if (!validated.personalNumber) {
+    if (!validated[FIELD_NAMES.PERSONAL_ID]) {
       setFormStep((prev) => prev + 1)
     }
   }

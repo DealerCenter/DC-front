@@ -5,10 +5,16 @@ import { useTranslations } from 'next-intl'
 import Box from '../../../../components/common/Box'
 import TextInputFieldPair from './TextInputFieldPair'
 import AddFieldButton from '../../../../components/common/AddFieldButton'
+import {
+  FIELD_NAMES,
+  useCreateOrderContext,
+} from '../../../hooks/useCreateOrderContext'
 
 type Props = {}
 
 const ParametersBox = ({}: Props) => {
+  const { values, handleBlur, handleChange, errors, touched } =
+    useCreateOrderContext()
   const t = useTranslations('')
 
   return (
@@ -19,13 +25,71 @@ const ParametersBox = ({}: Props) => {
         <TextInputFieldPair
           title='insurance'
           value=''
-          selectItems={[{ value: 'yes' }, { value: 'no' }]}
+          selectItems={[{ value: 'not working' }, { value: 'no' }]}
         />
-        <TextInputFieldPair title='manufacturer' value='dummy text' />
-        <TextInputFieldPair title='model' value='dummy text' />
-        <TextInputFieldPair title='year' value='dummy text' />
-        <TextInputFieldPair title='category' value='dummy text' />
-        <TextInputFieldPair title='mileage' value='dummy text' />
+        <TextInputFieldPair
+          title='manufacturer'
+          name={FIELD_NAMES.MANUFACTURER}
+          value={values[FIELD_NAMES.MANUFACTURER]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.MANUFACTURER] &&
+            touched[FIELD_NAMES.MANUFACTURER]
+              ? errors[FIELD_NAMES.MANUFACTURER]
+              : ''
+          }
+        />
+        <TextInputFieldPair
+          title='model'
+          name={FIELD_NAMES.MODEL}
+          value={values[FIELD_NAMES.MODEL]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.MODEL] && touched[FIELD_NAMES.MODEL]
+              ? errors[FIELD_NAMES.MODEL]
+              : ''
+          }
+        />
+        <TextInputFieldPair
+          title='year'
+          name={FIELD_NAMES.MANUFACTURE_YEAR}
+          value={values[FIELD_NAMES.MANUFACTURE_YEAR]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.MANUFACTURE_YEAR] &&
+            touched[FIELD_NAMES.MANUFACTURE_YEAR]
+              ? errors[FIELD_NAMES.MANUFACTURE_YEAR]
+              : ''
+          }
+        />
+        <TextInputFieldPair
+          title='category'
+          name={FIELD_NAMES.CAR_CATEGORY}
+          value={values[FIELD_NAMES.CAR_CATEGORY]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.CAR_CATEGORY] &&
+            touched[FIELD_NAMES.CAR_CATEGORY]
+              ? errors[FIELD_NAMES.CAR_CATEGORY]
+              : ''
+          }
+        />
+        <TextInputFieldPair
+          title='mileage'
+          name={FIELD_NAMES.MILEAGE}
+          value={values[FIELD_NAMES.MILEAGE]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.MILEAGE] && touched[FIELD_NAMES.MILEAGE]
+              ? errors[FIELD_NAMES.MILEAGE]
+              : ''
+          }
+        />
       </LabelsFrame>
       <AddFieldButton onClick={() => {}} />
     </Box>

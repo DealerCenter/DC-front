@@ -37,9 +37,6 @@ const Page = (props: Props) => {
     setAuthStep('registration')
   }
 
-  const { isAuthenticated } = useUserData()
-  console.log('Authenticated:', isAuthenticated)
-
   return (
     <>
       {authStep === 'login' ? (
