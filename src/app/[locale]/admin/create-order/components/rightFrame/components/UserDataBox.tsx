@@ -1,25 +1,21 @@
 import React, { useState } from 'react'
-import Box from '../../../../components/common/Box'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-
-import TextInput from '@/common/components/inputElements/TextInput'
-import BasicButton from '@/common/components/appButton/BasicButton'
-
-import checkedGreen from '@/assets/icons/checkedGreen.svg'
-import checkedEmpty from '@/assets/icons/checkedIconEmpty.svg'
-import editIcon from '@/assets/icons/editPencil.svg'
-import addPersonIcon from '@/assets/icons/addPersonBlack.svg'
 import { useMediaQuery } from 'react-responsive'
+
 import theme from '@/app/[locale]/theme'
 
-type Props = { header: string; fullName: string; value: string }
+import Box from '../../../../components/common/Box'
+import TextInput from '@/common/components/inputElements/TextInput'
 
-const UserDataBox = ({ header, fullName, value }: Props) => {
+import checkedEmpty from '@/assets/icons/checkedIconEmpty.svg'
+
+type Props = { header: string }
+
+const UserDataBox = ({ header }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
-  const [isEditing, setIsEditing] = useState(false)
 
   const t = useTranslations('')
 
@@ -27,71 +23,46 @@ const UserDataBox = ({ header, fullName, value }: Props) => {
     <Box>
       <HeaderFrame>
         <Header>{t(header)}</Header>
-        {isMobile && isEditing && (
-          <Icon onClick={() => setIsEditing(false)}>
+        {isMobile && (
+          <Icon onClick={() => {}}>
             <Image src={checkedEmpty} alt='checked icon' />
           </Icon>
         )}
       </HeaderFrame>
       <Line />
-      {fullName === '' ? (
-        <AddPersonFrame>
-          <Image src={addPersonIcon} alt='add person icon' />
-          <Value>{t('not added recipient data')}</Value>
-          <BasicButton onClick={() => {}}>{t('add recipient')}</BasicButton>
-        </AddPersonFrame>
-      ) : (
-        <>
-          {isEditing ? (
-            <DataFrame>
-              <TextInput
-                width={isMobile ? 160 : isTablet ? 156 : 180}
-                height={48}
-                type='text'
-                name='full name'
-                placeholder={t('full name')}
-                value={''}
-                onChange={() => {}}
-                onBlur={() => {}}
-                fontWeight='bold'
-                fontSize={13}
-                isOutline={false}
-              />
-              <TextInput
-                width={isMobile ? 143 : 160}
-                height={48}
-                type='text'
-                name='mob number'
-                placeholder={t('mob number')}
-                value={''}
-                onChange={() => {}}
-                onBlur={() => {}}
-                fontWeight='bold'
-                fontSize={13}
-                isOutline={false}
-              />
-              {!isMobile && (
-                <Icon onClick={() => setIsEditing(false)}>
-                  <Image src={checkedEmpty} alt='checked icon' />
-                </Icon>
-              )}
-            </DataFrame>
-          ) : (
-            <DataFrame>
-              <Name>{fullName}</Name>
-              <Value>{value}</Value>
-              <IconBox>
-                <Icon>
-                  <Image src={checkedGreen} alt='checked icon' />
-                </Icon>
-                <Icon onClick={() => setIsEditing(true)}>
-                  <Image src={editIcon} alt='pencil icon' />
-                </Icon>
-              </IconBox>
-            </DataFrame>
-          )}
-        </>
-      )}
+      <DataFrame>
+        <TextInput
+          width={isMobile ? 160 : isTablet ? 156 : 180}
+          height={48}
+          type='text'
+          name='full name'
+          placeholder={t('full name')}
+          value={''}
+          onChange={() => {}}
+          onBlur={() => {}}
+          fontWeight='bold'
+          fontSize={13}
+          isOutline={false}
+        />
+        <TextInput
+          width={isMobile ? 143 : 160}
+          height={48}
+          type='text'
+          name='mob number'
+          placeholder={t('mob number')}
+          value={''}
+          onChange={() => {}}
+          onBlur={() => {}}
+          fontWeight='bold'
+          fontSize={13}
+          isOutline={false}
+        />
+        {!isMobile && (
+          <Icon onClick={() => {}}>
+            <Image src={checkedEmpty} alt='checked icon' />
+          </Icon>
+        )}
+      </DataFrame>
     </Box>
   )
 }

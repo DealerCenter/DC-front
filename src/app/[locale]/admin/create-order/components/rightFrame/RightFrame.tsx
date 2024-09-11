@@ -1,21 +1,14 @@
-import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import ShippingStateBox from '../../../order-history/components/ShippingStateBox'
-import { dummyShippingSteps2 } from '@/assets/DummyData'
-import Image from 'next/image'
+import { useTranslations } from 'next-intl'
+import { useMediaQuery } from 'react-responsive'
 
-import boxIcon from '@/assets/icons/boxBlack.svg'
+import theme from '@/app/[locale]/theme'
+import ShippingStateBox from '../../../order-history/components/ShippingStateBox'
 import TextInput from '@/common/components/inputElements/TextInput'
 import UserDataBox from './components/UserDataBox'
 import Box from '../../../components/common/Box'
-import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/theme'
-
-const dummyUserData = [
-  { name: 'Luka Tsilosani', mobile: '+995 123 456 789' },
-  { name: 'Ani Kviciani', mobile: '+995 342 433 777' },
-]
+import { dummyShippingSteps2 } from '@/assets/DummyData'
 
 type Props = {}
 
@@ -61,16 +54,8 @@ const RightFrame = ({}: Props) => {
           </Frame2>
         </Frame>
       </Box>
-      <UserDataBox
-        header='recipient data'
-        fullName={''}
-        value={dummyUserData[0].mobile}
-      />
-      <UserDataBox
-        header='recipient data'
-        fullName={dummyUserData[1].name}
-        value={dummyUserData[1].mobile}
-      />
+      <UserDataBox header='recipient data' />
+      <UserDataBox header='recipient data' />
     </Container>
   )
 }

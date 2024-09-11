@@ -40,7 +40,7 @@ const ImageUpload = (props: Props) => {
   return (
     <Container>
       <AppGoBackButton
-        onClick={() => router.push(routeName.adminOrder)}
+        onClick={() => router.push(routeName.adminCreateOrder)}
         text={t('go back')}
       />
       <Box>
