@@ -46,7 +46,7 @@ const OrderProfile = (props: Props) => {
         </StateBoxFrame>
 
         <ImagesUploadComponent
-          onClick={() => router.push(routeName.adminOrderImageUpload)}
+          onClick={() => router.push(routeName.adminCreateOrderImageUpload)}
           height={372}
         />
         <DetailsRow />
