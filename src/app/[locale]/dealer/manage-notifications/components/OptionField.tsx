@@ -2,18 +2,30 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import ReactSwitch from 'react-switch'
 
-type Props = { text: string; isChecked: boolean; onChange: () => void }
+type Props = {
+  text: string
+  isChecked: boolean
+  onChange: (e: any) => void
+  key: string
+  setTouched: () => void
+}
 
-const OptionField = ({ text, isChecked, onChange }: Props) => {
+const OptionField = ({ text, isChecked, onChange, key, setTouched }: Props) => {
   const [isOn, setIsOn] = useState(isChecked)
-
-  const handleChange = () => {
+  const handleChange = (e: any) => {
     setIsOn((is) => !is)
-    onChange()
+    onChange(e)
+    setTouched()
   }
 
+  // settingsState.map((setting) => {
+  //   if ((setting.CategoryId = settingId)) {
+  //     setIsOn(setting.enabled)
+  //   }
+  // })
+
   return (
-    <Container>
+    <Container key={key}>
       <Label>{text}</Label>
       <ReactSwitch
         onChange={handleChange}

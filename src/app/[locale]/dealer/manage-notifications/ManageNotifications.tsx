@@ -6,63 +6,104 @@ import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4B
 import OptionField from './components/OptionField'
 import AppButton from '@/common/components/appButton/AppButton'
 import FormSaveButton from '@/common/components/appButton/FormSaveButton'
-import { getNotificationSettings } from '@/api/apiCalls'
-import { setSettingsData } from './helpers/setSettingsData'
+import {
+  getNotificationSettings,
+  updateNotificationSettings,
+} from '@/api/apiCalls'
 import { useUserData } from '@/common/store/userDataStore'
-import OptionFieldsFrame from './components/OptionFieldsFrame'
+
+const nameChanger = (name: string) => {
+  switch (name) {
+    case 'OrderGet':
+      return 'order acceptance'
+    case 'DebtExistence':
+      return 'existence of debt'
+    case 'InfoMissing':
+      return 'incomplete information'
+    case 'CompanyNewsAndServiceChange':
+      return 'company news and changes'
+    default:
+      return ''
+  }
+}
+
+type NotificationCategory = {
+  id: number
+  createdAt: string
+  updatedAt: string
+  type: string
+  name: string
+}
+
+type NotificationSetting = {
+  id: number
+  createdAt: string
+  updatedAt: string
+  enabled: boolean
+  notificationCategory: NotificationCategory
+}
 
 type Props = {}
 
 const ManageNotifications = (props: Props) => {
-  const [isLoading, setIsLoading] = useState(true)
-
   const [isOpenEmail, setIsOpenEmail] = useState(true)
   const [isOpenSms, setIsOpenSms] = useState(true)
-
   const [isEmailSaved, setIsEmailSaved] = useState(true)
   const [isSmsSaved, setIsSmsSaved] = useState(true)
-
-  const [emailSettings, setEmailSettings] = useState({
-    OrderGet: true,
-    DebtExistence: true,
-    InfoMissing: true,
-    CompanyNewsAndServiceChange: true,
-  })
-  const [smsSettings, setSmsSettings] = useState({
-    OrderGet: true,
-    DebtExistence: false,
-    InfoMissing: true,
-    CompanyNewsAndServiceChange: false,
-  })
+  const [notifications, setNotifications] = useState<NotificationSetting[]>([])
 
   const { userData } = useUserData()
 
   const t = useTranslations('')
 
-  const handleEmailChange = () => {
-    setIsEmailSaved(false)
-  }
-  const handleSmsChange = () => {
-    setIsSmsSaved(false)
-  }
-
   const getSettings = async () => {
     if (!userData) return
-
-    setIsLoading(true)
     const notificationData = await getNotificationSettings(userData.id)
-
-    console.log(notificationData)
-
-    setIsLoading(!setSettingsData(notificationData, setEmailSettings, 'Email'))
-    setIsLoading(!setSettingsData(notificationData, setSmsSettings, 'Sms'))
+    setNotifications(notificationData)
   }
+
+  notifications.sort((a, b) => {
+    return a.notificationCategory.id - b.notificationCategory.id
+  })
 
   // when userData updates and we have users' id, then we get the settings
   useEffect(() => {
     userData && getSettings()
     // eslint-disable-next-line
   }, [userData])
+
+  // Function to update a single notification
+  const updateNotification = (id: number, enabled: boolean) => {
+    setNotifications((prev) =>
+      prev.map((notification) =>
+        notification.id === id ? { ...notification, enabled } : notification
+      )
+    )
+  }
+
+  // Function to send PUT request to update settings
+  const saveChanges = async () => {
+    if (!userData) return
+
+    try {
+      const updatedData = notifications.map(({ id, enabled }) => ({
+        notificationId: id,
+        enabled,
+      }))
+      console.log('data to send:', updatedData)
+
+      const response = await updateNotificationSettings(
+        userData.id,
+        updatedData
+      )
+      setNotifications(response)
+
+      setIsEmailSaved(true)
+      setIsSmsSaved(true)
+    } catch (error) {
+      console.error('Error updating settings', error)
+    }
+  }
 
   return (
     <Container>
@@ -75,18 +116,27 @@ const ManageNotifications = (props: Props) => {
             onArrowDown={() => setIsOpenEmail((is) => !is)}
             isOpen={isOpenEmail}
           />
-          {!isLoading && isOpenEmail && (
-            <OptionFieldsFrame
-              settingsState={emailSettings}
-              onChange={handleEmailChange}
-            />
+          {userData && isOpenEmail && (
+            <OptionFieldsFrame>
+              {notifications.map(
+                (notification) =>
+                  notification.notificationCategory.type === 'Email' && (
+                    <OptionField
+                      key={`optionField${notification.createdAt}${notification.id}`}
+                      isChecked={notification.enabled}
+                      onChange={(e) => updateNotification(notification.id, e)}
+                      text={t(
+                        nameChanger(notification.notificationCategory.name)
+                      )}
+                      setTouched={() => setIsEmailSaved(false)}
+                    />
+                  )
+              )}
+            </OptionFieldsFrame>
           )}
           {!isEmailSaved && (
             <ButtonFrame>
-              <FormSaveButton
-                text={t('save')}
-                onClick={() => setIsEmailSaved(true)}
-              />
+              <FormSaveButton text={t('save')} onClick={saveChanges} />
             </ButtonFrame>
           )}
         </InputFieldsBox>
@@ -97,18 +147,30 @@ const ManageNotifications = (props: Props) => {
             onArrowDown={() => setIsOpenSms((is) => !is)}
             isOpen={isOpenSms}
           />
-          {!isLoading && isOpenSms && (
-            <OptionFieldsFrame
-              settingsState={smsSettings}
-              onChange={handleSmsChange}
-            />
+          {userData && isOpenSms && (
+            <OptionFieldsFrame>
+              {notifications.map(
+                (notification) =>
+                  notification.notificationCategory.type === 'Sms' && (
+                    <OptionField
+                      key={`optionField${notification.createdAt}${notification.id}`}
+                      isChecked={notification.enabled}
+                      onChange={(e) => updateNotification(notification.id, e)}
+                      text={t(
+                        nameChanger(notification.notificationCategory.name)
+                      )}
+                      setTouched={() => setIsSmsSaved(false)}
+                    />
+                  )
+              )}
+            </OptionFieldsFrame>
           )}
-          {!isSmsSaved && (
+          {userData && !isSmsSaved && (
             <ButtonFrame>
               <AppButton
                 text={t('save')}
                 type='filled'
-                onClick={() => setIsSmsSaved(true)}
+                onClick={saveChanges}
                 isSmall={true}
               />
             </ButtonFrame>
@@ -128,6 +190,12 @@ const Container = styled.div`
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors?.white};
   border-radius: 16px;
+`
+
+const OptionFieldsFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing?.sm};
 `
 
 const Frame = styled.div`

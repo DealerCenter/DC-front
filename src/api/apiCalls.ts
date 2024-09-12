@@ -72,8 +72,29 @@ export const updateUserData = async (
 export const getNotificationSettings = async (id: number) => {
   try {
     const response = await axiosInstance.get(
-      `${endpoints.GET_NOTIFICATION_SETTING}${id}`
+      `${endpoints.NOTIFICATION_SETTINGS_DEALERS}${id}`
     )
+
+    return response.data
+  } catch (error) {
+    console.error('Error getting notification settings:', error)
+  }
+}
+
+export const updateNotificationSettings = async (
+  id: number,
+  data: {
+    notificationId: number
+    enabled: boolean
+  }[]
+) => {
+  try {
+    const response = await axiosInstance.put(
+      `${endpoints.NOTIFICATION_SETTINGS_DEALERS}${id}`,
+      data
+    )
+
+    console.log('notification settings updated successfully:', response)
 
     return response.data
   } catch (error) {

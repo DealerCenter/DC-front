@@ -35,3 +35,17 @@ type ME_RES = {
     websiteUrl: string
   } | null
 }
+
+type NOTIFICATION_RES = {
+  id: number
+  createdAt: string
+  updatedAt: string
+  enabled: boolean
+  notificationCategory: {
+    id: number
+    createdAt: string
+    updatedAt: string
+    type: string
+    name: string
+  }
+}

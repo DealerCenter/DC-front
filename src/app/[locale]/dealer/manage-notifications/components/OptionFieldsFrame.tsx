@@ -2,6 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import OptionField from './OptionField'
 import { useTranslations } from 'next-intl'
+import { string } from 'yup'
+
+type NotificationCategory = {
+  id: number
+  type: string
+  name: string
+}
+
+type NotificationSetting = {
+  id: number
+  enabled: boolean
+  notificationCategory: NotificationCategory
+}
 
 type Props = {
   settingsState: {
@@ -10,34 +23,33 @@ type Props = {
     InfoMissing: boolean
     CompanyNewsAndServiceChange: boolean
   }
-  onChange: () => void
+  onChange: (e: any) => void
+  labelsAndIds: { label: string; id: number }[]
+  notifications: NotificationSetting[]
+  updateNotification: (id: number, enabled: boolean) => void
 }
 
-const OptionFieldsFrame = ({ settingsState, onChange }: Props) => {
+const OptionFieldsFrame = ({
+  settingsState,
+  onChange,
+  labelsAndIds,
+  notifications,
+  updateNotification,
+}: Props) => {
   const t = useTranslations('')
 
   return (
     <Container>
-      <OptionField
-        text={t('order acceptance')}
-        onChange={onChange}
-        isChecked={settingsState.OrderGet}
-      />
-      <OptionField
-        text={t('existence of debt')}
-        onChange={onChange}
-        isChecked={settingsState.DebtExistence}
-      />
-      <OptionField
-        text={t('incomplete information')}
-        onChange={onChange}
-        isChecked={settingsState.InfoMissing}
-      />
-      <OptionField
-        text={t('company news and changes')}
-        onChange={onChange}
-        isChecked={settingsState.CompanyNewsAndServiceChange}
-      />
+      {labelsAndIds.map((item, i) => (
+        <OptionField
+          key={`settingsFiledForSettings${item.id}`}
+          text={t(item.label)}
+          onChange={(e) => updateNotification(item.id, e.target.checked)}
+          isChecked={}
+          settingId={item.id}
+          // settingsState={}
+        />
+      ))}
     </Container>
   )
 }

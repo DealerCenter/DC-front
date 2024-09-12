@@ -6,6 +6,6 @@ export const endpoints = {
   ME: '/auth/me',
   CHANGE_PASSWORD: '/auth/change-password',
   UPDATE_USER_DATA: '/api/dealers',
-  GET_NOTIFICATION_SETTING: '/notifications/',
+  NOTIFICATION_SETTINGS_DEALERS: '/notifications/dealers/',
   CREATE_ORDER: '/orders',
 }
