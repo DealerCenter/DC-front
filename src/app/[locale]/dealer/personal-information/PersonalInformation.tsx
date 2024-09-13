@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
+import { useUserData } from '@/common/store/userDataStore'
 import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import ChangePasswordBox from './components/ChangePasswordBox'
-import { useUserData } from '@/common/store/userDataStore'
-import InputFieldsBox from './components/InputFieldsBox'
 import ContactInformationBox from './components/ContactInformationBox'
 
 type Props = {}

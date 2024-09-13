@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import TextInputField from './TextInputField'
-import InputFieldsHeader from '@/common/components/inputFieldsHeader/InputFieldsHeader'
 import styled from 'styled-components'
-import FormSaveButton from '@/common/components/appButton/FormSaveButton'
 import { useTranslations } from 'next-intl'
+
 import { useUserData } from '@/common/store/userDataStore'
+import { setTrueForSeconds } from '@/common/helpers/simpleFunctions'
 import { updateUserData } from '@/api/apiCalls'
+
+import InputFieldsHeader from '@/common/components/inputFieldsHeader/InputFieldsHeader'
+import FormSaveButton from '@/common/components/appButton/FormSaveButton'
+import TextInputField from './TextInputField'
 
 type Props = { type: 'representative' | 'individual' | 'company' }
 
 const ContactInformationBox = ({ type }: Props) => {
-  const [isOpenDropdown, setIsOpenDropdown] = useState(false)
+  const [isOpenDropdown, setIsOpenDropdown] = useState(true)
   const [isSaved, setIsSaved] = useState(true)
 
   const [errorMessage, setErrorMessage] = useState(false)
@@ -26,7 +29,7 @@ const ContactInformationBox = ({ type }: Props) => {
   })
 
   const t = useTranslations('')
-  const { userData, fetchUserData } = useUserData()
+  const { userData, setUserData } = useUserData()
 
   useEffect(() => {
     if (userData) {
@@ -40,14 +43,6 @@ const ContactInformationBox = ({ type }: Props) => {
       })
     }
   }, [userData])
-
-  // to ensure that messages do not appear if user starts to change the info again
-  useEffect(() => {
-    if (!isSaved) {
-      setErrorMessage(false)
-      setSuccessMessage(false)
-    }
-  }, [isSaved])
 
   const handleSave = async () => {
     if (!userData) return
@@ -72,15 +67,13 @@ const ContactInformationBox = ({ type }: Props) => {
           }
 
     const response = await updateUserData(data)
-    fetchUserData()
+    setUserData(response)
 
     if (response) {
-      setSuccessMessage(true)
-      setErrorMessage(false)
+      setTrueForSeconds(setSuccessMessage, 3)
       setIsSaved(true)
     } else {
-      setSuccessMessage(false)
-      setErrorMessage(true)
+      setTrueForSeconds(setErrorMessage, 3)
     }
   }
 

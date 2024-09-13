@@ -61,8 +61,11 @@ export const updateUserData = async (
       }
 ) => {
   try {
-    await axiosInstance.patch(endpoints.UPDATE_USER_DATA, payload)
-    return true
+    const response = await axiosInstance.patch(
+      endpoints.UPDATE_USER_DATA,
+      payload
+    )
+    return response.data
   } catch (error) {
     console.error('Error with updating the data:', error)
     return false
@@ -93,8 +96,6 @@ export const updateNotificationSettings = async (
       `${endpoints.NOTIFICATION_SETTINGS_DEALERS}${id}`,
       data
     )
-
-    console.log('notification settings updated successfully:', response)
 
     return response.data
   } catch (error) {

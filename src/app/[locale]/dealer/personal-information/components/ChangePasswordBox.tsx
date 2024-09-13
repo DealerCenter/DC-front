@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
+import { setTrueForSeconds } from '@/common/helpers/simpleFunctions'
 import { changeUserPassword } from '@/api/apiCalls'
+
+import TextInputField from './TextInputField'
 import FormSaveButton from '@/common/components/appButton/FormSaveButton'
 import InputFieldsHeader from '@/common/components/inputFieldsHeader/InputFieldsHeader'
-import TextInputField from './TextInputField'
 
 type Props = {}
 
@@ -23,23 +25,29 @@ const ChangePasswordBox = (props: Props) => {
 
   const t = useTranslations('')
 
+  const clearAllFields = () => {
+    setOldPassword('')
+    setNewPassword('')
+    setRepeatNewPassword('')
+  }
 
   const handleChangePassword = async () => {
+    if (newPassword !== repeatNewPassword) {
+      setTrueForSeconds(setPasswordsDoNotMatch, 3)
+    }
+
     if (newPassword === repeatNewPassword && oldPassword) {
       setPasswordsDoNotMatch(false)
 
       const response = await changeUserPassword(oldPassword, newPassword)
 
       if (response) {
-        setSuccessMessage(true)
-        setErrorMessage(false)
+        clearAllFields()
+        setTrueForSeconds(setSuccessMessage, 3)
         setIsSaved(true)
       } else {
-        setSuccessMessage(false)
-        setErrorMessage(true)
+        setTrueForSeconds(setErrorMessage, 3)
       }
-    } else {
-      setPasswordsDoNotMatch(true)
     }
   }
 

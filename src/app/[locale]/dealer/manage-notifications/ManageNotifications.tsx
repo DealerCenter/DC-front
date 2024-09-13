@@ -1,31 +1,16 @@
-import InputFieldsHeader from '@/common/components/inputFieldsHeader/InputFieldsHeader'
-import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
-import OptionField from './components/OptionField'
-import AppButton from '@/common/components/appButton/AppButton'
-import FormSaveButton from '@/common/components/appButton/FormSaveButton'
+import { useTranslations } from 'next-intl'
+
 import {
   getNotificationSettings,
   updateNotificationSettings,
 } from '@/api/apiCalls'
 import { useUserData } from '@/common/store/userDataStore'
+import { setTrueForSeconds } from '@/common/helpers/simpleFunctions'
 
-const nameChanger = (name: string) => {
-  switch (name) {
-    case 'OrderGet':
-      return 'order acceptance'
-    case 'DebtExistence':
-      return 'existence of debt'
-    case 'InfoMissing':
-      return 'incomplete information'
-    case 'CompanyNewsAndServiceChange':
-      return 'company news and changes'
-    default:
-      return ''
-  }
-}
+import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
+import OptionFieldsBox from './components/OptionFieldsBox'
 
 type NotificationCategory = {
   id: number
@@ -46,8 +31,8 @@ type NotificationSetting = {
 type Props = {}
 
 const ManageNotifications = (props: Props) => {
-  const [isOpenEmail, setIsOpenEmail] = useState(true)
-  const [isOpenSms, setIsOpenSms] = useState(true)
+  const [errorMessage, setErrorMessage] = useState(false)
+  const [successMessage, setSuccessMessage] = useState(false)
   const [isEmailSaved, setIsEmailSaved] = useState(true)
   const [isSmsSaved, setIsSmsSaved] = useState(true)
   const [notifications, setNotifications] = useState<NotificationSetting[]>([])
@@ -90,92 +75,55 @@ const ManageNotifications = (props: Props) => {
         notificationId: id,
         enabled,
       }))
-      console.log('data to send:', updatedData)
 
       const response = await updateNotificationSettings(
         userData.id,
         updatedData
       )
       setNotifications(response)
-
       setIsEmailSaved(true)
       setIsSmsSaved(true)
+
+      setTrueForSeconds(setSuccessMessage, 3)
     } catch (error) {
       console.error('Error updating settings', error)
+      setTrueForSeconds(setErrorMessage, 3)
     }
+  }
+
+  if (!userData) {
+    return (
+      <Loading>
+        {t('loading')}
+        {'...'}
+      </Loading>
+    )
   }
 
   return (
     <Container>
       <HeaderH4Bold text={t('manage notifications')} />
       <Frame>
-        <InputFieldsBox>
-          <InputFieldsHeader
-            text={t('email notifications')}
-            onEdit={() => setIsOpenEmail((is) => !is)}
-            onArrowDown={() => setIsOpenEmail((is) => !is)}
-            isOpen={isOpenEmail}
-          />
-          {userData && isOpenEmail && (
-            <OptionFieldsFrame>
-              {notifications.map(
-                (notification) =>
-                  notification.notificationCategory.type === 'Email' && (
-                    <OptionField
-                      key={`optionField${notification.createdAt}${notification.id}`}
-                      isChecked={notification.enabled}
-                      onChange={(e) => updateNotification(notification.id, e)}
-                      text={t(
-                        nameChanger(notification.notificationCategory.name)
-                      )}
-                      setTouched={() => setIsEmailSaved(false)}
-                    />
-                  )
-              )}
-            </OptionFieldsFrame>
-          )}
-          {!isEmailSaved && (
-            <ButtonFrame>
-              <FormSaveButton text={t('save')} onClick={saveChanges} />
-            </ButtonFrame>
-          )}
-        </InputFieldsBox>
-        <InputFieldsBox>
-          <InputFieldsHeader
-            text={t('sms notifications')}
-            onEdit={() => setIsOpenSms((is) => !is)}
-            onArrowDown={() => setIsOpenSms((is) => !is)}
-            isOpen={isOpenSms}
-          />
-          {userData && isOpenSms && (
-            <OptionFieldsFrame>
-              {notifications.map(
-                (notification) =>
-                  notification.notificationCategory.type === 'Sms' && (
-                    <OptionField
-                      key={`optionField${notification.createdAt}${notification.id}`}
-                      isChecked={notification.enabled}
-                      onChange={(e) => updateNotification(notification.id, e)}
-                      text={t(
-                        nameChanger(notification.notificationCategory.name)
-                      )}
-                      setTouched={() => setIsSmsSaved(false)}
-                    />
-                  )
-              )}
-            </OptionFieldsFrame>
-          )}
-          {userData && !isSmsSaved && (
-            <ButtonFrame>
-              <AppButton
-                text={t('save')}
-                type='filled'
-                onClick={saveChanges}
-                isSmall={true}
-              />
-            </ButtonFrame>
-          )}
-        </InputFieldsBox>
+        <OptionFieldsBox
+          headerText={t('email notifications')}
+          notificationsState={notifications}
+          saveChanges={saveChanges}
+          onChange={updateNotification}
+          isSaved={isEmailSaved}
+          setIsSaved={setIsEmailSaved}
+          isError={errorMessage}
+          isSuccess={successMessage}
+        />
+        <OptionFieldsBox
+          headerText={t('sms notifications')}
+          notificationsState={notifications}
+          saveChanges={saveChanges}
+          onChange={updateNotification}
+          isSaved={isSmsSaved}
+          setIsSaved={setIsSmsSaved}
+          isError={errorMessage}
+          isSuccess={successMessage}
+        />
       </Frame>
     </Container>
   )
@@ -192,25 +140,18 @@ const Container = styled.div`
   border-radius: 16px;
 `
 
-const OptionFieldsFrame = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing?.sm};
-`
-
 const Frame = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.xl};
 `
 
-const InputFieldsBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing?.lg};
-`
+const Loading = styled.div`
+  margin: 10px;
 
-const ButtonFrame = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  color: ${({ theme }) => theme.colors?.main_gray_56};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    margin: 30px;
+  }
 `
