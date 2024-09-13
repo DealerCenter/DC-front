@@ -28,7 +28,7 @@ const SearchPanel = (props: Props) => {
           <CheckItemBox label='Copart' />
         </ChecklistBox>
       </OptionBox>
-      <OptionBox label={t('Buy now')}>
+      <OptionBox label={'Buy now'}>
         <FromUptoBox type='text' />
       </OptionBox>
       <OptionBox label={t('brand')}>
