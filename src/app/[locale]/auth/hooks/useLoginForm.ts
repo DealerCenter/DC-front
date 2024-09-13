@@ -40,7 +40,7 @@ const useLoginForm = () => {
         message.success(t('you are logged in'))
         router.push(routeName.dealer)
       } catch (error) {
-        message.success(t('you could not log in'))
+        message.error(t('you could not log in'))
         if (error instanceof AxiosError) {
           console.error('Axios Error:', error)
           setAxiosError(error)

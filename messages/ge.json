@@ -219,6 +219,10 @@
   "you could not log in": "თქვენ ვერ შეხვედით სისტემაში",
   "you are logged out": "თქვენ გამოხვედით სისტემიდან",
   "you could not log out": "თქვენ ვერ გამოხვედით სისტემიდან",
+  "notification settings updated successfully": "შეტყობინებების პარამეტრები წარმატებით განახლდა",
+  "failed to update notification settings": "შეტყობინებების პარამეტრები ვერ განახლდა",
+
+  "password required": "პაროლი აუცილებელია",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
@@ -235,7 +239,9 @@
     "personal number required": "პირადი ნომერი აუცილებელია",
     "name required": "სახელი აუცილებელია",
     "surname required": "გვარი აუცილებელია",
-    "actual address required": "ფაქტობრივი მისამართი აუცილებელია"
+    "actual address required": "ფაქტობრივი მისამართი აუცილებელია",
+    "document is required": "დოკუმენტი აუცილებელია",
+    "id image is required": "პირადობის მოწმობის სურათი აუცილებელია"
   },
   "not added recipient data": "მიმღები პირის მონაცემები ჯერ არ გაქვს დამატებული ",
 

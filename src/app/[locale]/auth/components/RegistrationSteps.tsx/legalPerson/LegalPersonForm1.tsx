@@ -110,7 +110,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
       />
       <FileDropZone
         width={442}
-        dropText={t('Drop the files here ...')}
+        dropText={t('drop the files here')}
         text={t('upload a certificate')}
         uploadedText={t('file uploaded')}
         onDropAdditional={setUploadDocument}

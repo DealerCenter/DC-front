@@ -84,9 +84,9 @@ const ManageNotifications = (props: Props) => {
       setIsEmailSaved(true)
       setIsSmsSaved(true)
 
-      message.success(t('information updated successfully'))
+      message.success(t('notification settings updated successfully'))
     } catch (error) {
-      message.error(t('information not updated'))
+      message.error(t('failed to update notification settings'))
       console.error('Error updating settings', error)
     }
   }

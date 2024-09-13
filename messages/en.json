@@ -219,6 +219,10 @@
   "you could not log in": "You could not log in",
   "you are logged out": "You are logged out",
   "you could not log out": "You could not log out",
+  "notification settings updated successfully": "Notification settings updated successfully",
+  "failed to update notification settings": "Failed to update notification settings",
+
+  "password required": "Password is required",
 
   "useForm": {
     "must be valid email": "Must be a valid email",
@@ -235,7 +239,9 @@
     "personal number required": "Personal number is required",
     "name required": "Name is required",
     "surname required": "Surname is required",
-    "actual address required": "Actual address is required"
+    "actual address required": "Actual address is required",
+    "document is required": "Document is required",
+    "id image is required": "ID Image is required"
   },
   "not added recipient data": "You have not added recipient data yet",
 

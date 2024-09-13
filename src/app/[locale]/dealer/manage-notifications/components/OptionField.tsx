@@ -6,11 +6,11 @@ type Props = {
   text: string
   isChecked: boolean
   onChange: (e: any) => void
-  key: string
+
   setTouched: () => void
 }
 
-const OptionField = ({ text, isChecked, onChange, key, setTouched }: Props) => {
+const OptionField = ({ text, isChecked, onChange, setTouched }: Props) => {
   const [isOn, setIsOn] = useState(isChecked)
   const handleChange = (e: any) => {
     setIsOn((is) => !is)
@@ -18,14 +18,8 @@ const OptionField = ({ text, isChecked, onChange, key, setTouched }: Props) => {
     setTouched()
   }
 
-  // settingsState.map((setting) => {
-  //   if ((setting.CategoryId = settingId)) {
-  //     setIsOn(setting.enabled)
-  //   }
-  // })
-
   return (
-    <Container key={key}>
+    <Container>
       <Label>{text}</Label>
       <ReactSwitch
         onChange={handleChange}
@@ -67,5 +61,3 @@ const Label = styled.div`
     font-size: ${({ theme }) => theme.fontSizes?.medium};
   }
 `
-
-const Icon = styled.div``

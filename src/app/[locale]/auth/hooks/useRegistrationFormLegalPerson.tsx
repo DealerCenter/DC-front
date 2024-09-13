@@ -38,7 +38,8 @@ export const RegisterFormProviderLegalPerson = ({
   const [uploadDocument, setUploadDocument] = useState<Blob>()
   const [uploadIdImage, setUploadIdImage] = useState<Blob>()
   const router = useRouter()
-  const t = useTranslations('useForm')
+  const tUseForm = useTranslations('useForm')
+  const t = useTranslations('')
 
   const initialValues = {
     [FIELD_NAMES.EMAIL]: '',
@@ -90,35 +91,43 @@ export const RegisterFormProviderLegalPerson = ({
     validationSchema: yup.object({
       [FIELD_NAMES.COMPANY_NAME]: yup
         .string()
-        .required(t('company name required')),
+        .required(tUseForm('company name required')),
       [FIELD_NAMES.EMAIL]: yup
         .string()
-        .email(t('must be valid email'))
-        .required(t('email required')),
-      [FIELD_NAMES.PASSWORD]: yup.string().required(t('password required')),
+        .email(tUseForm('must be valid email'))
+        .required(tUseForm('email required')),
+      [FIELD_NAMES.PASSWORD]: yup
+        .string()
+        .required(tUseForm('password required')),
       [FIELD_NAMES.REPEAT_PASSWORD]: yup
         .string()
         .oneOf([yup.ref('password'), ''], 'Passwords must match'),
       [FIELD_NAMES.IDENTIFICATION_CODE]: yup
         .string()
-        .required(t('identification code required')),
-      [FIELD_NAMES.ADDRESS]: yup.string().required(t('address required')),
+        .required(tUseForm('identification code required')),
+      [FIELD_NAMES.ADDRESS]: yup
+        .string()
+        .required(tUseForm('address required')),
       [FIELD_NAMES.WEBSITE_URL]: yup.string(),
       [FIELD_NAMES.LAST_NAME]: yup
         .string()
-        .required(t('name of representative required')),
+        .required(tUseForm('name of representative required')),
       [FIELD_NAMES.LAST_NAME]: yup
         .string()
-        .required(t('surname of representative required')),
+        .required(tUseForm('surname of representative required')),
       [FIELD_NAMES.CONTACT_NUMBER]: yup
         .string()
-        .required(t('contact number required')),
+        .required(tUseForm('contact number required')),
       [FIELD_NAMES.BIRTH_DATE]: yup
         .date()
-        .required(t('date of birth required')),
+        .required(tUseForm('date of birth required')),
       [FIELD_NAMES.PERSONAL_ID]: yup
         .number()
-        .required(t('personal number required')),
+        .required(tUseForm('personal number required')),
+      // // File validation for document
+      // [FIELD_NAMES.DOCUMENT]: yup.mixed().required(t('document is required')),
+      // // File validation for id image
+      // [FIELD_NAMES.ID_IMAGE]: yup.mixed().required(t('id image is required')),
     }),
   })
 
