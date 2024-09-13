@@ -1,24 +1,25 @@
-import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/inputElements/TextInput'
 import React, { Dispatch, SetStateAction } from 'react'
-
-import Image from 'next/image'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+
 import {
   FIELD_NAMES,
   useRegisterFormContextLegalPerson,
 } from '../../../hooks/useRegistrationFormLegalPerson'
+import theme from '@/app/[locale]/theme'
 
+import TextInput from '@/common/components/inputElements/TextInput'
+import AppButton from '@/common/components/appButton/AppButton'
 import ValidateTextBox from '@/common/components/passwordValidateTextBox/ValidateTextBox'
 import usePasswordValidation from '../../../hooks/usePasswordValidation'
 import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/theme'
+import { message } from 'antd'
 
 type Props = { setFormStep: Dispatch<SetStateAction<number>> }
 
 const FormStep3 = ({ setFormStep }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   const t = useTranslations('')
 
   const {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import { message } from 'antd'
 
 import { useUserData } from '@/common/store/userDataStore'
-import { setTrueForSeconds } from '@/common/helpers/simpleFunctions'
 import { updateUserData } from '@/api/apiCalls'
 
 import InputFieldsHeader from '@/common/components/inputFieldsHeader/InputFieldsHeader'
@@ -15,9 +15,6 @@ type Props = { type: 'representative' | 'individual' | 'company' }
 const ContactInformationBox = ({ type }: Props) => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(true)
   const [isSaved, setIsSaved] = useState(true)
-
-  const [errorMessage, setErrorMessage] = useState(false)
-  const [successMessage, setSuccessMessage] = useState(false)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -70,10 +67,10 @@ const ContactInformationBox = ({ type }: Props) => {
     setUserData(response)
 
     if (response) {
-      setTrueForSeconds(setSuccessMessage, 3)
+      message.success(t('information updated successfully'))
       setIsSaved(true)
     } else {
-      setTrueForSeconds(setErrorMessage, 3)
+      message.error(t('information not updated'))
     }
   }
 
@@ -151,10 +148,6 @@ const ContactInformationBox = ({ type }: Props) => {
       {isOpenDropdown && (
         <>
           <InputFieldsFrame>{renderInputFields()}</InputFieldsFrame>
-          {successMessage && (
-            <Success>{t('information updated successfully')}</Success>
-          )}
-          {errorMessage && <Error>{t('information not updated')}</Error>}
           {!isSaved && (
             <ButtonFrame>
               <FormSaveButton text={t('save')} onClick={handleSave} />

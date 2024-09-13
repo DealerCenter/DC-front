@@ -19,6 +19,7 @@
   "drop the file here": "ფაილი ჩააგდეთ აქ ...",
   "name of representative": "წარმომადგენლის სახელი",
   "surname of representative": "წარმომადგენლის გვარი",
+  "address of representative": "წარმომადგენლის მისამართი",
   "contact number": "საკონტაქტო ნომერი",
   "date of birth": "დაბადების თარიღი",
   "personal number": "პირადი ნომერი",
@@ -102,6 +103,7 @@
   "location": "მდებარეობა",
   "state": "შტატი",
   "address": "მისამართი",
+  "company address": "კომპანიის მისამართი",
   "parameters": "პარამეტრები",
   "insurance": "დაზღვევა",
   "manufacturer": "მწარმოებელი",
@@ -204,11 +206,19 @@
   "information not updated": "ინფორმაციის განახლება ვერ მოხერხდა",
 
   "loading": "იტვირთება",
+  "wait": "დაელოდე",
 
   "": "",
 
   "dealer id": "დილერის ID",
   "receiver id": "მიმღების ID",
+
+  "you registered successfully": "თქვენ წარმატებით დარეგისტრირდით",
+  "you could not register": "თქვენ ვერ დარეგისტრირდით",
+  "you are logged in": "თქვენ შეხვედით სისტემაში",
+  "you could not log in": "თქვენ ვერ შეხვედით სისტემაში",
+  "you are logged out": "თქვენ გამოხვედით სისტემიდან",
+  "you could not log out": "თქვენ ვერ გამოხვედით სისტემიდან",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

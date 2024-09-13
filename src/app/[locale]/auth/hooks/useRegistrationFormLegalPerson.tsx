@@ -1,11 +1,13 @@
 import React, { ReactNode, createContext, useContext, useState } from 'react'
 import { useFormik, FormikValues, Formik } from 'formik'
+import { message } from 'antd'
 import * as yup from 'yup'
 import { useTranslations } from 'next-intl'
 import axiosInstance from '@/api/apiClient'
+import { useRouter } from '@/navigation'
+
 import { endpoints } from '@/api/endpoints'
 import { handleAuthResponse } from '@/common/helpers/utils'
-import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 
 const FormikContext = createContext<FormikValues | null>(null)
@@ -13,9 +15,11 @@ const FormikContext = createContext<FormikValues | null>(null)
 export const FIELD_NAMES = {
   COMPANY_NAME: 'companyName',
   IDENTIFICATION_CODE: 'identificationCode',
+  ADDRESS: 'address',
   COMPANY_ADDRESS: 'companyAddress',
   WEBSITE_URL: 'websiteUrl',
   DOCUMENT: 'document',
+  ID_IMAGE: 'image',
   FIRST_NAME: 'firstName',
   LAST_NAME: 'lastName',
   CONTACT_NUMBER: 'phoneNumber',
@@ -24,8 +28,6 @@ export const FIELD_NAMES = {
   EMAIL: 'email',
   PASSWORD: 'password',
   REPEAT_PASSWORD: 'repeatPassword',
-
-  ADDRESS: 'address',
 }
 
 export const RegisterFormProviderLegalPerson = ({
@@ -33,9 +35,10 @@ export const RegisterFormProviderLegalPerson = ({
 }: {
   children: ReactNode
 }) => {
-  const t = useTranslations('useForm')
-  const router = useRouter()
   const [uploadDocument, setUploadDocument] = useState<Blob>()
+  const [uploadIdImage, setUploadIdImage] = useState<Blob>()
+  const router = useRouter()
+  const t = useTranslations('useForm')
 
   const initialValues = {
     [FIELD_NAMES.EMAIL]: '',
@@ -64,6 +67,9 @@ export const RegisterFormProviderLegalPerson = ({
 
       uploadDocument &&
         legalFormData.append(FIELD_NAMES.DOCUMENT, uploadDocument)
+      uploadIdImage && legalFormData.append(FIELD_NAMES.ID_IMAGE, uploadIdImage)
+
+      console.log('data we are sending to backend:', data)
 
       try {
         const response = await axiosInstance.post<REGISTER_RES>(
@@ -71,8 +77,12 @@ export const RegisterFormProviderLegalPerson = ({
           legalFormData
         )
         handleAuthResponse(response)
+
+        message.success(t('you registered successfully'))
         router.push(routeName.dealer)
+        return response
       } catch (error) {
+        message.success(t('you could not register'))
         console.error('Error:', error)
       }
     },
@@ -133,6 +143,7 @@ export const RegisterFormProviderLegalPerson = ({
         validateForm,
         handleSubmit,
         setUploadDocument,
+        setUploadIdImage,
       }}
     >
       {children}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import { message } from 'antd'
 
 import { setTrueForSeconds } from '@/common/helpers/simpleFunctions'
 import { changeUserPassword } from '@/api/apiCalls'
@@ -20,8 +21,6 @@ const ChangePasswordBox = (props: Props) => {
   const [repeatNewPassword, setRepeatNewPassword] = useState('')
 
   const [passwordsDoNotMatch, setPasswordsDoNotMatch] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(false)
-  const [successMessage, setSuccessMessage] = useState(false)
 
   const t = useTranslations('')
 
@@ -43,10 +42,10 @@ const ChangePasswordBox = (props: Props) => {
 
       if (response) {
         clearAllFields()
-        setTrueForSeconds(setSuccessMessage, 3)
+        message.success(t('password updated successfully'))
         setIsSaved(true)
       } else {
-        setTrueForSeconds(setErrorMessage, 3)
+        message.error(t('password could not be updated'))
       }
     }
   }
@@ -84,10 +83,6 @@ const ChangePasswordBox = (props: Props) => {
               type='password'
             />
           </InputFieldsFrame>
-          {successMessage && (
-            <Success>{t('password updated successfully')}</Success>
-          )}
-          {errorMessage && <Error>{t('password could not be updated')}</Error>}
           {passwordsDoNotMatch && <Error>{t('passwords do not match')}</Error>}
           {newPassword && oldPassword && repeatNewPassword && !isSaved && (
             <ButtonFrame>
@@ -107,6 +102,7 @@ const Container = styled.div`
   flex-direction: column;
   gap: 24px;
 `
+
 const InputFieldsFrame = styled.div`
   padding: 0px 32px;
   display: flex;
@@ -121,12 +117,5 @@ const ButtonFrame = styled.div`
 
 const Error = styled.div`
   padding-left: 40px;
-
   color: ${({ theme }) => theme.colors?.red};
-`
-
-const Success = styled.div`
-  padding-left: 40px;
-
-  color: ${({ theme }) => theme.colors?.green};
 `

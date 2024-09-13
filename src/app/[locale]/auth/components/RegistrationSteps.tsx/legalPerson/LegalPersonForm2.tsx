@@ -18,8 +18,15 @@ type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
 const LegalPersonForm2 = ({ setFormStep }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, validateForm, errors, touched } =
-    useRegisterFormContextLegalPerson()
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    validateForm,
+    errors,
+    touched,
+    setUploadIdImage,
+  } = useRegisterFormContextLegalPerson()
 
   const onNextClick = async () => {
     const validated = await validateForm()
@@ -27,6 +34,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
       !validated[FIELD_NAMES.FIRST_NAME] &&
       !validated[FIELD_NAMES.LAST_NAME] &&
       !validated[FIELD_NAMES.CONTACT_NUMBER] &&
+      !validated[FIELD_NAMES.ADDRESS] &&
       !validated[FIELD_NAMES.BIRTH_DATE] &&
       !validated[FIELD_NAMES.PERSONAL_ID]
     ) {
@@ -38,6 +46,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
     values[FIELD_NAMES.FIRST_NAME].length === 0 ||
     values[FIELD_NAMES.LAST_NAME].length === 0 ||
     values[FIELD_NAMES.CONTACT_NUMBER].length === 0 ||
+    values[FIELD_NAMES.ADDRESS].length === 0 ||
     values[FIELD_NAMES.BIRTH_DATE].length === 0 ||
     values[FIELD_NAMES.PERSONAL_ID].length === 0
 
@@ -48,12 +57,12 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         type='text'
         name={FIELD_NAMES.FIRST_NAME}
         placeholder={t('name of representative')}
-        value={values.nameOfRepresentative}
+        value={values[FIELD_NAMES.FIRST_NAME]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.nameOfRepresentative && touched.nameOfRepresentative
-            ? errors.nameOfRepresentative
+          errors[FIELD_NAMES.FIRST_NAME] && touched[FIELD_NAMES.FIRST_NAME]
+            ? errors[FIELD_NAMES.FIRST_NAME]
             : ''
         }
       />
@@ -62,12 +71,26 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         type='text'
         name={FIELD_NAMES.LAST_NAME}
         placeholder={t('surname of representative')}
-        value={values.surnameOfRepresentative}
+        value={values[FIELD_NAMES.LAST_NAME]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.surnameOfRepresentative && touched.surnameOfRepresentative
-            ? errors.surnameOfRepresentative
+          errors[FIELD_NAMES.LAST_NAME] && touched[FIELD_NAMES.LAST_NAME]
+            ? errors[FIELD_NAMES.LAST_NAME]
+            : ''
+        }
+      />
+      <TextInput
+        width={isMobile ? undefined : 442}
+        type='text'
+        name={FIELD_NAMES.ADDRESS}
+        placeholder={t('address of representative')}
+        value={values[FIELD_NAMES.ADDRESS]}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errorMessage={
+          errors[FIELD_NAMES.ADDRESS] && touched[FIELD_NAMES.ADDRESS]
+            ? errors[FIELD_NAMES.ADDRESS]
             : ''
         }
       />
@@ -76,12 +99,13 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         type='text'
         name={FIELD_NAMES.CONTACT_NUMBER}
         placeholder={t('contact number')}
-        value={values.contactNumber}
+        value={values[FIELD_NAMES.CONTACT_NUMBER]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.contactNumber && touched.contactNumber
-            ? errors.contactNumber
+          errors[FIELD_NAMES.CONTACT_NUMBER] &&
+          touched[FIELD_NAMES.CONTACT_NUMBER]
+            ? errors[FIELD_NAMES.CONTACT_NUMBER]
             : ''
         }
       />
@@ -90,12 +114,14 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         type='date'
         name={FIELD_NAMES.BIRTH_DATE}
         placeholder={t('date of birth')}
-        value={values.dateOfBirth}
+        value={values[FIELD_NAMES.BIRTH_DATE]}
         onChange={handleChange}
         onBlur={handleBlur}
         optionalInfo={t('enter your date of birth')}
         errorMessage={
-          errors.dateOfBirth && touched.dateOfBirth ? errors.dateOfBirth : ''
+          errors[FIELD_NAMES.BIRTH_DATE] && touched[FIELD_NAMES.BIRTH_DATE]
+            ? errors[FIELD_NAMES.BIRTH_DATE]
+            : ''
         }
       />
       <TextInput
@@ -103,12 +129,12 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         type='text'
         name={FIELD_NAMES.PERSONAL_ID}
         placeholder={t('personal number')}
-        value={values.personalNumber}
+        value={values[FIELD_NAMES.PERSONAL_ID]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.personalNumber && touched.personalNumber
-            ? errors.personalNumber
+          errors[FIELD_NAMES.PERSONAL_ID] && touched[FIELD_NAMES.PERSONAL_ID]
+            ? errors[FIELD_NAMES.PERSONAL_ID]
             : ''
         }
       />
@@ -117,6 +143,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         dropText={t('drop the file')}
         text={t('upload an ID photo')}
         uploadedText={t('photo uploaded')}
+        onDropAdditional={setUploadIdImage}
       />
       <AppButton
         width={442}

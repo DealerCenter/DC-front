@@ -23,6 +23,7 @@ import bellIconBlack from '@/assets/icons/bell/bell-black.svg'
 import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
+import { message } from 'antd'
 
 type Props = {
   routes: {
@@ -37,7 +38,7 @@ const SideBar = ({ routes }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const pathname = usePathname()
-  const { userData, loading, error } = useUserData()
+  const { userData } = useUserData()
   const router = useRouter()
 
   const [isHovered, setIsHovered] = useState(false)
@@ -52,10 +53,15 @@ const SideBar = ({ routes }: Props) => {
   }
 
   const handleLogout = async () => {
-    setIsLoggingOut(true)
-    await logoutUser()
-    setIsLoggingOut(false)
-    router.push(routeName.landing)
+    try {
+      setIsLoggingOut(true)
+      await logoutUser()
+      message.success(t('you are logged out'))
+      router.push(routeName.landing)
+    } catch (error) {
+      setIsLoggingOut(false)
+      message.success(t('you could not log out'))
+    }
   }
 
   return (
@@ -131,7 +137,7 @@ const SideBar = ({ routes }: Props) => {
         {!isMobile && (
           <GrayContainer
             icon={exitIcon}
-            text={t('exit')}
+            text={isLoggingOut ? `${t('wait')}...` : t('exit')}
             height='71px'
             isHovered={isHovered}
             onClick={handleLogout}

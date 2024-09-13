@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useTranslations } from 'next-intl'
-import { FILE } from 'dns'
 import axiosInstance from '@/api/apiClient'
 import { endpoints } from '@/api/endpoints'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 import { AxiosError } from 'axios'
 import { handleAuthResponse } from '@/common/helpers/utils'
-import { useUserData } from '@/common/store/userDataStore'
+import { message } from 'antd'
 
 export const FIELD_NAMES = {
   EMAIL: 'email',
@@ -20,7 +19,8 @@ const useLoginForm = () => {
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
-  const t = useTranslations('useForm')
+  const tUseForm = useTranslations('useForm')
+  const t = useTranslations('')
   const router = useRouter()
 
   const formik = useFormik({
@@ -37,8 +37,10 @@ const useLoginForm = () => {
 
         handleAuthResponse(response)
 
+        message.success(t('you are logged in'))
         router.push(routeName.dealer)
       } catch (error) {
+        message.success(t('you could not log in'))
         if (error instanceof AxiosError) {
           console.error('Axios Error:', error)
           setAxiosError(error)
@@ -52,8 +54,8 @@ const useLoginForm = () => {
     validationSchema: yup.object({
       [FIELD_NAMES.EMAIL]: yup
         .string()
-        .email(t('must be valid email'))
-        .required(t('email required')),
+        .email(tUseForm('must be valid email'))
+        .required(tUseForm('email required')),
       [FIELD_NAMES.PASSWORD]: yup.string().required(t('password required')),
     }),
   })

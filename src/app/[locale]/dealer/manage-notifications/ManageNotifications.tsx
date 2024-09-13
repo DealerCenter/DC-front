@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import { message } from 'antd'
 
 import {
   getNotificationSettings,
   updateNotificationSettings,
 } from '@/api/apiCalls'
 import { useUserData } from '@/common/store/userDataStore'
-import { setTrueForSeconds } from '@/common/helpers/simpleFunctions'
 
 import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import OptionFieldsBox from './components/OptionFieldsBox'
@@ -84,10 +84,10 @@ const ManageNotifications = (props: Props) => {
       setIsEmailSaved(true)
       setIsSmsSaved(true)
 
-      setTrueForSeconds(setSuccessMessage, 3)
+      message.success(t('information updated successfully'))
     } catch (error) {
+      message.error(t('information not updated'))
       console.error('Error updating settings', error)
-      setTrueForSeconds(setErrorMessage, 3)
     }
   }
 
@@ -111,8 +111,6 @@ const ManageNotifications = (props: Props) => {
           onChange={updateNotification}
           isSaved={isEmailSaved}
           setIsSaved={setIsEmailSaved}
-          isError={errorMessage}
-          isSuccess={successMessage}
         />
         <OptionFieldsBox
           headerText={t('sms notifications')}
@@ -121,8 +119,6 @@ const ManageNotifications = (props: Props) => {
           onChange={updateNotification}
           isSaved={isSmsSaved}
           setIsSaved={setIsSmsSaved}
-          isError={errorMessage}
-          isSuccess={successMessage}
         />
       </Frame>
     </Container>

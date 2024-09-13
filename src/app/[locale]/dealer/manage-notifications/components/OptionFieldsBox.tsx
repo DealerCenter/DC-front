@@ -31,8 +31,6 @@ type Props = {
   onChange: (id: number, enabled: boolean) => void
   isSaved: boolean
   setIsSaved: (arg: boolean) => void
-  isError: boolean
-  isSuccess: boolean
 }
 
 const OptionFieldsBox = ({
@@ -42,8 +40,6 @@ const OptionFieldsBox = ({
   onChange,
   isSaved,
   setIsSaved,
-  isError,
-  isSuccess,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(true)
 
@@ -73,8 +69,6 @@ const OptionFieldsBox = ({
           )}
         </OptionFieldsFrame>
       )}
-      {isSuccess && <Success>{t('information updated successfully')}</Success>}
-      {isError && <Error>{t('information not updated')}</Error>}
       {!isSaved && (
         <ButtonFrame>
           <FormSaveButton text={t('save')} onClick={saveChanges} />
@@ -101,14 +95,4 @@ const InputFieldsBox = styled.div`
 const ButtonFrame = styled.div`
   display: flex;
   justify-content: flex-end;
-`
-
-const Error = styled.div`
-  padding-left: 40px;
-  color: ${({ theme }) => theme.colors?.red};
-`
-
-const Success = styled.div`
-  padding-left: 40px;
-  color: ${({ theme }) => theme.colors?.green};
 `

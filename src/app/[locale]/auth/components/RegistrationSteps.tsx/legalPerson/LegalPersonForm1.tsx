@@ -36,7 +36,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
     if (
       !validated[FIELD_NAMES.COMPANY_NAME] &&
       !validated[FIELD_NAMES.IDENTIFICATION_CODE] &&
-      !validated[FIELD_NAMES.ADDRESS] &&
+      !validated[FIELD_NAMES.COMPANY_ADDRESS] &&
       !validated[FIELD_NAMES.WEBSITE_URL]
     ) {
       setFormStep((prev) => prev + 1)
@@ -46,7 +46,7 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
   const isButtonDisabled =
     values[FIELD_NAMES.COMPANY_NAME].length === 0 ||
     values[FIELD_NAMES.IDENTIFICATION_CODE].length === 0 ||
-    values[FIELD_NAMES.ADDRESS].length === 0
+    values[FIELD_NAMES.COMPANY_ADDRESS].length === 0
 
   return (
     <StyledForm>
@@ -55,11 +55,13 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         type='text'
         name={FIELD_NAMES.COMPANY_NAME}
         placeholder={t('company name')}
-        value={values.companyName}
+        value={values[FIELD_NAMES.COMPANY_NAME]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.companyName && touched.companyName ? errors.companyName : ''
+          errors[FIELD_NAMES.COMPANY_NAME] && touched[FIELD_NAMES.COMPANY_NAME]
+            ? errors[FIELD_NAMES.COMPANY_NAME]
+            : ''
         }
       />
       <TextInput
@@ -67,34 +69,44 @@ const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
         type='text'
         name={FIELD_NAMES.IDENTIFICATION_CODE}
         placeholder={t('identification code')}
-        value={values.identificationCode}
+        value={values[FIELD_NAMES.IDENTIFICATION_CODE]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.identificationCode && touched.identificationCode
-            ? errors.identificationCode
+          errors[FIELD_NAMES.IDENTIFICATION_CODE] &&
+          touched[FIELD_NAMES.IDENTIFICATION_CODE]
+            ? errors[FIELD_NAMES.IDENTIFICATION_CODE]
             : ''
         }
       />
       <TextInput
         width={isMobile ? undefined : 442}
         type='text'
-        name={FIELD_NAMES.ADDRESS}
-        placeholder={t('address')}
-        value={values.address}
+        name={FIELD_NAMES.COMPANY_ADDRESS}
+        placeholder={t('company address')}
+        value={values[FIELD_NAMES.COMPANY_ADDRESS]}
         onChange={handleChange}
         onBlur={handleBlur}
-        errorMessage={errors.address && touched.address ? errors.address : ''}
+        errorMessage={
+          errors[FIELD_NAMES.COMPANY_ADDRESS] &&
+          touched[FIELD_NAMES.COMPANY_ADDRESS]
+            ? errors[FIELD_NAMES.COMPANY_ADDRESS]
+            : ''
+        }
       />
       <TextInput
         width={isMobile ? undefined : 442}
         type='text'
         name={FIELD_NAMES.WEBSITE_URL}
         placeholder={t('website')}
-        value={values.website}
+        value={values[FIELD_NAMES.WEBSITE_URL]}
         onChange={handleChange}
         onBlur={handleBlur}
-        errorMessage={errors.website && touched.website ? errors.website : ''}
+        errorMessage={
+          errors[FIELD_NAMES.WEBSITE_URL] && touched[FIELD_NAMES.WEBSITE_URL]
+            ? errors[FIELD_NAMES.WEBSITE_URL]
+            : ''
+        }
       />
       <FileDropZone
         width={442}
