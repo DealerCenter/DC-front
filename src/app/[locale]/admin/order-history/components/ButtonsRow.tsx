@@ -23,10 +23,10 @@ import { css } from 'styled-components'
 type Props = { isEditing: boolean; setIsEditing: (arg1: boolean) => void }
 
 const sortOptions = [
-  { label: 'date descending', icon: arrowDown },
-  { label: 'date ascending', icon: arrowUp },
-  { label: 'price descending', icon: arrowDown },
-  { label: 'price ascending', icon: arrowUp },
+  { label: 'date descending', icon: arrowDown, onClick: () => {} },
+  { label: 'date ascending', icon: arrowUp, onClick: () => {} },
+  { label: 'price descending', icon: arrowDown, onClick: () => {} },
+  { label: 'price ascending', icon: arrowUp, onClick: () => {} },
 ]
 
 const filterValues = {
@@ -90,11 +90,7 @@ const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
                 width={isMobile ? 160 : undefined}
               ></SecondaryButton>
             </AppDropdownFilter>
-            <AppDropdown
-              items={sortOptions}
-              modalStyle='white'
-              onSortClick={setSortOption}
-            >
+            <AppDropdown items={sortOptions} modalStyle='white'>
               <SecondaryButton
                 text={t('sort')}
                 onClick={() => {}}

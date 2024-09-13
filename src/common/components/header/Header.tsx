@@ -20,10 +20,22 @@ const Header = (props: Props) => {
   const router = useRouter()
 
   const servicesItems = [
-    { label: `${t('status check')}`, onClick: () => {} },
-    { label: `${t('document check')}`, onClick: () => {} },
-    { label: `${t('history check')}`, onClick: () => {} },
-    { label: `${t('transportation calculator')}`, onClick: () => {} },
+    {
+      label: `${t('status check')}`,
+      onClick: () => router.push(routeName.statusCheck),
+    },
+    {
+      label: `${t('document check')}`,
+      onClick: () => router.push(routeName.documentCheck),
+    },
+    {
+      label: `${t('history check')}`,
+      onClick: () => router.push(routeName.historyCheck),
+    },
+    {
+      label: `${t('transportation calculator')}`,
+      onClick: () => router.push(routeName.transportationCalculator),
+    },
   ]
 
   const mainItems = [

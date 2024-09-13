@@ -8,18 +8,11 @@ type Props = {
   modalStyle?: 'white' | 'black'
   items:
     | { href: { pathname: string }; locale: string; label: string }[]
-    | { label: string; icon: string }[]
-    | { label: string }[]
+    | { label: string; icon?: string; onClick: () => void }[]
 
   left?: number
   top?: number
-  onSortClick?: (
-    arg1:
-      | 'price ascending'
-      | 'price descending'
-      | 'date ascending'
-      | 'date descending'
-  ) => void
+
   handleToggle?: () => void
   handleClose?: () => void
 }
@@ -30,7 +23,6 @@ const AppDropdown = ({
   left,
   top,
   modalStyle = 'black',
-  onSortClick,
   handleToggle,
   handleClose,
 }: Props) => {
@@ -84,7 +76,6 @@ const AppDropdown = ({
               item={item}
               key={`${item.label}12ij${i}`}
               modalStyle={modalStyle}
-              onSortClick={onSortClick}
             />
           ))}
         </DropdownMenu>

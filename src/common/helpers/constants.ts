@@ -16,6 +16,12 @@ export const routeName = {
   adminUserContainers: '/admin/shipping-containers',
   contact: '/contact',
   searchVehicle: '/search-vehicle',
+
+  ourServices: '/our-services',
+  documentCheck: '/our-services/document-check',
+  historyCheck: '/our-services/history-check',
+  statusCheck: '/our-services/status-check',
+  transportationCalculator: '/our-services/transportation-calculator',
 }
 
 export const locales = ['en', 'ge', 'ru']

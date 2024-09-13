@@ -28,10 +28,10 @@ const OrderHistory = (props: Props) => {
   const router = useRouter()
 
   const sortOptions = [
-    { label: 'date descending', icon: arrowDown },
-    { label: 'date ascending', icon: arrowUp },
-    { label: 'price descending', icon: arrowDown },
-    { label: 'price ascending', icon: arrowUp },
+    { label: 'date descending', icon: arrowDown, onClick: () => {} },
+    { label: 'date ascending', icon: arrowUp, onClick: () => {} },
+    { label: 'price descending', icon: arrowDown, onClick: () => {} },
+    { label: 'price ascending', icon: arrowUp, onClick: () => {} },
   ]
 
   return (

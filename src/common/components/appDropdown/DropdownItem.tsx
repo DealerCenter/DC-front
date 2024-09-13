@@ -11,60 +11,60 @@ type Props = {
     href?: { pathname: string }
     locale?: string
     icon?: string
+    onClick?: () => void
   }
-  onSortClick?: (
-    arg1:
-      | 'price ascending'
-      | 'price descending'
-      | 'date ascending'
-      | 'date descending'
-  ) => void
 }
 
-const DropdownItem = ({ item, modalStyle, onSortClick }: Props) => {
+const DropdownItem = ({ item, modalStyle }: Props) => {
   const pathname = usePathname()
   const t = useTranslations('')
 
-  const { label, href, locale, icon } = item
-
-  const handleClick = (value: string) => {
-    if (
-      value === 'price ascending' ||
-      value === 'price descending' ||
-      value === 'date ascending' ||
-      value === 'date descending'
-    ) {
-      onSortClick && onSortClick(value)
-    } else {
-      console.error('Invalid value:', value)
-    }
-  }
+  const { label, href, locale, icon, onClick } = item
 
   return (
-    <Container
-      href={href ? href : pathname}
-      locale={locale && locale}
-      modalStyle={modalStyle}
-      isIcon={icon ? true : false}
-      onClick={() => handleClick(label)}
-    >
-      <Frame>
-        {icon && (
-          <Icon>
-            <Image src={icon} alt='icon' />
-          </Icon>
-        )}
-        {label && t(label)}
-      </Frame>
-    </Container>
+    <>
+      {href && locale ? (
+        <LinkContainer
+          href={href ? href : pathname}
+          locale={locale && locale}
+          modalStyle={modalStyle}
+          icon={icon ? true : false}
+          onClick={onClick ? onClick : () => {}}
+        >
+          <Frame>
+            {icon && (
+              <Icon>
+                <Image src={icon} alt='icon' />
+              </Icon>
+            )}
+            {label && label}
+          </Frame>
+        </LinkContainer>
+      ) : (
+        <Container
+          modalStyle={modalStyle}
+          icon={icon ? true : false}
+          onClick={onClick ? onClick : () => {}}
+        >
+          <Frame>
+            {icon && (
+              <Icon>
+                <Image src={icon} alt='icon' />
+              </Icon>
+            )}
+            {label && label}
+          </Frame>
+        </Container>
+      )}
+    </>
   )
 }
 
 export default DropdownItem
 
-type ContainerProps = { modalStyle: 'white' | 'black'; isIcon?: boolean }
+type ContainerProps = { modalStyle: 'white' | 'black'; icon?: boolean }
 
-const Container = styled(Link)<ContainerProps>`
+const Container = styled.div<ContainerProps>`
   list-style: none;
   font-size: 16px;
   font-weight: 400;
@@ -73,8 +73,53 @@ const Container = styled(Link)<ContainerProps>`
   border-radius: 8px;
   text-decoration: none;
 
-  ${({ isIcon }) =>
-    isIcon
+  ${({ icon }) =>
+    icon
+      ? css`
+          font-size: 13px;
+          padding: 8px;
+          width: 160px;
+        `
+      : css`
+          font-size: 16px;
+          padding: 10px 16px;
+          width: unset;
+        `}
+
+  ${({ modalStyle }) =>
+    modalStyle === 'white'
+      ? css`
+          color: ${({ theme }) => theme.colors?.black};
+          &:hover {
+            background-color: ${({ theme }) => theme.colors?.main_gray_04};
+          }
+        `
+      : modalStyle === 'black' &&
+        css`
+          color: ${({ theme }) => theme.colors?.white};
+          &:hover {
+            background-color: ${({ theme }) => theme.colors?.white_10};
+          }
+        `}
+
+
+
+  &:active {
+    color: ${({ theme }) => theme.colors?.main_gray_100};
+  }
+`
+
+const LinkContainer = styled(Link)<ContainerProps>`
+  list-style: none;
+  font-size: 16px;
+  font-weight: 400;
+  height: 20px;
+  white-space: nowrap;
+  border-radius: 8px;
+  text-decoration: none;
+
+  ${({ icon }) =>
+    icon
       ? css`
           font-size: 13px;
           padding: 8px;
