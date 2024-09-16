@@ -13,12 +13,11 @@ export const fetchMe = async () => {
 
 export const logoutUser = async () => {
   try {
-    await axiosInstance.post(endpoints.LOGOUT)
+    const response = await axiosInstance.post(endpoints.LOGOUT)
     handleLogout()
-    return true
+    return response
   } catch (error) {
     console.error('Error logging out:', error)
-    return false
   }
 }
 
@@ -32,12 +31,14 @@ export const changeUserPassword = async (
   }
 
   try {
-    await axiosInstance.post(endpoints.CHANGE_PASSWORD, passwordData)
+    const response = await axiosInstance.post(
+      endpoints.CHANGE_PASSWORD,
+      passwordData
+    )
 
-    return true
+    return response
   } catch (error) {
     console.error('Error with changing the password:', error)
-    return false
   }
 }
 
@@ -68,14 +69,13 @@ export const updateUserData = async (
     return response.data
   } catch (error) {
     console.error('Error with updating the data:', error)
-    return false
   }
 }
 
 export const getNotificationSettings = async (id: number) => {
   try {
     const response = await axiosInstance.get(
-      `${endpoints.NOTIFICATION_SETTINGS_DEALERS}${id}`
+      `${endpoints.NOTIFICATION_SETTINGS_DEALERS}/${id}`
     )
 
     return response.data
@@ -124,7 +124,7 @@ export const uploadOrder = async (payload: {
     const response = await axiosInstance.post(
       `${(endpoints.CREATE_ORDER, payload)}`
     )
-    console.log(response)
+    return response
   } catch (error) {
     console.error('Error creating new order:', error)
   }

@@ -27,15 +27,7 @@ const OrderProfile = (props: Props) => {
   const t = useTranslations('')
   const router = useRouter()
 
-  const {
-    values,
-    handleBlur,
-    handleChange,
-    errors,
-    touched,
-    validateForm,
-    handleSubmit,
-  } = useCreateOrderContext()
+  const { values, handleSubmit } = useCreateOrderContext()
 
   const isButtonDisabled =
     values[FIELD_NAMES.MANUFACTURER].length === 0 ||

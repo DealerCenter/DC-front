@@ -182,6 +182,7 @@ const ErrorMessage = styled.p`
   font-size: ${({ theme }) => theme.fontSizes?.extraSmall};
   top: 48px;
   left: 12px;
+  z-index: 10;
 `
 
 const OptionalText = styled.p`

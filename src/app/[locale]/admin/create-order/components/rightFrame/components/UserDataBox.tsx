@@ -11,6 +11,13 @@ import TextInput from '@/common/components/inputElements/TextInput'
 
 import checkedEmpty from '@/assets/icons/checkedIconEmpty.svg'
 
+const INPUT_WIDTH_MOBILE_1 = 160
+const INPUT_WIDTH_TABLET_1 = 156
+const INPUT_WIDTH_DESKTOP_1 = 180
+
+const INPUT_WIDTH_MOBILE_2 = 143
+const INPUT_WIDTH_DESKTOP_2 = 160
+
 type Props = {
   header: string
   name: string
@@ -32,19 +39,25 @@ const UserDataBox = ({
   placeholder1,
   placeholder2,
 }: Props) => {
-  const [textInputWidth, setTextInputWidth] = useState(180)
-  const [textInputWidth2, setTextInputWidth2] = useState(160)
+  const [textInputWidth, setTextInputWidth] = useState(INPUT_WIDTH_DESKTOP_1)
+  const [textInputWidth2, setTextInputWidth2] = useState(INPUT_WIDTH_DESKTOP_2)
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
 
   const t = useTranslations('')
 
   useEffect(() => {
-    setTextInputWidth(isMobile ? 160 : isTablet ? 156 : 180)
+    setTextInputWidth(
+      isMobile
+        ? INPUT_WIDTH_MOBILE_1
+        : isTablet
+          ? INPUT_WIDTH_TABLET_1
+          : INPUT_WIDTH_DESKTOP_1
+    )
   }, [isMobile, isTablet, setTextInputWidth])
 
   useEffect(() => {
-    setTextInputWidth2(isMobile ? 143 : 160)
+    setTextInputWidth2(isMobile ? INPUT_WIDTH_MOBILE_2 : INPUT_WIDTH_DESKTOP_2)
   }, [isMobile, setTextInputWidth2])
 
   return (

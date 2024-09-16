@@ -8,6 +8,13 @@ import theme from '@/app/[locale]/theme'
 import ImagesUploadComponent from '../../../components/common/ImagesUploadComponent'
 import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
 
+const INPUT_WIDTH_MOBILE_UPLOAD = 311
+const INPUT_WIDTH_TABLET_UPLOAD = 896
+const INPUT_WIDTH_DESKTOP_UPLOAD = 1136
+
+const INPUT_WIDTH_MOBILE = 311
+const INPUT_WIDTH_DESKTOP = 493
+
 type Props = { dropdownOptions: { value: string }[] }
 
 const InputFieldAndImageUploadPair = ({ dropdownOptions }: Props) => {
@@ -22,7 +29,7 @@ const InputFieldAndImageUploadPair = ({ dropdownOptions }: Props) => {
           options={dropdownOptions}
           onChange={() => {}}
           placeholder={t('mark photo location')}
-          width={isMobile ? 311 : 493}
+          width={isMobile ? INPUT_WIDTH_MOBILE : INPUT_WIDTH_DESKTOP}
           placeHolderIsBold={true}
           placeHolderIsGray={true}
         />
@@ -31,7 +38,13 @@ const InputFieldAndImageUploadPair = ({ dropdownOptions }: Props) => {
         onClick={() => {
           console.log('clicked')
         }}
-        width={isMobile ? 311 : isTablet ? 896 : 1136}
+        width={
+          isMobile
+            ? INPUT_WIDTH_MOBILE_UPLOAD
+            : isTablet
+              ? INPUT_WIDTH_TABLET_UPLOAD
+              : INPUT_WIDTH_DESKTOP_UPLOAD
+        }
         height={222}
       />
     </Container>

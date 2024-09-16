@@ -14,10 +14,14 @@ import {
   useCreateOrderContext,
 } from '../../hooks/useCreateOrderContext'
 
+const INPUT_WIDTH_MOBILE = 311
+const INPUT_WIDTH_TABLET = 333
+const INPUT_WIDTH_DESKTOP = 391
+
 type Props = {}
 
 const RightFrame = ({}: Props) => {
-  const [textInputWidth, setTextInputWidth] = useState(333)
+  const [textInputWidth, setTextInputWidth] = useState(INPUT_WIDTH_TABLET)
   const { values, handleBlur, handleChange, errors, touched } =
     useCreateOrderContext()
   const isMobile = useMediaQuery({ query: theme.media?.sm })
@@ -25,7 +29,13 @@ const RightFrame = ({}: Props) => {
   const t = useTranslations('')
 
   useEffect(() => {
-    setTextInputWidth(isMobile ? 311 : isTablet ? 333 : 391)
+    setTextInputWidth(
+      isMobile
+        ? INPUT_WIDTH_MOBILE
+        : isTablet
+          ? INPUT_WIDTH_TABLET
+          : INPUT_WIDTH_DESKTOP
+    )
   }, [isMobile, isTablet, setTextInputWidth])
 
   return (
