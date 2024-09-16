@@ -143,6 +143,7 @@ const LegalPersonForm2 = ({ setFormStep }: Props) => {
         dropText={t('drop the file here')}
         text={t('upload an ID photo')}
         uploadedText={t('photo uploaded')}
+        warningText={t('add an id photo')}
         onDropAdditional={setUploadIdImage}
       />
       <AppButton

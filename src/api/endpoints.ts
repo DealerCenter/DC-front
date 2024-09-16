@@ -8,4 +8,5 @@ export const endpoints = {
   UPDATE_USER_DATA: '/api/dealers',
   NOTIFICATION_SETTINGS_DEALERS: '/notifications/dealers',
   CREATE_ORDER: '/orders',
+  RECEIVERS: '/receivers',
 }

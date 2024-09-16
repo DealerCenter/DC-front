@@ -78,12 +78,11 @@ export const RegisterFormProviderLegalPerson = ({
           legalFormData
         )
         handleAuthResponse(response)
-
         message.success(t('you registered successfully'))
         router.push(routeName.dealer)
         return response
       } catch (error) {
-        message.success(t('you could not register'))
+        message.error(t('you could not register'))
         console.error('Error:', error)
       }
     },

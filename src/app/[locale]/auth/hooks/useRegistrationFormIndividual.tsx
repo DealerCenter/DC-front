@@ -7,6 +7,7 @@ import { endpoints } from '@/api/endpoints'
 import { handleAuthResponse } from '@/common/helpers/utils'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
+import { message } from 'antd'
 
 const FormikContext = createContext<FormikValues | null>(null)
 
@@ -60,10 +61,11 @@ export const RegisterFormProviderIndividual = ({
           endpoints.REGISTER,
           individualFormData
         )
-        console.log('sent data', data)
         handleAuthResponse(response)
+        message.success(t('you registered successfully'))
         router.push(routeName.dealer)
       } catch (error) {
+        message.error(t('you could not register'))
         console.error('Error:', error)
       }
     },

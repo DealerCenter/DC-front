@@ -49,3 +49,33 @@ type NOTIFICATION_RES = {
     name: string
   }
 }
+
+type RECEIVER_POST_RES = {
+  firstName: string
+  lastName: string
+  personalId: string
+  phoneNumber: string
+  isJuridical: boolean
+  dealer: {
+    id: number
+    createdAt: string // DateTime
+    updatedAt: string // DateTime
+    firstName: string
+    lastName: string
+    email: string
+    phoneNumber: string
+    isJuridical: boolean
+    address: string
+    personalId: string
+    birthDate: string // DateTime
+    idImageUrl: string
+    idImageVerificationStatus: string
+    juridicalDocUrl: string | null
+    juridicalDocVerificationStatus: string
+  }
+  idImageUrl: string
+  id: number
+  createdAt: string // DateTime
+  updatedAt: string // DateTime
+  verificationStatus: string
+}
