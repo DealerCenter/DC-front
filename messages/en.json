@@ -224,6 +224,8 @@
 
   "password required": "Password is required",
 
+  "search for recipient": "Search for a recipient",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 

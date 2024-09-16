@@ -12,6 +12,7 @@ import AddRecipient from './components/addRecipient/AddRecipient'
 import AppModal from '@/common/components/modal/AppModal'
 import { users } from '@/assets/DummyData'
 import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
+import SearchButton from '@/common/components/searchButton/SearchButton'
 
 type Props = {}
 
@@ -19,16 +20,19 @@ const UsersListBox = (props: Props) => {
   const t = useTranslations('')
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  const [isSearchActive, setIsSearchActive] = useState(false)
+
   return (
     <>
       <Container>
         <Frame>
           <HeaderH4Bold text={t('list of users')} />
           <ButtonFrame>
-            <SecondaryButton
+            <SearchButton
+              isActive={isSearchActive}
+              setIsActive={setIsSearchActive}
               text={t('search')}
-              onClick={() => {}}
-              icon={searchIcon}
+              placeholder={t('search for recipient')}
             />
             <SecondaryButton
               text={t('add recipient')}
