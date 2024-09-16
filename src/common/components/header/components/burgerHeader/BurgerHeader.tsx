@@ -1,10 +1,13 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import search from '@/assets/icons/search.svg'
-import person from '@/assets/icons/person.svg'
-import burger from '@/assets/icons/burger.svg'
+
 import BurgerHeaderMenu from './components/BurgerHeaderMenu'
+import LoginButton from '../LoginButton'
+import Logo from '../Logo'
+
+import search from '@/assets/icons/search.svg'
+import burger from '@/assets/icons/burger.svg'
 
 type Props = {}
 
@@ -17,19 +20,15 @@ const BurgerHeader = (props: Props) => {
         isOpen={isMenuOpen}
         handleClose={() => setIsMenuOpen(false)}
       />
-
-      <Logo>DUX</Logo>
+      <Logo />
       <Frame>
         <Item>
           <Image width={20} height={20} src={search} alt='search icon' />
         </Item>
-        <Item>
-          <Image width={16} height={20} src={person} alt='person icon' />
-        </Item>
+        <LoginButton />
         <Item onClick={() => setIsMenuOpen(true)}>
-          <Image width={18} height={13.5} src={burger} alt='burger icon' />
+          <Image width={18} src={burger} alt='burger icon' />
         </Item>
-        {/* ამაზე აღარ ვიწვალე, რომ გავარკვევთ მერე დავამთავრებ  */}
       </Frame>
     </Container>
   )
@@ -57,14 +56,6 @@ const Frame = styled.div`
   padding: 0;
   margin: 6px 0;
   gap: 6px;
-`
-
-const Logo = styled.h2`
-  color: ${({ theme }) => theme.colors?.white};
-  font-size: 23px;
-  font-weight: ${({ theme }) => theme.fontWeight?.bold};
-  padding: 12px 8px 12px 8px;
-  margin: 0;
 `
 
 const Item = styled.div`

@@ -4,7 +4,7 @@ import * as yup from 'yup'
 import { useTranslations } from 'next-intl'
 import axiosInstance from '@/api/apiClient'
 import { endpoints } from '@/api/endpoints'
-import { handleRegistrationResponse } from '@/common/helpers/utils'
+import { handleAuthResponse } from '@/common/helpers/utils'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 
@@ -16,7 +16,7 @@ export const FIELD_NAMES = {
   BIRTH_DATE: 'birthDate',
   ADDRESS: 'address',
   CONTACT_NUMBER: 'phoneNumber',
-  PERSONAL_Id: 'personalId',
+  PERSONAL_ID: 'personalId',
   EMAIL: 'email',
   PASSWORD: 'password',
   REPEAT_PASSWORD: 'repeatPassword',
@@ -38,7 +38,7 @@ export const RegisterFormProviderIndividual = ({
     [FIELD_NAMES.BIRTH_DATE]: '',
     [FIELD_NAMES.ADDRESS]: '',
     [FIELD_NAMES.CONTACT_NUMBER]: '',
-    [FIELD_NAMES.PERSONAL_Id]: '',
+    [FIELD_NAMES.PERSONAL_ID]: '',
     [FIELD_NAMES.EMAIL]: '',
     [FIELD_NAMES.PASSWORD]: '',
     [FIELD_NAMES.REPEAT_PASSWORD]: '',
@@ -48,19 +48,20 @@ export const RegisterFormProviderIndividual = ({
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
-      const body = { ...values }
-      delete body[FIELD_NAMES.REPEAT_PASSWORD]
-      Object.keys(body).forEach((key) =>
+      const data = { ...values }
+      delete data[FIELD_NAMES.REPEAT_PASSWORD]
+      Object.keys(data).forEach((key) =>
         individualFormData.append(key, values[key])
       )
       uploadFile && individualFormData.append(FIELD_NAMES.IMAGE, uploadFile)
 
       try {
-        const response = await axiosInstance.post<REGISTER>(
+        const response = await axiosInstance.post<REGISTER_RES>(
           endpoints.REGISTER,
           individualFormData
         )
-        handleRegistrationResponse(response)
+        console.log('sent data', data)
+        handleAuthResponse(response)
         router.push(routeName.dealer)
       } catch (error) {
         console.error('Error:', error)
@@ -79,7 +80,7 @@ export const RegisterFormProviderIndividual = ({
       [FIELD_NAMES.CONTACT_NUMBER]: yup
         .string()
         .required(t('contact number required')),
-      [FIELD_NAMES.PERSONAL_Id]: yup
+      [FIELD_NAMES.PERSONAL_ID]: yup
         .number()
         .required(t('personal number required')),
       [FIELD_NAMES.EMAIL]: yup
@@ -123,7 +124,7 @@ export const RegisterFormProviderIndividual = ({
 
 export const useRegisterFormContextIndividual = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {}
+  ExtraProps = {},
 >() => {
   const context = useContext(FormikContext)
   if (!context) {

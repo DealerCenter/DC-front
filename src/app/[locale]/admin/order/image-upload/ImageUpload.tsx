@@ -8,7 +8,7 @@ import { routeName } from '@/common/helpers/constants'
 
 import Box from '../../components/common/Box'
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
-import AddFileButton from '../../components/common/AddFileButton'
+import AddFieldButton from '../../components/common/AddFieldButton'
 import BasicButton from '@/common/components/appButton/BasicButton'
 import InputFieldAndImageUploadPair from './components/InputFieldAndImageUploadPair'
 
@@ -54,7 +54,7 @@ const ImageUpload = (props: Props) => {
             )
         )}
         <PaddingBox>
-          {numOfPairs < 3 && <AddFileButton onClick={handleAdd} />}
+          {numOfPairs < 3 && <AddFieldButton onClick={handleAdd} />}
         </PaddingBox>
         <CancelAndDonePair>
           {numOfPairs > 0 ? (

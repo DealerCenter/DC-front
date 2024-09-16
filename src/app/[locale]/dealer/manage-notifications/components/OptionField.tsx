@@ -2,14 +2,20 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import ReactSwitch from 'react-switch'
 
-type Props = { text: string; isChecked: boolean; onChange: () => void }
+type Props = {
+  text: string
+  isChecked: boolean
+  onChange: (e: any) => void
 
-const OptionField = ({ text, isChecked, onChange }: Props) => {
+  setTouched: () => void
+}
+
+const OptionField = ({ text, isChecked, onChange, setTouched }: Props) => {
   const [isOn, setIsOn] = useState(isChecked)
-
-  const handleChange = () => {
+  const handleChange = (e: any) => {
     setIsOn((is) => !is)
-    onChange()
+    onChange(e)
+    setTouched()
   }
 
   return (
@@ -55,5 +61,3 @@ const Label = styled.div`
     font-size: ${({ theme }) => theme.fontSizes?.medium};
   }
 `
-
-const Icon = styled.div``

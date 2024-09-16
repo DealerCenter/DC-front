@@ -112,4 +112,5 @@ const StyledButton = styled.button<ButtonProps>`
   border-radius: ${({ theme }) => theme.radius?.lg};
 
   cursor: pointer;
+  user-select: none;
 `

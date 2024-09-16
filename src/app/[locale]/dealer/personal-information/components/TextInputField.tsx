@@ -1,16 +1,35 @@
-import React from 'react'
+import { useScroll } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-type Props = { label: string; onChange?: () => void }
+type Props = {
+  label: string
+  onChange: () => void
+  value: string
+  setValue: (arg: string) => void
+  placeholder?: string
+  type?: string
+}
 
-const TextInputField = ({ label, onChange }: Props) => {
+const TextInputField = ({
+  label,
+  placeholder,
+  onChange,
+  type,
+  value,
+  setValue,
+}: Props) => {
   return (
     <InputBox>
       <InputLabel>{label}</InputLabel>
       <InputField
-        type='text'
-        placeholder='Something something'
-        onChange={onChange}
+        type={type ? type : 'text'}
+        placeholder={placeholder}
+        onChange={(e) => {
+          setValue(e.target.value)
+          onChange()
+        }}
+        value={value}
       ></InputField>
     </InputBox>
   )

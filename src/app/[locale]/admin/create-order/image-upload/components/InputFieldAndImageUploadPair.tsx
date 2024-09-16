@@ -1,0 +1,68 @@
+import React from 'react'
+import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
+import { useMediaQuery } from 'react-responsive'
+
+import theme from '@/app/[locale]/theme'
+
+import ImagesUploadComponent from '../../../components/common/ImagesUploadComponent'
+import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
+
+const INPUT_WIDTH_MOBILE_UPLOAD = 311
+const INPUT_WIDTH_TABLET_UPLOAD = 896
+const INPUT_WIDTH_DESKTOP_UPLOAD = 1136
+
+const INPUT_WIDTH_MOBILE = 311
+const INPUT_WIDTH_DESKTOP = 493
+
+type Props = { dropdownOptions: { value: string }[] }
+
+const InputFieldAndImageUploadPair = ({ dropdownOptions }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const isTablet = useMediaQuery({ query: theme.media?.md })
+  const t = useTranslations('')
+
+  return (
+    <Container>
+      <AppSelectBasicFrame>
+        <AppSelectBasic
+          options={dropdownOptions}
+          onChange={() => {}}
+          placeholder={t('mark photo location')}
+          width={isMobile ? INPUT_WIDTH_MOBILE : INPUT_WIDTH_DESKTOP}
+          placeHolderIsBold={true}
+          placeHolderIsGray={true}
+        />
+      </AppSelectBasicFrame>
+      <ImagesUploadComponent
+        onClick={() => {
+          console.log('clicked')
+        }}
+        width={
+          isMobile
+            ? INPUT_WIDTH_MOBILE_UPLOAD
+            : isTablet
+              ? INPUT_WIDTH_TABLET_UPLOAD
+              : INPUT_WIDTH_DESKTOP_UPLOAD
+        }
+        height={222}
+      />
+    </Container>
+  )
+}
+
+export default InputFieldAndImageUploadPair
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing?.lg};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    gap: ${({ theme }) => theme.spacing?.md};
+  }
+`
+const AppSelectBasicFrame = styled.div`
+  display: flex;
+  justify-content: flex-start;
+`

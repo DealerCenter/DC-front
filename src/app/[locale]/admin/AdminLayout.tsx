@@ -6,7 +6,7 @@ import theme from '../theme'
 import Footer from '@/common/components/footer/Footer'
 import SideBar from '../../../common/components/sideBar/SideBar'
 import { routeName } from '@/common/helpers/constants'
-import { usePathname, useRouter } from '@/navigation'
+import { usePathname } from '@/navigation'
 
 const routeNames = {
   orderHistory: routeName.adminOrderHistory,
@@ -20,12 +20,12 @@ type Props = { children: React.JSX.Element }
 const AdminLayout = ({ children }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
-  const router = useRouter()
-
   const pathname = usePathname()
   const isSideBarVisible =
     pathname !== routeName.adminOrder &&
     pathname !== routeName.adminOrderImageUpload &&
+    pathname !== routeName.adminCreateOrder &&
+    pathname !== routeName.adminCreateOrderImageUpload &&
     pathname !== routeName.adminUserProfile
 
   return (
@@ -38,12 +38,6 @@ const AdminLayout = ({ children }: Props) => {
         </Frame>
       </Container>
       {isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
-      <button
-        onClick={() => router.push(routeName.adminUserContainers)}
-        style={{ backgroundColor: 'cyan', margin: '50px' }}
-      >
-        Containers
-      </button>
       <Footer />
     </>
   )

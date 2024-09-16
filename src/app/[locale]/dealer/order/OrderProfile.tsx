@@ -76,7 +76,7 @@ const Container = styled.div`
   }
 `
 
-const BackToOrderButton = styled.button`
+const BackToOrderButton = styled.div`
   margin-bottom: 64px;
 `
 

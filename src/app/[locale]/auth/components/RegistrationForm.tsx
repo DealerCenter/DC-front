@@ -21,7 +21,6 @@ const Container = styled.div`
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors?.background};
   margin: auto;
-  /* min-height: 617px; */
   border-radius: 28px;
   display: flex;
   flex-direction: column;

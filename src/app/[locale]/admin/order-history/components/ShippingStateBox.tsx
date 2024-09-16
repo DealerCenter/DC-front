@@ -81,6 +81,8 @@ const Label = styled.label`
   font-size: 13px;
   font-weight: 400;
   color: ${({ theme }) => theme.colors?.black};
+
+  width: 150px;
 `
 
 const Line = styled.div`
