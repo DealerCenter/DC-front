@@ -35,7 +35,6 @@ const SearchButton = ({ isActive, setIsActive, text, placeholder }: Props) => {
     ) {
       setIsActive(false)
       setInputValue('')
-      console.log('got it')
     }
   }
 

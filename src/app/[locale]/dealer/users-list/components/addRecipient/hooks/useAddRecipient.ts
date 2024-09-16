@@ -21,7 +21,7 @@ const useAddRecipients = () => {
   )
   const [uploadIdImage, setUploadIdImage] = useState<Blob>()
   //   const router = useRouter()
-  const t = useTranslations('')
+  const t = useTranslations('useForm')
 
   const initialValues = {
     [FIELD_NAMES.FIRST_NAME]: '',
@@ -79,7 +79,7 @@ const useAddRecipients = () => {
       [FIELD_NAMES.PERSONAL_ID]: yup
         .string()
         .required(t('personal number required')),
-      [FIELD_NAMES.IS_JURIDICAL]: yup.boolean().required(t('')),
+      [FIELD_NAMES.IS_JURIDICAL]: yup.boolean().required(''),
     }),
   })
 

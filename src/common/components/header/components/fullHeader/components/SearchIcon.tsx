@@ -31,7 +31,6 @@ const SearchIcon = ({ isActive, setIsActive }: Props) => {
       closeIconRef.current.contains(event.target as Node)
     ) {
       setIsActive(false)
-      console.log('got it')
     }
   }
 

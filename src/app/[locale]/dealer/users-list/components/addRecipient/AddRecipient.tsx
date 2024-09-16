@@ -15,7 +15,6 @@ import useAddRecipients, { FIELD_NAMES } from './hooks/useAddRecipient'
 type Props = { onClose: () => void }
 
 const AddRecipient = ({ onClose }: Props) => {
-  const tUseForm = useTranslations('useForm')
   const t = useTranslations('')
   const [type, setType] = useState<'individual' | 'legalPerson'>('individual')
   const dummyValue = 'something'
@@ -46,13 +45,13 @@ const AddRecipient = ({ onClose }: Props) => {
           <Label>{t('enter recipient data')}</Label>
           <ChooseTypeFrame>
             <ChooseButton
-              text={t('Individual')}
+              text={t('individual')}
               isActive={!values[FIELD_NAMES.IS_JURIDICAL]} // if not juridical, it's individual
               onClick={() => setFieldValue(FIELD_NAMES.IS_JURIDICAL, false)}
             />
             <Image src={splitGrayLine} alt='line icon' />
             <ChooseButton
-              text={t('Legal Person')}
+              text={t('legal person')}
               isActive={!!values[FIELD_NAMES.IS_JURIDICAL]} // if juridical, it's legal person
               onClick={() => setFieldValue(FIELD_NAMES.IS_JURIDICAL, true)}
             />
