@@ -9,6 +9,7 @@ import theme from '@/app/[locale]/theme'
 import shipImage from '@/assets/images/shipImage.jpeg'
 import PageHeader from '@/common/components/pageHeader/PageHeader'
 import Calculator from './components/Calculator'
+import ResultsBox from './components/ResultsBox'
 
 const IMAGE_WIDTH = 386
 const IMAGE_HEIGHT = 292
@@ -27,20 +28,23 @@ const TransportationCalculator = (props: Props) => {
         text={t('specify details and calculate exact shipping cost')}
       />
       <Frame>
-        <ImageFrame>
-          {isMobile ? (
-            <Image src={shipImage} alt='ship image' layout='responsive' />
-          ) : (
-            <Image
-              src={shipImage}
-              alt='ship image'
-              width={IMAGE_WIDTH}
-              height={IMAGE_HEIGHT}
-            />
-          )}
-        </ImageFrame>
+        <ImageAndCalculatorFrame>
+          <ImageFrame>
+            {isMobile ? (
+              <Image src={shipImage} alt='ship image' layout='responsive' />
+            ) : (
+              <Image
+                src={shipImage}
+                alt='ship image'
+                width={IMAGE_WIDTH}
+                height={IMAGE_HEIGHT}
+              />
+            )}
+          </ImageFrame>
 
-        <Calculator />
+          <Calculator />
+        </ImageAndCalculatorFrame>
+        <ResultsBox />
       </Frame>
     </Container>
   )
@@ -69,6 +73,12 @@ const Container = styled.div`
 `
 
 const Frame = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+`
+
+const ImageAndCalculatorFrame = styled.div`
   display: flex;
   flex-direction: row;
   gap: 42px;
