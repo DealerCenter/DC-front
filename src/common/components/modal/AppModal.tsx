@@ -35,7 +35,7 @@ const AppModal = ({
       border: 'unset',
       backgroundColor: 'transparent',
       scrollbarWidth: 'none',
-      '-ms-overflow-style': 'none',
+      msOverflowStyle: 'none',
       WebkitOverflowScrolling: 'touch',
 
       ...style,
@@ -43,10 +43,9 @@ const AppModal = ({
   }
 
   useEffect(() => {
-    isOpen
-      ? (document.body.style.overflow = 'hidden')
-      : (document.body.style.overflow = 'unset')
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset'
   }, [isOpen])
+
   return (
     <Modal
       isOpen={isOpen}

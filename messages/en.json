@@ -226,6 +226,9 @@
 
   "search for recipient": "Search for a recipient",
 
+  "receiver deleted successfully": "Receiver deleted successfully",
+  "receiver not deleted": "Receiver could not be deleted",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 

@@ -79,3 +79,16 @@ type RECEIVER_POST_RES = {
   updatedAt: string // DateTime
   verificationStatus: string
 }
+
+type RECEIVER_GET_RES = {
+  id: number
+  firstName: string
+  lastName: string
+  personalId: string
+  phoneNumber: string
+  createdAt: string
+  updatedAt: string
+  isJuridical: boolean
+  idImageUrl: string
+  verificationStatus: string
+}

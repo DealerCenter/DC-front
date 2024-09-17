@@ -1,29 +1,65 @@
-import React from 'react'
-import LabelsContainer from '@/common/components/labelsContainer/LabelsContainer'
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import styled from 'styled-components'
-import ListItem from './listItem/ListItem'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import { deleteReceiver, getReceivers } from '@/api/apiCalls'
 
-type Props = {
-  usersData: {
-    fullName: string
-    id: string
-    mobile: string
-    dateOfAddition: string
-    isVerified: boolean
-  }[]
-}
+import ListItem from './listItem/ListItem'
+import LabelsContainer from '@/common/components/labelsContainer/LabelsContainer'
+import Pagination from '@/common/components/pagination/Pagination'
+import UserListEmpty from './UserListEmpty'
+import { message } from 'antd'
 
-const UserList = ({ usersData }: Props) => {
+type Props = { setIsModalOpen: (arg: boolean) => void; searchQuery: string }
+
+const UserList = ({ setIsModalOpen, searchQuery }: Props) => {
+  const [receiversData, setReceiversData] = useState<
+    RECEIVER_GET_RES[] | undefined
+  >(undefined)
+
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
+  const receiversToSkip = 0
+  const receiversToTake = 16
+
+  const getData = async () => {
+    const response = await getReceivers({
+      skip: receiversToSkip,
+      take: receiversToTake,
+      search: searchQuery,
+    })
+    setReceiversData(response)
+  }
+
+  useEffect(() => {
+    getData()
+    //eslint-disable-next-line
+  }, [searchQuery])
+
+  const handleDelete = async (id: number) => {
+    try {
+      await deleteReceiver(id)
+      getData()
+      message.success(t('receiver deleted successfully'))
+    } catch (error) {
+      message.error(t('receiver not deleted'))
+    }
+  }
+
+  if (!receiversData) {
+    return <Container />
+  }
+
+  if (receiversData.length === 0) {
+    return <UserListEmpty onClick={() => setIsModalOpen(true)} />
+  }
+
   return (
-    <Container>
-      {usersData.length !== 0 && (
+    <>
+      <Container>
         <>
           {!isMobile && (
             <LabelsContainer
@@ -35,15 +71,27 @@ const UserList = ({ usersData }: Props) => {
               ]}
             />
           )}
-          {usersData.map((data) => (
-            <ListItem userData={data} key={data.id} />
+          {receiversData.map((data) => (
+            <ListItem
+              receiverData={data}
+              key={data.id}
+              handleDelete={handleDelete}
+            />
           ))}
         </>
-      )}
-    </Container>
+      </Container>
+      {/* <PaginationBox>
+        <Pagination currentPage={1} setCurrentPage={() => {}} numOfPages={2} />
+      </PaginationBox> */}
+    </>
   )
 }
 
 export default UserList
 
 const Container = styled.div``
+
+const PaginationBox = styled.div`
+  display: flex;
+  justify-content: center;
+`

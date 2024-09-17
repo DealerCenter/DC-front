@@ -1,26 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
 import UsersList from './components/UsersList'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 
-import searchIcon from '@/assets/icons/searchForButton.svg'
 import plusIcon from '@/assets/icons/plus.svg'
 import UserListEmpty from './components/UserListEmpty'
 import AddRecipient from './components/addRecipient/AddRecipient'
 import AppModal from '@/common/components/modal/AppModal'
-import { users } from '@/assets/DummyData'
 import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 import SearchButton from '@/common/components/searchButton/SearchButton'
+import { getReceivers } from '@/api/apiCalls'
 
 type Props = {}
 
 const UsersListBox = (props: Props) => {
-  const t = useTranslations('')
   const [isModalOpen, setIsModalOpen] = useState(false)
-
   const [isSearchActive, setIsSearchActive] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const t = useTranslations('')
+
+  const onSearch = (query: string) => {
+    setSearchQuery(query)
+  }
+
+  const handleCloseSearch = () => {
+    setSearchQuery('')
+  }
 
   return (
     <>
@@ -33,6 +40,8 @@ const UsersListBox = (props: Props) => {
               setIsActive={setIsSearchActive}
               text={t('search')}
               placeholder={t('search for recipient')}
+              onSubmit={onSearch}
+              onCloseSearch={handleCloseSearch}
             />
             <SecondaryButton
               text={t('add recipient')}
@@ -43,15 +52,8 @@ const UsersListBox = (props: Props) => {
             />
           </ButtonFrame>
         </Frame>
-        {users.length === 0 ? (
-          <UserListEmpty
-            onClick={() => {
-              setIsModalOpen(true)
-            }}
-          />
-        ) : (
-          <UsersList usersData={users} />
-        )}
+
+        <UsersList setIsModalOpen={setIsModalOpen} searchQuery={searchQuery} />
       </Container>
 
       <AppModal

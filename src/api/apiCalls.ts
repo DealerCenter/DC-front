@@ -129,3 +129,30 @@ export const uploadOrder = async (payload: {
     console.error('Error creating new order:', error)
   }
 }
+
+export const getReceivers = async (payload: {
+  skip: number
+  take: number
+  search: string
+}) => {
+  try {
+    const response = await axiosInstance.get<RECEIVER_GET_RES[]>(
+      endpoints.RECEIVERS,
+      {
+        params: payload, // Pass payload as query parameters
+      }
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error getting receivers:', error)
+  }
+}
+
+export const deleteReceiver = async (id: number) => {
+  try {
+    const response = await axiosInstance.delete(`${endpoints.RECEIVERS}/${id}`)
+    return response
+  } catch (error) {
+    console.error('Error getting receivers:', error)
+  }
+}

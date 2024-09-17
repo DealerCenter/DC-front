@@ -13,9 +13,18 @@ type Props = {
   setIsActive: (arg1: boolean) => void
   text?: string
   placeholder?: string
+  onSubmit?: (arg: string) => void
+  onCloseSearch?: () => void
 }
 
-const SearchButton = ({ isActive, setIsActive, text, placeholder }: Props) => {
+const SearchButton = ({
+  isActive,
+  setIsActive,
+  text,
+  placeholder,
+  onSubmit,
+  onCloseSearch,
+}: Props) => {
   const [inputValue, setInputValue] = useState('')
   const t = useTranslations('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -35,6 +44,8 @@ const SearchButton = ({ isActive, setIsActive, text, placeholder }: Props) => {
     ) {
       setIsActive(false)
       setInputValue('')
+
+      onCloseSearch && onCloseSearch()
     }
   }
 
@@ -47,7 +58,9 @@ const SearchButton = ({ isActive, setIsActive, text, placeholder }: Props) => {
   }, [])
 
   const handleSubmit = () => {
-    console.log(inputValue)
+    if (!inputValue) return
+
+    onSubmit && onSubmit(inputValue)
 
     setInputValue('')
   }

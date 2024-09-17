@@ -8,17 +8,29 @@ import ListItemFull from './ListItemFull'
 import theme from '@/app/[locale]/theme'
 
 type Props = {
-  userData: {
-    fullName: string
-    id: string
-    mobile: string
-    dateOfAddition: string
-    isVerified: boolean
+  receiverData: {
+    id: number
+    firstName: string
+    lastName: string
+    personalId: string
+    phoneNumber: string
+    createdAt: string
+    verificationStatus: string
   }
+  handleDelete: (id: number) => void
 }
 
 const ListItem = ({
-  userData: { fullName, id, mobile, dateOfAddition, isVerified },
+  receiverData: {
+    id,
+    firstName,
+    lastName,
+    personalId,
+    phoneNumber,
+    verificationStatus,
+    createdAt,
+  },
+  handleDelete,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
@@ -26,19 +38,25 @@ const ListItem = ({
     <>
       {isMobile ? (
         <ListItemMobile
-          fullName={fullName}
           id={id}
-          mobile={mobile}
-          dateOfAddition={dateOfAddition}
-          isVerified={isVerified}
+          firstName={firstName}
+          lastName={lastName}
+          personalId={personalId}
+          phoneNumber={phoneNumber}
+          createdAt={createdAt}
+          verificationStatus={verificationStatus}
+          handleDelete={handleDelete}
         />
       ) : (
         <ListItemFull
-          fullName={fullName}
           id={id}
-          mobile={mobile}
-          dateOfAddition={dateOfAddition}
-          isVerified={isVerified}
+          firstName={firstName}
+          lastName={lastName}
+          personalId={personalId}
+          phoneNumber={phoneNumber}
+          createdAt={createdAt}
+          verificationStatus={verificationStatus}
+          handleDelete={handleDelete}
         />
       )}
     </>

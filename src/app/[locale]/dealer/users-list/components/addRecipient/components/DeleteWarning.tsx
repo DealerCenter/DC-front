@@ -6,9 +6,13 @@ import Image from 'next/image'
 
 import closeIcon from '@/assets/icons/closeX.svg'
 
-type Props = { onCancel: () => void; onDelete: () => void }
+type Props = {
+  onCancel: () => void
+  onDelete: () => void
+  nameOfReceiver?: string
+}
 
-const DeleteWarning = ({ onCancel, onDelete }: Props) => {
+const DeleteWarning = ({ onCancel, onDelete, nameOfReceiver }: Props) => {
   const t = useTranslations('')
 
   return (
@@ -18,7 +22,8 @@ const DeleteWarning = ({ onCancel, onDelete }: Props) => {
       </Icon>
       <FrameTop>
         <H3Bold>{t('delete recipient')}</H3Bold>
-        <Label>{t('delete data warning')}</Label>
+
+        <Label>{`${t('delete data warning')} ${nameOfReceiver ? `"${nameOfReceiver}"` : ''}`}</Label>
       </FrameTop>
       <ButtonsFrame>
         <ChooseButton
@@ -82,7 +87,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 369px;
-  height: 211px;
   border-radius: 24px;
   padding: 32px;
   gap: 24px;
@@ -92,6 +96,6 @@ const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.main_gray_10};
 
   @media ${({ theme }) => theme.media?.sm} {
-    padding: 32px 16px;
+    padding: 32px;
   }
 `
