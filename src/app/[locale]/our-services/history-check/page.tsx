@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
-import HistoryCheck from './HistoryCheck'
+import CheckVehicleHistory from './CheckVehicleHistory'
 
 type Props = {}
 
 const Page = (props: Props) => {
-  return <HistoryCheck />
+  return <CheckVehicleHistory />
 }
 
 export default Page

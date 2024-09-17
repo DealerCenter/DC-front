@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import DocumentCheck from './components/documentCheck/DocumentCheck'
-import TransportationCalculator from './components/transportationCalculator/TransportationCalculator'
+import TransportationCalculator from '@/app/[locale]/our-services/transportation-calculator/TransportationCalculator'
+import DocumentCheck from '@/app/[locale]/our-services/document-check/DocumentCheck'
 
 type Props = {}
 

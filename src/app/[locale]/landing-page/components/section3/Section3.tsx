@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import VehicleStatusCheck from './components/VehicleStatusCheck'
-import CheckVehicleHistory from './components/CheckVehicleHistory'
+import CheckVehicleHistory from '../../../our-services/history-check/CheckVehicleHistory'
 import LogosLineBox from './components/LogosLineBox'
+import VehicleStatusCheck from '@/app/[locale]/our-services/status-check/VehicleStatusCheck'
 
 type Props = {}
 

@@ -10,8 +10,6 @@ type Props = { rating: 1 | 2 | 3 | 4 | 5 }
 const StarRating = ({ rating }: Props) => {
   const dummyArray = Array(5).fill(0)
 
-  console.log(dummyArray)
-
   return (
     <Container>
       {dummyArray.map((_, i) => (

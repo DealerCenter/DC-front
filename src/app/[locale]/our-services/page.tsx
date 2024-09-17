@@ -5,7 +5,7 @@ import { routeName } from '@/common/helpers/constants'
 
 import DocumentCheck from './document-check/DocumentCheck'
 import HistoryCheck from './history-check/HistoryCheck'
-import StatusCheck from './status-check/StatusCheck'
+import StatusCheck from './status-check/VehicleStatusCheck'
 import TransportationCalculator from './transportation-calculator/TransportationCalculator'
 
 type Props = {}

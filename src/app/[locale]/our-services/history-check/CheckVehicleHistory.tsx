@@ -6,13 +6,12 @@ import styled, { css } from 'styled-components'
 
 import carOnBlack from '@/assets/images/blackCarOnBlack.jpeg'
 import { useTranslations } from 'next-intl'
-import SearchComponent from './SearchComponent'
+import SearchComponent from './components/SearchComponent'
 
 type Props = {}
 
 const CheckVehicleHistory = (props: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
-  const isTablet = useMediaQuery({ query: theme.media?.md })
 
   const t = useTranslations('')
 

@@ -1,6 +1,6 @@
-import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
 import { useMediaQuery } from 'react-responsive'
 import Image from 'next/image'
 
@@ -8,6 +8,19 @@ import theme from '@/app/[locale]/theme'
 import TextInput from '@/common/components/inputElements/TextInput'
 
 import searchIcon from '@/assets/icons/searchIconGray.svg'
+
+const INPUT_WIDTH_MOBILE = 343
+const INPUT_WIDTH_TABLET = 311
+const INPUT_WIDTH_DESKTOP = 431
+
+const INPUT_HEIGHT_TABLET = 70
+const INPUT_HEIGHT = 50
+
+const INPUT_PADDING_LEFT_MOBILE = 34
+const INPUT_PADDING_LEFT = 50
+
+const ICON_PADDING_LEFT_MOBILE = 10
+const ICON_PADDING_LEFT = 16
 
 type Props = { placeholder: string }
 
@@ -26,10 +39,18 @@ const SearchComponent = ({ placeholder }: Props) => {
         onChange={() => {}}
         onBlur={() => {}}
         icon={<Image src={searchIcon} alt='search icon' />}
-        height={isTablet ? 70 : 50}
-        width={isMobile ? 343 : isTablet ? 311 : 431}
-        paddingLeft={isMobile ? 34 : 50}
-        iconPaddingLeft={isMobile ? 10 : 16}
+        height={isTablet ? INPUT_HEIGHT_TABLET : INPUT_HEIGHT}
+        width={
+          isMobile
+            ? INPUT_WIDTH_MOBILE
+            : isTablet
+              ? INPUT_WIDTH_TABLET
+              : INPUT_WIDTH_DESKTOP
+        }
+        paddingLeft={isMobile ? INPUT_PADDING_LEFT_MOBILE : INPUT_PADDING_LEFT}
+        iconPaddingLeft={
+          isMobile ? ICON_PADDING_LEFT_MOBILE : ICON_PADDING_LEFT
+        }
       />
       {!isMobile && (
         <SearchButton>

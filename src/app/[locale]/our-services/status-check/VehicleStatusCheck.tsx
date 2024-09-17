@@ -1,20 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useTranslations } from 'next-intl'
 import { useMediaQuery } from 'react-responsive'
 
-import theme from '@/app/[locale]/theme'
-import PageHeader from '../../common/PageHeader'
+import theme from '../../theme'
+import InfoBox from './components/InfoBox'
 import TextInput from '@/common/components/inputElements/TextInput'
+import PageHeader from '@/common/components/pageHeader/PageHeader'
 
 import searchIcon from '@/assets/icons/searchIconGray.svg'
 import Image from 'next/image'
-import InfoBox from './InfoBox'
+import { useTranslations } from 'next-intl'
 
 type Props = {}
 
 const VehicleStatusCheck = (props: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   const t = useTranslations('')
 
   return (
@@ -30,9 +31,9 @@ const VehicleStatusCheck = (props: Props) => {
       <BlackDiv></BlackDiv>
       <TextInput
         type='text'
-        placeholder={'modkjsfl'}
+        placeholder={t('enter vehicle vin code')}
         name='search field'
-        value='search'
+        value=''
         onChange={() => {}}
         onBlur={() => {}}
         icon={<Image src={searchIcon} alt='search icon' />}

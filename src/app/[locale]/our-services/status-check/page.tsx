@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
-import StatusCheck from './StatusCheck'
+import VehicleStatusCheck from './VehicleStatusCheck'
 
 type Props = {}
 
 const Page = (props: Props) => {
-  return <StatusCheck />
+  return <VehicleStatusCheck />
 }
 
 export default Page

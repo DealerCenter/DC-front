@@ -260,6 +260,15 @@
   "from": "დან",
   "up to": "მდე",
 
+  "enter the name of the document": "შეიყვანე საბუთის დასახელება",
+  "search for document and enter in search field": "მოძებნე საბუთის დასახელება და ეცადე სწორად შეიყვანო ძებნის გრაფაში",
+  "check status": "შეამოწმე სტატუსი",
+  "find status of vehicle and see whether it is problem-free": "იპოვე ავტომობილის სტატუსი და გაეცანი ინფორმაციას, რა სახის დაზიანება ან პრობლემა აქვს მას. ამასთანავე ნახავ, უპრობლემოა თუ არა ის.",
+  "make a wise decision": "მიიღე გონივრული გადაწყვეტილება",
+  "find out if it is necessary to contact the company": "გაიგე საჭიროა თუ არა კომპანიასთან დაკონტაქტება, რა ზომებს უნდა მიმართო",
+
+  "calculate": "კალკულაცია",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 
@@ -276,15 +285,6 @@
     "name required": "სახელი აუცილებელია",
     "surname required": "გვარი აუცილებელია",
     "actual address required": "ფაქტობრივი მისამართი აუცილებელია"
-  },
-
-  "infoBox": {
-    "enter the name of the document": "შეიყვანე საბუთის დასახელება",
-    "search for document and enter in search field": "მოძებნე საბუთის დასახელება და ეცადე სწორად შეიყვანო ძებნის გრაფაში",
-    "check status": "შეამოწმე სტატუსი",
-    "find status of vehicle and see whether it is problem-free": "იპოვე ავტომობილის სტატუსი და გაეცანი ინფორმაციას, რა სახის დაზიანება ან პრობლემა აქვს მას. ამასთანავე ნახავ, უპრობლემოა თუ არა ის.",
-    "make a wise decision": "მიიღე გონივრული გადაწყვეტილება",
-    "find out if it is necessary to contact the company": "გაიგე საჭიროა თუ არა კომპანიასთან დაკონტაქტება, რა ზომებს უნდა მიმართო"
   },
 
   "contactPage": {
