@@ -29,10 +29,13 @@ const UserList = ({ setIsModalOpen, searchQuery }: Props) => {
 
   const getData = async () => {
     const response = await getReceivers({
-      skip: receiversToSkip,
-      take: RECEIVERS_PER_PAGE,
+      skip: searchQuery ? 0 : receiversToSkip,
+      take: searchQuery ? 1000 : RECEIVERS_PER_PAGE,
       search: searchQuery,
     })
+    if (searchQuery && response?.length === 0) {
+      message.error('could not find recipient')
+    }
     setReceiversData(response)
   }
 
@@ -79,7 +82,7 @@ const UserList = ({ setIsModalOpen, searchQuery }: Props) => {
     return <Container />
   }
 
-  if (receiversData.length === 0) {
+  if (receiversData.length === 0 && searchQuery.length === 0) {
     return <UserListEmpty onClick={() => setIsModalOpen(true)} />
   }
 
@@ -106,13 +109,15 @@ const UserList = ({ setIsModalOpen, searchQuery }: Props) => {
           ))}
         </>
       </Container>
-      <PaginationBox>
-        <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          numOfPages={numOfPages}
-        />
-      </PaginationBox>
+      {searchQuery.length === 0 && (
+        <PaginationBox>
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            numOfPages={numOfPages}
+          />
+        </PaginationBox>
+      )}
     </>
   )
 }

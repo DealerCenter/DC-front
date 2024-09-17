@@ -93,7 +93,7 @@ export const updateNotificationSettings = async (
 ) => {
   try {
     const response = await axiosInstance.put(
-      `${endpoints.NOTIFICATION_SETTINGS_DEALERS}${id}`,
+      `${endpoints.NOTIFICATION_SETTINGS_DEALERS}/${id}`,
       data
     )
 
