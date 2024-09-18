@@ -154,11 +154,13 @@ const IdLabel = styled(Label)`
   align-items: start;
   justify-content: start;
 `
+
 const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 40px;
   height: 40px;
+
+  cursor: pointer;
 `
-const CheckmarkBox = styled.div``

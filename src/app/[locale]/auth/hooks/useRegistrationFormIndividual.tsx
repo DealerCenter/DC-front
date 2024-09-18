@@ -29,7 +29,7 @@ export const RegisterFormProviderIndividual = ({
 }: {
   children: ReactNode
 }) => {
-  const t = useTranslations('useForm')
+  const t = useTranslations('')
   const router = useRouter()
   const [uploadFile, setUploadFile] = useState<Blob>()
 

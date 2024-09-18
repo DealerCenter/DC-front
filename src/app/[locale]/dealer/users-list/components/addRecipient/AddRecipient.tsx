@@ -14,7 +14,7 @@ import useAddRecipients, { FIELD_NAMES } from './hooks/useAddRecipient'
 
 type Props = {
   onClose: () => void
-  receiverData: {
+  receiverData?: {
     id: number
     firstName: string
     lastName: string
@@ -23,13 +23,16 @@ type Props = {
     createdAt: string
     verificationStatus: string
   }
+  setUpdatedSuccessfully: (arg: boolean) => void
 }
 
-const AddRecipient = ({ onClose, receiverData }: Props) => {
+const AddRecipient = ({
+  onClose,
+  receiverData,
+  setUpdatedSuccessfully,
+}: Props) => {
+  const [isIdImageUploaded, setIsIdImageUploaded] = useState(false)
   const t = useTranslations('')
-  const [type, setType] = useState<'individual' | 'legalPerson'>('individual')
-  const dummyValue = 'something'
-  const [isIdImageUploaded, setIsIdImageUploaded] = useState()
 
   const {
     values,
@@ -38,114 +41,112 @@ const AddRecipient = ({ onClose, receiverData }: Props) => {
     handleSubmit,
     errors,
     touched,
-    axiosError,
     setUploadIdImage,
     setFieldValue,
-  } = useAddRecipients(receiverData)
+    isButtonDisabled,
+  } = useAddRecipients(receiverData && receiverData, setUpdatedSuccessfully)
 
-  const isButtonDisabled = false
+  const isButtonDisabledNative =
+    isButtonDisabled || (!receiverData && !isIdImageUploaded)
 
   return (
     <Container>
-      <form onSubmit={handleSubmit}>
-        <Icon onClick={onClose}>
-          <Image src={closeIcon} alt='close icon' width={12} height={12} />
-        </Icon>
-        <FrameTop>
-          <H3Bold>{t('add recipient')}</H3Bold>
-          <Label>{t('enter recipient data')}</Label>
-          {!receiverData && (
-            <ChooseTypeFrame>
-              <ChooseButton
-                text={t('individual')}
-                isActive={!values[FIELD_NAMES.IS_JURIDICAL]} // if not juridical, it's individual
-                onClick={() => setFieldValue(FIELD_NAMES.IS_JURIDICAL, false)}
-              />
-              <Image src={splitGrayLine} alt='line icon' />
-              <ChooseButton
-                text={t('legal person')}
-                isActive={!!values[FIELD_NAMES.IS_JURIDICAL]} // if juridical, it's legal person
-                onClick={() => setFieldValue(FIELD_NAMES.IS_JURIDICAL, true)}
-              />
-            </ChooseTypeFrame>
-          )}
-        </FrameTop>
+      <Icon onClick={onClose}>
+        <Image src={closeIcon} alt='close icon' width={12} height={12} />
+      </Icon>
+      <FrameTop>
+        <H3Bold>{t('add recipient')}</H3Bold>
+        <Label>{t('enter recipient data')}</Label>
+        {!receiverData && (
+          <ChooseTypeFrame>
+            <ChooseButton
+              text={t('individual')}
+              isActive={!values[FIELD_NAMES.IS_JURIDICAL]} // if not juridical, it's individual
+              onClick={() => setFieldValue(FIELD_NAMES.IS_JURIDICAL, false)}
+            />
+            <Image src={splitGrayLine} alt='line icon' />
+            <ChooseButton
+              text={t('legal person')}
+              isActive={!!values[FIELD_NAMES.IS_JURIDICAL]} // if juridical, it's legal person
+              onClick={() => setFieldValue(FIELD_NAMES.IS_JURIDICAL, true)}
+            />
+          </ChooseTypeFrame>
+        )}
+      </FrameTop>
 
-        <InputFieldsFrame>
-          <TextInput
-            type='text'
-            name={FIELD_NAMES.FIRST_NAME}
-            placeholder={t('name')}
-            value={values[FIELD_NAMES.FIRST_NAME]}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            errorMessage={
-              errors[FIELD_NAMES.FIRST_NAME] && touched[FIELD_NAMES.FIRST_NAME]
-                ? errors[FIELD_NAMES.FIRST_NAME]
-                : ''
-            }
-          ></TextInput>
-          <TextInput
-            type='text'
-            name={FIELD_NAMES.LAST_NAME}
-            placeholder={t('surname')}
-            value={values[FIELD_NAMES.LAST_NAME]}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            errorMessage={
-              errors[FIELD_NAMES.LAST_NAME] && touched[FIELD_NAMES.LAST_NAME]
-                ? errors[FIELD_NAMES.LAST_NAME]
-                : ''
-            }
-          ></TextInput>
-          <TextInput
-            type='text'
-            name={FIELD_NAMES.PERSONAL_ID}
-            placeholder={t('personal number')}
-            value={values[FIELD_NAMES.PERSONAL_ID]}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            errorMessage={
-              errors[FIELD_NAMES.PERSONAL_ID] &&
-              touched[FIELD_NAMES.PERSONAL_ID]
-                ? errors[FIELD_NAMES.PERSONAL_ID]
-                : ''
-            }
-          ></TextInput>
-          <TextInput
-            type='text'
-            name={FIELD_NAMES.CONTACT_NUMBER}
-            placeholder={t('contact number')}
-            value={values[FIELD_NAMES.CONTACT_NUMBER]}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            errorMessage={
-              errors[FIELD_NAMES.CONTACT_NUMBER] &&
-              touched[FIELD_NAMES.CONTACT_NUMBER]
-                ? errors[FIELD_NAMES.CONTACT_NUMBER]
-                : ''
-            }
-          ></TextInput>
-          <FileDropZone
-            dropText={t('drop the file here')}
-            text={t('upload an ID photo')}
-            uploadedText={t('photo uploaded')}
-            warningText={t('add an id photo')}
-            onDropAdditional={setUploadIdImage}
-            setIsUploaded={setIsIdImageUploaded}
-          />
-        </InputFieldsFrame>
+      <InputFieldsFrame>
+        <TextInput
+          type='text'
+          name={FIELD_NAMES.FIRST_NAME}
+          placeholder={t('name')}
+          value={values[FIELD_NAMES.FIRST_NAME]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.FIRST_NAME] && touched[FIELD_NAMES.FIRST_NAME]
+              ? errors[FIELD_NAMES.FIRST_NAME]
+              : ''
+          }
+        ></TextInput>
+        <TextInput
+          type='text'
+          name={FIELD_NAMES.LAST_NAME}
+          placeholder={t('surname')}
+          value={values[FIELD_NAMES.LAST_NAME]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.LAST_NAME] && touched[FIELD_NAMES.LAST_NAME]
+              ? errors[FIELD_NAMES.LAST_NAME]
+              : ''
+          }
+        ></TextInput>
+        <TextInput
+          type='text'
+          name={FIELD_NAMES.PERSONAL_ID}
+          placeholder={t('personal number')}
+          value={values[FIELD_NAMES.PERSONAL_ID]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.PERSONAL_ID] && touched[FIELD_NAMES.PERSONAL_ID]
+              ? errors[FIELD_NAMES.PERSONAL_ID]
+              : ''
+          }
+        ></TextInput>
+        <TextInput
+          type='text'
+          name={FIELD_NAMES.CONTACT_NUMBER}
+          placeholder={t('contact number')}
+          value={values[FIELD_NAMES.CONTACT_NUMBER]}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errorMessage={
+            errors[FIELD_NAMES.CONTACT_NUMBER] &&
+            touched[FIELD_NAMES.CONTACT_NUMBER]
+              ? errors[FIELD_NAMES.CONTACT_NUMBER]
+              : ''
+          }
+        ></TextInput>
+        <FileDropZone
+          dropText={t('drop the file here')}
+          text={t('upload an ID photo')}
+          uploadedText={t('photo uploaded')}
+          warningText={t('add an id photo')}
+          onDropAdditional={setUploadIdImage}
+          setIsUploaded={setIsIdImageUploaded}
+        />
+      </InputFieldsFrame>
 
-        <AppButton
-          text={t('add')}
-          type='filled'
-          disabled={isButtonDisabled}
-          onClick={handleSubmit}
-          isSmall={false}
-          height='medium'
-          htmlType='submit'
-        ></AppButton>
-      </form>
+      <AppButton
+        text={receiverData ? t('update information') : t('add')}
+        type='filled'
+        disabled={isButtonDisabledNative}
+        onClick={handleSubmit}
+        isSmall={false}
+        height='medium'
+        htmlType='submit'
+      ></AppButton>
     </Container>
   )
 }

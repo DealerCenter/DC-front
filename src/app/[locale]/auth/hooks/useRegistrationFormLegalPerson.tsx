@@ -38,7 +38,7 @@ export const RegisterFormProviderLegalPerson = ({
   const [uploadDocument, setUploadDocument] = useState<Blob>()
   const [uploadIdImage, setUploadIdImage] = useState<Blob>()
   const router = useRouter()
-  const tUseForm = useTranslations('useForm')
+  const tUseForm = useTranslations('')
   const t = useTranslations('')
 
   const initialValues = {

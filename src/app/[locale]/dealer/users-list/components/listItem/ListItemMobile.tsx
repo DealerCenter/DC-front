@@ -23,6 +23,7 @@ type Props = {
   createdAt: string
   verificationStatus: string
   handleDelete: (id: number) => void
+  handleEdit: () => void
 }
 
 const ListItemMobile = ({
@@ -34,6 +35,7 @@ const ListItemMobile = ({
   createdAt,
   verificationStatus,
   handleDelete,
+  handleEdit,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -58,13 +60,7 @@ const ListItemMobile = ({
         </LabelAndIconBox>
         <IconBox>
           <Icon>
-            <Image
-              src={editPencil}
-              alt='edit icon'
-              onClick={() => {
-                console.log('edit ', `${firstName} ${lastName}`)
-              }}
-            />
+            <Image src={editPencil} alt='edit icon' onClick={handleEdit} />
           </Icon>
           <Icon>
             <Image

@@ -14,9 +14,19 @@ import { message } from 'antd'
 
 const RECEIVERS_PER_PAGE = 10
 
-type Props = { setIsModalOpen: (arg: boolean) => void; searchQuery: string }
+type Props = {
+  setIsModalOpen: (arg: boolean) => void
+  searchQuery: string
+  updatedSuccessfully: boolean
+  setUpdatedSuccessfully: (arg: boolean) => void
+}
 
-const UserList = ({ setIsModalOpen, searchQuery }: Props) => {
+const UserList = ({
+  setIsModalOpen,
+  searchQuery,
+  updatedSuccessfully,
+  setUpdatedSuccessfully,
+}: Props) => {
   const [receiversData, setReceiversData] = useState<
     RECEIVER_GET_RES[] | undefined
   >(undefined)
@@ -65,8 +75,15 @@ const UserList = ({ setIsModalOpen, searchQuery }: Props) => {
   // getData when search query comes in, or when the page changes
   useEffect(() => {
     getData()
+
+    console.log('useeffectgetata updated state:', updatedSuccessfully)
+
+    if (updatedSuccessfully) {
+      setIsModalOpen(false)
+      setUpdatedSuccessfully(false)
+    }
     //eslint-disable-next-line
-  }, [searchQuery, receiversToSkip])
+  }, [searchQuery, receiversToSkip, updatedSuccessfully])
 
   const handleDelete = async (id: number) => {
     try {
@@ -105,6 +122,8 @@ const UserList = ({ setIsModalOpen, searchQuery }: Props) => {
               receiverData={data}
               key={data.id}
               handleDelete={handleDelete}
+              updatedSuccessfully={updatedSuccessfully}
+              setUpdatedSuccessfully={setUpdatedSuccessfully}
             />
           ))}
         </>

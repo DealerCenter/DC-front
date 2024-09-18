@@ -23,7 +23,10 @@ const DeleteWarning = ({ onCancel, onDelete, nameOfReceiver }: Props) => {
       <FrameTop>
         <H3Bold>{t('delete recipient')}</H3Bold>
 
-        <Label>{`${t('delete data warning')} ${nameOfReceiver ? `"${nameOfReceiver}"` : ''}`}</Label>
+        <Label>{t('delete data warning')}</Label>
+        {nameOfReceiver && (
+          <Label>{`${t('recipient person')} ${nameOfReceiver}`}</Label>
+        )}
       </FrameTop>
       <ButtonsFrame>
         <ChooseButton

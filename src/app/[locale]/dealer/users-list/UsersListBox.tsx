@@ -19,6 +19,7 @@ const UsersListBox = (props: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isSearchActive, setIsSearchActive] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [updatedSuccessfully, setUpdatedSuccessfully] = useState(false)
   const t = useTranslations('')
 
   const onSearch = (query: string) => {
@@ -53,14 +54,22 @@ const UsersListBox = (props: Props) => {
           </ButtonFrame>
         </Frame>
 
-        <UsersList setIsModalOpen={setIsModalOpen} searchQuery={searchQuery} />
+        <UsersList
+          setIsModalOpen={setIsModalOpen}
+          searchQuery={searchQuery}
+          updatedSuccessfully={updatedSuccessfully}
+          setUpdatedSuccessfully={setUpdatedSuccessfully}
+        />
       </Container>
 
       <AppModal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
       >
-        <AddRecipient onClose={() => setIsModalOpen(false)} />
+        <AddRecipient
+          onClose={() => setIsModalOpen(false)}
+          setUpdatedSuccessfully={setUpdatedSuccessfully}
+        />
       </AppModal>
     </>
   )

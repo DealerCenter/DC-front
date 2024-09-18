@@ -31,7 +31,7 @@ export const FIELD_NAMES = {
 }
 
 export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
-  const t = useTranslations('createOrder')
+  const t = useTranslations('')
 
   const initialValues = {
     [FIELD_NAMES.MANUFACTURER]: '',

@@ -19,7 +19,7 @@ const useLoginForm = () => {
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
-  const tUseForm = useTranslations('useForm')
+  const tUseForm = useTranslations('')
   const t = useTranslations('')
   const router = useRouter()
 
