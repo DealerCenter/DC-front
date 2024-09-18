@@ -1,34 +1,48 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import { useMediaQuery } from 'react-responsive'
 
-import { useRegisterFormContextIndividual } from '../../../hooks/useRegistrationFormIndividual'
+import {
+  FIELD_NAMES,
+  useRegisterFormContextIndividual,
+} from '../../../hooks/useRegistrationFormIndividual'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
 import FileDropZone from '@/common/components/inputElements/FileDropZone'
+import theme from '@/app/[locale]/theme'
 
 type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
 
 const IndividualForm2 = ({ setFormStep }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, errors, touched, validateForm } =
-    useRegisterFormContextIndividual()
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    errors,
+    touched,
+    validateForm,
+    setUploadFile,
+  } = useRegisterFormContextIndividual()
 
   const onNextClick = async () => {
     const validated = await validateForm()
-    if (!validated.personalNumber) {
+    if (!validated[FIELD_NAMES.PERSONAL_ID]) {
       setFormStep((prev) => prev + 1)
     }
   }
 
-  const isButtonDisabled = values.personalNumber.length === 0
+  const isButtonDisabled = values[FIELD_NAMES.PERSONAL_ID].length === 0
 
   return (
     <StyledForm>
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
-        name='personalNumber'
+        name={FIELD_NAMES.PERSONAL_ID}
         placeholder={t('personal number')}
         value={values.personalNumber}
         onChange={handleChange}
@@ -38,12 +52,13 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
             ? errors.personalNumber
             : ''
         }
-      />{' '}
+      />
       <FileDropZone
         width={442}
         dropText={t('drop the file here')}
         text={t('upload an ID photo')}
         uploadedText={t('photo uploaded')}
+        onDropAdditional={setUploadFile}
       />
       <AppButton
         width={442}

@@ -2,10 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import { useRegisterFormContextLegalPerson } from '../../../hooks/useRegistrationFormLegalPerson'
+import {
+  FIELD_NAMES,
+  useRegisterFormContextLegalPerson,
+} from '../../../hooks/useRegistrationFormLegalPerson'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
 import FileDropZone from '@/common/components/inputElements/FileDropZone'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
 type Props = {
   setFormStep: React.Dispatch<React.SetStateAction<number>>
@@ -13,80 +18,102 @@ type Props = {
 }
 
 const LegalPersonForm1 = ({ setFormStep, goToLogin }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, errors, touched, validateForm } =
-    useRegisterFormContextLegalPerson()
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    errors,
+    touched,
+    validateForm,
+    setUploadDocument,
+  } = useRegisterFormContextLegalPerson()
 
   const onNextClick = async () => {
     const validated = await validateForm()
     if (
-      !validated.companyName &&
-      !validated.identificationCode &&
-      !validated.address &&
-      !validated.website
+      !validated[FIELD_NAMES.COMPANY_NAME] &&
+      !validated[FIELD_NAMES.IDENTIFICATION_CODE] &&
+      !validated[FIELD_NAMES.COMPANY_ADDRESS] &&
+      !validated[FIELD_NAMES.WEBSITE_URL]
     ) {
       setFormStep((prev) => prev + 1)
     }
   }
 
   const isButtonDisabled =
-    values.companyName.length === 0 ||
-    values.identificationCode.length === 0 ||
-    values.address.length === 0
+    values[FIELD_NAMES.COMPANY_NAME].length === 0 ||
+    values[FIELD_NAMES.IDENTIFICATION_CODE].length === 0 ||
+    values[FIELD_NAMES.COMPANY_ADDRESS].length === 0
 
   return (
     <StyledForm>
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
-        name='companyName'
+        name={FIELD_NAMES.COMPANY_NAME}
         placeholder={t('company name')}
-        value={values.companyName}
+        value={values[FIELD_NAMES.COMPANY_NAME]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.companyName && touched.companyName ? errors.companyName : ''
-        }
-      />
-      <TextInput
-        width={442}
-        type='text'
-        name='identificationCode'
-        placeholder={t('identification code')}
-        value={values.identificationCode}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errorMessage={
-          errors.identificationCode && touched.identificationCode
-            ? errors.identificationCode
+          errors[FIELD_NAMES.COMPANY_NAME] && touched[FIELD_NAMES.COMPANY_NAME]
+            ? errors[FIELD_NAMES.COMPANY_NAME]
             : ''
         }
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
-        name='address'
-        placeholder={t('address')}
-        value={values.address}
+        name={FIELD_NAMES.IDENTIFICATION_CODE}
+        placeholder={t('identification code')}
+        value={values[FIELD_NAMES.IDENTIFICATION_CODE]}
         onChange={handleChange}
         onBlur={handleBlur}
-        errorMessage={errors.address && touched.address ? errors.address : ''}
+        errorMessage={
+          errors[FIELD_NAMES.IDENTIFICATION_CODE] &&
+          touched[FIELD_NAMES.IDENTIFICATION_CODE]
+            ? errors[FIELD_NAMES.IDENTIFICATION_CODE]
+            : ''
+        }
       />
       <TextInput
-        width={442}
+        width={isMobile ? undefined : 442}
         type='text'
-        name='website'
-        placeholder={t('website')}
-        value={values.website}
+        name={FIELD_NAMES.COMPANY_ADDRESS}
+        placeholder={t('company address')}
+        value={values[FIELD_NAMES.COMPANY_ADDRESS]}
         onChange={handleChange}
         onBlur={handleBlur}
-        errorMessage={errors.website && touched.website ? errors.website : ''}
+        errorMessage={
+          errors[FIELD_NAMES.COMPANY_ADDRESS] &&
+          touched[FIELD_NAMES.COMPANY_ADDRESS]
+            ? errors[FIELD_NAMES.COMPANY_ADDRESS]
+            : ''
+        }
+      />
+      <TextInput
+        width={isMobile ? undefined : 442}
+        type='text'
+        name={FIELD_NAMES.WEBSITE_URL}
+        placeholder={t('website')}
+        value={values[FIELD_NAMES.WEBSITE_URL]}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errorMessage={
+          errors[FIELD_NAMES.WEBSITE_URL] && touched[FIELD_NAMES.WEBSITE_URL]
+            ? errors[FIELD_NAMES.WEBSITE_URL]
+            : ''
+        }
       />
       <FileDropZone
         width={442}
-        dropText={t('Drop the files here ...')}
+        dropText={t('drop the files here')}
         text={t('upload a certificate')}
         uploadedText={t('file uploaded')}
+        onDropAdditional={setUploadDocument}
       />
       <AppButton
         width={442}

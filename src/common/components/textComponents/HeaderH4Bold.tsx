@@ -33,6 +33,9 @@ const StyledH4 = styled.h4<StyledH4Props>`
       : css`
           font-size: 28px;
         `}
+
+  cursor: default;
+  user-select: none;
 `
 
 const H4Box = styled.div`

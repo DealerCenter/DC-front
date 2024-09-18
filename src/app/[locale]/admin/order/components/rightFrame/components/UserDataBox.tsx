@@ -61,8 +61,8 @@ const UserDataBox = ({ header, fullName, value }: Props) => {
                 width={isMobile ? 143 : 160}
                 height={48}
                 type='text'
-                name='mob. number'
-                placeholder={t('mob. number')}
+                name='mob number'
+                placeholder={t('mob number')}
                 value={''}
                 onChange={() => {}}
                 onBlur={() => {}}

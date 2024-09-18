@@ -19,6 +19,7 @@
   "drop the file here": "Drop the file here ...",
   "name of representative": "Name of representative",
   "surname of representative": "Surname of representative",
+  "address of representative": "Address of representative",
   "contact number": "Contact number",
   "date of birth": "Date of birth",
   "personal number": "Personal number",
@@ -103,6 +104,7 @@
   "location": "Location",
   "state": "State",
   "address": "Address",
+  "company address": "Company address",
   "parameters": "Parameters",
   "insurance": "Insurance",
   "manufacturer": "Manufacturer",
@@ -113,7 +115,7 @@
   "more details": "More details",
   "description": "Description",
   "full name": "Full name",
-  "mob. number": "Mobile number",
+  "mob number": "Mobile number",
 
   "dealers": "Dealers",
   "orders": "Orders",
@@ -162,6 +164,7 @@
   "contact": "Contact",
   "rights reserved": "© 2024. DUX. All rights reserved.",
   "contact info of representative": "Contact information of the representative",
+  "contact info of company": "Contact info of the company",
 
   "status check": "Status check",
   "document check": "Document check",
@@ -207,6 +210,30 @@
   "or": "Or",
 
   "see all recipients": "See all recipients",
+  "passwords do not match": "Passwords do not match",
+  "password updated successfully": "Password updated successfully",
+  "password could not be updated": "Password could not be updated",
+  "information updated successfully": "Information has been updated successfully",
+  "information not updated": "Information could not be updated",
+
+  "loading": "Loading",
+  "wait": "Wait",
+
+  "": "",
+
+  "dealer id": "Dealer ID",
+  "receiver id": "Receiver ID",
+
+  "you registered successfully": "You registered successfully",
+  "you could not register": "You could not register",
+  "you are logged in": "You are logged in",
+  "you could not log in": "You could not log in",
+  "you are logged out": "You are logged out",
+  "you could not log out": "You could not log out",
+  "notification settings updated successfully": "Notification settings updated successfully",
+  "failed to update notification settings": "Failed to update notification settings",
+
+  "password required": "Password is required",
 
   "useForm": {
     "must be valid email": "Must be a valid email",
@@ -223,7 +250,27 @@
     "personal number required": "Personal number is required",
     "name required": "Name is required",
     "surname required": "Surname is required",
-    "actual address required": "Actual address is required"
+    "actual address required": "Actual address is required",
+    "document is required": "Document is required",
+    "id image is required": "ID Image is required"
   },
-  "not added recipient data": "You have not added recipient data yet"
+  "not added recipient data": "You have not added recipient data yet",
+
+  "createOrder": {
+    "manufacturer required": "Manufacturer is required",
+    "manufacture year required": "Manufacture year is required",
+    "model required": "Model is required",
+    "vin required": "VIN is required",
+    "transportation cost required": "Transportation cost is required",
+    "car cost required": "Car cost is required",
+    "state required": "State is required",
+    "exact address required": "Exact address is required",
+    "insurance status required": "Insurance status is required",
+    "car category required": "Car category is required",
+    "mileage required": "Mileage is required",
+    "status required": "Status is required",
+    "container ID required": "Container ID is required",
+    "dealer ID required": "Dealer ID is required",
+    "receiver ID required": "Receiver ID is required"
+  }
 }

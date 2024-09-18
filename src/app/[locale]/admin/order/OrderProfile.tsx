@@ -19,6 +19,7 @@ import DetailsRow from './components/detailsRow/DetailsRow'
 
 import leftArrow from '@/assets/icons/arrows/arrowLeftThinBlack.svg'
 import EditButton from '../components/common/EditButton'
+import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
 
 type Props = {}
 
@@ -32,14 +33,11 @@ const OrderProfile = (props: Props) => {
   return (
     <Container>
       <TopButtonsFrame>
-        <BackToOrderButton
+        <AppGoBackButton
           onClick={() => router.push(routeName.adminOrderHistory)}
-        >
-          <Image src={leftArrow} alt='left arrow icon' height={20} />
-          {!isMobile && (
-            <BackToOrderLabel>{t('back to orders')}</BackToOrderLabel>
-          )}
-        </BackToOrderButton>
+          text={t('back to orders')}
+          noTextOnMobile={true}
+        />
         <EditButton onClick={() => setIsEditing((is) => !is)} />
       </TopButtonsFrame>
 

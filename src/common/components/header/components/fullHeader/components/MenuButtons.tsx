@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import SearchIcon from './SearchIcon'
-import LoginButton from './LoginButton'
+import LoginButton from '../../LoginButton'
 import LangChangeButton from './LangChangeButton'
 
 type Props = {}
@@ -15,7 +15,7 @@ const MenuButtons = (props: Props) => {
       {!isSearchActive && (
         <>
           <LoginButton />
-          <LangChangeButton left={2} top={66} width={71} />
+          <LangChangeButton left={4} top={64} width={71} />
         </>
       )}
     </Container>

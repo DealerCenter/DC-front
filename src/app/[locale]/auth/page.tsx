@@ -8,6 +8,7 @@ import InputFormLegalPerson from './components/InputFormLegalPerson'
 import AppButton from '@/common/components/appButton/AppButton'
 import Header from '@/common/components/header/Header'
 import AuthLanding from './components/AuthLanding'
+import { useUserData } from '@/common/store/userDataStore'
 
 type Props = {}
 

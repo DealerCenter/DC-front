@@ -18,8 +18,9 @@ import AppDropdownFilter from '@/common/components/appDropdown/appFilter/AppDrop
 import { useAdminState } from '../../AdminStateContext'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
-import { css } from 'styled-components'
 import BindContainerBox from './bindContainer/BindContainerBox'
+import { routeName } from '@/common/helpers/constants'
+import { useRouter } from '@/navigation'
 
 type Props = { isEditing: boolean; setIsEditing: (arg1: boolean) => void }
 
@@ -59,6 +60,7 @@ const filterValues = {
 const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
+  const router = useRouter()
 
   const { setSortOption } = useAdminState()
 
@@ -137,7 +139,7 @@ const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
           <ButtonPairFrame>
             <SecondaryButton
               text={t('add')}
-              onClick={() => {}}
+              onClick={() => router.push(routeName.adminCreateOrder)}
               icon={addIcon}
               width={isMobile ? 160 : undefined}
             ></SecondaryButton>

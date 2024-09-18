@@ -20,6 +20,7 @@ type Props = {
   fontSize?: number
   isOutline?: boolean
   backgroundColor?: string
+  isDisabled?: boolean
 }
 
 const TextInput = ({
@@ -39,6 +40,7 @@ const TextInput = ({
   fontSize = 16,
   isOutline = true,
   backgroundColor,
+  isDisabled = false,
 }: Props) => {
   return (
     <Container>
@@ -58,6 +60,7 @@ const TextInput = ({
         fontSize={fontSize}
         isOutline={isOutline}
         backgroundColor={backgroundColor}
+        disabled={isDisabled}
       />
       {optionalInfo && (
         <TextBox>
@@ -191,6 +194,7 @@ const ErrorMessage = styled.p`
   font-size: ${({ theme }) => theme.fontSizes?.extraSmall};
   top: 48px;
   left: 12px;
+  z-index: 10;
 `
 
 const OptionalText = styled.p`

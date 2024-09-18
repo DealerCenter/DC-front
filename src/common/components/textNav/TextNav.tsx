@@ -40,18 +40,20 @@ const StyledDiv = styled.div<StyledDivProps>`
   border: 2px solid ${({ theme }) => theme.colors?.main_gray_42};
   width: 32px;
   height: 32px;
-  cursor: pointer;
 
   ${({ done, active, theme }) =>
     done
       ? css`
+          cursor: pointer;
           background-color: ${theme.colors?.main_gray_100};
         `
       : active
         ? css`
+            cursor: default;
             border-color: ${theme.colors?.main_gray_100};
           `
         : css`
+            cursor: default;
             border-color: ${theme.colors?.main_gray_42};
           `}
 `

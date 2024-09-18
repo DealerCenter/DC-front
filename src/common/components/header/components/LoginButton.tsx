@@ -4,6 +4,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import person from '@/assets/icons/person.svg'
+import { routeName } from '@/common/helpers/constants'
 
 type Props = { text?: string }
 
@@ -12,7 +13,7 @@ const LoginButton = ({ text }: Props) => {
 
   return (
     <Item
-      onClick={() => router.push('/auth')}
+      onClick={() => router.push(routeName.auth)}
       isText={typeof text === 'string'}
     >
       <Image width={20} height={20} src={person} alt='person icon' />
@@ -49,6 +50,10 @@ const Item = styled.div<ItemProps>`
       : css`
           width: 56px;
           padding: unset;
+          @media ${({ theme }) => theme.media?.sm} {
+            height: 40px;
+            width: 40px;
+          }
         `}
 
   cursor: pointer

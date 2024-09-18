@@ -49,6 +49,7 @@ const Container = styled.div<ContainerProps>`
   }
 
   cursor: pointer;
+  user-select: none;
 `
 const Label = styled.label`
   color: ${({ theme }) => theme.colors?.main_gray_100};

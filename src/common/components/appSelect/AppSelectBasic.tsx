@@ -64,7 +64,9 @@ const AppSelectBasic = ({
         placeHolderIsGray={placeHolderIsGray}
       >
         {selectedValue
-          ? options.find((option) => option.value === selectedValue)?.value
+          ? t(
+              `${options.find((option) => option.value === selectedValue)?.value}`
+            )
           : placeholder}
         <Icon isOpen={isOpen}>
           <Image src={arrowDown} alt='arrow down' />

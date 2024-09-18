@@ -1,12 +1,22 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import pencilIcon from '@/assets/icons/editPencil.svg'
 import arrowDown from '@/assets/icons/arrowDown.svg'
 import Image from 'next/image'
 
-type Props = { text: string; onEdit: () => void; onArrowDown: () => void }
+type Props = {
+  text: string
+  onEdit: () => void
+  onArrowDown: () => void
+  isOpen?: boolean
+}
 
-const InputFieldsHeader = ({ text, onEdit, onArrowDown }: Props) => {
+const InputFieldsHeader = ({
+  text,
+  onEdit,
+  onArrowDown,
+  isOpen = false,
+}: Props) => {
   return (
     <Container>
       <StyledH5>{text}</StyledH5>
@@ -14,7 +24,7 @@ const InputFieldsHeader = ({ text, onEdit, onArrowDown }: Props) => {
         <Icon onClick={onEdit}>
           <Image src={pencilIcon} alt='icon' />
         </Icon>
-        <Icon onClick={onArrowDown}>
+        <Icon onClick={onArrowDown} isOpen={isOpen}>
           <Image src={arrowDown} alt='icon' />
         </Icon>
       </IconsBox>
@@ -44,12 +54,25 @@ const StyledH5 = styled.h5`
   }
 `
 
-const Icon = styled.div`
+type IconProps = {
+  isOpen?: boolean
+}
+
+const Icon = styled.div<IconProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 36px;
   height: 36px;
+
+  transition: transform 0.3s ease-in-out;
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      transform: rotate(180deg);
+    `}
+
+  cursor: pointer;
 `
 
 const IconsBox = styled.div`
