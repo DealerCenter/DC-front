@@ -244,8 +244,6 @@
   "receiver could not be updated": "Receiver could not be updated",
   "receiver could not be uploaded": "Receiver could not be uploaded",
 
-  "must be valid email": "Must be a valid email",
-
   "email required": "Email is required",
   "password required": "Password is required",
   "company name required": "Company name is required",
@@ -278,5 +276,13 @@
   "status required": "Status is required",
   "container ID required": "Container ID is required",
   "dealer ID required": "Dealer ID is required",
-  "receiver ID required": "Receiver ID is required"
+  "receiver ID required": "Receiver ID is required",
+  "url required": "URL required",
+
+  "add new container": "Add new container",
+  "enter container data": "Enter container data",
+  "container created successfully": "The container was created successfully",
+  "container could not be created": "The container could not be created",
+
+  "must be valid email": "Must be a valid email"
 }

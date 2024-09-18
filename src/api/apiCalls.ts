@@ -156,3 +156,29 @@ export const deleteReceiver = async (id: number) => {
     console.error('Error getting receivers:', error)
   }
 }
+
+export const createContainer = async (payload: {
+  name: string
+  trackingUrl: string
+}) => {
+  try {
+    const response = await axiosInstance.post<CONTAINER_POST_RES>(
+      endpoints.CREATE_CONTAINER,
+      payload
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error with updating the data:', error)
+  }
+}
+
+export const getContainers = async (orderId: string) => {
+  try {
+    const response = await axiosInstance.get(
+      `${endpoints.GET_CONTAINERS}/${orderId}`
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error getting containers:', error)
+  }
+}

@@ -6,26 +6,32 @@ import ContainersList from './components/ContainersList'
 import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 
-import searchIcon from '@/assets/icons/searchForButton.svg'
 import plusIcon from '@/assets/icons/plus.svg'
-import UserListEmpty from './components/UserListEmpty'
-import { containers, users } from '@/assets/DummyData'
+import { containers } from '@/assets/DummyData'
+import AddContainer from './components/addContainer/AddContainer'
+import AppModal from '@/common/components/modal/AppModal'
+import SearchButton from '@/common/components/searchButton/SearchButton'
 
 type Props = {}
 
 const Containers = (props: Props) => {
   const t = useTranslations('')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isSearchActive, setIsSearchActive] = useState(false)
+  const [uploadedSuccessfully, setUploadedSuccessfully] = useState(false)
 
   return (
     <Container>
       <Frame>
         <HeaderH4Bold text={t('containers')} />
         <ButtonFrame>
-          <SecondaryButton
+          <SearchButton
+            isActive={isSearchActive}
+            setIsActive={setIsSearchActive}
             text={t('search')}
-            onClick={() => {}}
-            icon={searchIcon}
+            placeholder={t('search for recipient')}
+            onSubmit={() => {}}
+            onCloseSearch={() => {}}
           />
           <SecondaryButton
             text={t('add container')}
@@ -37,6 +43,12 @@ const Containers = (props: Props) => {
         </ButtonFrame>
       </Frame>
       <ContainersList containersData={containers} />
+      <AppModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <AddContainer onClose={() => setIsModalOpen(false)} />
+      </AppModal>
     </Container>
   )
 }

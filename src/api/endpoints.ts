@@ -9,4 +9,6 @@ export const endpoints = {
   NOTIFICATION_SETTINGS_DEALERS: '/notifications/dealers',
   CREATE_ORDER: '/orders',
   RECEIVERS: '/receivers',
+  GET_CONTAINERS: '/containers/orders',
+  CREATE_CONTAINER: '/containers',
 }

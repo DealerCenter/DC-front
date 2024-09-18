@@ -4,42 +4,41 @@ import * as yup from 'yup'
 import { useTranslations } from 'next-intl'
 import axiosInstance from '@/api/apiClient'
 import { endpoints } from '@/api/endpoints'
-import { useRouter } from '@/navigation'
-import { routeName } from '@/common/helpers/constants'
 import { AxiosError } from 'axios'
-import { handleAuthResponse } from '@/common/helpers/utils'
 import { message } from 'antd'
+import { createContainer } from '@/api/apiCalls'
 
 export const FIELD_NAMES = {
-  EMAIL: 'email',
-  PASSWORD: 'password',
+  NAME: 'name',
+  TRACKING_URL: 'trackingUrl',
 }
 
-const useLoginForm = () => {
+const useAddContainer = () => {
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
+
   const t = useTranslations('')
-  const router = useRouter()
 
   const formik = useFormik({
     initialValues: {
-      [FIELD_NAMES.EMAIL]: '',
-      [FIELD_NAMES.PASSWORD]: '',
+      [FIELD_NAMES.NAME]: '',
+      [FIELD_NAMES.TRACKING_URL]: '',
     },
     onSubmit: async (values) => {
       try {
-        const response = await axiosInstance.post<LOGIN_RES>(
-          endpoints.LOGIN,
+        const response = await axiosInstance.post<CONTAINER_POST_RES>(
+          endpoints.CREATE_CONTAINER,
           values
         )
 
-        handleAuthResponse(response)
+        message.success(t('container created successfully'))
 
-        message.success(t('you are logged in'))
-        router.push(routeName.dealer)
+        return response
       } catch (error) {
-        message.error(t('you could not log in'))
+        message.error(t('container could not be created'))
+
+        console.error('Error:', error)
         if (error instanceof AxiosError) {
           console.error('Axios Error:', error)
           setAxiosError(error)
@@ -51,13 +50,14 @@ const useLoginForm = () => {
     },
 
     validationSchema: yup.object({
-      [FIELD_NAMES.EMAIL]: yup
-        .string()
-        .email(t('must be valid email'))
-        .required(t('email required')),
-      [FIELD_NAMES.PASSWORD]: yup.string().required(t('password required')),
+      [FIELD_NAMES.NAME]: yup.string().required(t('name required')),
+      [FIELD_NAMES.TRACKING_URL]: yup.string().required(t('url required')),
     }),
   })
+
+  const isButtonDisabled =
+    formik.values[FIELD_NAMES.NAME].length === 0 ||
+    formik.values[FIELD_NAMES.TRACKING_URL].length === 0
 
   return {
     values: formik.values,
@@ -67,7 +67,9 @@ const useLoginForm = () => {
     errors: formik.errors,
     touched: formik.touched,
     axiosError: axiosError,
+    setFieldValue: formik.setFieldValue,
+    isButtonDisabled,
   }
 }
 
-export default useLoginForm
+export default useAddContainer

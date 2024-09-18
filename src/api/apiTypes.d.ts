@@ -92,3 +92,11 @@ type RECEIVER_GET_RES = {
   idImageUrl: string
   verificationStatus: string
 }
+
+type CONTAINER_POST_RES = {
+  name: string
+  trackingUrl: string
+  id: number
+  createdAt: string
+  updatedAt: string
+}
