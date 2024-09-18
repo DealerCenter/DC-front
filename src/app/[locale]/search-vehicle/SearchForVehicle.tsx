@@ -9,9 +9,12 @@ import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import sortIconBlack from '@/assets/icons/sortBlack.svg'
 import filterIcon from '@/assets/icons/filterIcon2.svg'
 import filterIconWithCancel from '@/assets/icons/filterIcon2WithCancel.svg'
-import cancelForFilter from '@/assets/icons/cancelForFilter.svg'
 import Pagination from '@/common/components/pagination/Pagination'
 import SearchResultsList from './components/SearchResultsList'
+
+import checkboxFilled from '@/assets/icons/checkboxFilled.svg'
+import { useRouter } from '@/navigation'
+import { routeName } from '@/common/helpers/constants'
 
 const DummyNumOfPages = 3
 
@@ -21,6 +24,8 @@ const SearchForVehicle = (props: Props) => {
   const [isFilterOn, setIsFilterOn] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const t = useTranslations('')
+
+  const router = useRouter()
 
   return (
     <Container>
@@ -36,6 +41,11 @@ const SearchForVehicle = (props: Props) => {
             onClick={() => setIsFilterOn((is) => !is)}
             icon={isFilterOn ? filterIconWithCancel : filterIcon}
             withoutLabel={true}
+          />
+          <SecondaryButton
+            text='temporary vehicle listing link'
+            onClick={() => router.push(routeName.vehicleListing)}
+            icon={checkboxFilled}
           />
           <SecondaryButton
             text={t('sort')}

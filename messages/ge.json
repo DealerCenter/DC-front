@@ -269,6 +269,12 @@
 
   "calculate": "კალკულაცია",
 
+  "time left to bid": "ტენდერისთვის დარჩენილი დრო",
+  "bid now": "შესთავაზე ახლავე",
+  "enter bid": "შეიყვანე შეთავაზება",
+  "current bid": "მიმდინარე შეთავაზება",
+  "can not bid before authorization": "ავტორიზაციამდე ვერ გააკეთებთ შეთავაზებას",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 

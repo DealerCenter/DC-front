@@ -16,6 +16,7 @@ export const routeName = {
   adminUserContainers: '/admin/shipping-containers',
   contact: '/contact',
   searchVehicle: '/search-vehicle',
+  vehicleListing: '/search-vehicle/vehicle-listing',
   landingPage: '/',
 
   ourServices: '/our-services',

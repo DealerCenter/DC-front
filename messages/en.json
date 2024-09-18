@@ -271,6 +271,12 @@
 
   "calculate": "Calculate",
 
+  "time left to bid": "Time left to bid",
+  "bid now": "Bid now",
+  "enter bid": "Enter bid",
+  "current bid": "Current bid",
+  "can not bid before authorization": "Won't be eligible to bid before authorization",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 
