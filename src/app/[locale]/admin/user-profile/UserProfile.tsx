@@ -27,7 +27,7 @@ const UserProfile = (props: Props) => {
     <Container>
       <TopButtonsFrame>
         <AppGoBackButton
-          onClick={() => router.push(routeName.adminUsersList)}
+          onClick={() => router.push(routeName.adminDealersList)}
           text={t('return to dealers list')}
           noTextOnMobile={true}
         />

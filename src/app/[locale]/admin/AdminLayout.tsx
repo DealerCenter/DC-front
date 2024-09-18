@@ -1,18 +1,20 @@
-import Header from '@/common/components/header/Header'
 import React from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
-import theme from '../theme'
-import Footer from '@/common/components/footer/Footer'
-import SideBar from '../../../common/components/sideBar/SideBar'
 import { routeName } from '@/common/helpers/constants'
 import { usePathname } from '@/navigation'
 
+import theme from '../theme'
+
+import Header from '@/common/components/header/Header'
+import Footer from '@/common/components/footer/Footer'
+import SideBar from './components/sideBar/SideBar'
+
 const routeNames = {
-  orderHistory: routeName.adminOrderHistory,
-  personalInformation: routeName.adminManageNotifications,
-  usersList: routeName.adminUsersList,
-  manageNotifications: routeName.adminPersonalInformation,
+  orders: routeName.adminOrderHistory,
+  dealers: routeName.adminDealersList,
+  containers: routeName.adminContainers,
+  settings: routeName.adminPersonalInformation,
 }
 
 type Props = { children: React.JSX.Element }
@@ -33,7 +35,7 @@ const AdminLayout = ({ children }: Props) => {
       <Header />
       <Container>
         <Frame>
-          {isSideBarVisible && <SideBar routes={routeNames} />}
+          {isSideBarVisible && !isMobile && <SideBar routes={routeNames} />}
           {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
         </Frame>
       </Container>

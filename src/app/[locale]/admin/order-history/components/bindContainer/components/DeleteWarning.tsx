@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import ChooseButton from './ChooseButton'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import closeIcon from '@/assets/icons/closeX.svg'
+import ChooseButton from '@/common/components/appButton/ChooseButton'
 
 type Props = { onCancel: () => void; onDelete: () => void }
 

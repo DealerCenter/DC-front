@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import SearchComponent from './SearchComponent'
-import ContainersListBox from './ContainersListBox'
+import SearchComponent from './components/SearchComponent'
+import ContainersListBox from './components/ContainersListBox'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
 
@@ -52,7 +52,7 @@ const BindContainerFrame = styled.div`
   flex-direction: column;
   align-items: center;
   gap: ${({ theme }) => theme.spacing?.lg};
-  margin-top: ${({ theme }) => theme.spacing?.lg};
+  margin-top: ${({ theme }) => theme.spacing?.md};
 `
 
 const Label = styled.label`

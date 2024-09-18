@@ -19,6 +19,7 @@ type Props = {
   fontWeight?: 'normal' | 'bold'
   fontSize?: number
   isOutline?: boolean
+  backgroundColor?: string
   isDisabled?: boolean
 }
 
@@ -38,6 +39,7 @@ const TextInput = ({
   fontWeight = 'normal',
   fontSize = 16,
   isOutline = true,
+  backgroundColor,
   isDisabled = false,
 }: Props) => {
   return (
@@ -57,6 +59,7 @@ const TextInput = ({
         fontWeight={fontWeight}
         fontSize={fontSize}
         isOutline={isOutline}
+        backgroundColor={backgroundColor}
         disabled={isDisabled}
       />
       {optionalInfo && (
@@ -84,12 +87,12 @@ type InputProps = {
   fontWeight?: 'normal' | 'bold'
   fontSize?: number
   isOutline?: boolean
+  backgroundColor?: string
 }
 
 const StyledInput = styled.input<InputProps>`
   position: relative;
   box-sizing: border-box;
-  background-color: ${({ theme }) => theme.colors?.white};
 
   outline-offset: 1px;
   width: 350px;
@@ -144,6 +147,15 @@ const StyledInput = styled.input<InputProps>`
     css`
       padding-left: 50px;
     `}
+
+  ${({ backgroundColor }) =>
+    backgroundColor
+      ? css`
+          background-color: ${backgroundColor};
+        `
+      : css`
+          background-color: ${({ theme }) => theme.colors?.white};
+        `}
 
     @media ${({ theme }) => theme.media?.sm} {
     ${({ isHalfSize, width }) =>

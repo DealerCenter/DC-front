@@ -53,6 +53,7 @@
   "recipient person": "მიმღები პირი",
   "mobile": "მობილური",
   "the date of addition": "დამატების თარიღი",
+  "date of Joining": "გაწევრიანების თარიღი",
   "verification": "ვერიფიკაცია",
   "authentication": "ავთენტიფიკაცია",
   "exit": "გასვლა",
@@ -115,6 +116,12 @@
   "description": "აღწერა",
   "full name": "სახელი და გვარი",
   "mob number": "მობ. ნომერი",
+
+  "dealers": "დილერები",
+  "orders": "შეკვეთები",
+  "settings": "პარამეტრები",
+
+  "add order": "შეკვეთის დამატება",
 
   "transportation": "ტრანსპორტირება",
   "cost of vehicle": "ავტომობილის ღირებულება",
@@ -185,12 +192,15 @@
   "current orders": "მიმდინარე შეკვეთები",
   "archive": "არქივი",
 
+  "dealers list": "დილერების სია",
+
   "containers": "კონტეინერები",
   "brand name": "დასახელება",
   "link": "ლინკი",
   "departure date": "წამოსვლის თარიღი",
   "arrival date": "ჩამოსვლის თარიღი",
   "number of cars": "ავტომობილების რაოდენობა",
+  "num of cars": "ავტ. ოდენობა",
   "add container": "კონტეინერის დამატება",
   "change status": "სტატუსის შეცვლა",
   "bind container": "კონტეინერის მიბმა",
@@ -199,6 +209,7 @@
   "add new": "დაამატე ახალი",
   "or": "ან",
 
+  "see all recipients": "ნახე ყველა მიმღები",
   "passwords do not match": "პაროლები არ ემთხვევა",
   "password updated successfully": "პაროლი წარმატებით განახლდა",
   "password could not be updated": "პაროლი ვერ განახლდა",

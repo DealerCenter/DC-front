@@ -7,13 +7,18 @@ type Props = {
     | [string, string, string, string, string]
 
   height?: number
+  paddingRight?: number
 }
 
-const LabelsContainer = ({ labels, height }: Props) => {
+const LabelsContainer = ({ labels, height, paddingRight }: Props) => {
   const is4Labels = labels.length === 4
 
   return (
-    <Container height={height} is4Labels={is4Labels}>
+    <Container
+      height={height}
+      is4Labels={is4Labels}
+      paddingRight={paddingRight}
+    >
       {labels.map((label, i) => (
         <Label key={i}>{label}</Label>
       ))}
@@ -24,7 +29,11 @@ const LabelsContainer = ({ labels, height }: Props) => {
 
 export default LabelsContainer
 
-type ContainerProps = { height?: number; is4Labels: boolean }
+type ContainerProps = {
+  height?: number
+  is4Labels: boolean
+  paddingRight?: number
+}
 
 const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
@@ -52,6 +61,12 @@ const Container = styled.div<ContainerProps>`
       : css`
           padding: 16px 50px;
         `}
+
+  ${({ paddingRight }) =>
+    paddingRight &&
+    css`
+      padding-right: ${paddingRight}px;
+    `}
 `
 const Label = styled.label`
   display: flex;
@@ -60,4 +75,5 @@ const Label = styled.label`
   text-align: center;
   width: 120px;
   color: ${({ theme }) => theme.colors?.white};
+  white-space: nowrap;
 `

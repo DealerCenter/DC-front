@@ -9,8 +9,6 @@ import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import searchIcon from '@/assets/icons/searchForButton.svg'
 import plusIcon from '@/assets/icons/plus.svg'
 import UserListEmpty from './components/UserListEmpty'
-import AddContainer from './components/addContainer/AddContainer'
-import AppModal from '@/common/components/modal/AppModal'
 import { containers, users } from '@/assets/DummyData'
 
 type Props = {}
@@ -20,43 +18,26 @@ const Containers = (props: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <>
-      <Container>
-        <Frame>
-          <HeaderH4Bold text={t('containers')} />
-          <ButtonFrame>
-            <SecondaryButton
-              text={t('search')}
-              onClick={() => {}}
-              icon={searchIcon}
-            />
-            <SecondaryButton
-              text={t('add container')}
-              onClick={() => {
-                setIsModalOpen(true)
-              }}
-              icon={plusIcon}
-            />
-          </ButtonFrame>
-        </Frame>
-        {users.length === 0 ? (
-          <UserListEmpty
+    <Container>
+      <Frame>
+        <HeaderH4Bold text={t('containers')} />
+        <ButtonFrame>
+          <SecondaryButton
+            text={t('search')}
+            onClick={() => {}}
+            icon={searchIcon}
+          />
+          <SecondaryButton
+            text={t('add container')}
             onClick={() => {
               setIsModalOpen(true)
             }}
+            icon={plusIcon}
           />
-        ) : (
-          <ContainersList containersData={containers} />
-        )}
-      </Container>
-
-      <AppModal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-      >
-        <AddContainer onClose={() => setIsModalOpen(false)} />
-      </AppModal>
-    </>
+        </ButtonFrame>
+      </Frame>
+      <ContainersList containersData={containers} />
+    </Container>
   )
 }
 
