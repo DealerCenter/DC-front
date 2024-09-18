@@ -1,10 +1,18 @@
+import { routeName } from '@/common/helpers/constants'
+import { useRouter } from '@/navigation'
 import React from 'react'
 import styled from 'styled-components'
 
 type Props = {}
 
 const Logo = (props: Props) => {
-  return <StyledLogo>DUX</StyledLogo>
+  const router = useRouter()
+
+  return (
+    <StyledLogo onClick={() => router.push(routeName.landingPage)}>
+      DUX
+    </StyledLogo>
+  )
 }
 
 export default Logo
@@ -22,5 +30,5 @@ const StyledLogo = styled.label`
     padding: 12px 8px 12px 8px;
   }
 
-  cursor: default;
+  cursor: pointer;
 `

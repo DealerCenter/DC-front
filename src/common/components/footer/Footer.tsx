@@ -19,12 +19,14 @@ const Footer = (props: Props) => {
     <Container>
       <TopFrame>
         <LeftBox>
-          <Logo onClick={() => router.push('/')}>DUX</Logo>
+          <Logo onClick={() => router.push(routeName.landingPage)}>DUX</Logo>
           <LeftBoxText>{t('shipping company text')}</LeftBoxText>
         </LeftBox>
         <RightBox>
           <Item>
-            <Label>{t('search for vehicle')}</Label>
+            <Label onClick={() => router.push(routeName.searchVehicle)}>
+              {t('search for vehicle')}
+            </Label>
           </Item>
           <Item>
             <Label>{t('our services')}</Label>
@@ -105,6 +107,8 @@ const Logo = styled.h2`
   font-weight: 700;
   padding: 12px 0;
   margin: 0;
+
+  cursor: pointer;
 `
 
 const LeftBoxText = styled.p`
@@ -113,6 +117,8 @@ const LeftBoxText = styled.p`
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 400;
   max-width: 300px;
+
+  cursor: default;
 `
 
 const RightBox = styled.div`
@@ -186,6 +192,8 @@ const Text = styled.p`
   color: ${({ theme }) => theme.colors?.white};
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 400;
+
+  cursor: default;
 `
 
 const IconBox = styled.div`
