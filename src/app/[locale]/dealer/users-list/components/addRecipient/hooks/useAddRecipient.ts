@@ -7,7 +7,7 @@ import { endpoints } from '@/api/endpoints'
 import { AxiosError } from 'axios'
 
 export const FIELD_NAMES = {
-  ID_IMAGE: 'idImage ',
+  ID_IMAGE: 'idImage',
   FIRST_NAME: 'firstName',
   LAST_NAME: 'lastName',
   PERSONAL_ID: 'personalId',
@@ -15,7 +15,15 @@ export const FIELD_NAMES = {
   IS_JURIDICAL: 'isJuridical',
 }
 
-const useAddRecipients = () => {
+const useAddRecipients = (receiverData: {
+  id: number
+  firstName: string
+  lastName: string
+  personalId: string
+  phoneNumber: string
+  createdAt: string
+  verificationStatus: string
+}) => {
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
@@ -24,10 +32,10 @@ const useAddRecipients = () => {
   const t = useTranslations('useForm')
 
   const initialValues = {
-    [FIELD_NAMES.FIRST_NAME]: '',
-    [FIELD_NAMES.LAST_NAME]: '',
-    [FIELD_NAMES.CONTACT_NUMBER]: '',
-    [FIELD_NAMES.PERSONAL_ID]: '',
+    [FIELD_NAMES.FIRST_NAME]: receiverData?.firstName || '',
+    [FIELD_NAMES.LAST_NAME]: receiverData?.lastName || '',
+    [FIELD_NAMES.CONTACT_NUMBER]: receiverData?.phoneNumber || '',
+    [FIELD_NAMES.PERSONAL_ID]: receiverData?.personalId || '',
     [FIELD_NAMES.IS_JURIDICAL]: false,
   }
 
@@ -36,20 +44,25 @@ const useAddRecipients = () => {
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
-      console.log('slkfdjsimage:', uploadIdImage)
       const data = { ...values }
       Object.keys(data).forEach((key) => {
         legalFormData.append(key, values[key])
       })
 
+      receiverData && legalFormData.delete(FIELD_NAMES.IS_JURIDICAL)
+
       uploadIdImage && legalFormData.append(FIELD_NAMES.ID_IMAGE, uploadIdImage)
 
-      //   console.log('data we are sending to backend:', legalFormData)
       try {
-        const response = await axiosInstance.post<RECEIVER_POST_RES>(
-          endpoints.RECEIVERS,
-          legalFormData
-        )
+        const response = receiverData
+          ? await axiosInstance.put<RECEIVER_POST_RES>(
+              `${endpoints.RECEIVERS}/${receiverData.id}`,
+              legalFormData
+            )
+          : await axiosInstance.post<RECEIVER_POST_RES>(
+              endpoints.RECEIVERS,
+              legalFormData
+            )
 
         console.log('__Receiver uploaded successfully__:', response)
         // message.success(t('you registered successfully'))

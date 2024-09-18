@@ -54,6 +54,7 @@ const AppModal = ({
       // @ts-ignore
       style={customStyles}
       contentLabel={contentLabel}
+      ariaHideApp={false}
     >
       {children}
     </Modal>

@@ -12,9 +12,20 @@ import closeIcon from '@/assets/icons/closeX.svg'
 import splitGrayLine from '@/assets/icons/splitGrayLine.svg'
 import useAddRecipients, { FIELD_NAMES } from './hooks/useAddRecipient'
 
-type Props = { onClose: () => void }
+type Props = {
+  onClose: () => void
+  receiverData: {
+    id: number
+    firstName: string
+    lastName: string
+    personalId: string
+    phoneNumber: string
+    createdAt: string
+    verificationStatus: string
+  }
+}
 
-const AddRecipient = ({ onClose }: Props) => {
+const AddRecipient = ({ onClose, receiverData }: Props) => {
   const t = useTranslations('')
   const [type, setType] = useState<'individual' | 'legalPerson'>('individual')
   const dummyValue = 'something'
@@ -30,7 +41,7 @@ const AddRecipient = ({ onClose }: Props) => {
     axiosError,
     setUploadIdImage,
     setFieldValue,
-  } = useAddRecipients()
+  } = useAddRecipients(receiverData)
 
   const isButtonDisabled = false
 
@@ -43,19 +54,21 @@ const AddRecipient = ({ onClose }: Props) => {
         <FrameTop>
           <H3Bold>{t('add recipient')}</H3Bold>
           <Label>{t('enter recipient data')}</Label>
-          <ChooseTypeFrame>
-            <ChooseButton
-              text={t('individual')}
-              isActive={!values[FIELD_NAMES.IS_JURIDICAL]} // if not juridical, it's individual
-              onClick={() => setFieldValue(FIELD_NAMES.IS_JURIDICAL, false)}
-            />
-            <Image src={splitGrayLine} alt='line icon' />
-            <ChooseButton
-              text={t('legal person')}
-              isActive={!!values[FIELD_NAMES.IS_JURIDICAL]} // if juridical, it's legal person
-              onClick={() => setFieldValue(FIELD_NAMES.IS_JURIDICAL, true)}
-            />
-          </ChooseTypeFrame>
+          {!receiverData && (
+            <ChooseTypeFrame>
+              <ChooseButton
+                text={t('individual')}
+                isActive={!values[FIELD_NAMES.IS_JURIDICAL]} // if not juridical, it's individual
+                onClick={() => setFieldValue(FIELD_NAMES.IS_JURIDICAL, false)}
+              />
+              <Image src={splitGrayLine} alt='line icon' />
+              <ChooseButton
+                text={t('legal person')}
+                isActive={!!values[FIELD_NAMES.IS_JURIDICAL]} // if juridical, it's legal person
+                onClick={() => setFieldValue(FIELD_NAMES.IS_JURIDICAL, true)}
+              />
+            </ChooseTypeFrame>
+          )}
         </FrameTop>
 
         <InputFieldsFrame>

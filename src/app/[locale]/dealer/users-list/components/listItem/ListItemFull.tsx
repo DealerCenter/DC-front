@@ -22,6 +22,7 @@ type Props = {
   createdAt: string
   verificationStatus: string
   handleDelete: (id: number) => void
+  handleEdit: () => void
 }
 
 const ListItemFull = ({
@@ -33,6 +34,7 @@ const ListItemFull = ({
   createdAt,
   verificationStatus,
   handleDelete,
+  handleEdit,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -75,13 +77,7 @@ const ListItemFull = ({
         </Label>
         <IconBox>
           <Icon>
-            <Image
-              src={editPencil}
-              alt='edit icon'
-              onClick={() => {
-                console.log('edit')
-              }}
-            />
+            <Image src={editPencil} alt='edit icon' onClick={handleEdit} />
           </Icon>
           <Icon>
             <Image
