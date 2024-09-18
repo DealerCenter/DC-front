@@ -5,9 +5,9 @@ import { useTranslations } from 'next-intl'
 import { useMediaQuery } from 'react-responsive'
 
 import theme from '@/app/[locale]/theme'
+import NotificationDot from '../../notificationDot/notificationDot'
 
 import notificationBell from '@/assets/icons/notificationBell.svg'
-import notificationDot from '@/assets/icons/notificationDot.svg'
 
 type Props = {
   refreshDate: string
@@ -40,12 +40,7 @@ const InfoBox = ({
         <IconBox>
           <BellBox>
             <Image src={notificationBell} alt='notification bell icon' />
-            <DotBox>
-              <DotBox1>
-                <Image src={notificationDot} alt='notification Dot icon' />
-              </DotBox1>
-              <DotNumber>{notificationCount}</DotNumber>
-            </DotBox>
+            <NotificationDot number={notificationCount} />
           </BellBox>
         </IconBox>
       </Container>

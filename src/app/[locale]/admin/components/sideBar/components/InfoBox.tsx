@@ -8,6 +8,7 @@ import theme from '@/app/[locale]/theme'
 
 import notificationBell from '@/assets/icons/notificationBell.svg'
 import notificationDot from '@/assets/icons/notificationDot.svg'
+import NotificationDot from '@/common/components/notificationDot/notificationDot'
 
 type Props = {
   refreshDate: string
@@ -40,12 +41,7 @@ const InfoBox = ({
         <IconBox>
           <BellBox>
             <Image src={notificationBell} alt='notification bell icon' />
-            <DotBox>
-              <DotBox1>
-                <Image src={notificationDot} alt='notification Dot icon' />
-              </DotBox1>
-              <DotNumber>{notificationCount}</DotNumber>
-            </DotBox>
+            <NotificationDot number={notificationCount} />
           </BellBox>
         </IconBox>
       </Container>
@@ -167,22 +163,4 @@ const BellBox = styled.div`
   align-items: center;
   width: 32px;
   height: 32px;
-`
-const DotBox = styled.div`
-  position: absolute;
-  right: 0px;
-  top: 0px;
-
-  display: grid;
-  place-items: center;
-`
-const DotBox1 = styled.div`
-  display: flex;
-`
-
-const DotNumber = styled.span`
-  position: absolute;
-  font-size: 10px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors?.white};
 `

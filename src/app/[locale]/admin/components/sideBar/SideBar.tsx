@@ -55,7 +55,7 @@ const SideBar = ({ routes }: Props) => {
         <Frame>
           <InfoBox
             isHovered={isHovered}
-            name='Joshua'
+            name='Name'
             refreshDate='last refresh jul 11 2034'
             notificationCount={9}
           />
