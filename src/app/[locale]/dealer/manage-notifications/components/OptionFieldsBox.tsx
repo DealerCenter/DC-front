@@ -53,7 +53,7 @@ const OptionFieldsBox = ({
         onArrowDown={() => setIsOpen((is) => !is)}
         isOpen={isOpen}
       />
-      {isOpen && (
+      {isOpen && notificationsState && (
         <OptionFieldsFrame>
           {notificationsState.map(
             (notification) =>

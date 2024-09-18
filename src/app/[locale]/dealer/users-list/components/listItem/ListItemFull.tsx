@@ -2,65 +2,82 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+import { formatDate } from '@/common/helpers/simpleFunctions'
+import { verificationStatusName } from '@/common/helpers/constants'
+import DeleteWarning from '../addRecipient/components/DeleteWarning'
+import AppModal from '@/common/components/modal/AppModal'
+
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
+import uncheckedYellow from '@/assets/icons/uncheckedYellow.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
-import AppModal from '@/common/components/modal/AppModal'
-import DeleteWarning from '../addRecipient/components/DeleteWarning'
 
 type Props = {
-  fullName: string
-  id: string
-  mobile: string
-  dateOfAddition: string
-  isVerified: boolean
+  id: number
+  firstName: string
+  lastName: string
+  personalId: string
+  phoneNumber: string
+  createdAt: string
+  verificationStatus: string
+  handleDelete: (id: number) => void
+  handleEdit: () => void
 }
 
 const ListItemFull = ({
-  fullName,
   id,
-  mobile,
-  dateOfAddition,
-  isVerified,
+  firstName,
+  lastName,
+  personalId,
+  phoneNumber,
+  createdAt,
+  verificationStatus,
+  handleDelete,
+  handleEdit,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const formattedDate = formatDate(createdAt)
 
   return (
     <>
       <Container>
         <LabelBox>
-          <NameLabel>{fullName}</NameLabel>
-          <IdLabel>{id}</IdLabel>
+          <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
+          <IdLabel>{personalId}</IdLabel>
         </LabelBox>
-        <Label>{mobile}</Label>
-        <Label>{dateOfAddition}</Label>
+        <Label>{phoneNumber}</Label>
+        <Label>{formattedDate}</Label>
         <Label>
-          {isVerified ? (
+          {verificationStatus === verificationStatusName.VERIFIED ? (
             <Image
               src={checkedGreen}
               alt='checked icon'
               width={20}
               height={20}
             />
-          ) : (
+          ) : verificationStatus === verificationStatusName.UNVERIFIED ? (
             <Image
               src={uncheckedRed}
               alt='unchecked icon'
               width={20}
               height={20}
             />
+          ) : (
+            verificationStatus === verificationStatusName.PENDING && (
+              <Image
+                src={uncheckedYellow}
+                alt='pending icon'
+                width={20}
+                height={20}
+              />
+            )
           )}
         </Label>
         <IconBox>
           <Icon>
-            <Image
-              src={editPencil}
-              alt='edit icon'
-              onClick={() => {
-                console.log('edit')
-              }}
-            />
+            <Image src={editPencil} alt='edit icon' onClick={handleEdit} />
           </Icon>
           <Icon>
             <Image
@@ -77,7 +94,11 @@ const ListItemFull = ({
       >
         <DeleteWarning
           onCancel={() => setIsModalOpen(false)}
-          onDelete={() => console.log('delete')}
+          onDelete={() => {
+            handleDelete(id)
+            setIsModalOpen(false)
+          }}
+          nameOfReceiver={`${firstName} ${lastName}`}
         />
       </AppModal>
     </>

@@ -24,3 +24,9 @@ export const routeName = {
 }
 
 export const locales = ['en', 'ge', 'ru']
+
+export const verificationStatusName = {
+  PENDING: 'PENDING',
+  VERIFIED: 'VERIFIED',
+  UNVERIFIED: 'UNVERIFIED',
+}

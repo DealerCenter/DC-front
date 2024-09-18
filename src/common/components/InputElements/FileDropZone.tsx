@@ -13,6 +13,7 @@ type Props = {
   warningText?: string
   width?: number
   onDropAdditional?: (file: any) => void
+  setIsUploaded?: (arg: boolean) => void
 }
 
 const FileDropZone = ({
@@ -22,6 +23,7 @@ const FileDropZone = ({
   warningText,
   width,
   onDropAdditional,
+  setIsUploaded,
 }: Props) => {
   const [isDropped, setIsDropped] = useState(false)
 
@@ -30,9 +32,10 @@ const FileDropZone = ({
       // Do something with the files
       console.log('accepted files: ', acceptedFiles)
       setIsDropped(true)
+      setIsUploaded && setIsUploaded(true)
       if (onDropAdditional) onDropAdditional(acceptedFiles[0])
     },
-    [onDropAdditional]
+    [onDropAdditional, setIsUploaded]
   )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })

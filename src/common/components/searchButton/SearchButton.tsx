@@ -2,17 +2,29 @@ import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import search from '@/assets/icons/search.svg'
+import search from '@/assets/icons/searchForButton.svg'
+
 import { useTranslations } from 'next-intl'
 
-import closeX from '@/assets/icons/closeXWhite.svg'
+import closeX from '@/assets/icons/closeX.svg'
 
 type Props = {
   isActive: boolean
   setIsActive: (arg1: boolean) => void
+  text?: string
+  placeholder?: string
+  onSubmit?: (arg: string) => void
+  onCloseSearch?: () => void
 }
 
-const SearchIcon = ({ isActive, setIsActive }: Props) => {
+const SearchButton = ({
+  isActive,
+  setIsActive,
+  text,
+  placeholder,
+  onSubmit,
+  onCloseSearch,
+}: Props) => {
   const [inputValue, setInputValue] = useState('')
   const t = useTranslations('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -31,6 +43,9 @@ const SearchIcon = ({ isActive, setIsActive }: Props) => {
       closeIconRef.current.contains(event.target as Node)
     ) {
       setIsActive(false)
+      setInputValue('')
+
+      onCloseSearch && onCloseSearch()
     }
   }
 
@@ -43,7 +58,9 @@ const SearchIcon = ({ isActive, setIsActive }: Props) => {
   }, [])
 
   const handleSubmit = () => {
-    console.log(inputValue)
+    if (!inputValue) return
+
+    onSubmit && onSubmit(inputValue)
 
     setInputValue('')
   }
@@ -56,16 +73,21 @@ const SearchIcon = ({ isActive, setIsActive }: Props) => {
   }
 
   return (
-    <Container isActive={isActive} onClick={() => setIsActive(true)}>
+    <Container
+      isActive={isActive}
+      text={text}
+      onClick={() => setIsActive(true)}
+    >
       <IconBox onClick={handleSubmit}>
-        <Image width={20} height={20} src={search} alt='search icon' />
+        <Image src={search} alt='search icon' />
       </IconBox>
+      {!isActive && text && <Label>{text}</Label>}
       {isActive && (
         <>
           <StyledInput
             type='text'
             isActive={isActive}
-            placeholder={t('vin code')}
+            placeholder={placeholder ? placeholder : ''}
             ref={inputRef}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
@@ -80,25 +102,34 @@ const SearchIcon = ({ isActive, setIsActive }: Props) => {
   )
 }
 
-export default SearchIcon
+export default SearchButton
 
-type IsActiveProp = { isActive: boolean }
+type IsActiveProp = { isActive: boolean; text?: string }
 
 const Container = styled.div<IsActiveProp>`
   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  border-radius: 12px;
 
-  ${({ isActive }) =>
-    isActive
+  gap: 6px;
+
+  cursor: pointer;
+
+  ${({ text }) =>
+    text
       ? css`
-          width: unset;
-          border: unset;
+          padding: 0 20px 0 14px;
         `
       : css`
-          width: 56px;
-          border: 2px solid ${({ theme }) => theme.colors?.white_24};
+          padding: 0 15px 0 15px;
         `}
 
-  height: 44px;
+  border: 1px solid ${({ theme }) => theme.colors?.main_gray_56};
+
   border-radius: ${({ theme }) => theme.radius?.lg};
   color: ${({ theme }) => theme.colors?.white};
   display: flex;
@@ -106,6 +137,7 @@ const Container = styled.div<IsActiveProp>`
   justify-content: center;
   position: relative;
 
+  user-select: none;
   cursor: pointer;
 `
 
@@ -116,19 +148,19 @@ const StyledInput = styled.input<IsActiveProp>`
     isActive
       ? css`
           width: 200px;
-          border: 2px solid ${({ theme }) => theme.colors?.white_24};
+          border: unset;
         `
       : css`
           width: unset;
           border: unset;
         `}
 
-  height: 44px;
+  height: 42px;
   border-radius: ${({ theme }) => theme.radius?.lg};
-  color: ${({ theme }) => theme.colors?.white};
-  padding-left: 45px;
-  padding-right: 40px;
-  background-color: ${({ theme }) => theme.colors?.button_black};
+  color: ${({ theme }) => theme.colors?.black};
+
+  padding-right: 25px;
+  background-color: ${({ theme }) => theme.colors?.white};
 
   &:focus {
     outline: none;
@@ -139,8 +171,6 @@ const IconBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  left: 17px;
 `
 
 const CloseIconBox = styled.div`
@@ -152,5 +182,12 @@ const CloseIconBox = styled.div`
   position: absolute;
   right: 3px;
   border-radius: ${({ theme }) => theme.radius?.lg};
-  background-color: ${({ theme }) => theme.colors?.white_10};
+  background-color: ${({ theme }) => theme.colors?.main_gray_04};
+`
+
+const Label = styled.label`
+  color: ${({ theme }) => theme.colors?.main_gray_100};
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
 `

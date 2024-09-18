@@ -235,6 +235,11 @@
 
   "password required": "პაროლი აუცილებელია",
 
+  "search for recipient": "მოძებნეთ მიმღები",
+
+  "receiver deleted successfully": "მიმღები წარმატებით წაიშალა",
+  "receiver not deleted": "მიმღები ვერ წაიშალა",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 
