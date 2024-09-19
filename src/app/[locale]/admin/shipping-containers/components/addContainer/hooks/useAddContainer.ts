@@ -13,7 +13,7 @@ export const FIELD_NAMES = {
   TRACKING_URL: 'trackingUrl',
 }
 
-const useAddContainer = () => {
+const useAddContainer = (setUploadedSuccessfully: (arg: boolean) => void) => {
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
@@ -31,6 +31,8 @@ const useAddContainer = () => {
           endpoints.CREATE_CONTAINER,
           values
         )
+
+        setUploadedSuccessfully(true)
 
         message.success(t('container created successfully'))
 

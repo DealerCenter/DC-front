@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
@@ -19,6 +19,13 @@ const Containers = (props: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isSearchActive, setIsSearchActive] = useState(false)
   const [uploadedSuccessfully, setUploadedSuccessfully] = useState(false)
+
+  useEffect(() => {
+    if (uploadedSuccessfully) {
+      setIsModalOpen(false)
+      setUploadedSuccessfully(false)
+    }
+  }, [uploadedSuccessfully])
 
   return (
     <Container>
@@ -47,7 +54,10 @@ const Containers = (props: Props) => {
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
       >
-        <AddContainer onClose={() => setIsModalOpen(false)} />
+        <AddContainer
+          onClose={() => setIsModalOpen(false)}
+          setUploadedSuccessfully={setUploadedSuccessfully}
+        />
       </AppModal>
     </Container>
   )

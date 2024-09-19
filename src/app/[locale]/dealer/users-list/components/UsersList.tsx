@@ -76,8 +76,6 @@ const UserList = ({
   useEffect(() => {
     getData()
 
-    console.log('useeffectgetata updated state:', updatedSuccessfully)
-
     if (updatedSuccessfully) {
       setIsModalOpen(false)
       setUpdatedSuccessfully(false)

@@ -11,9 +11,10 @@ import useAddContainer, { FIELD_NAMES } from './hooks/useAddContainer'
 
 type Props = {
   onClose: () => void
+  setUploadedSuccessfully: (arg: boolean) => void
 }
 
-const AddContainer = ({ onClose }: Props) => {
+const AddContainer = ({ onClose, setUploadedSuccessfully }: Props) => {
   const t = useTranslations('')
 
   const {
@@ -24,7 +25,7 @@ const AddContainer = ({ onClose }: Props) => {
     errors,
     touched,
     isButtonDisabled,
-  } = useAddContainer()
+  } = useAddContainer(setUploadedSuccessfully)
 
   return (
     <Container>
