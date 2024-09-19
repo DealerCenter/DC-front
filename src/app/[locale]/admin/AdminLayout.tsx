@@ -8,7 +8,7 @@ import theme from '../theme'
 
 import Header from '@/common/components/header/Header'
 import Footer from '@/common/components/footer/Footer'
-import SideBar from './components/sideBar/SideBar'
+import SideBarAdmin from './components/sideBar/SideBarAdmin'
 
 const routeNames = {
   orders: routeName.adminOrderHistory,
@@ -35,7 +35,9 @@ const AdminLayout = ({ children }: Props) => {
       <Header />
       <Container>
         <Frame>
-          {isSideBarVisible && !isMobile && <SideBar routes={routeNames} />}
+          {isSideBarVisible && !isMobile && (
+            <SideBarAdmin routes={routeNames} />
+          )}
           {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
         </Frame>
       </Container>

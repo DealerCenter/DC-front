@@ -27,22 +27,7 @@ const OrderProfile = (props: Props) => {
   const t = useTranslations('')
   const router = useRouter()
 
-  const { values, handleSubmit } = useCreateOrderContext()
-
-  const isButtonDisabled =
-    values[FIELD_NAMES.MANUFACTURER].length === 0 ||
-    values[FIELD_NAMES.MODEL].length === 0 ||
-    values[FIELD_NAMES.VIN].length === 0 ||
-    values[FIELD_NAMES.EXACT_ADDRESS].length === 0 ||
-    values[FIELD_NAMES.CAR_CATEGORY].length === 0 ||
-    values[FIELD_NAMES.STATUS].length === 0 ||
-    values[FIELD_NAMES.MILEAGE] === 0 ||
-    values[FIELD_NAMES.TRANSPORTATION_COST] === 0 ||
-    values[FIELD_NAMES.CAR_COST] === 0 ||
-    values[FIELD_NAMES.STATE_ID] === 0 ||
-    values[FIELD_NAMES.CONTAINER_ID] === 0 ||
-    values[FIELD_NAMES.DEALER_ID] === 0 ||
-    values[FIELD_NAMES.RECEIVER_ID] === 0
+  const { values, handleSubmit, isButtonDisabled } = useCreateOrderContext()
 
   return (
     <Container>
@@ -55,7 +40,8 @@ const OrderProfile = (props: Props) => {
         <FormSaveButton
           onClick={handleSubmit}
           text={t('save')}
-          // disabled={isButtonDisabled}
+          htmlType='submit'
+          disabled={isButtonDisabled}
         />
       </TopButtonsFrame>
 

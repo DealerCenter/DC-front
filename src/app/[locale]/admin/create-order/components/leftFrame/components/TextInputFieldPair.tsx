@@ -4,32 +4,44 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import TextInput from '@/common/components/inputElements/TextInput'
-import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
 
-import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import AppSelectChoose from '@/common/components/appSelect/AppSelectChoose'
+import AppSelectWidthId from '@/common/components/appSelect/AppSelectWidthId'
+import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
 
 type Props = {
   title: string
   value: string
   placeholder?: string
-  selectItems?: { value: string }[]
   name?: string
   onBlur?: ChangeEventHandler<HTMLInputElement>
   onChange?: ChangeEventHandler<HTMLInputElement>
   errorMessage?: string
+  selectOptions?: {
+    option1: { value: string; onChoose: () => void }
+    option2: { value: string; onChoose: () => void }
+  }
+  optionsListWidthID?: { name: string; id: number }[]
+  handleSetValueWithId?: (id: number) => void
+  selectOptionsBasic?: string[]
+  handleSetValueBasic?: (value: string) => void
 }
 
 const TextInputFieldPair = ({
   title,
   value,
-  selectItems,
   placeholder,
   name,
   onBlur,
   onChange,
   errorMessage,
+  selectOptions,
+  optionsListWidthID,
+  handleSetValueWithId,
+  selectOptionsBasic,
+  handleSetValueBasic,
 }: Props) => {
   const [textInputWidth, setTextInputWidth] = useState(220)
   const [textInputWidth2, setTextInputWidth2] = useState(220)
@@ -61,11 +73,18 @@ const TextInputFieldPair = ({
         isOutline={false}
         isDisabled={true}
       />
-      {selectItems ? (
-        <AppSelectBasic
-          options={selectItems}
-          onChange={() => {}}
+      {selectOptions ? (
+        <AppSelectChoose options={selectOptions} placeholder={t('select')} />
+      ) : optionsListWidthID ? (
+        <AppSelectWidthId
+          options={optionsListWidthID}
+          onChange={handleSetValueWithId ? handleSetValueWithId : () => {}}
           placeholder={t('select')}
+        />
+      ) : selectOptionsBasic ? (
+        <AppSelectBasic
+          optionsBasic={selectOptionsBasic}
+          onChange={handleSetValueBasic ? handleSetValueBasic : () => {}}
         />
       ) : (
         <TextInput

@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import { usePathname, useRouter } from '@/navigation'
+import { message } from 'antd'
 
 import { useUserData } from '@/common/store/userDataStore'
 import { logoutUser } from '@/api/apiCalls'
@@ -23,7 +24,6 @@ import bellIconBlack from '@/assets/icons/bell/bell-black.svg'
 import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
-import { message } from 'antd'
 
 type Props = {
   routes: {
@@ -40,8 +40,8 @@ const SideBar = ({ routes }: Props) => {
   const pathname = usePathname()
   const { userData } = useUserData()
   const router = useRouter()
-
   const [isHovered, setIsHovered] = useState(false)
+
   const [isLoggingOut, setIsLoggingOut] = useState(false)
 
   const handleMouseEnter = () => {

@@ -10,12 +10,27 @@ import {
   useCreateOrderContext,
 } from '../../../hooks/useCreateOrderContext'
 
+const dummyDropdownList = [
+  {
+    name: 'LA',
+    id: 1,
+  },
+  {
+    name: 'NY',
+    id: 2,
+  },
+]
+
 type Props = {}
 
 const LocationBox = ({}: Props) => {
-  const { values, handleBlur, handleChange, errors, touched } =
+  const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
     useCreateOrderContext()
   const t = useTranslations('')
+
+  const handleSetStateId = (id: number) => {
+    setFieldValue(FIELD_NAMES.STATE_ID, id)
+  }
 
   return (
     <Box>
@@ -34,6 +49,8 @@ const LocationBox = ({}: Props) => {
               ? errors[FIELD_NAMES.STATE_ID]
               : ''
           }
+          optionsListWidthID={dummyDropdownList}
+          handleSetValueWithId={handleSetStateId}
         />
         <TextInputFieldPair
           title='address'

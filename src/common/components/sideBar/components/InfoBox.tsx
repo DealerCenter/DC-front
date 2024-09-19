@@ -2,9 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
-import { useMediaQuery } from 'react-responsive'
 
-import theme from '@/app/[locale]/theme'
 import NotificationDot from '../../notificationDot/notificationDot'
 
 import notificationBell from '@/assets/icons/notificationBell.svg'
@@ -22,9 +20,6 @@ const InfoBox = ({
   notificationCount,
   isHovered,
 }: Props) => {
-  const isTablet = useMediaQuery({
-    query: theme.media?.md,
-  })
   const t = useTranslations('')
 
   return (

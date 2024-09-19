@@ -9,13 +9,29 @@ import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../../hooks/useCreateOrderContext'
+import { carCategories } from '@/common/helpers/constants'
 
 type Props = {}
 
 const ParametersBox = ({}: Props) => {
-  const { values, handleBlur, handleChange, errors, touched } =
+  const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
     useCreateOrderContext()
   const t = useTranslations('')
+
+  const selectOptions = {
+    option1: {
+      value: 'yes',
+      onChoose: () => setFieldValue(FIELD_NAMES.IS_INSURED, true),
+    },
+    option2: {
+      value: 'no',
+      onChoose: () => setFieldValue(FIELD_NAMES.IS_INSURED, false),
+    },
+  }
+
+  const handleSetCarCategory = (value: string) => {
+    setFieldValue(FIELD_NAMES.CAR_CATEGORY, value)
+  }
 
   return (
     <Box>
@@ -25,7 +41,7 @@ const ParametersBox = ({}: Props) => {
         <TextInputFieldPair
           title='insurance'
           value=''
-          selectItems={[{ value: 'not working' }, { value: 'no' }]}
+          selectOptions={selectOptions}
         />
         <TextInputFieldPair
           title='manufacturer'
@@ -77,6 +93,8 @@ const ParametersBox = ({}: Props) => {
               ? errors[FIELD_NAMES.CAR_CATEGORY]
               : ''
           }
+          selectOptionsBasic={carCategories}
+          handleSetValueBasic={handleSetCarCategory}
         />
         <TextInputFieldPair
           title='mileage'

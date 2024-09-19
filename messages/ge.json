@@ -284,5 +284,7 @@
   "container created successfully": "კონტეინერი წარმატებით შეიქმნა",
   "container could not be created": "კონტეინერი ვერ შეიქმნა",
 
+  "must be a number": "უნდა იყოს რიცხვი",
+
   "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა"
 }

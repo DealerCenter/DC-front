@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useMediaQuery } from 'react-responsive'
 
 import theme from '@/app/[locale]/theme'
-import ShippingStateBox from '../../../order-history/components/ShippingStateBox'
+import ShippingStateBox from '../../../order-history/components/shippingStateBox/ShippingStateBox'
 import TextInput from '@/common/components/inputElements/TextInput'
 import UserDataBox from './components/UserDataBox'
 import Box from '../../../components/common/Box'
@@ -13,6 +13,18 @@ import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../hooks/useCreateOrderContext'
+import AppSelectWidthId from '@/common/components/appSelect/AppSelectWidthId'
+
+const dummyDropdownList = [
+  {
+    name: 'container 1',
+    id: 1,
+  },
+  {
+    name: 'container 2',
+    id: 2,
+  },
+]
 
 const INPUT_WIDTH_MOBILE = 311
 const INPUT_WIDTH_TABLET = 333
@@ -22,7 +34,7 @@ type Props = {}
 
 const RightFrame = ({}: Props) => {
   const [textInputWidth, setTextInputWidth] = useState(INPUT_WIDTH_TABLET)
-  const { values, handleBlur, handleChange, errors, touched } =
+  const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
     useCreateOrderContext()
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
@@ -38,22 +50,26 @@ const RightFrame = ({}: Props) => {
     )
   }, [isMobile, isTablet, setTextInputWidth])
 
+  const handleSetReceiverValue = (id: number) => {
+    setFieldValue(FIELD_NAMES.RECEIVER_ID, id)
+  }
+
+  const handleSetContainerValue = (id: number) => {
+    setFieldValue(FIELD_NAMES.CONTAINER_ID, id)
+  }
+
   return (
     <Container>
       <Box>
         <Header>{t('status')}</Header>
         <Line />
-        <ShippingStateBox
-          shippingSteps={dummyShippingSteps2}
-          currentStep={1}
-          isEditing={true}
-        />
+        <ShippingStateBox isEditing={true} />
       </Box>
       <Box>
         <Header>{t('container data')}</Header> <Line />
         <Frame>
           <Frame2>
-            <TextInput
+            {/* <TextInput
               width={textInputWidth}
               height={48}
               type='text'
@@ -71,6 +87,12 @@ const RightFrame = ({}: Props) => {
                   ? errors[FIELD_NAMES.CONTAINER_ID]
                   : ''
               }
+            /> */}
+            <AppSelectWidthId
+              options={dummyDropdownList}
+              onChange={handleSetContainerValue}
+              placeholder={t('select')}
+              width={textInputWidth}
             />
           </Frame2>
         </Frame>
@@ -88,8 +110,9 @@ const RightFrame = ({}: Props) => {
             ? errors[FIELD_NAMES.RECEIVER_ID]
             : ''
         }
+        setFieldValue={handleSetReceiverValue}
       />
-      <UserDataBox
+      {/* <UserDataBox
         header={t('dealer data')}
         placeholder1={t('full name')}
         placeholder2={t('dealer id')}
@@ -102,7 +125,7 @@ const RightFrame = ({}: Props) => {
             ? errors[FIELD_NAMES.DEALER_ID]
             : ''
         }
-      />
+      /> */}
     </Container>
   )
 }

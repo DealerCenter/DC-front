@@ -1,27 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react'
-import styled, { css } from 'styled-components'
-
-import arrowDown from '@/assets/icons/arrowDown.svg'
+import React, { Fragment, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-type Option = {
-  value: string
-}
+import arrowDown from '@/assets/icons/arrowDown.svg'
 
 type Props = {
-  onChange: (value: string) => void
-  options?: Option[]
-  optionsBasic?: string[]
+  options: { name: string; id: number }[]
+  onChange: (value: number) => void
   placeholder?: string
   width?: number
   placeHolderIsBold?: boolean
   placeHolderIsGray?: boolean
 }
 
-const AppSelectBasic = ({
+const AppSelectWidthId = ({
   options,
-  optionsBasic,
   onChange,
   placeholder,
   width,
@@ -29,14 +23,17 @@ const AppSelectBasic = ({
   placeHolderIsGray,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedValue, setSelectedValue] = useState<string | null>(null)
+  const [selectedOption, setSelectedOption] = useState<{
+    name: string
+    id: number
+  } | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const t = useTranslations('')
 
-  const handleOptionClick = (value: string) => {
-    setSelectedValue(value)
-    onChange(value)
+  const handleOptionClick = (value: { name: string; id: number }) => {
+    setSelectedOption(value)
+    onChange(value.id)
     setIsOpen(false)
   }
 
@@ -57,15 +54,6 @@ const AppSelectBasic = ({
     //eslint-disable-next-line
   }, [])
 
-  const handleOptionHeader = () => {
-    if (options) {
-      return t(options.find((option) => option.value === selectedValue)?.value)
-    }
-    if (optionsBasic) {
-      return optionsBasic.find((option) => option === selectedValue)
-    }
-  }
-
   return (
     <SelectContainer ref={dropdownRef}>
       <SelectHeader
@@ -74,39 +62,27 @@ const AppSelectBasic = ({
         placeHolderIsBold={placeHolderIsBold}
         placeHolderIsGray={placeHolderIsGray}
       >
-        {selectedValue ? `${handleOptionHeader()}` : placeholder}
+        {selectedOption ? selectedOption.name : placeholder}
         <Icon isOpen={isOpen}>
           <Image src={arrowDown} alt='arrow down' />
         </Icon>
       </SelectHeader>
       {isOpen && (
         <SelectOptions>
-          {options &&
-            options.map((option) => (
-              <React.Fragment key={`SelectOptionOption${option.value}`}>
-                <OptionItem onClick={() => handleOptionClick(option.value)}>
-                  <OptionLabel>{t(option.value)}</OptionLabel>
-                </OptionItem>
-              </React.Fragment>
-            ))}
-          {optionsBasic &&
-            optionsBasic.map((option) => (
-              <React.Fragment key={`OptionsBasicOption${option}`}>
-                <OptionItem
-                  key={option}
-                  onClick={() => handleOptionClick(option)}
-                >
-                  <OptionLabel>{option}</OptionLabel>
-                </OptionItem>
-              </React.Fragment>
-            ))}
+          {options.map((option) => (
+            <React.Fragment key={`appSelectWithIdOption${option.name}`}>
+              <OptionItem onClick={() => handleOptionClick(option)}>
+                <OptionLabel>{option.name}</OptionLabel>
+              </OptionItem>
+            </React.Fragment>
+          ))}
         </SelectOptions>
       )}
     </SelectContainer>
   )
 }
 
-export default AppSelectBasic
+export default AppSelectWidthId
 
 const SelectContainer = styled.div`
   position: relative;

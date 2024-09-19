@@ -284,5 +284,7 @@
   "container created successfully": "The container was created successfully",
   "container could not be created": "The container could not be created",
 
+  "must be a number": "Must be a number",
+
   "must be valid email": "Must be a valid email"
 }

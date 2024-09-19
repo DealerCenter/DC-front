@@ -103,7 +103,7 @@ export const updateNotificationSettings = async (
   }
 }
 
-export const uploadOrder = async (payload: {
+export const createOrder = async (payload: {
   manufacturer: string
   manufactureYear: number
   model: string
@@ -121,9 +121,7 @@ export const uploadOrder = async (payload: {
   receiverId: number
 }) => {
   try {
-    const response = await axiosInstance.post(
-      `${(endpoints.CREATE_ORDER, payload)}`
-    )
+    const response = await axiosInstance.post(endpoints.CREATE_ORDER, payload)
     return response
   } catch (error) {
     console.error('Error creating new order:', error)

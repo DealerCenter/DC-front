@@ -1,11 +1,26 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-type Props = { text: string; onClick: () => void; disabled?: boolean }
+type Props = {
+  text: string
+  onClick: () => void
+  disabled?: boolean
+  htmlType?: 'submit' | 'button' | 'reset'
+}
 
-const FormSaveButton = ({ text, onClick, disabled = false }: Props) => {
+const FormSaveButton = ({
+  text,
+  onClick,
+  disabled = false,
+  htmlType = 'button',
+}: Props) => {
   return (
-    <StyledButton onClick={onClick} disabled={disabled} isDisabled={disabled}>
+    <StyledButton
+      onClick={onClick}
+      disabled={disabled}
+      isDisabled={disabled}
+      type={htmlType}
+    >
       {text}
     </StyledButton>
   )

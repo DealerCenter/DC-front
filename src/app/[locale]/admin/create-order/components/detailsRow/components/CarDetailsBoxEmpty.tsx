@@ -11,8 +11,12 @@ import {
 
 type Props = {}
 
+const INPUT_WIDTH_MOBILE = 311
+const INPUT_WIDTH_TABLET = 242
+const INPUT_WIDTH_DESKTOP = 356
+
 const CarDetailsBoxEmpty = (props: Props) => {
-  const [textInputWidth, setTextInputWidth] = useState(0)
+  const [textInputWidth, setTextInputWidth] = useState(242)
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
@@ -20,7 +24,13 @@ const CarDetailsBoxEmpty = (props: Props) => {
     useCreateOrderContext()
 
   useEffect(() => {
-    setTextInputWidth(isMobile ? 311 : isTablet ? 242 : 356)
+    setTextInputWidth(
+      isMobile
+        ? INPUT_WIDTH_MOBILE
+        : isTablet
+          ? INPUT_WIDTH_TABLET
+          : INPUT_WIDTH_DESKTOP
+    )
   }, [isMobile, isTablet, setTextInputWidth])
 
   return (

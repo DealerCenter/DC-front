@@ -10,6 +10,19 @@ import Box from '../../../../components/common/Box'
 import TextInput from '@/common/components/inputElements/TextInput'
 
 import checkedEmpty from '@/assets/icons/checkedIconEmpty.svg'
+import AppSelectWidthId from '@/common/components/appSelect/AppSelectWidthId'
+import { FIELD_NAMES } from '../../../hooks/useCreateOrderContext'
+
+const dummyDropdownList = [
+  {
+    name: 'receiver 1',
+    id: 1,
+  },
+  {
+    name: 'receiver 2',
+    id: 2,
+  },
+]
 
 const INPUT_WIDTH_MOBILE_1 = 160
 const INPUT_WIDTH_TABLET_1 = 156
@@ -27,6 +40,7 @@ type Props = {
   errorMessage: string
   placeholder1: string
   placeholder2: string
+  setFieldValue: (arg: number) => void
 }
 
 const UserDataBox = ({
@@ -38,6 +52,7 @@ const UserDataBox = ({
   errorMessage,
   placeholder1,
   placeholder2,
+  setFieldValue,
 }: Props) => {
   const [textInputWidth, setTextInputWidth] = useState(INPUT_WIDTH_DESKTOP_1)
   const [textInputWidth2, setTextInputWidth2] = useState(INPUT_WIDTH_DESKTOP_2)
@@ -84,8 +99,9 @@ const UserDataBox = ({
           fontWeight='bold'
           fontSize={13}
           isOutline={false}
+          isDisabled={true}
         />
-        <TextInput
+        {/* <TextInput
           width={textInputWidth2}
           height={48}
           type='text'
@@ -97,14 +113,20 @@ const UserDataBox = ({
           fontWeight='bold'
           fontSize={13}
           isOutline={false}
+        /> */}
+        <AppSelectWidthId
+          options={dummyDropdownList}
+          onChange={setFieldValue}
+          placeholder={t('select')}
+          width={textInputWidth2}
         />
         {!isMobile && (
           <Icon onClick={() => {}}>
             <Image src={checkedEmpty} alt='checked icon' />
           </Icon>
         )}
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </DataFrame>
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Box>
   )
 }
@@ -131,6 +153,7 @@ const Line = styled.div`
 `
 
 const DataFrame = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

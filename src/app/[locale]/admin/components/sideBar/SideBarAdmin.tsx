@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
-import { usePathname } from '@/navigation'
+import { usePathname, useRouter } from '@/navigation'
 
 import theme from '@/app/[locale]/theme'
+import { routeName } from '@/common/helpers/constants'
 
-import InfoBox from './components/InfoBox'
-import BarButton from './components/BarButton'
 import AddOrderButton from './components/AddOrderButton'
 import GrayContainer from './components/GrayContainer'
+import InfoBox from '@/common/components/sideBar/components/InfoBox'
+import BarButton from '@/common/components/sideBar/components/BarButton'
 
 import clockBlack from '@/assets/icons/clock/clock-black.svg'
 import clockWhite from '@/assets/icons/clock/clock-white.svg'
@@ -31,11 +32,11 @@ type Props = {
   }
 }
 
-const SideBar = ({ routes }: Props) => {
+const SideBarAdmin = ({ routes }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const pathname = usePathname()
-
+  const router = useRouter()
   const [isHovered, setIsHovered] = useState(false)
 
   const handleMouseEnter = () => {
@@ -64,6 +65,7 @@ const SideBar = ({ routes }: Props) => {
             icon={plusIcon}
             isHovered={isHovered}
             height={56}
+            onClick={() => router.push(routeName.adminCreateOrder)}
           />
           <ButtonFrame>
             <BarButton
@@ -130,7 +132,7 @@ const SideBar = ({ routes }: Props) => {
   )
 }
 
-export default SideBar
+export default SideBarAdmin
 
 const EmptyContainer = styled.div`
   display: none;

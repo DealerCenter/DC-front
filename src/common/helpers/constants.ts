@@ -30,3 +30,18 @@ export const verificationStatusName = {
   VERIFIED: 'VERIFIED',
   UNVERIFIED: 'UNVERIFIED',
 }
+
+export const carCategories = [
+  'Sedan',
+  'Jeep',
+  'Coupe',
+  'Hatchback',
+  'Universal',
+  'Cabriolet',
+  'Pickup',
+  'Minivan',
+  'Microbus',
+  'GoodsWagon',
+  'Limousine',
+  'CrossOver',
+]
