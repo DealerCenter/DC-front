@@ -177,6 +177,7 @@ const BarContainer = styled.div`
       width: 334px;
       box-shadow: 0px 10px 45px rgba(0, 0, 0, 0.15);
     }
+    box-shadow: 0px 10px 45px rgba(0, 0, 0, 0.05);
   }
 
   min-width: unset;

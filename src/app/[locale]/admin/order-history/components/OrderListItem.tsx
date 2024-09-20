@@ -11,19 +11,12 @@ import { useTranslations } from 'next-intl'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 import StatusAndDebtBoxMobile from './StatusAndDebtBoxMobile'
+import { ORDER_CONSTANTS, SHIPPING_STATUS } from '@/common/helpers/constants'
+import { ORDERS_GET_RES } from '@/api/apiTypes'
 
 type Props = {
   imageLink: string
-  item: {
-    brand: string
-    model: string
-    year: string
-    vinCode: string
-    buyerFullName: string
-    buyerPhoneNumber: string
-    debt: number
-    arrivalState: string
-  }
+  item: ORDERS_GET_RES
   onClick: () => void
   isEditing: boolean
 }
@@ -34,15 +27,18 @@ const OrderListItem = ({ imageLink, item, onClick, isEditing }: Props) => {
   const [isChecked, setIsChecked] = useState(false)
 
   const {
-    brand,
-    model,
-    year,
-    vinCode,
-    buyerFullName,
-    buyerPhoneNumber,
-    debt,
-    arrivalState,
+    manufacturer: brand,
+    model: carModel,
+    manufactureYear: year,
+    vin: vinCode,
+    receiver,
+    carCost,
+    transportaionCost: amount,
+    status: shippingStatus,
+
+    createdAt: date,
   } = item
+  const { firstName: buyerFullName, phoneNumber: buyerPhoneNumber } = receiver
 
   useEffect(() => {
     !isEditing && setIsChecked(false)
@@ -70,14 +66,15 @@ const OrderListItem = ({ imageLink, item, onClick, isEditing }: Props) => {
           </CheckboxFrame>
         )}
         {isMobile && (
-          <StatusAndDebtBoxMobile arrivalState={arrivalState} amount={debt} />
+          <StatusAndDebtBoxMobile arrivalState={'arrived'} amount={amount} />
         )}
         <CarImageAndModelBox
           imageLink={imageLink}
           brand={brand}
-          model={model}
+          model={carModel}
           year={year}
           vinCode={vinCode}
+          date={date}
         />
       </Frame>
 
@@ -96,8 +93,8 @@ const OrderListItem = ({ imageLink, item, onClick, isEditing }: Props) => {
         </BottomFrameMobile>
       ) : (
         <DetailsBox
-          amount={debt}
-          arrivalState={arrivalState}
+          amount={amount}
+          arrivalState={'arrived'}
           buyerFullName={buyerFullName}
           buyerPhoneNumber={buyerPhoneNumber}
           vinCode={vinCode}

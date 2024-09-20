@@ -1,6 +1,7 @@
 import { handleLogout } from '@/common/helpers/utils'
 import axiosInstance from './apiClient'
 import { endpoints } from './endpoints'
+import { OrdersQueryType, ShippingStatus } from '@/common/helpers/constants'
 
 export const fetchMe = async () => {
   try {
@@ -121,10 +122,21 @@ export const createOrder = async (payload: {
   receiverId: number
 }) => {
   try {
-    const response = await axiosInstance.post(endpoints.CREATE_ORDER, payload)
+    const response = await axiosInstance.post(endpoints.ORDERS, payload)
     return response
   } catch (error) {
     console.error('Error creating new order:', error)
+  }
+}
+
+export const getOrders = async (payload: OrdersQueryType) => {
+  try {
+    const response = await axiosInstance.get(endpoints.ORDERS, {
+      params: payload, // Pass payload as query parameters
+    })
+    return response.data
+  } catch (error) {
+    console.error('Failed to fetch orders data:', error)
   }
 }
 

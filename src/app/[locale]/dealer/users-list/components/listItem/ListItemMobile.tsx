@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import { verificationStatusName } from '@/common/helpers/constants'
+import { VERIFICATION_STATUS_NAME } from '@/common/helpers/constants'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
@@ -47,12 +47,12 @@ const ListItemMobile = ({
         <LabelAndIconBox>
           <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
           <Icon>
-            {verificationStatus === verificationStatusName.VERIFIED ? (
+            {verificationStatus === VERIFICATION_STATUS_NAME.VERIFIED ? (
               <Image src={checkedGreen} alt='checked icon' />
-            ) : verificationStatus === verificationStatusName.UNVERIFIED ? (
+            ) : verificationStatus === VERIFICATION_STATUS_NAME.UNVERIFIED ? (
               <Image src={uncheckedRed} alt='unchecked icon' />
             ) : (
-              verificationStatus === verificationStatusName.PENDING && (
+              verificationStatus === VERIFICATION_STATUS_NAME.PENDING && (
                 <Image src={uncheckedYellow} alt='pending icon' />
               )
             )}

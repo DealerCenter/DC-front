@@ -5,10 +5,10 @@ import { DatePickerProps } from 'antd'
 
 import {
   FIELD_NAMES,
-  SHIPPING_STATUS,
   useCreateOrderContext,
 } from '../../../create-order/hooks/useCreateOrderContext'
 import LineOfStatus from './components/LineOfStatus'
+import { SHIPPING_STATUS } from '@/common/helpers/constants'
 
 const SHIPPING_STEPS = [
   {

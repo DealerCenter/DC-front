@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { formatDate } from '@/common/helpers/simpleFunctions'
-import { verificationStatusName } from '@/common/helpers/constants'
+import { VERIFICATION_STATUS_NAME } from '@/common/helpers/constants'
 import DeleteWarning from '../addRecipient/components/DeleteWarning'
 import AppModal from '@/common/components/modal/AppModal'
 
@@ -50,14 +50,14 @@ const ListItemFull = ({
         <Label>{phoneNumber}</Label>
         <Label>{formattedDate}</Label>
         <Label>
-          {verificationStatus === verificationStatusName.VERIFIED ? (
+          {verificationStatus === VERIFICATION_STATUS_NAME.VERIFIED ? (
             <Image
               src={checkedGreen}
               alt='checked icon'
               width={20}
               height={20}
             />
-          ) : verificationStatus === verificationStatusName.UNVERIFIED ? (
+          ) : verificationStatus === VERIFICATION_STATUS_NAME.UNVERIFIED ? (
             <Image
               src={uncheckedRed}
               alt='unchecked icon'
@@ -65,7 +65,7 @@ const ListItemFull = ({
               height={20}
             />
           ) : (
-            verificationStatus === verificationStatusName.PENDING && (
+            verificationStatus === VERIFICATION_STATUS_NAME.PENDING && (
               <Image
                 src={uncheckedYellow}
                 alt='pending icon'

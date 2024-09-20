@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
@@ -15,21 +15,12 @@ import sortIconBlack from '@/assets/icons/sortBlack.svg'
 import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
 import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
 import AppDropdownFilter from '@/common/components/appDropdown/appFilter/AppDropDownFilter'
-import { useAdminState } from '../../AdminStateContext'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 import BindContainerBox from './bindContainer/BindContainerBox'
 import { routeName } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
-
-type Props = { isEditing: boolean; setIsEditing: (arg1: boolean) => void }
-
-const sortOptions = [
-  { label: 'date descending', icon: arrowDown },
-  { label: 'date ascending', icon: arrowUp },
-  { label: 'price descending', icon: arrowDown },
-  { label: 'price ascending', icon: arrowUp },
-]
+import CloseIconBlack from '@/common/components/readyIcons/CloseIconBlack'
 
 const changeStatusList = [
   { label: 'arrived' },
@@ -57,12 +48,54 @@ const filterValues = {
   ],
 }
 
-const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
+type Props = {
+  isEditing: boolean
+  setIsEditing: (arg1: boolean) => void
+  setSortByCost: (arg: 'desc' | 'asc' | null) => void
+  setSortByCreateDate: (arg: 'desc' | 'asc' | null) => void
+}
+
+const ButtonsRow = ({
+  isEditing,
+  setIsEditing,
+  setSortByCost,
+  setSortByCreateDate,
+}: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const router = useRouter()
 
-  const { setSortOption } = useAdminState()
+  const [activeSortLabel, setActiveSortLabel] = useState('sort')
+
+  const sortOptions = [
+    {
+      label: 'date descending',
+      icon: arrowDown,
+      onChoose: () => setSortByCreateDate('desc'),
+    },
+    {
+      label: 'date ascending',
+      icon: arrowUp,
+      onChoose: () => setSortByCreateDate('asc'),
+    },
+    {
+      label: 'price descending',
+      icon: arrowDown,
+      onChoose: () => setSortByCost('desc'),
+    },
+    {
+      label: 'price ascending',
+      icon: arrowUp,
+      onChoose: () => setSortByCost('asc'),
+    },
+  ]
+
+  const onClearSort = (e: any) => {
+    e.stopPropagation()
+    setSortByCost(null)
+    setSortByCreateDate(null)
+    setActiveSortLabel('sort')
+  }
 
   const handleEditButton = () => {
     isEditing ? setIsEditing(false) : setIsEditing(true)
@@ -124,16 +157,22 @@ const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
               ></SecondaryButton>
             </AppDropdownFilter>
             <AppDropdown
-              items={sortOptions}
+              // items={sortOptions}
               modalStyle='white'
-              onSortClick={setSortOption}
+              onSortClick={() => {}}
+              sortOptions={sortOptions}
+              setActiveLabel={setActiveSortLabel}
+              // onCancel={onClearSort}
             >
               <SecondaryButton
-                text={t('sort')}
+                text={t(activeSortLabel)}
                 onClick={() => {}}
                 icon={sortIconBlack}
                 width={isMobile ? 160 : undefined}
-              ></SecondaryButton>
+              />
+              {activeSortLabel !== 'sort' && (
+                <CloseIconBlack onClick={onClearSort} top={-8} right={-8} />
+              )}
             </AppDropdown>
           </ButtonPairFrame>
           <ButtonPairFrame>

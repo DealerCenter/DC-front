@@ -1,4 +1,5 @@
 import theme from '@/app/[locale]/theme'
+import { formatDate } from '@/common/helpers/simpleFunctions'
 import Image from 'next/image'
 import React from 'react'
 import { useMediaQuery } from 'react-responsive'
@@ -9,8 +10,9 @@ type Props = {
   imageLink: string
   brand: string
   model: string
-  year: string
+  year: number
   vinCode: string
+  date: string
 }
 
 const CarImageAndModelBox = ({
@@ -19,8 +21,11 @@ const CarImageAndModelBox = ({
   model,
   year,
   vinCode,
+  date,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+
+  const formattedDate = formatDate(date)
 
   return (
     <ImageFrame>
@@ -47,7 +52,7 @@ const CarImageAndModelBox = ({
             <TextBold>{`${brand} ${year}`}</TextBold>
             <Text>{vinCode}</Text>
           </TextBox>
-          <Text>{'29/03/2024'}</Text>
+          <Text>{formattedDate}</Text>
         </TextFrame>
       )}
     </ImageFrame>

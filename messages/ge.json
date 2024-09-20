@@ -287,6 +287,7 @@
   "must be a number": "უნდა იყოს რიცხვი",
   "order created successfully": "შეკვეთა წარმატებით შეიქმნა",
   "could not create order": "შეკვეთა ვერ შეიქმნა",
+  "orders not found": "შეკვეთები ვერ მოიძებნა",
 
   "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა"
 }

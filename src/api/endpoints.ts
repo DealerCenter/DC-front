@@ -7,7 +7,7 @@ export const endpoints = {
   CHANGE_PASSWORD: '/auth/change-password',
   UPDATE_USER_DATA: '/api/dealers',
   NOTIFICATION_SETTINGS_DEALERS: '/notifications/dealers',
-  CREATE_ORDER: '/orders',
+  ORDERS: '/orders',
   RECEIVERS: '/receivers',
   GET_CONTAINERS: '/containers/orders',
   CREATE_CONTAINER: '/containers',

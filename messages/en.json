@@ -287,6 +287,7 @@
   "must be a number": "Must be a number",
   "order created successfully": "Order created successfully",
   "could not create order": "Could not create order",
+  "orders not found": "Orders could not be found",
 
   "must be valid email": "Must be a valid email"
 }

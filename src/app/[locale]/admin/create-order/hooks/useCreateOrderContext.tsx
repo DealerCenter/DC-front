@@ -3,9 +3,7 @@ import React, { ReactNode, createContext, useContext, useState } from 'react'
 import { useFormik, FormikValues } from 'formik'
 import * as yup from 'yup'
 import { useTranslations } from 'next-intl'
-import { useRouter } from '@/navigation'
-import { routeName } from '@/common/helpers/constants'
-import { createOrder } from '@/api/apiCalls'
+
 import axiosInstance from '@/api/apiClient'
 import { endpoints } from '@/api/endpoints'
 import { message } from 'antd'
@@ -31,13 +29,6 @@ export const FIELD_NAMES = {
   CONTAINER_ID: 'containerId',
   // DEALER_ID: 'dealerId',
   RECEIVER_ID: 'receiverId',
-}
-
-export const SHIPPING_STATUS = {
-  IN_AMERICAN_WAREHOUSE: 'InAmericanWarehouse',
-  IN_CONTAINER: 'InContainer',
-  UNDERGOES_CUSTOMS: 'UndergoesCustomsProcedures',
-  SENT: 'Sent',
 }
 
 export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
@@ -90,10 +81,13 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
 
       try {
         const response = await axiosInstance.post(
-          endpoints.CREATE_ORDER,
+          endpoints.ORDERS,
           numericValues
         )
+
         message.success(t('order created successfully'))
+        // MY_BUG
+        // after reset, all fields are not cleared.
         resetForm()
 
         return response
@@ -144,14 +138,28 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     formik.values[FIELD_NAMES.VIN].length === 0 ||
     formik.values[FIELD_NAMES.EXACT_ADDRESS].length === 0 ||
     formik.values[FIELD_NAMES.CAR_CATEGORY].length === 0 ||
-    formik.values[FIELD_NAMES.STATUS].length === 0
-  // typeof formik.values[FIELD_NAMES.MILEAGE] !== 'number' ||
-  //   typeof formik.values[FIELD_NAMES.TRANSPORTATION_COST] !== 'number' ||
-  //   typeof formik.values[FIELD_NAMES.CAR_COST] !== 'number' ||
-  //   // typeof formik.values[FIELD_NAMES.STATE_ID] !== 'number' ||
-  //   typeof formik.values[FIELD_NAMES.CONTAINER_ID] !== 'number' ||
-  //   // formik.values[FIELD_NAMES.DEALER_ID] !== 'number' ||
-  //   typeof formik.values[FIELD_NAMES.RECEIVER_ID] !== 'number'
+    formik.values[FIELD_NAMES.STATUS].length === 0 ||
+    formik.values[FIELD_NAMES.MILEAGE] === null ||
+    formik.values[FIELD_NAMES.TRANSPORTATION_COST] === null ||
+    formik.values[FIELD_NAMES.TRANSPORTATION_COST] === undefined ||
+    formik.values[FIELD_NAMES.TRANSPORTATION_COST] === '' ||
+    isNaN(Number(formik.values[FIELD_NAMES.TRANSPORTATION_COST])) ||
+    formik.values[FIELD_NAMES.CAR_COST] === null ||
+    formik.values[FIELD_NAMES.CAR_COST] === undefined ||
+    formik.values[FIELD_NAMES.CAR_COST] === '' ||
+    isNaN(Number(formik.values[FIELD_NAMES.CAR_COST])) ||
+    formik.values[FIELD_NAMES.MILEAGE] === null ||
+    formik.values[FIELD_NAMES.MILEAGE] === undefined ||
+    formik.values[FIELD_NAMES.MILEAGE] === '' ||
+    isNaN(Number(formik.values[FIELD_NAMES.MILEAGE])) ||
+    formik.values[FIELD_NAMES.MANUFACTURE_YEAR] === null ||
+    formik.values[FIELD_NAMES.MANUFACTURE_YEAR] === undefined ||
+    formik.values[FIELD_NAMES.MANUFACTURE_YEAR] === '' ||
+    isNaN(Number(formik.values[FIELD_NAMES.MANUFACTURE_YEAR])) ||
+    // formik.values[FIELD_NAMES.DEALER_ID] !== 'number' ||
+    typeof formik.values[FIELD_NAMES.STATE_ID] !== 'number' ||
+    typeof formik.values[FIELD_NAMES.CONTAINER_ID] !== 'number' ||
+    typeof formik.values[FIELD_NAMES.RECEIVER_ID] !== 'number'
 
   const {
     values,

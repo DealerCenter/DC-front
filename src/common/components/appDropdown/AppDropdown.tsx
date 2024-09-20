@@ -2,6 +2,13 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import DropdownItem from './DropdownItem'
+import Image from 'next/image'
+
+type SortOption = {
+  label: string
+  icon: string
+  onChoose: () => void
+}
 
 type Props = {
   children: ReactNode
@@ -13,19 +20,21 @@ type Props = {
 
   left?: number
   top?: number
-  onSortClick?: (
-    arg1:
-      | 'price ascending'
-      | 'price descending'
-      | 'date ascending'
-      | 'date descending'
-  ) => void
+  onSortClick?: () => void
   handleToggle?: () => void
   handleClose?: () => void
   width?: number
   isBorder?: boolean
   ReadyComponent?: ReactNode
+  sortOptions?: SortOption[]
+  setActiveLabel?: (arg: string) => void
+  onCancel?: () => void
 }
+
+// | 'price ascending'
+// | 'price descending'
+// | 'date ascending'
+// | 'date descending'
 
 const AppDropdown = ({
   children,
@@ -39,6 +48,9 @@ const AppDropdown = ({
   width,
   isBorder,
   ReadyComponent,
+  sortOptions,
+  setActiveLabel,
+  onCancel,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -97,6 +109,16 @@ const AppDropdown = ({
               />
             ))}
           {ReadyComponent && ReadyComponent}
+          {sortOptions &&
+            sortOptions.map((item, i) => (
+              <DropdownItem
+                item={item}
+                key={`${item.label}12ij${i}`}
+                modalStyle={modalStyle}
+                onSortClick={item.onChoose}
+                onClick={() => setActiveLabel && setActiveLabel(item.label)}
+              />
+            ))}
         </DropdownMenu>
       )}
     </Dropdown>

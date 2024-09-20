@@ -1,7 +1,6 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import DropdownItem from '../DropdownItem'
 import DropdownFilterBox from './components/DropdownFilterBox'
 
 type Props = {

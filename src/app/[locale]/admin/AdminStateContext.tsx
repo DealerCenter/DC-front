@@ -23,10 +23,10 @@ type AdminState = {
       | 'date descending'
       | null
   ) => void
-  // activeOptionRecipient: number
-  // setActiveOptionRecipient: (arg1: number) => void
-  // activeOptionDealer: number
-  // setActiveOptionDealer: (arg1: number) => void
+  activeOptionRecipient: number
+  setActiveOptionRecipient: (arg1: number) => void
+  activeOptionDealer: number
+  setActiveOptionDealer: (arg1: number) => void
 }
 
 const AdminStateContext = createContext<AdminState | undefined>(undefined)
@@ -45,8 +45,8 @@ export const AdminStateProvider = ({ children }: { children: ReactNode }) => {
     | 'date descending'
     | null
   >(null)
-  // const [activeOptionRecipient, setActiveOptionRecipient] = useState(0)
-  // const [activeOptionDealer, setActiveOptionDealer] = useState(0)
+  const [activeOptionRecipient, setActiveOptionRecipient] = useState(0)
+  const [activeOptionDealer, setActiveOptionDealer] = useState(0)
 
   return (
     <AdminStateContext.Provider
@@ -58,10 +58,10 @@ export const AdminStateProvider = ({ children }: { children: ReactNode }) => {
         sortOption,
         setSortOption,
 
-        // activeOptionRecipient,
-        // setActiveOptionRecipient,
-        // activeOptionDealer,
-        // setActiveOptionDealer,
+        activeOptionRecipient,
+        setActiveOptionRecipient,
+        activeOptionDealer,
+        setActiveOptionDealer,
       }}
     >
       {children}
