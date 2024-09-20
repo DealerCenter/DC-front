@@ -21,8 +21,8 @@ const dummyDropdownList = [
     id: 1,
   },
   {
-    name: 'container 2',
-    id: 2,
+    name: 'container 3',
+    id: 3,
   },
 ]
 

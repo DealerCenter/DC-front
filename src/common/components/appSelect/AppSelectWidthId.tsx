@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
-import { useTranslations } from 'next-intl'
 
 import arrowDown from '@/assets/icons/arrowDown.svg'
+import ErrorMessage from '../errorMessage/ErrorMessage'
 
 type Props = {
   options: { name: string; id: number }[]
@@ -12,6 +12,7 @@ type Props = {
   width?: number
   placeHolderIsBold?: boolean
   placeHolderIsGray?: boolean
+  errorMessage?: string
 }
 
 const AppSelectWidthId = ({
@@ -21,6 +22,7 @@ const AppSelectWidthId = ({
   width,
   placeHolderIsBold,
   placeHolderIsGray,
+  errorMessage,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<{
@@ -28,8 +30,6 @@ const AppSelectWidthId = ({
     id: number
   } | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
-
-  const t = useTranslations('')
 
   const handleOptionClick = (value: { name: string; id: number }) => {
     setSelectedOption(value)
@@ -78,6 +78,7 @@ const AppSelectWidthId = ({
           ))}
         </SelectOptions>
       )}
+      {errorMessage && <ErrorMessage text={errorMessage} top={48} left={12} />}
     </SelectContainer>
   )
 }

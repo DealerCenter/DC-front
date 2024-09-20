@@ -8,6 +8,7 @@ import { routeName } from '@/common/helpers/constants'
 import { createOrder } from '@/api/apiCalls'
 import axiosInstance from '@/api/apiClient'
 import { endpoints } from '@/api/endpoints'
+import { message } from 'antd'
 
 const FormikContext = createContext<FormikValues | null>(null)
 
@@ -32,7 +33,7 @@ export const FIELD_NAMES = {
   RECEIVER_ID: 'receiverId',
 }
 
-const statusOptions = {
+export const SHIPPING_STATUS = {
   IN_AMERICAN_WAREHOUSE: 'InAmericanWarehouse',
   IN_CONTAINER: 'InContainer',
   UNDERGOES_CUSTOMS: 'UndergoesCustomsProcedures',
@@ -62,7 +63,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       console.log('onSubmit:', values)
 
       const numericValues = { ...values }
@@ -92,9 +93,12 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
           endpoints.CREATE_ORDER,
           numericValues
         )
-        console.log('post response:', response)
+        message.success(t('order created successfully'))
+        resetForm()
+
         return response
       } catch (error) {
+        message.error(t('could not create order'))
         console.error('Error creating new order:', error)
       }
     },

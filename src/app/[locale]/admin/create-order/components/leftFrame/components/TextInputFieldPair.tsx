@@ -74,17 +74,23 @@ const TextInputFieldPair = ({
         isDisabled={true}
       />
       {selectOptions ? (
-        <AppSelectChoose options={selectOptions} placeholder={t('select')} />
+        <AppSelectChoose
+          options={selectOptions}
+          placeholder={t('select')}
+          errorMessage={errorMessage}
+        />
       ) : optionsListWidthID ? (
         <AppSelectWidthId
           options={optionsListWidthID}
           onChange={handleSetValueWithId ? handleSetValueWithId : () => {}}
           placeholder={t('select')}
+          errorMessage={errorMessage}
         />
       ) : selectOptionsBasic ? (
         <AppSelectBasic
           optionsBasic={selectOptionsBasic}
           onChange={handleSetValueBasic ? handleSetValueBasic : () => {}}
+          errorMessage={errorMessage}
         />
       ) : (
         <TextInput

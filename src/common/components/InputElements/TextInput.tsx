@@ -2,6 +2,7 @@ import React, { ChangeEventHandler } from 'react'
 import styled, { css } from 'styled-components'
 import infoIcon from '@/assets/icons/info.svg'
 import Image from 'next/image'
+import ErrorMessage from '../errorMessage/ErrorMessage'
 
 type Props = {
   type: string
@@ -68,7 +69,7 @@ const TextInput = ({
           <OptionalText>{optionalInfo}</OptionalText>
         </TextBox>
       )}
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {errorMessage && <ErrorMessage text={errorMessage} top={48} left={12} />}
     </Container>
   )
 }
@@ -186,15 +187,6 @@ const TextBox = styled.div`
   margin-top: 8px;
   margin-bottom: 0;
   height: 20px;
-`
-
-const ErrorMessage = styled.p`
-  color: ${({ theme }) => theme.colors?.red};
-  position: absolute;
-  font-size: ${({ theme }) => theme.fontSizes?.extraSmall};
-  top: 48px;
-  left: 12px;
-  z-index: 10;
 `
 
 const OptionalText = styled.p`

@@ -285,6 +285,8 @@
   "container could not be created": "The container could not be created",
 
   "must be a number": "Must be a number",
+  "order created successfully": "Order created successfully",
+  "could not create order": "Could not create order",
 
   "must be valid email": "Must be a valid email"
 }

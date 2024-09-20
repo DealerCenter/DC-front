@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import arrowDown from '@/assets/icons/arrowDown.svg'
+import ErrorMessage from '../errorMessage/ErrorMessage'
 
 type Props = {
   options: {
@@ -14,6 +15,7 @@ type Props = {
   width?: number
   placeHolderIsBold?: boolean
   placeHolderIsGray?: boolean
+  errorMessage?: string
 }
 
 const AppSelectChoose = ({
@@ -22,6 +24,7 @@ const AppSelectChoose = ({
   width,
   placeHolderIsBold,
   placeHolderIsGray,
+  errorMessage,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedValue, setSelectedValue] = useState<{
@@ -87,6 +90,7 @@ const AppSelectChoose = ({
           </OptionItem>
         </SelectOptions>
       )}
+      {errorMessage && <ErrorMessage text={errorMessage} top={48} left={12} />}
     </SelectContainer>
   )
 }
