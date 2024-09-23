@@ -293,5 +293,7 @@
   "create any task with status": "Create any task with its status, assign people to it, add labels and project name.",
   "new issue": "New issue",
 
+  "error while connecting to the server": "An error occurred while connecting to the server. Please contact support if the issue persists.",
+
   "must be valid email": "Must be a valid email"
 }

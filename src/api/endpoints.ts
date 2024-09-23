@@ -11,4 +11,5 @@ export const endpoints = {
   RECEIVERS: '/receivers',
   GET_CONTAINERS: '/containers/orders',
   CREATE_CONTAINER: '/containers',
+  HEALTH: '/health',
 }

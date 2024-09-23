@@ -195,3 +195,14 @@ export const getContainers = async (orderId: string) => {
     console.error('Error getting containers:', error)
   }
 }
+
+export const checkHealth = async () => {
+  try {
+    const response = await axiosInstance.get(endpoints.HEALTH)
+    // return response.data
+    console.log('checked health')
+    return false
+  } catch (error) {
+    console.error('Error getting health:', error)
+  }
+}
