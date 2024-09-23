@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
-
+import { message } from 'antd'
 import { useMediaQuery } from 'react-responsive'
+
 import theme from '@/app/[locale]/theme'
 import { deleteReceiver, getReceivers } from '@/api/apiCalls'
+import { RECEIVER_GET_RES } from '@/api/apiTypes'
 
 import ListItem from './listItem/ListItem'
 import LabelsContainer from '@/common/components/labelsContainer/LabelsContainer'
 import Pagination from '@/common/components/pagination/Pagination'
 import UserListEmpty from './UserListEmpty'
-import { message } from 'antd'
 
 const RECEIVERS_PER_PAGE = 10
 
@@ -27,6 +28,7 @@ const UserList = ({
   updatedSuccessfully,
   setUpdatedSuccessfully,
 }: Props) => {
+  const [isLoading, setIsLoading] = useState(false)
   const [receiversData, setReceiversData] = useState<
     RECEIVER_GET_RES[] | undefined
   >(undefined)
@@ -38,11 +40,13 @@ const UserList = ({
   const t = useTranslations('')
 
   const getData = async () => {
+    setIsLoading(true)
     const response = await getReceivers({
       skip: searchQuery ? 0 : receiversToSkip,
       take: searchQuery ? 1000 : RECEIVERS_PER_PAGE,
       search: searchQuery,
     })
+    setIsLoading(false)
     if (searchQuery && response?.length === 0) {
       message.error('could not find recipient')
     }
@@ -132,6 +136,7 @@ const UserList = ({
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             numOfPages={numOfPages}
+            isDisabled={isLoading}
           />
         </PaginationBox>
       )}
