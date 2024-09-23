@@ -136,8 +136,7 @@ export const getOrders = async (payload: OrdersQueryType) => {
     const response = await axiosInstance.get(endpoints.ORDERS, {
       params: payload, // Pass payload as query parameters
     })
-    // return response.data
-    return []
+    return response.data
   } catch (error) {
     console.error('Failed to fetch orders data:', error)
   }
@@ -199,9 +198,7 @@ export const getContainers = async (orderId: string) => {
 export const checkHealth = async () => {
   try {
     const response = await axiosInstance.get(endpoints.HEALTH)
-    // return response.data
-    console.log('checked health')
-    return false
+    return response.data
   } catch (error) {
     console.error('Error getting health:', error)
   }

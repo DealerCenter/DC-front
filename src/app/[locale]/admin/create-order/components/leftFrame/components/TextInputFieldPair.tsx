@@ -91,6 +91,7 @@ const TextInputFieldPair = ({
           optionsBasic={selectOptionsBasic}
           onChange={handleSetValueBasic ? handleSetValueBasic : () => {}}
           errorMessage={errorMessage}
+          placeholder={t('select')}
         />
       ) : (
         <TextInput

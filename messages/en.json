@@ -295,5 +295,7 @@
 
   "error while connecting to the server": "An error occurred while connecting to the server. Please contact support if the issue persists.",
 
+  "specify an address": "Specify an address",
+
   "must be valid email": "Must be a valid email"
 }

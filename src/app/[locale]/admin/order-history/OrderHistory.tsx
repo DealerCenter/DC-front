@@ -47,6 +47,7 @@ const OrderHistory = (props: Props) => {
     })
     if (response) {
       setIsPageLoaded(true)
+      console.log('response:', response)
       setOrdersList(response)
     }
   }

@@ -39,7 +39,6 @@ const LocationBox = ({}: Props) => {
       <LabelsFrame>
         <TextInputFieldPair
           title='state'
-          placeholder='California'
           name={FIELD_NAMES.STATE_ID}
           value={values[FIELD_NAMES.STATE_ID]}
           onChange={handleChange}
@@ -54,7 +53,7 @@ const LocationBox = ({}: Props) => {
         />
         <TextInputFieldPair
           title='address'
-          placeholder='Beverly hills, 235'
+          placeholder={t('specify an address')}
           name={FIELD_NAMES.EXACT_ADDRESS}
           value={values[FIELD_NAMES.EXACT_ADDRESS]}
           onChange={handleChange}
