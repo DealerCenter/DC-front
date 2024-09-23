@@ -65,7 +65,7 @@ const DropdownMenu = styled.div<DropdownMenuProps>`
   display: flex;
   flex-direction: column;
   padding: 6px;
-  z-index: 100;
+  z-index: 3;
   background-color: ${({ theme }) => theme.colors?.white};
 
   box-shadow: 0 8px 42px 0 ${({ theme }) => theme.colors?.main_gray_10};

@@ -53,6 +53,7 @@ type Props = {
   setIsEditing: (arg1: boolean) => void
   setSortByCost: (arg: 'desc' | 'asc' | null) => void
   setSortByCreateDate: (arg: 'desc' | 'asc' | null) => void
+  isPageLoaded: boolean
 }
 
 const ButtonsRow = ({
@@ -60,6 +61,7 @@ const ButtonsRow = ({
   setIsEditing,
   setSortByCost,
   setSortByCreateDate,
+  isPageLoaded,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
@@ -154,6 +156,7 @@ const ButtonsRow = ({
                 onClick={() => {}}
                 icon={filterIconBlack}
                 width={isMobile ? 160 : undefined}
+                isDisabled={!isPageLoaded}
               ></SecondaryButton>
             </AppDropdownFilter>
             <AppDropdown
@@ -162,6 +165,8 @@ const ButtonsRow = ({
               onSortClick={() => {}}
               sortOptions={sortOptions}
               setActiveLabel={setActiveSortLabel}
+              isDisabled={!isPageLoaded}
+
               // onCancel={onClearSort}
             >
               <SecondaryButton
@@ -169,6 +174,7 @@ const ButtonsRow = ({
                 onClick={() => {}}
                 icon={sortIconBlack}
                 width={isMobile ? 160 : undefined}
+                isDisabled={!isPageLoaded}
               />
               {activeSortLabel !== 'sort' && (
                 <CloseIconBlack onClick={onClearSort} top={-8} right={-8} />
@@ -187,6 +193,7 @@ const ButtonsRow = ({
               onClick={handleEditButton}
               icon={pencilIcon}
               width={isMobile ? 160 : undefined}
+              isDisabled={!isPageLoaded}
             ></SecondaryButton>
           </ButtonPairFrame>
         </ButtonFrame>

@@ -289,5 +289,9 @@
   "could not create order": "Could not create order",
   "orders not found": "Orders could not be found",
 
+  "add your first task": "Add your first task",
+  "create any task with status": "Create any task with its status, assign people to it, add labels and project name.",
+  "new issue": "New issue",
+
   "must be valid email": "Must be a valid email"
 }

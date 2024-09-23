@@ -29,6 +29,7 @@ type Props = {
   sortOptions?: SortOption[]
   setActiveLabel?: (arg: string) => void
   onCancel?: () => void
+  isDisabled?: boolean
 }
 
 // | 'price ascending'
@@ -51,6 +52,7 @@ const AppDropdown = ({
   sortOptions,
   setActiveLabel,
   onCancel,
+  isDisabled,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -89,7 +91,9 @@ const AppDropdown = ({
 
   return (
     <Dropdown ref={dropdownRef}>
-      <DropdownTrigger onClick={toggleDropdown}>{children}</DropdownTrigger>
+      <DropdownTrigger onClick={isDisabled ? () => {} : toggleDropdown}>
+        {children}
+      </DropdownTrigger>
       {isOpen && (
         <DropdownMenu
           modalStyle={modalStyle}
@@ -148,7 +152,7 @@ const DropdownMenu = styled.div<DropdownMenuProps>`
   display: flex;
   flex-direction: column;
   padding: 6px;
-  z-index: 100;
+  z-index: 3;
 
   box-shadow: 0 8px 42px 0 ${({ theme }) => theme.colors?.main_gray_10};
   ${({ modalStyle }) =>

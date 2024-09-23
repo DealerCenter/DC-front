@@ -2,6 +2,7 @@ import { handleLogout } from '@/common/helpers/utils'
 import axiosInstance from './apiClient'
 import { endpoints } from './endpoints'
 import { OrdersQueryType, ShippingStatus } from '@/common/helpers/constants'
+import { CONTAINER_POST_RES, ME_RES, RECEIVER_GET_RES } from './apiTypes'
 
 export const fetchMe = async () => {
   try {
@@ -131,10 +132,12 @@ export const createOrder = async (payload: {
 
 export const getOrders = async (payload: OrdersQueryType) => {
   try {
+    console.log('fetched')
     const response = await axiosInstance.get(endpoints.ORDERS, {
       params: payload, // Pass payload as query parameters
     })
-    return response.data
+    // return response.data
+    return []
   } catch (error) {
     console.error('Failed to fetch orders data:', error)
   }

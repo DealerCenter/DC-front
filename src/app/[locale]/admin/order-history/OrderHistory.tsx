@@ -9,14 +9,21 @@ import ButtonsRow from './components/ButtonsRow'
 
 import { getOrders } from '@/api/apiCalls'
 import { message } from 'antd'
-import { OrdersQueryType, ShippingStatus } from '@/common/helpers/constants'
+import {
+  OrdersQueryType,
+  routeName,
+  ShippingStatus,
+} from '@/common/helpers/constants'
 import { ORDERS_GET_RES } from '@/api/apiTypes'
+import AddYourFirstTask from './components/AddYourFirstTask'
+import { useRouter } from '@/navigation'
 
 const itemsPerPage = 8
 
 type Props = {}
 
 const OrderHistory = (props: Props) => {
+  const [isPageLoaded, setIsPageLoaded] = useState(false)
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [isEditing, setIsEditing] = useState(false)
@@ -27,7 +34,7 @@ const OrderHistory = (props: Props) => {
   >(null)
   const [shippingStatus, setShippingStatus] = useState<ShippingStatus>(null)
   // const [filterQueries, setFilterQueries] = useState<OrdersQueryType>()
-
+  const router = useRouter()
   const t = useTranslations('')
 
   const handleGetOrders = async () => {
@@ -38,10 +45,10 @@ const OrderHistory = (props: Props) => {
       sortByCost: sortByCost,
       status: shippingStatus,
     })
-    if (response?.length === 0) {
-      message.error(t('orders not found'))
+    if (response) {
+      setIsPageLoaded(true)
+      setOrdersList(response)
     }
-    response && setOrdersList(response)
   }
 
   useEffect(() => {
@@ -58,9 +65,11 @@ const OrderHistory = (props: Props) => {
           setIsEditing={setIsEditing}
           setSortByCost={setSortByCost}
           setSortByCreateDate={setSortByCreateDate}
+          isPageLoaded={isPageLoaded}
         />
       </TopFrame>
-      {ordersList && (
+
+      {ordersList && ordersList?.length > 0 ? (
         <OrderList
           onClick={() => {}}
           list={ordersList}
@@ -69,6 +78,10 @@ const OrderHistory = (props: Props) => {
           itemsPerPage={itemsPerPage}
           isEditing={isEditing}
           setTotalPages={setTotalPages}
+        />
+      ) : (
+        <AddYourFirstTask
+          onClick={() => router.push(routeName.adminCreateOrder)}
         />
       )}
       <PaginationFrame>
