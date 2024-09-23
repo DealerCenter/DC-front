@@ -68,6 +68,12 @@ const Container = styled.div<ContainerProps>`
     height: 85px;
   }
 
+  @media ${({ theme }) => theme.media?.notSm} {
+    &:active {
+      background-color: ${({ theme }) => theme.colors?.main_gray_04};
+    }
+  }
+
   cursor: pointer;
 `
 const Frame = styled.div`

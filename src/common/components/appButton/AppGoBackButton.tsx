@@ -39,6 +39,9 @@ const BackToOrderButton = styled.button`
     &:hover {
       background-color: ${({ theme }) => theme.colors?.main_gray_04};
     }
+    &:active {
+      background-color: ${({ theme }) => theme.colors?.main_gray_10};
+    }
   }
 
   cursor: pointer;

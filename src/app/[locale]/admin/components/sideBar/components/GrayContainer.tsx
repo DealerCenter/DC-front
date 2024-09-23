@@ -50,7 +50,6 @@ const Container = styled.div<ContainerProps>`
   align-items: center;
   text-align: left;
   justify-content: start;
-  /* justify-content: flex-start; */
   background-color: ${({ theme }) => theme.colors?.main_gray_04};
   border: 0.5px solid ${({ theme }) => theme.colors?.main_gray_10};
   border-radius: 16px;
@@ -82,6 +81,10 @@ const Container = styled.div<ContainerProps>`
   @media ${({ theme }) => theme.media?.sm} {
     width: 100%;
     height: 85px;
+  }
+
+  @media ${({ theme }) => theme.media?.notSm} {
+    cursor: pointer;
   }
 `
 const Frame = styled.div`
