@@ -1,11 +1,10 @@
 import { useTranslations } from 'next-intl'
-import React, { useCallback, useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 
-import OptionsBox from './OptionsBox'
-// import CheckBox from '@/common/components/checkBox/CheckBox'
 import BasicButton from '@/common/components/appButton/BasicButton'
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
+import OptionsBox from './OptionsBox'
 
 type Props = {
   values: { status: string[]; recipient: string[]; dealer: string[] }
@@ -14,10 +13,11 @@ type Props = {
 
 const DropdownFilterBox = ({ values, toggleDropdown }: Props) => {
   const t = useTranslations('')
+  const [activeSetting, setActiveSetting] = useState<
+    'status' | 'recipient' | 'dealer' | null
+  >(null)
 
-  const { status, recipient, dealer } = values
-
-  const [checkedOption, setCheckedOption] = useState()
+  const [checkedOption, setCheckedOption] = useState('')
 
   const handleCancel = () => {
     toggleDropdown()
@@ -26,35 +26,34 @@ const DropdownFilterBox = ({ values, toggleDropdown }: Props) => {
     toggleDropdown()
   }
 
-  const updateShipmentStatus = (status: string) => {}
-
   return (
     <Container>
-      {/* <Frame>
+      <Frame>
         <OptionsBox
           activeOption={activeSetting}
           setActiveOption={setActiveSetting}
         />
         <List>
-          {value.map((value, i) => (
-            <ListItem
-              key={`DropdownFilterBoxListItem${i}`}
-              onClick={() => updateShipmentStatus(value)}
-            >
-              <CheckBox isChecked={value === checkedOption} />
-              <Text>
-                {t(
-                  value === 'inWarehouse'
-                    ? 'in warehouse'
+          {activeSetting &&
+            values[activeSetting].map((value, i) => (
+              <ListItem
+                key={`DropdownFilterBoxListItem${i}`}
+                onClick={() => setCheckedOption(value)}
+              >
+                <CheckBox isChecked={value === checkedOption} />
+                <Text>
+                  {value === 'inWarehouse'
+                    ? t('in warehouse')
                     : value === 'onTheWay'
-                      ? 'on the way'
-                      : value === 'arrived' && 'arrived'
-                )}
-              </Text>
-            </ListItem>
-          ))}
+                      ? t('on the way')
+                      : value === 'arrived'
+                        ? t('arrived')
+                        : value}
+                </Text>
+              </ListItem>
+            ))}
         </List>
-      </Frame> */}
+      </Frame>
       <CancelSaveBox>
         <BasicButton
           onClick={handleCancel}

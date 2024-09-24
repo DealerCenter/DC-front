@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
-import OrderList from './components/OrderList'
-import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 import Pagination from '@/common/components/pagination/Pagination'
+import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 import ButtonsRow from './components/ButtonsRow'
+import OrderList from './components/OrderList'
 
 import { getOrders } from '@/api/apiCalls'
-import { message } from 'antd'
-import {
-  OrdersQueryType,
-  routeName,
-  ShippingStatus,
-} from '@/common/helpers/constants'
 import { ORDERS_GET_RES } from '@/api/apiTypes'
-import AddYourFirstTask from './components/AddYourFirstTask'
+import { routeName, ShippingStatus } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
+import AddYourFirstTask from './components/AddYourFirstTask'
 
 const itemsPerPage = 8
 
@@ -47,7 +42,6 @@ const OrderHistory = (props: Props) => {
     })
     if (response) {
       setIsPageLoaded(true)
-      console.log('response:', response)
       setOrdersList(response)
     }
   }

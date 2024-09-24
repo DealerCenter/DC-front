@@ -132,7 +132,6 @@ export const createOrder = async (payload: {
 
 export const getOrders = async (payload: OrdersQueryType) => {
   try {
-    console.log('fetched')
     const response = await axiosInstance.get(endpoints.ORDERS, {
       params: payload, // Pass payload as query parameters
     })
