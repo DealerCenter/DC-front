@@ -119,7 +119,6 @@ export const createOrder = async (payload: {
   mileage: number
   status: string
   containerId: number
-  dealerId: number
   receiverId: number
 }) => {
   try {
@@ -127,6 +126,36 @@ export const createOrder = async (payload: {
     return response
   } catch (error) {
     console.error('Error creating new order:', error)
+  }
+}
+
+export const changeOrder = async (
+  payload: {
+    manufacturer: string
+    manufactureYear: number
+    model: string
+    vin: string
+    transportaionCost: number
+    carCost: number
+    stateId: number
+    exactAddress: string
+    isInsured: boolean
+    carCategory: string
+    mileage: number
+    status: string
+    containerId: number
+    receiverId: number
+  },
+  id: number
+) => {
+  try {
+    const response = await axiosInstance.put(
+      `${endpoints.ORDERS}/${id}`,
+      payload
+    )
+    return response
+  } catch (error) {
+    console.error('Error changing order:', error)
   }
 }
 

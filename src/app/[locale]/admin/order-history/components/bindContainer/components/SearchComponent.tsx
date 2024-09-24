@@ -13,6 +13,7 @@ const SearchComponent = (props: Props) => {
   const t = useTranslations('')
 
   const handleSearch = () => {
+    if (inputValue === '') return
     console.log(inputValue)
     setInputValue('')
   }

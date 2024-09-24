@@ -30,12 +30,8 @@ type Props = {
   setActiveLabel?: (arg: string) => void
   onCancel?: () => void
   isDisabled?: boolean
+  isNoActionOnClick?: boolean
 }
-
-// | 'price ascending'
-// | 'price descending'
-// | 'date ascending'
-// | 'date descending'
 
 const AppDropdown = ({
   children,
@@ -53,6 +49,7 @@ const AppDropdown = ({
   setActiveLabel,
   onCancel,
   isDisabled,
+  isNoActionOnClick,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -77,7 +74,7 @@ const AppDropdown = ({
   }
 
   const handleItemClick = () => {
-    setIsOpen(false)
+    !isNoActionOnClick && setIsOpen(false)
     handleClose && handleClose()
   }
 

@@ -13,6 +13,8 @@ const BindContainerBox = (props: Props) => {
   const [containerLinkValue, setContainerLinkValue] = useState('')
   const t = useTranslations('')
 
+  const handleAddNew = () => {}
+
   return (
     <BindContainerFrame>
       <Label>{t('choose from list')}</Label>
@@ -36,7 +38,7 @@ const BindContainerBox = (props: Props) => {
         text={t('add new')}
         type='filled'
         disabled={false}
-        onClick={() => {}}
+        onClick={handleAddNew}
         isSmall={false}
         height='medium'
         width={323}

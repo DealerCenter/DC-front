@@ -103,6 +103,8 @@ const ButtonsRow = ({
     isEditing ? setIsEditing(false) : setIsEditing(true)
   }
 
+  const handleAddContainer = () => {}
+
   return (
     <>
       {isEditing ? (
@@ -122,9 +124,10 @@ const ButtonsRow = ({
             <AppDropdown
               ReadyComponent={<BindContainerBox />}
               modalStyle='white'
-              // width={240}
               top={48}
               isBorder={true}
+              isNoActionOnClick={true}
+              handleClose={() => {}}
             >
               <BasicButton onClick={() => {}} color='white' isBorder={true}>
                 {t('bind container')}
