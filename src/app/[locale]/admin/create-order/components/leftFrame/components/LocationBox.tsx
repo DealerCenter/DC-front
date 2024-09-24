@@ -1,22 +1,21 @@
-import React from 'react'
-import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import styled from 'styled-components'
 
-import Box from '../../../../components/common/Box'
-import TextInputFieldPair from './TextInputFieldPair'
 import AddFieldButton from '../../../../components/common/AddFieldButton'
+import Box from '../../../../components/common/Box'
 import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../../hooks/useCreateOrderContext'
+import TextInputFieldPair from './TextInputFieldPair'
 
 const dummyDropdownList = [
   {
-    name: 'LA',
+    label: 'LA',
     id: 1,
   },
   {
-    name: 'NY',
+    label: 'NY',
     id: 2,
   },
 ]

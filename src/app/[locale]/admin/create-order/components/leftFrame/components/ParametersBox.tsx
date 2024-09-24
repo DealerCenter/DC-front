@@ -29,6 +29,10 @@ const ParametersBox = ({}: Props) => {
     },
   }
 
+  const handleChooseIsInsured = (arg: boolean) => {
+    setFieldValue(FIELD_NAMES.IS_INSURED, arg)
+  }
+
   const handleSetCarCategory = (value: string) => {
     setFieldValue(FIELD_NAMES.CAR_CATEGORY, value)
   }
@@ -42,6 +46,7 @@ const ParametersBox = ({}: Props) => {
           title='insurance'
           value=''
           selectOptions={selectOptions}
+          onYesOrNoChange={handleChooseIsInsured}
         />
         <TextInputFieldPair
           title='manufacturer'

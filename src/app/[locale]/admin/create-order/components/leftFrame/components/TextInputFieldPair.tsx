@@ -1,15 +1,12 @@
-import React, { ChangeEventHandler, useEffect, useState } from 'react'
-import styled from 'styled-components'
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-
-import TextInput from '@/common/components/inputElements/TextInput'
-
+import { ChangeEventHandler, useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import styled from 'styled-components'
+
 import theme from '@/app/[locale]/theme'
-import AppSelectChoose from '@/common/components/appSelect/AppSelectChoose'
-import AppSelectWidthId from '@/common/components/appSelect/AppSelectWidthId'
-import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
+import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
+import AppSelectTrueFalse from '@/common/components/appSelect/AppSelectTrueFalse'
+import TextInput from '@/common/components/inputElements/TextInput'
 
 type Props = {
   title: string
@@ -23,10 +20,11 @@ type Props = {
     option1: { value: string; onChoose: () => void }
     option2: { value: string; onChoose: () => void }
   }
-  optionsListWidthID?: { name: string; id: number }[]
+  optionsListWidthID?: { label: string; id: number }[]
   handleSetValueWithId?: (id: number) => void
   selectOptionsBasic?: string[]
   handleSetValueBasic?: (value: string) => void
+  onYesOrNoChange?: (value: boolean) => void
 }
 
 const TextInputFieldPair = ({
@@ -42,6 +40,7 @@ const TextInputFieldPair = ({
   handleSetValueWithId,
   selectOptionsBasic,
   handleSetValueBasic,
+  onYesOrNoChange,
 }: Props) => {
   const [textInputWidth, setTextInputWidth] = useState(220)
   const [textInputWidth2, setTextInputWidth2] = useState(220)
@@ -73,25 +72,33 @@ const TextInputFieldPair = ({
         isOutline={false}
         isDisabled={true}
       />
-      {selectOptions ? (
-        <AppSelectChoose
-          options={selectOptions}
+      {onYesOrNoChange ? (
+        // <AppSelectChoose
+        //   options={selectOptions}
+        //   placeholder={t('select')}
+        //   errorMessage={errorMessage}
+        // />
+        <AppSelectTrueFalse
+          onChange={onYesOrNoChange}
           placeholder={t('select')}
           errorMessage={errorMessage}
         />
       ) : optionsListWidthID ? (
-        <AppSelectWidthId
-          options={optionsListWidthID}
-          onChange={handleSetValueWithId ? handleSetValueWithId : () => {}}
+        <AppSelectAntDesign
+          optionsWithId={optionsListWidthID}
+          onChangeId={handleSetValueWithId ? handleSetValueWithId : () => {}}
           placeholder={t('select')}
           errorMessage={errorMessage}
+          fontSize={13}
         />
       ) : selectOptionsBasic ? (
-        <AppSelectBasic
+        <AppSelectAntDesign
           optionsBasic={selectOptionsBasic}
-          onChange={handleSetValueBasic ? handleSetValueBasic : () => {}}
+          onChangeString={handleSetValueBasic ? handleSetValueBasic : () => {}}
           errorMessage={errorMessage}
           placeholder={t('select')}
+          width={textInputWidth2}
+          fontSize={13}
         />
       ) : (
         <TextInput

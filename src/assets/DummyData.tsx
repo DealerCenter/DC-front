@@ -227,3 +227,86 @@ export const containers = [
     numberOfCars: '3/4',
   },
 ]
+
+export const dummyDropdownList = [
+  {
+    label: 'Luke Skywalker',
+    id: 1,
+  },
+  {
+    label: 'Hermione Granger',
+    id: 2,
+  },
+  {
+    label: 'Tony Stark',
+    id: 3,
+  },
+  {
+    label: 'Jack Sparrow',
+    id: 4,
+  },
+  {
+    label: 'Ellen Ripley',
+    id: 5,
+  },
+  {
+    label: 'Indiana Jones',
+    id: 6,
+  },
+  {
+    label: 'Neo',
+    id: 7,
+  },
+  {
+    label: 'Frodo Baggins',
+    id: 8,
+  },
+  {
+    label: 'Darth Vader',
+    id: 9,
+  },
+  {
+    label: 'Wolverine',
+    id: 10,
+  },
+  {
+    label: 'John Wick',
+    id: 11,
+  },
+  {
+    label: 'Katniss Everdeen',
+    id: 12,
+  },
+  {
+    label: 'Batman',
+    id: 13,
+  },
+  {
+    label: 'Black Panther',
+    id: 14,
+  },
+  {
+    label: 'Sarah Connor',
+    id: 15,
+  },
+  {
+    label: 'James Bond',
+    id: 16,
+  },
+  {
+    label: 'Thor',
+    id: 17,
+  },
+  {
+    label: 'Captain America',
+    id: 18,
+  },
+  {
+    label: 'Spider-Man',
+    id: 19,
+  },
+  {
+    label: 'Lara Croft',
+    id: 20,
+  },
+]

@@ -1,28 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import styled from 'styled-components'
 
 import theme from '@/app/[locale]/theme'
-import ShippingStateBox from '../../../order-history/components/shippingStateBox/ShippingStateBox'
-import TextInput from '@/common/components/inputElements/TextInput'
-import UserDataBox from './components/UserDataBox'
+import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
 import Box from '../../../components/common/Box'
-import { dummyShippingSteps2 } from '@/assets/DummyData'
+import ShippingStateBox from '../../../order-history/components/shippingStateBox/ShippingStateBox'
 import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../hooks/useCreateOrderContext'
-import AppSelectWidthId from '@/common/components/appSelect/AppSelectWidthId'
 
-const dummyDropdownList = [
+const containersDropdownList = [
   {
-    name: 'container 1',
+    label: 'container 1',
     id: 1,
   },
   {
-    name: 'container 3',
+    label: 'container 3',
     id: 3,
+  },
+]
+
+const receiversDropdownList = [
+  {
+    label: 'receiver 1',
+    id: 1,
+  },
+  {
+    label: 'receiver 2',
+    id: 2,
   },
 ]
 
@@ -34,8 +42,7 @@ type Props = {}
 
 const RightFrame = ({}: Props) => {
   const [textInputWidth, setTextInputWidth] = useState(INPUT_WIDTH_TABLET)
-  const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
-    useCreateOrderContext()
+  const { setFieldValue } = useCreateOrderContext()
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
@@ -69,63 +76,28 @@ const RightFrame = ({}: Props) => {
         <Header>{t('container data')}</Header> <Line />
         <Frame>
           <Frame2>
-            {/* <TextInput
-              width={textInputWidth}
-              height={48}
-              type='text'
-              placeholder={t('provide a link')}
-              fontWeight='bold'
-              fontSize={13}
-              isOutline={false}
-              name={FIELD_NAMES.CONTAINER_ID}
-              value={values[FIELD_NAMES.CONTAINER_ID]}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              errorMessage={
-                errors[FIELD_NAMES.CONTAINER_ID] &&
-                touched[FIELD_NAMES.CONTAINER_ID]
-                  ? errors[FIELD_NAMES.CONTAINER_ID]
-                  : ''
-              }
-            /> */}
-            <AppSelectWidthId
-              options={dummyDropdownList}
-              onChange={handleSetContainerValue}
+            <AppSelectAntDesign
+              optionsWithId={containersDropdownList}
+              onChangeId={handleSetContainerValue}
               placeholder={t('select')}
-              width={textInputWidth}
+              fontSize={13}
             />
           </Frame2>
         </Frame>
       </Box>
-      <UserDataBox
-        header={t('recipient data')}
-        placeholder1={t('full name')}
-        placeholder2={t('receiver id')}
-        name={FIELD_NAMES.RECEIVER_ID}
-        value={values[FIELD_NAMES.RECEIVER_ID]}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errorMessage={
-          errors[FIELD_NAMES.RECEIVER_ID] && touched[FIELD_NAMES.RECEIVER_ID]
-            ? errors[FIELD_NAMES.RECEIVER_ID]
-            : ''
-        }
-        setFieldValue={handleSetReceiverValue}
-      />
-      {/* <UserDataBox
-        header={t('dealer data')}
-        placeholder1={t('full name')}
-        placeholder2={t('dealer id')}
-        name={FIELD_NAMES.DEALER_ID}
-        value={values[FIELD_NAMES.DEALER_ID]}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        errorMessage={
-          errors[FIELD_NAMES.DEALER_ID] && touched[FIELD_NAMES.DEALER_ID]
-            ? errors[FIELD_NAMES.DEALER_ID]
-            : ''
-        }
-      /> */}
+      <Box>
+        <Header>{t('recipient data')}</Header> <Line />
+        <Frame>
+          <Frame2>
+            <AppSelectAntDesign
+              optionsWithId={receiversDropdownList}
+              onChangeId={handleSetReceiverValue}
+              placeholder={t('select')}
+              fontSize={13}
+            />
+          </Frame2>
+        </Frame>
+      </Box>
     </Container>
   )
 }
