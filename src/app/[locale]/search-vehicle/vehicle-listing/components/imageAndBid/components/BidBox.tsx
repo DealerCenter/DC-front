@@ -1,12 +1,13 @@
 import TextInput from '@/common/components/inputElements/TextInput'
-import React, { useState } from 'react'
+import { useTranslations } from 'next-intl'
+import Image from 'next/image'
+import { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import dollarSign from '@/assets/icons/dollarSignBlack.svg'
 import infoIconEmpty from '@/assets/icons/infoIconEmpty.svg'
-import Image from 'next/image'
-import BasicButton from '@/common/components/appButton/BasicButton'
-import { useTranslations } from 'next-intl'
+import AppTooltip from '@/common/components/appTooltip/AppTooltip'
+import ToolTipTextBox from '@/common/components/appTooltip/ToolTipTextBox'
 
 type Props = {}
 
@@ -35,7 +36,11 @@ const BidBox = (props: Props) => {
           paddingLeft={38}
         />
         <CurrentBidBox>
-          <Image src={infoIconEmpty} alt='image' />
+          <AppTooltip
+            tooltipValue={<ToolTipTextBox text='This is a tooltip' />}
+          >
+            <Image src={infoIconEmpty} alt='info icon' width={20} height={20} />
+          </AppTooltip>
           <CurrentBidLabel>{t('current bid')}</CurrentBidLabel>
         </CurrentBidBox>
       </EnterBidBox>
@@ -48,7 +53,16 @@ const BidBox = (props: Props) => {
         </StyledButton>
         {isButtonDisabled && (
           <ButtonWarningLabelBox onClick={() => setIsButtonDisabled(false)}>
-            <Image src={infoIconEmpty} alt='image' />
+            <AppTooltip
+              tooltipValue={<ToolTipTextBox text='This is a tooltip' />}
+            >
+              <Image
+                src={infoIconEmpty}
+                alt='info icon'
+                width={20}
+                height={20}
+              />
+            </AppTooltip>
             <ButtonWarningLabel>
               {t('can not bid before authorization')}
             </ButtonWarningLabel>
@@ -69,8 +83,6 @@ const Container = styled.div`
   padding: 24px 32px 24px 32px;
   background-color: ${({ theme }) => theme.colors?.white};
 
-  /* width: 469px;
-  height: 320px; */
   height: 100%;
 `
 

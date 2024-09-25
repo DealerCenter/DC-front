@@ -1,5 +1,3 @@
-import React from 'react'
-
 import styled from 'styled-components'
 import BidBox from './components/BidBox'
 import ImagesBox from './components/ImagesBox'
@@ -16,7 +14,7 @@ const ImageAndBid = (props: Props) => {
           <ModelLabel>E class, Diezel</ModelLabel>
         </CarBrandAndModel>
 
-        <BidBox></BidBox>
+        <BidBox />
       </CarModelAndBidFrame>
     </Container>
   )
@@ -28,13 +26,25 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.md};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
+  }
 `
 
 const CarModelAndBidFrame = styled.div`
-  width: 500px;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.md};
+
+  width: 468px;
+
+  @media ${({ theme }) => theme.media?.md} {
+    width: 359px;
+  }
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 343px;
+  }
 `
 
 const CarBrandAndModel = styled.div`

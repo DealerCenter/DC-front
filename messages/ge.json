@@ -260,6 +260,26 @@
   "from": "დან",
   "up to": "მდე",
 
+  "odometer": "ოდომეტრი",
+  "keys": "გასაღებები",
+  "engine type": "ძრავის ტიპი",
+  "drivetrain": "ამძრავი",
+  "fuel": "საწვავი",
+  "cylinders": "ცილინდრები",
+  "body style 1": "კორპუსის სტილი",
+
+  "vin": "Vin",
+  "lot number": "ლოტის ნომერი",
+  "date added": "დამატების თარიღი",
+  "date of auction": "აუქციონის თარიღი",
+  "facility": "დაწესებულება",
+  "seller": "გამყიდველი",
+  "gas": "ბენზინი",
+
+  "undercarriage": "ქვეშა ნაწილი",
+  "wont start": "არ იქოქება",
+  "certification of title": "სათაურის სერტიფიკატი",
+
   "enter the name of the document": "შეიყვანე საბუთის დასახელება",
   "search for document and enter in search field": "მოძებნე საბუთის დასახელება და ეცადე სწორად შეიყვანო ძებნის გრაფაში",
   "check status": "შეამოწმე სტატუსი",

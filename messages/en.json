@@ -262,6 +262,26 @@
   "from": "From",
   "up to": "Up to",
 
+  "odometer": "Odometer",
+  "keys": "Keys",
+  "engine type": "Engine type",
+  "drivetrain": "Drivetrain",
+  "fuel": "Fuel",
+  "cylinders": "Cylinders",
+  "body style": "Body style",
+
+  "vin": "Vin",
+  "lot number": "Lot number",
+  "date added": "Date added",
+  "date of auction": "Date of auction",
+  "facility": "Facility",
+  "seller": "Seller",
+  "gas": "Gas",
+
+  "undercarriage": "Undercarriage",
+  "wont start": "Won’t start",
+  "certification of title": "Certification of title",
+
   "enter the name of the document": "Enter the name of the document",
   "search for document and enter in search field": "Search for the name of the document and try to enter it correctly in the search field",
   "check status": "Check status",

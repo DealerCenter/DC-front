@@ -21,11 +21,7 @@ const DebtBox = (props: Props) => {
     <Container>
       <DebtFrame>
         <Text16BoldGray>{t('current debt')}</Text16BoldGray>
-        <AppTooltip
-          tooltipValue={<DebtTooltipContainer />}
-          maxWidth={500}
-          trigger={isMobile ? 'click' : 'hover'}
-        >
+        <AppTooltip tooltipValue={<DebtTooltipContainer />} maxWidth={500}>
           <DebtLabelBox>
             <DebtLabel>$ 1,600</DebtLabel>
             <Image src={infoIcon} alt='info icon' />

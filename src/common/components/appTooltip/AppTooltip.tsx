@@ -2,6 +2,7 @@ import React from 'react'
 import { ConfigProvider, Tooltip } from 'antd'
 import theme from '@/app/[locale]/theme'
 import styled from 'styled-components'
+import { useMediaQuery } from 'react-responsive'
 
 type Props = {
   children: React.ReactNode
@@ -9,19 +10,19 @@ type Props = {
   arrow?: boolean
   radius?: number
   maxWidth?: number
-  trigger?: 'click' | 'hover'
   backgroundColor?: string
 }
 
 const AppTooltip = ({
   children,
   tooltipValue,
-  radius = 30,
+  radius = 8,
   maxWidth = 320,
-  trigger,
   arrow = true,
   backgroundColor = theme.colors?.white,
 }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   return (
     <ConfigProvider
       theme={{
@@ -33,7 +34,7 @@ const AppTooltip = ({
       <Tooltip
         title={tooltipValue}
         color={backgroundColor}
-        trigger={trigger}
+        trigger={isMobile ? 'click' : 'hover'}
         overlayStyle={{ maxWidth: maxWidth }}
         overlayInnerStyle={{ padding: 0 }}
         arrow={arrow}

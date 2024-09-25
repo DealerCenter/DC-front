@@ -1,8 +1,7 @@
-import React from 'react'
 import styled from 'styled-components'
 
-import ImageAndBid from './components/imageAndBid/ImageAndBid'
 import DamageAuctionVehicleInfo from './components/damageAuctionVehicleInfo/DamageAuctionVehicleInfo'
+import ImageAndBid from './components/imageAndBid/ImageAndBid'
 
 type Props = {}
 
@@ -18,7 +17,6 @@ const VehicleListing = (props: Props) => {
 export default VehicleListing
 
 const Container = styled.div`
-  width: 1200px;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.md};
