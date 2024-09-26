@@ -262,6 +262,9 @@
   "from": "From",
   "up to": "Up to",
 
+  "condition": "Condition",
+  "title": "Title",
+
   "odometer": "Odometer",
   "keys": "Keys",
   "engine type": "Engine type",
@@ -296,6 +299,11 @@
   "enter bid": "Enter bid",
   "current bid": "Current bid",
   "can not bid before authorization": "Won't be eligible to bid before authorization",
+
+  "authorization": "Authorization",
+  "authorization required!": "Authorization required!",
+
+  "to place bid log in or register": "To place a bid, please log in or register",
 
   "useForm": {
     "must be valid email": "Must be a valid email",

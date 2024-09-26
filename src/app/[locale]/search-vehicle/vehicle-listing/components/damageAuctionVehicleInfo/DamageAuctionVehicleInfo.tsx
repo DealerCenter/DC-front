@@ -70,7 +70,7 @@ const DamageAuctionVehicleInfo = (props: Props) => {
             <LabelValuePair label={t('drivetrain')} value={'FWD'} />
             <LabelValuePair label={t('transmission')} value={t('automatic')} />
             <LabelValuePair label={t('fuel')} value={t('gas')} />
-            <LabelValuePair label={t('cylinders')} value={t('sedan')} />
+            <LabelValuePair label={t('cylinders')} value={'sedan'} />
             <LabelValuePair label={t('body style 1')} value={'Silver'} />
           </FrameForPairs>
         </BoxWithHeader>

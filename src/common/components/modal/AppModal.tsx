@@ -31,11 +31,12 @@ const AppModal = ({
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       overflow: 'scroll',
+      // MY_BUG
       height: '100%',
       border: 'unset',
       backgroundColor: 'transparent',
       scrollbarWidth: 'none',
-      '-ms-overflow-style': 'none',
+      msOverflowStyle: 'none',
       WebkitOverflowScrolling: 'touch',
 
       ...style,

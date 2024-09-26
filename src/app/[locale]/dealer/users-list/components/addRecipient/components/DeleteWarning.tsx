@@ -18,7 +18,7 @@ const DeleteWarning = ({ onCancel, onDelete }: Props) => {
       </Icon>
       <FrameTop>
         <H3Bold>{t('delete recipient')}</H3Bold>
-        <Label>{t('delete data warning')}</Label>
+        <StyledP>{t('delete data warning')}</StyledP>
       </FrameTop>
       <ButtonsFrame>
         <ChooseButton
@@ -50,17 +50,24 @@ const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 `
 
-const Label = styled.label`
+const StyledP = styled.p`
   font-size: 13px;
   font-weight: 400;
+  margin: 0;
+
+  cursor: default;
 `
 
 const H3Bold = styled.h3`
   font-size: 19px;
   font-weight: 700;
   margin: 0;
+
+  cursor: default;
 `
 
 const FrameTop = styled.div`

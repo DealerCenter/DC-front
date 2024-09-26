@@ -8,10 +8,13 @@ import dollarSign from '@/assets/icons/dollarSignBlack.svg'
 import infoIconEmpty from '@/assets/icons/infoIconEmpty.svg'
 import AppTooltip from '@/common/components/appTooltip/AppTooltip'
 import ToolTipTextBox from '@/common/components/appTooltip/ToolTipTextBox'
+import AppModal from '@/common/components/modal/AppModal'
+import AuthRequired from '@/common/components/AuthRequired/AuthRequired'
 
 type Props = {}
 
 const BidBox = (props: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState(false)
 
   const t = useTranslations('')
@@ -46,7 +49,7 @@ const BidBox = (props: Props) => {
       </EnterBidBox>
       <ButtonBox>
         <StyledButton
-          onClick={() => setIsButtonDisabled(true)}
+          onClick={() => setIsModalOpen(true)}
           disabled={isButtonDisabled}
         >
           {t('bid now')}
@@ -69,6 +72,15 @@ const BidBox = (props: Props) => {
           </ButtonWarningLabelBox>
         )}
       </ButtonBox>
+      <AppModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <AuthRequired
+          onCancel={() => setIsModalOpen(false)}
+          onAuth={() => {}}
+        />
+      </AppModal>
     </Container>
   )
 }
