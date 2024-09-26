@@ -1,11 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import { css } from 'styled-components'
 
-type Props = { children: React.JSX.Element; header: string; width: number }
+type Props = {
+  children: React.JSX.Element
+  header: string
+  width?: number
+  isWidthFill?: boolean
+}
 
-const BoxWithHeader = ({ children, header, width }: Props) => {
+const BoxWithHeader = ({ children, header, width, isWidthFill }: Props) => {
   return (
-    <Container width={width}>
+    <Container width={width} isWidthFill={isWidthFill}>
       <Header>{header}</Header>
       <Line />
       {children}
@@ -15,7 +21,7 @@ const BoxWithHeader = ({ children, header, width }: Props) => {
 
 export default BoxWithHeader
 
-type ContainerProps = { width: number }
+type ContainerProps = { width?: number; isWidthFill?: boolean }
 
 const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
@@ -31,12 +37,30 @@ const Container = styled.div<ContainerProps>`
 
   @media ${({ theme }) => theme.media?.md} {
     width: 472px;
+
+    ${({ isWidthFill }) =>
+      isWidthFill &&
+      css`
+        width: 100%;
+      `}
   }
 
   @media ${({ theme }) => theme.media?.sm} {
     padding: ${({ theme }) => theme.spacing?.lg};
     width: 343px;
+
+    ${({ isWidthFill }) =>
+      isWidthFill &&
+      css`
+        width: 100%;
+      `}
   }
+
+  ${({ isWidthFill }) =>
+    isWidthFill &&
+    css`
+      width: 100%;
+    `}
 `
 
 const Header = styled.label`

@@ -269,7 +269,7 @@
   "drivetrain": "ამძრავი",
   "fuel": "საწვავი",
   "cylinders": "ცილინდრები",
-  "body style 1": "კორპუსის სტილი",
+  "body style": "კორპუსის სტილი",
 
   "vin": "Vin",
   "lot number": "ლოტის ნომერი",
@@ -313,6 +313,10 @@
   "total overhead costs": "საერთო დამატებითი ხარჯები",
   "total": "სულ",
   "final bid": "საბოლოო შეთავაზება",
+
+  "previous lots": "წინა ლოტები",
+  "date": "თარიღი",
+  "bid price": "შეთავაზებული ფასი",
 
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",

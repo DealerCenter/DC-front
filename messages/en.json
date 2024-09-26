@@ -316,6 +316,10 @@
   "total": "Total",
   "final bid": "Final bid",
 
+  "previous lots": "Previous lots",
+  "date": "Date",
+  "bid price": "Bid price",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 

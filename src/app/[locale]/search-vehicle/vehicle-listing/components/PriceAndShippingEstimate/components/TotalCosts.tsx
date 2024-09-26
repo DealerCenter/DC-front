@@ -11,7 +11,7 @@ const TotalCosts = ({ total }: Props) => {
 
   return (
     <Container>
-      <Header>{t('total overhead costs')}</Header>
+      <Text>{t('total overhead costs')}</Text>
       <TotalBox>
         <InfoIconWithTooltip
           tooltipValue={<ToolTipTextBox text='Total costs tooltip' />}
@@ -26,11 +26,12 @@ const TotalCosts = ({ total }: Props) => {
 export default TotalCosts
 
 const Container = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 16px 32px;
-  gap: ${({ theme }) => theme.spacing?.lg};
+  gap: ${({ theme }) => theme.spacing?.xsm};
   border-radius: ${({ theme }) => theme.radius?.xl};
   background-color: ${({ theme }) => theme.colors?.white};
 
@@ -44,6 +45,18 @@ const TotalBox = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 8px;
+`
+
+const Text = styled.label`
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
+  color: ${({ theme }) => theme.colors?.main_gray_100};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 160px;
+  }
+
+  cursor: default;
 `
 
 const Header = styled.label`
