@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 import DamageAuctionVehicleInfo from './components/damageAuctionVehicleInfo/DamageAuctionVehicleInfo'
 import ImageAndBid from './components/imageAndBid/ImageAndBid'
+import PriceAndShippingEstimate from './components/PriceAndShippingEstimate/PriceAndShippingEstimate'
 
 type Props = {}
 
@@ -10,6 +11,7 @@ const VehicleListing = (props: Props) => {
     <Container>
       <ImageAndBid />
       <DamageAuctionVehicleInfo />
+      <PriceAndShippingEstimate />
     </Container>
   )
 }

@@ -27,6 +27,10 @@ const Container = styled.div`
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.md};
 
+  @media ${({ theme }) => theme.media?.md} {
+    width: 960px;
+  }
+
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;
   }

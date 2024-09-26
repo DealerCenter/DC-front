@@ -22,6 +22,7 @@ type Props = {
   paddingLeft?: number
   iconPaddingLeft?: number
   hasShadow?: boolean
+  isWidthFill?: boolean
 }
 
 const TextInput = ({
@@ -43,6 +44,7 @@ const TextInput = ({
   paddingLeft,
   iconPaddingLeft,
   hasShadow,
+  isWidthFill,
 }: Props) => {
   return (
     <Container>
@@ -65,6 +67,7 @@ const TextInput = ({
         isOutline={isOutline}
         paddingLeft={paddingLeft}
         hasShadow={hasShadow}
+        isWidthFill={isWidthFill}
       />
       {optionalInfo && (
         <TextBox>
@@ -97,6 +100,7 @@ type InputProps = {
   isOutline?: boolean
   paddingLeft?: number
   hasShadow?: boolean
+  isWidthFill?: boolean
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -105,6 +109,7 @@ const StyledInput = styled.input<InputProps>`
   background-color: ${({ theme }) => theme.colors?.white};
 
   outline-offset: 1px;
+
   width: 350px;
 
   padding: 10px 10px 10px 16px;
@@ -130,19 +135,6 @@ const StyledInput = styled.input<InputProps>`
           font-size: unset;
         `};
 
-  ${({ isHalfSize, width }) =>
-    isHalfSize
-      ? css`
-          width: 213px;
-        `
-      : width
-        ? css`
-            width: ${width}px;
-          `
-        : css`
-            width: 350px;
-          `}
-
   ${({ height }) =>
     height
       ? css`
@@ -150,7 +142,7 @@ const StyledInput = styled.input<InputProps>`
         `
       : css`
           height: 52px;
-        `}       
+        `}
 
   ${({ icon, paddingLeft }) =>
     icon && !paddingLeft
@@ -169,6 +161,20 @@ const StyledInput = styled.input<InputProps>`
         `
       : css``}
 
+
+${({ isHalfSize, width }) =>
+    isHalfSize
+      ? css`
+          width: 213px;
+        `
+      : width
+        ? css`
+            width: ${width}px;
+          `
+        : css`
+            width: 350px;
+          `}
+
     @media ${({ theme }) => theme.media?.sm} {
     ${({ isHalfSize, width }) =>
       isHalfSize
@@ -183,6 +189,12 @@ const StyledInput = styled.input<InputProps>`
               width: 350px;
             `}
   }
+
+  ${({ isWidthFill }) =>
+    isWidthFill &&
+    css`
+      width: 100%;
+    `}
 
   &::placeholder {
     color: ${({ theme }) => theme.colors?.main_gray_56};

@@ -15,8 +15,8 @@ const DamageAuctionVehicleInfo = (props: Props) => {
     <Container>
       <Frame>
         <FrameColumn>
-          <BoxWithHeader header={t('damage')}>
-            <FrameForPairs width={644}>
+          <BoxWithHeader header={t('damage')} width={716}>
+            <FrameForPairs>
               <LabelValuePair
                 label={t('damage')}
                 value={t('undercarriage')}
@@ -38,8 +38,8 @@ const DamageAuctionVehicleInfo = (props: Props) => {
               />
             </FrameForPairs>
           </BoxWithHeader>
-          <BoxWithHeader header={t('damage')}>
-            <FrameForPairs width={652}>
+          <BoxWithHeader header={t('damage')} width={716}>
+            <FrameForPairs>
               <LabelValuePair label={t('vin')} value={t('undercarriage')} />
               <LabelValuePair label={t('lot number')} value={t('wont start')} />
               <LabelValuePair
@@ -62,8 +62,8 @@ const DamageAuctionVehicleInfo = (props: Props) => {
             </FrameForPairs>
           </BoxWithHeader>
         </FrameColumn>
-        <BoxWithHeader header={t('damage')}>
-          <FrameForPairs width={404}>
+        <BoxWithHeader header={t('damage')} width={468}>
+          <FrameForPairs>
             <LabelValuePair label={t('odometer')} value={'129,000 mi'} />
             <LabelValuePair label={t('keys')} value={t('yes')} />
             <LabelValuePair label={t('engine type')} value={'3.5L'} />
@@ -103,20 +103,8 @@ const FrameColumn = styled.div`
   gap: ${({ theme }) => theme.spacing?.md};
 `
 
-type FrameForPairsType = { width: number }
-
-const FrameForPairs = styled.div<FrameForPairsType>`
+const FrameForPairs = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.xsm};
-
-  width: ${({ width }) => `${width}px`};
-
-  @media ${({ theme }) => theme.media?.md} {
-    width: 408px;
-  }
-
-  @media ${({ theme }) => theme.media?.sm} {
-    width: 295px;
-  }
 `

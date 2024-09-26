@@ -52,10 +52,6 @@ const LabelBox = styled.div`
   height: 36px;
 
   width: 142px;
-
-  @media ${({ theme }) => theme.media?.sm} {
-    width: 120px;
-  }
 `
 
 const ValueBox = styled.div`

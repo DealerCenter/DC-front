@@ -4,18 +4,19 @@ import Image from 'next/image'
 import { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import dollarSign from '@/assets/icons/dollarSignBlack.svg'
-import infoIconEmpty from '@/assets/icons/infoIconEmpty.svg'
 import AppTooltip from '@/common/components/appTooltip/AppTooltip'
 import ToolTipTextBox from '@/common/components/appTooltip/ToolTipTextBox'
-import AppModal from '@/common/components/modal/AppModal'
 import AuthRequired from '@/common/components/AuthRequired/AuthRequired'
+import AppModal from '@/common/components/modal/AppModal'
+
+import dollarSign from '@/assets/icons/dollarSignBlack.svg'
+import infoIconEmpty from '@/assets/icons/infoIconEmpty.svg'
 
 type Props = {}
 
 const BidBox = (props: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const t = useTranslations('')
 
@@ -30,12 +31,12 @@ const BidBox = (props: Props) => {
         <TextInput
           type='text'
           placeholder={t('enter bid')}
-          icon={<Image src={dollarSign} alt='image' />}
           name='enter bid'
           value=''
           onBlur={() => {}}
           onChange={() => {}}
           width={200}
+          icon={<Image src={dollarSign} alt='image' />}
           paddingLeft={38}
         />
         <CurrentBidBox>
@@ -55,7 +56,7 @@ const BidBox = (props: Props) => {
           {t('bid now')}
         </StyledButton>
         {isButtonDisabled && (
-          <ButtonWarningLabelBox onClick={() => setIsButtonDisabled(false)}>
+          <ButtonWarningLabelBox onClick={() => setIsModalOpen(true)}>
             <AppTooltip
               tooltipValue={<ToolTipTextBox text='This is a tooltip' />}
             >

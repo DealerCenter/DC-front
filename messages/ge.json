@@ -303,6 +303,17 @@
 
   "to place bid log in or register": "bid-ის დასადებად გაიარე ავტორიზაცია ან რეგისტრაცია",
 
+  "price and additional costs": "ფასი და დამატებითი ხარჯები",
+  "price estimate": "ფასის შეფასება",
+  "shipping estimate": "გადაზიდვის შეფასება",
+  "delivery to": "მიწოდება",
+  "auction fees": "აუქციონის გადასახადები",
+  "documentation fee": "დოკუმენტაციის საფასური",
+  "transaction": "ტრანსაქცია",
+  "total overhead costs": "საერთო დამატებითი ხარჯები",
+  "total": "სულ",
+  "final bid": "საბოლოო შეთავაზება",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 

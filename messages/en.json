@@ -305,6 +305,17 @@
 
   "to place bid log in or register": "To place a bid, please log in or register",
 
+  "price and additional costs": "Price and additional costs",
+  "price estimate": "Price estimate",
+  "shipping estimate": "Shipping estimate",
+  "delivery to": "Delivery to",
+  "auction fees": "Auction fees",
+  "documentation fee": "Documentation fee",
+  "transaction": "Transaction",
+  "total overhead costs": "Total overhead costs",
+  "total": "Total",
+  "final bid": "Final bid",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 

@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
-type Props = { children: React.JSX.Element; header: string }
+type Props = { children: React.JSX.Element; header: string; width: number }
 
-const BoxWithHeader = ({ children, header }: Props) => {
+const BoxWithHeader = ({ children, header, width }: Props) => {
   return (
-    <Container>
+    <Container width={width}>
       <Header>{header}</Header>
       <Line />
       {children}
@@ -15,7 +15,10 @@ const BoxWithHeader = ({ children, header }: Props) => {
 
 export default BoxWithHeader
 
-const Container = styled.div`
+type ContainerProps = { width: number }
+
+const Container = styled.div<ContainerProps>`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   border-radius: ${({ theme }) => theme.radius?.xl};
@@ -24,8 +27,15 @@ const Container = styled.div`
 
   gap: ${({ theme }) => theme.spacing?.lg};
 
+  width: ${({ width }) => `${width}px`};
+
+  @media ${({ theme }) => theme.media?.md} {
+    width: 472px;
+  }
+
   @media ${({ theme }) => theme.media?.sm} {
     padding: ${({ theme }) => theme.spacing?.lg};
+    width: 343px;
   }
 `
 
@@ -39,5 +49,6 @@ const Header = styled.label`
 
 const Line = styled.div`
   height: 1px;
+  border-radius: 5px;
   background-color: ${({ theme }) => theme.colors?.main_gray_04};
 `
