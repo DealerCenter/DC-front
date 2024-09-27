@@ -25,6 +25,7 @@ const AddContainer = ({ onClose, setUploadedSuccessfully }: Props) => {
     errors,
     touched,
     isButtonDisabled,
+    isLoading,
   } = useAddContainer(setUploadedSuccessfully)
 
   return (
@@ -67,7 +68,7 @@ const AddContainer = ({ onClose, setUploadedSuccessfully }: Props) => {
         }
       ></TextInput>
       <AppButton
-        text={t('add new container')}
+        text={isLoading ? t('loading') : t('add new container')}
         type='filled'
         disabled={isButtonDisabled}
         onClick={handleSubmit}

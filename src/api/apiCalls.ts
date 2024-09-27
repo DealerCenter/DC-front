@@ -31,7 +31,7 @@ export const fetchMeAdmin = async () => {
 }
 
 export const logoutUser = async (isAdmin?: boolean) => {
-  const endpoint = isAdmin ? endpoints.LOGOUT_ADMIN : endpoints.LOGOUT_DEALER
+  const endpoint = isAdmin ? endpoints.LOGOUT_ADMIN : endpoints.LOGOUT
 
   try {
     const response = await axiosInstance.post(endpoint)
@@ -182,7 +182,7 @@ export const getOrders = async (
   payload: OrdersQueryType,
   isAdmin?: boolean
 ) => {
-  const endpoint = isAdmin ? endpoints.ORDERS_ADMIN : endpoints.ORDERS_DEALER
+  const endpoint = isAdmin ? endpoints.ORDERS_ADMIN : endpoints.ORDERS
 
   try {
     const response = await axiosInstance.get<ORDERS_GET_RES>(endpoint, {
@@ -225,9 +225,10 @@ export const createContainer = async (payload: {
   name: string
   trackingUrl: string
 }) => {
+  console.log('aqvart?')
   try {
     const response = await axiosInstance.post<CONTAINER_POST_RES>(
-      endpoints.CREATE_CONTAINER,
+      endpoints.CONTAINERS_ADMIN,
       payload
     )
     return response.data

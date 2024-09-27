@@ -15,6 +15,7 @@ export const FIELD_NAMES = {
 }
 
 const useAddContainer = (setUploadedSuccessfully: (arg: boolean) => void) => {
+  const [isLoading, setIsLoading] = useState(false)
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
@@ -28,8 +29,9 @@ const useAddContainer = (setUploadedSuccessfully: (arg: boolean) => void) => {
     },
     onSubmit: async (values) => {
       try {
+        setIsLoading(true)
         const response = await axiosInstance.post<CONTAINER_POST_RES>(
-          endpoints.CREATE_CONTAINER,
+          endpoints.CONTAINERS_ADMIN,
           values
         )
 
@@ -49,6 +51,8 @@ const useAddContainer = (setUploadedSuccessfully: (arg: boolean) => void) => {
           console.error('Unknown Error:', error)
           setAxiosError(undefined) // Handle non-Axios errors if needed
         }
+      } finally {
+        setIsLoading(false)
       }
     },
 
@@ -72,6 +76,7 @@ const useAddContainer = (setUploadedSuccessfully: (arg: boolean) => void) => {
     axiosError: axiosError,
     setFieldValue: formik.setFieldValue,
     isButtonDisabled,
+    isLoading,
   }
 }
 
