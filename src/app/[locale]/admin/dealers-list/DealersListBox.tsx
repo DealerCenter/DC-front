@@ -12,12 +12,15 @@ import AddRecipient from './components/addRecipient/AddRecipient'
 import AppModal from '@/common/components/modal/AppModal'
 import { users as dummyUsers } from '@/assets/DummyData'
 import DealersList from './components/DealersList'
+import { getReceiversAdmin } from '@/api/apiCalls'
 
 type Props = {}
 
 const DealersListBox = (props: Props) => {
   const t = useTranslations('')
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  getReceiversAdmin('62')
 
   return (
     <Container>

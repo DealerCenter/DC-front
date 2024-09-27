@@ -212,6 +212,18 @@ export const getReceivers = async (payload: {
   }
 }
 
+export const getReceiversAdmin = async (id: string) => {
+  try {
+    const response = await axiosInstance.get<RECEIVER_GET_RES[]>(
+      `${endpoints.RECEIVERS_ADMIN}/${id}`
+    )
+    console.log('getReceiversAdmin:', response)
+    return response.data
+  } catch (error) {
+    console.error('Error getting receivers:', error)
+  }
+}
+
 export const deleteReceiver = async (id: number) => {
   try {
     const response = await axiosInstance.delete(`${endpoints.RECEIVERS}/${id}`)
@@ -225,7 +237,7 @@ export const createContainer = async (payload: {
   name: string
   trackingUrl: string
 }) => {
-  console.log('aqvart?')
+  console.log('apiCalls createContainer?')
   try {
     const response = await axiosInstance.post<CONTAINER_POST_RES>(
       endpoints.CONTAINERS_ADMIN,

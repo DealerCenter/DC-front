@@ -1,14 +1,14 @@
 export const users = [
   {
     fullName: 'Luka Tsilosani',
-    id: '09138409387',
+    id: '51',
     mobile: '098 028 07 77',
     dateOfAddition: '24/07/11',
     isVerified: true,
   },
   {
     fullName: 'Zuka Jakeli',
-    id: '02189491234',
+    id: '63',
     mobile: '098 028 11 11',
     dateOfAddition: '24/04/11',
     isVerified: true,

@@ -47,6 +47,7 @@ export const carCategories = [
 ]
 
 export const SHIPPING_STATUS = {
+  IN_AUCTION: 'InAuction',
   IN_AMERICAN_WAREHOUSE: 'InAmericanWarehouse',
   IN_CONTAINER: 'InContainer',
   UNDERGOES_CUSTOMS: 'UndergoesCustomsProcedures',
@@ -54,6 +55,7 @@ export const SHIPPING_STATUS = {
 }
 
 export type ShippingStatus =
+  | 'InAuction'
   | 'InAmericanWarehouse'
   | 'InContainer'
   | 'UndergoesCustomsProcedures'
@@ -65,6 +67,7 @@ export type OrdersQueryType =
       sortByCreateDate: 'asc' | 'desc' | null
       sortByCost: 'asc' | 'desc' | null
       status: ShippingStatus
+      dealerId?: number
     }
   | undefined
 

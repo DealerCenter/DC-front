@@ -18,7 +18,7 @@ import AppDropdownFilter from '@/common/components/appDropdown/appFilter/AppDrop
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 import BindContainerBox from './bindContainer/BindContainerBox'
-import { routeName } from '@/common/helpers/constants'
+import { routeName, ShippingStatus } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
 import CloseIconBlack from '@/common/components/readyIcons/CloseIconBlack'
 
@@ -28,32 +28,14 @@ const changeStatusList = [
   { label: 'in warehouse' },
 ]
 
-const filterValues = {
-  status: ['arrived', 'onTheWay', 'inWarehouse'],
-  recipient: [
-    'Luka Tsilosani',
-    'Ani Kviciani',
-    'Zuka Jakeli',
-    'Luka Tsilosani',
-    'Ani Kviciani',
-    'Zuka Jakeli',
-  ],
-  dealer: [
-    'Ani Kviciani',
-    'Ani Kviciani',
-    'Zuka Jakeli',
-    'Zuka Jakeli',
-    'Luka Tsilosani',
-    'Luka Tsilosani',
-  ],
-}
-
 type Props = {
   isEditing: boolean
   setIsEditing: (arg1: boolean) => void
   setSortByCost: (arg: 'desc' | 'asc' | null) => void
   setSortByCreateDate: (arg: 'desc' | 'asc' | null) => void
   isPageLoaded: boolean
+  shippingStatus: ShippingStatus
+  setShippingStatus: (arg: ShippingStatus) => void
 }
 
 const ButtonsRow = ({
@@ -62,6 +44,8 @@ const ButtonsRow = ({
   setSortByCost,
   setSortByCreateDate,
   isPageLoaded,
+  shippingStatus,
+  setShippingStatus,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
@@ -92,6 +76,11 @@ const ButtonsRow = ({
     },
   ]
 
+  const onClearFilter = (e: any) => {
+    e.stopPropagation()
+    setShippingStatus(null)
+  }
+
   const onClearSort = (e: any) => {
     e.stopPropagation()
     setSortByCost(null)
@@ -102,8 +91,6 @@ const ButtonsRow = ({
   const handleEditButton = () => {
     isEditing ? setIsEditing(false) : setIsEditing(true)
   }
-
-  const handleAddContainer = () => {}
 
   return (
     <>
@@ -153,7 +140,7 @@ const ButtonsRow = ({
       ) : (
         <ButtonFrame>
           <ButtonPairFrame>
-            <AppDropdownFilter values={filterValues}>
+            <AppDropdownFilter setShippingStatus={setShippingStatus}>
               <SecondaryButton
                 text={t('filter')}
                 onClick={() => {}}
@@ -161,6 +148,9 @@ const ButtonsRow = ({
                 width={isMobile ? 160 : undefined}
                 isDisabled={!isPageLoaded}
               ></SecondaryButton>
+              {shippingStatus !== null && (
+                <CloseIconBlack onClick={onClearFilter} top={-8} right={-8} />
+              )}
             </AppDropdownFilter>
             <AppDropdown
               // items={sortOptions}

@@ -52,7 +52,7 @@ const OrderHistory = (props: Props) => {
   useEffect(() => {
     handleGetOrders()
     //eslint-disable-next-line
-  }, [sortByCost, sortByCreateDate])
+  }, [sortByCost, sortByCreateDate, shippingStatus])
 
   return (
     <Container>
@@ -64,6 +64,8 @@ const OrderHistory = (props: Props) => {
           setSortByCost={setSortByCost}
           setSortByCreateDate={setSortByCreateDate}
           isPageLoaded={isPageLoaded}
+          shippingStatus={shippingStatus}
+          setShippingStatus={setShippingStatus}
         />
       </TopFrame>
 

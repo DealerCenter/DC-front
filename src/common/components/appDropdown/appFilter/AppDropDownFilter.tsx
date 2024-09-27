@@ -2,15 +2,21 @@ import { ReactNode, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import DropdownFilterBox from './components/DropdownFilterBox'
+import { ShippingStatus } from '@/common/helpers/constants'
 
 type Props = {
   children: ReactNode
-  values: { status: string[]; recipient: string[]; dealer: string[] }
   left?: number
   top?: number
+  setShippingStatus: (arg: ShippingStatus) => void
 }
 
-const AppDropdownFilter = ({ children, values, left, top }: Props) => {
+const AppDropdownFilter = ({
+  children,
+  left,
+  top,
+  setShippingStatus,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -39,7 +45,10 @@ const AppDropdownFilter = ({ children, values, left, top }: Props) => {
       <DropdownTrigger onClick={toggleDropdown}>{children}</DropdownTrigger>
       {isOpen && (
         <DropdownMenu left={left} top={top}>
-          <DropdownFilterBox values={values} toggleDropdown={toggleDropdown} />
+          <DropdownFilterBox
+            toggleDropdown={toggleDropdown}
+            setShippingStatus={setShippingStatus}
+          />
         </DropdownMenu>
       )}
     </Dropdown>

@@ -299,5 +299,11 @@
 
   "search for container": "Search for container",
 
-  "must be valid email": "Must be a valid email"
+  "must be valid email": "Must be a valid email",
+
+  "InAuction": "In Auction",
+  "InAmericanWarehouse": "In American warehouse",
+  "InContainer": "In Container",
+  "UndergoesCustomsProcedures": "Undergoes Customs Procedures",
+  "Sent": "Sent"
 }

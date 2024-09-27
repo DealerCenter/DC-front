@@ -5,24 +5,36 @@ import styled from 'styled-components'
 import BasicButton from '@/common/components/appButton/BasicButton'
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
 import OptionsBox from './OptionsBox'
+import { ShippingStatus } from '@/common/helpers/constants'
+import SingleDropdown from './SingleDropdown'
+import SingleDropdownShippingStatus from './SingleDropdownShippingStatus'
 
 type Props = {
-  values: { status: string[]; recipient: string[]; dealer: string[] }
   toggleDropdown: () => void
+  setShippingStatus: (arg: ShippingStatus) => void
 }
 
-const DropdownFilterBox = ({ values, toggleDropdown }: Props) => {
+const DropdownFilterBox = ({ toggleDropdown, setShippingStatus }: Props) => {
   const t = useTranslations('')
   const [activeSetting, setActiveSetting] = useState<
     'status' | 'recipient' | 'dealer' | null
-  >(null)
+  >('status')
 
-  const [checkedOption, setCheckedOption] = useState('')
+  // const [checkedOption, setCheckedOption] = useState('')
+
+  const [checkedStatus, setCheckedStatus] = useState<ShippingStatus>(null)
+  const [checkedRecipient, setCheckedRecipient] = useState('')
+  const [checkedDealer, setCheckedDealer] = useState('')
 
   const handleCancel = () => {
+    setCheckedStatus(null)
+    setCheckedRecipient('')
+    setCheckedDealer('')
+    setShippingStatus(null)
     toggleDropdown()
   }
   const handleSave = () => {
+    setShippingStatus(checkedStatus)
     toggleDropdown()
   }
 
@@ -33,26 +45,26 @@ const DropdownFilterBox = ({ values, toggleDropdown }: Props) => {
           activeOption={activeSetting}
           setActiveOption={setActiveSetting}
         />
-        <List>
-          {activeSetting &&
-            values[activeSetting].map((value, i) => (
-              <ListItem
-                key={`DropdownFilterBoxListItem${i}`}
-                onClick={() => setCheckedOption(value)}
-              >
-                <CheckBox isChecked={value === checkedOption} />
-                <Text>
-                  {value === 'inWarehouse'
-                    ? t('in warehouse')
-                    : value === 'onTheWay'
-                      ? t('on the way')
-                      : value === 'arrived'
-                        ? t('arrived')
-                        : value}
-                </Text>
-              </ListItem>
-            ))}
-        </List>
+        {activeSetting === 'status' ? (
+          <SingleDropdownShippingStatus
+            checkedStatus={checkedStatus}
+            setCheckedStatus={setCheckedStatus}
+          />
+        ) : activeSetting === 'recipient' ? (
+          <SingleDropdown
+            values={['recipient1', 'recipient2', 'recipient3']}
+            checkedOption={checkedRecipient}
+            setCheckedOption={setCheckedRecipient}
+          />
+        ) : (
+          activeSetting === 'dealer' && (
+            <SingleDropdown
+              values={['dealer1', 'dealer2', 'dealer3']}
+              checkedOption={checkedDealer}
+              setCheckedOption={setCheckedDealer}
+            />
+          )
+        )}
       </Frame>
       <CancelSaveBox>
         <BasicButton
@@ -86,32 +98,6 @@ const Frame = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-`
-
-const List = styled.ul`
-  padding: 0;
-  margin: 0;
-`
-const ListItem = styled.li`
-  box-sizing: border-box;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 36px;
-  list-style: none;
-  padding: 8px;
-  gap: 16px;
-  border-radius: 8px;
-
-  transition: all 100ms ease-out;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors?.main_gray_04};
-  }
-`
-
-const Text = styled.label`
-  font-size: ${({ theme }) => theme.fontSizes?.small_13};
-  font-weight: ${({ theme }) => theme.fontWeight?.normal};
 `
 
 const CancelSaveBox = styled.div`
