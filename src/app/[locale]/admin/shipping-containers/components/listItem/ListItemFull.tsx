@@ -15,7 +15,7 @@ type Props = {
   link: string
   departureDate: string
   arrivalDate: string
-  numberOfCars: string
+  id: number
 }
 
 const ListItemFull = ({
@@ -24,7 +24,7 @@ const ListItemFull = ({
   link,
   departureDate,
   arrivalDate,
-  numberOfCars,
+  id,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -37,7 +37,7 @@ const ListItemFull = ({
         <LinkLabel>{link}</LinkLabel>
         <Label>{departureDate}</Label>
         <Label>{arrivalDate}</Label>
-        <Label>{numberOfCars}</Label>
+        <Label>{id}</Label>
       </Container>
       <AppModal
         isOpen={isModalOpen}

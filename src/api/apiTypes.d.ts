@@ -103,6 +103,14 @@ type CONTAINER_POST_RES = {
   updatedAt: string
 }
 
+type CONTAINER_GET_RES = {
+  name: string
+  trackingUrl: string
+  id: number
+  createdAt: string
+  updatedAt: string
+}
+
 type ORDERS_GET_RES = {
   id: number
   createdAt: string // DateTime

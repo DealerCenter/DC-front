@@ -7,6 +7,7 @@ import { endpoints } from '@/api/endpoints'
 import { AxiosError } from 'axios'
 import { message } from 'antd'
 import { createContainer } from '@/api/apiCalls'
+import { CONTAINER_POST_RES } from '@/api/apiTypes'
 
 export const FIELD_NAMES = {
   NAME: 'name',

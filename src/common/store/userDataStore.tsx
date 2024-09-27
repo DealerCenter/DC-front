@@ -1,4 +1,5 @@
 import { fetchMe } from '@/api/apiCalls'
+import { ME_RES } from '@/api/apiTypes'
 import { create } from 'zustand'
 
 interface UserDataState {

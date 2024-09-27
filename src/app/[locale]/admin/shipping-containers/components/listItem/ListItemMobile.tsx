@@ -15,7 +15,7 @@ type Props = {
   link: string
   departureDate: string
   arrivalDate: string
-  numberOfCars: string
+  id: number
 }
 
 const ListItemMobile = ({
@@ -24,7 +24,7 @@ const ListItemMobile = ({
   link,
   departureDate,
   arrivalDate,
-  numberOfCars,
+  id,
 }: Props) => {
   const t = useTranslations('')
 
@@ -74,7 +74,7 @@ const ListItemMobile = ({
       <LabelAndIconBox>
         <Image src={calendarIcon} alt='calendar icon' />
         <Label>
-          {t('added')} {numberOfCars}
+          {t('added')} {id}
         </Label>
       </LabelAndIconBox>
     </Container>

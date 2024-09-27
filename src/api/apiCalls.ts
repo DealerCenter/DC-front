@@ -3,6 +3,7 @@ import axiosInstance from './apiClient'
 import { endpoints } from './endpoints'
 import { OrdersQueryType, ShippingStatus } from '@/common/helpers/constants'
 import {
+  CONTAINER_GET_RES,
   CONTAINER_POST_RES,
   ME_RES,
   ORDERS_GET_RES,
@@ -224,11 +225,12 @@ export const createContainer = async (payload: {
   }
 }
 
-export const getContainers = async (orderId: string) => {
+export const getContainersAdmin = async () => {
   try {
-    const response = await axiosInstance.get(
-      `${endpoints.GET_CONTAINERS}/${orderId}`
+    const response = await axiosInstance.get<CONTAINER_GET_RES[]>(
+      endpoints.CONTAINERS_ADMIN
     )
+    console.log('get container admin:', response.data)
     return response.data
   } catch (error) {
     console.error('Error getting containers:', error)

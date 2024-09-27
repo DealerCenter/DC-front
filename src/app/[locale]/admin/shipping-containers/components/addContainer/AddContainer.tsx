@@ -81,7 +81,7 @@ const AddContainer = ({ onClose, setUploadedSuccessfully }: Props) => {
 
 export default AddContainer
 
-const Container = styled.div`
+const Container = styled.form`
   position: relative;
   display: flex;
   flex-direction: column;

@@ -14,6 +14,7 @@ export const endpoints = {
   HEALTH: '/health',
 
   ORDERS_ADMIN: '/orders',
+  CONTAINERS_ADMIN: '/containers',
 
   ADMINS: '/admins',
   LOGIN_ADMIN: '/admins/login',
