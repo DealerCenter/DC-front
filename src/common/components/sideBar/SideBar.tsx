@@ -60,7 +60,7 @@ const SideBar = ({ routes }: Props) => {
       router.push(routeName.landing)
     } catch (error) {
       setIsLoggingOut(false)
-      message.success(t('you could not log out'))
+      message.error(t('you could not log out'))
     }
   }
 

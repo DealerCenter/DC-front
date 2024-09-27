@@ -2,7 +2,12 @@ import { handleLogout } from '@/common/helpers/utils'
 import axiosInstance from './apiClient'
 import { endpoints } from './endpoints'
 import { OrdersQueryType, ShippingStatus } from '@/common/helpers/constants'
-import { CONTAINER_POST_RES, ME_RES, RECEIVER_GET_RES } from './apiTypes'
+import {
+  CONTAINER_POST_RES,
+  ME_RES,
+  ORDERS_GET_RES,
+  RECEIVER_GET_RES,
+} from './apiTypes'
 
 export const fetchMe = async () => {
   try {
@@ -13,9 +18,11 @@ export const fetchMe = async () => {
   }
 }
 
-export const logoutUser = async () => {
+export const logoutUser = async (isAdmin?: boolean) => {
+  const endpoint = isAdmin ? endpoints.LOGOUT_ADMIN : endpoints.LOGOUT_DEALER
+
   try {
-    const response = await axiosInstance.post(endpoints.LOGOUT)
+    const response = await axiosInstance.post(endpoint)
     handleLogout()
     return response
   } catch (error) {
@@ -110,7 +117,7 @@ export const createOrder = async (payload: {
   manufactureYear: number
   model: string
   vin: string
-  transportaionCost: number
+  transportationCost: number
   carCost: number
   stateId: number
   exactAddress: string
@@ -122,7 +129,7 @@ export const createOrder = async (payload: {
   receiverId: number
 }) => {
   try {
-    const response = await axiosInstance.post(endpoints.ORDERS, payload)
+    const response = await axiosInstance.post(endpoints.ORDERS_ADMIN, payload)
     return response
   } catch (error) {
     console.error('Error creating new order:', error)
@@ -135,7 +142,7 @@ export const changeOrder = async (
     manufactureYear: number
     model: string
     vin: string
-    transportaionCost: number
+    transportationCost: number
     carCost: number
     stateId: number
     exactAddress: string
@@ -150,7 +157,7 @@ export const changeOrder = async (
 ) => {
   try {
     const response = await axiosInstance.put(
-      `${endpoints.ORDERS}/${id}`,
+      `${endpoints.ORDERS_ADMIN}/${id}`,
       payload
     )
     return response
@@ -159,9 +166,14 @@ export const changeOrder = async (
   }
 }
 
-export const getOrders = async (payload: OrdersQueryType) => {
+export const getOrders = async (
+  payload: OrdersQueryType,
+  isAdmin?: boolean
+) => {
+  const endpoint = isAdmin ? endpoints.ORDERS_ADMIN : endpoints.ORDERS_DEALER
+
   try {
-    const response = await axiosInstance.get(endpoints.ORDERS, {
+    const response = await axiosInstance.get<ORDERS_GET_RES>(endpoint, {
       params: payload, // Pass payload as query parameters
     })
     return response.data

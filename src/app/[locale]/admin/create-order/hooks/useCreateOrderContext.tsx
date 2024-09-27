@@ -15,7 +15,7 @@ export const FIELD_NAMES = {
   MANUFACTURE_YEAR: 'manufactureYear',
   MODEL: 'model',
   VIN: 'vin',
-  TRANSPORTATION_COST: 'transportaionCost',
+  TRANSPORTATION_COST: 'transportationCost',
   CAR_COST: 'carCost',
   STATE_ID: 'stateId',
   EXACT_ADDRESS: 'exactAddress',

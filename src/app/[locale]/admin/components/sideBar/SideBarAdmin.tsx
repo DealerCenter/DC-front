@@ -22,6 +22,10 @@ import containersBurgerWhite from '@/assets/icons/containersBurgerWhite.svg'
 import settingsGearBlack from '@/assets/icons/settingsGearBlack.svg'
 import settingsGearWhite from '@/assets/icons/settingsGearWhite.svg'
 import plusIcon from '@/assets/icons/plusInCircle24.svg'
+import { logoutUser } from '@/api/apiCalls'
+import { message } from 'antd'
+
+const isAdmin = true
 
 type Props = {
   routes: {
@@ -39,12 +43,26 @@ const SideBarAdmin = ({ routes }: Props) => {
   const router = useRouter()
   const [isHovered, setIsHovered] = useState(false)
 
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
+
   const handleMouseEnter = () => {
     setIsHovered(true)
   }
 
   const handleMouseLeave = () => {
     setIsHovered(false)
+  }
+
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true)
+      await logoutUser(isAdmin)
+      message.success(t('you are logged out'))
+      router.push(routeName.landing)
+    } catch (error) {
+      setIsLoggingOut(false)
+      message.error(t('you could not log out'))
+    }
   }
 
   return (
@@ -121,9 +139,11 @@ const SideBarAdmin = ({ routes }: Props) => {
         {!isMobile && (
           <GrayContainer
             icon={exitIcon}
-            text={t('exit')}
+            text={isLoggingOut ? `${t('wait')}...` : t('exit')}
             height='71px'
             isHovered={isHovered}
+            onClick={handleLogout}
+            disabled={isLoggingOut}
           />
         )}
       </BarContainer>

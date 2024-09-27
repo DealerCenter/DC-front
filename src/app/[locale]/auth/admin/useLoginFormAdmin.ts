@@ -12,7 +12,7 @@ import { message } from 'antd'
 import { LOGIN_RES } from '@/api/apiTypes'
 
 export const FIELD_NAMES = {
-  EMAIL: 'email',
+  USERNAME: 'username',
   PASSWORD: 'password',
 }
 
@@ -25,20 +25,20 @@ const useLoginForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      [FIELD_NAMES.EMAIL]: '',
+      [FIELD_NAMES.USERNAME]: '',
       [FIELD_NAMES.PASSWORD]: '',
     },
     onSubmit: async (values) => {
       try {
         const response = await axiosInstance.post<LOGIN_RES>(
-          endpoints.LOGIN,
+          endpoints.LOGIN_ADMIN,
           values
         )
 
         handleAuthResponse(response)
 
         message.success(t('you are logged in'))
-        router.push(routeName.dealer)
+        router.push(routeName.admin)
       } catch (error) {
         message.error(t('you could not log in'))
         if (error instanceof AxiosError) {
@@ -52,10 +52,7 @@ const useLoginForm = () => {
     },
 
     validationSchema: yup.object({
-      [FIELD_NAMES.EMAIL]: yup
-        .string()
-        .email(t('must be valid email'))
-        .required(t('email required')),
+      [FIELD_NAMES.USERNAME]: yup.string().required(t('username required')),
       [FIELD_NAMES.PASSWORD]: yup.string().required(t('password required')),
     }),
   })

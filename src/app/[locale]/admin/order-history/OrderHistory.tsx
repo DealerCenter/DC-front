@@ -15,6 +15,8 @@ import AddYourFirstTask from './components/AddYourFirstTask'
 
 const itemsPerPage = 8
 
+const isAdmin = true
+
 type Props = {}
 
 const OrderHistory = (props: Props) => {
@@ -22,7 +24,7 @@ const OrderHistory = (props: Props) => {
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [isEditing, setIsEditing] = useState(false)
-  const [ordersList, setOrdersList] = useState<ORDERS_GET_RES[]>()
+  const [ordersList, setOrdersList] = useState<ORDERS_GET_RES>()
   const [sortByCost, setSortByCost] = useState<'asc' | 'desc' | null>(null)
   const [sortByCreateDate, setSortByCreateDate] = useState<
     'asc' | 'desc' | null
@@ -33,16 +35,17 @@ const OrderHistory = (props: Props) => {
   const t = useTranslations('')
 
   const handleGetOrders = async () => {
-    const response = await getOrders({
-      skip: 0,
-      take: 0,
-      sortByCreateDate: sortByCreateDate,
-      sortByCost: sortByCost,
-      status: shippingStatus,
-    })
+    const response = await getOrders(
+      {
+        sortByCreateDate: sortByCreateDate,
+        sortByCost: sortByCost,
+        status: shippingStatus,
+      },
+      isAdmin
+    )
     if (response) {
       setIsPageLoaded(true)
-      setOrdersList(response)
+      setOrdersList(response.data)
     }
   }
 

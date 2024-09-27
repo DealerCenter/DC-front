@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
-import DetailsBox from './DetailsBox'
-import CarImageAndModelBox from './CarImageAndModelBox'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import styled, { css } from 'styled-components'
+import CarImageAndModelBox from './CarImageAndModelBox'
+import DetailsBox from './DetailsBox'
 
+import { ORDERS_GET_RES } from '@/api/apiTypes'
+import theme from '@/app/[locale]/theme'
 import grabHandle from '@/assets/icons/GrabHandle2x3Dots.svg'
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
-import PersonFrameMobile from './PersonFrameMobile'
 import { useTranslations } from 'next-intl'
 import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/theme'
+import PersonFrameMobile from './PersonFrameMobile'
 import StatusAndDebtBoxMobile from './StatusAndDebtBoxMobile'
-import { ORDER_CONSTANTS, SHIPPING_STATUS } from '@/common/helpers/constants'
-import { ORDERS_GET_RES } from '@/api/apiTypes'
 
 type Props = {
   imageLink: string
@@ -33,7 +32,7 @@ const OrderListItem = ({ imageLink, item, onClick, isEditing }: Props) => {
     vin: vinCode,
     receiver,
     carCost,
-    transportaionCost: amount,
+    transportationCost: amount,
     status: shippingStatus,
 
     createdAt: date,

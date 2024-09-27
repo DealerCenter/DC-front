@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
-import useLoginForm, { FIELD_NAMES } from '../hooks/useLoginForm'
+import useLoginForm, { FIELD_NAMES } from './useLoginFormAdmin'
 
 import Image from 'next/image'
 import emailIcon from '@/assets/icons/email.svg'
@@ -33,9 +33,9 @@ const LoginForm = ({ goToRegistration }: Props) => {
     touched,
   } = useLoginForm()
 
-  useEffect(() => {
-    axiosError && message.error(axiosError.message)
-  }, [axiosError])
+  // useEffect(() => {
+  //   axiosError && message.error(axiosError.message)
+  // }, [axiosError])
 
   return (
     <Container>
@@ -43,10 +43,10 @@ const LoginForm = ({ goToRegistration }: Props) => {
         <H4Bold>{t('login')}</H4Bold>
         <TextInputContainer>
           <TextInput
-            type='email'
-            name={FIELD_NAMES.EMAIL}
-            placeholder='john@example.com'
-            value={values[FIELD_NAMES.EMAIL]}
+            type='username'
+            name={FIELD_NAMES.USERNAME}
+            placeholder='username'
+            value={values[FIELD_NAMES.USERNAME]}
             onChange={handleChange}
             onBlur={handleBlur}
             icon={
@@ -54,8 +54,8 @@ const LoginForm = ({ goToRegistration }: Props) => {
             }
             width={isMobile ? undefined : 442}
             errorMessage={
-              errors[FIELD_NAMES.EMAIL] && touched[FIELD_NAMES.EMAIL]
-                ? errors[FIELD_NAMES.EMAIL]
+              errors[FIELD_NAMES.USERNAME] && touched[FIELD_NAMES.USERNAME]
+                ? errors[FIELD_NAMES.USERNAME]
                 : ''
             }
           />
@@ -78,6 +78,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
                 />
               }
               width={isMobile ? undefined : 442}
+              // errorMessage={axiosError ? axiosError.message : ''}
               errorMessage={
                 errors[FIELD_NAMES.PASSWORD] && touched[FIELD_NAMES.PASSWORD]
                   ? errors[FIELD_NAMES.PASSWORD]
