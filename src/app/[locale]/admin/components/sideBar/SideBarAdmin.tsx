@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
@@ -22,8 +22,9 @@ import containersBurgerWhite from '@/assets/icons/containersBurgerWhite.svg'
 import settingsGearBlack from '@/assets/icons/settingsGearBlack.svg'
 import settingsGearWhite from '@/assets/icons/settingsGearWhite.svg'
 import plusIcon from '@/assets/icons/plusInCircle24.svg'
-import { logoutUser } from '@/api/apiCalls'
+import { fetchMeAdmin, logoutUser } from '@/api/apiCalls'
 import { message } from 'antd'
+import { ADMIN_GET_RES } from '@/api/apiTypes'
 
 const isAdmin = true
 
@@ -45,6 +46,8 @@ const SideBarAdmin = ({ routes }: Props) => {
 
   const [isLoggingOut, setIsLoggingOut] = useState(false)
 
+  const [adminData, setAdminData] = useState<ADMIN_GET_RES>()
+
   const handleMouseEnter = () => {
     setIsHovered(true)
   }
@@ -52,6 +55,15 @@ const SideBarAdmin = ({ routes }: Props) => {
   const handleMouseLeave = () => {
     setIsHovered(false)
   }
+
+  const handleGetData = async () => {
+    const response = await fetchMeAdmin()
+    response && setAdminData(response[0])
+  }
+
+  useEffect(() => {
+    handleGetData()
+  }, [])
 
   const handleLogout = async () => {
     try {
@@ -74,7 +86,7 @@ const SideBarAdmin = ({ routes }: Props) => {
         <Frame>
           <InfoBox
             isHovered={isHovered}
-            name='Name'
+            name={adminData ? adminData.username : ''}
             refreshDate='last refresh jul 11 2034'
             notificationCount={9}
           />

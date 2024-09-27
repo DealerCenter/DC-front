@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import ContainersList from './components/ContainersList'
-import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
-import SecondaryButton from '@/common/components/appButton/SecondaryButton'
+import { fetchMeAdmin, getContainersAdmin } from '@/api/apiCalls'
+import { CONTAINER_GET_RES } from '@/api/apiTypes'
 
-import plusIcon from '@/assets/icons/plus.svg'
-import { containers } from '@/assets/DummyData'
-import AddContainer from './components/addContainer/AddContainer'
+import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import AppModal from '@/common/components/modal/AppModal'
 import SearchButton from '@/common/components/searchButton/SearchButton'
-import { getContainersAdmin } from '@/api/apiCalls'
-import { CONTAINER_GET_RES } from '@/api/apiTypes'
-import { message } from 'antd'
+import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
+import AddContainer from './components/addContainer/AddContainer'
+import ContainersList from './components/ContainersList'
+
+import plusIcon from '@/assets/icons/plus.svg'
 
 type Props = {}
 

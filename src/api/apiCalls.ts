@@ -3,6 +3,7 @@ import axiosInstance from './apiClient'
 import { endpoints } from './endpoints'
 import { OrdersQueryType, ShippingStatus } from '@/common/helpers/constants'
 import {
+  ADMIN_GET_RES,
   CONTAINER_GET_RES,
   CONTAINER_POST_RES,
   ME_RES,
@@ -13,6 +14,16 @@ import {
 export const fetchMe = async () => {
   try {
     const response = await axiosInstance.get<ME_RES>(endpoints.ME)
+    return response.data
+  } catch (error) {
+    console.error('Failed to fetch user data:', error)
+  }
+}
+
+export const fetchMeAdmin = async () => {
+  try {
+    const response = await axiosInstance.get(endpoints.ADMINS)
+    // console.log(response.data)
     return response.data
   } catch (error) {
     console.error('Failed to fetch user data:', error)
@@ -230,7 +241,6 @@ export const getContainersAdmin = async () => {
     const response = await axiosInstance.get<CONTAINER_GET_RES[]>(
       endpoints.CONTAINERS_ADMIN
     )
-    console.log('get container admin:', response.data)
     return response.data
   } catch (error) {
     console.error('Error getting containers:', error)

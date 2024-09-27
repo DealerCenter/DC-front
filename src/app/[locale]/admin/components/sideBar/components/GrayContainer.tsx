@@ -51,9 +51,9 @@ const Container = styled.div<ContainerProps>`
   justify-content: start;
   background-color: ${({ theme }) => theme.colors?.main_gray_04};
   border: 0.5px solid ${({ theme }) => theme.colors?.main_gray_10};
-  border-radius: 16px;
+  border-radius: ${({ theme }) => theme.radius?.xl};
   gap: 19px;
-  padding: 24px 16px 24px 16px;
+  padding: 24px 16px;
   width: 100%;
 
   ${({ height }) =>
@@ -93,9 +93,11 @@ const Frame = styled.div`
 `
 
 const Text = styled.p<IsHoveredProps>`
+  display: flex;
+  align-items: center;
   margin: 0;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
 
   @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
@@ -114,7 +116,7 @@ const Text = styled.p<IsHoveredProps>`
 const Balance = styled.p<IsHoveredProps>`
   margin: 0;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: ${({ theme }) => theme.fontWeight?.normal};
 
   @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
@@ -133,4 +135,7 @@ const Balance = styled.p<IsHoveredProps>`
 
 const IconBox = styled.div`
   margin-left: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

@@ -156,3 +156,11 @@ type ORDERS_GET_RES = {
     idImageUrl: string | null
   }
 }
+
+type ADMIN_GET_RES = {
+  id: number
+  createdAt: string
+  updatedAt: string
+  username: string
+  roleIds: number[]
+}
