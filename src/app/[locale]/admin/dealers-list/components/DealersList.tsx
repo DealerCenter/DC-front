@@ -39,8 +39,9 @@ const DealersList = ({ dealersData }: Props) => {
             <ListItem
               userData={data}
               key={`ListItem${data.id}`}
-              // onClick={() => router.push(routeName.adminUserProfile)}
-              onClick={() => {}}
+              onClick={() =>
+                router.push(`${routeName.adminUserProfile}/${data.id}`)
+              }
             />
           ))}
         </>

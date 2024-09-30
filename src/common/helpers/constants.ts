@@ -19,7 +19,7 @@ export const routeName = {
   adminCreateOrderImageUpload: '/admin/create-order/image-upload',
   adminOrderImageUpload: '/admin/order/image-upload',
   adminDealersList: '/admin/dealers-list',
-  adminUserProfile: '/admin/user-profile',
+  adminUserProfile: '/admin/dealer-profile',
   adminContainers: '/admin/shipping-containers',
 }
 
@@ -53,6 +53,10 @@ export const SHIPPING_STATUS = {
   UNDERGOES_CUSTOMS: 'UndergoesCustomsProcedures',
   SENT: 'Sent',
 }
+
+export type LocalesType = 'en' | 'ge' | 'ru'
+
+export type ParamsType = { locale?: LocalesType; id?: number }
 
 export type VerificationStatusType = 'PENDING' | 'VERIFIED' | 'UNVERIFIED'
 

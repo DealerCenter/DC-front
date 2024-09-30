@@ -48,8 +48,6 @@ const ListItemFull = ({
     !isDisabled && setIsDropdownOpen(!isDropdownOpen)
   }
 
-  console.log('status:', idImageVerificationStatus)
-
   return (
     <>
       <Container>

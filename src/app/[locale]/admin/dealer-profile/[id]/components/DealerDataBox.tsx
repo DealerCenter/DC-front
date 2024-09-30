@@ -6,7 +6,7 @@ import { useMediaQuery } from 'react-responsive'
 
 import theme from '@/app/[locale]/theme'
 
-import Box from '../../components/common/Box'
+import Box from '../../../components/common/Box'
 import LabelValuePair from './LabelValuePair'
 import HeaderH5Bold from '@/common/components/textComponents/HeaderH5Bold'
 

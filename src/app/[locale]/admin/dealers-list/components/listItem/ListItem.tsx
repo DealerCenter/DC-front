@@ -16,7 +16,6 @@ type Props = {
 
 const ListItem = ({ onClick, userData }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
-  console.log(userData.id)
 
   const [dealerId, setDealerId] = useState(0)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)

@@ -5,10 +5,10 @@ import { useRouter } from '@/navigation'
 import { useMediaQuery } from 'react-responsive'
 
 import { routeName } from '@/common/helpers/constants'
-import theme from '../../theme'
+import theme from '../../../theme'
 
+import EditButton from '../../components/common/EditButton'
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
-import EditButton from '../components/common/EditButton'
 import DealerDataBox from './components/DealerDataBox'
 import LabelValueBox from './components/LabelValueBox'
 import PdfAndImageBox from './components/PdfAndImageBox'
@@ -18,15 +18,13 @@ import OrderListBox from './components/OrderListBox'
 import { getDealerWithId, getOrders } from '@/api/apiCalls'
 import { DEALERS_DATA, ORDER_DATA, ORDERS_GET_RES } from '@/api/apiTypes'
 import LoadingText from '@/common/components/readyComponents/LoadingText'
-import Page from '../../page'
+import Page from '../../../page'
 
 const ITEMS_PER_PAGE = 8
 
-type Props = {}
+type Props = { dealerId: number }
 
-const dummyUserId = 62
-
-const UserProfile = (props: Props) => {
+const DealerProfile = ({ dealerId }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [dealerData, setDealerData] = useState<DEALERS_DATA>()
@@ -37,7 +35,7 @@ const UserProfile = (props: Props) => {
 
   const handleGetDealer = async () => {
     setIsLoading(true)
-    const response = await getDealerWithId(dummyUserId)
+    const response = await getDealerWithId(dealerId)
     if (response) {
       setDealerData(response)
     }
@@ -112,7 +110,7 @@ const UserProfile = (props: Props) => {
   )
 }
 
-export default UserProfile
+export default DealerProfile
 
 const Container = styled.div`
   max-width: 1200px;

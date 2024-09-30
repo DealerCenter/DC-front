@@ -28,7 +28,7 @@ const AdminLayout = ({ children }: Props) => {
     pathname !== routeName.adminOrderImageUpload &&
     pathname !== routeName.adminCreateOrder &&
     pathname !== routeName.adminCreateOrderImageUpload &&
-    pathname !== routeName.adminUserProfile
+    !pathname.startsWith(routeName.adminUserProfile)
 
   return (
     <>

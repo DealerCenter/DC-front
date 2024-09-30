@@ -34,8 +34,6 @@ const OrderHistory = (props: Props) => {
   const router = useRouter()
   const t = useTranslations('')
 
-  console.log('props:', props)
-
   const handleGetOrders = async () => {
     setIsLoading(true)
     const response = await getOrders(
