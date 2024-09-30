@@ -11,6 +11,7 @@ import {
   ADMIN_GET_RES,
   CONTAINER_GET_RES,
   CONTAINER_POST_RES,
+  DEALERS_DATA,
   DEALERS_RES,
   ME_RES,
   ORDERS_GET_RES,
@@ -211,6 +212,17 @@ export const getDealers = async (payload: DealersQueryType) => {
     return response.data
   } catch (error) {
     console.error('Failed to fetch dealers data:', error)
+  }
+}
+
+export const getDealerWithId = async (id: number) => {
+  try {
+    const response = await axiosInstance.get<DEALERS_DATA>(
+      `${endpoints.DEALERS_ADMIN}/${id}`
+    )
+    return response.data
+  } catch (error) {
+    console.error('Failed to fetch dealer data:', error)
   }
 }
 

@@ -20,7 +20,7 @@ const DebtBox = ({ amount, arrivalState }: Props) => {
     <Container>
       <Frame>
         <Text>{t('debt')}</Text>
-        <Money>$ {amount.toString()}</Money>
+        <Money>$ {amount}</Money>
       </Frame>
       <ArrivalStateBox arrivalState={arrivalState} />
     </Container>

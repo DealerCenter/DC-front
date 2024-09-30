@@ -11,10 +11,22 @@ import LabelValuePair from './LabelValuePair'
 import HeaderH5Bold from '@/common/components/textComponents/HeaderH5Bold'
 
 import checkedIcon from '@/assets/icons/checkedGreen.svg'
+import { DEALERS_DATA } from '@/api/apiTypes'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
+import { formatDate } from '@/common/helpers/simpleFunctions'
 
-type Props = {}
+type Props = { dealerData: DEALERS_DATA }
 
-const DealerDataBox = (props: Props) => {
+const DealerDataBox = ({
+  dealerData: {
+    firstName,
+    lastName,
+    phoneNumber,
+    personalId,
+    createdAt,
+    idImageVerificationStatus,
+  },
+}: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
@@ -24,15 +36,19 @@ const DealerDataBox = (props: Props) => {
       <HeaderH5Bold text={t('dealer data')} />
       <Line />
       <Frame>
-        <LabelValuePair label={t('full name')} value='Ani Kviciani' />
-        <LabelValuePair label={t('mobile number')} value='555 555 555' />
-        <LabelValuePair label={t('personal number')} value='555 555 555' />
-        <LabelValuePair label={t('date of joining')} value='24/04/2023' />
+        <LabelValuePair
+          label={t('full name')}
+          value={`${firstName} ${lastName}`}
+        />
+        <LabelValuePair label={t('mobile number')} value={phoneNumber} />
+        <LabelValuePair label={t('personal number')} value={personalId} />
+        <LabelValuePair
+          label={t('date of joining')}
+          value={formatDate(createdAt)}
+        />
         <LabelFrame>
           <Label>{t('authentication')}</Label>
-          <Icon>
-            <Image src={checkedIcon} alt='checked icon' width={20} />
-          </Icon>
+          <VerificationIcon verificationStatus={idImageVerificationStatus} />
         </LabelFrame>
       </Frame>
     </Box>

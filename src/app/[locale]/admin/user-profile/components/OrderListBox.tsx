@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
@@ -7,6 +7,9 @@ import OrderList from '@/common/components/orderList/OrderList'
 import HeaderH5Bold from '@/common/components/textComponents/HeaderH5Bold'
 
 import { orderedCars } from '@/assets/DummyData'
+import { getOrders } from '@/api/apiCalls'
+import { ORDER_DATA, ORDERS_GET_RES } from '@/api/apiTypes'
+import LoadingText from '@/common/components/readyComponents/LoadingText'
 
 const itemsPerPageCurrent = 4
 const totalPagesCurrent = Math.ceil(orderedCars.length / itemsPerPageCurrent)
@@ -14,33 +17,39 @@ const totalPagesCurrent = Math.ceil(orderedCars.length / itemsPerPageCurrent)
 const itemsPerPageArchive = 2
 const totalPagesArchive = Math.ceil(orderedCars.length / itemsPerPageArchive)
 
-type Props = {}
+type Props = { headerText: string; ordersResponse: ORDERS_GET_RES }
 
-const OrderListBox = (props: Props) => {
+const OrderListBox = ({ headerText, ordersResponse }: Props) => {
   const [currentPageCurrent, setCurrentPageCurrent] = useState(1)
   const [currentPageArchive, setCurrentPageArchive] = useState(1)
+
+  const [ordersData, setOrdersData] = useState<ORDER_DATA[]>()
+
+  useEffect(() => {
+    ordersResponse && setOrdersData(ordersResponse.data)
+  }, [ordersResponse])
+
   const t = useTranslations('')
+
+  if (!ordersData) {
+    return <LoadingText />
+  }
 
   return (
     <Container>
       <HeaderFrame>
-        <HeaderH5Bold text={t('current orders')} />
+        <HeaderH5Bold text={headerText} />
       </HeaderFrame>
-      <OrderList
-        onClick={() => {}}
-        list={orderedCars}
-        currentPage={currentPageCurrent}
-        itemsPerPage={itemsPerPageCurrent}
-      />
+      <OrderList onClick={() => {}} orderData={ordersResponse.data} />
       <PaginationFrame>
         <Pagination
-          currentPage={currentPageCurrent}
-          numOfPages={totalPagesCurrent}
-          setCurrentPage={setCurrentPageCurrent}
+          currentPage={ordersResponse.page}
+          numOfPages={ordersResponse.pageCount}
+          setCurrentPage={() => {}}
         />
       </PaginationFrame>
-      <HeaderFrame>
-        <HeaderH5Bold text={t('archive')} />
+      {/* <HeaderFrame>
+        <HeaderH5Bold text={`${t('archive')} ${'not working'}`} />
       </HeaderFrame>
       <OrderList
         onClick={() => {}}
@@ -54,7 +63,7 @@ const OrderListBox = (props: Props) => {
           numOfPages={totalPagesArchive}
           setCurrentPage={setCurrentPageArchive}
         />
-      </PaginationFrame>
+      </PaginationFrame> */}
     </Container>
   )
 }

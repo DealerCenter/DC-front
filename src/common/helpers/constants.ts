@@ -68,9 +68,9 @@ export type OrdersQueryType =
   | {
       page?: number
       pageSize?: number
-      sortByCreateDate: 'asc' | 'desc' | null
-      sortByCost: 'asc' | 'desc' | null
-      status: ShippingStatus
+      sortByCreateDate?: 'asc' | 'desc' | null
+      sortByCost?: 'asc' | 'desc' | null
+      status?: ShippingStatus
       dealerId?: number
     }
   | undefined

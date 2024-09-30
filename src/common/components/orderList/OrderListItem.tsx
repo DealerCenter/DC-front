@@ -8,28 +8,19 @@ import ShippingStateBox from '../../../app/[locale]/dealer/order-history/compone
 import { useMediaQuery } from 'react-responsive'
 import { dummyShippingSteps } from '@/assets/DummyData'
 import theme from '@/app/[locale]/theme'
+import { ORDER_DATA } from '@/api/apiTypes'
 
 type Props = {
   imageLink: string
   index: number
   shippingStep: 0 | 1 | 2 | 3 | 4
-  item: {
-    brand: string
-    model: string
-    year: string
-    vinCode: string
-    buyerFullName: string
-    buyerPhoneNumber: string
-    debt: number
-    isArrived: boolean
-    arrivalState: string
-  }
+  orderData: ORDER_DATA
   onClick: () => void
 }
 
 const OrderListItem = ({
   imageLink,
-  item,
+  orderData,
   index,
   shippingStep,
   onClick,
@@ -38,33 +29,24 @@ const OrderListItem = ({
     query: theme.media?.md,
   })
 
-  const {
-    brand,
-    model,
-    year,
-    vinCode,
-    buyerFullName,
-    buyerPhoneNumber,
-    debt,
-    isArrived,
-    arrivalState,
-  } = item
+  const { manufacturer, model, vin, manufactureYear, status, receiver } =
+    orderData
 
   return (
     <Container index={index} onClick={onClick}>
       <Frame>
         <CarDetailsBox
           imageLink={imageLink}
-          brand={brand}
+          brand={manufacturer}
           model={model}
-          year={year}
-          vinCode={vinCode}
+          year={manufactureYear.toString()}
+          vinCode={vin}
         />
         <MiddleFrame>
           <UserInfoBox
-            isArrived={isArrived}
-            buyerFullName={buyerFullName}
-            buyerPhoneNumber={buyerPhoneNumber}
+            isArrived={true}
+            buyerFullName={`${receiver.firstName} ${receiver.lastName}`}
+            buyerPhoneNumber={receiver.phoneNumber}
           />
           {isTablet || (
             <ShippingStateBoxFrame>
@@ -76,7 +58,7 @@ const OrderListItem = ({
           )}
         </MiddleFrame>
       </Frame>
-      <DebtBox amount={debt} arrivalState={arrivalState} />
+      {/* <DebtBox amount={debt} arrivalState={arrivalState} /> */}
     </Container>
   )
 }

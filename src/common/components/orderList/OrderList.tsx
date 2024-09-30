@@ -3,41 +3,27 @@ import OrderListItem from './OrderListItem'
 import styled from 'styled-components'
 
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
+import { ORDER_DATA } from '@/api/apiTypes'
 
 type Props = {
   onClick: () => void
-  currentPage: number
-  itemsPerPage: number
-  list: {
-    brand: string
-    model: string
-    year: string
-    vinCode: string
-    buyerFullName: string
-    buyerPhoneNumber: string
-    debt: number
-    isArrived: boolean
-    arrivalState: string
-  }[]
+  orderData: ORDER_DATA[]
 }
 
-const OrderList = ({ list, onClick, currentPage, itemsPerPage }: Props) => {
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  const currentItems = list.slice(startIndex, endIndex)
-
+const OrderList = ({ onClick, orderData }: Props) => {
   return (
     <ListFrame>
-      {currentItems.map((car, i) => (
-        <OrderListItem
-          onClick={onClick}
-          imageLink={DummyImage.src}
-          item={car}
-          key={`${car.vinCode}82kj32${i}`}
-          index={i}
-          shippingStep={2}
-        />
-      ))}
+      {orderData &&
+        orderData.map((order, i) => (
+          <OrderListItem
+            onClick={onClick}
+            imageLink={DummyImage.src}
+            orderData={order}
+            key={`${order.vin}82kj32${i}`}
+            index={i}
+            shippingStep={2}
+          />
+        ))}
     </ListFrame>
   )
 }

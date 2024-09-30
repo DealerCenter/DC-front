@@ -11,7 +11,7 @@ import {
   VerificationStatusType,
 } from '@/common/helpers/constants'
 
-type Props = { verificationStatus: string }
+type Props = { verificationStatus: VerificationStatusType }
 
 const VerificationIcon = ({ verificationStatus }: Props) => {
   return (

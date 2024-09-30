@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 import { useRouter } from '@/navigation'
@@ -15,13 +15,72 @@ import PdfAndImageBox from './components/PdfAndImageBox'
 
 import userImage from '@/assets/images/userImage.png'
 import OrderListBox from './components/OrderListBox'
+import { getDealerWithId, getOrders } from '@/api/apiCalls'
+import { DEALERS_DATA, ORDER_DATA, ORDERS_GET_RES } from '@/api/apiTypes'
+import LoadingText from '@/common/components/readyComponents/LoadingText'
+import Page from '../../page'
+
+const ITEMS_PER_PAGE = 8
 
 type Props = {}
 
+const dummyUserId = 62
+
 const UserProfile = (props: Props) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [dealerData, setDealerData] = useState<DEALERS_DATA>()
+  const [ordersResponse, setOrdersResponse] = useState<ORDERS_GET_RES>()
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const router = useRouter()
+
+  const handleGetDealer = async () => {
+    setIsLoading(true)
+    const response = await getDealerWithId(dummyUserId)
+    if (response) {
+      setDealerData(response)
+    }
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    handleGetDealer()
+  }, [])
+
+  const handleGetOrders = async () => {
+    const response = await getOrders(
+      {
+        page: currentPage,
+        pageSize: ITEMS_PER_PAGE,
+        dealerId: undefined,
+      },
+      true
+    )
+    if (response) {
+      setOrdersResponse(response)
+    }
+  }
+
+  useEffect(() => {
+    handleGetOrders()
+    //eslint-disable-next-line
+  }, [])
+
+  if (!dealerData) {
+    return (
+      <Container>
+        <TopButtonsFrame>
+          <AppGoBackButton
+            onClick={() => router.push(routeName.adminDealersList)}
+            text={t('return to dealers list')}
+            noTextOnMobile={true}
+          />
+        </TopButtonsFrame>
+        <LoadingText />
+      </Container>
+    )
+  }
 
   return (
     <Container>
@@ -35,7 +94,7 @@ const UserProfile = (props: Props) => {
       </TopButtonsFrame>
       <Frame>
         {isMobile && <PdfAndImageBox image={userImage.src} />}
-        <DealerDataBox />
+        <DealerDataBox dealerData={dealerData} />
         <MiddleFrame>
           <LabelValueBox label={t('current debt')} value={'$ 5,750'} />
           <LabelValueBox label={t('cars on the way')} value={'12'} />
@@ -43,7 +102,12 @@ const UserProfile = (props: Props) => {
         </MiddleFrame>
         {!isMobile && <PdfAndImageBox image={userImage.src} />}
       </Frame>
-      <OrderListBox />
+      {ordersResponse && (
+        <OrderListBox
+          headerText={t('current orders')}
+          ordersResponse={ordersResponse}
+        />
+      )}
     </Container>
   )
 }
