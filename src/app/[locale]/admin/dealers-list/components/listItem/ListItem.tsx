@@ -16,37 +16,11 @@ type Props = {
 
 const ListItem = ({ onClick, userData }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+  console.log(userData.receivers)
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [totalPages, setTotalPages] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1)
   const [dealerId, setDealerId] = useState(0)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [receiversList, setReceiversList] = useState<RECEIVER_DATA[]>()
-
-  const handleGetReceivers = async () => {
-    setIsLoading(true)
-    const response = await getReceivers(
-      {
-        page: currentPage,
-        pageSize: ITEMS_PER_PAGE,
-        // dealerId: 80,
-      },
-      isAdmin
-    )
-    if (response) {
-      console.log('receiversList res:', response.data)
-      setReceiversList(response.data)
-      setCurrentPage(response.page)
-      setTotalPages(response.pageCount)
-    }
-    setIsLoading(false)
-  }
-
-  useEffect(() => {
-    isDropdownOpen && handleGetReceivers()
-    //eslint-disable-next-line
-  }, [isDropdownOpen])
 
   return (
     <>
@@ -56,8 +30,6 @@ const ListItem = ({ onClick, userData }: Props) => {
           userData={userData}
           isDropdownOpen={isDropdownOpen}
           setIsDropdownOpen={setIsDropdownOpen}
-          setDealerId={setDealerId}
-          receiversList={receiversList}
         />
       ) : (
         <ListItemFull
@@ -65,8 +37,6 @@ const ListItem = ({ onClick, userData }: Props) => {
           userData={userData}
           isDropdownOpen={isDropdownOpen}
           setIsDropdownOpen={setIsDropdownOpen}
-          setDealerId={setDealerId}
-          receiversList={receiversList}
         />
       )}
     </>

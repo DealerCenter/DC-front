@@ -7,11 +7,9 @@ import { VERIFICATION_STATUS_NAME } from '@/common/helpers/constants'
 import DeleteWarning from '../addRecipient/components/DeleteWarning'
 import AppModal from '@/common/components/modal/AppModal'
 
-import checkedGreen from '@/assets/icons/checkedGreen.svg'
-import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
-import uncheckedYellow from '@/assets/icons/uncheckedYellow.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
+import VerificationIcon from '@/common/components/readyIcons/verificationIcon'
 
 type Props = {
   id: number
@@ -50,30 +48,7 @@ const ListItemFull = ({
         <Label>{phoneNumber}</Label>
         <Label>{formattedDate}</Label>
         <Label>
-          {verificationStatus === VERIFICATION_STATUS_NAME.VERIFIED ? (
-            <Image
-              src={checkedGreen}
-              alt='checked icon'
-              width={20}
-              height={20}
-            />
-          ) : verificationStatus === VERIFICATION_STATUS_NAME.UNVERIFIED ? (
-            <Image
-              src={uncheckedRed}
-              alt='unchecked icon'
-              width={20}
-              height={20}
-            />
-          ) : (
-            verificationStatus === VERIFICATION_STATUS_NAME.PENDING && (
-              <Image
-                src={uncheckedYellow}
-                alt='pending icon'
-                width={20}
-                height={20}
-              />
-            )
-          )}
+          <VerificationIcon verificationStatus={verificationStatus} />
         </Label>
         <IconBox>
           <Icon>

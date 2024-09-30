@@ -12,14 +12,13 @@ import downArrowGray from '@/assets/icons/downArrowGray.svg'
 import ListItemMobileDropdown from './ListItemMobileDropdown'
 import { DEALERS_DATA, RECEIVER_DATA } from '@/api/apiTypes'
 import { formatDate } from '@/common/helpers/simpleFunctions'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
 
 type Props = {
   onClick: () => void
   userData: DEALERS_DATA
-  receiversList: RECEIVER_DATA[] | undefined
   isDropdownOpen: boolean
   setIsDropdownOpen: (arg: boolean) => void
-  setDealerId: (arg: number) => void
   isDisabled?: boolean
 }
 
@@ -33,18 +32,18 @@ const ListItemMobile = ({
     createdAt,
     phoneNumber,
     idImageVerificationStatus,
+    receivers,
   },
-  receiversList,
   isDropdownOpen,
   setIsDropdownOpen,
-  setDealerId,
   isDisabled,
 }: Props) => {
   const t = useTranslations('')
 
   const handleDropdown = (e: any) => {
     e.stopPropagation()
-    setDealerId(id)
+    if (receivers?.length === 0) return
+
     !isDisabled && setIsDropdownOpen(!isDropdownOpen)
   }
 
@@ -57,11 +56,9 @@ const ListItemMobile = ({
           >{`${firstName} ${lastName}`}</NameLabel>
           <IconAndDebtBox>
             <Icon>
-              {idImageVerificationStatus ? (
-                <Image src={checkedGreen} alt='checked icon' />
-              ) : (
-                <Image src={uncheckedRed} alt='unchecked icon' />
-              )}
+              <VerificationIcon
+                verificationStatus={idImageVerificationStatus}
+              />
             </Icon>
             <DebtLabel>{`$ 5750`}</DebtLabel>
           </IconAndDebtBox>
@@ -86,8 +83,8 @@ const ListItemMobile = ({
       </DropdownBox>
       {isDropdownOpen && <></>}
       {isDropdownOpen &&
-        receiversList &&
-        receiversList.map((receiver, i) => (
+        receivers &&
+        receivers.map((receiver, i) => (
           <ListItemMobileDropdown
             key={`listItemFullDropdown${receiver.personalId}`}
             onClick={() => {}}

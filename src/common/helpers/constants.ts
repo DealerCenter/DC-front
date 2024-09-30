@@ -54,6 +54,8 @@ export const SHIPPING_STATUS = {
   SENT: 'Sent',
 }
 
+export type VerificationStatusType = 'PENDING' | 'VERIFIED' | 'UNVERIFIED'
+
 export type ShippingStatus =
   | 'InAuction'
   | 'InAmericanWarehouse'
@@ -93,47 +95,3 @@ export type ReceiversQueryType =
       dealerId?: number
     }
   | undefined
-
-// export const ORDER_CONSTANTS = {
-//   ID: 'id',
-//   CREATED_AT: 'createdAt',
-//   UPDATED_AT: 'updatedAt',
-//   MANUFACTURER: 'manufacturer',
-//   MANUFACTURE_YEAR: 'manufactureYear',
-//   CAR_DETAILS: 'carDetails',
-//   ADDITIONAL_INFORMATION: 'additionalInformation',
-//   MODEL: 'model',
-//   VIN: 'vin',
-//   TRANSPORTATION_COST: 'transportationCost',
-//   CAR_COST: 'carCost',
-//   EXACT_ADDRESS: 'exactAddress',
-//   IS_INSURED: 'isInsured',
-//   CAR_CATEGORY: 'carCategory',
-//   MILEAGE: 'mileage',
-//   STATUS: 'status',
-//   STATE: {
-//     ID: 'state.id',
-//     CREATED_AT: 'state.createdAt',
-//     UPDATED_AT: 'state.updatedAt',
-//     NAME: 'state.name',
-//   },
-//   CONTAINER: {
-//     ID: 'container.id',
-//     CREATED_AT: 'container.createdAt',
-//     UPDATED_AT: 'container.updatedAt',
-//     NAME: 'container.name',
-//     TRACKING_URL: 'container.trackingUrl',
-//   },
-//   RECEIVER: {
-//     ID: 'receiver.id',
-//     CREATED_AT: 'receiver.createdAt',
-//     UPDATED_AT: 'receiver.updatedAt',
-//     FIRST_NAME: 'receiver.firstName',
-//     LAST_NAME: 'receiver.lastName',
-//     PERSONAL_ID: 'receiver.personalId',
-//     PHONE_NUMBER: 'receiver.phoneNumber',
-//     VERIFICATION_STATUS: 'receiver.verificationStatus',
-//     IS_JURIDICAL: 'receiver.isJuridical',
-//     ID_IMAGE_URL: 'receiver.idImageUrl',
-//   },
-// }

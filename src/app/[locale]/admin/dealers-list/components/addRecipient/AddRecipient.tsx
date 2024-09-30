@@ -16,7 +16,6 @@ type Props = { onClose: () => void }
 const AddRecipient = ({ onClose }: Props) => {
   const t = useTranslations('')
   const [type, setType] = useState<'individual' | 'legalPerson'>('individual')
-  const dummyValue = 'something'
 
   return (
     <Container>
@@ -40,76 +39,47 @@ const AddRecipient = ({ onClose }: Props) => {
           />
         </ChooseTypeFrame>
       </FrameTop>
-      {type === 'individual' && (
-        <InputFieldsFrame>
-          <TextInput
-            type='text'
-            name='name'
-            placeholder='name'
-            value={dummyValue}
-            onChange={() => {}}
-            onBlur={() => {}}
-          ></TextInput>
-          <TextInput
-            type='text'
-            name='surname'
-            placeholder='surname'
-            value={dummyValue}
-            onChange={() => {}}
-            onBlur={() => {}}
-          ></TextInput>
-          <TextInput
-            type='text'
-            name='personalNumber'
-            placeholder='personalNumber'
-            value={dummyValue}
-            onChange={() => {}}
-            onBlur={() => {}}
-          ></TextInput>
-          <TextInput
-            type='text'
-            name='mobileNumber'
-            placeholder='mobileNumber'
-            value={dummyValue}
-            onChange={() => {}}
-            onBlur={() => {}}
-          ></TextInput>
-          <FileDropZone
-            dropText={t('drop the file')}
-            text={t('upload an ID photo')}
-            uploadedText={t('photo uploaded')}
-            warningText={t('add an id photo')}
-          />
-        </InputFieldsFrame>
-      )}
-      {type === 'legalPerson' && (
-        <InputFieldsFrame>
-          <TextInput
-            type='text'
-            name='companyName'
-            placeholder='companyName'
-            value={'companyName'}
-            onChange={() => {}}
-            onBlur={() => {}}
-          ></TextInput>
-          <TextInput
-            type='text'
-            name='contactNumber'
-            placeholder='contactNumber'
-            value={'contactNumber'}
-            onChange={() => {}}
-            onBlur={() => {}}
-          ></TextInput>
-          <TextInput
-            type='text'
-            name='identificationNumber'
-            placeholder='identificationNumber'
-            value={'identificationNumber'}
-            onChange={() => {}}
-            onBlur={() => {}}
-          ></TextInput>
-        </InputFieldsFrame>
-      )}
+
+      <InputFieldsFrame>
+        <TextInput
+          type='text'
+          name='name'
+          placeholder='name'
+          value=''
+          onChange={() => {}}
+          onBlur={() => {}}
+        ></TextInput>
+        <TextInput
+          type='text'
+          name='surname'
+          placeholder='surname'
+          value=''
+          onChange={() => {}}
+          onBlur={() => {}}
+        ></TextInput>
+        <TextInput
+          type='text'
+          name='personalNumber'
+          placeholder='personalNumber'
+          value=''
+          onChange={() => {}}
+          onBlur={() => {}}
+        ></TextInput>
+        <TextInput
+          type='text'
+          name='mobileNumber'
+          placeholder='mobileNumber'
+          value=''
+          onChange={() => {}}
+          onBlur={() => {}}
+        ></TextInput>
+        <FileDropZone
+          dropText={t('drop the file here')}
+          text={t('upload an ID photo')}
+          uploadedText={t('photo uploaded')}
+          warningText={t('add an id photo')}
+        />
+      </InputFieldsFrame>
 
       <AppButton
         text={t('add')}

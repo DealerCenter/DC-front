@@ -11,12 +11,17 @@ import searchIcon from '@/assets/icons/searchForButton.svg'
 import DealersList from './components/DealersList'
 import { getDealers } from '@/api/apiCalls'
 import { DEALERS_DATA, DEALERS_RES } from '@/api/apiTypes'
+import SearchButton from '@/common/components/searchButton/SearchButton'
+import Pagination from '@/common/components/pagination/Pagination'
+import AddRecipient from './components/addRecipient/AddRecipient'
+import AppModal from '@/common/components/modal/AppModal'
 
 const ITEMS_PER_PAGE = 8
 
 type Props = {}
 
 const DealersListBox = (props: Props) => {
+  const [isSearchActive, setIsSearchActive] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
@@ -36,8 +41,6 @@ const DealersListBox = (props: Props) => {
       personalId: '',
     })
     if (response) {
-      console.log('res:', response.data)
-      // setIsPageLoaded(true)
       setDealersList(response.data)
       setCurrentPage(response.page)
       setTotalPages(response.pageCount)
@@ -48,17 +51,20 @@ const DealersListBox = (props: Props) => {
   useEffect(() => {
     handleGetDealers()
     //eslint-disable-next-line
-  }, [])
+  }, [currentPage])
 
   return (
     <Container>
       <Frame>
         <HeaderH4Bold text={t('dealers list')} />
         <ButtonFrame>
-          <SecondaryButton
+          <SearchButton
+            isActive={isSearchActive}
+            setIsActive={setIsSearchActive}
             text={t('search')}
-            onClick={() => {}}
-            icon={searchIcon}
+            placeholder={t('search for dealer')}
+            onSubmit={() => {}}
+            onCloseSearch={() => {}}
           />
           <SecondaryButton
             text={t('add recipient')}
@@ -70,6 +76,20 @@ const DealersListBox = (props: Props) => {
         </ButtonFrame>
       </Frame>
       {dealersList && <DealersList dealersData={dealersList} />}
+      <PaginationFrame>
+        <Pagination
+          currentPage={currentPage}
+          numOfPages={totalPages}
+          setCurrentPage={setCurrentPage}
+          isDisabled={isLoading}
+        />
+      </PaginationFrame>
+      <AppModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <AddRecipient onClose={() => setIsModalOpen(false)} />
+      </AppModal>
     </Container>
   )
 }
@@ -116,4 +136,10 @@ const ButtonFrame = styled.div`
   flex-direction: row;
   gap: 10px;
   padding: 8px 0 24px 0;
+`
+
+const PaginationFrame = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: ${({ theme }) => theme.spacing?.md};
 `

@@ -205,5 +205,5 @@ type DEALERS_DATA = {
   idImageVerificationStatus: string
   juridicalDocUrl: string | null
   juridicalDocVerificationStatus: string
-  receivers?: any[]
+  receivers?: RECEIVER_DATA[] | []
 }

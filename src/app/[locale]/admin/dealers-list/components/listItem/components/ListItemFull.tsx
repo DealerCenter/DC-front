@@ -5,22 +5,19 @@ import styled, { css } from 'styled-components'
 import AppModal from '@/common/components/modal/AppModal'
 import DeleteWarning from '../../DeleteWarning'
 
-import checkedGreen from '@/assets/icons/checkedGreen.svg'
-import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 import dropDownIcon from '@/assets/icons/arrowDown.svg'
 import ListItemFullDropdown from './ListItemFullDropdown'
 import { DEALERS_DATA, RECEIVER_DATA } from '@/api/apiTypes'
 import { formatDate } from '@/common/helpers/simpleFunctions'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
 
 type Props = {
   onClick: () => void
   userData: DEALERS_DATA
-  receiversList: RECEIVER_DATA[] | undefined
   isDropdownOpen: boolean
   setIsDropdownOpen: (arg: boolean) => void
-  setDealerId: (arg: number) => void
   isDisabled?: boolean
 }
 
@@ -34,29 +31,33 @@ const ListItemFull = ({
     createdAt,
     phoneNumber,
     idImageVerificationStatus,
+    receivers,
   },
-  receiversList,
   isDropdownOpen,
   setIsDropdownOpen,
-  setDealerId,
   isDisabled,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  const withReceivers = receivers && receivers?.length > 0
+
   const handleDropdown = (e: any) => {
     e.stopPropagation()
-    setDealerId(id)
+    if (receivers?.length === 0) return
+
     !isDisabled && setIsDropdownOpen(!isDropdownOpen)
   }
 
-  // console.log('log from item id:', id)
+  console.log('status:', idImageVerificationStatus)
 
   return (
     <>
       <Container>
         <LabelBox>
           <DropdownIcon isOpen={isDropdownOpen} onClick={handleDropdown}>
-            <Image src={dropDownIcon} alt='down arrow icon' width={12} />
+            {withReceivers && (
+              <Image src={dropDownIcon} alt='down arrow icon' width={12} />
+            )}
           </DropdownIcon>
           <NameAndIdBox>
             <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
@@ -67,37 +68,34 @@ const ListItemFull = ({
         <Label>{formatDate(createdAt)}</Label>
         <DebtLabel>{`$ 5750`}</DebtLabel>
         <IconBox>
-          <Icon>
-            {idImageVerificationStatus ? (
-              <Image
-                src={checkedGreen}
-                alt='checked icon'
-                width={20}
-                height={20}
+          {withReceivers ? (
+            <>
+              <ReceiversNumberLabel>{receivers.length}</ReceiversNumberLabel>
+              <VerificationIcon
+                verificationStatus={idImageVerificationStatus}
               />
-            ) : (
-              <Image
-                src={uncheckedRed}
-                alt='unchecked icon'
-                width={20}
-                height={20}
+            </>
+          ) : (
+            <>
+              <VerificationIcon
+                verificationStatus={idImageVerificationStatus}
               />
-            )}
-          </Icon>
-          <Icon>
-            <Image
-              src={editPencil}
-              alt='edit icon'
-              onClick={isDisabled ? () => {} : onClick}
-            />
-          </Icon>
-          <Icon>
-            <Image
-              src={trashCan}
-              alt='trash icon'
-              onClick={() => setIsModalOpen(true)}
-            />
-          </Icon>
+              <Icon>
+                <Image
+                  src={editPencil}
+                  alt='edit icon'
+                  onClick={isDisabled ? () => {} : onClick}
+                />
+              </Icon>
+              <Icon>
+                <Image
+                  src={trashCan}
+                  alt='trash icon'
+                  onClick={() => setIsModalOpen(true)}
+                />
+              </Icon>
+            </>
+          )}
         </IconBox>
       </Container>
       <AppModal
@@ -110,8 +108,8 @@ const ListItemFull = ({
         />
       </AppModal>
       {isDropdownOpen &&
-        receiversList &&
-        receiversList.map((receiver, i) => (
+        receivers &&
+        receivers.map((receiver, i) => (
           <ListItemFullDropdown
             key={`listItemFullDropdown${receiver.personalId}`}
             onClick={() => {}}
@@ -159,6 +157,16 @@ const Label = styled.label`
   align-items: center;
   text-align: center;
   width: 120px;
+  color: ${({ theme }) => theme.colors?.main_gray_100};
+  font-size: 13px;
+`
+
+const ReceiversNumberLabel = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 40px;
   color: ${({ theme }) => theme.colors?.main_gray_100};
   font-size: 13px;
 `
