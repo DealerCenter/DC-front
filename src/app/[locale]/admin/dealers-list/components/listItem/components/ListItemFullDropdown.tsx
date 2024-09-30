@@ -10,23 +10,25 @@ import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 import dashedLine from '@/assets/icons/dashedLineGray.svg'
+import { RECEIVER_DATA } from '@/api/apiTypes'
+import { formatDate } from '@/common/helpers/simpleFunctions'
 
 type Props = {
-  fullName: string
-  id: string
-  mobile: string
-  dateOfAddition: string
-  isVerified: boolean
   onClick: () => void
+  receiverData: RECEIVER_DATA
 }
 
 const ListItemFullDropdown = ({
-  fullName,
-  id,
-  mobile,
-  dateOfAddition,
-  isVerified,
   onClick,
+  receiverData: {
+    id,
+    personalId,
+    firstName,
+    lastName,
+    phoneNumber,
+    createdAt,
+    verificationStatus,
+  },
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -39,16 +41,16 @@ const ListItemFullDropdown = ({
         <LabelBox>
           <Circle />
           <NameAndIdBox>
-            <NameLabel>{fullName}</NameLabel>
-            <IdLabel>{id}</IdLabel>
+            <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
+            <IdLabel>{personalId}</IdLabel>
           </NameAndIdBox>
         </LabelBox>
-        <Label>{mobile}</Label>
-        <Label>{dateOfAddition}</Label>
+        <Label>{phoneNumber}</Label>
+        <Label>{formatDate(createdAt)}</Label>
         <DebtLabel></DebtLabel>
         <IconBox>
           <Icon>
-            {isVerified ? (
+            {verificationStatus ? (
               <Image
                 src={checkedGreen}
                 alt='checked icon'

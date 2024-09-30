@@ -11,51 +11,64 @@ import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 import dropDownIcon from '@/assets/icons/arrowDown.svg'
 import ListItemFullDropdown from './ListItemFullDropdown'
+import { DEALERS_DATA, RECEIVER_DATA } from '@/api/apiTypes'
+import { formatDate } from '@/common/helpers/simpleFunctions'
 
 type Props = {
-  fullName: string
-  id: string
-  mobile: string
-  dateOfAddition: string
-  isVerified: boolean
   onClick: () => void
+  userData: DEALERS_DATA
+  receiversList: RECEIVER_DATA[] | undefined
+  isDropdownOpen: boolean
+  setIsDropdownOpen: (arg: boolean) => void
+  setDealerId: (arg: number) => void
+  isDisabled?: boolean
 }
 
 const ListItemFull = ({
-  fullName,
-  id,
-  mobile,
-  dateOfAddition,
-  isVerified,
   onClick,
+  userData: {
+    id,
+    personalId,
+    firstName,
+    lastName,
+    createdAt,
+    phoneNumber,
+    idImageVerificationStatus,
+  },
+  receiversList,
+  isDropdownOpen,
+  setIsDropdownOpen,
+  setDealerId,
+  isDisabled,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  const handleDropdown = (e: any) => {
+    e.stopPropagation()
+    setDealerId(id)
+    !isDisabled && setIsDropdownOpen(!isDropdownOpen)
+  }
+
+  // console.log('log from item id:', id)
 
   return (
     <>
       <Container>
         <LabelBox>
-          <DropdownIcon
-            isOpen={isDropdownOpen}
-            onClick={(e) => {
-              e.stopPropagation()
-              setIsDropdownOpen((is) => !is)
-            }}
-          >
+          <DropdownIcon isOpen={isDropdownOpen} onClick={handleDropdown}>
             <Image src={dropDownIcon} alt='down arrow icon' width={12} />
           </DropdownIcon>
           <NameAndIdBox>
-            <NameLabel>{fullName}</NameLabel>
-            <IdLabel>{id}</IdLabel>
+            <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
+            <IdLabel>{personalId}</IdLabel>
           </NameAndIdBox>
         </LabelBox>
-        <Label>{mobile}</Label>
-        <Label>{dateOfAddition}</Label>
+        <Label>{phoneNumber}</Label>
+        <Label>{formatDate(createdAt)}</Label>
         <DebtLabel>{`$ 5750`}</DebtLabel>
         <IconBox>
           <Icon>
-            {isVerified ? (
+            {idImageVerificationStatus ? (
               <Image
                 src={checkedGreen}
                 alt='checked icon'
@@ -72,7 +85,11 @@ const ListItemFull = ({
             )}
           </Icon>
           <Icon>
-            <Image src={editPencil} alt='edit icon' onClick={onClick} />
+            <Image
+              src={editPencil}
+              alt='edit icon'
+              onClick={isDisabled ? () => {} : onClick}
+            />
           </Icon>
           <Icon>
             <Image
@@ -92,26 +109,15 @@ const ListItemFull = ({
           onDelete={() => console.log('delete')}
         />
       </AppModal>
-      {isDropdownOpen && (
-        <>
+      {isDropdownOpen &&
+        receiversList &&
+        receiversList.map((receiver, i) => (
           <ListItemFullDropdown
-            onClick={onClick}
-            fullName={fullName}
-            id={id}
-            mobile={mobile}
-            dateOfAddition={dateOfAddition}
-            isVerified={isVerified}
+            key={`listItemFullDropdown${receiver.personalId}`}
+            onClick={() => {}}
+            receiverData={receiver}
           />
-          <ListItemFullDropdown
-            onClick={onClick}
-            fullName={fullName}
-            id={id}
-            mobile={mobile}
-            dateOfAddition={dateOfAddition}
-            isVerified={isVerified}
-          />
-        </>
-      )}
+        ))}
     </>
   )
 }

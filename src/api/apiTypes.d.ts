@@ -83,6 +83,14 @@ type RECEIVER_POST_RES = {
 }
 
 type RECEIVER_GET_RES = {
+  page: number
+  pageCount: number
+  pageSize: number
+  total: number
+  data: RECEIVER_DATA[]
+}
+
+type RECEIVER_DATA = {
   id: number
   firstName: string
   lastName: string
@@ -171,4 +179,31 @@ type ADMIN_GET_RES = {
   updatedAt: string
   username: string
   roleIds: number[]
+}
+
+type DEALERS_RES = {
+  page: number
+  pageCount: number
+  pageSize: number
+  total: number
+  data: DEALERS_DATA[]
+}
+
+type DEALERS_DATA = {
+  id: number
+  createdAt: string
+  updatedAt: string
+  firstName: string
+  lastName: string
+  email: string
+  phoneNumber: string
+  isJuridical: boolean
+  address: string
+  personalId: string
+  birthDate: string
+  idImageUrl: string
+  idImageVerificationStatus: string
+  juridicalDocUrl: string | null
+  juridicalDocVerificationStatus: string
+  receivers?: any[]
 }

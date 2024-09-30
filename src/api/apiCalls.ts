@@ -1,11 +1,17 @@
 import { handleLogout } from '@/common/helpers/utils'
 import axiosInstance from './apiClient'
 import { endpoints } from './endpoints'
-import { OrdersQueryType, ShippingStatus } from '@/common/helpers/constants'
+import {
+  DealersQueryType,
+  OrdersQueryType,
+  ReceiversQueryType,
+  ShippingStatus,
+} from '@/common/helpers/constants'
 import {
   ADMIN_GET_RES,
   CONTAINER_GET_RES,
   CONTAINER_POST_RES,
+  DEALERS_RES,
   ME_RES,
   ORDERS_GET_RES,
   RECEIVER_GET_RES,
@@ -194,18 +200,30 @@ export const getOrders = async (
   }
 }
 
-export const getReceivers = async (payload: {
-  skip: number
-  take: number
-  search: string
-}) => {
+export const getDealers = async (payload: DealersQueryType) => {
   try {
-    const response = await axiosInstance.get<RECEIVER_GET_RES[]>(
-      endpoints.RECEIVERS,
+    const response = await axiosInstance.get<DEALERS_RES>(
+      endpoints.DEALERS_ADMIN,
       {
         params: payload, // Pass payload as query parameters
       }
     )
+    return response.data
+  } catch (error) {
+    console.error('Failed to fetch dealers data:', error)
+  }
+}
+
+export const getReceivers = async (
+  payload: ReceiversQueryType,
+  isAdmin?: boolean
+) => {
+  const endpoint = isAdmin ? endpoints.RECEIVERS_ADMIN : endpoints.RECEIVERS
+
+  try {
+    const response = await axiosInstance.get<RECEIVER_GET_RES>(endpoint, {
+      params: payload, // Pass payload as query parameters
+    })
     return response.data
   } catch (error) {
     console.error('Error getting receivers:', error)

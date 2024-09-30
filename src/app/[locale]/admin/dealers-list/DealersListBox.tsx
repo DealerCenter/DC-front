@@ -1,26 +1,54 @@
-import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
+import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 
-import searchIcon from '@/assets/icons/searchForButton.svg'
-import plusIcon from '@/assets/icons/plus.svg'
-import UserListEmpty from './components/UserListEmpty'
-import AddRecipient from './components/addRecipient/AddRecipient'
-import AppModal from '@/common/components/modal/AppModal'
 import { users as dummyUsers } from '@/assets/DummyData'
+import plusIcon from '@/assets/icons/plus.svg'
+import searchIcon from '@/assets/icons/searchForButton.svg'
 import DealersList from './components/DealersList'
-import { getReceiversAdmin } from '@/api/apiCalls'
+import { getDealers } from '@/api/apiCalls'
+import { DEALERS_DATA, DEALERS_RES } from '@/api/apiTypes'
+
+const ITEMS_PER_PAGE = 8
 
 type Props = {}
 
 const DealersListBox = (props: Props) => {
-  const t = useTranslations('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [totalPages, setTotalPages] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [dealersList, setDealersList] = useState<DEALERS_DATA[]>()
+  const t = useTranslations('')
 
-  getReceiversAdmin('62')
+  const handleGetDealers = async () => {
+    setIsLoading(true)
+    const response = await getDealers({
+      page: currentPage,
+      pageSize: ITEMS_PER_PAGE,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      personalId: '',
+    })
+    if (response) {
+      console.log('res:', response.data)
+      // setIsPageLoaded(true)
+      setDealersList(response.data)
+      setCurrentPage(response.page)
+      setTotalPages(response.pageCount)
+    }
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    handleGetDealers()
+    //eslint-disable-next-line
+  }, [])
 
   return (
     <Container>
@@ -41,7 +69,7 @@ const DealersListBox = (props: Props) => {
           />
         </ButtonFrame>
       </Frame>
-      <DealersList dealersData={dummyUsers} />
+      {dealersList && <DealersList dealersData={dealersList} />}
     </Container>
   )
 }

@@ -13,8 +13,9 @@ export const endpoints = {
   HEALTH: '/health',
 
   ORDERS_ADMIN: '/orders',
-  CONTAINERS_ADMIN: '/containers',
+  DEALERS_ADMIN: '/dealers',
   RECEIVERS_ADMIN: '/receivers',
+  CONTAINERS_ADMIN: '/containers',
   GET_CONTAINERS_BY_ORDER_ID_ADMIN: '/containers/by-order',
 
   ADMINS: '/admins',

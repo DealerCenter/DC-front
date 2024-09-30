@@ -73,6 +73,27 @@ export type OrdersQueryType =
     }
   | undefined
 
+export type DealersQueryType =
+  | {
+      page?: number
+      pageSize?: number
+      firstName?: string
+      lastName?: string
+      email?: string
+      phoneNumber?: string
+      personalId?: string
+    }
+  | undefined
+
+export type ReceiversQueryType =
+  | {
+      page?: number
+      pageSize?: number
+      search?: string
+      dealerId?: number
+    }
+  | undefined
+
 // export const ORDER_CONSTANTS = {
 //   ID: 'id',
 //   CREATED_AT: 'createdAt',
