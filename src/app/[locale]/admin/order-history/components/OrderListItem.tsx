@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import CarImageAndModelBox from './CarImageAndModelBox'
 import DetailsBox from './DetailsBox'
 
-import { ORDERS_GET_RES } from '@/api/apiTypes'
+import { ORDER_DATA, ORDERS_GET_RES } from '@/api/apiTypes'
 import theme from '@/app/[locale]/theme'
 import grabHandle from '@/assets/icons/GrabHandle2x3Dots.svg'
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
@@ -15,7 +15,7 @@ import StatusAndDebtBoxMobile from './StatusAndDebtBoxMobile'
 
 type Props = {
   imageLink: string
-  item: ORDERS_GET_RES
+  item: ORDER_DATA
   onClick: () => void
   isEditing: boolean
 }

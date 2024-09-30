@@ -64,6 +64,8 @@ export type ShippingStatus =
 
 export type OrdersQueryType =
   | {
+      page?: number
+      pageSize?: number
       sortByCreateDate: 'asc' | 'desc' | null
       sortByCost: 'asc' | 'desc' | null
       status: ShippingStatus

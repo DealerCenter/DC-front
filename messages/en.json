@@ -302,6 +302,9 @@
 
   "must be valid email": "Must be a valid email",
 
+  "username required": "Username required",
+  "username": "Username",
+
   "InAuction": "In Auction",
   "InAmericanWarehouse": "In American warehouse",
   "InContainer": "In Container",

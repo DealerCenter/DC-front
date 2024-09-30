@@ -302,6 +302,9 @@
 
   "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 
+  "username required": "მომხმარებლის სახელი საჭიროა",
+  "username": "მომხმარებლის სახელი",
+
   "InAuction": "აუქციონზე",
   "InAmericanWarehouse": "ამერიკულ საწყობში",
   "InContainer": "კონტეინერში",

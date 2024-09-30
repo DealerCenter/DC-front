@@ -8,35 +8,38 @@ import ButtonsRow from './components/ButtonsRow'
 import OrderList from './components/OrderList'
 
 import { getOrders } from '@/api/apiCalls'
-import { ORDERS_GET_RES } from '@/api/apiTypes'
+import { ORDER_DATA, ORDERS_GET_RES } from '@/api/apiTypes'
 import { routeName, ShippingStatus } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
 import AddYourFirstTask from './components/AddYourFirstTask'
 
-const itemsPerPage = 8
+const ITEMS_PER_PAGE = 8
 
 const isAdmin = true
 
 type Props = {}
 
 const OrderHistory = (props: Props) => {
+  const [isLoading, setIsLoading] = useState(false)
   const [isPageLoaded, setIsPageLoaded] = useState(false)
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [isEditing, setIsEditing] = useState(false)
-  const [ordersList, setOrdersList] = useState<ORDERS_GET_RES>()
+  const [ordersList, setOrdersList] = useState<ORDER_DATA[]>()
   const [sortByCost, setSortByCost] = useState<'asc' | 'desc' | null>(null)
   const [sortByCreateDate, setSortByCreateDate] = useState<
     'asc' | 'desc' | null
   >(null)
   const [shippingStatus, setShippingStatus] = useState<ShippingStatus>(null)
-  // const [filterQueries, setFilterQueries] = useState<OrdersQueryType>()
   const router = useRouter()
   const t = useTranslations('')
 
   const handleGetOrders = async () => {
+    setIsLoading(true)
     const response = await getOrders(
       {
+        page: currentPage,
+        pageSize: ITEMS_PER_PAGE,
         sortByCreateDate: sortByCreateDate,
         sortByCost: sortByCost,
         status: shippingStatus,
@@ -46,13 +49,16 @@ const OrderHistory = (props: Props) => {
     if (response) {
       setIsPageLoaded(true)
       setOrdersList(response.data)
+      setCurrentPage(response.page)
+      setTotalPages(response.pageCount)
     }
+    setIsLoading(false)
   }
 
   useEffect(() => {
     handleGetOrders()
     //eslint-disable-next-line
-  }, [sortByCost, sortByCreateDate, shippingStatus])
+  }, [sortByCost, sortByCreateDate, shippingStatus, currentPage])
 
   return (
     <Container>
@@ -63,22 +69,14 @@ const OrderHistory = (props: Props) => {
           setIsEditing={setIsEditing}
           setSortByCost={setSortByCost}
           setSortByCreateDate={setSortByCreateDate}
-          isPageLoaded={isPageLoaded}
+          isButtonsDisabled={!isPageLoaded}
           shippingStatus={shippingStatus}
           setShippingStatus={setShippingStatus}
         />
       </TopFrame>
 
       {ordersList && ordersList?.length > 0 ? (
-        <OrderList
-          onClick={() => {}}
-          list={ordersList}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          itemsPerPage={itemsPerPage}
-          isEditing={isEditing}
-          setTotalPages={setTotalPages}
-        />
+        <OrderList onClick={() => {}} list={ordersList} isEditing={isEditing} />
       ) : (
         <AddYourFirstTask
           onClick={() => router.push(routeName.adminCreateOrder)}
@@ -89,6 +87,7 @@ const OrderHistory = (props: Props) => {
           currentPage={currentPage}
           numOfPages={totalPages}
           setCurrentPage={setCurrentPage}
+          isDisabled={isLoading}
         />
       </PaginationFrame>
     </Container>

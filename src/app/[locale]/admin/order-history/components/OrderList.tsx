@@ -6,27 +6,15 @@ import DummyImage from '@/assets/images/DummyCarImage.jpg'
 import OrderListHeader from './OrderListHeader'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
-import { ORDERS_GET_RES } from '@/api/apiTypes'
+import { ORDER_DATA, ORDERS_GET_RES } from '@/api/apiTypes'
 
 type Props = {
+  list: ORDER_DATA[]
   onClick: () => void
-  currentPage: number
-  itemsPerPage: number
-  list: ORDERS_GET_RES[]
   isEditing: boolean
-  setTotalPages: (arg1: number) => void
-  setCurrentPage: (arg1: number) => void
 }
 
-const OrderList = ({
-  list,
-  onClick,
-  currentPage,
-  itemsPerPage,
-  isEditing,
-  setTotalPages,
-  setCurrentPage,
-}: Props) => {
+const OrderList = ({ list, onClick, isEditing }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   return (

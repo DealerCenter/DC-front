@@ -112,6 +112,14 @@ type CONTAINER_GET_RES = {
 }
 
 type ORDERS_GET_RES = {
+  page: number
+  pageCount: number
+  pageSize: number
+  total: number
+  data: ORDER_DATA[]
+}
+
+type ORDER_DATA = {
   id: number
   createdAt: string // DateTime
   updatedAt: string // DateTime

@@ -33,7 +33,7 @@ type Props = {
   setIsEditing: (arg1: boolean) => void
   setSortByCost: (arg: 'desc' | 'asc' | null) => void
   setSortByCreateDate: (arg: 'desc' | 'asc' | null) => void
-  isPageLoaded: boolean
+  isButtonsDisabled: boolean
   shippingStatus: ShippingStatus
   setShippingStatus: (arg: ShippingStatus) => void
 }
@@ -43,7 +43,7 @@ const ButtonsRow = ({
   setIsEditing,
   setSortByCost,
   setSortByCreateDate,
-  isPageLoaded,
+  isButtonsDisabled,
   shippingStatus,
   setShippingStatus,
 }: Props) => {
@@ -146,7 +146,7 @@ const ButtonsRow = ({
                 onClick={() => {}}
                 icon={filterIconBlack}
                 width={isMobile ? 160 : undefined}
-                isDisabled={!isPageLoaded}
+                isDisabled={isButtonsDisabled}
               ></SecondaryButton>
               {shippingStatus !== null && (
                 <CloseIconBlack onClick={onClearFilter} top={-8} right={-8} />
@@ -158,7 +158,7 @@ const ButtonsRow = ({
               onSortClick={() => {}}
               sortOptions={sortOptions}
               setActiveLabel={setActiveSortLabel}
-              isDisabled={!isPageLoaded}
+              isDisabled={isButtonsDisabled}
 
               // onCancel={onClearSort}
             >
@@ -167,7 +167,7 @@ const ButtonsRow = ({
                 onClick={() => {}}
                 icon={sortIconBlack}
                 width={isMobile ? 160 : undefined}
-                isDisabled={!isPageLoaded}
+                isDisabled={isButtonsDisabled}
               />
               {activeSortLabel !== 'sort' && (
                 <CloseIconBlack onClick={onClearSort} top={-8} right={-8} />
@@ -186,7 +186,7 @@ const ButtonsRow = ({
               onClick={handleEditButton}
               icon={pencilIcon}
               width={isMobile ? 160 : undefined}
-              isDisabled={!isPageLoaded}
+              isDisabled={isButtonsDisabled}
             ></SecondaryButton>
           </ButtonPairFrame>
         </ButtonFrame>
