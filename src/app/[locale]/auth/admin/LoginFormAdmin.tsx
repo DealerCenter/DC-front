@@ -40,7 +40,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
   return (
     <Container>
       <StyledForm onSubmit={handleSubmit}>
-        <H4Bold>{t('login')}</H4Bold>
+        <H4Bold>{t('admin login')}</H4Bold>
         <TextInputContainer>
           <TextInput
             type='username'

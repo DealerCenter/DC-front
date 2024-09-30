@@ -1,6 +1,7 @@
 {
   "register": "Register",
   "login": "Login",
+  "admin login": "Admin login",
   "not registered?": "Not registered?",
   "already registered?": "Already registered?",
   "password": "Password",
