@@ -33,6 +33,7 @@
   "upload": "ატვირთვა",
   "file uploaded": "ფაილი ატვირთულია",
   "photo uploaded": "ფოტო ატვირთულია",
+  "photos uploaded": "ფოტოები ატვირთულია",
   "use numbers": "გამოიყენეთ რიცხვები",
   "use uppercase characters": "გამოიყენეთ დიდი სიმბოლოები",
   "use lowercase characters": "გამოიყენეთ პატარა სიმბოლოები",
@@ -311,5 +312,10 @@
   "InAmericanWarehouse": "ამერიკულ საწყობში",
   "InContainer": "კონტეინერში",
   "UndergoesCustomsProcedures": "გადასცემს საბაჟო პროცედურებს",
-  "Sent": "გაგზავნილია"
+  "Sent": "გაგზავნილია",
+
+  "towTruckImages": "ევაკუატორი",
+  "abroadPortImages": "აშშ პორტი",
+  "containerImages": "კონტეინერი",
+  "homePortImages": "საქართველოს პორტი"
 }

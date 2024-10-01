@@ -7,6 +7,9 @@ import theme from '@/app/[locale]/theme'
 
 import ImagesUploadComponent from '../../../components/common/ImagesUploadComponent'
 import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
+import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
+import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
+import FileDropZone from '@/common/components/inputElements/FileDropZone'
 
 const INPUT_WIDTH_MOBILE_UPLOAD = 311
 const INPUT_WIDTH_TABLET_UPLOAD = 896
@@ -15,7 +18,7 @@ const INPUT_WIDTH_DESKTOP_UPLOAD = 1136
 const INPUT_WIDTH_MOBILE = 311
 const INPUT_WIDTH_DESKTOP = 493
 
-type Props = { dropdownOptions: { value: string }[] }
+type Props = { dropdownOptions: { value: IMAGE_LOCATIONS }[] }
 
 const InputFieldAndImageUploadPair = ({ dropdownOptions }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
@@ -33,11 +36,17 @@ const InputFieldAndImageUploadPair = ({ dropdownOptions }: Props) => {
           placeHolderIsBold={true}
           placeHolderIsGray={true}
         />
+        {/* <AppSelectAntDesign
+          // value={value}
+          optionsBasic={dropdownOptions}
+          // onChangeString={handleSetValueBasic ? handleSetValueBasic : () => {}}
+          // errorMessage={errorMessage}
+          placeholder={t('mark photo location')}
+          width={isMobile ? INPUT_WIDTH_MOBILE : INPUT_WIDTH_DESKTOP}
+          fontSize={13}
+        /> */}
       </AppSelectBasicFrame>
       <ImagesUploadComponent
-        onClick={() => {
-          console.log('clicked')
-        }}
         width={
           isMobile
             ? INPUT_WIDTH_MOBILE_UPLOAD
@@ -46,6 +55,9 @@ const InputFieldAndImageUploadPair = ({ dropdownOptions }: Props) => {
               : INPUT_WIDTH_DESKTOP_UPLOAD
         }
         height={222}
+        text={t('add photos of vehicle')}
+        dropText={t('drop the files here')}
+        uploadedText={t('photos uploaded')}
       />
     </Container>
   )

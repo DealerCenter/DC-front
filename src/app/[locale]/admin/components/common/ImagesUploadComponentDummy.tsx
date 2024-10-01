@@ -1,71 +1,37 @@
 import FileDropZone from '@/common/components/inputElements/FileDropZone'
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { useDropzone } from 'react-dropzone'
 
 import BasicButton from '@/common/components/appButton/BasicButton'
 
-import plusIcon from '@/assets/icons/plusIconWhite.svg'
 import uploadIcon from '@/assets/icons/fileUpload/uploadIconWithArrow.svg'
-import uploadedIcon from '@/assets/icons/fileUpload/fileUploadedEmpty.svg'
+import plusIcon from '@/assets/icons/plusIconWhite.svg'
 
 type Props = {
-  text?: string
-  dropText?: string
-  uploadedText?: string
-  height?: number
+  onClick: () => void
   width?: number
-  onDropAdditional?: (file: any) => void
-  setIsUploaded?: (arg: boolean) => void
+  height?: number
+  text?: string
 }
 
-const ImagesUploadComponent = ({
-  text,
-  dropText,
-  uploadedText,
-  height,
+const ImagesUploadComponentDummy = ({
+  onClick,
   width,
-  onDropAdditional,
-  setIsUploaded,
+  height,
+  text,
 }: Props) => {
   const t = useTranslations('')
 
-  const [isDropped, setIsDropped] = useState(false)
-
-  const onDrop = useCallback(
-    <T extends File>(acceptedFiles: T[]) => {
-      // Do something with the files
-      console.log('accepted files: ', acceptedFiles)
-      setIsDropped(true)
-      setIsUploaded && setIsUploaded(true)
-      if (onDropAdditional) onDropAdditional(acceptedFiles[0])
-    },
-    [onDropAdditional, setIsUploaded]
-  )
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
-
   return (
-    <Container {...getRootProps()} width={width} height={height}>
+    <Container width={width} height={height} onClick={onClick}>
       <Frame>
         <IconBox>
-          <Image
-            src={isDropped ? uploadedIcon : uploadIcon}
-            alt='upload icon'
-            height={30}
-          />
+          <Image src={uploadIcon} alt='upload icon' />
         </IconBox>
-        <input {...getInputProps()} />
-        {isDropped ? (
-          <Text isDropped={isDropped}>{uploadedText}</Text>
-        ) : isDragActive ? (
-          <Text>{dropText}</Text>
-        ) : (
-          <Text>{text}</Text>
-        )}
-        <BasicButton onClick={() => {}} padding={16} width={155}>
+        {text && <Text>{text}</Text>}
+        <BasicButton onClick={onClick} padding={16} width={155}>
           <ButtonIcon>
             <Image src={plusIcon} alt='check icon' width={15} />
           </ButtonIcon>
@@ -76,27 +42,14 @@ const ImagesUploadComponent = ({
   )
 }
 
-export default ImagesUploadComponent
+export default ImagesUploadComponentDummy
 
-type TextProps = {
-  isDropped?: boolean
-}
-
-const Text = styled.label<TextProps>`
+const Text = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   color: ${({ theme }) => theme.colors?.black};
 
-  ${({ isDropped, theme }) =>
-    isDropped
-      ? css`
-          color: ${theme.colors?.main_gray_100};
-        `
-      : css`
-          color: ${theme.colors?.main_gray_56};
-        `}
-
-  cursor: pointer
+  cursor: pointer;
 `
 
 const IconBox = styled.div`
@@ -151,7 +104,7 @@ const Container = styled.div<ContainerProps>`
           }
         `}
 
-  border: 2px dashed ${({ theme }) => theme.colors?.main_gray_100};
+        border: 2px dashed ${({ theme }) => theme.colors?.main_gray_100};
 
   cursor: pointer;
 

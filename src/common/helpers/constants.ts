@@ -39,6 +39,13 @@ export enum SHIPPING_STATUS {
   SENT = 'Sent',
 }
 
+export enum IMAGE_LOCATIONS {
+  TOW_TRUCK = 'towTruckImages',
+  ABROAD_PORT = 'abroadPortImages',
+  CONTAINER = 'containerImages',
+  HOME_PORT = 'homePortImages',
+}
+
 export type LocalesType = 'en' | 'ge' | 'ru'
 
 export type VerificationStatusType = VERIFICATION_STATUS_NAME

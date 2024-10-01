@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
 
-import { routeName } from '@/common/helpers/constants'
+import { IMAGE_LOCATIONS, routeName } from '@/common/helpers/constants'
 
 import Box from '../../components/common/Box'
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
@@ -22,6 +22,19 @@ const dropdownOptions = [
   { value: 'usa port' },
   { value: 'container' },
   { value: 'georgian port' },
+]
+const dropdownOptions2 = [
+  { value: IMAGE_LOCATIONS.TOW_TRUCK },
+  { value: IMAGE_LOCATIONS.ABROAD_PORT },
+  { value: IMAGE_LOCATIONS.CONTAINER },
+  { value: IMAGE_LOCATIONS.HOME_PORT },
+]
+
+const ImageLocations = [
+  IMAGE_LOCATIONS.TOW_TRUCK,
+  IMAGE_LOCATIONS.ABROAD_PORT,
+  IMAGE_LOCATIONS.CONTAINER,
+  IMAGE_LOCATIONS.HOME_PORT,
 ]
 
 const ImageUpload = (props: Props) => {
@@ -48,7 +61,7 @@ const ImageUpload = (props: Props) => {
           (_, i) =>
             i <= numOfPairs && (
               <InputFieldAndImageUploadPair
-                dropdownOptions={dropdownOptions}
+                dropdownOptions={dropdownOptions2}
                 key={`InputFieldAndImageUploadPair${i}`}
               />
             )

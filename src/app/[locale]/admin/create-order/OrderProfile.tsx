@@ -16,6 +16,7 @@ import IdAndDateBox from './components/IdAndDateBox'
 import LeftFrame from './components/leftFrame/LeftFrame'
 import RightFrame from './components/rightFrame/RightFrame'
 import { useCreateOrderContext } from './hooks/useCreateOrderContext'
+import ImagesUploadComponentDummy from '../components/common/ImagesUploadComponentDummy'
 
 const isAdmin = true
 
@@ -66,7 +67,8 @@ const OrderProfile = ({ id }: Props) => {
           <ArrivalStateBox arrivalState='arrived' />
         </StateBoxFrame>
 
-        <ImagesUploadComponent
+        <ImagesUploadComponentDummy
+          text={t('add photos of vehicle')}
           onClick={() => router.push(routeName.adminCreateOrderImageUpload)}
           height={372}
         />

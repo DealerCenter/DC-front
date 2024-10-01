@@ -33,6 +33,7 @@
   "upload": "Upload",
   "file uploaded": "File uploaded",
   "photo uploaded": "Photo uploaded",
+  "photos uploaded": "Photos uploaded",
   "use numbers": "Use numbers",
   "use uppercase characters": "Use uppercase characters",
   "use lowercase characters": "Use lowercase characters",
@@ -310,5 +311,10 @@
   "InAmericanWarehouse": "In American warehouse",
   "InContainer": "In Container",
   "UndergoesCustomsProcedures": "Undergoes Customs Procedures",
-  "Sent": "Sent"
+  "Sent": "Sent",
+
+  "towTruckImages": "Evacuator",
+  "abroadPortImages": "USA Port",
+  "containerImages": "Container",
+  "homePortImages": "Georgian port"
 }
