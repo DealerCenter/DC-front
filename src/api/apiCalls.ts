@@ -1,22 +1,21 @@
-import { handleLogout } from '@/common/helpers/utils'
-import axiosInstance from './apiClient'
-import { endpoints } from './endpoints'
 import {
   DealersQueryType,
   OrdersQueryType,
   ReceiversQueryType,
-  ShippingStatus,
 } from '@/common/helpers/constants'
+import { handleLogout } from '@/common/helpers/utils'
+import axiosInstance from './apiClient'
 import {
-  ADMIN_GET_RES,
   CONTAINER_GET_RES,
   CONTAINER_POST_RES,
   DEALERS_DATA,
   DEALERS_RES,
   ME_RES,
+  OrderPostAdminType,
   ORDERS_GET_RES,
   RECEIVER_GET_RES,
 } from './apiTypes'
+import { endpoints } from './endpoints'
 
 export const fetchMe = async () => {
   try {
@@ -131,22 +130,7 @@ export const updateNotificationSettings = async (
   }
 }
 
-export const createOrder = async (payload: {
-  manufacturer: string
-  manufactureYear: number
-  model: string
-  vin: string
-  transportationCost: number
-  carCost: number
-  stateId: number
-  exactAddress: string
-  isInsured: boolean
-  carCategory: string
-  mileage: number
-  status: string
-  containerId: number
-  receiverId: number
-}) => {
+export const createOrder = async (payload: OrderPostAdminType) => {
   try {
     const response = await axiosInstance.post(endpoints.ORDERS_ADMIN, payload)
     return response
@@ -215,7 +199,7 @@ export const getDealers = async (payload: DealersQueryType) => {
   }
 }
 
-export const getDealerWithId = async (id: number) => {
+export const getDealerWithId = async (id: string) => {
   try {
     const response = await axiosInstance.get<DEALERS_DATA>(
       `${endpoints.DEALERS_ADMIN}/${id}`

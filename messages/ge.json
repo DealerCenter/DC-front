@@ -129,7 +129,8 @@
   "total debt": "ჯამური დავალიანება",
 
   "status": "სტატუსი",
-  "is in American warehouse": "ამერიკის საწყობშია",
+  "in auction": "აუქციონზე",
+  "is in american warehouse": "ამერიკის საწყობშია",
   "in container": "კონტეინერშია",
   "undergoes customs procedures": "გადის საბაჟო პროცედურებს",
   "was sent": "გამოიგზავნა",

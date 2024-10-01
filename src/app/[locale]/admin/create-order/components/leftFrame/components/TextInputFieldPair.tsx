@@ -10,7 +10,8 @@ import TextInput from '@/common/components/inputElements/TextInput'
 
 type Props = {
   title: string
-  value: string
+  value: string | number
+  booleanValue?: boolean
   placeholder?: string
   name?: string
   onBlur?: ChangeEventHandler<HTMLInputElement>
@@ -30,6 +31,7 @@ type Props = {
 const TextInputFieldPair = ({
   title,
   value,
+  booleanValue,
   placeholder,
   name,
   onBlur,
@@ -73,18 +75,16 @@ const TextInputFieldPair = ({
         isDisabled={true}
       />
       {onYesOrNoChange ? (
-        // <AppSelectChoose
-        //   options={selectOptions}
-        //   placeholder={t('select')}
-        //   errorMessage={errorMessage}
-        // />
         <AppSelectTrueFalse
+          booleanValue={booleanValue}
           onChange={onYesOrNoChange}
           placeholder={t('select')}
           errorMessage={errorMessage}
+          fontSize={13}
         />
       ) : optionsListWidthID ? (
         <AppSelectAntDesign
+          value={value}
           optionsWithId={optionsListWidthID}
           onChangeId={handleSetValueWithId ? handleSetValueWithId : () => {}}
           placeholder={t('select')}
@@ -93,6 +93,7 @@ const TextInputFieldPair = ({
         />
       ) : selectOptionsBasic ? (
         <AppSelectAntDesign
+          value={value}
           optionsBasic={selectOptionsBasic}
           onChangeString={handleSetValueBasic ? handleSetValueBasic : () => {}}
           errorMessage={errorMessage}

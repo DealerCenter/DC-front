@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { CreateOrderProvider } from './hooks/useCreateOrderContext'
+import { CreateOrderProvider } from '../hooks/useCreateOrderContext'
 
 export const metadata: Metadata = {
   title: 'Create Next App',

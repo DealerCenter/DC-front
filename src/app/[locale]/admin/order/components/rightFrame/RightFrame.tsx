@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import ShippingStateBox from '../../../order-history/components/shippingStateBox/ShippingStateBox'
+import ShippingStateBox from '../../../order-history/components/shippingStateBox/ShippingStatusBox'
 import { dummyShippingSteps2 } from '@/assets/DummyData'
 import Image from 'next/image'
 

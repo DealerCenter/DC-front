@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import CarImageAndModelBox from './CarImageAndModelBox'
 import DetailsBox from './DetailsBox'
 
-import { ORDER_DATA, ORDERS_GET_RES } from '@/api/apiTypes'
+import { ORDER_DATA } from '@/api/apiTypes'
 import theme from '@/app/[locale]/theme'
 import grabHandle from '@/assets/icons/GrabHandle2x3Dots.svg'
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
@@ -36,6 +36,7 @@ const OrderListItem = ({ imageLink, item, onClick, isEditing }: Props) => {
     status: shippingStatus,
 
     createdAt: date,
+    id: orderId,
   } = item
   const { firstName: buyerFullName, phoneNumber: buyerPhoneNumber } = receiver
 

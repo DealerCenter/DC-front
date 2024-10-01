@@ -103,7 +103,7 @@ type RECEIVER_DATA = {
   updatedAt: string
   isJuridical: boolean
   idImageUrl: string
-  verificationStatus: string
+  verificationStatus: VerificationStatusType
 }
 
 type CONTAINER_POST_RES = {
@@ -134,15 +134,13 @@ type ORDER_DATA = {
   id: number
   createdAt: string // DateTime
   updatedAt: string // DateTime
-  carDetails: string
-  additionalInformation: string
+  additionalDetails: string | null
   manufacturer: string
   manufactureYear: number
   model: string
   vin: string
   transportationCost: number
-  carDetails: string
-  additionalInformation: string
+  carDetails: string | null
   carCost: number
   exactAddress: string
   isInsured: boolean
@@ -162,18 +160,16 @@ type ORDER_DATA = {
     name: string
     trackingUrl: string
   }
-  receiver: {
-    id: number
-    createdAt: string // DateTime
-    updatedAt: string // DateTime
-    firstName: string
-    lastName: string
-    personalId: string
-    phoneNumber: string
-    verificationStatus: string
-    isJuridical: boolean
-    idImageUrl: string | null
-  }
+  receiver: RECEIVER_DATA
+  carImages: CAR_IMAGE[]
+}
+
+type CAR_IMAGE = {
+  id: number
+  createdAt: string
+  updatedAt: string
+  url: string
+  type: string
 }
 
 type ADMIN_GET_RES = {
@@ -209,10 +205,10 @@ type DEALERS_DATA = {
   juridicalDocUrl: string | null
   juridicalDocVerificationStatus: VerificationStatusType
   receivers?: RECEIVER_DATA[] | []
-  juridicalInfo?: JuridicalInfo // Optional if not always present
+  juridicalInfo?: JURIDICAL_INFO // Optional if not always present
 }
 
-type JuridicalInfo = {
+type JURIDICAL_INFO = {
   companyAddress: string
   companyName: string
   createdAt: string
@@ -220,4 +216,27 @@ type JuridicalInfo = {
   identificationCode: string
   updatedAt: string
   websiteUrl: string
+}
+
+type OrderPostAdminType = {
+  manufacturer: string
+  manufactureYear: number
+  model: string
+  vin: string
+  transportationCost: number
+  carCost: number
+  stateId: number
+  exactAddress: string
+  isInsured: boolean
+  carCategory: string
+  mileage: number
+  status: string
+  containerId: number
+  receiverId: number
+  additionalDetails?: string
+  carDetails?: string
+  towTruckImages?: any[]
+  abroadPortImages?: any[]
+  containerImages?: any[]
+  homePortImages?: any[]
 }

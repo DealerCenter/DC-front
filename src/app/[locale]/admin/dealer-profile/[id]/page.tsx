@@ -1,10 +1,10 @@
 'use client'
 
 import LoadingText from '@/common/components/readyComponents/LoadingText'
-import { ParamsType } from '@/common/helpers/constants'
+import { LocalesType } from '@/common/helpers/constants'
 import DealerProfile from './DealerProfile'
 
-type Props = { params: ParamsType }
+type Props = { params: { locale?: LocalesType; id?: string } }
 
 const Page = ({ params }: Props) => {
   if (!params.id) return <LoadingText />

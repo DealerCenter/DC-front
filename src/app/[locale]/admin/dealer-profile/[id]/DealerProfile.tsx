@@ -22,7 +22,7 @@ import Page from '../../../page'
 
 const ITEMS_PER_PAGE = 8
 
-type Props = { dealerId: number }
+type Props = { dealerId: string }
 
 const DealerProfile = ({ dealerId }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -44,6 +44,7 @@ const DealerProfile = ({ dealerId }: Props) => {
 
   useEffect(() => {
     handleGetDealer()
+    //eslint-disable-next-line
   }, [])
 
   const handleGetOrders = async () => {

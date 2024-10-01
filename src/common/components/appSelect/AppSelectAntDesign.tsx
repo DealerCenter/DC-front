@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ConfigProvider, Select } from 'antd'
 import { useTranslations } from 'next-intl'
 import theme from '@/app/[locale]/theme'
@@ -9,6 +9,7 @@ import Image from 'next/image'
 import arrowDown from '@/assets/icons/arrowDown.svg'
 
 type Props = {
+  value?: string | number
   optionsBasic?: string[]
   optionsWithId?: { id: number; label: string }[]
   onSearch?: (arg: string | number) => void
@@ -21,6 +22,7 @@ type Props = {
 }
 
 const AppSelectAntDesign = ({
+  value,
   optionsBasic,
   optionsWithId = [
     { id: 1, label: '1' },
@@ -47,6 +49,18 @@ const AppSelectAntDesign = ({
   const handleOnSearch = (value: string | number) => {
     onSearch && onSearch(value)
   }
+
+  useEffect(() => {
+    if (typeof value === 'string' || typeof value === 'number') {
+      const label =
+        optionsWithId && optionsWithId.find((item) => item.id === value)?.label
+
+      setSelectedItem(label ? label : value)
+    }
+    if (value === '') {
+      setSelectedItem(undefined)
+    }
+  }, [value, optionsWithId])
 
   return (
     <Container>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
 import { DatePickerProps } from 'antd'
@@ -8,54 +8,63 @@ import {
   useCreateOrderContext,
 } from '../../../create-order/hooks/useCreateOrderContext'
 import LineOfStatus from './components/LineOfStatus'
-import { SHIPPING_STATUS } from '@/common/helpers/constants'
+import { SHIPPING_STATUS, ShippingStatus } from '@/common/helpers/constants'
 
 const SHIPPING_STEPS = [
-  {
-    value: SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE,
-    title: 'is in American warehouse',
-    step: 1,
-  },
-  {
-    value: SHIPPING_STATUS.IN_CONTAINER,
-    title: 'in container',
-    step: 2,
-  },
-  {
-    value: SHIPPING_STATUS.UNDERGOES_CUSTOMS,
-    title: 'undergoes customs procedures',
-    step: 3,
-  },
-  { value: SHIPPING_STATUS.SENT, title: 'was sent', step: 4 },
+  { value: SHIPPING_STATUS.IN_AUCTION, step: 1 },
+  { value: SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE, step: 2 },
+  { value: SHIPPING_STATUS.IN_CONTAINER, step: 3 },
+  { value: SHIPPING_STATUS.UNDERGOES_CUSTOMS, step: 4 },
+  { value: SHIPPING_STATUS.SENT, step: 5 },
 ]
 
 type Props = {
   isEditing: boolean
+  value: ShippingStatus
 }
 
-const ShippingStateBox = ({ isEditing }: Props) => {
+type ShippingStepType = { value: SHIPPING_STATUS | null; step: number }
+
+const ShippingStatusBox = ({ isEditing, value }: Props) => {
   const t = useTranslations('')
 
   const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
     useCreateOrderContext()
 
-  const [currentStep, setCurrentStep] = useState<0 | 1 | 2 | 3 | 4>(0)
+  const [currentStep, setCurrentStep] = useState<ShippingStepType>({
+    value: null,
+    step: 0,
+  })
+
+  useEffect(() => {
+    if (!value) {
+      setCurrentStep({
+        value: null,
+        step: 0,
+      })
+      return
+    }
+
+    const step = SHIPPING_STEPS.find((item) => item.value === value)
+
+    step && setCurrentStep(step)
+  }, [value])
 
   // console.log('status in formik:', values[FIELD_NAMES.STATUS])
 
   const onChange = (
     date: DatePickerProps['value'],
     dateString: string | string[],
-    step: 0 | 1 | 2 | 3 | 4
+    step: ShippingStepType
   ) => {
-    // console.log(date, dateString, `Step: ${step}`)
+    // console.log(date, dateString, `Step: ${step.value}`)
 
     // Update the current step based on the step of the changed DatePicker
     if (date) {
-      setCurrentStep(step as 0 | 1 | 2 | 3 | 4)
+      setCurrentStep(step)
 
       // Update the Formik value for the status field
-      setFieldValue(FIELD_NAMES.STATUS, SHIPPING_STEPS[step - 1].value)
+      setFieldValue(FIELD_NAMES.STATUS, SHIPPING_STEPS[step.step - 1].value)
     }
   }
 
@@ -65,20 +74,18 @@ const ShippingStateBox = ({ isEditing }: Props) => {
         <LineOfStatus
           key={`lineOfStatusKey${step.value}`}
           isEditing={isEditing}
-          title={t(step.title)}
+          title={t(step.value)}
           step={step.step}
-          currentStep={currentStep}
+          currentStep={currentStep.step}
           totalSteps={SHIPPING_STEPS.length}
-          onChange={(date, dateString) =>
-            onChange(date, dateString, step.step as 0 | 1 | 2 | 3 | 4)
-          }
+          onChange={(date, dateString) => onChange(date, dateString, step)}
         />
       ))}
     </Container>
   )
 }
 
-export default ShippingStateBox
+export default ShippingStatusBox
 
 type ContainerProps = { isEditing: boolean }
 

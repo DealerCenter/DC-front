@@ -56,9 +56,9 @@ const CarDetailsBoxEmpty = (props: Props) => {
         width={textInputWidth}
         height={48}
         type='text'
-        placeholder={t('release year')}
-        fontWeight='bold'
         fontSize={13}
+        fontWeight='bold'
+        placeholder={t('release year')}
         name={FIELD_NAMES.MANUFACTURE_YEAR}
         value={values[FIELD_NAMES.MANUFACTURE_YEAR]}
         onChange={handleChange}
@@ -74,14 +74,18 @@ const CarDetailsBoxEmpty = (props: Props) => {
         width={textInputWidth}
         height={48}
         type='text'
-        name='vehicle feature'
-        placeholder={`NotWorking ${t('vehicle feature')}`}
-        value={''}
-        onChange={() => {}}
-        onBlur={() => {}}
-        fontWeight='bold'
         fontSize={13}
-        isDisabled={true}
+        fontWeight='bold'
+        placeholder={t('vehicle feature')}
+        name={FIELD_NAMES.CAR_DETAILS}
+        value={values[FIELD_NAMES.CAR_DETAILS] ?? ''}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errorMessage={
+          errors[FIELD_NAMES.CAR_DETAILS] && touched[FIELD_NAMES.CAR_DETAILS]
+            ? errors[FIELD_NAMES.CAR_DETAILS]
+            : ''
+        }
       />
       <TextInput
         width={textInputWidth}

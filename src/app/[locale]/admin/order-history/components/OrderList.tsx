@@ -1,31 +1,35 @@
-import React, { useEffect } from 'react'
+import styled from 'styled-components'
 import OrderListItem from './OrderListItem'
-import styled, { css } from 'styled-components'
 
-import DummyImage from '@/assets/images/DummyCarImage.jpg'
-import OrderListHeader from './OrderListHeader'
-import { useMediaQuery } from 'react-responsive'
+import { ORDER_DATA } from '@/api/apiTypes'
 import theme from '@/app/[locale]/theme'
-import { ORDER_DATA, ORDERS_GET_RES } from '@/api/apiTypes'
+import DummyImage from '@/assets/images/DummyCarImage.jpg'
+import { routeName } from '@/common/helpers/constants'
+import { useRouter } from '@/navigation'
+import { useMediaQuery } from 'react-responsive'
+import OrderListHeader from './OrderListHeader'
 
 type Props = {
   list: ORDER_DATA[]
-  onClick: () => void
   isEditing: boolean
 }
 
-const OrderList = ({ list, onClick, isEditing }: Props) => {
+const OrderList = ({ list, isEditing }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+
+  const router = useRouter()
 
   return (
     <ListFrame>
       {!isMobile && <OrderListHeader />}
-      {list.map((car, i) => (
+      {list.map((order, i) => (
         <OrderListItem
-          onClick={onClick}
+          onClick={() =>
+            router.push(`${routeName.adminCreateOrder}/${order.id}`)
+          }
           imageLink={DummyImage.src}
-          item={car}
-          key={`${car.id}82kj32${i}`}
+          item={order}
+          key={`${order.id}82kj32${i}`}
           isEditing={isEditing}
         />
       ))}

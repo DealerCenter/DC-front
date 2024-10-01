@@ -1,10 +1,11 @@
 'use client'
-import React, { ReactNode, createContext, useContext, useState } from 'react'
-import { useFormik, FormikValues } from 'formik'
-import * as yup from 'yup'
+import { FormikValues, useFormik } from 'formik'
 import { useTranslations } from 'next-intl'
+import { ReactNode, createContext, useContext } from 'react'
+import * as yup from 'yup'
 
 import axiosInstance from '@/api/apiClient'
+import { ORDER_DATA } from '@/api/apiTypes'
 import { endpoints } from '@/api/endpoints'
 import { message } from 'antd'
 
@@ -29,27 +30,52 @@ export const FIELD_NAMES = {
   CONTAINER_ID: 'containerId',
   // DEALER_ID: 'dealerId',
   RECEIVER_ID: 'receiverId',
+
+  ADDITIONAL_DETAILS: 'additionalDetails',
+  CAR_DETAILS: 'carDetails',
 }
 
 export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
   const t = useTranslations('')
 
+  // const initialValues = {
+  //   [FIELD_NAMES.MANUFACTURER]: yup.string,
+  //   [FIELD_NAMES.MANUFACTURE_YEAR]: yup.number,
+  //   [FIELD_NAMES.MODEL]: yup.string,
+  //   [FIELD_NAMES.VIN]: yup.string,
+  //   [FIELD_NAMES.TRANSPORTATION_COST]: yup.number,
+  //   [FIELD_NAMES.CAR_COST]: yup.number,
+  //   [FIELD_NAMES.STATE_ID]: yup.number,
+  //   [FIELD_NAMES.EXACT_ADDRESS]: yup.string,
+  //   [FIELD_NAMES.IS_INSURED]: yup.boolean,
+  //   [FIELD_NAMES.CAR_CATEGORY]: yup.string,
+  //   [FIELD_NAMES.MILEAGE]: yup.number,
+  //   [FIELD_NAMES.STATUS]: yup.string,
+  //   [FIELD_NAMES.CONTAINER_ID]: yup.number,
+  //   // [FIELD_NAMES.DEALER_ID]: yup.number,
+  //   [FIELD_NAMES.RECEIVER_ID]: yup.number,
+  //   [FIELD_NAMES.ADDITIONAL_DETAILS]: yup.string,
+  //   [FIELD_NAMES.CAR_DETAILS]: yup.string,
+  // }
+
   const initialValues = {
-    [FIELD_NAMES.MANUFACTURER]: yup.string,
-    [FIELD_NAMES.MANUFACTURE_YEAR]: yup.number,
-    [FIELD_NAMES.MODEL]: yup.string,
-    [FIELD_NAMES.VIN]: yup.string,
-    [FIELD_NAMES.TRANSPORTATION_COST]: yup.number,
-    [FIELD_NAMES.CAR_COST]: yup.number,
-    [FIELD_NAMES.STATE_ID]: yup.number,
-    [FIELD_NAMES.EXACT_ADDRESS]: yup.string,
-    [FIELD_NAMES.IS_INSURED]: yup.boolean,
-    [FIELD_NAMES.CAR_CATEGORY]: yup.string,
-    [FIELD_NAMES.MILEAGE]: yup.number,
-    [FIELD_NAMES.STATUS]: yup.string,
-    [FIELD_NAMES.CONTAINER_ID]: yup.number,
-    // [FIELD_NAMES.DEALER_ID]: yup.number,
-    [FIELD_NAMES.RECEIVER_ID]: yup.number,
+    [FIELD_NAMES.MANUFACTURER]: '',
+    [FIELD_NAMES.MANUFACTURE_YEAR]: '',
+    [FIELD_NAMES.MODEL]: '',
+    [FIELD_NAMES.VIN]: '',
+    [FIELD_NAMES.TRANSPORTATION_COST]: '',
+    [FIELD_NAMES.CAR_COST]: '',
+    [FIELD_NAMES.STATE_ID]: '',
+    [FIELD_NAMES.EXACT_ADDRESS]: '',
+    [FIELD_NAMES.IS_INSURED]: '',
+    [FIELD_NAMES.CAR_CATEGORY]: '',
+    [FIELD_NAMES.MILEAGE]: '',
+    [FIELD_NAMES.STATUS]: '',
+    [FIELD_NAMES.CONTAINER_ID]: '',
+    // [FIELD_NAMES.DEALER_ID]: "",
+    [FIELD_NAMES.RECEIVER_ID]: '',
+    [FIELD_NAMES.ADDITIONAL_DETAILS]: '',
+    [FIELD_NAMES.CAR_DETAILS]: '',
   }
 
   const formik = useFormik({
@@ -161,6 +187,36 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     typeof formik.values[FIELD_NAMES.CONTAINER_ID] !== 'number' ||
     typeof formik.values[FIELD_NAMES.RECEIVER_ID] !== 'number'
 
+  const prefillFormikValues = (orderDetails: ORDER_DATA) => {
+    setFieldValue(FIELD_NAMES.MANUFACTURER, orderDetails.manufacturer)
+    setFieldValue(FIELD_NAMES.MANUFACTURE_YEAR, orderDetails.manufactureYear)
+    setFieldValue(FIELD_NAMES.MODEL, orderDetails.model)
+    setFieldValue(FIELD_NAMES.VIN, orderDetails.vin)
+    setFieldValue(
+      FIELD_NAMES.TRANSPORTATION_COST,
+      orderDetails.transportationCost
+    )
+    setFieldValue(FIELD_NAMES.CAR_COST, orderDetails.carCost)
+    setFieldValue(FIELD_NAMES.STATE_ID, orderDetails.state.id)
+    setFieldValue(FIELD_NAMES.EXACT_ADDRESS, orderDetails.exactAddress)
+    setFieldValue(
+      FIELD_NAMES.ADDITIONAL_DETAILS,
+      orderDetails.additionalDetails
+    )
+    setFieldValue(FIELD_NAMES.CAR_DETAILS, orderDetails.carDetails)
+    setFieldValue(FIELD_NAMES.IS_INSURED, orderDetails.isInsured)
+    setFieldValue(FIELD_NAMES.CAR_CATEGORY, orderDetails.carCategory)
+    setFieldValue(FIELD_NAMES.MILEAGE, orderDetails.mileage)
+    setFieldValue(FIELD_NAMES.STATUS, orderDetails.status)
+    setFieldValue(FIELD_NAMES.CONTAINER_ID, orderDetails.container.id)
+    setFieldValue(FIELD_NAMES.RECEIVER_ID, orderDetails.receiver.id)
+    setFieldValue(
+      FIELD_NAMES.ADDITIONAL_DETAILS,
+      orderDetails.additionalDetails
+    )
+    setFieldValue(FIELD_NAMES.CAR_DETAILS, orderDetails.carDetails)
+  }
+
   const {
     values,
     handleBlur,
@@ -170,6 +226,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     validateForm,
     handleSubmit,
     setFieldValue,
+    resetForm,
   } = formik
 
   return (
@@ -184,6 +241,8 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         handleSubmit,
         setFieldValue,
         isButtonDisabled,
+        prefillFormikValues,
+        resetForm,
       }}
     >
       {children}

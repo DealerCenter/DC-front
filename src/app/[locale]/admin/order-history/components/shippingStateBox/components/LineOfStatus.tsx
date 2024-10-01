@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { DoneIcon, DoneIconGrayEmpty, LineGray, LineGreen } from '../../Icons'
 import { setHeapSnapshotNearHeapLimit } from 'v8'
 import { DatePicker, DatePickerProps } from 'antd'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import { SHIPPING_STATUS, ShippingStatus } from '@/common/helpers/constants'
 
 type Props = {
   isEditing: boolean
@@ -15,7 +16,7 @@ type Props = {
   onChange: (
     date: DatePickerProps['value'],
     dateString: string | string[],
-    step: 0 | 1 | 2 | 3 | 4
+    step: number
   ) => void
 }
 
@@ -29,14 +30,28 @@ const LineOfStatus = ({
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
+  const [dateValue, setDateValue] = useState<DatePickerProps['value']>(null)
+
+  // Effect to clear the DatePicker when step <= currentStep
+  useEffect(() => {
+    if (step > currentStep) {
+      setDateValue(null)
+    }
+  }, [step, currentStep])
+
   const handleDateChange: DatePickerProps['onChange'] = (date, dateString) => {
-    onChange(date, dateString, step as 0 | 1 | 2 | 3 | 4)
+    setDateValue(date) // Update the date state
+    onChange(date, dateString, step)
   }
 
   return (
     <Line>
       {isEditing ? (
-        <DatePicker onChange={handleDateChange} />
+        <DatePicker
+          value={dateValue}
+          onChange={handleDateChange}
+          variant={step <= currentStep ? 'filled' : 'outlined'}
+        />
       ) : (
         <Date>{step <= currentStep && `22/04${!isMobile ? '/2022' : ''}`}</Date>
       )}
@@ -49,7 +64,9 @@ const LineOfStatus = ({
         ) : (
           <>
             <DoneIcon />
-            {step !== totalSteps && <LineGreen />}
+            {step === currentStep
+              ? step !== totalSteps && <LineGray />
+              : step !== totalSteps && <LineGreen />}
           </>
         )}
       </IconBox>

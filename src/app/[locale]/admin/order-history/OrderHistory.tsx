@@ -8,7 +8,7 @@ import ButtonsRow from './components/ButtonsRow'
 import OrderList from './components/OrderList'
 
 import { getOrders } from '@/api/apiCalls'
-import { ORDER_DATA, ORDERS_GET_RES } from '@/api/apiTypes'
+import { ORDER_DATA } from '@/api/apiTypes'
 import { routeName, ShippingStatus } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
 import AddYourFirstTask from './components/AddYourFirstTask'
@@ -76,7 +76,7 @@ const OrderHistory = (props: Props) => {
       </TopFrame>
 
       {ordersList && ordersList?.length > 0 ? (
-        <OrderList onClick={() => {}} list={ordersList} isEditing={isEditing} />
+        <OrderList list={ordersList} isEditing={isEditing} />
       ) : (
         <AddYourFirstTask
           onClick={() => router.push(routeName.adminCreateOrder)}

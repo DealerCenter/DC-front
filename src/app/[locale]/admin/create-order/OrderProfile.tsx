@@ -1,34 +1,41 @@
 'use client'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
+import { useEffect } from 'react'
+import styled from 'styled-components'
 
 import { routeName } from '@/common/helpers/constants'
 
-import IdAndDateBox from './components/IdAndDateBox'
-import LeftFrame from './components/leftFrame/LeftFrame'
-import RightFrame from './components/rightFrame/RightFrame'
+import { getOrders } from '@/api/apiCalls'
+import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
+import FormSaveButton from '@/common/components/appButton/FormSaveButton'
 import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
 import ImagesUploadComponent from '../components/common/ImagesUploadComponent'
 import DetailsRow from './components/detailsRow/DetailsRow'
-import EditButton from '../components/common/EditButton'
-import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
-import FormSaveButton from '@/common/components/appButton/FormSaveButton'
-import {
-  FIELD_NAMES,
-  useCreateOrderContext,
-} from './hooks/useCreateOrderContext'
-import { message } from 'antd'
+import IdAndDateBox from './components/IdAndDateBox'
+import LeftFrame from './components/leftFrame/LeftFrame'
+import RightFrame from './components/rightFrame/RightFrame'
+import { useCreateOrderContext } from './hooks/useCreateOrderContext'
 
-type Props = {}
+const isAdmin = true
 
-const OrderProfile = (props: Props) => {
+type Props = { id?: string }
+
+const OrderProfile = ({ id }: Props) => {
   const t = useTranslations('')
   const router = useRouter()
+  const { handleSubmit, isButtonDisabled, prefillFormikValues, resetForm } =
+    useCreateOrderContext()
 
-  const { handleSubmit, isButtonDisabled } = useCreateOrderContext()
+  const handleGetOrderData = async () => {
+    const response = await getOrders({}, isAdmin)
+    response?.data && prefillFormikValues(response?.data[0])
+  }
+
+  useEffect(() => {
+    handleGetOrderData()
+    //eslint-disable-next-line
+  }, [])
 
   return (
     <Container>

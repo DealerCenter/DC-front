@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ConfigProvider, Select } from 'antd'
 import { useTranslations } from 'next-intl'
 import theme from '@/app/[locale]/theme'
@@ -14,6 +14,7 @@ type Props = {
   placeholder?: string
   errorMessage?: string
   fontSize?: number
+  booleanValue?: boolean
 }
 
 const AppSelectTrueFalse = ({
@@ -22,6 +23,7 @@ const AppSelectTrueFalse = ({
   errorMessage,
   fontSize,
   onChange,
+  booleanValue,
 }: Props) => {
   const [selectedOption, setSelectedOption] = useState<boolean | undefined>(
     undefined
@@ -32,6 +34,15 @@ const AppSelectTrueFalse = ({
     setSelectedOption(value)
     onChange(value)
   }
+
+  useEffect(() => {
+    if (typeof booleanValue === 'boolean') {
+      setSelectedOption(booleanValue)
+    }
+    if (!booleanValue) {
+      setSelectedOption(undefined)
+    }
+  }, [booleanValue])
 
   return (
     <Container>

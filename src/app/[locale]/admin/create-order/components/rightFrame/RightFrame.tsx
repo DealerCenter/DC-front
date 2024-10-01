@@ -6,11 +6,11 @@ import styled from 'styled-components'
 import theme from '@/app/[locale]/theme'
 import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
 import Box from '../../../components/common/Box'
-import ShippingStateBox from '../../../order-history/components/shippingStateBox/ShippingStateBox'
 import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../hooks/useCreateOrderContext'
+import ShippingStatusBox from '../../../order-history/components/shippingStateBox/ShippingStatusBox'
 
 const containersDropdownList = [
   {
@@ -42,7 +42,7 @@ type Props = {}
 
 const RightFrame = ({}: Props) => {
   const [textInputWidth, setTextInputWidth] = useState(INPUT_WIDTH_TABLET)
-  const { setFieldValue } = useCreateOrderContext()
+  const { values, setFieldValue } = useCreateOrderContext()
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
@@ -70,13 +70,17 @@ const RightFrame = ({}: Props) => {
       <Box>
         <Header>{t('status')}</Header>
         <Line />
-        <ShippingStateBox isEditing={true} />
+        <ShippingStatusBox
+          isEditing={true}
+          value={values[FIELD_NAMES.STATUS]}
+        />
       </Box>
       <Box>
         <Header>{t('container data')}</Header> <Line />
         <Frame>
           <Frame2>
             <AppSelectAntDesign
+              value={values[FIELD_NAMES.CONTAINER_ID]}
               optionsWithId={containersDropdownList}
               onChangeId={handleSetContainerValue}
               placeholder={t('select')}
@@ -90,6 +94,7 @@ const RightFrame = ({}: Props) => {
         <Frame>
           <Frame2>
             <AppSelectAntDesign
+              value={values[FIELD_NAMES.RECEIVER_ID]}
               optionsWithId={receiversDropdownList}
               onChangeId={handleSetReceiverValue}
               placeholder={t('select')}

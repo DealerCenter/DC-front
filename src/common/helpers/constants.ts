@@ -25,48 +25,25 @@ export const routeName = {
 
 export const locales = ['en', 'ge', 'ru']
 
-export const VERIFICATION_STATUS_NAME = {
-  PENDING: 'PENDING',
-  VERIFIED: 'VERIFIED',
-  UNVERIFIED: 'UNVERIFIED',
+export enum VERIFICATION_STATUS_NAME {
+  PENDING = 'PENDING',
+  VERIFIED = 'VERIFIED',
+  UNVERIFIED = 'UNVERIFIED',
 }
 
-export const carCategories = [
-  'Sedan',
-  'Jeep',
-  'Coupe',
-  'Hatchback',
-  'Universal',
-  'Cabriolet',
-  'Pickup',
-  'Minivan',
-  'Microbus',
-  'GoodsWagon',
-  'Limousine',
-  'CrossOver',
-]
-
-export const SHIPPING_STATUS = {
-  IN_AUCTION: 'InAuction',
-  IN_AMERICAN_WAREHOUSE: 'InAmericanWarehouse',
-  IN_CONTAINER: 'InContainer',
-  UNDERGOES_CUSTOMS: 'UndergoesCustomsProcedures',
-  SENT: 'Sent',
+export enum SHIPPING_STATUS {
+  IN_AUCTION = 'InAuction',
+  IN_AMERICAN_WAREHOUSE = 'InAmericanWarehouse',
+  IN_CONTAINER = 'InContainer',
+  UNDERGOES_CUSTOMS = 'UndergoesCustomsProcedures',
+  SENT = 'Sent',
 }
 
 export type LocalesType = 'en' | 'ge' | 'ru'
 
-export type ParamsType = { locale?: LocalesType; id?: number }
+export type VerificationStatusType = VERIFICATION_STATUS_NAME
 
-export type VerificationStatusType = 'PENDING' | 'VERIFIED' | 'UNVERIFIED'
-
-export type ShippingStatus =
-  | 'InAuction'
-  | 'InAmericanWarehouse'
-  | 'InContainer'
-  | 'UndergoesCustomsProcedures'
-  | 'Sent'
-  | null
+export type ShippingStatus = SHIPPING_STATUS | null
 
 export type OrdersQueryType =
   | {
@@ -99,3 +76,18 @@ export type ReceiversQueryType =
       dealerId?: number
     }
   | undefined
+
+export const carCategories = [
+  'Sedan',
+  'Jeep',
+  'Coupe',
+  'Hatchback',
+  'Universal',
+  'Cabriolet',
+  'Pickup',
+  'Minivan',
+  'Microbus',
+  'GoodsWagon',
+  'Limousine',
+  'CrossOver',
+]

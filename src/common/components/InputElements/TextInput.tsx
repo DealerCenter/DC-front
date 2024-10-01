@@ -8,7 +8,7 @@ type Props = {
   type: string
   placeholder: string
   name: string
-  value: string
+  value?: string | number
   onChange: ChangeEventHandler<HTMLInputElement>
   onBlur: ChangeEventHandler<HTMLInputElement>
   icon?: any
@@ -52,7 +52,7 @@ const TextInput = ({
         type={type}
         name={name}
         placeholder={placeholder}
-        value={value}
+        value={value ? value : ''}
         onChange={onChange}
         onBlur={onBlur}
         icon={icon}
