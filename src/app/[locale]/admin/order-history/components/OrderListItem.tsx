@@ -18,9 +18,18 @@ type Props = {
   item: ORDER_DATA
   onClick: () => void
   isEditing: boolean
+  addOrderId: (id: number) => void
+  removeOrderId: (id: number) => void
 }
 
-const OrderListItem = ({ imageLink, item, onClick, isEditing }: Props) => {
+const OrderListItem = ({
+  imageLink,
+  item,
+  onClick,
+  isEditing,
+  addOrderId,
+  removeOrderId,
+}: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const [isChecked, setIsChecked] = useState(false)
@@ -45,7 +54,12 @@ const OrderListItem = ({ imageLink, item, onClick, isEditing }: Props) => {
   }, [isEditing])
 
   const handleClick = () => {
-    isEditing ? setIsChecked((is) => !is) : onClick()
+    if (isEditing) {
+      isChecked ? removeOrderId(orderId) : addOrderId(orderId)
+      setIsChecked((is) => !is)
+    } else {
+      onClick()
+    }
   }
 
   return (

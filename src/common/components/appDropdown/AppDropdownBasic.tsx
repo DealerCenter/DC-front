@@ -2,50 +2,32 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import DropdownItem from './DropdownItem'
-import Image from 'next/image'
-
-type SortOption = {
-  label: string
-  icon: string
-  onChoose: () => void
-}
 
 type Props = {
   children: ReactNode
   modalStyle?: 'white' | 'black'
-  items?:
-    | { href: { pathname: string }; locale: string; label: string }[]
-    | { label: string; icon: string }[]
-    | { label: string }[]
-
+  items: { label: string }[]
   left?: number
   top?: number
-  onSortClick?: () => void
-  handleToggle?: () => void
+
   handleClose?: () => void
   width?: number
   isBorder?: boolean
-  ReadyComponent?: ReactNode
-  sortOptions?: SortOption[]
-  setActiveLabel?: (arg: string) => void
+  setActiveValue?: (arg: string) => void
   isDisabled?: boolean
   isNoActionOnClick?: boolean
 }
 
-const AppDropdown = ({
+const AppDropdownBasic = ({
   children,
   items,
   left,
   top,
   modalStyle = 'black',
-  onSortClick,
-  handleToggle,
   handleClose,
   width,
   isBorder,
-  ReadyComponent,
-  sortOptions,
-  setActiveLabel,
+  setActiveValue,
   isDisabled,
   isNoActionOnClick,
 }: Props) => {
@@ -54,9 +36,6 @@ const AppDropdown = ({
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
-    {
-      handleToggle && handleToggle()
-    }
   }
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -68,9 +47,11 @@ const AppDropdown = ({
     }
   }
 
-  const handleItemClick = () => {
+  const handleItemClick = (label?: string) => {
     !isNoActionOnClick && setIsOpen(false)
     handleClose && handleClose()
+
+    setActiveValue && label && setActiveValue(label)
   }
 
   useEffect(() => {
@@ -91,7 +72,7 @@ const AppDropdown = ({
           modalStyle={modalStyle}
           left={left}
           top={top}
-          onClick={handleItemClick}
+          onClick={() => {}}
           width={width}
           isBorder={isBorder}
         >
@@ -101,18 +82,7 @@ const AppDropdown = ({
                 item={item}
                 key={`${item.label}12ij${i}`}
                 modalStyle={modalStyle}
-                onSortClick={onSortClick}
-              />
-            ))}
-          {ReadyComponent && ReadyComponent}
-          {sortOptions &&
-            sortOptions.map((item, i) => (
-              <DropdownItem
-                item={item}
-                key={`${item.label}12ij${i}`}
-                modalStyle={modalStyle}
-                onSortClick={item.onChoose}
-                onClick={() => setActiveLabel && setActiveLabel(item.label)}
+                onItemClick={handleItemClick}
               />
             ))}
         </DropdownMenu>
@@ -121,7 +91,7 @@ const AppDropdown = ({
   )
 }
 
-export default AppDropdown
+export default AppDropdownBasic
 
 const Dropdown = styled.div`
   position: relative;

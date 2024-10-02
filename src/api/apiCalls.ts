@@ -12,6 +12,7 @@ import {
   DEALERS_RES,
   ME_RES,
   OrderPostAdminType,
+  OrderPutAdminType,
   ORDERS_GET_RES,
   RECEIVER_GET_RES,
 } from './apiTypes'
@@ -139,23 +140,8 @@ export const createOrder = async (payload: OrderPostAdminType) => {
   }
 }
 
-export const changeOrder = async (
-  payload: {
-    manufacturer: string
-    manufactureYear: number
-    model: string
-    vin: string
-    transportationCost: number
-    carCost: number
-    stateId: number
-    exactAddress: string
-    isInsured: boolean
-    carCategory: string
-    mileage: number
-    status: string
-    containerId: number
-    receiverId: number
-  },
+export const changeOrderAdmin = async (
+  payload: OrderPutAdminType,
   id: number
 ) => {
   try {

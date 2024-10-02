@@ -8,13 +8,16 @@ import { routeName } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
 import { useMediaQuery } from 'react-responsive'
 import OrderListHeader from './OrderListHeader'
+import { useEffect, useState } from 'react'
 
 type Props = {
   list: ORDER_DATA[]
   isEditing: boolean
+  addOrderId: (id: number) => void
+  removeOrderId: (id: number) => void
 }
 
-const OrderList = ({ list, isEditing }: Props) => {
+const OrderList = ({ list, isEditing, addOrderId, removeOrderId }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   const router = useRouter()
@@ -31,6 +34,8 @@ const OrderList = ({ list, isEditing }: Props) => {
           item={order}
           key={`${order.id}82kj32${i}`}
           isEditing={isEditing}
+          addOrderId={addOrderId}
+          removeOrderId={removeOrderId}
         />
       ))}
     </ListFrame>

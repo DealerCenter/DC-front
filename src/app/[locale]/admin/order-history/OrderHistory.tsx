@@ -7,12 +7,13 @@ import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 import ButtonsRow from './components/ButtonsRow'
 import OrderList from './components/OrderList'
 
-import { getOrders } from '@/api/apiCalls'
+import { changeOrderAdmin, getOrders } from '@/api/apiCalls'
 import { ORDER_DATA } from '@/api/apiTypes'
 import { routeName, ShippingStatus } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
 import AddYourFirstTask from './components/AddYourFirstTask'
 import LoadingText from '@/common/components/readyComponents/LoadingText'
+import { message } from 'antd'
 
 const ITEMS_PER_PAGE = 8
 
@@ -33,9 +34,23 @@ const OrderHistory = (props: Props) => {
   >(null)
   const [shippingStatus, setShippingStatus] = useState<ShippingStatus>(null)
 
+  const [shippingStatusOnEdit, setShippingStatusOnEdit] = useState<
+    string | null
+  >(null)
+
   // for filter when backend adds it
   const [dealerId, setDealerId] = useState<number | null>(null)
   const [receiverId, setReceiverId] = useState<number | null>(null)
+
+  const [checkedOrderIds, setCheckedOrderIds] = useState<number[] | []>([])
+
+  const handleAddOrderIdToList = (id: number) => {
+    setCheckedOrderIds((prev) => [...prev, id])
+  }
+
+  const handleRemoveOrderIdFromList = (id: number) => {
+    setCheckedOrderIds((prev) => prev.filter((orderId) => orderId !== id))
+  }
 
   // Has to be done after backend is fixed
   // useEffect(() => {
@@ -43,6 +58,27 @@ const OrderHistory = (props: Props) => {
   //   console.log('dealer id:', dealerId)
   //   console.log('receiver id:', receiverId)
   // }, [dealerId, receiverId, shippingStatus])
+
+  const handleEditSubmit = async () => {
+    if (checkedOrderIds.length > 0) {
+      try {
+        for (const id of checkedOrderIds) {
+          const response = await changeOrderAdmin(
+            { status: shippingStatusOnEdit ? shippingStatusOnEdit : '' },
+            id
+          )
+          console.log(response)
+          message.success(t('order edited successfully'))
+        }
+        // clearing info after requests are done
+        setCheckedOrderIds([])
+        setShippingStatusOnEdit(null)
+      } catch (error) {
+        message.error(t('could not edit order'))
+        console.error('Error editing orders:', error)
+      }
+    }
+  }
 
   const router = useRouter()
   const t = useTranslations('')
@@ -67,6 +103,11 @@ const OrderHistory = (props: Props) => {
     }
     setIsLoading(false)
   }
+
+  useEffect(() => {
+    console.log('ids list', checkedOrderIds)
+    //eslint-disable-next-line
+  }, [checkedOrderIds])
 
   useEffect(() => {
     handleGetOrders()
@@ -98,11 +139,20 @@ const OrderHistory = (props: Props) => {
           setShippingStatus={setShippingStatus}
           setDealerId={setDealerId}
           setReceiverId={setReceiverId}
+          clearOrderIdsList={() => setCheckedOrderIds([])}
+          shippingStatusOnEdit={shippingStatusOnEdit}
+          setShippingStatusOnEdit={setShippingStatusOnEdit}
+          handleEditSubmit={handleEditSubmit}
         />
       </TopFrame>
 
       {ordersList && ordersList?.length > 0 ? (
-        <OrderList list={ordersList} isEditing={isEditing} />
+        <OrderList
+          list={ordersList}
+          isEditing={isEditing}
+          addOrderId={handleAddOrderIdToList}
+          removeOrderId={handleRemoveOrderIdFromList}
+        />
       ) : (
         <AddYourFirstTask
           onClick={() => router.push(routeName.adminCreateOrder)}

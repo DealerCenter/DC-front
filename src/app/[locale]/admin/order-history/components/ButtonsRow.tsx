@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
@@ -18,14 +18,21 @@ import AppDropdownFilter from '@/common/components/appDropdown/appFilter/AppDrop
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 import BindContainerBox from './bindContainer/BindContainerBox'
-import { routeName, ShippingStatus } from '@/common/helpers/constants'
+import {
+  routeName,
+  SHIPPING_STATUS,
+  ShippingStatus,
+} from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
 import CloseIconBlack from '@/common/components/readyIcons/CloseIconBlack'
+import AppDropdownBasic from '@/common/components/appDropdown/AppDropdownBasic'
 
 const changeStatusList = [
-  { label: 'arrived' },
-  { label: 'on the way' },
-  { label: 'in warehouse' },
+  { label: SHIPPING_STATUS.IN_AUCTION },
+  { label: SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE },
+  { label: SHIPPING_STATUS.IN_CONTAINER },
+  { label: SHIPPING_STATUS.UNDERGOES_CUSTOMS },
+  { label: SHIPPING_STATUS.SENT },
 ]
 
 type Props = {
@@ -38,6 +45,10 @@ type Props = {
   setShippingStatus: (arg: ShippingStatus) => void
   setDealerId: (arg: number | null) => void
   setReceiverId: (arg: number | null) => void
+  clearOrderIdsList: () => void
+  shippingStatusOnEdit: string | null
+  setShippingStatusOnEdit: (arg: string | null) => void
+  handleEditSubmit: () => void
 }
 
 const ButtonsRow = ({
@@ -50,6 +61,10 @@ const ButtonsRow = ({
   setShippingStatus,
   setDealerId,
   setReceiverId,
+  clearOrderIdsList,
+  shippingStatusOnEdit,
+  setShippingStatusOnEdit,
+  handleEditSubmit,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
@@ -94,6 +109,19 @@ const ButtonsRow = ({
     setActiveSortLabel('sort')
   }
 
+  const onClearShippingStatusOnEdit = (e: any) => {
+    e.stopPropagation()
+    setShippingStatusOnEdit(null)
+  }
+
+  const onDoneEdit = () => {
+    handleEditSubmit()
+  }
+
+  useEffect(() => {
+    console.log('shipping status', shippingStatusOnEdit)
+  }, [shippingStatusOnEdit])
+
   const handleEditButton = () => {
     isEditing ? setIsEditing(false) : setIsEditing(true)
   }
@@ -103,17 +131,29 @@ const ButtonsRow = ({
       {isEditing ? (
         <ButtonFrameEdit>
           <ButtonPairFrame>
-            <AppDropdown
+            <AppDropdownBasic
               items={changeStatusList}
               modalStyle='white'
-              width={240}
+              width={300}
               top={48}
               isBorder={true}
+              setActiveValue={setShippingStatusOnEdit}
             >
               <BasicButton onClick={() => {}} color='white' isBorder={true}>
-                {t('change status')}
+                {t(
+                  shippingStatusOnEdit
+                    ? `${shippingStatusOnEdit}`
+                    : 'change status'
+                )}
               </BasicButton>
-            </AppDropdown>
+              {shippingStatusOnEdit !== null && (
+                <CloseIconBlack
+                  onClick={onClearShippingStatusOnEdit}
+                  top={-8}
+                  right={-8}
+                />
+              )}
+            </AppDropdownBasic>
             <AppDropdown
               ReadyComponent={<BindContainerBox />}
               modalStyle='white'
@@ -133,13 +173,13 @@ const ButtonsRow = ({
               padding={16}
               color='white'
             >
-              <ButtonText>{t('cancel')}</ButtonText>
+              <ButtonText onClick={clearOrderIdsList}>{t('cancel')}</ButtonText>
             </BasicButton>
             <BasicButton onClick={() => setIsEditing(false)} padding={16}>
               <ButtonIcon>
                 <Image src={checkIcon} alt='check icon' width={15} />
               </ButtonIcon>
-              <ButtonText>{t('done')}</ButtonText>
+              <ButtonText onClick={onDoneEdit}>{t('done')}</ButtonText>
             </BasicButton>
           </ButtonPairFrame>
         </ButtonFrameEdit>

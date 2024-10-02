@@ -240,3 +240,26 @@ type OrderPostAdminType = {
   containerImages?: any[]
   homePortImages?: any[]
 }
+
+type OrderPutAdminType = {
+  manufacturer?: string
+  manufactureYear?: number
+  model?: string
+  vin?: string
+  transportationCost?: number
+  carCost?: number
+  stateId?: number
+  exactAddress?: string
+  isInsured?: boolean
+  carCategory?: string
+  mileage?: number
+  status?: string
+  containerId?: number
+  receiverId?: number
+  additionalDetails?: string
+  carDetails?: string
+  towTruckImages?: any[]
+  abroadPortImages?: any[]
+  containerImages?: any[]
+  homePortImages?: any[]
+}

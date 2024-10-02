@@ -21,35 +21,37 @@ type Props = {
       | 'date descending'
   ) => void
   onClick?: () => void
+  onItemClick?: (arg: string) => void
 }
 
-const DropdownItem = ({ item, modalStyle, onSortClick, onClick }: Props) => {
+const DropdownItem = ({
+  item,
+  modalStyle,
+  onSortClick,
+  onClick,
+  onItemClick,
+}: Props) => {
   const pathname = usePathname()
   const t = useTranslations('')
 
   const { label, href, locale, icon, onChoose } = item
-
-  // const handleClick = (value: string) => {
-  //   if (
-  //     value === 'price ascending' ||
-  //     value === 'price descending' ||
-  //     value === 'date ascending' ||
-  //     value === 'date descending'
-  //   ) {
-  //     onSortClick && onSortClick(value)
-  //   } else {
-  //     console.error('Invalid value:', value)
-  //   }
-  // }
 
   const handleClick = () => {
     onChoose && onChoose()
     onClick && onClick()
   }
 
+  const handleItemClick = () => {
+    onItemClick && onItemClick(item.label)
+  }
+
   return (
     <StyledLink href={href ? href : pathname} locale={locale && locale}>
-      <Container modalStyle={modalStyle} isIcon={!!icon} onClick={handleClick}>
+      <Container
+        modalStyle={modalStyle}
+        isIcon={!!icon}
+        onClick={onItemClick ? handleItemClick : handleClick}
+      >
         <Frame>
           {icon && (
             <Icon>
