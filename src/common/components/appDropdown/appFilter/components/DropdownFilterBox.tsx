@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import BasicButton from '@/common/components/appButton/BasicButton'
@@ -8,6 +8,8 @@ import OptionsBox from './OptionsBox'
 import { ShippingStatus } from '@/common/helpers/constants'
 import SingleDropdown from './SingleDropdown'
 import SingleDropdownShippingStatus from './SingleDropdownShippingStatus'
+import { getReceivers } from '@/api/apiCalls'
+import { RECEIVER_DATA } from '@/api/apiTypes'
 
 type Props = {
   toggleDropdown: () => void
@@ -26,6 +28,8 @@ const DropdownFilterBox = ({ toggleDropdown, setShippingStatus }: Props) => {
   const [checkedRecipient, setCheckedRecipient] = useState('')
   const [checkedDealer, setCheckedDealer] = useState('')
 
+  const [receiversList, setReceiversList] = useState<RECEIVER_DATA[]>()
+
   const handleCancel = () => {
     setCheckedStatus(null)
     setCheckedRecipient('')
@@ -37,6 +41,18 @@ const DropdownFilterBox = ({ toggleDropdown, setShippingStatus }: Props) => {
     setShippingStatus(checkedStatus)
     toggleDropdown()
   }
+
+  const getRecipients = async () => {
+    const res = await getReceivers({}, true)
+    res && setReceiversList(res.data)
+  }
+
+  useEffect(() => {
+    getRecipients()
+  }, [])
+  useEffect(() => {
+    console.log('state recipient', checkedRecipient)
+  }, [checkedRecipient])
 
   return (
     <Container>
@@ -52,9 +68,9 @@ const DropdownFilterBox = ({ toggleDropdown, setShippingStatus }: Props) => {
           />
         ) : activeSetting === 'recipient' ? (
           <SingleDropdown
-            values={['recipient1', 'recipient2', 'recipient3']}
             checkedOption={checkedRecipient}
             setCheckedOption={setCheckedRecipient}
+            receiversList={receiversList}
           />
         ) : (
           activeSetting === 'dealer' && (

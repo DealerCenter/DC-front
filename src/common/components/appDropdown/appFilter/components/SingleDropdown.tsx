@@ -1,31 +1,59 @@
 // import { ShippingStatus } from '@/common/helpers/constants'
+import { RECEIVER_DATA } from '@/api/apiTypes'
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
+import SearchSmall from '@/common/components/search/SearchSmall'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
 
 type Props = {
-  values: string[]
+  values?: string[]
   checkedOption: string
   setCheckedOption: (arg: string) => void
+  receiversList?: RECEIVER_DATA[]
 }
 
-const SingleDropdown = ({ values, checkedOption, setCheckedOption }: Props) => {
+const SingleDropdown = ({
+  values,
+  checkedOption,
+  setCheckedOption,
+  receiversList,
+}: Props) => {
   const t = useTranslations('')
 
-  return (
-    <List>
-      {values.map((value, i) => (
-        <ListItem
-          key={`DropdownFilterBoxListItem${i}`}
-          onClick={() => setCheckedOption(value)}
-        >
-          <CheckBox isChecked={value === checkedOption} />
-          {!values ? <Text>{t(value)}</Text> : <Text>{value}</Text>}
-        </ListItem>
-      ))}
-    </List>
-  )
+  if (receiversList) {
+    return (
+      <List>
+        <SearchSmall />
+        {receiversList.map((value, i) => (
+          <ListItem
+            key={`DropdownFilterBoxListItem${i}`}
+            onClick={() => setCheckedOption(value.id.toString())}
+          >
+            <CheckBox isChecked={value.id.toString() === checkedOption} />
+            <Text>{`${value.firstName} ${value.lastName}`}</Text>
+          </ListItem>
+        ))}
+      </List>
+    )
+  }
+  if (values) {
+    return (
+      <List>
+        {values.map((value, i) => (
+          <ListItem
+            key={`DropdownFilterBoxListItem${i}`}
+            onClick={() => setCheckedOption(value)}
+          >
+            <CheckBox isChecked={value === checkedOption} />
+            {!values ? <Text>{t(value)}</Text> : <Text>{value}</Text>}
+          </ListItem>
+        ))}
+      </List>
+    )
+  }
+
+  return <List></List>
 }
 
 export default SingleDropdown
