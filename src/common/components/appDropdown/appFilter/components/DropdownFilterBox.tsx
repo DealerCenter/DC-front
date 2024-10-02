@@ -2,14 +2,14 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import BasicButton from '@/common/components/appButton/BasicButton'
-import CheckBox from '@/common/components/appCheckBox/Checkbox'
-import OptionsBox from './OptionsBox'
-import { ShippingStatus } from '@/common/helpers/constants'
-import SingleDropdown from './SingleDropdown'
-import SingleDropdownShippingStatus from './SingleDropdownShippingStatus'
 import { getDealersAdmin, getReceivers } from '@/api/apiCalls'
 import { DEALERS_DATA, RECEIVER_DATA } from '@/api/apiTypes'
+
+import BasicButton from '@/common/components/appButton/BasicButton'
+import { ShippingStatus } from '@/common/helpers/constants'
+import OptionsBox from './OptionsBox'
+import SingleDropdown from './SingleDropdown'
+import SingleDropdownShippingStatus from './SingleDropdownShippingStatus'
 
 type Props = {
   toggleDropdown: () => void
@@ -28,8 +28,6 @@ const DropdownFilterBox = ({
   const [activeSetting, setActiveSetting] = useState<
     'status' | 'recipient' | 'dealer' | null
   >('status')
-
-  // const [checkedOption, setCheckedOption] = useState('')
 
   const [checkedStatus, setCheckedStatus] = useState<ShippingStatus>(null)
   const [checkedRecipientId, setCheckedRecipientId] = useState<number | null>(
@@ -59,19 +57,23 @@ const DropdownFilterBox = ({
 
   const getRecipients = async () => {
     const res = await getReceivers({ search: '' }, true)
+    res && console.log('fetched receivers list:', receiversSearchQuery)
     res && setReceiversList(res.data)
   }
   useEffect(() => {
     getRecipients()
+    //eslint-disable-next-line
   }, [receiversSearchQuery])
 
   const getDealers = async () => {
     const res = await getDealersAdmin({})
+    res && console.log('fetched dealers list:', dealersSearchQuery)
     res && setDealersList(res.data)
   }
   useEffect(() => {
     getDealers()
-  }, [])
+    //eslint-disable-next-line
+  }, [dealersSearchQuery])
 
   return (
     <Container>
@@ -97,7 +99,6 @@ const DropdownFilterBox = ({
                 lastName,
               }))
             }
-            searchQuery={receiversSearchQuery}
             setSearchQuery={setReceiversSearchQuery}
           />
         ) : (
@@ -113,7 +114,6 @@ const DropdownFilterBox = ({
               }
               checkedOption={checkedDealerId}
               setCheckedId={setCheckedDealerId}
-              searchQuery={dealersSearchQuery}
               setSearchQuery={setDealersSearchQuery}
             />
           )
