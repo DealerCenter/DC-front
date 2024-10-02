@@ -1,13 +1,14 @@
 'use client'
 import { FormikValues, useFormik } from 'formik'
 import { useTranslations } from 'next-intl'
-import { ReactNode, createContext, useContext } from 'react'
+import { ReactNode, createContext, useContext, useState } from 'react'
 import * as yup from 'yup'
 
 import axiosInstance from '@/api/apiClient'
 import { ORDER_DATA } from '@/api/apiTypes'
 import { endpoints } from '@/api/endpoints'
 import { message } from 'antd'
+import { useScroll } from 'framer-motion'
 
 const FormikContext = createContext<FormikValues | null>(null)
 
@@ -37,6 +38,8 @@ export const FIELD_NAMES = {
 
 export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
   const t = useTranslations('')
+
+  const [orderId, setOrderId] = useState<number | null>(null)
 
   // const initialValues = {
   //   [FIELD_NAMES.MANUFACTURER]: yup.string,
@@ -83,7 +86,9 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     onSubmit: async (values, { resetForm }) => {
       console.log('onSubmit:', values)
 
-      const numericValues = { ...values }
+      const numericValues: {
+        [x: string]: string | number
+      } = { ...values }
       const numberFields = [
         FIELD_NAMES.MANUFACTURE_YEAR,
         FIELD_NAMES.TRANSPORTATION_COST,
@@ -103,23 +108,34 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         }
       })
 
-      console.log('onSubmit with numeric values:', numericValues)
+      // console.log('onSubmit with numeric values:', numericValues)
 
       try {
-        const response = await axiosInstance.post(
-          endpoints.ORDERS,
-          numericValues
+        const response = orderId
+          ? await axiosInstance.put(
+              `${endpoints.ORDERS_ADMIN}/${orderId}`,
+              numericValues
+            )
+          : await axiosInstance.post(endpoints.ORDERS_ADMIN, numericValues)
+
+        message.success(
+          orderId
+            ? t('order edited successfully')
+            : t('order created successfully')
         )
 
-        message.success(t('order created successfully'))
-        // MY_BUG
-        // after reset, all fields are not cleared.
+        // Reset all fields
         resetForm()
 
         return response
       } catch (error) {
-        message.error(t('could not create order'))
-        console.error('Error creating new order:', error)
+        if (orderId) {
+          message.error(t('could not edit order'))
+          console.error('Error editing order:', error)
+        } else {
+          message.error(t('could not create order'))
+          console.error('Error creating new order:', error)
+        }
       }
     },
 
@@ -243,6 +259,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         isButtonDisabled,
         prefillFormikValues,
         resetForm,
+        setOrderId,
       }}
     >
       {children}

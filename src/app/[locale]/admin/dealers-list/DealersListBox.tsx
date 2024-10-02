@@ -9,7 +9,7 @@ import { users as dummyUsers } from '@/assets/DummyData'
 import plusIcon from '@/assets/icons/plus.svg'
 import searchIcon from '@/assets/icons/searchForButton.svg'
 import DealersList from './components/DealersList'
-import { getDealers } from '@/api/apiCalls'
+import { getDealersAdmin } from '@/api/apiCalls'
 import { DEALERS_DATA, DEALERS_RES } from '@/api/apiTypes'
 import SearchButton from '@/common/components/searchButton/SearchButton'
 import Pagination from '@/common/components/pagination/Pagination'
@@ -31,7 +31,7 @@ const DealersListBox = (props: Props) => {
 
   const handleGetDealers = async () => {
     setIsLoading(true)
-    const response = await getDealers({
+    const response = await getDealersAdmin({
       page: currentPage,
       pageSize: ITEMS_PER_PAGE,
       firstName: '',

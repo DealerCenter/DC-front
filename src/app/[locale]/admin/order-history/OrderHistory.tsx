@@ -12,6 +12,7 @@ import { ORDER_DATA } from '@/api/apiTypes'
 import { routeName, ShippingStatus } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
 import AddYourFirstTask from './components/AddYourFirstTask'
+import LoadingText from '@/common/components/readyComponents/LoadingText'
 
 const ITEMS_PER_PAGE = 8
 
@@ -31,6 +32,18 @@ const OrderHistory = (props: Props) => {
     'asc' | 'desc' | null
   >(null)
   const [shippingStatus, setShippingStatus] = useState<ShippingStatus>(null)
+
+  // for filter when backend adds it
+  const [dealerId, setDealerId] = useState<number | null>(null)
+  const [receiverId, setReceiverId] = useState<number | null>(null)
+
+  // Has to be done after backend is fixed
+  // useEffect(() => {
+  //   console.log('shipping status:', shippingStatus)
+  //   console.log('dealer id:', dealerId)
+  //   console.log('receiver id:', receiverId)
+  // }, [dealerId, receiverId, shippingStatus])
+
   const router = useRouter()
   const t = useTranslations('')
 
@@ -60,6 +73,17 @@ const OrderHistory = (props: Props) => {
     //eslint-disable-next-line
   }, [sortByCost, sortByCreateDate, shippingStatus, currentPage])
 
+  if (!isPageLoaded) {
+    return (
+      <Container>
+        <HeaderH4Bold text={t('order history')} />
+        <LoaderBox>
+          <LoadingText />
+        </LoaderBox>
+      </Container>
+    )
+  }
+
   return (
     <Container>
       <TopFrame>
@@ -72,6 +96,8 @@ const OrderHistory = (props: Props) => {
           isButtonsDisabled={!isPageLoaded}
           shippingStatus={shippingStatus}
           setShippingStatus={setShippingStatus}
+          setDealerId={setDealerId}
+          setReceiverId={setReceiverId}
         />
       </TopFrame>
 
@@ -119,4 +145,11 @@ const PaginationFrame = styled.div`
   display: flex;
   justify-content: center;
   padding: ${({ theme }) => theme.spacing?.md};
+`
+
+const LoaderBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
 `

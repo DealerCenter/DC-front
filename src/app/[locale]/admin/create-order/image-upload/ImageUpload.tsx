@@ -18,12 +18,6 @@ import closeX from '@/assets/icons/closeX.svg'
 type Props = {}
 
 const dropdownOptions = [
-  { value: 'evacuator' },
-  { value: 'usa port' },
-  { value: 'container' },
-  { value: 'georgian port' },
-]
-const dropdownOptions2 = [
   { value: IMAGE_LOCATIONS.TOW_TRUCK },
   { value: IMAGE_LOCATIONS.ABROAD_PORT },
   { value: IMAGE_LOCATIONS.CONTAINER },
@@ -40,6 +34,8 @@ const ImageLocations = [
 const ImageUpload = (props: Props) => {
   const t = useTranslations('')
   const router = useRouter()
+
+  const [selectedLocations, setSelectedLocations] = useState([])
 
   const [numOfPairs, setNumOfPairs] = useState(0)
 
@@ -61,8 +57,11 @@ const ImageUpload = (props: Props) => {
           (_, i) =>
             i <= numOfPairs && (
               <InputFieldAndImageUploadPair
-                dropdownOptions={dropdownOptions2}
+                dropdownOptions={dropdownOptions.filter((item) => {
+                  return !selectedLocations.includes(item.value)
+                })}
                 key={`InputFieldAndImageUploadPair${i}`}
+                setSelectedLocations={setSelectedLocations}
               />
             )
         )}

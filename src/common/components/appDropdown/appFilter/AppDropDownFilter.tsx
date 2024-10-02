@@ -9,6 +9,8 @@ type Props = {
   left?: number
   top?: number
   setShippingStatus: (arg: ShippingStatus) => void
+  setDealerId: (arg: number | null) => void
+  setReceiverId: (arg: number | null) => void
 }
 
 const AppDropdownFilter = ({
@@ -16,6 +18,8 @@ const AppDropdownFilter = ({
   left,
   top,
   setShippingStatus,
+  setDealerId,
+  setReceiverId,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -48,6 +52,8 @@ const AppDropdownFilter = ({
           <DropdownFilterBox
             toggleDropdown={toggleDropdown}
             setShippingStatus={setShippingStatus}
+            setDealerId={setDealerId}
+            setReceiverId={setReceiverId}
           />
         </DropdownMenu>
       )}

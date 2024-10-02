@@ -10,7 +10,6 @@ import { getOrders } from '@/api/apiCalls'
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
 import FormSaveButton from '@/common/components/appButton/FormSaveButton'
 import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
-import ImagesUploadComponent from '../components/common/ImagesUploadComponent'
 import DetailsRow from './components/detailsRow/DetailsRow'
 import IdAndDateBox from './components/IdAndDateBox'
 import LeftFrame from './components/leftFrame/LeftFrame'
@@ -25,7 +24,7 @@ type Props = { id?: string }
 const OrderProfile = ({ id }: Props) => {
   const t = useTranslations('')
   const router = useRouter()
-  const { handleSubmit, isButtonDisabled, prefillFormikValues, resetForm } =
+  const { handleSubmit, isButtonDisabled, prefillFormikValues, setOrderId } =
     useCreateOrderContext()
 
   const handleGetOrderData = async () => {
@@ -37,6 +36,10 @@ const OrderProfile = ({ id }: Props) => {
     handleGetOrderData()
     //eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    id && setOrderId(id)
+  }, [id, setOrderId])
 
   return (
     <Container>
@@ -53,7 +56,6 @@ const OrderProfile = ({ id }: Props) => {
           disabled={isButtonDisabled}
         />
       </TopButtonsFrame>
-
       <ImageFrame>
         <IdAndDateFrame>
           <IdAndDateBox
@@ -74,6 +76,7 @@ const OrderProfile = ({ id }: Props) => {
         />
         <DetailsRow />
       </ImageFrame>
+
       <BottomFrame>
         <LeftFrame />
         <RightFrame />

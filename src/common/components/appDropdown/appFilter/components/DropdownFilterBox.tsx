@@ -8,15 +8,22 @@ import OptionsBox from './OptionsBox'
 import { ShippingStatus } from '@/common/helpers/constants'
 import SingleDropdown from './SingleDropdown'
 import SingleDropdownShippingStatus from './SingleDropdownShippingStatus'
-import { getReceivers } from '@/api/apiCalls'
-import { RECEIVER_DATA } from '@/api/apiTypes'
+import { getDealersAdmin, getReceivers } from '@/api/apiCalls'
+import { DEALERS_DATA, RECEIVER_DATA } from '@/api/apiTypes'
 
 type Props = {
   toggleDropdown: () => void
   setShippingStatus: (arg: ShippingStatus) => void
+  setDealerId: (arg: number | null) => void
+  setReceiverId: (arg: number | null) => void
 }
 
-const DropdownFilterBox = ({ toggleDropdown, setShippingStatus }: Props) => {
+const DropdownFilterBox = ({
+  toggleDropdown,
+  setShippingStatus,
+  setDealerId,
+  setReceiverId,
+}: Props) => {
   const t = useTranslations('')
   const [activeSetting, setActiveSetting] = useState<
     'status' | 'recipient' | 'dealer' | null
@@ -25,34 +32,46 @@ const DropdownFilterBox = ({ toggleDropdown, setShippingStatus }: Props) => {
   // const [checkedOption, setCheckedOption] = useState('')
 
   const [checkedStatus, setCheckedStatus] = useState<ShippingStatus>(null)
-  const [checkedRecipient, setCheckedRecipient] = useState('')
-  const [checkedDealer, setCheckedDealer] = useState('')
+  const [checkedRecipientId, setCheckedRecipientId] = useState<number | null>(
+    null
+  )
+  const [checkedDealerId, setCheckedDealerId] = useState<number | null>(null)
 
   const [receiversList, setReceiversList] = useState<RECEIVER_DATA[]>()
+  const [receiversSearchQuery, setReceiversSearchQuery] = useState('')
+
+  const [dealersList, setDealersList] = useState<DEALERS_DATA[]>()
+  const [dealersSearchQuery, setDealersSearchQuery] = useState('')
 
   const handleCancel = () => {
     setCheckedStatus(null)
-    setCheckedRecipient('')
-    setCheckedDealer('')
+    setCheckedRecipientId(null)
+    setCheckedDealerId(null)
     setShippingStatus(null)
     toggleDropdown()
   }
   const handleSave = () => {
     setShippingStatus(checkedStatus)
+    setDealerId(checkedDealerId)
+    setReceiverId(checkedRecipientId)
     toggleDropdown()
   }
 
   const getRecipients = async () => {
-    const res = await getReceivers({}, true)
+    const res = await getReceivers({ search: '' }, true)
     res && setReceiversList(res.data)
   }
-
   useEffect(() => {
     getRecipients()
-  }, [])
+  }, [receiversSearchQuery])
+
+  const getDealers = async () => {
+    const res = await getDealersAdmin({})
+    res && setDealersList(res.data)
+  }
   useEffect(() => {
-    console.log('state recipient', checkedRecipient)
-  }, [checkedRecipient])
+    getDealers()
+  }, [])
 
   return (
     <Container>
@@ -68,16 +87,34 @@ const DropdownFilterBox = ({ toggleDropdown, setShippingStatus }: Props) => {
           />
         ) : activeSetting === 'recipient' ? (
           <SingleDropdown
-            checkedOption={checkedRecipient}
-            setCheckedOption={setCheckedRecipient}
-            receiversList={receiversList}
+            checkedOption={checkedRecipientId}
+            setCheckedId={setCheckedRecipientId}
+            values={
+              receiversList &&
+              receiversList.map(({ id, firstName, lastName }) => ({
+                id,
+                firstName,
+                lastName,
+              }))
+            }
+            searchQuery={receiversSearchQuery}
+            setSearchQuery={setReceiversSearchQuery}
           />
         ) : (
           activeSetting === 'dealer' && (
             <SingleDropdown
-              values={['dealer1', 'dealer2', 'dealer3']}
-              checkedOption={checkedDealer}
-              setCheckedOption={setCheckedDealer}
+              values={
+                dealersList &&
+                dealersList.map(({ id, firstName, lastName }) => ({
+                  id,
+                  firstName,
+                  lastName,
+                }))
+              }
+              checkedOption={checkedDealerId}
+              setCheckedId={setCheckedDealerId}
+              searchQuery={dealersSearchQuery}
+              setSearchQuery={setDealersSearchQuery}
             />
           )
         )}

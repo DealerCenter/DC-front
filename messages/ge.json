@@ -308,6 +308,9 @@
   "username": "მომხმარებლის სახელი",
   "search for dealer": "მოძებნეთ დილერი",
 
+  "order edited successfully": "შეკვეთა რედაქტირებულია წარმატებით",
+  "could not edit order": "შეკვეთის რედაქტირება ვერ მოხერხდა",
+
   "InAuction": "აუქციონზე",
   "InAmericanWarehouse": "ამერიკულ საწყობში",
   "InContainer": "კონტეინერში",

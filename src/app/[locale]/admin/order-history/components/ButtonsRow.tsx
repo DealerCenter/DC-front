@@ -36,6 +36,8 @@ type Props = {
   isButtonsDisabled: boolean
   shippingStatus: ShippingStatus
   setShippingStatus: (arg: ShippingStatus) => void
+  setDealerId: (arg: number | null) => void
+  setReceiverId: (arg: number | null) => void
 }
 
 const ButtonsRow = ({
@@ -46,6 +48,8 @@ const ButtonsRow = ({
   isButtonsDisabled,
   shippingStatus,
   setShippingStatus,
+  setDealerId,
+  setReceiverId,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
@@ -79,6 +83,8 @@ const ButtonsRow = ({
   const onClearFilter = (e: any) => {
     e.stopPropagation()
     setShippingStatus(null)
+    setDealerId(null)
+    setReceiverId(null)
   }
 
   const onClearSort = (e: any) => {
@@ -140,7 +146,11 @@ const ButtonsRow = ({
       ) : (
         <ButtonFrame>
           <ButtonPairFrame>
-            <AppDropdownFilter setShippingStatus={setShippingStatus}>
+            <AppDropdownFilter
+              setShippingStatus={setShippingStatus}
+              setDealerId={setDealerId}
+              setReceiverId={setReceiverId}
+            >
               <SecondaryButton
                 text={t('filter')}
                 onClick={() => {}}

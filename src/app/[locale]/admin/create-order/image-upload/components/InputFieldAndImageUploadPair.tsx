@@ -18,9 +18,15 @@ const INPUT_WIDTH_DESKTOP_UPLOAD = 1136
 const INPUT_WIDTH_MOBILE = 311
 const INPUT_WIDTH_DESKTOP = 493
 
-type Props = { dropdownOptions: { value: IMAGE_LOCATIONS }[] }
+type Props = {
+  dropdownOptions: { value: IMAGE_LOCATIONS }[]
+  setSelectedLocations: () => void
+}
 
-const InputFieldAndImageUploadPair = ({ dropdownOptions }: Props) => {
+const InputFieldAndImageUploadPair = ({
+  dropdownOptions,
+  setSelectedLocations,
+}: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
@@ -30,7 +36,7 @@ const InputFieldAndImageUploadPair = ({ dropdownOptions }: Props) => {
       <AppSelectBasicFrame>
         <AppSelectBasic
           options={dropdownOptions}
-          onChange={() => {}}
+          onChange={(e) => setSelectedLocations((prev) => [e])}
           placeholder={t('mark photo location')}
           width={isMobile ? INPUT_WIDTH_MOBILE : INPUT_WIDTH_DESKTOP}
           placeHolderIsBold={true}

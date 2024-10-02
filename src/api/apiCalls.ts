@@ -185,7 +185,7 @@ export const getOrders = async (
   }
 }
 
-export const getDealers = async (payload: DealersQueryType) => {
+export const getDealersAdmin = async (payload: DealersQueryType) => {
   try {
     const response = await axiosInstance.get<DEALERS_RES>(
       endpoints.DEALERS_ADMIN,

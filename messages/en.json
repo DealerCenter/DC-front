@@ -307,6 +307,9 @@
   "username": "Username",
   "search for dealer": "Search for a dealer",
 
+  "order edited successfully": "Order edited successfully",
+  "could not edit order": "Could not edit order",
+
   "InAuction": "In Auction",
   "InAmericanWarehouse": "In American warehouse",
   "InContainer": "In Container",
