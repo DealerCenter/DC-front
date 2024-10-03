@@ -6,6 +6,7 @@ import axiosInstance from '@/api/apiClient'
 import { endpoints } from '@/api/endpoints'
 import { AxiosError } from 'axios'
 import { message } from 'antd'
+import { RECEIVER_POST_RES } from '@/api/apiTypes'
 
 export const FIELD_NAMES = {
   ID_IMAGE: 'idImage',

@@ -8,7 +8,6 @@ import axiosInstance from '@/api/apiClient'
 import { ORDER_DATA } from '@/api/apiTypes'
 import { endpoints } from '@/api/endpoints'
 import { message } from 'antd'
-import { useScroll } from 'framer-motion'
 
 const FormikContext = createContext<FormikValues | null>(null)
 
@@ -21,17 +20,13 @@ export const FIELD_NAMES = {
   CAR_COST: 'carCost',
   STATE_ID: 'stateId',
   EXACT_ADDRESS: 'exactAddress',
-
   IS_INSURED: 'isInsured',
-
   CAR_CATEGORY: 'carCategory',
   MILEAGE: 'mileage',
-
   STATUS: 'status',
   CONTAINER_ID: 'containerId',
   // DEALER_ID: 'dealerId',
   RECEIVER_ID: 'receiverId',
-
   ADDITIONAL_DETAILS: 'additionalDetails',
   CAR_DETAILS: 'carDetails',
 }
@@ -40,26 +35,6 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
   const t = useTranslations('')
 
   const [orderId, setOrderId] = useState<number | null>(null)
-
-  // const initialValues = {
-  //   [FIELD_NAMES.MANUFACTURER]: yup.string,
-  //   [FIELD_NAMES.MANUFACTURE_YEAR]: yup.number,
-  //   [FIELD_NAMES.MODEL]: yup.string,
-  //   [FIELD_NAMES.VIN]: yup.string,
-  //   [FIELD_NAMES.TRANSPORTATION_COST]: yup.number,
-  //   [FIELD_NAMES.CAR_COST]: yup.number,
-  //   [FIELD_NAMES.STATE_ID]: yup.number,
-  //   [FIELD_NAMES.EXACT_ADDRESS]: yup.string,
-  //   [FIELD_NAMES.IS_INSURED]: yup.boolean,
-  //   [FIELD_NAMES.CAR_CATEGORY]: yup.string,
-  //   [FIELD_NAMES.MILEAGE]: yup.number,
-  //   [FIELD_NAMES.STATUS]: yup.string,
-  //   [FIELD_NAMES.CONTAINER_ID]: yup.number,
-  //   // [FIELD_NAMES.DEALER_ID]: yup.number,
-  //   [FIELD_NAMES.RECEIVER_ID]: yup.number,
-  //   [FIELD_NAMES.ADDITIONAL_DETAILS]: yup.string,
-  //   [FIELD_NAMES.CAR_DETAILS]: yup.string,
-  // }
 
   const initialValues = {
     [FIELD_NAMES.MANUFACTURER]: '',

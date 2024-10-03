@@ -5,16 +5,14 @@ import styled from 'styled-components'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 
-import { users as dummyUsers } from '@/assets/DummyData'
-import plusIcon from '@/assets/icons/plus.svg'
-import searchIcon from '@/assets/icons/searchForButton.svg'
-import DealersList from './components/DealersList'
 import { getDealersAdmin } from '@/api/apiCalls'
-import { DEALERS_DATA, DEALERS_RES } from '@/api/apiTypes'
-import SearchButton from '@/common/components/searchButton/SearchButton'
-import Pagination from '@/common/components/pagination/Pagination'
-import AddRecipient from './components/addRecipient/AddRecipient'
+import { DEALERS_DATA } from '@/api/apiTypes'
+import plusIcon from '@/assets/icons/plus.svg'
 import AppModal from '@/common/components/modal/AppModal'
+import Pagination from '@/common/components/pagination/Pagination'
+import SearchButton from '@/common/components/searchButton/SearchButton'
+import AddRecipient from './components/addRecipient/AddRecipient'
+import DealersList from './components/DealersList'
 
 const ITEMS_PER_PAGE = 8
 
