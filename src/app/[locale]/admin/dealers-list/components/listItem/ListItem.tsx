@@ -12,9 +12,10 @@ const isAdmin = true
 type Props = {
   onClick: () => void
   userData: DEALERS_DATA
+  onDeleteDealer: (dealerId: number) => void
 }
 
-const ListItem = ({ onClick, userData }: Props) => {
+const ListItem = ({ onClick, userData, onDeleteDealer }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   const [dealerId, setDealerId] = useState(0)
@@ -28,6 +29,7 @@ const ListItem = ({ onClick, userData }: Props) => {
           userData={userData}
           isDropdownOpen={isDropdownOpen}
           setIsDropdownOpen={setIsDropdownOpen}
+          onDeleteDealer={onDeleteDealer}
         />
       ) : (
         <ListItemFull
@@ -35,6 +37,7 @@ const ListItem = ({ onClick, userData }: Props) => {
           userData={userData}
           isDropdownOpen={isDropdownOpen}
           setIsDropdownOpen={setIsDropdownOpen}
+          onDeleteDealer={onDeleteDealer}
         />
       )}
     </>

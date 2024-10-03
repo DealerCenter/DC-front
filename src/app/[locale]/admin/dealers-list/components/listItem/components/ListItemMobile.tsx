@@ -20,6 +20,7 @@ type Props = {
   isDropdownOpen: boolean
   setIsDropdownOpen: (arg: boolean) => void
   isDisabled?: boolean
+  onDeleteDealer: (orderId: number) => void
 }
 
 const ListItemMobile = ({
@@ -37,6 +38,7 @@ const ListItemMobile = ({
   isDropdownOpen,
   setIsDropdownOpen,
   isDisabled,
+  onDeleteDealer,
 }: Props) => {
   const t = useTranslations('')
 

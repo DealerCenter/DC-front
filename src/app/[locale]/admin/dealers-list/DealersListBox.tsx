@@ -47,6 +47,10 @@ const DealersListBox = (props: Props) => {
     setIsLoading(false)
   }
 
+  const handleDeleteDealer = async (dealerId: number) => {
+    console.log('request delete dealer:', dealerId)
+  }
+
   useEffect(() => {
     handleGetDealers()
     //eslint-disable-next-line
@@ -74,7 +78,12 @@ const DealersListBox = (props: Props) => {
           />
         </ButtonFrame>
       </Frame>
-      {dealersList && <DealersList dealersData={dealersList} />}
+      {dealersList && (
+        <DealersList
+          dealersData={dealersList}
+          onDeleteDealer={handleDeleteDealer}
+        />
+      )}
       <PaginationFrame>
         <Pagination
           currentPage={currentPage}

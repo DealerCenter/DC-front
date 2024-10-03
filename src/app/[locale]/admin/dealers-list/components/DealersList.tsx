@@ -12,9 +12,10 @@ import { DEALERS_DATA } from '@/api/apiTypes'
 
 type Props = {
   dealersData: DEALERS_DATA[]
+  onDeleteDealer: (dealerId: number) => void
 }
 
-const DealersList = ({ dealersData }: Props) => {
+const DealersList = ({ dealersData, onDeleteDealer }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const router = useRouter()
@@ -42,6 +43,7 @@ const DealersList = ({ dealersData }: Props) => {
               onClick={() =>
                 router.push(`${routeName.adminUserProfile}/${data.id}`)
               }
+              onDeleteDealer={onDeleteDealer}
             />
           ))}
         </>

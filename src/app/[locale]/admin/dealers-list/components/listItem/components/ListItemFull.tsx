@@ -21,6 +21,7 @@ type Props = {
   isDropdownOpen: boolean
   setIsDropdownOpen: (arg: boolean) => void
   isDisabled?: boolean
+  onDeleteDealer: (orderId: number) => void
 }
 
 const ListItemFull = ({
@@ -38,6 +39,7 @@ const ListItemFull = ({
   isDropdownOpen,
   setIsDropdownOpen,
   isDisabled,
+  onDeleteDealer,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -50,6 +52,11 @@ const ListItemFull = ({
     if (receivers?.length === 0) return
 
     !isDisabled && setIsDropdownOpen(!isDropdownOpen)
+  }
+
+  const handleUserDelete = () => {
+    onDeleteDealer(id)
+    setIsModalOpen(false)
   }
 
   return (
@@ -106,7 +113,7 @@ const ListItemFull = ({
       >
         <DeleteWarning
           onCancel={() => setIsModalOpen(false)}
-          onDelete={() => console.log('delete')}
+          onDelete={handleUserDelete}
           header={t('delete recipient')}
           text={t('delete data warning')}
         />
