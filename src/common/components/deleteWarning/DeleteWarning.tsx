@@ -1,14 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
-import ChooseButton from './addRecipient/components/ChooseButton'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import closeIcon from '@/assets/icons/closeX.svg'
+import ChooseButton from '../appButton/ChooseButton'
 
-type Props = { onCancel: () => void; onDelete: () => void }
+type Props = {
+  onCancel: () => void
+  onDelete: () => void
+  header?: string
+  text?: string
+  deletingItemText?: string
+}
 
-const DeleteWarning = ({ onCancel, onDelete }: Props) => {
+const DeleteWarning = ({
+  onCancel,
+  onDelete,
+  header,
+  text,
+  deletingItemText,
+}: Props) => {
   const t = useTranslations('')
 
   return (
@@ -17,8 +29,9 @@ const DeleteWarning = ({ onCancel, onDelete }: Props) => {
         <Image src={closeIcon} alt='close icon' width={12} height={12} />
       </Icon>
       <FrameTop>
-        <H3Bold>{t('delete recipient')}</H3Bold>
-        <Label>{t('delete data warning')}</Label>
+        <H3Bold>{header}</H3Bold>
+        <Label>{text}</Label>
+        {deletingItemText && <Label>{deletingItemText}</Label>}
       </FrameTop>
       <ButtonsFrame>
         <ChooseButton
@@ -82,7 +95,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 369px;
-  height: 211px;
   border-radius: 24px;
   padding: 32px;
   gap: 24px;
@@ -92,6 +104,6 @@ const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.main_gray_10};
 
   @media ${({ theme }) => theme.media?.sm} {
-    padding: 32px 16px;
+    padding: 32px;
   }
 `

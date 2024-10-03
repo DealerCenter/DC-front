@@ -12,7 +12,7 @@ import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 import calendarIcon from '@/assets/icons/calendar.svg'
 import AppModal from '@/common/components/modal/AppModal'
-import DeleteWarning from '../addRecipient/components/DeleteWarning'
+import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
 
 type Props = {
   id: number
@@ -103,7 +103,9 @@ const ListItemMobile = ({
             handleDelete(id)
             setIsModalOpen(false)
           }}
-          nameOfReceiver={`${firstName} ${lastName}`}
+          header={t('delete recipient')}
+          text={t('delete data warning')}
+          deletingItemText={`${t('recipient person')} ${firstName} ${lastName}`}
         />
       </AppModal>
     </Container>

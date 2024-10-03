@@ -1,17 +1,19 @@
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import AppModal from '@/common/components/modal/AppModal'
-import DeleteWarning from '../../DeleteWarning'
+import { DEALERS_DATA } from '@/api/apiTypes'
+import { formatDate } from '@/common/helpers/simpleFunctions'
 
+import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
+import AppModal from '@/common/components/modal/AppModal'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
+import ListItemFullDropdown from './ListItemFullDropdown'
+
+import dropDownIcon from '@/assets/icons/arrowDown.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
-import dropDownIcon from '@/assets/icons/arrowDown.svg'
-import ListItemFullDropdown from './ListItemFullDropdown'
-import { DEALERS_DATA, RECEIVER_DATA } from '@/api/apiTypes'
-import { formatDate } from '@/common/helpers/simpleFunctions'
-import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
 
 type Props = {
   onClick: () => void
@@ -38,6 +40,8 @@ const ListItemFull = ({
   isDisabled,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const t = useTranslations('')
 
   const withReceivers = receivers && receivers?.length > 0
 
@@ -103,6 +107,8 @@ const ListItemFull = ({
         <DeleteWarning
           onCancel={() => setIsModalOpen(false)}
           onDelete={() => console.log('delete')}
+          header={t('delete recipient')}
+          text={t('delete data warning')}
         />
       </AppModal>
       {isDropdownOpen &&

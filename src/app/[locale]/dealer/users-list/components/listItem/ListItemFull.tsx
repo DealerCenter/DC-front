@@ -1,15 +1,16 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
 
 import { formatDate } from '@/common/helpers/simpleFunctions'
 import { VERIFICATION_STATUS_NAME } from '@/common/helpers/constants'
-import DeleteWarning from '../addRecipient/components/DeleteWarning'
 import AppModal from '@/common/components/modal/AppModal'
 
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 import VerificationIcon from '@/common/components/readyIcons/verificationIcon'
+import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
 
 type Props = {
   id: number
@@ -35,6 +36,8 @@ const ListItemFull = ({
   handleEdit,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const t = useTranslations('')
 
   const formattedDate = formatDate(createdAt)
 
@@ -73,7 +76,9 @@ const ListItemFull = ({
             handleDelete(id)
             setIsModalOpen(false)
           }}
-          nameOfReceiver={`${firstName} ${lastName}`}
+          header={t('delete recipient')}
+          text={t('delete data warning')}
+          deletingItemText={`${t('recipient person')} ${firstName} ${lastName}`}
         />
       </AppModal>
     </>

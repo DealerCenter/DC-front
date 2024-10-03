@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import DeleteWarning from '../../DeleteWarning'
+// import DeleteWarning from '../../DeleteWarning'
 import AppModal from '@/common/components/modal/AppModal'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
@@ -12,6 +12,8 @@ import trashCan from '@/assets/icons/trashCan.svg'
 import dashedLine from '@/assets/icons/dashedLineGray.svg'
 import { RECEIVER_DATA } from '@/api/apiTypes'
 import { formatDate } from '@/common/helpers/simpleFunctions'
+import { useTranslations } from 'next-intl'
+import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
 
 type Props = {
   onClick: () => void
@@ -31,6 +33,8 @@ const ListItemFullDropdown = ({
   },
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const t = useTranslations('')
 
   return (
     <>
@@ -85,6 +89,8 @@ const ListItemFullDropdown = ({
         <DeleteWarning
           onCancel={() => setIsModalOpen(false)}
           onDelete={() => console.log('delete')}
+          header={t('delete recipient')}
+          text={t('delete data warning')}
         />
       </AppModal>
     </>
