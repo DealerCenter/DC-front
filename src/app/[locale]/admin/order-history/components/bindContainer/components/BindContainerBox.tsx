@@ -1,27 +1,69 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import SearchComponent from './components/SearchComponent'
-import ContainersListBox from './components/ContainersListBox'
+import SearchComponent from './SearchComponent'
+import ContainersListBox from './ContainersListBox'
 import AppButton from '@/common/components/appButton/AppButton'
 import TextInput from '@/common/components/inputElements/TextInput'
+import { getContainersAdmin } from '@/api/apiCalls'
+import { CONTAINER_GET_RES } from '@/api/apiTypes'
 
-type Props = {}
+type Props = {
+  setContainerToBind: (arg: CONTAINER_GET_RES | null) => void
+  setIsOpen: (arg: boolean) => void
+}
 
-const BindContainerBox = (props: Props) => {
+const BindContainerBox = ({ setContainerToBind, setIsOpen }: Props) => {
   const [containerLinkValue, setContainerLinkValue] = useState('')
+
+  const [containersList, setContainersList] = useState<CONTAINER_GET_RES[]>()
+  const [filteredContainersList, setFilteredContainersList] =
+    useState<CONTAINER_GET_RES[]>()
+
+  const [searchQuery, setSearchQuery] = useState('')
+
   const t = useTranslations('')
 
   const handleAddNew = () => {}
+
+  const handleGetContainers = async () => {
+    const response = await getContainersAdmin()
+    setContainersList(response)
+  }
+
+  // get containers on mount
+  useEffect(() => {
+    handleGetContainers()
+  }, [])
+
+  // set filtered container list when containers list is set
+  useEffect(() => {
+    containersList && setFilteredContainersList(containersList)
+  }, [containersList])
+
+  // filter containers list with search query
+  useEffect(() => {
+    setFilteredContainersList(
+      containersList?.filter((item) => item.trackingUrl.includes(searchQuery))
+    )
+    //eslint-disable-next-line
+  }, [searchQuery])
 
   return (
     <BindContainerFrame>
       <Label>{t('choose from list')}</Label>
 
       <SearchFrame>
-        <SearchComponent />
-        <ContainersListBox />
+        <SearchComponent
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+        <ContainersListBox
+          containersList={filteredContainersList}
+          setContainerToBind={setContainerToBind}
+          setIsOpen={setIsOpen}
+        />
       </SearchFrame>
       <Label>{t('or')}</Label>
       <TextInput

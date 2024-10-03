@@ -8,7 +8,7 @@ import ButtonsRow from './components/ButtonsRow'
 import OrderList from './components/OrderList'
 
 import { changeOrderAdmin, getOrders } from '@/api/apiCalls'
-import { ORDER_DATA } from '@/api/apiTypes'
+import { CONTAINER_GET_RES, ORDER_DATA } from '@/api/apiTypes'
 import { routeName, ShippingStatus } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
 import AddYourFirstTask from './components/AddYourFirstTask'
@@ -43,6 +43,8 @@ const OrderHistory = (props: Props) => {
   const [receiverId, setReceiverId] = useState<number | null>(null)
 
   const [checkedOrderIds, setCheckedOrderIds] = useState<number[] | []>([])
+  const [containerToBind, setContainerToBind] =
+    useState<CONTAINER_GET_RES | null>(null)
 
   const handleAddOrderIdToList = (id: number) => {
     setCheckedOrderIds((prev) => [...prev, id])
@@ -64,15 +66,18 @@ const OrderHistory = (props: Props) => {
       try {
         for (const id of checkedOrderIds) {
           const response = await changeOrderAdmin(
-            { status: shippingStatusOnEdit ? shippingStatusOnEdit : '' },
+            {
+              status: shippingStatusOnEdit ? shippingStatusOnEdit : '',
+              containerId: containerToBind?.id,
+            },
             id
           )
-          console.log(response)
           message.success(t('order edited successfully'))
         }
         // clearing info after requests are done
         setCheckedOrderIds([])
         setShippingStatusOnEdit(null)
+        setContainerToBind(null)
       } catch (error) {
         message.error(t('could not edit order'))
         console.error('Error editing orders:', error)
@@ -103,11 +108,6 @@ const OrderHistory = (props: Props) => {
     }
     setIsLoading(false)
   }
-
-  useEffect(() => {
-    console.log('ids list', checkedOrderIds)
-    //eslint-disable-next-line
-  }, [checkedOrderIds])
 
   useEffect(() => {
     handleGetOrders()
@@ -143,6 +143,8 @@ const OrderHistory = (props: Props) => {
           shippingStatusOnEdit={shippingStatusOnEdit}
           setShippingStatusOnEdit={setShippingStatusOnEdit}
           handleEditSubmit={handleEditSubmit}
+          containerToBind={containerToBind}
+          setContainerToBind={setContainerToBind}
         />
       </TopFrame>
 

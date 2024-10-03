@@ -1,31 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
-import styled from 'styled-components'
+import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
+import { useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
+import styled from 'styled-components'
+
+import { CONTAINER_GET_RES } from '@/api/apiTypes'
+import theme from '@/app/[locale]/theme'
 
 import BasicButton from '@/common/components/appButton/BasicButton'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import AppDropdown from '@/common/components/appDropdown/AppDropdown'
 
-import addIcon from '@/assets/icons/plusInCircle.svg'
-import pencilIcon from '@/assets/icons/pencilFull.svg'
-import checkIcon from '@/assets/icons/checkBoxIcons/checkWhite.svg'
-import filterIconBlack from '@/assets/icons/filterBlack.svg'
-import sortIconBlack from '@/assets/icons/sortBlack.svg'
-import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
-import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
+import AppDropdownBasic from '@/common/components/appDropdown/AppDropdownBasic'
 import AppDropdownFilter from '@/common/components/appDropdown/appFilter/AppDropDownFilter'
-import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/theme'
-import BindContainerBox from './bindContainer/BindContainerBox'
+import CloseIconBlack from '@/common/components/readyIcons/CloseIconBlack'
 import {
   routeName,
   SHIPPING_STATUS,
   ShippingStatus,
 } from '@/common/helpers/constants'
-import { useRouter } from '@/navigation'
-import CloseIconBlack from '@/common/components/readyIcons/CloseIconBlack'
-import AppDropdownBasic from '@/common/components/appDropdown/AppDropdownBasic'
+import BindContainerDropdown from './bindContainer/BindContainerDropdown'
+
+import checkIcon from '@/assets/icons/checkBoxIcons/checkWhite.svg'
+import filterIconBlack from '@/assets/icons/filterBlack.svg'
+import pencilIcon from '@/assets/icons/pencilFull.svg'
+import addIcon from '@/assets/icons/plusInCircle.svg'
+import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
+import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
+import sortIconBlack from '@/assets/icons/sortBlack.svg'
 
 const changeStatusList = [
   { label: SHIPPING_STATUS.IN_AUCTION },
@@ -49,6 +52,8 @@ type Props = {
   shippingStatusOnEdit: string | null
   setShippingStatusOnEdit: (arg: string | null) => void
   handleEditSubmit: () => void
+  containerToBind: CONTAINER_GET_RES | null
+  setContainerToBind: (arg: CONTAINER_GET_RES | null) => void
 }
 
 const ButtonsRow = ({
@@ -65,6 +70,8 @@ const ButtonsRow = ({
   shippingStatusOnEdit,
   setShippingStatusOnEdit,
   handleEditSubmit,
+  containerToBind,
+  setContainerToBind,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
@@ -114,13 +121,14 @@ const ButtonsRow = ({
     setShippingStatusOnEdit(null)
   }
 
+  const onClearContainerToBind = (e: any) => {
+    e.stopPropagation()
+    setContainerToBind(null)
+  }
+
   const onDoneEdit = () => {
     handleEditSubmit()
   }
-
-  useEffect(() => {
-    console.log('shipping status', shippingStatusOnEdit)
-  }, [shippingStatusOnEdit])
 
   const handleEditButton = () => {
     isEditing ? setIsEditing(false) : setIsEditing(true)
@@ -141,9 +149,7 @@ const ButtonsRow = ({
             >
               <BasicButton onClick={() => {}} color='white' isBorder={true}>
                 {t(
-                  shippingStatusOnEdit
-                    ? `${shippingStatusOnEdit}`
-                    : 'change status'
+                  shippingStatusOnEdit ? shippingStatusOnEdit : 'change status'
                 )}
               </BasicButton>
               {shippingStatusOnEdit !== null && (
@@ -154,18 +160,20 @@ const ButtonsRow = ({
                 />
               )}
             </AppDropdownBasic>
-            <AppDropdown
-              ReadyComponent={<BindContainerBox />}
-              modalStyle='white'
-              top={48}
-              isBorder={true}
-              isNoActionOnClick={true}
-              handleClose={() => {}}
-            >
+            <BindContainerDropdown setContainerToBind={setContainerToBind}>
               <BasicButton onClick={() => {}} color='white' isBorder={true}>
-                {t('bind container')}
+                {containerToBind
+                  ? containerToBind.trackingUrl
+                  : t('bind container')}
               </BasicButton>
-            </AppDropdown>
+              {containerToBind && (
+                <CloseIconBlack
+                  onClick={onClearContainerToBind}
+                  top={-8}
+                  right={-8}
+                />
+              )}
+            </BindContainerDropdown>
           </ButtonPairFrame>
           <ButtonPairFrame>
             <BasicButton
