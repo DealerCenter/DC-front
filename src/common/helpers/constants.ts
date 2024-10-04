@@ -24,6 +24,7 @@ export const routeName = {
   historyCheck: '/our-services/history-check',
   statusCheck: '/our-services/status-check',
   transportationCalculator: '/our-services/transportation-calculator',
+  aboutUs: '/about-us',
 }
 
 export const locales = ['en', 'ge', 'ru']

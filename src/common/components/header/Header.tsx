@@ -52,7 +52,7 @@ const Header = (props: Props) => {
     {
       label: `${t('about us')}`,
       onClick: () => {
-        console.log('about us')
+        router.push(routeName.aboutUs)
       },
     },
     {
