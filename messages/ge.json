@@ -318,6 +318,8 @@
   "date": "თარიღი",
   "bid price": "შეთავაზებული ფასი",
 
+  "date of sale": "გაყიდვის თარიღი",
+
   "useForm": {
     "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
 

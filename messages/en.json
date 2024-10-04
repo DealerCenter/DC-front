@@ -320,6 +320,8 @@
   "date": "Date",
   "bid price": "Bid price",
 
+  "date of sale": "Date of sale",
+
   "useForm": {
     "must be valid email": "Must be a valid email",
 
