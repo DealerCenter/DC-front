@@ -7,7 +7,7 @@ import lineGreen from '@/assets/icons/shippingStateIcons/lineGreen.svg'
 import lineGray from '@/assets/icons/shippingStateIcons/lineGray.svg'
 import circleSmallGray from '@/assets/icons/shippingStateIcons/circleSmallGray.svg'
 import pendingGreen from '@/assets/icons/shippingStateIcons/pendingGreen.svg'
-import doneIconGrayEmtpy from '@/assets/icons/shippingStateIcons/doneIconGrayEmtpy.svg'
+import doneIconGrayEmpty from '@/assets/icons/shippingStateIcons/doneIconGrayEmpty.svg'
 
 type Props = {}
 
@@ -22,7 +22,7 @@ export const DoneIcon = (props: Props) => {
 export const DoneIconGrayEmpty = (props: Props) => {
   return (
     <Icon>
-      <Image src={doneIconGrayEmtpy} alt='icon' height={16} />
+      <Image src={doneIconGrayEmpty} alt='icon' height={16} />
     </Icon>
   )
 }

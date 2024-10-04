@@ -133,7 +133,7 @@ const SideBarAdmin = ({ routes }: Props) => {
               height={20}
               href={routes.containers}
             />
-            <BarButton
+            {/* <BarButton
               isHovered={isHovered}
               active={pathname === routes.settings}
               text={t('settings')}
@@ -145,7 +145,7 @@ const SideBarAdmin = ({ routes }: Props) => {
               width={20}
               height={20}
               href={routes.settings}
-            />
+            /> */}
           </ButtonFrame>
         </Frame>
         {!isMobile && (

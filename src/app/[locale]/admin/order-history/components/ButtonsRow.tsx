@@ -211,9 +211,7 @@ const ButtonsRow = ({
               )}
             </AppDropdownFilter>
             <AppDropdown
-              // items={sortOptions}
               modalStyle='white'
-              onSortClick={() => {}}
               sortOptions={sortOptions}
               setActiveLabel={setActiveSortLabel}
               isDisabled={isButtonsDisabled}

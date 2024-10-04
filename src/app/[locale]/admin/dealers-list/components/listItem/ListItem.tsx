@@ -1,13 +1,9 @@
+import { DEALERS_DATA } from '@/api/apiTypes'
 import theme from '@/app/[locale]/theme'
+import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import ListItemFull from './components/ListItemFull'
 import ListItemMobile from './components/ListItemMobile'
-import { DEALERS_DATA, RECEIVER_DATA } from '@/api/apiTypes'
-import { useEffect, useState } from 'react'
-import { getReceivers } from '@/api/apiCalls'
-
-const ITEMS_PER_PAGE = 8
-const isAdmin = true
 
 type Props = {
   onClick: () => void
@@ -18,7 +14,6 @@ type Props = {
 const ListItem = ({ onClick, userData, onDeleteDealer }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
-  const [dealerId, setDealerId] = useState(0)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   return (

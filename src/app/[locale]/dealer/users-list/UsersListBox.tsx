@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 import styled from 'styled-components'
 
-import UsersList from './components/UsersList'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
+import UsersList from './components/UsersList'
 
 import plusIcon from '@/assets/icons/plus.svg'
-import UserListEmpty from './components/UserListEmpty'
-import AddRecipient from './components/addRecipient/AddRecipient'
 import AppModal from '@/common/components/modal/AppModal'
-import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 import SearchButton from '@/common/components/searchButton/SearchButton'
-import { getReceivers } from '@/api/apiCalls'
+import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
+import AddRecipient from './components/addRecipient/AddRecipient'
 
 type Props = {}
 
@@ -57,6 +55,7 @@ const UsersListBox = (props: Props) => {
         <UsersList
           setIsModalOpen={setIsModalOpen}
           searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
           updatedSuccessfully={updatedSuccessfully}
           setUpdatedSuccessfully={setUpdatedSuccessfully}
         />

@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import { getDealersAdmin, getReceivers } from '@/api/apiCalls'
+import { getDealersAdmin, getReceiversAdmin } from '@/api/apiCalls'
 import { DEALERS_DATA, RECEIVER_DATA } from '@/api/apiTypes'
 
 import BasicButton from '@/common/components/appButton/BasicButton'
@@ -56,7 +56,7 @@ const DropdownFilterBox = ({
   }
 
   const getRecipients = async () => {
-    const res = await getReceivers({ search: '' }, true)
+    const res = await getReceiversAdmin({ search: '' })
     res && console.log('fetched receivers list:', receiversSearchQuery)
     res && setReceiversList(res.data)
   }

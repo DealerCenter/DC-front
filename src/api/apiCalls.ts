@@ -196,23 +196,39 @@ export const getDealerWithId = async (id: string) => {
   }
 }
 
-export const getReceivers = async (
-  payload: ReceiversQueryType,
-  isAdmin?: boolean
-) => {
-  const endpoint = isAdmin ? endpoints.RECEIVERS_ADMIN : endpoints.RECEIVERS
-
+export const getReceivers = async (payload: {
+  page?: number
+  pageSize?: number
+  search?: string
+}) => {
   try {
-    const response = await axiosInstance.get<RECEIVER_GET_RES>(endpoint, {
-      params: payload, // Pass payload as query parameters
-    })
+    const response = await axiosInstance.get<RECEIVER_GET_RES>(
+      endpoints.RECEIVERS,
+      {
+        params: payload, // Pass payload as query parameters
+      }
+    )
     return response.data
   } catch (error) {
     console.error('Error getting receivers:', error)
   }
 }
 
-export const getReceiversAdmin = async (id: string) => {
+export const getReceiversAdmin = async (payload: ReceiversQueryType) => {
+  try {
+    const response = await axiosInstance.get<RECEIVER_GET_RES>(
+      endpoints.RECEIVERS_ADMIN,
+      {
+        params: payload, // Pass payload as query parameters
+      }
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error getting receivers:', error)
+  }
+}
+
+export const getReceiversAdminWithId = async (id: string) => {
   try {
     const response = await axiosInstance.get<RECEIVER_GET_RES[]>(
       `${endpoints.RECEIVERS_ADMIN}/${id}`

@@ -118,15 +118,17 @@ const ListItemFull = ({
           text={t('delete data warning')}
         />
       </AppModal>
-      {isDropdownOpen &&
-        receivers &&
-        receivers.map((receiver, i) => (
-          <ListItemFullDropdown
-            key={`listItemFullDropdown${i}`}
-            onClick={() => {}}
-            receiverData={receiver}
-          />
-        ))}
+      {isDropdownOpen && receivers && (
+        <ReceiversListDropdownFrame>
+          {receivers.map((receiver, i) => (
+            <ListItemFullDropdown
+              key={`listItemFullDropdown${i}`}
+              onClick={() => {}}
+              receiverData={receiver}
+            />
+          ))}
+        </ReceiversListDropdownFrame>
+      )}
     </>
   )
 }
@@ -216,4 +218,9 @@ const NameAndIdBox = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 4px;
+`
+
+const ReceiversListDropdownFrame = styled.div`
+  max-height: 500px;
+  overflow-y: auto;
 `

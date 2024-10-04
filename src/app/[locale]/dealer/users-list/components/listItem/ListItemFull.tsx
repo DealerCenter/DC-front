@@ -9,7 +9,7 @@ import AppModal from '@/common/components/modal/AppModal'
 
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
-import VerificationIcon from '@/common/components/readyIcons/verificationIcon'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
 import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
   personalId: string
   phoneNumber: string
   createdAt: string
-  verificationStatus: string
+  verificationStatus: VERIFICATION_STATUS_NAME
   handleDelete: (id: number) => void
   handleEdit: () => void
 }

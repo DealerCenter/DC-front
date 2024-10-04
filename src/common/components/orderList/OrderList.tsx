@@ -7,7 +7,7 @@ import { ORDER_DATA } from '@/api/apiTypes'
 
 type Props = {
   onClick: () => void
-  orderData: ORDER_DATA[]
+  orderData?: ORDER_DATA[]
 }
 
 const OrderList = ({ onClick, orderData }: Props) => {
@@ -21,7 +21,7 @@ const OrderList = ({ onClick, orderData }: Props) => {
             orderData={order}
             key={`${order.vin}82kj32${i}`}
             index={i}
-            shippingStep={2}
+            shippingStatus={'InContainer'}
           />
         ))}
     </ListFrame>

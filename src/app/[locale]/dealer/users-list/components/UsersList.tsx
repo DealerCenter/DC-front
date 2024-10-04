@@ -6,7 +6,7 @@ import { useMediaQuery } from 'react-responsive'
 
 import theme from '@/app/[locale]/theme'
 import { deleteReceiver, getReceivers } from '@/api/apiCalls'
-import { RECEIVER_GET_RES } from '@/api/apiTypes'
+import { RECEIVER_DATA, RECEIVER_GET_RES } from '@/api/apiTypes'
 
 import ListItem from './listItem/ListItem'
 import LabelsContainer from '@/common/components/labelsContainer/LabelsContainer'
@@ -18,6 +18,7 @@ const RECEIVERS_PER_PAGE = 10
 type Props = {
   setIsModalOpen: (arg: boolean) => void
   searchQuery: string
+  setSearchQuery: (arg: string) => void
   updatedSuccessfully: boolean
   setUpdatedSuccessfully: (arg: boolean) => void
 }
@@ -25,16 +26,16 @@ type Props = {
 const UserList = ({
   setIsModalOpen,
   searchQuery,
+  setSearchQuery,
   updatedSuccessfully,
   setUpdatedSuccessfully,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [receiversData, setReceiversData] = useState<
-    RECEIVER_GET_RES[] | undefined
+    RECEIVER_DATA[] | undefined
   >(undefined)
 
   const [numOfPages, setNumOfPages] = useState(0)
-  const [receiversToSkip, setReceiversToSkip] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
@@ -42,39 +43,21 @@ const UserList = ({
   const getData = async () => {
     setIsLoading(true)
     const response = await getReceivers({
-      skip: searchQuery ? 0 : receiversToSkip,
-      take: searchQuery ? 1000 : RECEIVERS_PER_PAGE,
+      page: currentPage,
+      pageSize: RECEIVERS_PER_PAGE,
       search: searchQuery,
     })
-    setIsLoading(false)
-    if (searchQuery && response?.length === 0) {
+    if (response) {
+      setReceiversData(response.data)
+      setNumOfPages(response.pageCount)
+      console.log('receiver updated')
+    }
+    if (searchQuery && !response) {
       message.error('could not find recipient')
     }
-    setReceiversData(response)
+    setSearchQuery('')
+    setIsLoading(false)
   }
-
-  // To get number of pages for the Pagination component
-  const getTotalReceivers = async () => {
-    try {
-      const response = await getReceivers({
-        skip: 0,
-        take: 10000,
-        search: '',
-      })
-      response && setNumOfPages(Math.ceil(response.length / RECEIVERS_PER_PAGE))
-    } catch (error) {
-      console.error('Could not get total receivers')
-    }
-  }
-
-  useEffect(() => {
-    getTotalReceivers()
-    //eslint-disable-next-line
-  }, [])
-
-  useEffect(() => {
-    setReceiversToSkip(RECEIVERS_PER_PAGE * (currentPage - 1))
-  }, [currentPage])
 
   // getData when search query comes in, or when the page changes
   useEffect(() => {
@@ -85,7 +68,7 @@ const UserList = ({
       setUpdatedSuccessfully(false)
     }
     //eslint-disable-next-line
-  }, [searchQuery, receiversToSkip, updatedSuccessfully])
+  }, [searchQuery, currentPage, updatedSuccessfully])
 
   const handleDelete = async (id: number) => {
     try {
@@ -130,16 +113,14 @@ const UserList = ({
           ))}
         </>
       </Container>
-      {searchQuery.length === 0 && (
-        <PaginationBox>
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            numOfPages={numOfPages}
-            isDisabled={isLoading}
-          />
-        </PaginationBox>
-      )}
+      <PaginationBox>
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          numOfPages={numOfPages}
+          isDisabled={isLoading}
+        />
+      </PaginationBox>
     </>
   )
 }

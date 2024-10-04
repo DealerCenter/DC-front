@@ -1,19 +1,22 @@
 import Image from 'next/image'
 import React from 'react'
 import styled, { css } from 'styled-components'
-import CarDetailsBox from '../../../app/[locale]/dealer/order-history/components/CarDetailsBox'
-import DebtBox from '../../../app/[locale]/dealer/order-history/components/DebtBox'
-import UserInfoBox from '../../../app/[locale]/dealer/order-history/components/UserInfoBox'
-import ShippingStateBox from '../../../app/[locale]/dealer/order-history/components/ShippingStateBox'
+
 import { useMediaQuery } from 'react-responsive'
 import { dummyShippingSteps } from '@/assets/DummyData'
 import theme from '@/app/[locale]/theme'
 import { ORDER_DATA } from '@/api/apiTypes'
 
+import CarDetailsBox from '../../../app/[locale]/dealer/order-history/components/CarDetailsBox'
+import DebtBox from '../../../app/[locale]/dealer/order-history/components/DebtBox'
+import UserInfoBox from '../../../app/[locale]/dealer/order-history/components/UserInfoBox'
+import ShippingStatusBox from '../shippingStateBox/ShippingStatusBox'
+import { SHIPPING_STATUS } from '@/common/helpers/constants'
+
 type Props = {
   imageLink: string
   index: number
-  shippingStep: 0 | 1 | 2 | 3 | 4
+  shippingStatus: SHIPPING_STATUS
   orderData: ORDER_DATA
   onClick: () => void
 }
@@ -22,15 +25,22 @@ const OrderListItem = ({
   imageLink,
   orderData,
   index,
-  shippingStep,
+  shippingStatus,
   onClick,
 }: Props) => {
   const isTablet = useMediaQuery({
     query: theme.media?.md,
   })
 
-  const { manufacturer, model, vin, manufactureYear, status, receiver } =
-    orderData
+  const {
+    manufacturer,
+    model,
+    vin,
+    manufactureYear,
+    status,
+    receiver,
+    carCost,
+  } = orderData
 
   return (
     <Container index={index} onClick={onClick}>
@@ -50,15 +60,12 @@ const OrderListItem = ({
           />
           {isTablet || (
             <ShippingStateBoxFrame>
-              <ShippingStateBox
-                shippingSteps={dummyShippingSteps}
-                currentStep={shippingStep}
-              />
+              <ShippingStatusBox isEditing={false} value={shippingStatus} />
             </ShippingStateBoxFrame>
           )}
         </MiddleFrame>
       </Frame>
-      {/* <DebtBox amount={debt} arrivalState={arrivalState} /> */}
+      <DebtBox amount={carCost} arrivalState={'arrived'} />
     </Container>
   )
 }
@@ -116,7 +123,7 @@ const Frame = styled.div`
 `
 
 const ShippingStateBoxFrame = styled.div`
-  width: 222px;
+  width: 252px;
   height: 180px;
 
   @media ${({ theme }) => theme.media?.sm} {
