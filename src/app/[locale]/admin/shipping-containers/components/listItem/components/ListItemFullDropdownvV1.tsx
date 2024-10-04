@@ -1,36 +1,25 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import { RECEIVER_DATA } from '@/api/apiTypes'
-import { formatDate } from '@/common/helpers/simpleFunctions'
-import { useTranslations } from 'next-intl'
-
-import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
 import AppModal from '@/common/components/modal/AppModal'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
+import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
-import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
+import dashedLine from '@/assets/icons/dashedLineGray.svg'
+import { CONTAINER_GET_RES, ORDER_DATA, RECEIVER_DATA } from '@/api/apiTypes'
+import { formatDate } from '@/common/helpers/simpleFunctions'
+import { useTranslations } from 'next-intl'
+import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
 
 type Props = {
   onClick: () => void
-  receiverData: RECEIVER_DATA
+  orderData: ORDER_DATA
 }
 
-const ListItemFullDropdown = ({
-  onClick,
-  receiverData: {
-    id,
-    personalId,
-    firstName,
-    lastName,
-    phoneNumber,
-    createdAt,
-    verificationStatus,
-  },
-}: Props) => {
+const ListItemFullDropdown = ({ onClick, orderData }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const t = useTranslations('')
@@ -38,35 +27,21 @@ const ListItemFullDropdown = ({
   return (
     <>
       <Container>
-        <DashedLine />
+        <DottedLine>
+          <Image src={dashedLine} alt='dashed line' />
+        </DottedLine>
         <LabelBox>
           <Circle />
           <NameAndIdBox>
-            <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
-            <IdLabel>{personalId}</IdLabel>
+            <NameLabel>{orderData.model}</NameLabel>
+            <IdLabel>{orderData.vin}</IdLabel>
           </NameAndIdBox>
         </LabelBox>
-        <Label>{phoneNumber}</Label>
-        <Label>{formatDate(createdAt)}</Label>
+        <Label>{orderData.receiver.firstName}</Label>
+        <Label>{orderData.carCost}</Label>
+        {/* <Label>{formatDate(createdAt)}</Label> */}
         <DebtLabel></DebtLabel>
         <IconBox>
-          <Icon>
-            {verificationStatus ? (
-              <Image
-                src={checkedGreen}
-                alt='checked icon'
-                width={20}
-                height={20}
-              />
-            ) : (
-              <Image
-                src={uncheckedRed}
-                alt='unchecked icon'
-                width={20}
-                height={20}
-              />
-            )}
-          </Icon>
           <Icon>
             <Image src={editPencil} alt='edit icon' onClick={onClick} />
           </Icon>
@@ -95,6 +70,19 @@ const ListItemFullDropdown = ({
 }
 
 export default ListItemFullDropdown
+
+const DottedLine = styled.div`
+  position: absolute;
+  top: -27px;
+  left: 30px;
+`
+
+const Circle = styled.div`
+  height: 8px;
+  width: 8px;
+  border-radius: 10px;
+  background-color: ${({ theme }) => theme.colors?.main_gray_16};
+`
 
 const Container = styled.div`
   position: relative;
@@ -173,21 +161,22 @@ const NameAndIdBox = styled.div`
   gap: 4px;
 `
 
-const DashedLine = styled.div`
-  position: absolute;
-  top: -31px;
-  left: 25px;
+type DropdownIconProps = { isOpen: boolean }
 
-  width: 12px;
-  height: 65px;
+const DropdownIcon = styled.div<DropdownIconProps>`
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  border-left: 2px dashed ${({ theme }) => theme.colors?.main_gray_16};
-  border-bottom: 2px dashed ${({ theme }) => theme.colors?.main_gray_16};
-`
+  transition: transform 0.3s ease-in-out;
 
-const Circle = styled.div`
-  height: 8px;
-  width: 8px;
-  border-radius: 10px;
-  background-color: ${({ theme }) => theme.colors?.main_gray_16};
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      transform: rotate(180deg);
+    `}
+
+  cursor: pointer;
 `

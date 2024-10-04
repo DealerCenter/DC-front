@@ -48,8 +48,6 @@ export enum IMAGE_LOCATIONS {
 
 export type LocalesType = 'en' | 'ge' | 'ru'
 
-export type VerificationStatusType = VERIFICATION_STATUS_NAME
-
 export type ShippingStatus = SHIPPING_STATUS | null
 
 export type OrdersQueryType =

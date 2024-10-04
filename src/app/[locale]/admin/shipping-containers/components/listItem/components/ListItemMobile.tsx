@@ -16,6 +16,9 @@ type Props = {
   departureDate: string
   arrivalDate: string
   id: number
+
+  isDropdownOpen: boolean
+  setIsDropdownOpen: (arg: boolean) => void
 }
 
 const ListItemMobile = ({
@@ -25,6 +28,8 @@ const ListItemMobile = ({
   departureDate,
   arrivalDate,
   id,
+  isDropdownOpen,
+  setIsDropdownOpen,
 }: Props) => {
   const t = useTranslations('')
 

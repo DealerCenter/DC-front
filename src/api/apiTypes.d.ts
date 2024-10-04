@@ -1,6 +1,6 @@
 import {
   ORDER_CONSTANTS,
-  VerificationStatusType,
+  VERIFICATION_STATUS_NAME,
 } from '@/common/helpers/constants'
 
 type REGISTER_RES = {
@@ -26,9 +26,9 @@ type ME_RES = {
   personalId: string
   birthDate: string
   idImageUrl: string
-  idImageVerificationStatus: VerificationStatusType
+  idImageVerificationStatus: VERIFICATION_STATUS_NAME
   juridicalDocUrl: string | null
-  juridicalDocVerificationStatus: VerificationStatusType
+  juridicalDocVerificationStatus: VERIFICATION_STATUS_NAME
   juridicalInfo: {
     companyAddress: string
     id: number
@@ -74,9 +74,9 @@ type RECEIVER_POST_RES = {
     personalId: string
     birthDate: string // DateTime
     idImageUrl: string
-    idImageVerificationStatus: VerificationStatusType
+    idImageVerificationStatus: VERIFICATION_STATUS_NAME
     juridicalDocUrl: string | null
-    juridicalDocVerificationStatus: VerificationStatusType
+    juridicalDocVerificationStatus: VERIFICATION_STATUS_NAME
   }
   idImageUrl: string
   id: number
@@ -103,7 +103,7 @@ type RECEIVER_DATA = {
   updatedAt: string
   isJuridical: boolean
   idImageUrl: string
-  verificationStatus: VerificationStatusType
+  verificationStatus: VERIFICATION_STATUS_NAME
 }
 
 type CONTAINER_POST_RES = {
@@ -201,9 +201,9 @@ type DEALERS_DATA = {
   personalId: string
   birthDate: string
   idImageUrl: string
-  idImageVerificationStatus: VerificationStatusType
+  idImageVerificationStatus: VERIFICATION_STATUS_NAME
   juridicalDocUrl: string | null
-  juridicalDocVerificationStatus: VerificationStatusType
+  juridicalDocVerificationStatus: VERIFICATION_STATUS_NAME
   receivers?: RECEIVER_DATA[] | []
   juridicalInfo?: JURIDICAL_INFO // Optional if not always present
 }

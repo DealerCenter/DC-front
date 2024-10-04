@@ -11,9 +11,9 @@ import AppModal from '@/common/components/modal/AppModal'
 import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
 import ListItemFullDropdown from './ListItemFullDropdown'
 
-import dropDownIcon from '@/assets/icons/arrowDown.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
+import DropdownIcon from '@/common/components/readyIcons/DropdownIcon'
 
 type Props = {
   onClick: () => void
@@ -47,7 +47,7 @@ const ListItemFull = ({
 
   const withReceivers = receivers && receivers?.length > 0
 
-  const handleDropdown = (e: any) => {
+  const handleDropdown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation()
     if (receivers?.length === 0) return
 
@@ -63,11 +63,11 @@ const ListItemFull = ({
     <>
       <Container>
         <LabelBox>
-          <DropdownIcon isOpen={isDropdownOpen} onClick={handleDropdown}>
-            {withReceivers && (
-              <Image src={dropDownIcon} alt='down arrow icon' width={12} />
-            )}
-          </DropdownIcon>
+          <DropdownIcon
+            isOpen={isDropdownOpen}
+            onClickWithEvent={handleDropdown}
+            isShowing={withReceivers}
+          />
           <NameAndIdBox>
             <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
             <IdLabel>{personalId}</IdLabel>
@@ -122,7 +122,7 @@ const ListItemFull = ({
         receivers &&
         receivers.map((receiver, i) => (
           <ListItemFullDropdown
-            key={`listItemFullDropdown${receiver.personalId}`}
+            key={`listItemFullDropdown${i}`}
             onClick={() => {}}
             receiverData={receiver}
           />
@@ -216,24 +216,4 @@ const NameAndIdBox = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 4px;
-`
-
-type DropdownIconProps = { isOpen: boolean }
-
-const DropdownIcon = styled.div<DropdownIconProps>`
-  width: 36px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  transition: transform 0.3s ease-in-out;
-
-  ${({ isOpen }) =>
-    isOpen &&
-    css`
-      transform: rotate(180deg);
-    `}
-
-  cursor: pointer;
 `

@@ -1,10 +1,10 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { useMediaQuery } from 'react-responsive'
-import ListItemMobile from './ListItemMobile'
-import ListItemFull from './ListItemFull'
+import ListItemMobile from './components/ListItemMobile'
+import ListItemFull from './components/ListItemFull'
 import theme from '@/app/[locale]/theme'
 import { CONTAINER_GET_RES } from '@/api/apiTypes'
 import { formatDate } from '@/common/helpers/simpleFunctions'
@@ -33,6 +33,8 @@ const ListItem = ({
   // containerData: { brandName, link, departureDate, arrivalDate, numberOfCars },
   containerData: { name, trackingUrl, id, createdAt, updatedAt },
 }: Props) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   const createdAtFormatted = formatDate(createdAt)
@@ -48,6 +50,8 @@ const ListItem = ({
           departureDate={createdAtFormatted}
           arrivalDate={updatedAtFormatted}
           id={id}
+          isDropdownOpen={isDropdownOpen}
+          setIsDropdownOpen={setIsDropdownOpen}
         />
       ) : (
         <ListItemFull
@@ -57,6 +61,8 @@ const ListItem = ({
           departureDate={createdAtFormatted}
           arrivalDate={updatedAtFormatted}
           id={id}
+          isDropdownOpen={isDropdownOpen}
+          setIsDropdownOpen={setIsDropdownOpen}
         />
       )}
     </>

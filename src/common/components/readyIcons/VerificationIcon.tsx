@@ -6,12 +6,9 @@ import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import uncheckedYellow from '@/assets/icons/uncheckedYellow.svg'
 
-import {
-  VERIFICATION_STATUS_NAME,
-  VerificationStatusType,
-} from '@/common/helpers/constants'
+import { VERIFICATION_STATUS_NAME } from '@/common/helpers/constants'
 
-type Props = { verificationStatus: VerificationStatusType }
+type Props = { verificationStatus: VERIFICATION_STATUS_NAME }
 
 const VerificationIcon = ({ verificationStatus }: Props) => {
   return (
