@@ -338,8 +338,8 @@
     "actual address required": "ფაქტობრივი მისამართი აუცილებელია"
   },
 
-  "contactPage": {
-    "to improve our services and functionalities together": "ერთად გავაუმჯობესოთ ჩვენი სერვისები და ფუნქციონალები",
-    "fill out the form and tell us what you would like to improve": "შეავსე ფორმა და მოგვწერე რის გაუმჯობესებას ისურვებდი"
-  }
+  "to improve our services and functionalities together": "ერთად გავაუმჯობესოთ ჩვენი სერვისები და ფუნქციონალები",
+  "fill out the form and tell us what you would like to improve": "შეავსე ფორმა და მოგვწერე რის გაუმჯობესებას ისურვებდი",
+
+  "write us": "მოგვწერე"
 }

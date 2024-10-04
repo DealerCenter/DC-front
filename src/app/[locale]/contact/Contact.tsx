@@ -6,11 +6,14 @@ import containersImage from '@/assets/images/containersImageOrange.jpeg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../theme'
 import ContactForm from './components/ContactForm'
+import { useTranslations } from 'next-intl'
 
 type Props = {}
 
 const Contact = (props: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+
+  const t = useTranslations('')
 
   return (
     <Container>
@@ -23,7 +26,11 @@ const Contact = (props: Props) => {
           />
         </ImageFrame>
       )}
-      <ContactForm />
+      <ContactForm
+        headerText={t('to improve our services and functionalities together')}
+        text={t('fill out the form and tell us what you would like to improve')}
+        isHeaderCentered={true}
+      />
     </Container>
   )
 }

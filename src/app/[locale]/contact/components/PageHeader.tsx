@@ -8,6 +8,7 @@ type Props = {
   headerColor?: string
   textColor?: string
   width?: number
+  isHeaderCentered?: boolean
 }
 
 const PageHeader = ({
@@ -16,11 +17,12 @@ const PageHeader = ({
   headerColor,
   textColor,
   width,
+  isHeaderCentered,
 }: Props) => {
   const t = useTranslations('')
 
   return (
-    <Container width={width}>
+    <Container width={width} isCentered={isHeaderCentered}>
       <Header color={headerColor}>{headerText}</Header>
       <Text color={textColor}>{text}</Text>
     </Container>
@@ -29,7 +31,7 @@ const PageHeader = ({
 
 export default PageHeader
 
-type ContainerProps = { width?: number }
+type ContainerProps = { width?: number; isCentered?: boolean }
 
 type ColorProps = {
   color?: string
@@ -39,6 +41,15 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  ${({ isCentered }) =>
+    isCentered
+      ? css`
+          align-items: center;
+        `
+      : css`
+          align-items: unset;
+        `}
 
   gap: ${({ theme }) => theme.spacing?.xl};
 
@@ -56,7 +67,9 @@ const Container = styled.div<ContainerProps>`
   }
 `
 
-const Header = styled.h2<ColorProps>`
+type HeaderProps = { color?: string }
+
+const Header = styled.h2<HeaderProps>`
   margin: 0;
   font-size: 33px;
   font-weight: ${({ theme }) => theme.fontWeight?.bold};

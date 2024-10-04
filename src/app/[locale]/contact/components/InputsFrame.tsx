@@ -1,38 +1,38 @@
-import TextInput from '@/common/components/inputElements/TextInput'
 import { useTranslations } from 'next-intl'
-import React from 'react'
-import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
-import theme from '../../theme'
+
+import TextInput from '@/common/components/inputElements/TextInput'
 
 type Props = {}
 
 const InputsFrame = (props: Props) => {
-  const isMobile = useMediaQuery({ query: theme.media?.sm })
-  const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
 
   return (
     <Container>
       <PairFrame>
-        <TextInput
-          type='text'
-          placeholder={t('name')}
-          name='name'
-          value=''
-          onChange={() => {}}
-          onBlur={() => {}}
-          width={isMobile ? 163 : isTablet ? 195 : 270}
-        />
-        <TextInput
-          type='text'
-          placeholder={t('surname')}
-          name='surname'
-          value=''
-          onChange={() => {}}
-          onBlur={() => {}}
-          width={isMobile ? 163 : isTablet ? 195 : 270}
-        />
+        <TextInputSmallBox>
+          <TextInput
+            type='text'
+            placeholder={t('name')}
+            name='name'
+            value=''
+            onChange={() => {}}
+            onBlur={() => {}}
+            isWidthFill={true}
+          />
+        </TextInputSmallBox>
+        <TextInputSmallBox>
+          <TextInput
+            type='text'
+            placeholder={t('surname')}
+            name='surname'
+            value=''
+            onChange={() => {}}
+            onBlur={() => {}}
+            isWidthFill={true}
+          />
+        </TextInputSmallBox>
       </PairFrame>
       <TextInput
         type='text'
@@ -41,7 +41,7 @@ const InputsFrame = (props: Props) => {
         value=''
         onChange={() => {}}
         onBlur={() => {}}
-        width={isMobile ? 350 : isTablet ? 414 : 564}
+        isWidthFill={true}
       />
       <TextInput
         type='text'
@@ -50,7 +50,7 @@ const InputsFrame = (props: Props) => {
         value=''
         onChange={() => {}}
         onBlur={() => {}}
-        width={isMobile ? 350 : isTablet ? 414 : 564}
+        isWidthFill={true}
       />
       <StyledTextArea name='message' placeholder={t('message')} />
     </Container>
@@ -74,6 +74,11 @@ const PairFrame = styled.div`
   flex-direction: row;
 
   gap: ${({ theme }) => theme.spacing?.lg};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing?.md};
+  }
 `
 
 const StyledTextArea = styled.textarea`
@@ -94,5 +99,16 @@ const StyledTextArea = styled.textarea`
   }
   @media ${({ theme }) => theme.media?.sm} {
     width: 350px;
+  }
+`
+
+const TextInputSmallBox = styled.div`
+  width: 270px;
+
+  @media ${({ theme }) => theme.media?.md} {
+    width: 195px;
+  }
+  @media ${({ theme }) => theme.media?.sm} {
+    width: unset;
   }
 `
