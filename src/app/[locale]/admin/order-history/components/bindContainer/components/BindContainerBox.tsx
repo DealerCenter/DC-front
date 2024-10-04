@@ -58,6 +58,7 @@ const BindContainerBox = ({ setContainerToBind, setIsOpen }: Props) => {
         <SearchComponent
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          placeholder={t('search for container')}
         />
         <ContainersListBox
           containersList={filteredContainersList}

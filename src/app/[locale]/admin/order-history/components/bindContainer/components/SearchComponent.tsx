@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
-import { useTranslations } from 'next-intl'
 
 import closeX from '@/assets/icons/closeX.svg'
 import searchIcon from '@/assets/icons/SearchIconBlack.svg'
 
-type Props = { searchQuery: string; setSearchQuery: (arg: string) => void }
+type Props = {
+  searchQuery: string
+  setSearchQuery: (arg: string) => void
+  placeholder?: string
+}
 
-const SearchComponent = ({ searchQuery, setSearchQuery }: Props) => {
-  const t = useTranslations('')
-
+const SearchComponent = ({
+  searchQuery,
+  setSearchQuery,
+  placeholder,
+}: Props) => {
   const handleClear = () => {
     setSearchQuery('')
   }
@@ -23,7 +27,7 @@ const SearchComponent = ({ searchQuery, setSearchQuery }: Props) => {
 
       <StyledInput
         type='text'
-        placeholder={t('vin code')}
+        placeholder={placeholder}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
