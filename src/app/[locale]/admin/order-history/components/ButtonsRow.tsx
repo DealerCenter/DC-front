@@ -1,42 +1,23 @@
 import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
 
 import { CONTAINER_GET_RES } from '@/api/apiTypes'
 import theme from '@/app/[locale]/theme'
+import { routeName, ShippingStatus } from '@/common/helpers/constants'
 
 import BasicButton from '@/common/components/appButton/BasicButton'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
-import AppDropdown from '@/common/components/appDropdown/AppDropdown'
-
-import AppDropdownBasic from '@/common/components/appDropdown/AppDropdownBasic'
-import AppDropdownFilter from '@/common/components/appDropdown/appFilter/AppDropDownFilter'
-import CloseIconBlack from '@/common/components/readyIcons/CloseIconBlack'
-import {
-  routeName,
-  SHIPPING_STATUS,
-  ShippingStatus,
-} from '@/common/helpers/constants'
-import BindContainerDropdown from './bindContainer/BindContainerDropdown'
+import AppSort from '@/common/components/appSort/AppSort'
+import OrderHistoryBindContainer from './OrderHistoryBindContainer'
+import OrderHistoryChangeStatus from './OrderHistoryChangeStatus'
+import OrderHistoryFilter from './OrderHistoryFilter'
 
 import checkIcon from '@/assets/icons/checkBoxIcons/checkWhite.svg'
-import filterIconBlack from '@/assets/icons/filterBlack.svg'
 import pencilIcon from '@/assets/icons/pencilFull.svg'
 import addIcon from '@/assets/icons/plusInCircle.svg'
-import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
-import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
-import sortIconBlack from '@/assets/icons/sortBlack.svg'
-
-const changeStatusList = [
-  { label: SHIPPING_STATUS.IN_AUCTION },
-  { label: SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE },
-  { label: SHIPPING_STATUS.IN_CONTAINER },
-  { label: SHIPPING_STATUS.UNDERGOES_CUSTOMS },
-  { label: SHIPPING_STATUS.SENT },
-]
 
 type Props = {
   isEditing: boolean
@@ -77,55 +58,6 @@ const ButtonsRow = ({
   const t = useTranslations('')
   const router = useRouter()
 
-  const [activeSortLabel, setActiveSortLabel] = useState('sort')
-
-  const sortOptions = [
-    {
-      label: 'date descending',
-      icon: arrowDown,
-      onChoose: () => setSortByCreateDate('desc'),
-    },
-    {
-      label: 'date ascending',
-      icon: arrowUp,
-      onChoose: () => setSortByCreateDate('asc'),
-    },
-    {
-      label: 'price descending',
-      icon: arrowDown,
-      onChoose: () => setSortByCost('desc'),
-    },
-    {
-      label: 'price ascending',
-      icon: arrowUp,
-      onChoose: () => setSortByCost('asc'),
-    },
-  ]
-
-  const onClearFilter = (e: any) => {
-    e.stopPropagation()
-    setShippingStatus(null)
-    setDealerId(null)
-    setReceiverId(null)
-  }
-
-  const onClearSort = (e: any) => {
-    e.stopPropagation()
-    setSortByCost(null)
-    setSortByCreateDate(null)
-    setActiveSortLabel('sort')
-  }
-
-  const onClearShippingStatusOnEdit = (e: any) => {
-    e.stopPropagation()
-    setShippingStatusOnEdit(null)
-  }
-
-  const onClearContainerToBind = (e: any) => {
-    e.stopPropagation()
-    setContainerToBind(null)
-  }
-
   const onDoneEdit = () => {
     handleEditSubmit()
   }
@@ -139,41 +71,15 @@ const ButtonsRow = ({
       {isEditing ? (
         <ButtonFrameEdit>
           <ButtonPairFrame>
-            <AppDropdownBasic
-              items={changeStatusList}
-              modalStyle='white'
-              width={300}
-              top={48}
-              isBorder={true}
-              setActiveValue={setShippingStatusOnEdit}
-            >
-              <BasicButton onClick={() => {}} color='white' isBorder={true}>
-                {t(
-                  shippingStatusOnEdit ? shippingStatusOnEdit : 'change status'
-                )}
-              </BasicButton>
-              {shippingStatusOnEdit !== null && (
-                <CloseIconBlack
-                  onClick={onClearShippingStatusOnEdit}
-                  top={-8}
-                  right={-8}
-                />
-              )}
-            </AppDropdownBasic>
-            <BindContainerDropdown setContainerToBind={setContainerToBind}>
-              <BasicButton onClick={() => {}} color='white' isBorder={true}>
-                {containerToBind
-                  ? containerToBind.trackingUrl
-                  : t('bind container')}
-              </BasicButton>
-              {containerToBind && (
-                <CloseIconBlack
-                  onClick={onClearContainerToBind}
-                  top={-8}
-                  right={-8}
-                />
-              )}
-            </BindContainerDropdown>
+            <OrderHistoryChangeStatus
+              shippingStatusOnEdit={shippingStatusOnEdit}
+              setShippingStatusOnEdit={setShippingStatusOnEdit}
+            />
+
+            <OrderHistoryBindContainer
+              containerToBind={containerToBind}
+              setContainerToBind={setContainerToBind}
+            />
           </ButtonPairFrame>
           <ButtonPairFrame>
             <BasicButton
@@ -194,41 +100,18 @@ const ButtonsRow = ({
       ) : (
         <ButtonFrame>
           <ButtonPairFrame>
-            <AppDropdownFilter
+            <OrderHistoryFilter
+              shippingStatus={shippingStatus}
               setShippingStatus={setShippingStatus}
               setDealerId={setDealerId}
               setReceiverId={setReceiverId}
-            >
-              <SecondaryButton
-                text={t('filter')}
-                onClick={() => {}}
-                icon={filterIconBlack}
-                width={isMobile ? 160 : undefined}
-                isDisabled={isButtonsDisabled}
-              ></SecondaryButton>
-              {shippingStatus !== null && (
-                <CloseIconBlack onClick={onClearFilter} top={-8} right={-8} />
-              )}
-            </AppDropdownFilter>
-            <AppDropdown
-              modalStyle='white'
-              sortOptions={sortOptions}
-              setActiveLabel={setActiveSortLabel}
               isDisabled={isButtonsDisabled}
-
-              // onCancel={onClearSort}
-            >
-              <SecondaryButton
-                text={t(activeSortLabel)}
-                onClick={() => {}}
-                icon={sortIconBlack}
-                width={isMobile ? 160 : undefined}
-                isDisabled={isButtonsDisabled}
-              />
-              {activeSortLabel !== 'sort' && (
-                <CloseIconBlack onClick={onClearSort} top={-8} right={-8} />
-              )}
-            </AppDropdown>
+            />
+            <AppSort
+              setSortByCost={setSortByCost}
+              setSortByDate={setSortByCreateDate}
+              isDisabled={isButtonsDisabled}
+            />
           </ButtonPairFrame>
           <ButtonPairFrame>
             <SecondaryButton
