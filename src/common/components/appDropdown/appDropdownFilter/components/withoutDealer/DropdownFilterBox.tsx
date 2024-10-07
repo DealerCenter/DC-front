@@ -15,20 +15,22 @@ type Props = {
   toggleDropdown: () => void
   setShippingStatus: (arg: ShippingStatus) => void
   setReceiverId: (arg: number | null) => void
-  checkedStatus: ShippingStatus
-  setCheckedStatus: (arg: ShippingStatus) => void
+  checkedShippingStatus: ShippingStatus
+  setCheckedShippingStatus: (arg: ShippingStatus) => void
   checkedRecipientId: number | null
   setCheckedRecipientId: (arg: number | null) => void
+  clearFilterStates: () => void
 }
 
 const DropdownFilterBox = ({
   toggleDropdown,
   setShippingStatus,
   setReceiverId,
-  checkedStatus,
-  setCheckedStatus,
+  checkedShippingStatus,
+  setCheckedShippingStatus,
   checkedRecipientId,
   setCheckedRecipientId,
+  clearFilterStates,
 }: Props) => {
   const t = useTranslations('')
 
@@ -40,14 +42,12 @@ const DropdownFilterBox = ({
   const [receiversSearchQuery, setReceiversSearchQuery] = useState('')
 
   const handleCancel = () => {
-    setCheckedStatus(null)
-    setCheckedRecipientId(null)
-    setShippingStatus(null)
+    clearFilterStates()
     toggleDropdown()
   }
 
   const handleSave = () => {
-    setShippingStatus(checkedStatus)
+    setShippingStatus(checkedShippingStatus)
     setReceiverId(checkedRecipientId)
     toggleDropdown()
   }
@@ -72,8 +72,8 @@ const DropdownFilterBox = ({
         />
         {activeSetting === 'status' ? (
           <SingleDropdownShippingStatus
-            checkedStatus={checkedStatus}
-            setCheckedStatus={setCheckedStatus}
+            checkedShippingStatus={checkedShippingStatus}
+            setCheckedShippingStatus={setCheckedShippingStatus}
           />
         ) : (
           activeSetting === 'recipient' && (
@@ -108,7 +108,7 @@ const DropdownFilterBox = ({
           height={36}
           width={130}
           color='black'
-          isDisabled={!checkedStatus && !checkedRecipientId}
+          isDisabled={!checkedShippingStatus && !checkedRecipientId}
         >
           <TextBold>{t('save')}</TextBold>
         </BasicButton>

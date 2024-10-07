@@ -12,13 +12,14 @@ type Props = {
   setShippingStatus: (arg: ShippingStatus) => void
   setDealerId: (arg: number | null) => void
   setReceiverId: (arg: number | null) => void
-  checkedStatus: ShippingStatus
-  setCheckedStatus: (arg: ShippingStatus) => void
+  checkedShippingStatus: ShippingStatus
+  setCheckedShippingStatus: (arg: ShippingStatus) => void
   checkedRecipientId: number | null
   setCheckedRecipientId: (arg: number | null) => void
   checkedDealerId: number | null
   setCheckedDealerId: (arg: number | null) => void
   isWithDealer?: boolean
+  clearFilterStates: () => void
 }
 
 const AppDropdownFilter = ({
@@ -28,13 +29,14 @@ const AppDropdownFilter = ({
   setShippingStatus,
   setDealerId,
   setReceiverId,
-  checkedStatus,
-  setCheckedStatus,
+  checkedShippingStatus,
+  setCheckedShippingStatus,
   checkedDealerId,
   setCheckedDealerId,
   checkedRecipientId,
   setCheckedRecipientId,
   isWithDealer,
+  clearFilterStates,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -70,22 +72,24 @@ const AppDropdownFilter = ({
               setShippingStatus={setShippingStatus}
               setDealerId={setDealerId}
               setReceiverId={setReceiverId}
-              checkedStatus={checkedStatus}
-              setCheckedStatus={setCheckedStatus}
+              checkedShippingStatus={checkedShippingStatus}
+              setCheckedShippingStatus={setCheckedShippingStatus}
               checkedRecipientId={checkedRecipientId}
               setCheckedRecipientId={setCheckedRecipientId}
               checkedDealerId={checkedDealerId}
               setCheckedDealerId={setCheckedDealerId}
+              clearFilterStates={clearFilterStates}
             />
           ) : (
             <DropdownFilterBox
               toggleDropdown={toggleDropdown}
               setShippingStatus={setShippingStatus}
               setReceiverId={setReceiverId}
-              checkedStatus={checkedStatus}
-              setCheckedStatus={setCheckedStatus}
+              checkedShippingStatus={checkedShippingStatus}
+              setCheckedShippingStatus={setCheckedShippingStatus}
               checkedRecipientId={checkedRecipientId}
               setCheckedRecipientId={setCheckedRecipientId}
+              clearFilterStates={clearFilterStates}
             />
           )}
         </DropdownMenu>

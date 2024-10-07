@@ -27,7 +27,8 @@ const OrderHistoryFilter = ({
   setReceiverId,
   isDisabled,
 }: Props) => {
-  const [checkedStatus, setCheckedStatus] = useState<ShippingStatus>(null)
+  const [checkedShippingStatus, setCheckedShippingStatus] =
+    useState<ShippingStatus>(null)
   const [checkedRecipientId, setCheckedRecipientId] = useState<number | null>(
     null
   )
@@ -38,10 +39,14 @@ const OrderHistoryFilter = ({
 
   const onClearFilter = (e: any) => {
     e.stopPropagation()
+    clearFilterStates()
+  }
+
+  const clearFilterStates = () => {
     setShippingStatus(null)
     setReceiverId(null)
 
-    setCheckedStatus(null)
+    setCheckedShippingStatus(null)
     setCheckedRecipientId(null)
   }
 
@@ -49,13 +54,14 @@ const OrderHistoryFilter = ({
     <AppDropdownFilter
       setShippingStatus={setShippingStatus}
       setReceiverId={setReceiverId}
-      checkedStatus={checkedStatus}
-      setCheckedStatus={setCheckedStatus}
+      checkedShippingStatus={checkedShippingStatus}
+      setCheckedShippingStatus={setCheckedShippingStatus}
       checkedRecipientId={checkedRecipientId}
       setCheckedRecipientId={setCheckedRecipientId}
       checkedDealerId={null}
       setCheckedDealerId={() => {}}
       setDealerId={() => {}}
+      clearFilterStates={clearFilterStates}
     >
       <SecondaryButton
         text={t('filter')}

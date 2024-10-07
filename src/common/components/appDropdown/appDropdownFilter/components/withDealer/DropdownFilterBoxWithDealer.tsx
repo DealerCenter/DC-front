@@ -18,12 +18,13 @@ type Props = {
   setShippingStatus: (arg: ShippingStatus) => void
   setDealerId: (arg: number | null) => void
   setReceiverId: (arg: number | null) => void
-  checkedStatus: ShippingStatus
-  setCheckedStatus: (arg: ShippingStatus) => void
+  checkedShippingStatus: ShippingStatus
+  setCheckedShippingStatus: (arg: ShippingStatus) => void
   checkedDealerId: number | null
   setCheckedDealerId: (arg: number | null) => void
   checkedRecipientId: number | null
   setCheckedRecipientId: (arg: number | null) => void
+  clearFilterStates: () => void
 }
 
 const DropdownFilterBoxWithDealer = ({
@@ -31,12 +32,13 @@ const DropdownFilterBoxWithDealer = ({
   setShippingStatus,
   setDealerId,
   setReceiverId,
-  checkedStatus,
-  setCheckedStatus,
+  checkedShippingStatus,
+  setCheckedShippingStatus,
   checkedDealerId,
   setCheckedDealerId,
   checkedRecipientId,
   setCheckedRecipientId,
+  clearFilterStates,
 }: Props) => {
   const t = useTranslations('')
 
@@ -51,15 +53,13 @@ const DropdownFilterBoxWithDealer = ({
   const [dealersSearchQuery, setDealersSearchQuery] = useState('')
 
   const handleCancel = () => {
-    setCheckedStatus(null)
-    setCheckedRecipientId(null)
-    setCheckedDealerId(null)
-    setShippingStatus(null)
+    clearFilterStates()
     toggleDropdown()
   }
 
   const handleSave = () => {
-    setShippingStatus(checkedStatus)
+    setShippingStatus(checkedShippingStatus)
+
     setDealerId(checkedDealerId)
     setReceiverId(checkedRecipientId)
     toggleDropdown()
@@ -96,8 +96,8 @@ const DropdownFilterBoxWithDealer = ({
         />
         {activeSetting === 'status' ? (
           <SingleDropdownShippingStatus
-            checkedStatus={checkedStatus}
-            setCheckedStatus={setCheckedStatus}
+            checkedShippingStatus={checkedShippingStatus}
+            setCheckedShippingStatus={setCheckedShippingStatus}
           />
         ) : activeSetting === 'recipient' ? (
           <SingleDropdown
@@ -146,7 +146,9 @@ const DropdownFilterBoxWithDealer = ({
           height={36}
           width={157}
           color='black'
-          isDisabled={!checkedStatus && !checkedRecipientId && !checkedDealerId}
+          isDisabled={
+            !checkedShippingStatus && !checkedRecipientId && !checkedDealerId
+          }
         >
           <TextBold>{t('save')}</TextBold>
         </BasicButton>

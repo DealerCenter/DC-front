@@ -14,22 +14,18 @@ const statusValues: ShippingStatus[] = [
 ]
 
 type Props = {
-  checkedStatus: ShippingStatus
-  setCheckedStatus: (arg: ShippingStatus) => void
+  checkedShippingStatus: ShippingStatus
+  setCheckedShippingStatus: (arg: ShippingStatus) => void
 }
 
 const SingleDropdownShippingStatus = ({
-  checkedStatus,
-  setCheckedStatus,
+  checkedShippingStatus,
+  setCheckedShippingStatus,
 }: Props) => {
   const t = useTranslations('')
 
   const handleClick = (value: ShippingStatus) => {
-    if (value === checkedStatus) {
-      setCheckedStatus(null)
-    } else {
-      setCheckedStatus(value)
-    }
+    setCheckedShippingStatus(value)
   }
 
   return (
@@ -39,7 +35,7 @@ const SingleDropdownShippingStatus = ({
           key={`DropdownFilterBoxListItem${i}`}
           onClick={() => handleClick(value)}
         >
-          <CheckBox isChecked={value === checkedStatus} />
+          <CheckBox isChecked={value === checkedShippingStatus} />
           <Text>{t(value)}</Text>
         </ListItem>
       ))}
