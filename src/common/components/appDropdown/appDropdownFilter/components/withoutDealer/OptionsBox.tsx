@@ -1,13 +1,9 @@
-import Image from 'next/image'
-import React from 'react'
+import { useTranslations } from 'next-intl'
 import styled, { css } from 'styled-components'
 
-import lineIcon from '@/assets/icons/splitGrayLine.svg'
-import { useTranslations } from 'next-intl'
-
 type Props = {
-  activeOption: 'status' | 'recipient' | 'dealer' | null
-  setActiveOption: (arg1: 'status' | 'recipient' | 'dealer') => void
+  activeOption: 'status' | 'recipient' | null
+  setActiveOption: (arg1: 'status' | 'recipient') => void
 }
 
 const OptionsBox = ({ activeOption, setActiveOption }: Props) => {
@@ -21,19 +17,11 @@ const OptionsBox = ({ activeOption, setActiveOption }: Props) => {
       >
         <TextBold>{t('status')}</TextBold>
       </Setting>
-      <Image src={lineIcon} alt='line icon' />
       <Setting
         isActive={'recipient' === activeOption}
         onClick={() => setActiveOption('recipient')}
       >
         <TextBold>{t('recipient')}</TextBold>
-      </Setting>
-      <Image src={lineIcon} alt='line icon' />
-      <Setting
-        isActive={'dealer' === activeOption}
-        onClick={() => setActiveOption('dealer')}
-      >
-        <TextBold>{t('dealer')}</TextBold>
       </Setting>
     </SettingsBox>
   )
@@ -42,7 +30,7 @@ const OptionsBox = ({ activeOption, setActiveOption }: Props) => {
 export default OptionsBox
 
 const SettingsBox = styled.div`
-  width: 330px;
+  width: 270px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -52,7 +40,7 @@ const SettingsBox = styled.div`
 type SettingProps = { isActive: boolean }
 
 const Setting = styled.div<SettingProps>`
-  width: 100px;
+  width: 130px;
   height: 36px;
   display: flex;
   justify-content: center;

@@ -27,7 +27,9 @@ type Props = {
   isButtonsDisabled: boolean
   shippingStatus: ShippingStatus
   setShippingStatus: (arg: ShippingStatus) => void
+  dealerId: number | null
   setDealerId: (arg: number | null) => void
+  receiverId: number | null
   setReceiverId: (arg: number | null) => void
   clearOrderIdsList: () => void
   shippingStatusOnEdit: string | null
@@ -45,7 +47,9 @@ const ButtonsRow = ({
   isButtonsDisabled,
   shippingStatus,
   setShippingStatus,
+  dealerId,
   setDealerId,
+  receiverId,
   setReceiverId,
   clearOrderIdsList,
   shippingStatusOnEdit,
@@ -103,7 +107,9 @@ const ButtonsRow = ({
             <OrderHistoryFilter
               shippingStatus={shippingStatus}
               setShippingStatus={setShippingStatus}
+              dealerId={dealerId}
               setDealerId={setDealerId}
+              receiverId={receiverId}
               setReceiverId={setReceiverId}
               isDisabled={isButtonsDisabled}
             />

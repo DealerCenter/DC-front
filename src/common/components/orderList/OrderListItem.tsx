@@ -42,8 +42,6 @@ const OrderListItem = ({
     transportationCost,
   } = orderData
 
-  console.log(orderData)
-
   return (
     <Container index={index} onClick={onClick}>
       <Frame>

@@ -2,24 +2,21 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import { getDealersAdmin, getReceiversAdmin } from '@/api/apiCalls'
-import { DEALERS_DATA, RECEIVER_DATA } from '@/api/apiTypes'
+import { getReceivers } from '@/api/apiCalls'
+import { RECEIVER_DATA } from '@/api/apiTypes'
 
 import BasicButton from '@/common/components/appButton/BasicButton'
 import { ShippingStatus } from '@/common/helpers/constants'
+import SingleDropdown from '../common/SingleDropdown'
+import SingleDropdownShippingStatus from '../common/SingleDropdownShippingStatus'
 import OptionsBox from './OptionsBox'
-import SingleDropdown from './SingleDropdown'
-import SingleDropdownShippingStatus from './SingleDropdownShippingStatus'
 
 type Props = {
   toggleDropdown: () => void
   setShippingStatus: (arg: ShippingStatus) => void
-  setDealerId: (arg: number | null) => void
   setReceiverId: (arg: number | null) => void
   checkedStatus: ShippingStatus
   setCheckedStatus: (arg: ShippingStatus) => void
-  checkedDealerId: number | null
-  setCheckedDealerId: (arg: number | null) => void
   checkedRecipientId: number | null
   setCheckedRecipientId: (arg: number | null) => void
 }
@@ -27,44 +24,36 @@ type Props = {
 const DropdownFilterBox = ({
   toggleDropdown,
   setShippingStatus,
-  setDealerId,
   setReceiverId,
   checkedStatus,
   setCheckedStatus,
-  checkedDealerId,
-  setCheckedDealerId,
   checkedRecipientId,
   setCheckedRecipientId,
 }: Props) => {
   const t = useTranslations('')
 
   const [activeSetting, setActiveSetting] = useState<
-    'status' | 'recipient' | 'dealer' | null
+    'status' | 'recipient' | null
   >('status')
 
   const [receiversList, setReceiversList] = useState<RECEIVER_DATA[]>()
   const [receiversSearchQuery, setReceiversSearchQuery] = useState('')
 
-  const [dealersList, setDealersList] = useState<DEALERS_DATA[]>()
-  const [dealersSearchQuery, setDealersSearchQuery] = useState('')
-
   const handleCancel = () => {
     setCheckedStatus(null)
     setCheckedRecipientId(null)
-    setCheckedDealerId(null)
     setShippingStatus(null)
     toggleDropdown()
   }
 
   const handleSave = () => {
     setShippingStatus(checkedStatus)
-    setDealerId(checkedDealerId)
     setReceiverId(checkedRecipientId)
     toggleDropdown()
   }
 
   const getRecipients = async () => {
-    const res = await getReceiversAdmin({ search: '' })
+    const res = await getReceivers({ search: '' })
     res && console.log('fetched receivers list:', receiversSearchQuery)
     res && setReceiversList(res.data)
   }
@@ -73,21 +62,6 @@ const DropdownFilterBox = ({
     getRecipients()
     //eslint-disable-next-line
   }, [receiversSearchQuery])
-
-  const getDealers = async () => {
-    const res = await getDealersAdmin({})
-    res && console.log('fetched dealers list:', dealersSearchQuery)
-    res && setDealersList(res.data)
-  }
-
-  useEffect(() => {
-    getDealers()
-    //eslint-disable-next-line
-  }, [dealersSearchQuery])
-
-  useEffect(() => {
-    console.log('checked status,', checkedStatus)
-  }, [checkedStatus])
 
   return (
     <Container>
@@ -101,34 +75,20 @@ const DropdownFilterBox = ({
             checkedStatus={checkedStatus}
             setCheckedStatus={setCheckedStatus}
           />
-        ) : activeSetting === 'recipient' ? (
-          <SingleDropdown
-            checkedOption={checkedRecipientId}
-            setCheckedId={setCheckedRecipientId}
-            values={
-              receiversList &&
-              receiversList.map(({ id, firstName, lastName }) => ({
-                id,
-                firstName,
-                lastName,
-              }))
-            }
-            setSearchQuery={setReceiversSearchQuery}
-          />
         ) : (
-          activeSetting === 'dealer' && (
+          activeSetting === 'recipient' && (
             <SingleDropdown
+              checkedOption={checkedRecipientId}
+              setCheckedId={setCheckedRecipientId}
               values={
-                dealersList &&
-                dealersList.map(({ id, firstName, lastName }) => ({
+                receiversList &&
+                receiversList.map(({ id, firstName, lastName }) => ({
                   id,
                   firstName,
                   lastName,
                 }))
               }
-              checkedOption={checkedDealerId}
-              setCheckedId={setCheckedDealerId}
-              setSearchQuery={setDealersSearchQuery}
+              setSearchQuery={setReceiversSearchQuery}
             />
           )
         )}
@@ -137,7 +97,7 @@ const DropdownFilterBox = ({
         <BasicButton
           onClick={handleCancel}
           height={36}
-          width={157}
+          width={130}
           color='white'
           isBorder={true}
         >
@@ -146,9 +106,9 @@ const DropdownFilterBox = ({
         <BasicButton
           onClick={handleSave}
           height={36}
-          width={157}
+          width={130}
           color='black'
-          isDisabled={!checkedStatus && !checkedRecipientId && !checkedDealerId}
+          isDisabled={!checkedStatus && !checkedRecipientId}
         >
           <TextBold>{t('save')}</TextBold>
         </BasicButton>
@@ -160,7 +120,7 @@ const DropdownFilterBox = ({
 export default DropdownFilterBox
 
 const Container = styled.div`
-  width: 330px;
+  width: 270px;
   background-color: ${({ theme }) => theme.colors?.white};
   display: flex;
   flex-direction: column;

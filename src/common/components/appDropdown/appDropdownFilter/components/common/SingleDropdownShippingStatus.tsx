@@ -24,12 +24,20 @@ const SingleDropdownShippingStatus = ({
 }: Props) => {
   const t = useTranslations('')
 
+  const handleClick = (value: ShippingStatus) => {
+    if (value === checkedStatus) {
+      setCheckedStatus(null)
+    } else {
+      setCheckedStatus(value)
+    }
+  }
+
   return (
     <List>
       {statusValues.map((value, i) => (
         <ListItem
           key={`DropdownFilterBoxListItem${i}`}
-          onClick={() => setCheckedStatus(value)}
+          onClick={() => handleClick(value)}
         >
           <CheckBox isChecked={value === checkedStatus} />
           <Text>{t(value)}</Text>

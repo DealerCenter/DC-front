@@ -1,8 +1,9 @@
 import { ReactNode, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import DropdownFilterBox from './components/DropdownFilterBox'
 import { ShippingStatus } from '@/common/helpers/constants'
+import DropdownFilterBoxWithDealer from './components/withDealer/DropdownFilterBoxWithDealer'
+import DropdownFilterBox from './components/withoutDealer/DropdownFilterBox'
 
 type Props = {
   children: ReactNode
@@ -13,10 +14,11 @@ type Props = {
   setReceiverId: (arg: number | null) => void
   checkedStatus: ShippingStatus
   setCheckedStatus: (arg: ShippingStatus) => void
-  checkedDealerId: number | null
-  setCheckedDealerId: (arg: number | null) => void
   checkedRecipientId: number | null
   setCheckedRecipientId: (arg: number | null) => void
+  checkedDealerId: number | null
+  setCheckedDealerId: (arg: number | null) => void
+  isWithDealer?: boolean
 }
 
 const AppDropdownFilter = ({
@@ -32,6 +34,7 @@ const AppDropdownFilter = ({
   setCheckedDealerId,
   checkedRecipientId,
   setCheckedRecipientId,
+  isWithDealer,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -61,18 +64,30 @@ const AppDropdownFilter = ({
       <DropdownTrigger onClick={toggleDropdown}>{children}</DropdownTrigger>
       {isOpen && (
         <DropdownMenu left={left} top={top}>
-          <DropdownFilterBox
-            toggleDropdown={toggleDropdown}
-            setShippingStatus={setShippingStatus}
-            setDealerId={setDealerId}
-            setReceiverId={setReceiverId}
-            checkedStatus={checkedStatus}
-            setCheckedStatus={setCheckedStatus}
-            checkedRecipientId={checkedRecipientId}
-            setCheckedRecipientId={setCheckedRecipientId}
-            checkedDealerId={checkedDealerId}
-            setCheckedDealerId={setCheckedDealerId}
-          />
+          {isWithDealer ? (
+            <DropdownFilterBoxWithDealer
+              toggleDropdown={toggleDropdown}
+              setShippingStatus={setShippingStatus}
+              setDealerId={setDealerId}
+              setReceiverId={setReceiverId}
+              checkedStatus={checkedStatus}
+              setCheckedStatus={setCheckedStatus}
+              checkedRecipientId={checkedRecipientId}
+              setCheckedRecipientId={setCheckedRecipientId}
+              checkedDealerId={checkedDealerId}
+              setCheckedDealerId={setCheckedDealerId}
+            />
+          ) : (
+            <DropdownFilterBox
+              toggleDropdown={toggleDropdown}
+              setShippingStatus={setShippingStatus}
+              setReceiverId={setReceiverId}
+              checkedStatus={checkedStatus}
+              setCheckedStatus={setCheckedStatus}
+              checkedRecipientId={checkedRecipientId}
+              setCheckedRecipientId={setCheckedRecipientId}
+            />
+          )}
         </DropdownMenu>
       )}
     </Dropdown>

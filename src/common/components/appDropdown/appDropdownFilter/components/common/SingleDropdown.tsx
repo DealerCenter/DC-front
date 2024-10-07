@@ -1,14 +1,12 @@
-// import { ShippingStatus } from '@/common/helpers/constants'
-import { DEALERS_DATA, RECEIVER_DATA } from '@/api/apiTypes'
+import { useTranslations } from 'next-intl'
+import styled from 'styled-components'
+
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
 import SearchSmall from '@/common/components/search/SearchSmall'
-import { useTranslations } from 'next-intl'
-import React, { useState } from 'react'
-import styled from 'styled-components'
 
 type Props = {
   values?: { id: number; firstName: string; lastName: string }[]
-  checkedOption: string | number | null
+  checkedOption: number | null
   setCheckedId: (arg: number | null) => void
   setSearchQuery: (arg: string) => void
 }
@@ -21,32 +19,47 @@ const SingleDropdown = ({
 }: Props) => {
   const t = useTranslations('')
 
+  const handleClick = (value: number | null) => {
+    if (value === checkedOption) {
+      setCheckedId(null)
+    } else {
+      setCheckedId(value)
+    }
+  }
+
   if (values) {
     return (
-      <List>
+      <Container>
         <SearchBox>
           <SearchSmall placeholder={t('search')} onSubmit={setSearchQuery} />
         </SearchBox>
-        {values.map((value, i) => (
-          <ListItem
-            key={`DropdownFilterBoxListItem${i}`}
-            onClick={() => setCheckedId(value.id)}
-          >
-            <CheckBox isChecked={value.id === checkedOption} />
-            <Text>{`${value.firstName} ${value.lastName}`}</Text>
-          </ListItem>
-        ))}
-      </List>
+        <List>
+          {values.map((value, i) => (
+            <ListItem
+              key={`DropdownFilterBoxListItem${i}`}
+              onClick={() => handleClick(value.id)}
+            >
+              <CheckBox isChecked={value.id === checkedOption} />
+              <Text>{`${value.firstName} ${value.lastName}`}</Text>
+            </ListItem>
+          ))}
+        </List>
+      </Container>
     )
   }
-  return <List></List>
+  return <Container></Container>
 }
 
 export default SingleDropdown
 
+const Container = styled.div``
+
 const List = styled.ul`
   padding: 0;
   margin: 0;
+
+  max-height: 300px;
+  overflow-y: auto;
 `
 
 const ListItem = styled.li`

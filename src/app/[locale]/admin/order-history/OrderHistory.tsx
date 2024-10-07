@@ -137,7 +137,9 @@ const OrderHistory = (props: Props) => {
           isButtonsDisabled={!isPageLoaded}
           shippingStatus={shippingStatus}
           setShippingStatus={setShippingStatus}
+          dealerId={dealerId}
           setDealerId={setDealerId}
+          receiverId={receiverId}
           setReceiverId={setReceiverId}
           clearOrderIdsList={() => setCheckedOrderIds([])}
           shippingStatusOnEdit={shippingStatusOnEdit}

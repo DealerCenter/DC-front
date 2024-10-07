@@ -18,6 +18,8 @@ import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
 import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
 import { ORDER_DATA } from '@/api/apiTypes'
 import { getOrders } from '@/api/apiCalls'
+import AppSort from '@/common/components/appSort/AppSort'
+import OrderHistoryFilter from './components/OrderHistoryFilter'
 
 const sortOptions = [
   { label: 'date descending', icon: arrowDown },
@@ -42,6 +44,8 @@ const OrderHistory = (props: Props) => {
     'asc' | 'desc' | null
   >(null)
   const [shippingStatus, setShippingStatus] = useState<ShippingStatus>(null)
+
+  const [receiverId, setReceiverId] = useState<number | null>(null)
 
   const t = useTranslations('')
   const router = useRouter()
@@ -74,18 +78,16 @@ const OrderHistory = (props: Props) => {
       <TopFrame>
         <HeaderH4Bold text={t('order history')} />
         <ButtonFrame>
-          <SecondaryButton
-            text={t('filter')}
-            onClick={() => {}}
-            icon={filterIconBlack}
-          ></SecondaryButton>
-          <AppDropdown items={sortOptions} modalStyle='white'>
-            <SecondaryButton
-              text={t('sort')}
-              onClick={() => {}}
-              icon={sortIconBlack}
-            ></SecondaryButton>
-          </AppDropdown>
+          <OrderHistoryFilter
+            shippingStatus={shippingStatus}
+            setShippingStatus={setShippingStatus}
+            setReceiverId={setReceiverId}
+            receiverId={receiverId}
+          />
+          <AppSort
+            setSortByCost={setSortByCost}
+            setSortByDate={setSortByCreateDate}
+          />
         </ButtonFrame>
       </TopFrame>
       <OrderList
