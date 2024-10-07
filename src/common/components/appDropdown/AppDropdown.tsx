@@ -20,7 +20,6 @@ type Props = {
 
   left?: number
   top?: number
-  onSortClick?: () => void
   handleToggle?: () => void
   handleClose?: () => void
   width?: number
@@ -38,7 +37,6 @@ const AppDropdown = ({
   left,
   top,
   modalStyle = 'black',
-  onSortClick,
   handleToggle,
   handleClose,
   width,
@@ -101,7 +99,6 @@ const AppDropdown = ({
                 item={item}
                 key={`${item.label}12ij${i}`}
                 modalStyle={modalStyle}
-                onSortClick={onSortClick}
               />
             ))}
           {ReadyComponent && ReadyComponent}
@@ -111,7 +108,6 @@ const AppDropdown = ({
                 item={item}
                 key={`${item.label}12ij${i}`}
                 modalStyle={modalStyle}
-                onSortClick={item.onChoose}
                 onClick={() => setActiveLabel && setActiveLabel(item.label)}
               />
             ))}

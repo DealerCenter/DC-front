@@ -13,45 +13,28 @@ type Props = {
     icon?: string
     onChoose?: () => void
   }
-  onSortClick?: (
-    arg1:
-      | 'price ascending'
-      | 'price descending'
-      | 'date ascending'
-      | 'date descending'
-  ) => void
   onClick?: () => void
   onItemClick?: (arg: string) => void
 }
 
-const DropdownItem = ({
-  item,
-  modalStyle,
-  onSortClick,
-  onClick,
-  onItemClick,
-}: Props) => {
+const DropdownItem = ({ item, modalStyle, onClick, onItemClick }: Props) => {
   const pathname = usePathname()
   const t = useTranslations('')
 
   const { label, href, locale, icon, onChoose } = item
 
   const handleClick = () => {
-    onChoose && onChoose()
-    onClick && onClick()
-  }
-
-  const handleItemClick = () => {
-    onItemClick && onItemClick(item.label)
+    if (onItemClick) {
+      onItemClick(item.label)
+    } else {
+      onChoose && onChoose()
+      onClick && onClick()
+    }
   }
 
   return (
     <StyledLink href={href ? href : pathname} locale={locale && locale}>
-      <Container
-        modalStyle={modalStyle}
-        isIcon={!!icon}
-        onClick={onItemClick ? handleItemClick : handleClick}
-      >
+      <Container modalStyle={modalStyle} isIcon={!!icon} onClick={handleClick}>
         <Frame>
           {icon && (
             <Icon>
