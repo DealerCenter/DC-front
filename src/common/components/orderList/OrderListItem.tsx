@@ -39,8 +39,10 @@ const OrderListItem = ({
     manufactureYear,
     status,
     receiver,
-    carCost,
+    transportationCost,
   } = orderData
+
+  console.log(orderData)
 
   return (
     <Container index={index} onClick={onClick}>
@@ -65,7 +67,7 @@ const OrderListItem = ({
           )}
         </MiddleFrame>
       </Frame>
-      <DebtBox amount={carCost} arrivalState={'arrived'} />
+      <DebtBox amount={transportationCost} arrivalState={'arrived'} />
     </Container>
   )
 }

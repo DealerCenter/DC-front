@@ -16,6 +16,12 @@ type Props = {
   setShippingStatus: (arg: ShippingStatus) => void
   setDealerId: (arg: number | null) => void
   setReceiverId: (arg: number | null) => void
+  checkedStatus: ShippingStatus
+  setCheckedStatus: (arg: ShippingStatus) => void
+  checkedDealerId: number | null
+  setCheckedDealerId: (arg: number | null) => void
+  checkedRecipientId: number | null
+  setCheckedRecipientId: (arg: number | null) => void
 }
 
 const DropdownFilterBox = ({
@@ -23,17 +29,18 @@ const DropdownFilterBox = ({
   setShippingStatus,
   setDealerId,
   setReceiverId,
+  checkedStatus,
+  setCheckedStatus,
+  checkedDealerId,
+  setCheckedDealerId,
+  checkedRecipientId,
+  setCheckedRecipientId,
 }: Props) => {
   const t = useTranslations('')
+
   const [activeSetting, setActiveSetting] = useState<
     'status' | 'recipient' | 'dealer' | null
   >('status')
-
-  const [checkedStatus, setCheckedStatus] = useState<ShippingStatus>(null)
-  const [checkedRecipientId, setCheckedRecipientId] = useState<number | null>(
-    null
-  )
-  const [checkedDealerId, setCheckedDealerId] = useState<number | null>(null)
 
   const [receiversList, setReceiversList] = useState<RECEIVER_DATA[]>()
   const [receiversSearchQuery, setReceiversSearchQuery] = useState('')
@@ -48,6 +55,7 @@ const DropdownFilterBox = ({
     setShippingStatus(null)
     toggleDropdown()
   }
+
   const handleSave = () => {
     setShippingStatus(checkedStatus)
     setDealerId(checkedDealerId)
@@ -60,6 +68,7 @@ const DropdownFilterBox = ({
     res && console.log('fetched receivers list:', receiversSearchQuery)
     res && setReceiversList(res.data)
   }
+
   useEffect(() => {
     getRecipients()
     //eslint-disable-next-line
@@ -70,10 +79,15 @@ const DropdownFilterBox = ({
     res && console.log('fetched dealers list:', dealersSearchQuery)
     res && setDealersList(res.data)
   }
+
   useEffect(() => {
     getDealers()
     //eslint-disable-next-line
   }, [dealersSearchQuery])
+
+  useEffect(() => {
+    console.log('checked status,', checkedStatus)
+  }, [checkedStatus])
 
   return (
     <Container>
@@ -129,7 +143,13 @@ const DropdownFilterBox = ({
         >
           <TextBold>{t('cancel')}</TextBold>
         </BasicButton>
-        <BasicButton onClick={handleSave} height={36} width={157} color='black'>
+        <BasicButton
+          onClick={handleSave}
+          height={36}
+          width={157}
+          color='black'
+          isDisabled={!checkedStatus && !checkedRecipientId && !checkedDealerId}
+        >
           <TextBold>{t('save')}</TextBold>
         </BasicButton>
       </CancelSaveBox>

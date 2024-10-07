@@ -1,16 +1,16 @@
 // import { ShippingStatus } from '@/common/helpers/constants'
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
-import { ShippingStatus } from '@/common/helpers/constants'
+import { SHIPPING_STATUS, ShippingStatus } from '@/common/helpers/constants'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
 
 const statusValues: ShippingStatus[] = [
-  'InAuction',
-  'InAmericanWarehouse',
-  'InContainer',
-  'UndergoesCustomsProcedures',
-  'Sent',
+  SHIPPING_STATUS.IN_AUCTION,
+  SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE,
+  SHIPPING_STATUS.IN_CONTAINER,
+  SHIPPING_STATUS.UNDERGOES_CUSTOMS,
+  SHIPPING_STATUS.SENT,
 ]
 
 type Props = {

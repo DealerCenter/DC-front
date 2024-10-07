@@ -9,6 +9,7 @@ type Props = {
   color?: 'black' | 'white'
   padding?: number
   isBorder?: boolean
+  isDisabled?: boolean
 }
 
 const BasicButton = ({
@@ -19,6 +20,7 @@ const BasicButton = ({
   color = 'black',
   padding,
   isBorder = false,
+  isDisabled,
 }: Props) => {
   return (
     <StyledButton
@@ -28,6 +30,7 @@ const BasicButton = ({
       color={color}
       padding={padding}
       isBorder={isBorder}
+      disabled={isDisabled}
     >
       {children}
     </StyledButton>
@@ -42,6 +45,7 @@ type ButtonProps = {
   color?: 'black' | 'white'
   padding?: number
   isBorder?: boolean
+  disabled?: boolean
 }
 
 const StyledButton = styled.button<ButtonProps>`
@@ -60,7 +64,7 @@ const StyledButton = styled.button<ButtonProps>`
           height: 44px;
         `} 
 
-  ${({ color }) =>
+  ${({ color, disabled }) =>
     color === 'white'
       ? css`
           background-color: ${({ theme }) => theme.colors?.white};
@@ -74,7 +78,10 @@ const StyledButton = styled.button<ButtonProps>`
         `
       : color === 'black' &&
         css`
-          background-color: ${({ theme }) => theme.colors?.button_black};
+          background-color: ${disabled
+            ? ({ theme }) => theme.colors?.main_gray_26
+            : ({ theme }) => theme.colors?.button_black};
+
           color: ${({ theme }) => theme.colors?.white};
           border: unset;
 

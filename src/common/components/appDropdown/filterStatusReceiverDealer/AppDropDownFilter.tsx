@@ -11,6 +11,12 @@ type Props = {
   setShippingStatus: (arg: ShippingStatus) => void
   setDealerId: (arg: number | null) => void
   setReceiverId: (arg: number | null) => void
+  checkedStatus: ShippingStatus
+  setCheckedStatus: (arg: ShippingStatus) => void
+  checkedDealerId: number | null
+  setCheckedDealerId: (arg: number | null) => void
+  checkedRecipientId: number | null
+  setCheckedRecipientId: (arg: number | null) => void
 }
 
 const AppDropdownFilter = ({
@@ -20,6 +26,12 @@ const AppDropdownFilter = ({
   setShippingStatus,
   setDealerId,
   setReceiverId,
+  checkedStatus,
+  setCheckedStatus,
+  checkedDealerId,
+  setCheckedDealerId,
+  checkedRecipientId,
+  setCheckedRecipientId,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -54,6 +66,12 @@ const AppDropdownFilter = ({
             setShippingStatus={setShippingStatus}
             setDealerId={setDealerId}
             setReceiverId={setReceiverId}
+            checkedStatus={checkedStatus}
+            setCheckedStatus={setCheckedStatus}
+            checkedRecipientId={checkedRecipientId}
+            setCheckedRecipientId={setCheckedRecipientId}
+            checkedDealerId={checkedDealerId}
+            setCheckedDealerId={setCheckedDealerId}
           />
         </DropdownMenu>
       )}

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
 import { ORDER_DATA } from '@/api/apiTypes'
+import { SHIPPING_STATUS } from '@/common/helpers/constants'
 
 type Props = {
   onClick: () => void
@@ -21,7 +22,7 @@ const OrderList = ({ onClick, orderData }: Props) => {
             orderData={order}
             key={`${order.vin}82kj32${i}`}
             index={i}
-            shippingStatus={'InContainer'}
+            shippingStatus={SHIPPING_STATUS.IN_CONTAINER}
           />
         ))}
     </ListFrame>
