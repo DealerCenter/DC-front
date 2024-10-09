@@ -29,7 +29,6 @@ const Contact = (props: Props) => {
       <ContactForm
         headerText={t('to improve our services and functionalities together')}
         text={t('fill out the form and tell us what you would like to improve')}
-        isHeaderCentered={true}
       />
     </Container>
   )

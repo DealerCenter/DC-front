@@ -45,6 +45,7 @@ const Container = styled.div`
   @media ${({ theme }) => theme.media?.sm} {
     width: 350px;
     height: unset;
+    gap: 32px;
   }
 `
 

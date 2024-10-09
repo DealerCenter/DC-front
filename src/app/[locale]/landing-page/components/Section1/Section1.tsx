@@ -1,10 +1,8 @@
-import React from 'react'
 import styled from 'styled-components'
 
-import ContainersImage from './components/ContainersImage'
+import SearchForDesiredCar from '../SearchForDesiredCar'
 import CarsAtAuctionCarousel from './components/CarsOnAuctionCarousel/CarsAtAuctionCarousel'
 import DecorativeLabelsBox from './components/searchComponent/components/DecorativeLabelsBox'
-import SearchForDesiredCar from '../SearchForDesiredCar'
 
 type Props = {}
 
