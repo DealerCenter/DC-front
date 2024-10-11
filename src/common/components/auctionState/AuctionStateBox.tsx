@@ -3,11 +3,15 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
+
 import soldIcon from '@/assets/icons/auctionStateBox/sold.svg'
 import notSoldIcon from '@/assets/icons/auctionStateBox/notSold.svg'
 import pendingIcon from '@/assets/icons/auctionStateBox/pending.svg'
-import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/theme'
+import soldIconSmall from '@/assets/icons/auctionStateBox/soldSmall.svg'
+import notSoldIconSmall from '@/assets/icons/auctionStateBox/notSoldSmall.svg'
+import pendingIconSmall from '@/assets/icons/auctionStateBox/pendingSmall.svg'
 
 const ICON_WIDTH = 16
 const ICON_HEIGHT = 16
@@ -30,11 +34,18 @@ const AuctionStateBox = ({ auctionState, shrinkOnSm }: Props) => {
         ? notSoldIcon
         : auctionState === 'sold' && soldIcon
 
+  const iconSmall =
+    auctionState === 'pending'
+      ? pendingIconSmall
+      : auctionState === 'not sold'
+        ? notSoldIconSmall
+        : auctionState === 'sold' && soldIconSmall
+
   return (
     <Container auctionState={auctionState} shrinkOnSm={shrinkOnSm}>
       <IconBox>
         <Image
-          src={icon}
+          src={isMobile ? iconSmall : icon}
           alt='icon'
           width={isMobile ? ICON_WIDTH_MOBILE : ICON_WIDTH}
           height={isMobile ? ICON_HEIGHT_MOBILE : ICON_HEIGHT}
@@ -63,10 +74,12 @@ const Container = styled.div<AuctionStateProps>`
   border-radius: ${({ theme }) => theme.radius?.lg};
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 8px 14px;
-  gap: 14px;
+  gap: 10px;
+
+  width: 120px;
 
   ${({ auctionState, theme }) =>
     auctionState === 'sold'
@@ -75,7 +88,7 @@ const Container = styled.div<AuctionStateProps>`
         `
       : auctionState === 'not sold'
         ? css`
-            background-color: ${theme.colors?.main_gray_56};
+            background-color: ${theme.colors?.gray_gray};
           `
         : auctionState === 'pending' &&
           css`
@@ -87,7 +100,7 @@ const Container = styled.div<AuctionStateProps>`
     border-radius: 8px;
 
     padding: 10px 8px;
-    gap: 8px;
+    gap: 4px;
 
     ${({ shrinkOnSm }) =>
       shrinkOnSm
@@ -95,7 +108,7 @@ const Container = styled.div<AuctionStateProps>`
             width: 42px;
           `
         : css`
-            width: unset;
+            width: 85px;
           `};
   }
 `
@@ -103,6 +116,8 @@ const Container = styled.div<AuctionStateProps>`
 const Label = styled.label<AuctionStateProps>`
   font-size: ${({ theme }) => theme.fontSizes?.small_13};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
+
+  white-space: nowrap;
 
   ${({ auctionState, theme }) =>
     auctionState === 'sold'

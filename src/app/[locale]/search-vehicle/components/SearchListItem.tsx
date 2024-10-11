@@ -5,9 +5,9 @@ import CarDetailsBox from './CarDetailsBox'
 import dummyCarImage from '@/assets/images/DummyCarImage.jpg'
 import PriceAndStatusBox from './PriceAndStatusBox'
 
-type Props = {}
+type Props = { auctionState: 'sold' | 'not sold' | 'pending' }
 
-const SearchListItem = (props: Props) => {
+const SearchListItem = ({ auctionState }: Props) => {
   return (
     <Container>
       <CarDetailsBox
@@ -18,7 +18,7 @@ const SearchListItem = (props: Props) => {
         mileage='57,557 miles'
         location='Troy, MI'
       />
-      <PriceAndStatusBox amount={5750} auctionState={'sold'} />
+      <PriceAndStatusBox amount={5750} auctionState={auctionState} />
     </Container>
   )
 }

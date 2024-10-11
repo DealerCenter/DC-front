@@ -7,10 +7,10 @@ type Props = {}
 const SearchResultsList = (props: Props) => {
   return (
     <Container>
-      <SearchListItem />
-      <SearchListItem />
-      <SearchListItem />
-      <SearchListItem />
+      <SearchListItem auctionState={'not sold'} />
+      <SearchListItem auctionState={'pending'} />
+      <SearchListItem auctionState={'sold'} />
+      <SearchListItem auctionState={'not sold'} />
     </Container>
   )
 }

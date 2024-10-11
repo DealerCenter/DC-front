@@ -5,6 +5,7 @@ const theme = {
     yellow: 'rgba(254, 220, 105, 1)',
     link_blue: 'rgba(12, 140, 233, 1)',
     sky_blue: 'rgba(216, 226, 244, 1)',
+    gray_gray: 'rgba(193, 193, 193, 1)',
 
     black: '#000000',
     background: '#2020200A',
