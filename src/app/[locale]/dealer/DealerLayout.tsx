@@ -1,27 +1,27 @@
 'use client'
 import React from 'react'
 import styled from 'styled-components'
+import { useMediaQuery } from 'react-responsive'
+import { usePathname } from '@/navigation'
+
+import { routeName } from '@/common/helpers/constants'
+import theme from '../theme'
 
 import Header from '@/common/components/header/Header'
 import SideBar from '../../../common/components/sideBar/SideBar'
-import { useMediaQuery } from 'react-responsive'
-import theme from '../theme'
 import Footer from '@/common/components/footer/Footer'
-import { usePathname } from '@/navigation'
-import { routeName } from '@/common/helpers/constants'
 
 type Props = { children: React.JSX.Element }
 
 const routeNames = {
   orderHistory: routeName.dealerOrderHistory,
-  personalInformation: routeName.dealerManageNotifications,
+  personalInformation: routeName.dealerPersonalInformation,
   usersList: routeName.dealerUsersList,
-  manageNotifications: routeName.dealerPersonalInformation,
+  manageNotifications: routeName.dealerManageNotifications,
 }
 
 const DealerLayout = ({ children }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
-
   const pathname = usePathname()
 
   const isSideBarVisible = pathname !== routeName.dealerOrder

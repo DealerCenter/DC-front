@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import Box from '../../../../components/common/Box'
 import TextInputFieldPair from './TextInputFieldPair'
-import AddFileButton from '../../../../components/common/AddFileButton'
+import AddFieldButton from '../../../../components/common/AddFieldButton'
 
 type Props = { isEditing: boolean }
 
@@ -27,7 +27,7 @@ const LocationBox = ({ isEditing }: Props) => {
           isEditing={isEditing}
         />
       </LabelsFrame>
-      {isEditing && <AddFileButton onClick={() => {}} />}
+      {isEditing && <AddFieldButton onClick={() => {}} />}
     </Box>
   )
 }

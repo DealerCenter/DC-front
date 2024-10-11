@@ -23,6 +23,8 @@ type Props = {
   iconPaddingLeft?: number
   hasShadow?: boolean
   isWidthFill?: boolean
+  backgroundColor?: string
+  isDisabled?: boolean
 }
 
 const TextInput = ({
@@ -45,6 +47,8 @@ const TextInput = ({
   iconPaddingLeft,
   hasShadow,
   isWidthFill,
+  backgroundColor,
+  isDisabled = false,
 }: Props) => {
   return (
     <Container>
@@ -68,6 +72,8 @@ const TextInput = ({
         paddingLeft={paddingLeft}
         hasShadow={hasShadow}
         isWidthFill={isWidthFill}
+        backgroundColor={backgroundColor}
+        disabled={isDisabled}
       />
       {optionalInfo && (
         <TextBox>
@@ -101,12 +107,12 @@ type InputProps = {
   paddingLeft?: number
   hasShadow?: boolean
   isWidthFill?: boolean
+  backgroundColor?: string
 }
 
 const StyledInput = styled.input<InputProps>`
   position: relative;
   box-sizing: border-box;
-  background-color: ${({ theme }) => theme.colors?.white};
 
   outline-offset: 1px;
 
@@ -168,12 +174,36 @@ ${({ isHalfSize, width }) =>
           width: 213px;
         `
       : width
-        ? css`
-            width: ${width}px;
-          `
-        : css`
-            width: 350px;
-          `}
+      ? css`
+          width: ${width}px;
+        `
+      : css`
+          width: 350px;
+        `}
+
+  ${({ height }) =>
+    height
+      ? css`
+          height: ${height}px;
+        `
+      : css`
+          height: 52px;
+        `}       
+
+  ${({ icon }) =>
+    icon &&
+    css`
+      padding-left: 50px;
+    `}
+
+  ${({ backgroundColor }) =>
+    backgroundColor
+      ? css`
+          background-color: ${backgroundColor};
+        `
+      : css`
+          background-color: ${({ theme }) => theme.colors?.white};
+        `}
 
     @media ${({ theme }) => theme.media?.sm} {
     ${({ isHalfSize, width }) =>
@@ -182,12 +212,12 @@ ${({ isHalfSize, width }) =>
             width: 167.5px;
           `
         : width
-          ? css`
-              width: ${width}px;
-            `
-          : css`
-              width: 350px;
-            `}
+        ? css`
+            width: ${width}px;
+          `
+        : css`
+            width: 350px;
+          `}
   }
 
   ${({ isWidthFill }) =>
@@ -218,6 +248,7 @@ const ErrorMessage = styled.p`
   font-size: ${({ theme }) => theme.fontSizes?.extraSmall};
   top: 48px;
   left: 12px;
+  z-index: 10;
 `
 
 const OptionalText = styled.p`

@@ -1,43 +1,60 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
+
+import { verificationStatusName } from '@/common/helpers/constants'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
+import uncheckedYellow from '@/assets/icons/uncheckedYellow.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 import calendarIcon from '@/assets/icons/calendar.svg'
-import { useTranslations } from 'next-intl'
+import AppModal from '@/common/components/modal/AppModal'
+import DeleteWarning from '../addRecipient/components/DeleteWarning'
 
 type Props = {
-  fullName: string
-  id: string
-  mobile: string
-  dateOfAddition: string
-  isVerified: boolean
+  id: number
+  firstName: string
+  lastName: string
+  personalId: string
+  phoneNumber: string
+  createdAt: string
+  verificationStatus: string
+  handleDelete: (id: number) => void
 }
 
 const ListItemMobile = ({
-  fullName,
   id,
-  mobile,
-  dateOfAddition,
-  isVerified,
+  firstName,
+  lastName,
+  personalId,
+  phoneNumber,
+  createdAt,
+  verificationStatus,
+  handleDelete,
 }: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const t = useTranslations('')
 
   return (
     <Container>
       <NameFrame>
         <LabelAndIconBox>
-          <NameLabel>{fullName}</NameLabel>
+          <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
           <Icon>
-            {isVerified ? (
+            {verificationStatus === verificationStatusName.VERIFIED ? (
               <Image src={checkedGreen} alt='checked icon' />
-            ) : (
+            ) : verificationStatus === verificationStatusName.UNVERIFIED ? (
               <Image src={uncheckedRed} alt='unchecked icon' />
+            ) : (
+              verificationStatus === verificationStatusName.PENDING && (
+                <Image src={uncheckedYellow} alt='pending icon' />
+              )
             )}
-          </Icon>{' '}
+          </Icon>
         </LabelAndIconBox>
         <IconBox>
           <Icon>
@@ -45,7 +62,7 @@ const ListItemMobile = ({
               src={editPencil}
               alt='edit icon'
               onClick={() => {
-                console.log('edit ', fullName)
+                console.log('edit ', `${firstName} ${lastName}`)
               }}
             />
           </Icon>
@@ -53,9 +70,7 @@ const ListItemMobile = ({
             <Image
               src={trashCan}
               alt='trash icon'
-              onClick={() => {
-                console.log('delete ', fullName)
-              }}
+              onClick={() => setIsModalOpen(true)}
             />
           </Icon>
         </IconBox>
@@ -66,22 +81,35 @@ const ListItemMobile = ({
             {t('personal number')}
             {':'}
           </Label>
-          <ValueLabel>{id}</ValueLabel>
+          <ValueLabel>{personalId}</ValueLabel>
         </DetailsBox>
         <DetailsBox>
           <Label>
             {t('mobile number')}
             {':'}
           </Label>
-          <ValueLabel>{mobile}</ValueLabel>
+          <ValueLabel>{phoneNumber}</ValueLabel>
         </DetailsBox>
       </DetailsFrame>
       <LabelAndIconBox>
         <Image src={calendarIcon} alt='calendar icon' />
         <Label>
-          {t('added')} {dateOfAddition}
+          {t('added')} {createdAt}
         </Label>
       </LabelAndIconBox>
+      <AppModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <DeleteWarning
+          onCancel={() => setIsModalOpen(false)}
+          onDelete={() => {
+            handleDelete(id)
+            setIsModalOpen(false)
+          }}
+          nameOfReceiver={`${firstName} ${lastName}`}
+        />
+      </AppModal>
     </Container>
   )
 }

@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
+import { usePathname, useRouter } from '@/navigation'
+
+import { useUserData } from '@/common/store/userDataStore'
+import { logoutUser } from '@/api/apiCalls'
+import theme from '@/app/[locale]/theme'
+import { routeName } from '@/common/helpers/constants'
 
 import InfoBox from './components/InfoBox'
 import BarButton from './components/BarButton'
 import GrayContainer from './components/GrayContainer'
-
-import { routeName } from '@/common/helpers/constants'
-import { usePathname } from '@/navigation'
 
 import clockBlack from '@/assets/icons/clock/clock-black.svg'
 import clockWhite from '@/assets/icons/clock/clock-white.svg'
@@ -20,7 +23,7 @@ import bellIconBlack from '@/assets/icons/bell/bell-black.svg'
 import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
-import theme from '@/app/[locale]/theme'
+import { message } from 'antd'
 
 type Props = {
   routes: {
@@ -35,8 +38,11 @@ const SideBar = ({ routes }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const pathname = usePathname()
+  const { userData } = useUserData()
+  const router = useRouter()
 
   const [isHovered, setIsHovered] = useState(false)
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
 
   const handleMouseEnter = () => {
     setIsHovered(true)
@@ -44,6 +50,18 @@ const SideBar = ({ routes }: Props) => {
 
   const handleMouseLeave = () => {
     setIsHovered(false)
+  }
+
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true)
+      await logoutUser()
+      message.success(t('you are logged out'))
+      router.push(routeName.landing)
+    } catch (error) {
+      setIsLoggingOut(false)
+      message.success(t('you could not log out'))
+    }
   }
 
   return (
@@ -55,7 +73,7 @@ const SideBar = ({ routes }: Props) => {
         <Frame>
           <InfoBox
             isHovered={isHovered}
-            name='Joshua'
+            name={userData ? userData?.firstName : ''}
             refreshDate='last refresh jul 11 2034'
             notificationCount={9}
           />
@@ -119,9 +137,12 @@ const SideBar = ({ routes }: Props) => {
         {!isMobile && (
           <GrayContainer
             icon={exitIcon}
-            text={t('exit')}
+            text={isLoggingOut ? `${t('wait')}...` : t('exit')}
             height='71px'
             isHovered={isHovered}
+            onClick={handleLogout}
+            isCursorPointer={true}
+            disabled={isLoggingOut}
           />
         )}
       </BarContainer>

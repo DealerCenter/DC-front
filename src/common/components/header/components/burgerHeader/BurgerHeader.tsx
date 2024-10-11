@@ -4,10 +4,10 @@ import styled from 'styled-components'
 
 import BurgerHeaderMenu from './components/BurgerHeaderMenu'
 import Logo from '../Logo'
-
 import search from '@/assets/icons/search.svg'
 import person from '@/assets/icons/person.svg'
 import burger from '@/assets/icons/burger.svg'
+import LoginButton from '../LoginButton'
 
 type Props = {
   mainItems: { label: string; onClick: () => void }[]
@@ -30,13 +30,10 @@ const BurgerHeader = ({ mainItems, servicesItems }: Props) => {
         <Item>
           <Image width={20} height={20} src={search} alt='search icon' />
         </Item>
-        <Item>
-          <Image width={16} height={20} src={person} alt='person icon' />
-        </Item>
+        <LoginButton />
         <Item onClick={() => setIsMenuOpen(true)}>
-          <Image width={18} height={13.5} src={burger} alt='burger icon' />
+          <Image width={18} src={burger} alt='burger icon' />
         </Item>
-        {/* ამაზე აღარ ვიწვალე, რომ გავარკვევთ მერე დავამთავრებ  */}
       </Frame>
     </Container>
   )

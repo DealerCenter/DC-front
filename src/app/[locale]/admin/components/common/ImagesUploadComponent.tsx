@@ -9,7 +9,7 @@ import BasicButton from '@/common/components/appButton/BasicButton'
 import uploadIcon from '@/assets/icons/fileUpload/uploadIconWithArrow.svg'
 import plusIcon from '@/assets/icons/plusIconWhite.svg'
 
-type Props = { onClick: () => void; width: number; height: number }
+type Props = { onClick: () => void; width?: number; height?: number }
 
 const ImagesUploadComponent = ({ onClick, width, height }: Props) => {
   const t = useTranslations('')
@@ -58,8 +58,8 @@ const Frame = styled.div`
 `
 
 type ContainerProps = {
-  width: number
-  height: number
+  width?: number
+  height?: number
 }
 
 const Container = styled.div<ContainerProps>`
@@ -73,10 +73,24 @@ const Container = styled.div<ContainerProps>`
 
   border-radius: ${({ theme }) => theme.radius?.lg};
 
-  ${({ width, height }) => css`
-    width: ${width}px;
+  ${({ height }) => css`
     height: ${height}px;
   `}
+
+  ${({ width }) =>
+    width
+      ? css`
+          width: ${width}px;
+        `
+      : css`
+          width: 1200px;
+          @media ${({ theme }) => theme.media?.md} {
+            width: 960px;
+          }
+          @media ${({ theme }) => theme.media?.sm} {
+            width: 343px;
+          }
+        `}
 
   //CSS for Dashed border
 

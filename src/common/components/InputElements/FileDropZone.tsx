@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { Dispatch, useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
@@ -12,6 +12,8 @@ type Props = {
   uploadedText: string
   warningText?: string
   width?: number
+  onDropAdditional?: (file: any) => void
+  setIsUploaded?: (arg: boolean) => void
 }
 
 const FileDropZone = ({
@@ -20,14 +22,21 @@ const FileDropZone = ({
   uploadedText,
   warningText,
   width,
+  onDropAdditional,
+  setIsUploaded,
 }: Props) => {
   const [isDropped, setIsDropped] = useState(false)
 
-  const onDrop = useCallback(<T extends File>(acceptedFiles: T[]) => {
-    // Do something with the files
-    console.log('accepted files: ', acceptedFiles)
-    setIsDropped(true)
-  }, [])
+  const onDrop = useCallback(
+    <T extends File>(acceptedFiles: T[]) => {
+      // Do something with the files
+      console.log('accepted files: ', acceptedFiles)
+      setIsDropped(true)
+      setIsUploaded && setIsUploaded(true)
+      if (onDropAdditional) onDropAdditional(acceptedFiles[0])
+    },
+    [onDropAdditional, setIsUploaded]
+  )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 

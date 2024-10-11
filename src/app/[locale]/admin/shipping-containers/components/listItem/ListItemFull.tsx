@@ -7,7 +7,7 @@ import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 import AppModal from '@/common/components/modal/AppModal'
-import DeleteWarning from '../addContainer/components/DeleteWarning'
+import DeleteWarning from '../../../order-history/components/bindContainer/components/DeleteWarning'
 
 type Props = {
   onClick: () => void

@@ -13,6 +13,7 @@ type Props = {
   isSmall?: boolean
   height?: ButtonHeight
   width?: number
+  htmlType?: string
 }
 
 const AppButton = ({
@@ -23,6 +24,7 @@ const AppButton = ({
   isSmall,
   height = 'large',
   width,
+  htmlType,
 }: Props) => {
   return (
     <StyledButton
@@ -32,6 +34,7 @@ const AppButton = ({
       onClick={onClick}
       isSmall={isSmall}
       height={height}
+      type={htmlType ? htmlType : ''}
     >
       {text}
     </StyledButton>

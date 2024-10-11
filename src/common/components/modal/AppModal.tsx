@@ -44,10 +44,9 @@ const AppModal = ({
   }
 
   useEffect(() => {
-    isOpen
-      ? (document.body.style.overflow = 'hidden')
-      : (document.body.style.overflow = 'unset')
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset'
   }, [isOpen])
+
   return (
     <Modal
       isOpen={isOpen}
@@ -56,6 +55,7 @@ const AppModal = ({
       // @ts-ignore
       style={customStyles}
       contentLabel={contentLabel}
+      ariaHideApp={false}
     >
       {children}
     </Modal>

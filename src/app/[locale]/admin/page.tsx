@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect } from 'react'
-import UsersListBox from './users-list/UsersListBox'
+import UsersListBox from './dealers-list/DealersListBox'
 import OrderHistory from './order-history/OrderHistory'
 import ManageNotifications from './manage-notifications/ManageNotifications'
 import PersonalInformation from './personal-information/PersonalInformation'
