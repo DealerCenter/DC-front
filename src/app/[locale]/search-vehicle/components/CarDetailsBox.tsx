@@ -3,6 +3,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 import locationIcon from '@/assets/icons/locationIconGray.svg'
+import { useMediaQuery } from 'react-responsive'
+import theme from '../../theme'
+
+const IMAGE_WIDTH = 201
+const IMAGE_HEIGHT = 180
+const IMAGE_WIDTH_MOBILE = 120
+const IMAGE_HEIGHT_MOBILE = 125
 
 type Props = {
   imageLink: string
@@ -21,14 +28,16 @@ const CarDetailsBox = ({
   year,
   location,
 }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   return (
     <Container>
       <ImageBox>
         <Image
           src={imageLink}
           alt='image'
-          width={201}
-          height={180}
+          width={isMobile ? IMAGE_WIDTH_MOBILE : IMAGE_WIDTH}
+          height={isMobile ? IMAGE_HEIGHT_MOBILE : IMAGE_HEIGHT}
           style={{ objectFit: 'cover' }}
         />
       </ImageBox>
@@ -36,20 +45,22 @@ const CarDetailsBox = ({
         <CarBrandFrame>
           <CarBrandBox>
             <CarBrand>{brand}</CarBrand>
-            <TextGray>{year}</TextGray>
+            <YearLabel>{year}</YearLabel>
           </CarBrandBox>
-          <TextGray>{model}</TextGray>
-          <TextGray>{mileage}</TextGray>
-          <SmallDetailsBox>
-            <TextGray>4cyl</TextGray>
-            <Line />
-            <TextGray>SE</TextGray>
-            <Line />
-            <ColorBox>
-              <ColorDot />
-              <TextGray>Green</TextGray>
-            </ColorBox>
-          </SmallDetailsBox>
+          <SmallDetailsFrame>
+            <TextGray>{model}</TextGray>
+            <TextGray>{mileage}</TextGray>
+            <SmallDetailsBox>
+              <TextGray>4cyl</TextGray>
+              <Line />
+              <TextGray>SE</TextGray>
+              <Line />
+              <ColorBox>
+                <ColorDot />
+                <TextGray>Green</TextGray>
+              </ColorBox>
+            </SmallDetailsBox>
+          </SmallDetailsFrame>
         </CarBrandFrame>
         <LocationBox>
           <IconBox>
@@ -68,17 +79,26 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.md};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    gap: ${({ theme }) => theme.spacing?.sm};
+  }
 `
 
 const ImageBox = styled.div`
   position: relative;
-  width: 100%;
-  width: 201px;
-  height: 180px;
   overflow: hidden;
+  line-height: 0;
+
+  width: ${IMAGE_WIDTH};
+  height: ${IMAGE_HEIGHT};
   border-radius: 18px;
 
-  line-height: 0;
+  @media ${({ theme }) => theme.media?.sm} {
+    width: ${IMAGE_WIDTH_MOBILE};
+    height: ${IMAGE_HEIGHT_MOBILE};
+    border-radius: ${({ theme }) => theme.radius?.lg};
+  }
 `
 
 const DetailsBox = styled.div`
@@ -93,11 +113,27 @@ const CarBrandFrame = styled.div`
   gap: ${({ theme }) => theme.spacing?.xsm};
 `
 
+const SmallDetailsFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing?.xsm};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    gap: 4px;
+  }
+`
+
 const CarBrandBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: ${({ theme }) => theme.spacing?.sm};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
 `
 
 const SmallDetailsBox = styled.div`
@@ -133,13 +169,33 @@ const CarBrand = styled.h3`
   font-size: 19px;
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   color: ${({ theme }) => theme.colors?.black};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    font-size: ${({ theme }) => theme.fontSizes?.medium};
+  }
+`
+
+const YearLabel = styled.label`
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
+  color: ${({ theme }) => theme.colors?.main_gray_56};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    font-size: ${({ theme }) => theme.fontSizes?.small_13};
+  }
+
+  cursor: default;
 `
 
 const TextGray = styled.p`
   margin: 0;
-  font-size: 13px;
+  font-size: ${({ theme }) => theme.fontSizes?.small_13};
   font-weight: 400;
   color: ${({ theme }) => theme.colors?.main_gray_56};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    font-size: 11px;
+  }
 `
 
 const LocationBox = styled.div`

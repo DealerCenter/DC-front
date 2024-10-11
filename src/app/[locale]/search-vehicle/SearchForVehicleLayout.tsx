@@ -5,14 +5,14 @@ import styled from 'styled-components'
 import Header from '@/common/components/header/Header'
 import Footer from '@/common/components/footer/Footer'
 
-type Props = { children: React.JSX.Element }
+type Props = { children: React.JSX.Element; isFooterShowing: boolean }
 
-const SearchForVehicleLayout = ({ children }: Props) => {
+const SearchForVehicleLayout = ({ children, isFooterShowing }: Props) => {
   return (
     <>
       <Header />
       <ChildrenContainer>{children}</ChildrenContainer>
-      <Footer />
+      {isFooterShowing && <Footer />}
     </>
   )
 }

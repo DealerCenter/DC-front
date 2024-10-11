@@ -11,12 +11,18 @@ import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 
 import searchIcon from '@/assets/icons/searchSidePanel/searchIconWhite.svg'
 import filterIconWithCancel from '@/assets/icons/filterIcon2WithCancel.svg'
+import { useMediaQuery } from 'react-responsive'
+import theme from '../../theme'
 
 const dummyBrands = ['Acura', 'Alfa Romeo', 'Audi', 'Aston Martin', 'Mercedes']
+
+const BUTTON_WIDTH = 236
+const BUTTON_WIDTH_MOBILE = 343
 
 type Props = {}
 
 const SearchPanel = (props: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const [isFilterSelected, setIsFilterSelected] = useState(false)
   const t = useTranslations('')
 
@@ -58,7 +64,7 @@ const SearchPanel = (props: Props) => {
       </OptionBox>
       <ButtonsFrame>
         <BasicButton
-          width={isFilterSelected ? 164 : 236}
+          width={isMobile ? BUTTON_WIDTH_MOBILE : BUTTON_WIDTH}
           onClick={() => setIsFilterSelected((is) => !is)}
         >
           <ButtonIcon>
@@ -92,6 +98,10 @@ const Container = styled.div`
   border-radius: 24px;
 
   background-color: ${({ theme }) => theme.colors?.white};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: unset;
+  }
 `
 
 const ChecklistBox = styled.div`
@@ -106,6 +116,10 @@ const ButtonsFrame = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.md};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    gap: ${({ theme }) => theme.spacing?.xsm};
+  }
 `
 
 const ButtonIcon = styled.label`

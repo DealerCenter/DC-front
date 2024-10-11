@@ -56,7 +56,7 @@ const Container = styled.div<ContainerProps>`
   ${({ withoutLabel }) =>
     withoutLabel
       ? css`
-          padding: 0 16px 0 16px;
+          padding: 0 15px 0 15px;
         `
       : css`
           padding: 0 20px 0 14px;
@@ -77,6 +77,7 @@ const Label = styled.label`
   font-weight: 700;
   cursor: pointer;
 `
+
 const IconBox = styled.div`
   display: flex;
   justify-content: center;

@@ -18,7 +18,7 @@ const SearchListItem = (props: Props) => {
         mileage='57,557 miles'
         location='Troy, MI'
       />
-      <PriceAndStatusBox amount={5750} auctionState={'pending'} />
+      <PriceAndStatusBox amount={5750} auctionState={'sold'} />
     </Container>
   )
 }

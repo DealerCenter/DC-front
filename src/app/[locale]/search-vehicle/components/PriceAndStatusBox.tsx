@@ -32,17 +32,19 @@ const Container = styled.div`
 
   @media ${({ theme }) => theme.media?.sm} {
     height: unset;
-    flex-direction: row-reverse;
-    align-items: center;
   }
 `
 const Frame = styled.div`
-  width: 140px;
+  width: 125px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 8px;
   padding: 10px 0px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 80px;
+  }
 `
 
 const Text = styled.p`
@@ -57,4 +59,8 @@ const Money = styled.p`
   font-size: 23px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors?.main_gray_100};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    font-size: 19px;
+  }
 `

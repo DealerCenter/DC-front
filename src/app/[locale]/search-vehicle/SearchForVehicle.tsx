@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import SearchPanel from './components/SearchPanel'
@@ -15,52 +15,98 @@ import SearchResultsList from './components/SearchResultsList'
 import checkboxFilled from '@/assets/icons/checkboxFilled.svg'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
+import { useMediaQuery } from 'react-responsive'
+import theme from '../theme'
+import SelectedFiltersFrame from './components/SelectedFiltersFrame'
 
-const DummyNumOfPages = 3
+type Props = { setIsFooterShowing: (arg: boolean) => void }
 
-type Props = {}
-
-const SearchForVehicle = (props: Props) => {
+const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const [isFilterOn, setIsFilterOn] = useState(false)
-  const [currentPage, setCurrentPage] = useState(1)
+
+  const [isFilterOpenOnMobile, setIsFilterOpenOnMobile] = useState(false)
+
+  const [itemsList, setItemsList] = useState<string[]>([
+    'from-2003',
+    'filter',
+    'Mercedes',
+    'manual',
+    'IAAI',
+  ])
+
   const t = useTranslations('')
+
+  const handleAddItemToFilterList = (itemToAdd: string) => {
+    setItemsList((list) => [...list, itemToAdd])
+  }
+
+  const handleRemoveItemFromFilterList = (itemToRemove: string) => {
+    setItemsList(itemsList.filter((item) => item !== itemToRemove))
+  }
+
+  // in case filter is open and user switches to bigger display
+  useEffect(() => {
+    if (!isMobile) {
+      setIsFilterOpenOnMobile(false)
+    }
+  }, [isMobile])
+
+  // hide footer when filter open
+  useEffect(() => {
+    if (isFilterOpenOnMobile) {
+      setIsFooterShowing(false)
+    } else {
+      setIsFooterShowing(true)
+    }
+  }, [isFilterOpenOnMobile, setIsFooterShowing])
+
+  // toggle filter open only when screen is mobile size
+  const handleFilterToggleOnMobile = () => {
+    if (isMobile) {
+      setIsFilterOpenOnMobile((is) => !is)
+    }
+  }
 
   const router = useRouter()
 
   return (
     <Container>
-      <SearchPanel />
+      {!isMobile && <SearchPanel />}
       <ListFrame>
         <TextBold19>
           {`${'65'} `}
           {t('statement')}
         </TextBold19>
-        <SortBox>
-          <SecondaryButton
-            text=''
-            onClick={() => setIsFilterOn((is) => !is)}
-            icon={isFilterOn ? filterIconWithCancel : filterIcon}
-            withoutLabel={true}
-          />
-          <SecondaryButton
+        <SortFrame>
+          <SortBox>
+            <SecondaryButton
+              text=''
+              onClick={handleFilterToggleOnMobile}
+              icon={isFilterOn ? filterIconWithCancel : filterIcon}
+              withoutLabel={true}
+            />
+            <Line />
+          </SortBox>
+          {/* <SecondaryButton
             text='temporary vehicle listing link'
             onClick={() => router.push(routeName.vehicleListing)}
             icon={checkboxFilled}
-          />
+          /> */}
+          {!isMobile && (
+            <SelectedFiltersFrame
+              itemsList={itemsList}
+              handleRemoveFromList={handleRemoveItemFromFilterList}
+            />
+          )}
           <SecondaryButton
             text={t('sort')}
             onClick={() => {}}
             icon={sortIconBlack}
+            withoutLabel={isMobile}
           />
-        </SortBox>
-        <SearchResultsList />
-        <PaginationBox>
-          <Pagination
-            currentPage={currentPage}
-            numOfPages={DummyNumOfPages}
-            setCurrentPage={setCurrentPage}
-          />
-        </PaginationBox>
+        </SortFrame>
+        {isFilterOpenOnMobile ? <SearchPanel /> : <SearchResultsList />}
       </ListFrame>
     </Container>
   )
@@ -82,15 +128,31 @@ const ListFrame = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.md};
   width: 860px;
+
+  @media ${({ theme }) => theme.media?.md} {
+    width: 644px;
+  }
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: 375px;
+  }
+`
+
+const SortFrame = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: ${({ theme }) => theme.spacing?.md};
+  gap: ${({ theme }) => theme.spacing?.md};
+  border-radius: 24px;
+  background-color: ${({ theme }) => theme.colors?.white};
 `
 
 const SortBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: ${({ theme }) => theme.spacing?.xl};
+  flex-direction: row;
+  align-items: center;
+  height: 44px;
   gap: ${({ theme }) => theme.spacing?.md};
-  border-radius: 24px;
-  background-color: ${({ theme }) => theme.colors?.white};
 `
 
 const PaginationBox = styled.div`
@@ -106,4 +168,11 @@ const TextBold19 = styled.h6`
   font-size: 19px;
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   color: ${({ theme }) => theme.colors?.main_gray_100};
+`
+
+const Line = styled.div`
+  width: 1px;
+  height: 24px;
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.colors?.main_gray_10};
 `

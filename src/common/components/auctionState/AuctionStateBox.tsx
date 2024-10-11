@@ -9,6 +9,11 @@ import pendingIcon from '@/assets/icons/auctionStateBox/pending.svg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 
+const ICON_WIDTH = 16
+const ICON_HEIGHT = 16
+const ICON_WIDTH_MOBILE = 10
+const ICON_HEIGHT_MOBILE = 10
+
 type Props = {
   auctionState: 'sold' | 'not sold' | 'pending'
   shrinkOnSm?: boolean
@@ -28,7 +33,12 @@ const AuctionStateBox = ({ auctionState, shrinkOnSm }: Props) => {
   return (
     <Container auctionState={auctionState} shrinkOnSm={shrinkOnSm}>
       <IconBox>
-        <Image src={icon} alt='icon' />
+        <Image
+          src={icon}
+          alt='icon'
+          width={isMobile ? ICON_WIDTH_MOBILE : ICON_WIDTH}
+          height={isMobile ? ICON_HEIGHT_MOBILE : ICON_HEIGHT}
+        />
       </IconBox>
 
       {shrinkOnSm && isMobile ? (
@@ -55,7 +65,8 @@ const Container = styled.div<AuctionStateProps>`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 8px;
+  padding: 8px 14px;
+  gap: 14px;
 
   ${({ auctionState, theme }) =>
     auctionState === 'sold'
@@ -72,6 +83,12 @@ const Container = styled.div<AuctionStateProps>`
           `}
 
   @media  ${({ theme }) => theme.media?.sm} {
+    height: 32px;
+    border-radius: 8px;
+
+    padding: 10px 8px;
+    gap: 8px;
+
     ${({ shrinkOnSm }) =>
       shrinkOnSm
         ? css`
@@ -79,14 +96,13 @@ const Container = styled.div<AuctionStateProps>`
           `
         : css`
             width: unset;
-          `}
+          `};
   }
 `
 
 const Label = styled.label<AuctionStateProps>`
-  font-size: 13px;
-  font-weight: 700;
-  padding: 8px;
+  font-size: ${({ theme }) => theme.fontSizes?.small_13};
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
 
   ${({ auctionState, theme }) =>
     auctionState === 'sold'
@@ -96,12 +112,21 @@ const Label = styled.label<AuctionStateProps>`
       : css`
           color: ${theme.colors?.black};
         `}
+
+  @media  ${({ theme }) => theme.media?.sm} {
+    font-size: 11px;
+  }
 `
 
 const IconBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 24px;
-  height: 24px;
+  width: ${ICON_WIDTH};
+  height: ${ICON_HEIGHT};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: ${ICON_WIDTH_MOBILE};
+    height: ${ICON_HEIGHT_MOBILE};
+  }
 `
