@@ -118,17 +118,13 @@
   "description": "Description",
   "full name": "Full name",
   "mob number": "Mobile number",
-
   "dealers": "Dealers",
   "orders": "Orders",
   "settings": "Settings",
-
   "add order": "Add order",
-
   "transportation": "Transportation",
   "cost of vehicle": "The cost of the vehicle",
   "total debt": "Total debt",
-
   "status": "Status",
   "is in american warehouse": "It is in the American warehouse",
   "in container": "It's in the container",
@@ -211,6 +207,141 @@
   "add new": "Add new",
   "or": "Or",
 
+  "search for desired car": "Search for the desired car",
+  "car": "Car",
+  "truck": "Truck",
+  "motorcycle": "Motorcycle",
+  "browse cars at America's two largest auctions": "Browse cars at America's two largest auctions",
+
+  "cars at auction": "Cars at auction",
+  "see all": "See all",
+  "check": "Check",
+
+  "not added recipient data": "You have not added recipient data yet",
+
+  "specify type of document and get detailed information": "Specify the type of document and get detailed information about the desired vehicle.",
+  "find out if problematic and how good an investment it can be": "Find out if it's problematic and how good an investment it can be",
+  "specify details and calculate exact shipping cost": "Specify the details and calculate the exact shipping cost",
+
+  "auction": "Auction",
+  "vehicle type": "Vehicle type",
+  "from where": "From where",
+  "to where": "To where",
+
+  "which city/state is it coming from": "Which city/state is it coming from?",
+  "what city/port does it arrive at": "What city/port does it arrive at?",
+
+  "check vehicle status": "Check vehicle status",
+  "enter the vin code and see where your car is, etc": "Enter the vin code and see where your car is, how much money you have to pay, etc.",
+
+  "photos": "Photos",
+  "registered user": "Registered user",
+  "car that arrived at the place": "Car that arrived at the place",
+
+  "enter vehicle vin code": "Enter the vehicle's VIN code",
+  "enter vin code": "Enter VIN code",
+  "vehicle history check": "Vehicle history check",
+  "enter vin code and check history of vehicle, price, damage, etc": "Enter the vin code and check the history of the vehicle, the price it was sold at auction, the damage it had on the spot, etc.",
+
+  "help with auction": "Help with the auction",
+  "vehicle inspection": "Vehicle inspection",
+  "reliable import": "Reliable import",
+  "success story": "A success story",
+  "what customers are saying": "What customers are saying",
+
+  "we offer all services in one space": "We offer all services in one space",
+
+  "our team is ready to help": "Our team is ready to help!",
+  "have questions? Contact us": "Do you have questions? Contact us",
+  "monday-friday 9-5": "Monday-Friday 9-5",
+
+  "contact us": "Contact us",
+  "meet our team": "Meet our team",
+
+  "easy transportation": "Easy transportation",
+  "possibility to bring car from any us state": "Possibility to bring a car from any US state!",
+
+  "send message": "Send message",
+  "message": "Message",
+
+  "statement": "Statement",
+  "price": "Price",
+  "pending": "Pending",
+  "sold": "Sold",
+  "not sold": "Not sold",
+
+  "brand": "Brand",
+  "transmission": "Transmission",
+  "damage": "Damage",
+  "auction location": "Auction location",
+  "automatic": "Automatic",
+  "manual": "Manual",
+  "from": "From",
+  "up to": "Up to",
+
+  "condition": "Condition",
+  "title": "Title",
+
+  "odometer": "Odometer",
+  "keys": "Keys",
+  "engine type": "Engine type",
+  "drivetrain": "Drivetrain",
+  "fuel": "Fuel",
+  "cylinders": "Cylinders",
+  "body style": "Body style",
+
+  "vin": "Vin",
+  "lot number": "Lot number",
+  "date added": "Date added",
+  "date of auction": "Date of auction",
+  "facility": "Facility",
+  "seller": "Seller",
+  "gas": "Gas",
+
+  "undercarriage": "Undercarriage",
+  "wont start": "Won’t start",
+  "certification of title": "Certification of title",
+
+  "enter the name of the document": "Enter the name of the document",
+  "search for document and enter in search field": "Search for the name of the document and try to enter it correctly in the search field",
+  "check status": "Check status",
+  "find status of vehicle and see whether it is problem-free": "Find the status of the vehicle and find out what kind of damage or problem it has. At the same time, you will see whether it is problem-free or not.",
+  "make a wise decision": "Make a wise decision",
+  "find out if it is necessary to contact the company": "Find out if it is necessary to contact the company and what measures to apply",
+
+  "calculate": "Calculate",
+
+  "support": "Support",
+  "sales": "Sales",
+  "phone": "Phone",
+
+  "time left to bid": "Time left to bid",
+  "bid now": "Bid now",
+  "enter bid": "Enter bid",
+  "current bid": "Current bid",
+  "can not bid before authorization": "Won't be eligible to bid before authorization",
+
+  "authorization": "Authorization",
+  "authorization required!": "Authorization required!",
+
+  "to place bid log in or register": "To place a bid, please log in or register",
+
+  "price and additional costs": "Price and additional costs",
+  "price estimate": "Price estimate",
+  "shipping estimate": "Shipping estimate",
+  "delivery to": "Delivery to",
+  "auction fees": "Auction fees",
+  "documentation fee": "Documentation fee",
+  "transaction": "Transaction",
+  "total overhead costs": "Total overhead costs",
+  "total": "Total",
+  "final bid": "Final bid",
+
+  "previous lots": "Previous lots",
+  "date": "Date",
+  "bid price": "Bid price",
+
+  "date of sale": "Date of sale",
   "see all recipients": "See all recipients",
   "passwords do not match": "Passwords do not match",
   "password updated successfully": "Password updated successfully",
@@ -262,7 +393,12 @@
   "document is required": "Document is required",
   "id image is required": "ID Image is required",
 
-  "not added recipient data": "You have not added recipient data yet",
+
+
+  "to improve our services and functionalities together": "To improve our services and functionalities together",
+  "fill out the form and tell us what you would like to improve": "Fill out the form and tell us what you would like to improve",
+
+  "write us": "Write us",
 
   "manufacturer required": "Manufacturer is required",
   "manufacture year required": "Manufacture year is required",

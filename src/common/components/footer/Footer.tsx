@@ -1,27 +1,32 @@
 import Image from 'next/image'
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
+import { useRouter } from '@/navigation'
 
 import twitterIcon from '@/assets/icons/footer/twitter.svg'
 import linkedinIcon from '@/assets/icons/footer/linkedin.svg'
 import facebookIcon from '@/assets/icons/footer/facebook.svg'
-import { useTranslations } from 'next-intl'
+import { routeName } from '@/common/helpers/constants'
 
 type Props = {}
 
 const Footer = (props: Props) => {
+  const router = useRouter()
   const t = useTranslations('')
 
   return (
     <Container>
       <TopFrame>
         <LeftBox>
-          <Logo>DUX</Logo>
+          <Logo onClick={() => router.push(routeName.landingPage)}>DUX</Logo>
           <LeftBoxText>{t('shipping company text')}</LeftBoxText>
         </LeftBox>
         <RightBox>
           <Item>
-            <Label>{t('search for vehicle')}</Label>
+            <Label onClick={() => router.push(routeName.searchVehicle)}>
+              {t('search for vehicle')}
+            </Label>
           </Item>
           <Item>
             <Label>{t('our services')}</Label>
@@ -30,7 +35,9 @@ const Footer = (props: Props) => {
             <Label>{t('about us')}</Label>
           </Item>
           <Item>
-            <Label>{t('contact')}</Label>
+            <Label onClick={() => router.push(routeName.contact)}>
+              {t('contact')}
+            </Label>
           </Item>
         </RightBox>
       </TopFrame>
@@ -100,6 +107,8 @@ const Logo = styled.h2`
   font-weight: 700;
   padding: 12px 0;
   margin: 0;
+
+  cursor: pointer;
 `
 
 const LeftBoxText = styled.p`
@@ -108,6 +117,8 @@ const LeftBoxText = styled.p`
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 400;
   max-width: 300px;
+
+  cursor: default;
 `
 
 const RightBox = styled.div`
@@ -137,14 +148,23 @@ const Item = styled.div`
     align-items: flex-start;
     padding: unset;
   }
-
-  cursor: pointer;
 `
 
 const Label = styled.label`
   color: ${({ theme }) => theme.colors?.white_72};
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 400;
+
+  @media ${({ theme }) => theme.media?.notSm} {
+    &:hover {
+      color: ${({ theme }) => theme.colors?.white_86};
+    }
+    &:active {
+      color: ${({ theme }) => theme.colors?.white_42};
+    }
+  }
+
+  cursor: pointer;
 `
 
 const Line = styled.div`
@@ -172,6 +192,8 @@ const Text = styled.p`
   color: ${({ theme }) => theme.colors?.white};
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: 400;
+
+  cursor: default;
 `
 
 const IconBox = styled.div`

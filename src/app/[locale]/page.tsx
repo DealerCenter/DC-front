@@ -1,11 +1,14 @@
 'use client'
 
-import Header from '@/common/components/header/Header'
+import LandingPage from './landing-page/LandingPage'
+import LandingPageLayout from './landing-page/LandingPageLayout'
 
 export default function Page() {
   return (
     <main>
-      <Header />
+      <LandingPageLayout>
+        <LandingPage />
+      </LandingPageLayout>
     </main>
   )
 }

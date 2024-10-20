@@ -30,8 +30,10 @@ const ButtonIcon = styled.label`
   align-items: center;
   cursor: pointer;
 `
+
 const ButtonText = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   cursor: pointer;
+  user-select: none;
 `

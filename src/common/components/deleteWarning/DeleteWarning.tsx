@@ -63,17 +63,24 @@ const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 `
 
-const Label = styled.label`
+const StyledP = styled.p`
   font-size: 13px;
   font-weight: 400;
+  margin: 0;
+
+  cursor: default;
 `
 
 const H3Bold = styled.h3`
   font-size: 19px;
   font-weight: 700;
   margin: 0;
+
+  cursor: default;
 `
 
 const FrameTop = styled.div`

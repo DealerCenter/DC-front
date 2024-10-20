@@ -11,46 +11,58 @@ type Props = {
     href?: { pathname: string }
     locale?: string
     icon?: string
-    onChoose?: () => void
+    onClick?: () => void
   }
-  onClick?: () => void
-  onItemClick?: (arg: string) => void
 }
 
-const DropdownItem = ({ item, modalStyle, onClick, onItemClick }: Props) => {
+const DropdownItem = ({ item, modalStyle }: Props) => {
   const pathname = usePathname()
   const t = useTranslations('')
 
-  const { label, href, locale, icon, onChoose } = item
-
-  const handleClick = () => {
-    if (onItemClick) {
-      onItemClick(item.label)
-    } else {
-      onChoose && onChoose()
-      onClick && onClick()
-    }
-  }
+  const { label, href, locale, icon, onClick } = item
 
   return (
-    <StyledLink href={href ? href : pathname} locale={locale && locale}>
-      <Container modalStyle={modalStyle} isIcon={!!icon} onClick={handleClick}>
-        <Frame>
-          {icon && (
-            <Icon>
-              <Image src={icon} alt='icon' />
-            </Icon>
-          )}
-          {label && t(label)}
-        </Frame>
-      </Container>
-    </StyledLink>
+    <>
+      {href && locale ? (
+        <LinkContainer
+          href={href ? href : pathname}
+          locale={locale && locale}
+          modalStyle={modalStyle}
+          icon={icon ? true : false}
+          onClick={onClick ? onClick : () => {}}
+        >
+          <Frame>
+            {icon && (
+              <Icon>
+                <Image src={icon} alt='icon' />
+              </Icon>
+            )}
+            {label && label}
+          </Frame>
+        </LinkContainer>
+      ) : (
+        <Container
+          modalStyle={modalStyle}
+          icon={icon ? true : false}
+          onClick={onClick ? onClick : () => {}}
+        >
+          <Frame>
+            {icon && (
+              <Icon>
+                <Image src={icon} alt='icon' />
+              </Icon>
+            )}
+            {label && label}
+          </Frame>
+        </Container>
+      )}
+    </>
   )
 }
 
 export default DropdownItem
 
-type ContainerProps = { modalStyle: 'white' | 'black'; isIcon?: boolean }
+type ContainerProps = { modalStyle: 'white' | 'black'; icon?: boolean }
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -65,8 +77,53 @@ const Container = styled.div<ContainerProps>`
   border-radius: 8px;
   text-decoration: none;
 
-  ${({ isIcon }) =>
-    isIcon
+  ${({ icon }) =>
+    icon
+      ? css`
+          font-size: 13px;
+          padding: 8px;
+          width: 160px;
+        `
+      : css`
+          font-size: 16px;
+          padding: 10px 16px;
+          width: unset;
+        `}
+
+  ${({ modalStyle }) =>
+    modalStyle === 'white'
+      ? css`
+          color: ${({ theme }) => theme.colors?.black};
+          &:hover {
+            background-color: ${({ theme }) => theme.colors?.main_gray_04};
+          }
+        `
+      : modalStyle === 'black' &&
+        css`
+          color: ${({ theme }) => theme.colors?.white};
+          &:hover {
+            background-color: ${({ theme }) => theme.colors?.white_10};
+          }
+        `}
+
+
+
+  &:active {
+    color: ${({ theme }) => theme.colors?.main_gray_100};
+  }
+`
+
+const LinkContainer = styled(Link)<ContainerProps>`
+  list-style: none;
+  font-size: 16px;
+  font-weight: 400;
+  height: 20px;
+  white-space: nowrap;
+  border-radius: 8px;
+  text-decoration: none;
+
+  ${({ icon }) =>
+    icon
       ? css`
           font-size: 13px;
           padding: 8px;

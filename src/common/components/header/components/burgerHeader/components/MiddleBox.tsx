@@ -6,48 +6,40 @@ import downIcon from '@/assets/icons/arrowDownWhite.svg'
 import { css } from 'styled-components'
 import Image from 'next/image'
 
-type Props = {}
+type Props = {
+  mainItems: { label: string; onClick: () => void }[]
+  servicesItems: { label: string; onClick: () => void }[]
+}
 
-const MiddleBox = (props: Props) => {
+const MiddleBox = ({ mainItems, servicesItems }: Props) => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false)
 
   const t = useTranslations('')
 
-  const servicesItems = [
-    { label: `${t('status check')}` },
-    { label: `${t('document check')}` },
-    { label: `${t('history check')}` },
-    { label: `${t('transportation calculator')}` },
-  ]
-
-  const handleDropdownOpen = () => {
+  const handleDropdownToggle = () => {
     setIsOpenDropdown((is) => !is)
-  }
-
-  const handleDropdownClose = () => {
-    setIsOpenDropdown(false)
   }
 
   return (
     <Container>
-      <Item>{t('search for vehicle')}</Item>
-      <Item>
-        {t('our services')}{' '}
-        <Icon isOpen={isOpenDropdown} onClick={handleDropdownOpen}>
+      <Item onClick={mainItems[0].onClick}>{mainItems[0].label}</Item>
+      <Item onClick={handleDropdownToggle}>
+        {mainItems[1].label}
+        <Icon isOpen={isOpenDropdown}>
           <Image src={downIcon} alt='down arrow icon' />
         </Icon>
       </Item>
       {isOpenDropdown && (
         <Dropdown>
           {servicesItems.map((item, i) => (
-            <DropdownItem key={`dropdownItem82jof8${i}`}>
+            <DropdownItem key={`dropdownItem82jof8${i}`} onClick={item.onClick}>
               {item.label}
             </DropdownItem>
           ))}
         </Dropdown>
       )}
-      <Item>{t('about us')}</Item>
-      <Item>{t('contact')}</Item>
+      <Item onClick={mainItems[2].onClick}>{mainItems[2].label}</Item>
+      <Item onClick={mainItems[3].onClick}>{mainItems[3].label}</Item>
     </Container>
   )
 }
@@ -101,7 +93,7 @@ const Item = styled.div`
 
   gap: 10px;
 
-  cursor: default;
+  cursor: pointer;
 `
 type IconProps = { isOpen: boolean }
 

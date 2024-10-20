@@ -212,6 +212,140 @@
   "add new": "დაამატე ახალი",
   "or": "ან",
 
+  "search for desired car": "მოძებნე სასურველი ავტომობილი",
+  "car": "მსუბუქი ავტომობილი",
+  "truck": "სატვირთო ავტომობილი",
+  "motorcycle": "მოტოციკლი",
+  "browse cars at America's two largest auctions": "დაათვალიერე ავტომობილები ამერიკის ორ უდიდეს აუქციონზე",
+
+  "cars at auction": "ავტომობილები აუქციონზე",
+  "see all": "იხილეთ ყველა",
+  "check": "შემოწმება",
+
+  "not added recipient data": "მიმღები პირის მონაცემები ჯერ არ გაქვს დამატებული ",
+
+  "specify type of document and get detailed information": "მიუთითე საბუთის ტიპი და მიიღე დეტალური ინფორმაცია სასურველი ავტომობილის შესახებ.",
+  "find out if problematic and how good an investment it can be": "გაიგე, არის თუ არა პრობლემური და რამდენად კარგი ინვესტიცია შეიძლება იყოს",
+  "specify details and calculate exact shipping cost": "მიუთითეთ დეტალები და დათვალეთ ტრანსპორტირების ზუსტი ხარჯი",
+
+  "auction": "აუქციონი",
+  "vehicle type": "ავტომობილის ტიპი",
+  "from where": "საიდან",
+  "to where": "სად",
+
+  "which city/state is it coming from": "რომელი ქალაქი/შტატიდან მოდის",
+  "what city/port does it arrive at": "რომელ ქალაქში/პორტში ჩამოდის",
+
+  "check vehicle status": "ავტომობილის სტატუსის შემოწმება",
+  "enter the vin code and see where your car is, etc": "ჩაწერე ვინ კოდი და ნახე სად არის შენი ავტომობილი, რა თანხა გაქვს გადასახდელი და ა.შ.",
+
+  "photos": "ფოტოები",
+  "registered user": "დარეგისტრირებული მომხმარებელი",
+  "car that arrived at the place": "ადგილზე ჩამოსული ავტომობილი",
+
+  "enter vehicle vin code": "ჩაწერეთ ავტომობილის VIN კოდი",
+  "enter vin code": "ჩაწერეთ VIN კოდი",
+  "vehicle history check": "ავტომობილის ისტორიის შემოწმება",
+  "enter vin code and check history of vehicle, price, damage, etc": "ჩაწერე ვინ კოდი და შეამოწმე ავტომობილის ისტორია, რა ფასად გაიყიდა აუქციონზე, რა დაზიანება ჰქონდა ადგილზე და ა.შ.",
+
+  "help with auction": "დახმარება აუქციონზე",
+  "vehicle inspection": "ავტომობილის შემოწმება",
+  "reliable import": "სანდო იმპორტი",
+  "success story": "წარმატებული ისტორია",
+  "what customers are saying": "რას ამბობენ მომხმარებლები",
+
+  "we offer all services in one space": "ჩვენ გთავაზობთ ყველა სერვისს ერთ სივრცეში",
+  "our team is ready to help": "ჩვენი  გუნდი მზადაა დასახმარებლად!",
+  "have questions? Contact us": "კითხვები გაქვთ? დაგვიკავშირდით",
+  "monday-friday 9-5": "ორშაბათი-პარასკევი 9-5 საათამდე",
+
+  "contact us": "დაგვიკავშირდი",
+  "meet our team": "გაიცანით ჩვენი გუნდი",
+
+  "easy transportation": "მარტივი ტრანსპორტირება",
+  "possibility to bring car from any us state": "შესაძლებლობა ჩამოიყვანოთ ავტომობილი ამერიკის ნებისმიერი შტატიდან!",
+
+  "send message": "გააგზავნე შეტყობინება",
+  "message": "შეტყობინება",
+
+  "statement": "განცხადება",
+  "price": "ფასი",
+  "pending": "ელოდება",
+  "sold": "გაიყიდა",
+  "not sold": "არ გაიყიდა",
+
+  "brand": "ბრენდი",
+  "transmission": "ტრანსმისია",
+  "damage": "დაზიანება",
+  "auction location": "აუქციონის ლოკაცია",
+  "automatic": "ავტომატიკა",
+  "manual": "მექანიკა",
+  "from": "დან",
+  "up to": "მდე",
+
+  "condition": "მდგომარეობა",
+  "title": "სახელწოდება",
+
+  "odometer": "ოდომეტრი",
+  "keys": "გასაღებები",
+  "engine type": "ძრავის ტიპი",
+  "drivetrain": "ამძრავი",
+  "fuel": "საწვავი",
+  "cylinders": "ცილინდრები",
+  "body style": "კორპუსის სტილი",
+
+  "vin": "Vin",
+  "lot number": "ლოტის ნომერი",
+  "date added": "დამატების თარიღი",
+  "date of auction": "აუქციონის თარიღი",
+  "facility": "დაწესებულება",
+  "seller": "გამყიდველი",
+  "gas": "ბენზინი",
+
+  "undercarriage": "ქვეშა ნაწილი",
+  "wont start": "არ იქოქება",
+  "certification of title": "სათაურის სერტიფიკატი",
+
+  "enter the name of the document": "შეიყვანე საბუთის დასახელება",
+  "search for document and enter in search field": "მოძებნე საბუთის დასახელება და ეცადე სწორად შეიყვანო ძებნის გრაფაში",
+  "check status": "შეამოწმე სტატუსი",
+  "find status of vehicle and see whether it is problem-free": "იპოვე ავტომობილის სტატუსი და გაეცანი ინფორმაციას, რა სახის დაზიანება ან პრობლემა აქვს მას. ამასთანავე ნახავ, უპრობლემოა თუ არა ის.",
+  "make a wise decision": "მიიღე გონივრული გადაწყვეტილება",
+  "find out if it is necessary to contact the company": "გაიგე საჭიროა თუ არა კომპანიასთან დაკონტაქტება, რა ზომებს უნდა მიმართო",
+
+  "calculate": "კალკულაცია",
+
+  "support": "მხარდაჭერა",
+  "sales": "გაყიდვები",
+  "phone": "ტელეფონი",
+
+  "time left to bid": "ტენდერისთვის დარჩენილი დრო",
+  "bid now": "შესთავაზე ახლავე",
+  "enter bid": "შეიყვანე შეთავაზება",
+  "current bid": "მიმდინარე შეთავაზება",
+  "can not bid before authorization": "ავტორიზაციამდე ვერ გააკეთებთ შეთავაზებას",
+
+  "authorization": "ავტორიზაცია",
+  "authorization required!": "საჭიროა ავტორიზაცია!",
+
+  "to place bid log in or register": "bid-ის დასადებად გაიარე ავტორიზაცია ან რეგისტრაცია",
+
+  "price and additional costs": "ფასი და დამატებითი ხარჯები",
+  "price estimate": "ფასის შეფასება",
+  "shipping estimate": "გადაზიდვის შეფასება",
+  "delivery to": "მიწოდება",
+  "auction fees": "აუქციონის გადასახადები",
+  "documentation fee": "დოკუმენტაციის საფასური",
+  "transaction": "ტრანსაქცია",
+  "total overhead costs": "საერთო დამატებითი ხარჯები",
+  "total": "სულ",
+  "final bid": "საბოლოო შეთავაზება",
+
+  "previous lots": "წინა ლოტები",
+  "date": "თარიღი",
+  "bid price": "შეთავაზებული ფასი",
+
+  "date of sale": "გაყიდვის თარიღი",
   "see all recipients": "ნახე ყველა მიმღები",
   "passwords do not match": "პაროლები არ ემთხვევა",
   "password updated successfully": "პაროლი წარმატებით განახლდა",
@@ -243,6 +377,11 @@
 
   "update information": "ინფორმაციის განახლება",
 
+
+  "to improve our services and functionalities together": "ერთად გავაუმჯობესოთ ჩვენი სერვისები და ფუნქციონალები",
+  "fill out the form and tell us what you would like to improve": "შეავსე ფორმა და მოგვწერე რის გაუმჯობესებას ისურვებდი",
+
+  "write us": "მოგვწერე",
   "receiver uploaded successfully": "მიმღები წარმატებით აიტვირთა",
   "receiver updated successfully": "მიმღები წარმატებით განახლდა",
   "receiver could not be updated": "მიმღები ვერ განახლდა",
@@ -263,7 +402,6 @@
   "actual address required": "ფაქტობრივი მისამართი აუცილებელია",
   "document is required": "დოკუმენტი აუცილებელია",
   "id image is required": "პირადობის მოწმობის სურათი აუცილებელია",
-  "not added recipient data": "მიმღები პირის მონაცემები ჯერ არ გაქვს დამატებული ",
 
   "manufacturer required": "მწარმოებელი აუცილებელია",
   "manufacture year required": "მწარმოების წელი აუცილებელია",

@@ -5,13 +5,9 @@ import { useRouter } from '@/navigation'
 import { routeName, ShippingStatus } from '@/common/helpers/constants'
 
 import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
-import SecondaryButton from '@/common/components/appButton/SecondaryButton'
-import AppDropdown from '@/common/components/appDropdown/AppDropdown'
 import OrderList from '../../../../common/components/orderList/OrderList'
-import { orderedCars } from '@/assets/DummyData'
 
 import filterIconBlack from '@/assets/icons/filterBlack.svg'
-import sortIconBlack from '@/assets/icons/sortBlack.svg'
 import Pagination from '@/common/components/pagination/Pagination'
 
 import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'

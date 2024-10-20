@@ -15,8 +15,7 @@ type Props = {
   modalStyle?: 'white' | 'black'
   items?:
     | { href: { pathname: string }; locale: string; label: string }[]
-    | { label: string; icon: string }[]
-    | { label: string }[]
+    | { label: string; icon?: string; onClick: () => void }[]
 
   left?: number
   top?: number

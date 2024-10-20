@@ -8,6 +8,7 @@ type Props = {
   onClick: () => void
   icon: string
   width?: number
+  withoutLabel?: boolean
   htmlType?: 'button' | 'submit' | 'reset'
   isDisabled?: boolean
 }
@@ -17,27 +18,21 @@ const SecondaryButton = ({
   onClick,
   icon,
   width,
-  htmlType = 'button',
-  isDisabled,
+  withoutLabel,
 }: Props) => {
   return (
-    <Container
-      onClick={onClick}
-      width={width}
-      type={htmlType}
-      disabled={isDisabled}
-    >
+    <Container onClick={onClick} width={width} withoutLabel={withoutLabel}>
       <IconBox>
         <Image src={icon} alt='icon' />
       </IconBox>
-      <Label>{text}</Label>
+      {!withoutLabel && <Label>{text}</Label>}
     </Container>
   )
 }
 
 export default SecondaryButton
 
-type ContainerProps = { width?: number }
+type ContainerProps = { width?: number; withoutLabel?: boolean }
 
 const Container = styled.button<ContainerProps>`
   box-sizing: border-box;
@@ -61,6 +56,15 @@ const Container = styled.button<ContainerProps>`
           width: unset;
         `};
 
+  ${({ withoutLabel }) =>
+    withoutLabel
+      ? css`
+          padding: 0 15px 0 15px;
+        `
+      : css`
+          padding: 0 20px 0 14px;
+        `};
+
   &:hover {
     background-color: ${({ theme }) => theme.colors?.main_gray_04};
   }
@@ -77,6 +81,7 @@ const Label = styled.label`
   font-weight: 700;
   cursor: pointer;
 `
+
 const IconBox = styled.div`
   display: flex;
   justify-content: center;

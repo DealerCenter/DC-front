@@ -9,10 +9,14 @@ import downIcon from '@/assets/icons/arrowDownWhite.svg'
 import MenuButtons from './components/MenuButtons'
 import Logo from '../Logo'
 
-type Props = {}
+type Props = {
+  mainItems: { label: string; onClick: () => void }[]
+  servicesItems: { label: string; onClick: () => void }[]
+}
 
-const FullHeader = (props: Props) => {
+const FullHeader = ({ mainItems, servicesItems }: Props) => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false)
+  const t = useTranslations('')
 
   const handleDropdownOpen = () => {
     setIsOpenDropdown((is) => !is)
@@ -21,38 +25,28 @@ const FullHeader = (props: Props) => {
     setIsOpenDropdown(false)
   }
 
-  const t = useTranslations('')
-
-  const servicesItems = [
-    { label: `${t('status check')}` },
-    { label: `${t('document check')}` },
-    { label: `${t('history check')}` },
-    { label: `${t('transportation calculator')}` },
-  ]
-
   return (
     <>
       <Container>
         <Logo />
         <Frame>
-          <Title2>{t('search for vehicle')}</Title2>
+          <Title2 onClick={mainItems[0].onClick}>{mainItems[0].label}</Title2>
           <AppDropdown
             items={servicesItems}
             left={-50}
             top={70}
-            // isOpen={isOpenDropdown}
             handleToggle={handleDropdownOpen}
             handleClose={handleDropdownClose}
           >
             <Title2>
-              {t('our services')}
+              {mainItems[1].label}
               <Icon isOpen={isOpenDropdown}>
                 <Image src={downIcon} alt='down arrow icon' />
               </Icon>
             </Title2>
           </AppDropdown>
-          <Title2>{t('about us')}</Title2>
-          <Title2>{t('contact')}</Title2>
+          <Title2 onClick={mainItems[2].onClick}>{mainItems[2].label}</Title2>
+          <Title2 onClick={mainItems[3].onClick}>{mainItems[3].label}</Title2>
         </Frame>
         <MenuButtons />
       </Container>

@@ -20,6 +20,10 @@ type Props = {
   fontWeight?: 'normal' | 'bold'
   fontSize?: number
   isOutline?: boolean
+  paddingLeft?: number
+  iconPaddingLeft?: number
+  hasShadow?: boolean
+  isWidthFill?: boolean
   backgroundColor?: string
   isDisabled?: boolean
 }
@@ -40,12 +44,18 @@ const TextInput = ({
   fontWeight = 'normal',
   fontSize = 16,
   isOutline = true,
+  paddingLeft,
+  iconPaddingLeft,
+  hasShadow,
+  isWidthFill,
   backgroundColor,
   isDisabled = false,
 }: Props) => {
   return (
     <Container>
-      {icon ? <IconBox>{icon}</IconBox> : null}
+      {icon ? (
+        <IconBox iconPaddingLeft={iconPaddingLeft}>{icon}</IconBox>
+      ) : null}
       <StyledInput
         width={width}
         height={height}
@@ -60,6 +70,9 @@ const TextInput = ({
         fontWeight={fontWeight}
         fontSize={fontSize}
         isOutline={isOutline}
+        paddingLeft={paddingLeft}
+        hasShadow={hasShadow}
+        isWidthFill={isWidthFill}
         backgroundColor={backgroundColor}
         disabled={isDisabled}
       />
@@ -78,6 +91,10 @@ export default TextInput
 
 const Container = styled.div`
   position: relative;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `
 
 type InputProps = {
@@ -88,6 +105,9 @@ type InputProps = {
   fontWeight?: 'normal' | 'bold'
   fontSize?: number
   isOutline?: boolean
+  paddingLeft?: number
+  hasShadow?: boolean
+  isWidthFill?: boolean
   backgroundColor?: string
 }
 
@@ -96,6 +116,7 @@ const StyledInput = styled.input<InputProps>`
   box-sizing: border-box;
 
   outline-offset: 1px;
+
   width: 350px;
 
   padding: 10px 10px 10px 16px;
@@ -121,18 +142,45 @@ const StyledInput = styled.input<InputProps>`
           font-size: unset;
         `};
 
-  ${({ isHalfSize, width }) =>
+  ${({ height }) =>
+    height
+      ? css`
+          height: ${height}px;
+        `
+      : css`
+          height: 52px;
+        `}
+
+  ${({ icon, paddingLeft }) =>
+    icon && !paddingLeft
+      ? css`
+          padding-left: 50px;
+        `
+      : paddingLeft &&
+        css`
+          padding-left: ${paddingLeft}px;
+        `}
+
+  ${({ hasShadow }) =>
+    hasShadow
+      ? css`
+          box-shadow: 30px 30px 40px 0px rgba(0, 0, 0, 0.1);
+        `
+      : css``}
+
+
+${({ isHalfSize, width }) =>
     isHalfSize
       ? css`
           width: 213px;
         `
       : width
-        ? css`
-            width: ${width}px;
-          `
-        : css`
-            width: 350px;
-          `}
+      ? css`
+          width: ${width}px;
+        `
+      : css`
+          width: 350px;
+        `}
 
   ${({ height }) =>
     height
@@ -165,13 +213,19 @@ const StyledInput = styled.input<InputProps>`
             width: 167.5px;
           `
         : width
-          ? css`
-              width: ${width}px;
-            `
-          : css`
-              width: 350px;
-            `}
+        ? css`
+            width: ${width}px;
+          `
+        : css`
+            width: 350px;
+          `}
   }
+
+  ${({ isWidthFill }) =>
+    isWidthFill &&
+    css`
+      width: 100%;
+    `}
 
   &::placeholder {
     color: ${({ theme }) => theme.colors?.main_gray_56};
@@ -197,9 +251,22 @@ const OptionalText = styled.p`
   margin: 0;
 `
 
-const IconBox = styled.div`
+type IconBoxProps = { iconPaddingLeft?: number }
+
+const IconBox = styled.div<IconBoxProps>`
   position: absolute;
-  left: 16px;
-  top: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ${({ iconPaddingLeft }) =>
+    iconPaddingLeft
+      ? css`
+          left: ${iconPaddingLeft}px;
+        `
+      : css`
+          left: 16px;
+        `}
+
   z-index: 1000;
 `
