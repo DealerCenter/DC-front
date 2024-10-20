@@ -1,54 +1,57 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import DeleteWarning from '../../DeleteWarning'
+import { RECEIVER_DATA } from '@/api/apiTypes'
+import { formatDate } from '@/common/helpers/simpleFunctions'
+import { useTranslations } from 'next-intl'
+
+import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
 import AppModal from '@/common/components/modal/AppModal'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
-import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
-import dashedLine from '@/assets/icons/dashedLineGray.svg'
+import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 
 type Props = {
-  fullName: string
-  id: string
-  mobile: string
-  dateOfAddition: string
-  isVerified: boolean
   onClick: () => void
+  receiverData: RECEIVER_DATA
 }
 
 const ListItemFullDropdown = ({
-  fullName,
-  id,
-  mobile,
-  dateOfAddition,
-  isVerified,
   onClick,
+  receiverData: {
+    id,
+    personalId,
+    firstName,
+    lastName,
+    phoneNumber,
+    createdAt,
+    verificationStatus,
+  },
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const t = useTranslations('')
 
   return (
     <>
       <Container>
-        <DottedLine>
-          <Image src={dashedLine} alt='dashed line' />
-        </DottedLine>
+        <DashedLine />
         <LabelBox>
           <Circle />
           <NameAndIdBox>
-            <NameLabel>{fullName}</NameLabel>
-            <IdLabel>{id}</IdLabel>
+            <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
+            <IdLabel>{personalId}</IdLabel>
           </NameAndIdBox>
         </LabelBox>
-        <Label>{mobile}</Label>
-        <Label>{dateOfAddition}</Label>
+        <Label>{phoneNumber}</Label>
+        <Label>{formatDate(createdAt)}</Label>
         <DebtLabel></DebtLabel>
         <IconBox>
           <Icon>
-            {isVerified ? (
+            {verificationStatus ? (
               <Image
                 src={checkedGreen}
                 alt='checked icon'
@@ -83,6 +86,8 @@ const ListItemFullDropdown = ({
         <DeleteWarning
           onCancel={() => setIsModalOpen(false)}
           onDelete={() => console.log('delete')}
+          header={t('delete recipient')}
+          text={t('delete data warning')}
         />
       </AppModal>
     </>
@@ -90,19 +95,6 @@ const ListItemFullDropdown = ({
 }
 
 export default ListItemFullDropdown
-
-const DottedLine = styled.div`
-  position: absolute;
-  top: -27px;
-  left: 30px;
-`
-
-const Circle = styled.div`
-  height: 8px;
-  width: 8px;
-  border-radius: 10px;
-  background-color: ${({ theme }) => theme.colors?.main_gray_16};
-`
 
 const Container = styled.div`
   position: relative;
@@ -181,22 +173,21 @@ const NameAndIdBox = styled.div`
   gap: 4px;
 `
 
-type DropdownIconProps = { isOpen: boolean }
+const DashedLine = styled.div`
+  position: absolute;
+  top: -31px;
+  left: 25px;
 
-const DropdownIcon = styled.div<DropdownIconProps>`
-  width: 36px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 12px;
+  height: 65px;
 
-  transition: transform 0.3s ease-in-out;
+  border-left: 2px dashed ${({ theme }) => theme.colors?.main_gray_16};
+  border-bottom: 2px dashed ${({ theme }) => theme.colors?.main_gray_16};
+`
 
-  ${({ isOpen }) =>
-    isOpen &&
-    css`
-      transform: rotate(180deg);
-    `}
-
-  cursor: pointer;
+const Circle = styled.div`
+  height: 8px;
+  width: 8px;
+  border-radius: 10px;
+  background-color: ${({ theme }) => theme.colors?.main_gray_16};
 `

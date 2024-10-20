@@ -1,17 +1,16 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useTranslations } from 'next-intl'
 
 import { formatDate } from '@/common/helpers/simpleFunctions'
-import { verificationStatusName } from '@/common/helpers/constants'
-import DeleteWarning from '../addRecipient/components/DeleteWarning'
+import { VERIFICATION_STATUS_NAME } from '@/common/helpers/constants'
 import AppModal from '@/common/components/modal/AppModal'
 
-import checkedGreen from '@/assets/icons/checkedGreen.svg'
-import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
-import uncheckedYellow from '@/assets/icons/uncheckedYellow.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
+import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
 
 type Props = {
   id: number
@@ -20,7 +19,7 @@ type Props = {
   personalId: string
   phoneNumber: string
   createdAt: string
-  verificationStatus: string
+  verificationStatus: VERIFICATION_STATUS_NAME
   handleDelete: (id: number) => void
   handleEdit: () => void
 }
@@ -38,6 +37,8 @@ const ListItemFull = ({
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  const t = useTranslations('')
+
   const formattedDate = formatDate(createdAt)
 
   return (
@@ -50,30 +51,7 @@ const ListItemFull = ({
         <Label>{phoneNumber}</Label>
         <Label>{formattedDate}</Label>
         <Label>
-          {verificationStatus === verificationStatusName.VERIFIED ? (
-            <Image
-              src={checkedGreen}
-              alt='checked icon'
-              width={20}
-              height={20}
-            />
-          ) : verificationStatus === verificationStatusName.UNVERIFIED ? (
-            <Image
-              src={uncheckedRed}
-              alt='unchecked icon'
-              width={20}
-              height={20}
-            />
-          ) : (
-            verificationStatus === verificationStatusName.PENDING && (
-              <Image
-                src={uncheckedYellow}
-                alt='pending icon'
-                width={20}
-                height={20}
-              />
-            )
-          )}
+          <VerificationIcon verificationStatus={verificationStatus} />
         </Label>
         <IconBox>
           <Icon>
@@ -98,7 +76,9 @@ const ListItemFull = ({
             handleDelete(id)
             setIsModalOpen(false)
           }}
-          nameOfReceiver={`${firstName} ${lastName}`}
+          header={t('delete recipient')}
+          text={t('delete data warning')}
+          deletingItemText={`${t('recipient person')} ${firstName} ${lastName}`}
         />
       </AppModal>
     </>
@@ -154,11 +134,13 @@ const IdLabel = styled(Label)`
   align-items: start;
   justify-content: start;
 `
+
 const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 40px;
   height: 40px;
+
+  cursor: pointer;
 `
-const CheckmarkBox = styled.div``

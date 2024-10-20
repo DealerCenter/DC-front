@@ -1,6 +1,7 @@
 {
   "register": "რეგისტრაცია",
   "login": "შესვლა",
+  "admin login": "ადმინისტრატორის შესვლა",
   "not registered?": "არ ხარ დარეგისტრირებული?",
   "already registered?": "უკვე ხარ დარეგისტრირებული?",
   "password": "პაროლი",
@@ -32,6 +33,7 @@
   "upload": "ატვირთვა",
   "file uploaded": "ფაილი ატვირთულია",
   "photo uploaded": "ფოტო ატვირთულია",
+  "photos uploaded": "ფოტოები ატვირთულია",
   "use numbers": "გამოიყენეთ რიცხვები",
   "use uppercase characters": "გამოიყენეთ დიდი სიმბოლოები",
   "use lowercase characters": "გამოიყენეთ პატარა სიმბოლოები",
@@ -128,7 +130,8 @@
   "total debt": "ჯამური დავალიანება",
 
   "status": "სტატუსი",
-  "is in American warehouse": "ამერიკის საწყობშია",
+  "in auction": "აუქციონზე",
+  "is in american warehouse": "ამერიკის საწყობშია",
   "in container": "კონტეინერშია",
   "undergoes customs procedures": "გადის საბაჟო პროცედურებს",
   "was sent": "გამოიგზავნა",
@@ -367,53 +370,93 @@
   "notification settings updated successfully": "შეტყობინებების პარამეტრები წარმატებით განახლდა",
   "failed to update notification settings": "შეტყობინებების პარამეტრები ვერ განახლდა",
 
-  "password required": "პაროლი აუცილებელია",
-
   "search for recipient": "მოძებნეთ მიმღები",
 
   "receiver deleted successfully": "მიმღები წარმატებით წაიშალა",
   "receiver not deleted": "მიმღები ვერ წაიშალა",
 
-  "useForm": {
-    "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
+  "update information": "ინფორმაციის განახლება",
 
-    "email required": "ელ-ფოსტა აუცილებელია",
-    "password required": "პაროლი აუცილებელია",
-    "company name required": "კომპანიის სახელი აუცილებელია",
-    "identification code required": "საიდენტიფიკაციო კოდი აუცილებელია",
-    "address required": "მისამართი აუცილებელია",
-    "name of representative required": "წარმომადგენლის სახელი აუცილებელია",
-    "surname of representative required": "წარმომადგენლის გვარი აუცილებელია",
-    "contact number required": "საკონტაქტო ნომერი აუცილებელია",
-    "date of birth required": "დაბადების თარიღი აუცილებელია",
-    "personal number required": "პირადი ნომერი აუცილებელია",
-    "name required": "სახელი აუცილებელია",
-    "surname required": "გვარი აუცილებელია",
-    "actual address required": "ფაქტობრივი მისამართი აუცილებელია",
-    "document is required": "დოკუმენტი აუცილებელია",
-    "id image is required": "პირადობის მოწმობის სურათი აუცილებელია"
-  },
 
   "to improve our services and functionalities together": "ერთად გავაუმჯობესოთ ჩვენი სერვისები და ფუნქციონალები",
   "fill out the form and tell us what you would like to improve": "შეავსე ფორმა და მოგვწერე რის გაუმჯობესებას ისურვებდი",
 
   "write us": "მოგვწერე",
+  "receiver uploaded successfully": "მიმღები წარმატებით აიტვირთა",
+  "receiver updated successfully": "მიმღები წარმატებით განახლდა",
+  "receiver could not be updated": "მიმღები ვერ განახლდა",
+  "receiver could not be uploaded": "მიმღები ვერ აიტვირთა",
 
-  "createOrder": {
-    "manufacturer required": "მწარმოებელი აუცილებელია",
-    "manufacture year required": "მწარმოების წელი აუცილებელია",
-    "model required": "მოდელი აუცილებელია",
-    "vin required": "VIN კოდი აუცილებელია",
-    "transportation cost required": "ტრანსპორტირების ღირებულება აუცილებელია",
-    "car cost required": "ავტომობილის ღირებულება აუცილებელია",
-    "state required": "შტატი აუცილებელია",
-    "exact address required": "ზუსტი მისამართი აუცილებელია",
-    "insurance status required": "დაზღვევის სტატუსი აუცილებელია",
-    "car category required": "ავტომობილის კატეგორია აუცილებელია",
-    "mileage required": "გარბენი აუცილებელია",
-    "status required": "სტატუსი აუცილებელია",
-    "container ID required": "კონტეინერის ID აუცილებელია",
-    "dealer ID required": "დილერის ID აუცილებელია",
-    "receiver ID required": "მიმღების ID აუცილებელია"
-  }
+  "email required": "ელ-ფოსტა აუცილებელია",
+  "password required": "პაროლი აუცილებელია",
+  "company name required": "კომპანიის სახელი აუცილებელია",
+  "identification code required": "საიდენტიფიკაციო კოდი აუცილებელია",
+  "address required": "მისამართი აუცილებელია",
+  "name of representative required": "წარმომადგენლის სახელი აუცილებელია",
+  "surname of representative required": "წარმომადგენლის გვარი აუცილებელია",
+  "contact number required": "საკონტაქტო ნომერი აუცილებელია",
+  "date of birth required": "დაბადების თარიღი აუცილებელია",
+  "personal number required": "პირადი ნომერი აუცილებელია",
+  "name required": "სახელი აუცილებელია",
+  "surname required": "გვარი აუცილებელია",
+  "actual address required": "ფაქტობრივი მისამართი აუცილებელია",
+  "document is required": "დოკუმენტი აუცილებელია",
+  "id image is required": "პირადობის მოწმობის სურათი აუცილებელია",
+
+  "manufacturer required": "მწარმოებელი აუცილებელია",
+  "manufacture year required": "მწარმოების წელი აუცილებელია",
+  "model required": "მოდელი აუცილებელია",
+  "vin required": "VIN კოდი აუცილებელია",
+  "transportation cost required": "ტრანსპორტირების ღირებულება აუცილებელია",
+  "car cost required": "ავტომობილის ღირებულება აუცილებელია",
+  "state required": "შტატი აუცილებელია",
+  "exact address required": "ზუსტი მისამართი აუცილებელია",
+  "insurance status required": "დაზღვევის სტატუსი აუცილებელია",
+  "car category required": "ავტომობილის კატეგორია აუცილებელია",
+  "mileage required": "გარბენი აუცილებელია",
+  "status required": "სტატუსი აუცილებელია",
+  "container ID required": "კონტეინერის ID აუცილებელია",
+  "dealer ID required": "დილერის ID აუცილებელია",
+  "receiver ID required": "მიმღების ID აუცილებელია",
+  "url required": "ლინკი აუცილებელია",
+
+  "add new container": "დაამატეთ ახალი კონტეინერი",
+  "enter container data": "შეიყვანეთ კონტეინერის მონაცემები",
+  "container created successfully": "კონტეინერი წარმატებით შეიქმნა",
+  "container could not be created": "კონტეინერი ვერ შეიქმნა",
+
+  "must be a number": "უნდა იყოს რიცხვი",
+  "order created successfully": "შეკვეთა წარმატებით შეიქმნა",
+  "could not create order": "შეკვეთა ვერ შეიქმნა",
+  "orders not found": "შეკვეთები ვერ მოიძებნა",
+
+  "add your first task": "დაამატეთ თქვენი პირველი დავალება",
+  "create any task with status": "შექმენით ნებისმიერი დავალება თავისი სტატუსით, მიანიჭეთ მას ხალხი, დაამატეთ ლეიბლები და პროექტის სახელი.",
+  "new issue": "ახალი საკითხი",
+
+  "error while connecting to the server": "სერვერთან დაკავშირებისას მოხდა შეცდომა. გთხოვთ, დაუკავშირდეთ მხარდაჭერას, თუ პრობლემა შენარჩუნდება.",
+
+  "specify an address": "მიუთითეთ მისამართი",
+
+  "search for container": "მოძებნეთ კონტეინერი",
+
+  "must be valid email": "უნდა იყოს სწორი ელ-ფოსტა",
+
+  "username required": "მომხმარებლის სახელი საჭიროა",
+  "username": "მომხმარებლის სახელი",
+  "search for dealer": "მოძებნეთ დილერი",
+
+  "order edited successfully": "შეკვეთა რედაქტირებულია წარმატებით",
+  "could not edit order": "შეკვეთის რედაქტირება ვერ მოხერხდა",
+
+  "InAuction": "აუქციონზე",
+  "InAmericanWarehouse": "ამერიკულ საწყობში",
+  "InContainer": "კონტეინერში",
+  "UndergoesCustomsProcedures": "გადასცემს საბაჟო პროცედურებს",
+  "Sent": "გაგზავნილია",
+
+  "towTruckImages": "ევაკუატორი",
+  "abroadPortImages": "აშშ პორტი",
+  "containerImages": "კონტეინერი",
+  "homePortImages": "საქართველოს პორტი"
 }

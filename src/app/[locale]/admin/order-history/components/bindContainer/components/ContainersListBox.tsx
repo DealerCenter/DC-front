@@ -1,25 +1,35 @@
+import { CONTAINER_GET_RES } from '@/api/apiTypes'
 import React from 'react'
 import styled from 'styled-components'
 
-type Props = {}
+type Props = {
+  containersList?: CONTAINER_GET_RES[]
+  setContainerToBind: (arg: CONTAINER_GET_RES | null) => void
+  setIsOpen: (arg: boolean) => void
+}
 
-const containersDummyList = [
-  { link: 'maersk.com/ssdfss/202421', numberOfCars: '0/4' },
-  { link: 'maersk.com/ssdfss/202414', numberOfCars: '3/4' },
-  { link: 'maersk.com/ssdfss/202435', numberOfCars: '2/4' },
-  { link: 'maersk.com/ssdfss/202401', numberOfCars: '1/4' },
-  { link: 'maersk.com/ssdfss/202477', numberOfCars: '4/4' },
-]
+const ContainersListBox = ({
+  containersList,
+  setContainerToBind,
+  setIsOpen,
+}: Props) => {
+  const handleItemClick = (value: CONTAINER_GET_RES) => {
+    setContainerToBind(value)
+    setIsOpen(false)
+  }
 
-const ContainersListBox = (props: Props) => {
   return (
     <Container>
-      {containersDummyList.map((item, i) => (
-        <Pair key={`containerListItemForBindContainerModal${i}`}>
-          <Link>{item.link}</Link>
-          <NumberOfCars>{item.numberOfCars}</NumberOfCars>
-        </Pair>
-      ))}
+      {containersList &&
+        containersList.map((item, i) => (
+          <Pair
+            onClick={() => handleItemClick(item)}
+            key={`containerListItemForBindContainerModal${i}`}
+          >
+            <Link>{item.trackingUrl}</Link>
+            <NumberOfCars>{item.id}</NumberOfCars>
+          </Pair>
+        ))}
     </Container>
   )
 }
@@ -27,8 +37,13 @@ const ContainersListBox = (props: Props) => {
 export default ContainersListBox
 
 const Container = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+
+  width: 323px;
+  height: 200px;
+  overflow-y: auto;
 `
 const Pair = styled.div`
   box-sizing: border-box;

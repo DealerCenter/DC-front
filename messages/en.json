@@ -1,6 +1,7 @@
 {
   "register": "Register",
   "login": "Login",
+  "admin login": "Admin login",
   "not registered?": "Not registered?",
   "already registered?": "Already registered?",
   "password": "Password",
@@ -32,6 +33,7 @@
   "upload": "Upload",
   "file uploaded": "File uploaded",
   "photo uploaded": "Photo uploaded",
+  "photos uploaded": "Photos uploaded",
   "use numbers": "Use numbers",
   "use uppercase characters": "Use uppercase characters",
   "use lowercase characters": "Use lowercase characters",
@@ -124,7 +126,7 @@
   "cost of vehicle": "The cost of the vehicle",
   "total debt": "Total debt",
   "status": "Status",
-  "is in American warehouse": "It is in the American warehouse",
+  "is in american warehouse": "It is in the American warehouse",
   "in container": "It's in the container",
   "undergoes customs procedures": "Undergoes customs procedures",
   "was sent": "Was sent",
@@ -364,53 +366,94 @@
   "notification settings updated successfully": "Notification settings updated successfully",
   "failed to update notification settings": "Failed to update notification settings",
 
-  "password required": "Password is required",
-
   "search for recipient": "Search for a recipient",
 
   "receiver deleted successfully": "Receiver deleted successfully",
   "receiver not deleted": "Receiver could not be deleted",
 
-  "useForm": {
-    "must be valid email": "Must be a valid email",
+  "update information": "Update information",
+  "receiver uploaded successfully": "Receiver uploaded successfully",
+  "receiver updated successfully": "Receiver updated successfully",
+  "receiver could not be updated": "Receiver could not be updated",
+  "receiver could not be uploaded": "Receiver could not be uploaded",
 
-    "email required": "Email is required",
-    "password required": "Password is required",
-    "company name required": "Company name is required",
-    "identification code required": "Identification code is required",
-    "address required": "Address is required",
-    "name of representative required": "Name of the representative is required",
-    "surname of representative required": "Surname of the representative is required",
-    "contact number required": "Contact number is required",
-    "date of birth required": "Date of birth is required",
-    "personal number required": "Personal number is required",
-    "name required": "Name is required",
-    "surname required": "Surname is required",
-    "actual address required": "Actual address is required",
-    "document is required": "Document is required",
-    "id image is required": "ID Image is required"
-  },
+  "email required": "Email is required",
+  "password required": "Password is required",
+  "company name required": "Company name is required",
+  "identification code required": "Identification code is required",
+  "address required": "Address is required",
+  "name of representative required": "Name of the representative is required",
+  "surname of representative required": "Surname of the representative is required",
+  "contact number required": "Contact number is required",
+  "date of birth required": "Date of birth is required",
+  "personal number required": "Personal number is required",
+  "name required": "Name is required",
+  "surname required": "Surname is required",
+  "actual address required": "Actual address is required",
+  "document is required": "Document is required",
+  "id image is required": "ID Image is required",
+
+
 
   "to improve our services and functionalities together": "To improve our services and functionalities together",
   "fill out the form and tell us what you would like to improve": "Fill out the form and tell us what you would like to improve",
 
   "write us": "Write us",
 
-  "createOrder": {
-    "manufacturer required": "Manufacturer is required",
-    "manufacture year required": "Manufacture year is required",
-    "model required": "Model is required",
-    "vin required": "VIN is required",
-    "transportation cost required": "Transportation cost is required",
-    "car cost required": "Car cost is required",
-    "state required": "State is required",
-    "exact address required": "Exact address is required",
-    "insurance status required": "Insurance status is required",
-    "car category required": "Car category is required",
-    "mileage required": "Mileage is required",
-    "status required": "Status is required",
-    "container ID required": "Container ID is required",
-    "dealer ID required": "Dealer ID is required",
-    "receiver ID required": "Receiver ID is required"
-  }
+  "manufacturer required": "Manufacturer is required",
+  "manufacture year required": "Manufacture year is required",
+  "model required": "Model is required",
+  "vin required": "VIN is required",
+  "transportation cost required": "Transportation cost is required",
+  "car cost required": "Car cost is required",
+  "state required": "State is required",
+  "exact address required": "Exact address is required",
+  "insurance status required": "Insurance status is required",
+  "car category required": "Car category is required",
+  "mileage required": "Mileage is required",
+  "status required": "Status is required",
+  "container ID required": "Container ID is required",
+  "dealer ID required": "Dealer ID is required",
+  "receiver ID required": "Receiver ID is required",
+  "url required": "URL required",
+
+  "add new container": "Add new container",
+  "enter container data": "Enter container data",
+  "container created successfully": "The container was created successfully",
+  "container could not be created": "The container could not be created",
+
+  "must be a number": "Must be a number",
+  "order created successfully": "Order created successfully",
+  "could not create order": "Could not create order",
+  "orders not found": "Orders could not be found",
+
+  "add your first task": "Add your first task",
+  "create any task with status": "Create any task with its status, assign people to it, add labels and project name.",
+  "new issue": "New issue",
+
+  "error while connecting to the server": "An error occurred while connecting to the server. Please contact support if the issue persists.",
+
+  "specify an address": "Specify an address",
+
+  "search for container": "Search for container",
+
+  "must be valid email": "Must be a valid email",
+
+  "username required": "Username required",
+  "username": "Username",
+  "search for dealer": "Search for a dealer",
+
+  "order edited successfully": "Order edited successfully",
+  "could not edit order": "Could not edit order",
+
+  "InAuction": "In Auction",
+  "InAmericanWarehouse": "In American warehouse",
+  "InContainer": "In Container",
+  "UndergoesCustomsProcedures": "Undergoes Customs Procedures",
+  "Sent": "Sent",
+
+  "towTruckImages": "Evacuator",
+  "abroadPortImages": "USA Port",
+  "containerImages": "Container",
+  "homePortImages": "Georgian port"
 }

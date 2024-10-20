@@ -1,5 +1,21 @@
+import {
+  DealersQueryType,
+  OrdersQueryType,
+  ReceiversQueryType,
+} from '@/common/helpers/constants'
 import { handleLogout } from '@/common/helpers/utils'
 import axiosInstance from './apiClient'
+import {
+  CONTAINER_GET_RES,
+  CONTAINER_POST_RES,
+  DEALERS_DATA,
+  DEALERS_RES,
+  ME_RES,
+  OrderPostAdminType,
+  OrderPutAdminType,
+  ORDERS_GET_RES,
+  RECEIVER_GET_RES,
+} from './apiTypes'
 import { endpoints } from './endpoints'
 
 export const fetchMe = async () => {
@@ -11,9 +27,21 @@ export const fetchMe = async () => {
   }
 }
 
-export const logoutUser = async () => {
+export const fetchMeAdmin = async () => {
   try {
-    const response = await axiosInstance.post(endpoints.LOGOUT)
+    const response = await axiosInstance.get(endpoints.ADMINS)
+    // console.log(response.data)
+    return response.data
+  } catch (error) {
+    console.error('Failed to fetch user data:', error)
+  }
+}
+
+export const logoutUser = async (isAdmin?: boolean) => {
+  const endpoint = isAdmin ? endpoints.LOGOUT_ADMIN : endpoints.LOGOUT
+
+  try {
+    const response = await axiosInstance.post(endpoint)
     handleLogout()
     return response
   } catch (error) {
@@ -103,45 +131,109 @@ export const updateNotificationSettings = async (
   }
 }
 
-export const uploadOrder = async (payload: {
-  manufacturer: string
-  manufactureYear: number
-  model: string
-  vin: string
-  transportaionCost: number
-  carCost: number
-  stateId: number
-  exactAddress: string
-  isInsured: boolean
-  carCategory: string
-  mileage: number
-  status: string
-  containerId: number
-  dealerId: number
-  receiverId: number
-}) => {
+export const createOrder = async (payload: OrderPostAdminType) => {
   try {
-    const response = await axiosInstance.post(
-      `${(endpoints.CREATE_ORDER, payload)}`
-    )
+    const response = await axiosInstance.post(endpoints.ORDERS_ADMIN, payload)
     return response
   } catch (error) {
     console.error('Error creating new order:', error)
   }
 }
 
+export const changeOrderAdmin = async (
+  payload: OrderPutAdminType,
+  id: number
+) => {
+  try {
+    const response = await axiosInstance.put(
+      `${endpoints.ORDERS_ADMIN}/${id}`,
+      payload
+    )
+    return response
+  } catch (error) {
+    console.error('Error changing order:', error)
+  }
+}
+
+export const getOrders = async (
+  payload: OrdersQueryType,
+  isAdmin?: boolean
+) => {
+  const endpoint = isAdmin ? endpoints.ORDERS_ADMIN : endpoints.ORDERS
+
+  try {
+    const response = await axiosInstance.get<ORDERS_GET_RES>(endpoint, {
+      params: payload, // Pass payload as query parameters
+    })
+    return response.data
+  } catch (error) {
+    console.error('Failed to fetch orders data:', error)
+  }
+}
+
+export const getDealersAdmin = async (payload: DealersQueryType) => {
+  try {
+    const response = await axiosInstance.get<DEALERS_RES>(
+      endpoints.DEALERS_ADMIN,
+      {
+        params: payload, // Pass payload as query parameters
+      }
+    )
+    return response.data
+  } catch (error) {
+    console.error('Failed to fetch dealers data:', error)
+  }
+}
+
+export const getDealerWithId = async (id: string) => {
+  try {
+    const response = await axiosInstance.get<DEALERS_DATA>(
+      `${endpoints.DEALERS_ADMIN}/${id}`
+    )
+    return response.data
+  } catch (error) {
+    console.error('Failed to fetch dealer data:', error)
+  }
+}
+
 export const getReceivers = async (payload: {
-  skip: number
-  take: number
-  search: string
+  page?: number
+  pageSize?: number
+  search?: string
 }) => {
   try {
-    const response = await axiosInstance.get<RECEIVER_GET_RES[]>(
+    const response = await axiosInstance.get<RECEIVER_GET_RES>(
       endpoints.RECEIVERS,
       {
         params: payload, // Pass payload as query parameters
       }
     )
+    return response.data
+  } catch (error) {
+    console.error('Error getting receivers:', error)
+  }
+}
+
+export const getReceiversAdmin = async (payload: ReceiversQueryType) => {
+  try {
+    const response = await axiosInstance.get<RECEIVER_GET_RES>(
+      endpoints.RECEIVERS_ADMIN,
+      {
+        params: payload, // Pass payload as query parameters
+      }
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error getting receivers:', error)
+  }
+}
+
+export const getReceiversAdminWithId = async (id: string) => {
+  try {
+    const response = await axiosInstance.get<RECEIVER_GET_RES[]>(
+      `${endpoints.RECEIVERS_ADMIN}/${id}`
+    )
+    console.log('getReceiversAdmin:', response)
     return response.data
   } catch (error) {
     console.error('Error getting receivers:', error)
@@ -154,5 +246,41 @@ export const deleteReceiver = async (id: number) => {
     return response
   } catch (error) {
     console.error('Error getting receivers:', error)
+  }
+}
+
+export const createContainer = async (payload: {
+  name: string
+  trackingUrl: string
+}) => {
+  console.log('apiCalls createContainer?')
+  try {
+    const response = await axiosInstance.post<CONTAINER_POST_RES>(
+      endpoints.CONTAINERS_ADMIN,
+      payload
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error with updating the data:', error)
+  }
+}
+
+export const getContainersAdmin = async () => {
+  try {
+    const response = await axiosInstance.get<CONTAINER_GET_RES[]>(
+      endpoints.CONTAINERS_ADMIN
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error getting containers:', error)
+  }
+}
+
+export const checkHealth = async () => {
+  try {
+    const response = await axiosInstance.get(endpoints.HEALTH)
+    return response.data
+  } catch (error) {
+    console.error('Error getting health:', error)
   }
 }

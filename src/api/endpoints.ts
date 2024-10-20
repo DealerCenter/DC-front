@@ -7,6 +7,19 @@ export const endpoints = {
   CHANGE_PASSWORD: '/auth/change-password',
   UPDATE_USER_DATA: '/api/dealers',
   NOTIFICATION_SETTINGS_DEALERS: '/notifications/dealers',
-  CREATE_ORDER: '/orders',
-  RECEIVERS: '/receivers',
+  ORDERS: '/api/orders',
+  RECEIVERS: '/api/receivers',
+  GET_CONTAINERS_BY_ORDER_ID: '/api/containers/by-order',
+  HEALTH: '/health',
+
+  ORDERS_ADMIN: '/orders',
+  DEALERS_ADMIN: '/dealers',
+  RECEIVERS_ADMIN: '/receivers',
+  CONTAINERS_ADMIN: '/containers',
+  GET_CONTAINERS_BY_ORDER_ID_ADMIN: '/containers/by-order',
+
+  ADMINS: '/admins',
+  LOGIN_ADMIN: '/admins/login',
+  LOGOUT_ADMIN: '/admins/logout',
+  CHANGE_PASSWORD_ADMIN: '/admins/change-password',
 }

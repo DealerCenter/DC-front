@@ -1,68 +1,70 @@
-import React from 'react'
-import Image from 'next/image'
-import styled from 'styled-components'
+import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
+import { useMediaQuery } from 'react-responsive'
+import styled from 'styled-components'
+
+import { CONTAINER_GET_RES } from '@/api/apiTypes'
+import theme from '@/app/[locale]/theme'
+import { routeName, ShippingStatus } from '@/common/helpers/constants'
 
 import BasicButton from '@/common/components/appButton/BasicButton'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
-import AppDropdown from '@/common/components/appDropdown/AppDropdown'
+import AppSort from '@/common/components/appSort/AppSort'
+import OrderHistoryBindContainer from './OrderHistoryBindContainer'
+import OrderHistoryChangeStatus from './OrderHistoryChangeStatus'
+import OrderHistoryFilter from './OrderHistoryFilter'
 
-import addIcon from '@/assets/icons/plusInCircle.svg'
-import pencilIcon from '@/assets/icons/pencilFull.svg'
 import checkIcon from '@/assets/icons/checkBoxIcons/checkWhite.svg'
-import filterIconBlack from '@/assets/icons/filterBlack.svg'
-import sortIconBlack from '@/assets/icons/sortBlack.svg'
-import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
-import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
-import AppDropdownFilter from '@/common/components/appDropdown/appFilter/AppDropDownFilter'
-import { useAdminState } from '../../AdminStateContext'
-import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/theme'
-import BindContainerBox from './bindContainer/BindContainerBox'
-import { routeName } from '@/common/helpers/constants'
-import { useRouter } from '@/navigation'
+import pencilIcon from '@/assets/icons/pencilFull.svg'
+import addIcon from '@/assets/icons/plusInCircle.svg'
 
-type Props = { isEditing: boolean; setIsEditing: (arg1: boolean) => void }
-
-const sortOptions = [
-  { label: 'date descending', icon: arrowDown, onClick: () => {} },
-  { label: 'date ascending', icon: arrowUp, onClick: () => {} },
-  { label: 'price descending', icon: arrowDown, onClick: () => {} },
-  { label: 'price ascending', icon: arrowUp, onClick: () => {} },
-]
-
-const changeStatusList = [
-  { label: 'arrived' },
-  { label: 'on the way' },
-  { label: 'in warehouse' },
-]
-
-const filterValues = {
-  status: ['arrived', 'onTheWay', 'inWarehouse'],
-  recipient: [
-    'Luka Tsilosani',
-    'Ani Kviciani',
-    'Zuka Jakeli',
-    'Luka Tsilosani',
-    'Ani Kviciani',
-    'Zuka Jakeli',
-  ],
-  dealer: [
-    'Ani Kviciani',
-    'Ani Kviciani',
-    'Zuka Jakeli',
-    'Zuka Jakeli',
-    'Luka Tsilosani',
-    'Luka Tsilosani',
-  ],
+type Props = {
+  isEditing: boolean
+  setIsEditing: (arg1: boolean) => void
+  setSortByCost: (arg: 'desc' | 'asc' | null) => void
+  setSortByCreateDate: (arg: 'desc' | 'asc' | null) => void
+  isButtonsDisabled: boolean
+  shippingStatus: ShippingStatus
+  setShippingStatus: (arg: ShippingStatus) => void
+  dealerId: number | null
+  setDealerId: (arg: number | null) => void
+  receiverId: number | null
+  setReceiverId: (arg: number | null) => void
+  clearOrderIdsList: () => void
+  shippingStatusOnEdit: string | null
+  setShippingStatusOnEdit: (arg: string | null) => void
+  handleEditSubmit: () => void
+  containerToBind: CONTAINER_GET_RES | null
+  setContainerToBind: (arg: CONTAINER_GET_RES | null) => void
 }
 
-const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
+const ButtonsRow = ({
+  isEditing,
+  setIsEditing,
+  setSortByCost,
+  setSortByCreateDate,
+  isButtonsDisabled,
+  shippingStatus,
+  setShippingStatus,
+  dealerId,
+  setDealerId,
+  receiverId,
+  setReceiverId,
+  clearOrderIdsList,
+  shippingStatusOnEdit,
+  setShippingStatusOnEdit,
+  handleEditSubmit,
+  containerToBind,
+  setContainerToBind,
+}: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const router = useRouter()
 
-  const { setSortOption } = useAdminState()
+  const onDoneEdit = () => {
+    handleEditSubmit()
+  }
 
   const handleEditButton = () => {
     isEditing ? setIsEditing(false) : setIsEditing(true)
@@ -73,28 +75,15 @@ const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
       {isEditing ? (
         <ButtonFrameEdit>
           <ButtonPairFrame>
-            <AppDropdown
-              items={changeStatusList}
-              modalStyle='white'
-              width={240}
-              top={48}
-              isBorder={true}
-            >
-              <BasicButton onClick={() => {}} color='white' isBorder={true}>
-                {t('change status')}
-              </BasicButton>
-            </AppDropdown>
-            <AppDropdown
-              ReadyComponent={<BindContainerBox />}
-              modalStyle='white'
-              // width={240}
-              top={48}
-              isBorder={true}
-            >
-              <BasicButton onClick={() => {}} color='white' isBorder={true}>
-                {t('bind container')}
-              </BasicButton>
-            </AppDropdown>
+            <OrderHistoryChangeStatus
+              shippingStatusOnEdit={shippingStatusOnEdit}
+              setShippingStatusOnEdit={setShippingStatusOnEdit}
+            />
+
+            <OrderHistoryBindContainer
+              containerToBind={containerToBind}
+              setContainerToBind={setContainerToBind}
+            />
           </ButtonPairFrame>
           <ButtonPairFrame>
             <BasicButton
@@ -102,35 +91,33 @@ const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
               padding={16}
               color='white'
             >
-              <ButtonText>{t('cancel')}</ButtonText>
+              <ButtonText onClick={clearOrderIdsList}>{t('cancel')}</ButtonText>
             </BasicButton>
             <BasicButton onClick={() => setIsEditing(false)} padding={16}>
               <ButtonIcon>
                 <Image src={checkIcon} alt='check icon' width={15} />
               </ButtonIcon>
-              <ButtonText>{t('done')}</ButtonText>
+              <ButtonText onClick={onDoneEdit}>{t('done')}</ButtonText>
             </BasicButton>
           </ButtonPairFrame>
         </ButtonFrameEdit>
       ) : (
         <ButtonFrame>
           <ButtonPairFrame>
-            <AppDropdownFilter values={filterValues}>
-              <SecondaryButton
-                text={t('filter')}
-                onClick={() => {}}
-                icon={filterIconBlack}
-                width={isMobile ? 160 : undefined}
-              ></SecondaryButton>
-            </AppDropdownFilter>
-            <AppDropdown items={sortOptions} modalStyle='white'>
-              <SecondaryButton
-                text={t('sort')}
-                onClick={() => {}}
-                icon={sortIconBlack}
-                width={isMobile ? 160 : undefined}
-              ></SecondaryButton>
-            </AppDropdown>
+            <OrderHistoryFilter
+              shippingStatus={shippingStatus}
+              setShippingStatus={setShippingStatus}
+              dealerId={dealerId}
+              setDealerId={setDealerId}
+              receiverId={receiverId}
+              setReceiverId={setReceiverId}
+              isDisabled={isButtonsDisabled}
+            />
+            <AppSort
+              setSortByCost={setSortByCost}
+              setSortByDate={setSortByCreateDate}
+              isDisabled={isButtonsDisabled}
+            />
           </ButtonPairFrame>
           <ButtonPairFrame>
             <SecondaryButton
@@ -144,6 +131,7 @@ const ButtonsRow = ({ isEditing, setIsEditing }: Props) => {
               onClick={handleEditButton}
               icon={pencilIcon}
               width={isMobile ? 160 : undefined}
+              isDisabled={isButtonsDisabled}
             ></SecondaryButton>
           </ButtonPairFrame>
         </ButtonFrame>

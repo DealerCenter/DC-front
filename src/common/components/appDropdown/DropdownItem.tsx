@@ -64,6 +64,10 @@ export default DropdownItem
 
 type ContainerProps = { modalStyle: 'white' | 'black'; icon?: boolean }
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`
+
 const Container = styled.div<ContainerProps>`
   list-style: none;
   font-size: 16px;

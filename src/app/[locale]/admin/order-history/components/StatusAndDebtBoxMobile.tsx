@@ -3,7 +3,10 @@ import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
 
-type Props = { arrivalState: string; amount: number }
+type Props = {
+  arrivalState: 'arrived' | 'onTheWay' | 'inWarehouse'
+  amount: number
+}
 
 const StatusAndDebtBoxMobile = ({ arrivalState, amount }: Props) => {
   const t = useTranslations('')

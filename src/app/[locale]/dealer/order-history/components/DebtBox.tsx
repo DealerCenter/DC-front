@@ -10,7 +10,7 @@ import ArrivalStateBox from '../../../../../common/components/arrivalState/Arriv
 
 type Props = {
   amount: number
-  arrivalState: string
+  arrivalState: 'arrived' | 'onTheWay' | 'inWarehouse'
 }
 
 const DebtBox = ({ amount, arrivalState }: Props) => {
@@ -20,7 +20,7 @@ const DebtBox = ({ amount, arrivalState }: Props) => {
     <Container>
       <Frame>
         <Text>{t('debt')}</Text>
-        <Money>$ {amount.toString()}</Money>
+        <Money>$ {amount}</Money>
       </Frame>
       <ArrivalStateBox arrivalState={arrivalState} />
     </Container>

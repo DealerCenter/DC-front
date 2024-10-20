@@ -5,6 +5,8 @@ import { useTranslations } from 'next-intl'
 import axiosInstance from '@/api/apiClient'
 import { endpoints } from '@/api/endpoints'
 import { AxiosError } from 'axios'
+import { message } from 'antd'
+import { RECEIVER_POST_RES } from '@/api/apiTypes'
 
 export const FIELD_NAMES = {
   ID_IMAGE: 'idImage',
@@ -15,21 +17,25 @@ export const FIELD_NAMES = {
   IS_JURIDICAL: 'isJuridical',
 }
 
-const useAddRecipients = (receiverData: {
-  id: number
-  firstName: string
-  lastName: string
-  personalId: string
-  phoneNumber: string
-  createdAt: string
-  verificationStatus: string
-}) => {
+const useAddRecipients = (
+  receiverData?: {
+    id: number
+    firstName: string
+    lastName: string
+    personalId: string
+    phoneNumber: string
+    createdAt: string
+    verificationStatus: string
+  },
+  setUpdatedSuccessfully?: (arg: boolean) => void
+) => {
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
+
   const [uploadIdImage, setUploadIdImage] = useState<Blob>()
-  //   const router = useRouter()
-  const t = useTranslations('useForm')
+
+  const t = useTranslations('')
 
   const initialValues = {
     [FIELD_NAMES.FIRST_NAME]: receiverData?.firstName || '',
@@ -64,12 +70,21 @@ const useAddRecipients = (receiverData: {
               legalFormData
             )
 
-        console.log('__Receiver uploaded successfully__:', response)
-        // message.success(t('you registered successfully'))
-        // router.push(routeName.dealer)
+        setUpdatedSuccessfully && setUpdatedSuccessfully(true)
+
+        message.success(
+          receiverData
+            ? t('receiver updated successfully')
+            : t('receiver uploaded successfully')
+        )
+
         return response
       } catch (error) {
-        // message.success(t('you could not register'))
+        message.error(
+          receiverData
+            ? t('receiver could not be updated')
+            : t('receiver could not be uploaded')
+        )
         console.error('Error:', error)
         if (error instanceof AxiosError) {
           console.error('Axios Error:', error)

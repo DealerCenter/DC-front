@@ -1,8 +1,5 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
-import { useMediaQuery } from 'react-responsive'
 import Image from 'next/image'
-import theme from '@/app/[locale]/theme'
+import styled, { css } from 'styled-components'
 
 type Props = {
   text: string
@@ -11,6 +8,7 @@ type Props = {
   icon: string
   onClick?: () => void
   isHovered: boolean
+  disabled?: boolean
 }
 
 const GrayContainer = ({
@@ -20,13 +18,14 @@ const GrayContainer = ({
   icon,
   onClick,
   isHovered,
+  disabled,
 }: Props) => {
-  const isTablet = useMediaQuery({
-    query: theme.media?.md,
-  })
-
   return (
-    <Container height={height} onClick={onClick} isHovered={isHovered}>
+    <Container
+      height={height}
+      onClick={disabled ? () => {} : onClick}
+      isHovered={isHovered}
+    >
       <IconBox>
         <Image src={icon} alt='icon' />
       </IconBox>
@@ -50,12 +49,11 @@ const Container = styled.div<ContainerProps>`
   align-items: center;
   text-align: left;
   justify-content: start;
-  /* justify-content: flex-start; */
   background-color: ${({ theme }) => theme.colors?.main_gray_04};
   border: 0.5px solid ${({ theme }) => theme.colors?.main_gray_10};
-  border-radius: 16px;
+  border-radius: ${({ theme }) => theme.radius?.xl};
   gap: 19px;
-  padding: 24px 16px 24px 16px;
+  padding: 24px 16px;
   width: 100%;
 
   ${({ height }) =>
@@ -83,6 +81,10 @@ const Container = styled.div<ContainerProps>`
     width: 100%;
     height: 85px;
   }
+
+  @media ${({ theme }) => theme.media?.notSm} {
+    cursor: pointer;
+  }
 `
 const Frame = styled.div`
   display: flex;
@@ -91,9 +93,11 @@ const Frame = styled.div`
 `
 
 const Text = styled.p<IsHoveredProps>`
+  display: flex;
+  align-items: center;
   margin: 0;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: ${({ theme }) => theme.fontSizes?.medium};
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
 
   @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
@@ -112,7 +116,7 @@ const Text = styled.p<IsHoveredProps>`
 const Balance = styled.p<IsHoveredProps>`
   margin: 0;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: ${({ theme }) => theme.fontWeight?.normal};
 
   @media ${({ theme }) => theme.media?.md} {
     ${({ isHovered }) =>
@@ -131,4 +135,7 @@ const Balance = styled.p<IsHoveredProps>`
 
 const IconBox = styled.div`
   margin-left: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

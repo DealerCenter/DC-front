@@ -84,7 +84,7 @@ const RecipientBox = styled.div`
   align-items: center;
   flex-direction: row;
   gap: 8px;
-  width: 160px;
+  width: 120px;
 `
 const DealerBox = styled.div`
   display: flex;
@@ -92,7 +92,7 @@ const DealerBox = styled.div`
   align-items: center;
   flex-direction: row;
   gap: 8px;
-  width: 160px;
+  width: 120px;
 `
 const StatusBox = styled.div`
   display: flex;
@@ -100,7 +100,7 @@ const StatusBox = styled.div`
   align-items: center;
   flex-direction: row;
   gap: 8px;
-  width: 145px;
+  width: 120px;
 `
 const MoneyBox = styled.div`
   display: flex;
@@ -108,7 +108,7 @@ const MoneyBox = styled.div`
   align-items: center;
   flex-direction: row;
   gap: 8px;
-  width: 120px;
+  width: 100px;
 `
 
 const Text = styled.label`

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
-import { verificationStatusName } from '@/common/helpers/constants'
+import { VERIFICATION_STATUS_NAME } from '@/common/helpers/constants'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
@@ -12,7 +12,7 @@ import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
 import calendarIcon from '@/assets/icons/calendar.svg'
 import AppModal from '@/common/components/modal/AppModal'
-import DeleteWarning from '../addRecipient/components/DeleteWarning'
+import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
 
 type Props = {
   id: number
@@ -23,6 +23,7 @@ type Props = {
   createdAt: string
   verificationStatus: string
   handleDelete: (id: number) => void
+  handleEdit: () => void
 }
 
 const ListItemMobile = ({
@@ -34,6 +35,7 @@ const ListItemMobile = ({
   createdAt,
   verificationStatus,
   handleDelete,
+  handleEdit,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -45,12 +47,12 @@ const ListItemMobile = ({
         <LabelAndIconBox>
           <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
           <Icon>
-            {verificationStatus === verificationStatusName.VERIFIED ? (
+            {verificationStatus === VERIFICATION_STATUS_NAME.VERIFIED ? (
               <Image src={checkedGreen} alt='checked icon' />
-            ) : verificationStatus === verificationStatusName.UNVERIFIED ? (
+            ) : verificationStatus === VERIFICATION_STATUS_NAME.UNVERIFIED ? (
               <Image src={uncheckedRed} alt='unchecked icon' />
             ) : (
-              verificationStatus === verificationStatusName.PENDING && (
+              verificationStatus === VERIFICATION_STATUS_NAME.PENDING && (
                 <Image src={uncheckedYellow} alt='pending icon' />
               )
             )}
@@ -58,13 +60,7 @@ const ListItemMobile = ({
         </LabelAndIconBox>
         <IconBox>
           <Icon>
-            <Image
-              src={editPencil}
-              alt='edit icon'
-              onClick={() => {
-                console.log('edit ', `${firstName} ${lastName}`)
-              }}
-            />
+            <Image src={editPencil} alt='edit icon' onClick={handleEdit} />
           </Icon>
           <Icon>
             <Image
@@ -107,7 +103,9 @@ const ListItemMobile = ({
             handleDelete(id)
             setIsModalOpen(false)
           }}
-          nameOfReceiver={`${firstName} ${lastName}`}
+          header={t('delete recipient')}
+          text={t('delete data warning')}
+          deletingItemText={`${t('recipient person')} ${firstName} ${lastName}`}
         />
       </AppModal>
     </Container>

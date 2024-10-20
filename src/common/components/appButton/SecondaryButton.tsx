@@ -9,6 +9,8 @@ type Props = {
   icon: string
   width?: number
   withoutLabel?: boolean
+  htmlType?: 'button' | 'submit' | 'reset'
+  isDisabled?: boolean
 }
 
 const SecondaryButton = ({
@@ -32,7 +34,7 @@ export default SecondaryButton
 
 type ContainerProps = { width?: number; withoutLabel?: boolean }
 
-const Container = styled.div<ContainerProps>`
+const Container = styled.button<ContainerProps>`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -43,6 +45,7 @@ const Container = styled.div<ContainerProps>`
   border-radius: 12px;
   padding: 0 20px 0 14px;
   gap: 6px;
+  background-color: unset;
 
   ${({ width }) =>
     width

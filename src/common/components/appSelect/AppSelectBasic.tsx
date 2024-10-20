@@ -4,27 +4,32 @@ import styled, { css } from 'styled-components'
 import arrowDown from '@/assets/icons/arrowDown.svg'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import ErrorMessage from '../errorMessage/ErrorMessage'
 
 type Option = {
   value: string
 }
 
 type Props = {
-  options: Option[]
   onChange: (value: string) => void
+  options?: Option[]
+  optionsBasic?: string[]
   placeholder?: string
   width?: number
   placeHolderIsBold?: boolean
   placeHolderIsGray?: boolean
+  errorMessage?: string
 }
 
 const AppSelectBasic = ({
   options,
+  optionsBasic,
   onChange,
   placeholder,
   width,
   placeHolderIsBold,
   placeHolderIsGray,
+  errorMessage,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedValue, setSelectedValue] = useState<string | null>(null)
@@ -55,6 +60,15 @@ const AppSelectBasic = ({
     //eslint-disable-next-line
   }, [])
 
+  const handleOptionHeader = () => {
+    if (options) {
+      return t(options.find((option) => option.value === selectedValue)?.value)
+    }
+    if (optionsBasic) {
+      return optionsBasic.find((option) => option === selectedValue)
+    }
+  }
+
   return (
     <SelectContainer ref={dropdownRef}>
       <SelectHeader
@@ -63,29 +77,35 @@ const AppSelectBasic = ({
         placeHolderIsBold={placeHolderIsBold}
         placeHolderIsGray={placeHolderIsGray}
       >
-        {selectedValue
-          ? t(
-              `${options.find((option) => option.value === selectedValue)?.value}`
-            )
-          : placeholder}
+        {selectedValue ? `${handleOptionHeader()}` : placeholder}
         <Icon isOpen={isOpen}>
           <Image src={arrowDown} alt='arrow down' />
         </Icon>
       </SelectHeader>
       {isOpen && (
         <SelectOptions>
-          {options.map((option) => (
-            <>
-              <OptionItem
-                key={option.value}
-                onClick={() => handleOptionClick(option.value)}
-              >
-                <OptionLabel>{t(option.value)}</OptionLabel>
-              </OptionItem>
-            </>
-          ))}
+          {options &&
+            options.map((option) => (
+              <React.Fragment key={`SelectOptionOption${option.value}`}>
+                <OptionItem onClick={() => handleOptionClick(option.value)}>
+                  <OptionLabel>{t(option.value)}</OptionLabel>
+                </OptionItem>
+              </React.Fragment>
+            ))}
+          {optionsBasic &&
+            optionsBasic.map((option) => (
+              <React.Fragment key={`OptionsBasicOption${option}`}>
+                <OptionItem
+                  key={option}
+                  onClick={() => handleOptionClick(option)}
+                >
+                  <OptionLabel>{option}</OptionLabel>
+                </OptionItem>
+              </React.Fragment>
+            ))}
         </SelectOptions>
       )}
+      {errorMessage && <ErrorMessage text={errorMessage} top={48} left={12} />}
     </SelectContainer>
   )
 }

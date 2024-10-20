@@ -1,21 +1,35 @@
-import React from 'react'
-import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import styled from 'styled-components'
 
-import Box from '../../../../components/common/Box'
-import TextInputFieldPair from './TextInputFieldPair'
 import AddFieldButton from '../../../../components/common/AddFieldButton'
+import Box from '../../../../components/common/Box'
 import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../../hooks/useCreateOrderContext'
+import TextInputFieldPair from './TextInputFieldPair'
+
+const dummyDropdownList = [
+  {
+    label: 'LA',
+    id: 1,
+  },
+  {
+    label: 'NY',
+    id: 2,
+  },
+]
 
 type Props = {}
 
 const LocationBox = ({}: Props) => {
-  const { values, handleBlur, handleChange, errors, touched } =
+  const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
     useCreateOrderContext()
   const t = useTranslations('')
+
+  const handleSetStateId = (id: number) => {
+    setFieldValue(FIELD_NAMES.STATE_ID, id)
+  }
 
   return (
     <Box>
@@ -24,7 +38,6 @@ const LocationBox = ({}: Props) => {
       <LabelsFrame>
         <TextInputFieldPair
           title='state'
-          placeholder='California'
           name={FIELD_NAMES.STATE_ID}
           value={values[FIELD_NAMES.STATE_ID]}
           onChange={handleChange}
@@ -34,10 +47,12 @@ const LocationBox = ({}: Props) => {
               ? errors[FIELD_NAMES.STATE_ID]
               : ''
           }
+          optionsListWidthID={dummyDropdownList}
+          handleSetValueWithId={handleSetStateId}
         />
         <TextInputFieldPair
           title='address'
-          placeholder='Beverly hills, 235'
+          placeholder={t('specify an address')}
           name={FIELD_NAMES.EXACT_ADDRESS}
           value={values[FIELD_NAMES.EXACT_ADDRESS]}
           onChange={handleChange}

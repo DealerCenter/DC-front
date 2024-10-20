@@ -1,33 +1,73 @@
-import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
+import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 
-import searchIcon from '@/assets/icons/searchForButton.svg'
+import { getDealersAdmin } from '@/api/apiCalls'
+import { DEALERS_DATA } from '@/api/apiTypes'
 import plusIcon from '@/assets/icons/plus.svg'
-import UserListEmpty from './components/UserListEmpty'
-import AddRecipient from './components/addRecipient/AddRecipient'
 import AppModal from '@/common/components/modal/AppModal'
-import { users as dummyUsers } from '@/assets/DummyData'
+import Pagination from '@/common/components/pagination/Pagination'
+import SearchButton from '@/common/components/searchButton/SearchButton'
+// import AddRecipient from './components/addRecipient/AddRecipient'
 import DealersList from './components/DealersList'
+import AddRecipientAdmin from './components/addRecipientAdmin/AddRecipientAdmin'
+
+const ITEMS_PER_PAGE = 8
 
 type Props = {}
 
 const DealersListBox = (props: Props) => {
-  const t = useTranslations('')
+  const [isSearchActive, setIsSearchActive] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [totalPages, setTotalPages] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [dealersList, setDealersList] = useState<DEALERS_DATA[]>()
+  const t = useTranslations('')
+
+  const handleGetDealers = async () => {
+    setIsLoading(true)
+    const response = await getDealersAdmin({
+      page: currentPage,
+      pageSize: ITEMS_PER_PAGE,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      personalId: '',
+    })
+    if (response) {
+      setDealersList(response.data)
+      setCurrentPage(response.page)
+      setTotalPages(response.pageCount)
+    }
+    setIsLoading(false)
+  }
+
+  const handleDeleteDealer = async (dealerId: number) => {
+    console.log('request delete dealer:', dealerId)
+  }
+
+  useEffect(() => {
+    handleGetDealers()
+    //eslint-disable-next-line
+  }, [currentPage])
 
   return (
     <Container>
       <Frame>
         <HeaderH4Bold text={t('dealers list')} />
         <ButtonFrame>
-          <SecondaryButton
+          <SearchButton
+            isActive={isSearchActive}
+            setIsActive={setIsSearchActive}
             text={t('search')}
-            onClick={() => {}}
-            icon={searchIcon}
+            placeholder={t('search for dealer')}
+            onSubmit={() => {}}
+            onCloseSearch={() => {}}
           />
           <SecondaryButton
             text={t('add recipient')}
@@ -38,7 +78,26 @@ const DealersListBox = (props: Props) => {
           />
         </ButtonFrame>
       </Frame>
-      <DealersList dealersData={dummyUsers} />
+      {dealersList && (
+        <DealersList
+          dealersData={dealersList}
+          onDeleteDealer={handleDeleteDealer}
+        />
+      )}
+      <PaginationFrame>
+        <Pagination
+          currentPage={currentPage}
+          numOfPages={totalPages}
+          setCurrentPage={setCurrentPage}
+          isDisabled={isLoading}
+        />
+      </PaginationFrame>
+      <AppModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <AddRecipientAdmin onClose={() => setIsModalOpen(false)} />
+      </AppModal>
     </Container>
   )
 }
@@ -85,4 +144,10 @@ const ButtonFrame = styled.div`
   flex-direction: row;
   gap: 10px;
   padding: 8px 0 24px 0;
+`
+
+const PaginationFrame = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: ${({ theme }) => theme.spacing?.md};
 `

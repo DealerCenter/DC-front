@@ -10,7 +10,7 @@ import ArrivalStateBox from '../../../../../common/components/arrivalState/Arriv
 
 type Props = {
   amount: number
-  arrivalState: string
+  arrivalState: 'arrived' | 'onTheWay' | 'inWarehouse'
   buyerFullName: string
   buyerPhoneNumber: string
   vinCode: string
@@ -61,7 +61,7 @@ const Container = styled.div`
 `
 
 const ArrivalStateBoxFrame = styled.div`
-  width: 145px;
+  width: 120px;
   display: flex;
   justify-content: center;
 `
@@ -77,7 +77,7 @@ const Money = styled.label`
 `
 
 const Frame = styled.div`
-  width: 160px;
+  width: 140px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;

@@ -9,6 +9,7 @@ import { routeName } from '@/common/helpers/constants'
 import { AxiosError } from 'axios'
 import { handleAuthResponse } from '@/common/helpers/utils'
 import { message } from 'antd'
+import { LOGIN_RES } from '@/api/apiTypes'
 
 export const FIELD_NAMES = {
   EMAIL: 'email',
@@ -19,7 +20,6 @@ const useLoginForm = () => {
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
-  const tUseForm = useTranslations('useForm')
   const t = useTranslations('')
   const router = useRouter()
 
@@ -54,8 +54,8 @@ const useLoginForm = () => {
     validationSchema: yup.object({
       [FIELD_NAMES.EMAIL]: yup
         .string()
-        .email(tUseForm('must be valid email'))
-        .required(tUseForm('email required')),
+        .email(t('must be valid email'))
+        .required(t('email required')),
       [FIELD_NAMES.PASSWORD]: yup.string().required(t('password required')),
     }),
   })

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
@@ -13,6 +13,7 @@ import emailIcon from '@/assets/icons/email.svg'
 import passwordIcon from '@/assets/icons/password.svg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../../theme'
+import { message } from 'antd'
 
 type Props = {
   goToRegistration: () => void
@@ -22,8 +23,19 @@ const LoginForm = ({ goToRegistration }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const [isRemember, setIsRemember] = useState(false)
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, handleSubmit, axiosError } =
-    useLoginForm()
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    axiosError,
+    errors,
+    touched,
+  } = useLoginForm()
+
+  useEffect(() => {
+    axiosError && message.error(axiosError.message)
+  }, [axiosError])
 
   return (
     <Container>
@@ -34,13 +46,18 @@ const LoginForm = ({ goToRegistration }: Props) => {
             type='email'
             name={FIELD_NAMES.EMAIL}
             placeholder='john@example.com'
-            value={values.email}
+            value={values[FIELD_NAMES.EMAIL]}
             onChange={handleChange}
             onBlur={handleBlur}
             icon={
               <Image src={emailIcon} alt='email icon' width={20} height={16} />
             }
             width={isMobile ? undefined : 442}
+            errorMessage={
+              errors[FIELD_NAMES.EMAIL] && touched[FIELD_NAMES.EMAIL]
+                ? errors[FIELD_NAMES.EMAIL]
+                : ''
+            }
           />
         </TextInputContainer>
         <div>
@@ -49,7 +66,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
               type='password'
               name={FIELD_NAMES.PASSWORD}
               placeholder='•••••••'
-              value={values.password}
+              value={values[FIELD_NAMES.PASSWORD]}
               onChange={handleChange}
               onBlur={handleBlur}
               icon={
@@ -61,7 +78,11 @@ const LoginForm = ({ goToRegistration }: Props) => {
                 />
               }
               width={isMobile ? undefined : 442}
-              errorMessage={axiosError ? axiosError.message : ''}
+              errorMessage={
+                errors[FIELD_NAMES.PASSWORD] && touched[FIELD_NAMES.PASSWORD]
+                  ? errors[FIELD_NAMES.PASSWORD]
+                  : ''
+              }
             />
           </TextInputContainer>
           <LabelContainer>
@@ -78,6 +99,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
           disabled={false}
           onClick={handleSubmit}
           width={442}
+          htmlType='submit'
         />
       </StyledForm>
       <div>

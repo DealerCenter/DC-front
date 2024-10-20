@@ -7,12 +7,19 @@ import theme from '@/app/[locale]/theme'
 import Box from '../../../components/common/Box'
 import ParametersBox from './components/ParametersBox'
 import LocationBox from './components/LocationBox'
+import {
+  FIELD_NAMES,
+  useCreateOrderContext,
+} from '../../hooks/useCreateOrderContext'
 
 type Props = {}
 
 const LeftFrame = ({}: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
+
+  const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
+    useCreateOrderContext()
 
   return (
     <Container>
@@ -22,7 +29,13 @@ const LeftFrame = ({}: Props) => {
         <Box>
           <Header>{t('more details')}</Header>
           <Line />
-          <TextArea placeholder={t('description')} />
+          <TextArea
+            placeholder={t('description')}
+            name={FIELD_NAMES.ADDITIONAL_DETAILS}
+            value={values[FIELD_NAMES.ADDITIONAL_DETAILS] ?? ''}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
         </Box>
       )}
     </Container>
