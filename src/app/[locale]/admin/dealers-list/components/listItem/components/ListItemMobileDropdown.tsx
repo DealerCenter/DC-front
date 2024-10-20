@@ -10,23 +10,25 @@ import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import calendarIcon from '@/assets/icons/calendar.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
+import { RECEIVER_DATA } from '@/api/apiTypes'
+import { formatDate } from '@/common/helpers/simpleFunctions'
 
 type Props = {
-  fullName: string
-  id: string
-  mobile: string
-  dateOfAddition: string
-  isVerified: boolean
+  receiverData: RECEIVER_DATA
   onClick: () => void
 }
 
 const ListItemMobileDropdown = ({
-  fullName,
-  id,
-  mobile,
-  dateOfAddition,
-  isVerified,
   onClick,
+  receiverData: {
+    id,
+    personalId,
+    firstName,
+    lastName,
+    phoneNumber,
+    createdAt,
+    verificationStatus,
+  },
 }: Props) => {
   const t = useTranslations('')
 
@@ -34,10 +36,10 @@ const ListItemMobileDropdown = ({
     <Container onClick={onClick}>
       <TopFrame>
         <NameAndDebtBox>
-          <NameLabel>{fullName}</NameLabel>
+          <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
           <IconAndDebtBox>
             <Icon>
-              {isVerified ? (
+              {verificationStatus ? (
                 <Image src={checkedGreen} alt='checked icon' />
               ) : (
                 <Image src={uncheckedRed} alt='unchecked icon' />
@@ -49,17 +51,21 @@ const ListItemMobileDropdown = ({
         <IconAndLabelBox>
           <Image src={calendarIcon} alt='calendar icon' />
           <Label>
-            {t('added')} {dateOfAddition}
+            {t('added')} {formatDate(createdAt)}
           </Label>
         </IconAndLabelBox>
       </TopFrame>
       <DetailsFrame>
         <LabelValuePair
           label={t('personal number')}
-          value={id}
+          value={personalId}
           valueWidth={123}
         />
-        <LabelValuePair label={t('mobile')} value={mobile} valueWidth={123} />
+        <LabelValuePair
+          label={t('mobile')}
+          value={phoneNumber}
+          valueWidth={123}
+        />
       </DetailsFrame>
       <BottomFrame>
         <IconBox>

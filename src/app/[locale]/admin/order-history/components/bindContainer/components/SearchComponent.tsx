@@ -1,45 +1,35 @@
-import React, { useState } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
-import { useTranslations } from 'next-intl'
 
 import closeX from '@/assets/icons/closeX.svg'
 import searchIcon from '@/assets/icons/SearchIconBlack.svg'
 
-type Props = {}
+type Props = {
+  searchQuery: string
+  setSearchQuery: (arg: string) => void
+  placeholder?: string
+}
 
-const SearchComponent = (props: Props) => {
-  const [inputValue, setInputValue] = useState('')
-  const t = useTranslations('')
-
-  const handleSearch = () => {
-    console.log(inputValue)
-    setInputValue('')
-  }
-
+const SearchComponent = ({
+  searchQuery,
+  setSearchQuery,
+  placeholder,
+}: Props) => {
   const handleClear = () => {
-    setInputValue('')
-  }
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      // Handle Enter key press here
-      handleSearch()
-    }
+    setSearchQuery('')
   }
 
   return (
     <Container onClick={() => {}}>
-      <IconBox onClick={handleSearch}>
+      <IconBox onClick={() => {}}>
         <Image width={18} height={18} src={searchIcon} alt='search icon' />
       </IconBox>
 
       <StyledInput
         type='text'
-        placeholder={t('vin code')}
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={handleKeyDown}
+        placeholder={placeholder}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
       <CloseIconBox onClick={handleClear}>
         <Image src={closeX} alt='search icon' width={13} />
@@ -80,9 +70,11 @@ const IconBox = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  left: 17px;
+  left: 7px;
 
-  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: ${({ theme }) => theme.radius?.lg};
 `
 
 const CloseIconBox = styled.div`
@@ -95,6 +87,10 @@ const CloseIconBox = styled.div`
   right: 10px;
   border-radius: ${({ theme }) => theme.radius?.lg};
   background-color: ${({ theme }) => theme.colors?.main_gray_04};
+
+  &:active {
+    background-color: ${({ theme }) => theme.colors?.main_gray_10};
+  }
 
   cursor: pointer;
 `

@@ -130,4 +130,6 @@ const Label = styled.label<IsHoveredProps>`
             width: 0;
           `}
   }
+
+  cursor: pointer;
 `

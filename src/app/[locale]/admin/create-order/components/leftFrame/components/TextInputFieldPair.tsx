@@ -1,35 +1,48 @@
-import React, { ChangeEventHandler, useEffect, useState } from 'react'
-import styled from 'styled-components'
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-
-import TextInput from '@/common/components/inputElements/TextInput'
-import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
-
-import checkedGreen from '@/assets/icons/checkedGreen.svg'
+import { ChangeEventHandler, useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import styled from 'styled-components'
+
 import theme from '@/app/[locale]/theme'
+import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
+import AppSelectTrueFalse from '@/common/components/appSelect/AppSelectTrueFalse'
+import TextInput from '@/common/components/inputElements/TextInput'
 
 type Props = {
   title: string
-  value: string
+  value: string | number
+  booleanValue?: boolean
   placeholder?: string
-  selectItems?: { value: string }[]
   name?: string
   onBlur?: ChangeEventHandler<HTMLInputElement>
   onChange?: ChangeEventHandler<HTMLInputElement>
   errorMessage?: string
+  selectOptions?: {
+    option1: { value: string; onChoose: () => void }
+    option2: { value: string; onChoose: () => void }
+  }
+  optionsListWidthID?: { label: string; id: number }[]
+  handleSetValueWithId?: (id: number) => void
+  selectOptionsBasic?: string[]
+  handleSetValueBasic?: (value: string) => void
+  onYesOrNoChange?: (value: boolean) => void
 }
 
 const TextInputFieldPair = ({
   title,
   value,
-  selectItems,
+  booleanValue,
   placeholder,
   name,
   onBlur,
   onChange,
   errorMessage,
+  selectOptions,
+  optionsListWidthID,
+  handleSetValueWithId,
+  selectOptionsBasic,
+  handleSetValueBasic,
+  onYesOrNoChange,
 }: Props) => {
   const [textInputWidth, setTextInputWidth] = useState(220)
   const [textInputWidth2, setTextInputWidth2] = useState(220)
@@ -61,11 +74,32 @@ const TextInputFieldPair = ({
         isOutline={false}
         isDisabled={true}
       />
-      {selectItems ? (
-        <AppSelectBasic
-          options={selectItems}
-          onChange={() => {}}
+      {onYesOrNoChange ? (
+        <AppSelectTrueFalse
+          booleanValue={booleanValue}
+          onChange={onYesOrNoChange}
           placeholder={t('select')}
+          errorMessage={errorMessage}
+          fontSize={13}
+        />
+      ) : optionsListWidthID ? (
+        <AppSelectAntDesign
+          value={value}
+          optionsWithId={optionsListWidthID}
+          onChangeId={handleSetValueWithId ? handleSetValueWithId : () => {}}
+          placeholder={t('select')}
+          errorMessage={errorMessage}
+          fontSize={13}
+        />
+      ) : selectOptionsBasic ? (
+        <AppSelectAntDesign
+          value={value}
+          optionsBasic={selectOptionsBasic}
+          onChangeString={handleSetValueBasic ? handleSetValueBasic : () => {}}
+          errorMessage={errorMessage}
+          placeholder={t('select')}
+          width={textInputWidth2}
+          fontSize={13}
         />
       ) : (
         <TextInput

@@ -10,39 +10,57 @@ import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import calendarIcon from '@/assets/icons/calendar.svg'
 import downArrowGray from '@/assets/icons/downArrowGray.svg'
 import ListItemMobileDropdown from './ListItemMobileDropdown'
+import { DEALERS_DATA, RECEIVER_DATA } from '@/api/apiTypes'
+import { formatDate } from '@/common/helpers/simpleFunctions'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
 
 type Props = {
-  fullName: string
-  id: string
-  mobile: string
-  dateOfAddition: string
-  isVerified: boolean
   onClick: () => void
+  userData: DEALERS_DATA
+  isDropdownOpen: boolean
+  setIsDropdownOpen: (arg: boolean) => void
+  isDisabled?: boolean
+  onDeleteDealer: (orderId: number) => void
 }
 
 const ListItemMobile = ({
-  fullName,
-  id,
-  mobile,
-  dateOfAddition,
-  isVerified,
   onClick,
+  userData: {
+    id,
+    personalId,
+    firstName,
+    lastName,
+    createdAt,
+    phoneNumber,
+    idImageVerificationStatus,
+    receivers,
+  },
+  isDropdownOpen,
+  setIsDropdownOpen,
+  isDisabled,
+  onDeleteDealer,
 }: Props) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const t = useTranslations('')
+
+  const handleDropdown = (e: any) => {
+    e.stopPropagation()
+    if (receivers?.length === 0) return
+
+    !isDisabled && setIsDropdownOpen(!isDropdownOpen)
+  }
 
   return (
     <Container>
       <TopFrame>
         <NameAndDebtBox>
-          <NameLabel onClick={onClick}>{fullName}</NameLabel>
+          <NameLabel
+            onClick={isDisabled ? () => {} : onClick}
+          >{`${firstName} ${lastName}`}</NameLabel>
           <IconAndDebtBox>
             <Icon>
-              {isVerified ? (
-                <Image src={checkedGreen} alt='checked icon' />
-              ) : (
-                <Image src={uncheckedRed} alt='unchecked icon' />
-              )}
+              <VerificationIcon
+                verificationStatus={idImageVerificationStatus}
+              />
             </Icon>
             <DebtLabel>{`$ 5750`}</DebtLabel>
           </IconAndDebtBox>
@@ -50,31 +68,31 @@ const ListItemMobile = ({
         <IconAndLabelBox>
           <Image src={calendarIcon} alt='calendar icon' />
           <Label>
-            {t('added')} {dateOfAddition}
+            {t('added')} {formatDate(createdAt)}
           </Label>
         </IconAndLabelBox>
       </TopFrame>
       <DetailsFrame>
-        <LabelValuePair label={t('personal number')} value={id} />
-        <LabelValuePair label={t('mobile')} value={mobile} />
+        <LabelValuePair label={t('personal number')} value={personalId} />
+        <LabelValuePair label={t('mobile')} value={phoneNumber} />
         <LabelValuePair label={t('num of cars')} value={'15'} />
       </DetailsFrame>
       <DropdownBox>
-        <DropdownArrow onClick={() => setIsDropdownOpen((is) => !is)}>
+        <DropdownArrow onClick={handleDropdown}>
           <Image src={downArrowGray} alt='down arrow' />
         </DropdownArrow>
         <TextBold16Gray>{t('see all recipients')}</TextBold16Gray>
       </DropdownBox>
-      {isDropdownOpen && (
-        <ListItemMobileDropdown
-          fullName={fullName}
-          id={id}
-          mobile={mobile}
-          dateOfAddition={dateOfAddition}
-          isVerified={isVerified}
-          onClick={() => {}}
-        />
-      )}
+      {isDropdownOpen && <></>}
+      {isDropdownOpen &&
+        receivers &&
+        receivers.map((receiver, i) => (
+          <ListItemMobileDropdown
+            key={`listItemFullDropdown${receiver.personalId}`}
+            onClick={() => {}}
+            receiverData={receiver}
+          />
+        ))}
     </Container>
   )
 }

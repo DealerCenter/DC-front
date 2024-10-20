@@ -7,15 +7,10 @@ import theme from '@/app/[locale]/theme'
 
 import ListItem from './listItem/ListItem'
 import LabelsContainer from '@/common/components/labelsContainer/LabelsContainer'
+import { CONTAINER_GET_RES } from '@/api/apiTypes'
 
 type Props = {
-  containersData: {
-    brandName: string
-    link: string
-    departureDate: string
-    arrivalDate: string
-    numberOfCars: string
-  }[]
+  containersData: CONTAINER_GET_RES[]
 }
 
 const ContainersList = ({ containersData }: Props) => {
@@ -29,22 +24,28 @@ const ContainersList = ({ containersData }: Props) => {
           {!isMobile && (
             <LabelsContainer
               labels={[
-                t('brand name'),
-                t('link'),
-                t('departure date'),
-                t('arrival date'),
-                t('num of cars'),
+                // t('brand name'),
+                // t('link'),
+                // t('departure date'),
+                // t('arrival date'),
+                // t('num of cars'),
+                'name',
+                'trackingUrl',
+                'createdAt',
+                'updatedAt',
+                'id',
               ]}
               height={88}
             />
           )}
-          {containersData.map((data, i) => (
-            <ListItem
-              containerData={data}
-              key={`ListItemForContainersList${i}`}
-              onClick={() => {}}
-            />
-          ))}
+          {containersData &&
+            containersData.map((data, i) => (
+              <ListItem
+                containerData={data}
+                key={`ListItemForContainersList${i}`}
+                onClick={() => {}}
+              />
+            ))}
         </>
       )}
     </Container>

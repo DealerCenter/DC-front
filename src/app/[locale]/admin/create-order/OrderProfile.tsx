@@ -1,48 +1,45 @@
 'use client'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
+import { useEffect } from 'react'
+import styled from 'styled-components'
 
 import { routeName } from '@/common/helpers/constants'
 
+import { getOrders } from '@/api/apiCalls'
+import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
+import FormSaveButton from '@/common/components/appButton/FormSaveButton'
+import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
+import DetailsRow from './components/detailsRow/DetailsRow'
 import IdAndDateBox from './components/IdAndDateBox'
 import LeftFrame from './components/leftFrame/LeftFrame'
 import RightFrame from './components/rightFrame/RightFrame'
-import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
-import ImagesUploadComponent from '../components/common/ImagesUploadComponent'
-import DetailsRow from './components/detailsRow/DetailsRow'
-import EditButton from '../components/common/EditButton'
-import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
-import FormSaveButton from '@/common/components/appButton/FormSaveButton'
-import {
-  FIELD_NAMES,
-  useCreateOrderContext,
-} from './hooks/useCreateOrderContext'
+import { useCreateOrderContext } from './hooks/useCreateOrderContext'
+import ImagesUploadComponentDummy from '../components/common/ImagesUploadComponentDummy'
 
-type Props = {}
+const isAdmin = true
 
-const OrderProfile = (props: Props) => {
+type Props = { id?: string }
+
+const OrderProfile = ({ id }: Props) => {
   const t = useTranslations('')
   const router = useRouter()
+  const { handleSubmit, isButtonDisabled, prefillFormikValues, setOrderId } =
+    useCreateOrderContext()
 
-  const { values, handleSubmit } = useCreateOrderContext()
+  const handleGetOrderData = async () => {
+    const response = await getOrders({}, isAdmin)
+    response?.data && prefillFormikValues(response?.data[0])
+  }
 
-  const isButtonDisabled =
-    values[FIELD_NAMES.MANUFACTURER].length === 0 ||
-    values[FIELD_NAMES.MODEL].length === 0 ||
-    values[FIELD_NAMES.VIN].length === 0 ||
-    values[FIELD_NAMES.EXACT_ADDRESS].length === 0 ||
-    values[FIELD_NAMES.CAR_CATEGORY].length === 0 ||
-    values[FIELD_NAMES.STATUS].length === 0 ||
-    values[FIELD_NAMES.MILEAGE] === 0 ||
-    values[FIELD_NAMES.TRANSPORTATION_COST] === 0 ||
-    values[FIELD_NAMES.CAR_COST] === 0 ||
-    values[FIELD_NAMES.STATE_ID] === 0 ||
-    values[FIELD_NAMES.CONTAINER_ID] === 0 ||
-    values[FIELD_NAMES.DEALER_ID] === 0 ||
-    values[FIELD_NAMES.RECEIVER_ID] === 0
+  useEffect(() => {
+    handleGetOrderData()
+    //eslint-disable-next-line
+  }, [])
+
+  useEffect(() => {
+    id && setOrderId(id)
+  }, [id, setOrderId])
 
   return (
     <Container>
@@ -55,10 +52,10 @@ const OrderProfile = (props: Props) => {
         <FormSaveButton
           onClick={handleSubmit}
           text={t('save')}
-          // disabled={isButtonDisabled}
+          htmlType='submit'
+          disabled={isButtonDisabled}
         />
       </TopButtonsFrame>
-
       <ImageFrame>
         <IdAndDateFrame>
           <IdAndDateBox
@@ -72,12 +69,14 @@ const OrderProfile = (props: Props) => {
           <ArrivalStateBox arrivalState='arrived' />
         </StateBoxFrame>
 
-        <ImagesUploadComponent
+        <ImagesUploadComponentDummy
+          text={t('add photos of vehicle')}
           onClick={() => router.push(routeName.adminCreateOrderImageUpload)}
           height={372}
         />
         <DetailsRow />
       </ImageFrame>
+
       <BottomFrame>
         <LeftFrame />
         <RightFrame />

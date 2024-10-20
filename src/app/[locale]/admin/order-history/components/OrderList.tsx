@@ -1,84 +1,41 @@
-import React, { useEffect } from 'react'
+import styled from 'styled-components'
 import OrderListItem from './OrderListItem'
-import styled, { css } from 'styled-components'
 
-import DummyImage from '@/assets/images/DummyCarImage.jpg'
-import OrderListHeader from './OrderListHeader'
-import { useAdminState } from '../../AdminStateContext'
-import { useMediaQuery } from 'react-responsive'
+import { ORDER_DATA } from '@/api/apiTypes'
 import theme from '@/app/[locale]/theme'
+import DummyImage from '@/assets/images/DummyCarImage.jpg'
+import { routeName } from '@/common/helpers/constants'
+import { useRouter } from '@/navigation'
+import { useMediaQuery } from 'react-responsive'
+import OrderListHeader from './OrderListHeader'
+import { useEffect, useState } from 'react'
 
 type Props = {
-  onClick: () => void
-  currentPage: number
-  itemsPerPage: number
-  list: {
-    brand: string
-    model: string
-    year: string
-    vinCode: string
-    buyerFullName: string
-    buyerPhoneNumber: string
-    debt: number
-    isArrived: boolean
-    arrivalState: string
-  }[]
+  list: ORDER_DATA[]
   isEditing: boolean
-  setTotalPages: (arg1: number) => void
-  setCurrentPage: (arg1: number) => void
+  addOrderId: (id: number) => void
+  removeOrderId: (id: number) => void
 }
 
-const OrderList = ({
-  list,
-  onClick,
-  currentPage,
-  itemsPerPage,
-  isEditing,
-  setTotalPages,
-  setCurrentPage,
-}: Props) => {
+const OrderList = ({ list, isEditing, addOrderId, removeOrderId }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
-  const { activeOptionStatus, sortOption } = useAdminState()
 
-  const filteredList = activeOptionStatus
-    ? list.filter((cur) => cur.arrivalState === activeOptionStatus)
-    : list
-
-  const OrderedFilteredList = () => {
-    switch (sortOption) {
-      case 'price ascending':
-        return sortOption
-          ? filteredList.sort((a, b) => a.debt - b.debt)
-          : filteredList
-      case 'price descending':
-        return sortOption
-          ? filteredList.sort((a, b) => b.debt - a.debt)
-          : filteredList
-      default:
-        return filteredList
-    }
-  }
-
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [activeOptionStatus, setCurrentPage])
-
-  setTotalPages(Math.ceil(filteredList.length / itemsPerPage))
-
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  const currentItems = OrderedFilteredList().slice(startIndex, endIndex)
+  const router = useRouter()
 
   return (
     <ListFrame>
       {!isMobile && <OrderListHeader />}
-      {currentItems.map((car, i) => (
+      {list.map((order, i) => (
         <OrderListItem
-          onClick={onClick}
+          onClick={() =>
+            router.push(`${routeName.adminCreateOrder}/${order.id}`)
+          }
           imageLink={DummyImage.src}
-          item={car}
-          key={`${car.vinCode}82kj32${i}`}
+          item={order}
+          key={`${order.id}82kj32${i}`}
           isEditing={isEditing}
+          addOrderId={addOrderId}
+          removeOrderId={removeOrderId}
         />
       ))}
     </ListFrame>

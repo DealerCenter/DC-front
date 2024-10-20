@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 import { useRouter } from '@/navigation'
-import { routeName } from '@/common/helpers/constants'
+import { routeName, ShippingStatus } from '@/common/helpers/constants'
 
 import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
@@ -16,48 +16,83 @@ import Pagination from '@/common/components/pagination/Pagination'
 
 import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
 import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
+import { ORDER_DATA } from '@/api/apiTypes'
+import { getOrders } from '@/api/apiCalls'
+import AppSort from '@/common/components/appSort/AppSort'
+import OrderHistoryFilter from './components/OrderHistoryFilter'
 
-const itemsPerPage = 8
-const totalPages = Math.ceil(orderedCars.length / 8)
+const sortOptions = [
+  { label: 'date descending', icon: arrowDown },
+  { label: 'date ascending', icon: arrowUp },
+  { label: 'price descending', icon: arrowDown },
+  { label: 'price ascending', icon: arrowUp },
+]
+
+const ITEMS_PER_PAGE = 8
 
 type Props = {}
 
 const OrderHistory = (props: Props) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [isPageLoaded, setIsPageLoaded] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
+  const [isEditing, setIsEditing] = useState(false)
+  const [ordersList, setOrdersList] = useState<ORDER_DATA[]>()
+  const [sortByCost, setSortByCost] = useState<'asc' | 'desc' | null>(null)
+  const [sortByCreateDate, setSortByCreateDate] = useState<
+    'asc' | 'desc' | null
+  >(null)
+  const [shippingStatus, setShippingStatus] = useState<ShippingStatus>(null)
+
+  const [receiverId, setReceiverId] = useState<number | null>(null)
+
   const t = useTranslations('')
   const router = useRouter()
 
-  const sortOptions = [
-    { label: 'date descending', icon: arrowDown },
-    { label: 'date ascending', icon: arrowUp },
-    { label: 'price descending', icon: arrowDown },
-    { label: 'price ascending', icon: arrowUp },
-  ]
+  const handleGetOrders = async () => {
+    setIsLoading(true)
+    const response = await getOrders({
+      page: currentPage,
+      pageSize: ITEMS_PER_PAGE,
+      sortByCreateDate: sortByCreateDate,
+      sortByCost: sortByCost,
+      status: shippingStatus,
+    })
+    if (response) {
+      setIsPageLoaded(true)
+      setOrdersList(response.data)
+      setCurrentPage(response.page)
+      setTotalPages(response.pageCount)
+    }
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    handleGetOrders()
+    //eslint-disable-next-line
+  }, [sortByCost, sortByCreateDate, shippingStatus, currentPage])
 
   return (
     <Container>
       <TopFrame>
         <HeaderH4Bold text={t('order history')} />
         <ButtonFrame>
-          <SecondaryButton
-            text={t('filter')}
-            onClick={() => {}}
-            icon={filterIconBlack}
-          ></SecondaryButton>
-          <AppDropdown items={sortOptions} modalStyle='white'>
-            <SecondaryButton
-              text={t('sort')}
-              onClick={() => {}}
-              icon={sortIconBlack}
-            ></SecondaryButton>
-          </AppDropdown>
+          <OrderHistoryFilter
+            shippingStatus={shippingStatus}
+            setShippingStatus={setShippingStatus}
+            setReceiverId={setReceiverId}
+            receiverId={receiverId}
+          />
+          <AppSort
+            setSortByCost={setSortByCost}
+            setSortByDate={setSortByCreateDate}
+          />
         </ButtonFrame>
       </TopFrame>
       <OrderList
         onClick={() => router.push(routeName.dealerOrder)}
-        list={orderedCars}
-        currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
+        orderData={ordersList}
       />
       <PaginationFrame>
         <Pagination

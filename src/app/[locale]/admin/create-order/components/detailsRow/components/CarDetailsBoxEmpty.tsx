@@ -11,8 +11,12 @@ import {
 
 type Props = {}
 
+const INPUT_WIDTH_MOBILE = 311
+const INPUT_WIDTH_TABLET = 242
+const INPUT_WIDTH_DESKTOP = 356
+
 const CarDetailsBoxEmpty = (props: Props) => {
-  const [textInputWidth, setTextInputWidth] = useState(0)
+  const [textInputWidth, setTextInputWidth] = useState(242)
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
@@ -20,7 +24,13 @@ const CarDetailsBoxEmpty = (props: Props) => {
     useCreateOrderContext()
 
   useEffect(() => {
-    setTextInputWidth(isMobile ? 311 : isTablet ? 242 : 356)
+    setTextInputWidth(
+      isMobile
+        ? INPUT_WIDTH_MOBILE
+        : isTablet
+          ? INPUT_WIDTH_TABLET
+          : INPUT_WIDTH_DESKTOP
+    )
   }, [isMobile, isTablet, setTextInputWidth])
 
   return (
@@ -46,9 +56,9 @@ const CarDetailsBoxEmpty = (props: Props) => {
         width={textInputWidth}
         height={48}
         type='text'
-        placeholder={t('release year')}
-        fontWeight='bold'
         fontSize={13}
+        fontWeight='bold'
+        placeholder={t('release year')}
         name={FIELD_NAMES.MANUFACTURE_YEAR}
         value={values[FIELD_NAMES.MANUFACTURE_YEAR]}
         onChange={handleChange}
@@ -64,14 +74,18 @@ const CarDetailsBoxEmpty = (props: Props) => {
         width={textInputWidth}
         height={48}
         type='text'
-        name='vehicle feature'
-        placeholder={`NotWorking ${t('vehicle feature')}`}
-        value={''}
-        onChange={() => {}}
-        onBlur={() => {}}
-        fontWeight='bold'
         fontSize={13}
-        isDisabled={true}
+        fontWeight='bold'
+        placeholder={t('vehicle feature')}
+        name={FIELD_NAMES.CAR_DETAILS}
+        value={values[FIELD_NAMES.CAR_DETAILS] ?? ''}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        errorMessage={
+          errors[FIELD_NAMES.CAR_DETAILS] && touched[FIELD_NAMES.CAR_DETAILS]
+            ? errors[FIELD_NAMES.CAR_DETAILS]
+            : ''
+        }
       />
       <TextInput
         width={textInputWidth}

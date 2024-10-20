@@ -8,18 +8,14 @@ import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
+import { DEALERS_DATA } from '@/api/apiTypes'
 
 type Props = {
-  dealersData: {
-    fullName: string
-    id: string
-    mobile: string
-    dateOfAddition: string
-    isVerified: boolean
-  }[]
+  dealersData: DEALERS_DATA[]
+  onDeleteDealer: (dealerId: number) => void
 }
 
-const DealersList = ({ dealersData }: Props) => {
+const DealersList = ({ dealersData, onDeleteDealer }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const router = useRouter()
@@ -44,7 +40,10 @@ const DealersList = ({ dealersData }: Props) => {
             <ListItem
               userData={data}
               key={`ListItem${data.id}`}
-              onClick={() => router.push(routeName.adminUserProfile)}
+              onClick={() =>
+                router.push(`${routeName.adminUserProfile}/${data.id}`)
+              }
+              onDeleteDealer={onDeleteDealer}
             />
           ))}
         </>

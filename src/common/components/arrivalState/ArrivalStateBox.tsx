@@ -7,7 +7,7 @@ import clockIcon from '@/assets/icons/clock2Black.svg'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
-type Props = { arrivalState: string }
+type Props = { arrivalState: 'arrived' | 'onTheWay' | 'inWarehouse' }
 
 const ArrivalStateBox = ({ arrivalState }: Props) => {
   const t = useTranslations('')

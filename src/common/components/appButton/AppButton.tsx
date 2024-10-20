@@ -13,7 +13,7 @@ type Props = {
   isSmall?: boolean
   height?: ButtonHeight
   width?: number
-  htmlType?: string
+  htmlType?: 'button' | 'submit' | 'reset'
 }
 
 const AppButton = ({
@@ -34,7 +34,7 @@ const AppButton = ({
       onClick={onClick}
       isSmall={isSmall}
       height={height}
-      type={htmlType ? htmlType : ''}
+      type={htmlType ? htmlType : 'button'}
     >
       {text}
     </StyledButton>

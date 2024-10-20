@@ -1,27 +1,71 @@
 import FileDropZone from '@/common/components/inputElements/FileDropZone'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import { useDropzone } from 'react-dropzone'
 
 import BasicButton from '@/common/components/appButton/BasicButton'
 
-import uploadIcon from '@/assets/icons/fileUpload/uploadIconWithArrow.svg'
 import plusIcon from '@/assets/icons/plusIconWhite.svg'
+import uploadIcon from '@/assets/icons/fileUpload/uploadIconWithArrow.svg'
+import uploadedIcon from '@/assets/icons/fileUpload/fileUploadedEmpty.svg'
 
-type Props = { onClick: () => void; width?: number; height?: number }
+type Props = {
+  text?: string
+  dropText?: string
+  uploadedText?: string
+  height?: number
+  width?: number
+  onDropAdditional?: (file: any) => void
+  setIsUploaded?: (arg: boolean) => void
+}
 
-const ImagesUploadComponent = ({ onClick, width, height }: Props) => {
+const ImagesUploadComponent = ({
+  text,
+  dropText,
+  uploadedText,
+  height,
+  width,
+  onDropAdditional,
+  setIsUploaded,
+}: Props) => {
   const t = useTranslations('')
 
+  const [isDropped, setIsDropped] = useState(false)
+
+  const onDrop = useCallback(
+    <T extends File>(acceptedFiles: T[]) => {
+      // Do something with the files
+      console.log('accepted files: ', acceptedFiles)
+      setIsDropped(true)
+      setIsUploaded && setIsUploaded(true)
+      if (onDropAdditional) onDropAdditional(acceptedFiles[0])
+    },
+    [onDropAdditional, setIsUploaded]
+  )
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
   return (
-    <Container width={width} height={height}>
+    <Container {...getRootProps()} width={width} height={height}>
       <Frame>
         <IconBox>
-          <Image src={uploadIcon} alt='upload icon' />
+          <Image
+            src={isDropped ? uploadedIcon : uploadIcon}
+            alt='upload icon'
+            height={30}
+          />
         </IconBox>
-        <Text>{t('add photos of vehicle')}</Text>{' '}
-        <BasicButton onClick={onClick} padding={16} width={155}>
+        <input {...getInputProps()} />
+        {isDropped ? (
+          <Text isDropped={isDropped}>{uploadedText}</Text>
+        ) : isDragActive ? (
+          <Text>{dropText}</Text>
+        ) : (
+          <Text>{text}</Text>
+        )}
+        <BasicButton onClick={() => {}} padding={16} width={155}>
           <ButtonIcon>
             <Image src={plusIcon} alt='check icon' width={15} />
           </ButtonIcon>
@@ -34,10 +78,25 @@ const ImagesUploadComponent = ({ onClick, width, height }: Props) => {
 
 export default ImagesUploadComponent
 
-const Text = styled.label`
+type TextProps = {
+  isDropped?: boolean
+}
+
+const Text = styled.label<TextProps>`
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   color: ${({ theme }) => theme.colors?.black};
+
+  ${({ isDropped, theme }) =>
+    isDropped
+      ? css`
+          color: ${theme.colors?.main_gray_100};
+        `
+      : css`
+          color: ${theme.colors?.main_gray_56};
+        `}
+
+  cursor: pointer
 `
 
 const IconBox = styled.div`
@@ -92,27 +151,13 @@ const Container = styled.div<ContainerProps>`
           }
         `}
 
-  //CSS for Dashed border
+  border: 2px dashed ${({ theme }) => theme.colors?.main_gray_100};
 
-  --b: 2px; /* border thickness */
-  --s: 40px; /* size of the dashes */
-  --c1: ${({ theme }) => theme.colors?.white};
-  --c2: ${({ theme }) => theme.colors?.main_gray_100};
+  cursor: pointer;
 
-  position: relative;
-
-  :before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: var(--b);
-    background: repeating-conic-gradient(var(--c1) 0 25%, var(--c2) 0 50%) 0 0 /
-      var(--s) var(--s) round;
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask-composite: exclude;
-    border-radius: 12px;
+  &:focus {
+    border: none;
+    outline: 4px solid ${({ theme }) => theme.colors?.sky_blue};
   }
 `
 const ButtonIcon = styled.label`

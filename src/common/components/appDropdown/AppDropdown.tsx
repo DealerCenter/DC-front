@@ -2,6 +2,13 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import DropdownItem from './DropdownItem'
+import Image from 'next/image'
+
+type SortOption = {
+  label: string
+  icon: string
+  onChoose: () => void
+}
 
 type Props = {
   children: ReactNode
@@ -13,18 +20,15 @@ type Props = {
 
   left?: number
   top?: number
-  onSortClick?: (
-    arg1:
-      | 'price ascending'
-      | 'price descending'
-      | 'date ascending'
-      | 'date descending'
-  ) => void
   handleToggle?: () => void
   handleClose?: () => void
   width?: number
   isBorder?: boolean
   ReadyComponent?: ReactNode
+  sortOptions?: SortOption[]
+  setActiveLabel?: (arg: string) => void
+  isDisabled?: boolean
+  isNoActionOnClick?: boolean
 }
 
 const AppDropdown = ({
@@ -33,12 +37,15 @@ const AppDropdown = ({
   left,
   top,
   modalStyle = 'black',
-  onSortClick,
   handleToggle,
   handleClose,
   width,
   isBorder,
   ReadyComponent,
+  sortOptions,
+  setActiveLabel,
+  isDisabled,
+  isNoActionOnClick,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -56,14 +63,11 @@ const AppDropdown = ({
       !dropdownRef.current.contains(event.target as Node)
     ) {
       setIsOpen(false)
-      {
-        handleClose && handleClose()
-      }
     }
   }
 
   const handleItemClick = () => {
-    setIsOpen(false)
+    !isNoActionOnClick && setIsOpen(false)
     handleClose && handleClose()
   }
 
@@ -77,7 +81,9 @@ const AppDropdown = ({
 
   return (
     <Dropdown ref={dropdownRef}>
-      <DropdownTrigger onClick={toggleDropdown}>{children}</DropdownTrigger>
+      <DropdownTrigger onClick={isDisabled ? () => {} : toggleDropdown}>
+        {children}
+      </DropdownTrigger>
       {isOpen && (
         <DropdownMenu
           modalStyle={modalStyle}
@@ -93,10 +99,18 @@ const AppDropdown = ({
                 item={item}
                 key={`${item.label}12ij${i}`}
                 modalStyle={modalStyle}
-                onSortClick={onSortClick}
               />
             ))}
           {ReadyComponent && ReadyComponent}
+          {sortOptions &&
+            sortOptions.map((item, i) => (
+              <DropdownItem
+                item={item}
+                key={`${item.label}12ij${i}`}
+                modalStyle={modalStyle}
+                onClick={() => setActiveLabel && setActiveLabel(item.label)}
+              />
+            ))}
         </DropdownMenu>
       )}
     </Dropdown>
@@ -126,7 +140,7 @@ const DropdownMenu = styled.div<DropdownMenuProps>`
   display: flex;
   flex-direction: column;
   padding: 6px;
-  z-index: 100;
+  z-index: 3;
 
   box-shadow: 0 8px 42px 0 ${({ theme }) => theme.colors?.main_gray_10};
   ${({ modalStyle }) =>

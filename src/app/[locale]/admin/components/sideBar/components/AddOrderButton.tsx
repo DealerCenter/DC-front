@@ -1,8 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { useMediaQuery } from 'react-responsive'
 import Image from 'next/image'
-import theme from '@/app/[locale]/theme'
 
 type Props = {
   text: string
@@ -13,10 +11,6 @@ type Props = {
 }
 
 const AddOrderButton = ({ text, height, icon, onClick, isHovered }: Props) => {
-  const isTablet = useMediaQuery({
-    query: theme.media?.md,
-  })
-
   return (
     <Container height={height} onClick={onClick} isHovered={isHovered}>
       <IconBox>
@@ -73,6 +67,14 @@ const Container = styled.div<ContainerProps>`
     width: 100%;
     height: 85px;
   }
+
+  @media ${({ theme }) => theme.media?.notSm} {
+    &:active {
+      background-color: ${({ theme }) => theme.colors?.main_gray_04};
+    }
+  }
+
+  cursor: pointer;
 `
 const Frame = styled.div`
   display: flex;

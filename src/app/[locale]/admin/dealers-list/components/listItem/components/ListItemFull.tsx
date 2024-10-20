@@ -1,36 +1,63 @@
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import AppModal from '@/common/components/modal/AppModal'
-import DeleteWarning from '../../DeleteWarning'
+import { DEALERS_DATA } from '@/api/apiTypes'
+import { formatDate } from '@/common/helpers/simpleFunctions'
 
-import checkedGreen from '@/assets/icons/checkedGreen.svg'
-import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
-import editPencil from '@/assets/icons/editPencil.svg'
-import trashCan from '@/assets/icons/trashCan.svg'
-import dropDownIcon from '@/assets/icons/arrowDown.svg'
+import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
+import AppModal from '@/common/components/modal/AppModal'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
 import ListItemFullDropdown from './ListItemFullDropdown'
 
+import editPencil from '@/assets/icons/editPencil.svg'
+import trashCan from '@/assets/icons/trashCan.svg'
+import DropdownIcon from '@/common/components/readyIcons/DropdownIcon'
+
 type Props = {
-  fullName: string
-  id: string
-  mobile: string
-  dateOfAddition: string
-  isVerified: boolean
   onClick: () => void
+  userData: DEALERS_DATA
+  isDropdownOpen: boolean
+  setIsDropdownOpen: (arg: boolean) => void
+  isDisabled?: boolean
+  onDeleteDealer: (orderId: number) => void
 }
 
 const ListItemFull = ({
-  fullName,
-  id,
-  mobile,
-  dateOfAddition,
-  isVerified,
   onClick,
+  userData: {
+    id,
+    personalId,
+    firstName,
+    lastName,
+    createdAt,
+    phoneNumber,
+    idImageVerificationStatus,
+    receivers,
+  },
+  isDropdownOpen,
+  setIsDropdownOpen,
+  isDisabled,
+  onDeleteDealer,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  const t = useTranslations('')
+
+  const withReceivers = receivers && receivers?.length > 0
+
+  const handleDropdown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation()
+    if (receivers?.length === 0) return
+
+    !isDisabled && setIsDropdownOpen(!isDropdownOpen)
+  }
+
+  const handleUserDelete = () => {
+    onDeleteDealer(id)
+    setIsModalOpen(false)
+  }
 
   return (
     <>
@@ -38,49 +65,46 @@ const ListItemFull = ({
         <LabelBox>
           <DropdownIcon
             isOpen={isDropdownOpen}
-            onClick={(e) => {
-              e.stopPropagation()
-              setIsDropdownOpen((is) => !is)
-            }}
-          >
-            <Image src={dropDownIcon} alt='down arrow icon' width={12} />
-          </DropdownIcon>
+            onClickWithEvent={handleDropdown}
+            isShowing={withReceivers}
+          />
           <NameAndIdBox>
-            <NameLabel>{fullName}</NameLabel>
-            <IdLabel>{id}</IdLabel>
+            <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
+            <IdLabel>{personalId}</IdLabel>
           </NameAndIdBox>
         </LabelBox>
-        <Label>{mobile}</Label>
-        <Label>{dateOfAddition}</Label>
+        <Label>{phoneNumber}</Label>
+        <Label>{formatDate(createdAt)}</Label>
         <DebtLabel>{`$ 5750`}</DebtLabel>
         <IconBox>
-          <Icon>
-            {isVerified ? (
-              <Image
-                src={checkedGreen}
-                alt='checked icon'
-                width={20}
-                height={20}
+          {withReceivers ? (
+            <>
+              <ReceiversNumberLabel>{receivers.length}</ReceiversNumberLabel>
+              <VerificationIcon
+                verificationStatus={idImageVerificationStatus}
               />
-            ) : (
-              <Image
-                src={uncheckedRed}
-                alt='unchecked icon'
-                width={20}
-                height={20}
+            </>
+          ) : (
+            <>
+              <VerificationIcon
+                verificationStatus={idImageVerificationStatus}
               />
-            )}
-          </Icon>
-          <Icon>
-            <Image src={editPencil} alt='edit icon' onClick={onClick} />
-          </Icon>
-          <Icon>
-            <Image
-              src={trashCan}
-              alt='trash icon'
-              onClick={() => setIsModalOpen(true)}
-            />
-          </Icon>
+              <Icon>
+                <Image
+                  src={editPencil}
+                  alt='edit icon'
+                  onClick={isDisabled ? () => {} : onClick}
+                />
+              </Icon>
+              <Icon>
+                <Image
+                  src={trashCan}
+                  alt='trash icon'
+                  onClick={() => setIsModalOpen(true)}
+                />
+              </Icon>
+            </>
+          )}
         </IconBox>
       </Container>
       <AppModal
@@ -89,28 +113,21 @@ const ListItemFull = ({
       >
         <DeleteWarning
           onCancel={() => setIsModalOpen(false)}
-          onDelete={() => console.log('delete')}
+          onDelete={handleUserDelete}
+          header={t('delete recipient')}
+          text={t('delete data warning')}
         />
       </AppModal>
-      {isDropdownOpen && (
-        <>
-          <ListItemFullDropdown
-            onClick={onClick}
-            fullName={fullName}
-            id={id}
-            mobile={mobile}
-            dateOfAddition={dateOfAddition}
-            isVerified={isVerified}
-          />
-          <ListItemFullDropdown
-            onClick={onClick}
-            fullName={fullName}
-            id={id}
-            mobile={mobile}
-            dateOfAddition={dateOfAddition}
-            isVerified={isVerified}
-          />
-        </>
+      {isDropdownOpen && receivers && (
+        <ReceiversListDropdownFrame>
+          {receivers.map((receiver, i) => (
+            <ListItemFullDropdown
+              key={`listItemFullDropdown${i}`}
+              onClick={() => {}}
+              receiverData={receiver}
+            />
+          ))}
+        </ReceiversListDropdownFrame>
       )}
     </>
   )
@@ -157,6 +174,16 @@ const Label = styled.label`
   font-size: 13px;
 `
 
+const ReceiversNumberLabel = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 40px;
+  color: ${({ theme }) => theme.colors?.main_gray_100};
+  font-size: 13px;
+`
+
 const NameLabel = styled(Label)`
   font-weight: 700;
   justify-content: start;
@@ -193,22 +220,7 @@ const NameAndIdBox = styled.div`
   gap: 4px;
 `
 
-type DropdownIconProps = { isOpen: boolean }
-
-const DropdownIcon = styled.div<DropdownIconProps>`
-  width: 36px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  transition: transform 0.3s ease-in-out;
-
-  ${({ isOpen }) =>
-    isOpen &&
-    css`
-      transform: rotate(180deg);
-    `}
-
-  cursor: pointer;
+const ReceiversListDropdownFrame = styled.div`
+  max-height: 500px;
+  overflow-y: auto;
 `

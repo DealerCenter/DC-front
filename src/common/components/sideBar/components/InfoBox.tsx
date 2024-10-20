@@ -2,12 +2,9 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
-import { useMediaQuery } from 'react-responsive'
-
-import theme from '@/app/[locale]/theme'
 
 import notificationBell from '@/assets/icons/notificationBell.svg'
-import notificationDot from '@/assets/icons/notificationDot.svg'
+import NotificationDot from '../../notificationDot/NotificationDot'
 
 type Props = {
   refreshDate: string
@@ -22,9 +19,6 @@ const InfoBox = ({
   notificationCount,
   isHovered,
 }: Props) => {
-  const isTablet = useMediaQuery({
-    query: theme.media?.md,
-  })
   const t = useTranslations('')
 
   return (
@@ -37,17 +31,18 @@ const InfoBox = ({
           </TextBox>
           <DateText isHovered={isHovered}>{refreshDate}</DateText>
         </Frame>
-        <IconBox>
+        <IconBox isHovered={isHovered}>
           <BellBox>
             <Image src={notificationBell} alt='notification bell icon' />
-            <DotBox>
-              <DotBox1>
-                <Image src={notificationDot} alt='notification Dot icon' />
-              </DotBox1>
-              <DotNumber>{notificationCount}</DotNumber>
-            </DotBox>
+            <NotificationDot number={notificationCount} />
           </BellBox>
         </IconBox>
+        <IconBoxOnWide isHovered={isHovered}>
+          <BellBox>
+            <Image src={notificationBell} alt='notification bell icon' />
+            <NotificationDot number={notificationCount} />
+          </BellBox>
+        </IconBoxOnWide>
       </Container>
     </>
   )
@@ -158,7 +153,42 @@ const DateText = styled.p<ContainerProps>`
           `}
   }
 `
-const IconBox = styled.div``
+const IconBox = styled.div<ContainerProps>`
+  opacity: 0;
+  width: 0;
+
+  @media ${({ theme }) => theme.media?.md} {
+    ${({ isHovered }) =>
+      isHovered
+        ? css`
+            width: unset;
+            opacity: 0;
+          `
+        : css`
+            width: unset;
+            transition-property: opacity;
+            transition-duration: 1s;
+            transition-delay: 0.5s;
+            opacity: 1;
+          `}
+  }
+`
+
+const IconBoxOnWide = styled.div<ContainerProps>`
+  @media ${({ theme }) => theme.media?.md} {
+    ${({ isHovered }) =>
+      isHovered
+        ? css`
+            transition-property: opacity;
+            transition-duration: 1s;
+            transition-delay: 0.5s;
+            opacity: 1;
+          `
+        : css`
+            opacity: 0;
+          `}
+  }
+`
 
 const BellBox = styled.div`
   position: relative;

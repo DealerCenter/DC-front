@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { useMediaQuery } from 'react-responsive'
@@ -20,9 +20,17 @@ type Props = {
     verificationStatus: string
   }
   handleDelete: (id: number) => void
+  updatedSuccessfully: boolean
+  setUpdatedSuccessfully: (arg: boolean) => void
 }
 
-const ListItem = ({ receiverData, handleDelete }: Props) => {
+const ListItem = ({
+  receiverData,
+  handleDelete,
+  updatedSuccessfully,
+
+  setUpdatedSuccessfully,
+}: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
@@ -36,6 +44,10 @@ const ListItem = ({ receiverData, handleDelete }: Props) => {
     createdAt,
   } = receiverData
 
+  useEffect(() => {
+    updatedSuccessfully && setIsModalOpen(false)
+  }, [updatedSuccessfully])
+
   return (
     <>
       {isMobile ? (
@@ -48,6 +60,7 @@ const ListItem = ({ receiverData, handleDelete }: Props) => {
           createdAt={createdAt}
           verificationStatus={verificationStatus}
           handleDelete={handleDelete}
+          handleEdit={() => setIsModalOpen(true)}
         />
       ) : (
         <ListItemFull
@@ -69,6 +82,7 @@ const ListItem = ({ receiverData, handleDelete }: Props) => {
         <AddRecipient
           onClose={() => setIsModalOpen(false)}
           receiverData={receiverData}
+          setUpdatedSuccessfully={setUpdatedSuccessfully}
         />
       </AppModal>
     </>

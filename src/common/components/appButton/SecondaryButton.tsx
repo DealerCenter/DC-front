@@ -3,11 +3,30 @@ import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 
-type Props = { text: string; onClick: () => void; icon: string; width?: number }
+type Props = {
+  text: string
+  onClick: () => void
+  icon: string
+  width?: number
+  htmlType?: 'button' | 'submit' | 'reset'
+  isDisabled?: boolean
+}
 
-const SecondaryButton = ({ text, onClick, icon, width }: Props) => {
+const SecondaryButton = ({
+  text,
+  onClick,
+  icon,
+  width,
+  htmlType = 'button',
+  isDisabled,
+}: Props) => {
   return (
-    <Container onClick={onClick} width={width}>
+    <Container
+      onClick={onClick}
+      width={width}
+      type={htmlType}
+      disabled={isDisabled}
+    >
       <IconBox>
         <Image src={icon} alt='icon' />
       </IconBox>
@@ -20,7 +39,7 @@ export default SecondaryButton
 
 type ContainerProps = { width?: number }
 
-const Container = styled.div<ContainerProps>`
+const Container = styled.button<ContainerProps>`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -31,6 +50,7 @@ const Container = styled.div<ContainerProps>`
   border-radius: 12px;
   padding: 0 20px 0 14px;
   gap: 6px;
+  background-color: unset;
 
   ${({ width }) =>
     width

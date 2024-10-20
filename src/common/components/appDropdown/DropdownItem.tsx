@@ -11,52 +11,40 @@ type Props = {
     href?: { pathname: string }
     locale?: string
     icon?: string
+    onChoose?: () => void
   }
-  onSortClick?: (
-    arg1:
-      | 'price ascending'
-      | 'price descending'
-      | 'date ascending'
-      | 'date descending'
-  ) => void
+  onClick?: () => void
+  onItemClick?: (arg: string) => void
 }
 
-const DropdownItem = ({ item, modalStyle, onSortClick }: Props) => {
+const DropdownItem = ({ item, modalStyle, onClick, onItemClick }: Props) => {
   const pathname = usePathname()
   const t = useTranslations('')
 
-  const { label, href, locale, icon } = item
+  const { label, href, locale, icon, onChoose } = item
 
-  const handleClick = (value: string) => {
-    if (
-      value === 'price ascending' ||
-      value === 'price descending' ||
-      value === 'date ascending' ||
-      value === 'date descending'
-    ) {
-      onSortClick && onSortClick(value)
+  const handleClick = () => {
+    if (onItemClick) {
+      onItemClick(item.label)
     } else {
-      console.error('Invalid value:', value)
+      onChoose && onChoose()
+      onClick && onClick()
     }
   }
 
   return (
-    <Container
-      href={href ? href : pathname}
-      locale={locale && locale}
-      modalStyle={modalStyle}
-      isIcon={icon ? true : false}
-      onClick={() => handleClick(label)}
-    >
-      <Frame>
-        {icon && (
-          <Icon>
-            <Image src={icon} alt='icon' />
-          </Icon>
-        )}
-        {label && t(label)}
-      </Frame>
-    </Container>
+    <StyledLink href={href ? href : pathname} locale={locale && locale}>
+      <Container modalStyle={modalStyle} isIcon={!!icon} onClick={handleClick}>
+        <Frame>
+          {icon && (
+            <Icon>
+              <Image src={icon} alt='icon' />
+            </Icon>
+          )}
+          {label && t(label)}
+        </Frame>
+      </Container>
+    </StyledLink>
   )
 }
 
@@ -64,7 +52,11 @@ export default DropdownItem
 
 type ContainerProps = { modalStyle: 'white' | 'black'; isIcon?: boolean }
 
-const Container = styled(Link)<ContainerProps>`
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`
+
+const Container = styled.div<ContainerProps>`
   list-style: none;
   font-size: 16px;
   font-weight: 400;

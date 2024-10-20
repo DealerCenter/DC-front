@@ -1,37 +1,31 @@
 import Image from 'next/image'
 import React from 'react'
 import styled, { css } from 'styled-components'
-import CarDetailsBox from '../../../app/[locale]/dealer/order-history/components/CarDetailsBox'
-import DebtBox from '../../../app/[locale]/dealer/order-history/components/DebtBox'
-import UserInfoBox from '../../../app/[locale]/dealer/order-history/components/UserInfoBox'
-import ShippingStateBox from '../../../app/[locale]/dealer/order-history/components/ShippingStateBox'
+
 import { useMediaQuery } from 'react-responsive'
 import { dummyShippingSteps } from '@/assets/DummyData'
 import theme from '@/app/[locale]/theme'
+import { ORDER_DATA } from '@/api/apiTypes'
+
+import CarDetailsBox from '../../../app/[locale]/dealer/order-history/components/CarDetailsBox'
+import DebtBox from '../../../app/[locale]/dealer/order-history/components/DebtBox'
+import UserInfoBox from '../../../app/[locale]/dealer/order-history/components/UserInfoBox'
+import ShippingStatusBox from '../shippingStateBox/ShippingStatusBox'
+import { SHIPPING_STATUS } from '@/common/helpers/constants'
 
 type Props = {
   imageLink: string
   index: number
-  shippingStep: 0 | 1 | 2 | 3 | 4
-  item: {
-    brand: string
-    model: string
-    year: string
-    vinCode: string
-    buyerFullName: string
-    buyerPhoneNumber: string
-    debt: number
-    isArrived: boolean
-    arrivalState: string
-  }
+  shippingStatus: SHIPPING_STATUS
+  orderData: ORDER_DATA
   onClick: () => void
 }
 
 const OrderListItem = ({
   imageLink,
-  item,
+  orderData,
   index,
-  shippingStep,
+  shippingStatus,
   onClick,
 }: Props) => {
   const isTablet = useMediaQuery({
@@ -39,44 +33,39 @@ const OrderListItem = ({
   })
 
   const {
-    brand,
+    manufacturer,
     model,
-    year,
-    vinCode,
-    buyerFullName,
-    buyerPhoneNumber,
-    debt,
-    isArrived,
-    arrivalState,
-  } = item
+    vin,
+    manufactureYear,
+    status,
+    receiver,
+    transportationCost,
+  } = orderData
 
   return (
     <Container index={index} onClick={onClick}>
       <Frame>
         <CarDetailsBox
           imageLink={imageLink}
-          brand={brand}
+          brand={manufacturer}
           model={model}
-          year={year}
-          vinCode={vinCode}
+          year={manufactureYear.toString()}
+          vinCode={vin}
         />
         <MiddleFrame>
           <UserInfoBox
-            isArrived={isArrived}
-            buyerFullName={buyerFullName}
-            buyerPhoneNumber={buyerPhoneNumber}
+            isArrived={true}
+            buyerFullName={`${receiver.firstName} ${receiver.lastName}`}
+            buyerPhoneNumber={receiver.phoneNumber}
           />
           {isTablet || (
             <ShippingStateBoxFrame>
-              <ShippingStateBox
-                shippingSteps={dummyShippingSteps}
-                currentStep={shippingStep}
-              />
+              <ShippingStatusBox isEditing={false} value={shippingStatus} />
             </ShippingStateBoxFrame>
           )}
         </MiddleFrame>
       </Frame>
-      <DebtBox amount={debt} arrivalState={arrivalState} />
+      <DebtBox amount={transportationCost} arrivalState={'arrived'} />
     </Container>
   )
 }
@@ -134,7 +123,7 @@ const Frame = styled.div`
 `
 
 const ShippingStateBoxFrame = styled.div`
-  width: 222px;
+  width: 252px;
   height: 180px;
 
   @media ${({ theme }) => theme.media?.sm} {

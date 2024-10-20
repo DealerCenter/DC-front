@@ -1,48 +1,38 @@
-import Image from 'next/image'
-import React from 'react'
-import styled from 'styled-components'
-
-import { useMediaQuery } from 'react-responsive'
-import ListItemMobile from './components/ListItemMobile'
-import ListItemFull from './components/ListItemFull'
+import { DEALERS_DATA } from '@/api/apiTypes'
 import theme from '@/app/[locale]/theme'
+import { useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
+import ListItemFull from './components/ListItemFull'
+import ListItemMobile from './components/ListItemMobile'
 
 type Props = {
   onClick: () => void
-  userData: {
-    fullName: string
-    id: string
-    mobile: string
-    dateOfAddition: string
-    isVerified: boolean
-  }
+  userData: DEALERS_DATA
+  onDeleteDealer: (dealerId: number) => void
 }
 
-const ListItem = ({
-  onClick,
-  userData: { fullName, id, mobile, dateOfAddition, isVerified },
-}: Props) => {
+const ListItem = ({ onClick, userData, onDeleteDealer }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   return (
     <>
       {isMobile ? (
         <ListItemMobile
           onClick={onClick}
-          fullName={fullName}
-          id={id}
-          mobile={mobile}
-          dateOfAddition={dateOfAddition}
-          isVerified={isVerified}
+          userData={userData}
+          isDropdownOpen={isDropdownOpen}
+          setIsDropdownOpen={setIsDropdownOpen}
+          onDeleteDealer={onDeleteDealer}
         />
       ) : (
         <ListItemFull
           onClick={onClick}
-          fullName={fullName}
-          id={id}
-          mobile={mobile}
-          dateOfAddition={dateOfAddition}
-          isVerified={isVerified}
+          userData={userData}
+          isDropdownOpen={isDropdownOpen}
+          setIsDropdownOpen={setIsDropdownOpen}
+          onDeleteDealer={onDeleteDealer}
         />
       )}
     </>

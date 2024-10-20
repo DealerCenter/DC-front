@@ -1,31 +1,56 @@
-import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import ContainersList from './components/ContainersList'
-import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
-import SecondaryButton from '@/common/components/appButton/SecondaryButton'
+import { fetchMeAdmin, getContainersAdmin } from '@/api/apiCalls'
+import { CONTAINER_GET_RES } from '@/api/apiTypes'
 
-import searchIcon from '@/assets/icons/searchForButton.svg'
+import SecondaryButton from '@/common/components/appButton/SecondaryButton'
+import AppModal from '@/common/components/modal/AppModal'
+import SearchButton from '@/common/components/searchButton/SearchButton'
+import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
+import AddContainer from './components/addContainer/AddContainer'
+import ContainersList from './components/ContainersList'
+
 import plusIcon from '@/assets/icons/plus.svg'
-import UserListEmpty from './components/UserListEmpty'
-import { containers, users } from '@/assets/DummyData'
 
 type Props = {}
 
 const Containers = (props: Props) => {
   const t = useTranslations('')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isSearchActive, setIsSearchActive] = useState(false)
+  const [uploadedSuccessfully, setUploadedSuccessfully] = useState(false)
+  const [containersData, setContainersData] = useState<CONTAINER_GET_RES[]>()
+
+  useEffect(() => {
+    if (uploadedSuccessfully) {
+      setIsModalOpen(false)
+      setUploadedSuccessfully(false)
+    }
+  }, [uploadedSuccessfully])
+
+  const fetchContainerData = async () => {
+    const response = await getContainersAdmin()
+    response && setContainersData(response)
+  }
+
+  useEffect(() => {
+    fetchContainerData()
+  }, [uploadedSuccessfully])
 
   return (
     <Container>
       <Frame>
         <HeaderH4Bold text={t('containers')} />
         <ButtonFrame>
-          <SecondaryButton
+          <SearchButton
+            isActive={isSearchActive}
+            setIsActive={setIsSearchActive}
             text={t('search')}
-            onClick={() => {}}
-            icon={searchIcon}
+            placeholder={t('search for container')}
+            onSubmit={() => {}}
+            onCloseSearch={() => {}}
           />
           <SecondaryButton
             text={t('add container')}
@@ -36,7 +61,16 @@ const Containers = (props: Props) => {
           />
         </ButtonFrame>
       </Frame>
-      <ContainersList containersData={containers} />
+      {containersData && <ContainersList containersData={containersData} />}
+      <AppModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <AddContainer
+          onClose={() => setIsModalOpen(false)}
+          setUploadedSuccessfully={setUploadedSuccessfully}
+        />
+      </AppModal>
     </Container>
   )
 }
