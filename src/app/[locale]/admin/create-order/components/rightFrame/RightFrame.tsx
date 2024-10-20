@@ -52,8 +52,8 @@ const RightFrame = ({}: Props) => {
       isMobile
         ? INPUT_WIDTH_MOBILE
         : isTablet
-          ? INPUT_WIDTH_TABLET
-          : INPUT_WIDTH_DESKTOP
+        ? INPUT_WIDTH_TABLET
+        : INPUT_WIDTH_DESKTOP
     )
   }, [isMobile, isTablet, setTextInputWidth])
 
@@ -90,7 +90,7 @@ const RightFrame = ({}: Props) => {
         </Frame>
       </Box>
       <Box>
-        <Header>{t('recipient data')}</Header> <Line />
+        <Header>{t('dealer data')}</Header> <Line />
         <Frame>
           <Frame2>
             <AppSelectAntDesign

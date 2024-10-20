@@ -35,7 +35,12 @@ const ImageUpload = (props: Props) => {
   const t = useTranslations('')
   const router = useRouter()
 
-  const [selectedLocations, setSelectedLocations] = useState([])
+  const [selectedLocations, setSelectedLocations] = useState({
+    [IMAGE_LOCATIONS.TOW_TRUCK]: false,
+    [IMAGE_LOCATIONS.ABROAD_PORT]: false,
+    [IMAGE_LOCATIONS.CONTAINER]: false,
+    [IMAGE_LOCATIONS.HOME_PORT]: false,
+  })
 
   const [numOfPairs, setNumOfPairs] = useState(0)
 
@@ -57,11 +62,10 @@ const ImageUpload = (props: Props) => {
           (_, i) =>
             i <= numOfPairs && (
               <InputFieldAndImageUploadPair
-                dropdownOptions={dropdownOptions.filter((item) => {
-                  return !selectedLocations.includes(item.value)
-                })}
+                dropdownOptions={dropdownOptions}
                 key={`InputFieldAndImageUploadPair${i}`}
                 setSelectedLocations={setSelectedLocations}
+                selectedLocations={selectedLocations}
               />
             )
         )}

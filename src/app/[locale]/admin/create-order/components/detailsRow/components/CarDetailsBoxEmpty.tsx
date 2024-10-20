@@ -8,6 +8,8 @@ import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../../hooks/useCreateOrderContext'
+import AppButton from '@/common/components/appButton/AppButton'
+import { getCarDetailsByVin } from '@/common/helpers/utils'
 
 type Props = {}
 
@@ -20,7 +22,7 @@ const CarDetailsBoxEmpty = (props: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, errors, touched } =
+  const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
     useCreateOrderContext()
 
   useEffect(() => {
@@ -28,10 +30,30 @@ const CarDetailsBoxEmpty = (props: Props) => {
       isMobile
         ? INPUT_WIDTH_MOBILE
         : isTablet
-          ? INPUT_WIDTH_TABLET
-          : INPUT_WIDTH_DESKTOP
+        ? INPUT_WIDTH_TABLET
+        : INPUT_WIDTH_DESKTOP
     )
   }, [isMobile, isTablet, setTextInputWidth])
+
+  const checkCarByVin = async () => {
+    const vin = values[FIELD_NAMES.VIN]
+    if (vin) {
+      try {
+        const res = (await getCarDetailsByVin(vin)).result[0]
+        setFieldValue(FIELD_NAMES.MANUFACTURER, res.make)
+        setFieldValue(FIELD_NAMES.MANUFACTURE_YEAR, res.year)
+        setFieldValue(FIELD_NAMES.MODEL, res.model)
+        setFieldValue(FIELD_NAMES.VIN, vin)
+        setFieldValue(FIELD_NAMES.CAR_CATEGORY, res.vehicle_type)
+        setFieldValue(FIELD_NAMES.MILEAGE, res.odometer)
+        setFieldValue(FIELD_NAMES.CAR_COST, res.currency.iso_code)
+        setFieldValue(FIELD_NAMES.IS_INSURED, !!res.is_insurance)
+        setFieldValue(FIELD_NAMES.ADDITIONAL_DETAILS, res.car_info)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
 
   return (
     <CarDetailsBox>
@@ -102,6 +124,15 @@ const CarDetailsBoxEmpty = (props: Props) => {
           errors[FIELD_NAMES.VIN] && touched[FIELD_NAMES.VIN]
             ? errors[FIELD_NAMES.VIN]
             : ''
+        }
+        rightComponent={
+          <AppButton
+            text='Check'
+            height='medium'
+            onClick={checkCarByVin}
+            isSmall
+            type='outlined'
+          />
         }
       />
     </CarDetailsBox>

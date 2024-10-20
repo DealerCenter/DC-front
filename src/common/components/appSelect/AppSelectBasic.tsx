@@ -1,10 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import styled, { css } from 'styled-components'
 
 import arrowDown from '@/assets/icons/arrowDown.svg'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import ErrorMessage from '../errorMessage/ErrorMessage'
+import { Locations } from '@/app/[locale]/admin/create-order/image-upload/components/InputFieldAndImageUploadPair'
 
 type Option = {
   value: string
@@ -19,6 +26,8 @@ type Props = {
   placeHolderIsBold?: boolean
   placeHolderIsGray?: boolean
   errorMessage?: string
+  selectedLocations: Locations
+  setSelectedLocations: Dispatch<SetStateAction<Locations>>
 }
 
 const AppSelectBasic = ({
@@ -30,6 +39,8 @@ const AppSelectBasic = ({
   placeHolderIsBold,
   placeHolderIsGray,
   errorMessage,
+  selectedLocations,
+  setSelectedLocations,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedValue, setSelectedValue] = useState<string | null>(null)
@@ -69,6 +80,21 @@ const AppSelectBasic = ({
     }
   }
 
+  console.log({
+    selectedLocations,
+    // selectedValue,
+    // trali: selectedLocations[selectedValue],
+  })
+
+  useEffect(() => {
+    return () => {
+      setSelectedLocations((prev) => ({
+        ...prev,
+        selectedLocations: false,
+      }))
+    }
+  }, [])
+
   return (
     <SelectContainer ref={dropdownRef}>
       <SelectHeader
@@ -85,13 +111,18 @@ const AppSelectBasic = ({
       {isOpen && (
         <SelectOptions>
           {options &&
-            options.map((option) => (
-              <React.Fragment key={`SelectOptionOption${option.value}`}>
-                <OptionItem onClick={() => handleOptionClick(option.value)}>
-                  <OptionLabel>{t(option.value)}</OptionLabel>
-                </OptionItem>
-              </React.Fragment>
-            ))}
+            options
+              .filter(
+                (option) =>
+                  selectedLocations[option.value as keyof Locations] === false
+              )
+              .map((option) => (
+                <React.Fragment key={`SelectOptionOption${option.value}`}>
+                  <OptionItem onClick={() => handleOptionClick(option.value)}>
+                    <OptionLabel>{t(option.value)}</OptionLabel>
+                  </OptionItem>
+                </React.Fragment>
+              ))}
           {optionsBasic &&
             optionsBasic.map((option) => (
               <React.Fragment key={`OptionsBasicOption${option}`}>

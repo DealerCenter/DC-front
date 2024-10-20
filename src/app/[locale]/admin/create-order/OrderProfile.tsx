@@ -33,7 +33,7 @@ const OrderProfile = ({ id }: Props) => {
   }
 
   useEffect(() => {
-    handleGetOrderData()
+    // handleGetOrderData()
     //eslint-disable-next-line
   }, [])
 

@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from 'react'
+import React, { ChangeEventHandler, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
 import infoIcon from '@/assets/icons/info.svg'
 import Image from 'next/image'
@@ -26,6 +26,7 @@ type Props = {
   isWidthFill?: boolean
   backgroundColor?: string
   isDisabled?: boolean
+  rightComponent?: ReactNode
 }
 
 const TextInput = ({
@@ -50,6 +51,7 @@ const TextInput = ({
   isWidthFill,
   backgroundColor,
   isDisabled = false,
+  rightComponent,
 }: Props) => {
   return (
     <Container>
@@ -76,6 +78,7 @@ const TextInput = ({
         backgroundColor={backgroundColor}
         disabled={isDisabled}
       />
+      {rightComponent ? rightComponent : null}
       {optionalInfo && (
         <TextBox>
           <Image src={infoIcon} alt='info icon' width={16} height={16} />
