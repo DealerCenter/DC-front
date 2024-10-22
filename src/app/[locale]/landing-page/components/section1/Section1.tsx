@@ -11,7 +11,7 @@ const Section1 = (props: Props) => {
     <Container>
       <SearchForDesiredCar />
       <CarsAtAuctionCarousel
-        onSeeAllClick={() => console.log('see all clicked')}
+        onSeeAllClick={() => console.log('see alll clicked')}
       />
       <DecorativeLabelsBox />
     </Container>
