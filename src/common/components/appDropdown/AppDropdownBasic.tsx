@@ -82,7 +82,7 @@ const AppDropdownBasic = ({
                 item={item}
                 key={`${item.label}12ij${i}`}
                 modalStyle={modalStyle}
-                onItemClick={handleItemClick}
+                // onItemClick={handleItemClick}
               />
             ))}
         </DropdownMenu>

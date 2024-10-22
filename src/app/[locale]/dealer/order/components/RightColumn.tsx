@@ -15,8 +15,9 @@ type Props = {}
 const RightColumn = (props: Props) => {
   return (
     <Container>
-      <BoxWithHeader headerText='status' children={undefined}>
+      <BoxWithHeader headerText='status'>
         {/* <ShippingStateBox shippingSteps={dummyShippingSteps2} currentStep={1} /> */}
+        <div></div>
       </BoxWithHeader>
       <ContainerData />
       <DataOfRecipient />

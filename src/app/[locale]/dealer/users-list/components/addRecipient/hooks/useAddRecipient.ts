@@ -52,7 +52,8 @@ const useAddRecipients = (
     onSubmit: async (values) => {
       const data = { ...values }
       Object.keys(data).forEach((key) => {
-        legalFormData.append(key, values[key])
+        const value = String(values[key])
+        legalFormData.append(key, value)
       })
 
       receiverData && legalFormData.delete(FIELD_NAMES.IS_JURIDICAL)
@@ -112,10 +113,10 @@ const useAddRecipients = (
   })
 
   const isButtonDisabled =
-    formik.values[FIELD_NAMES.FIRST_NAME].length === 0 ||
-    formik.values[FIELD_NAMES.LAST_NAME].length === 0 ||
-    formik.values[FIELD_NAMES.CONTACT_NUMBER].length === 0 ||
-    formik.values[FIELD_NAMES.PERSONAL_ID].length === 0
+    formik.values[FIELD_NAMES.FIRST_NAME].toString().length === 0 ||
+    formik.values[FIELD_NAMES.LAST_NAME].toString().length === 0 ||
+    formik.values[FIELD_NAMES.CONTACT_NUMBER].toString().length === 0 ||
+    formik.values[FIELD_NAMES.PERSONAL_ID].toString().length === 0
 
   return {
     values: formik.values,
