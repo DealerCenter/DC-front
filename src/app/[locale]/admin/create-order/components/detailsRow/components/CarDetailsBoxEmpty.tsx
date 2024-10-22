@@ -10,6 +10,7 @@ import {
 } from '../../../hooks/useCreateOrderContext'
 import AppButton from '@/common/components/appButton/AppButton'
 import { getCarDetailsByVin } from '@/common/helpers/utils'
+import { message } from 'antd'
 
 type Props = {}
 
@@ -30,8 +31,8 @@ const CarDetailsBoxEmpty = (props: Props) => {
       isMobile
         ? INPUT_WIDTH_MOBILE
         : isTablet
-        ? INPUT_WIDTH_TABLET
-        : INPUT_WIDTH_DESKTOP
+          ? INPUT_WIDTH_TABLET
+          : INPUT_WIDTH_DESKTOP
     )
   }, [isMobile, isTablet, setTextInputWidth])
 
@@ -49,7 +50,9 @@ const CarDetailsBoxEmpty = (props: Props) => {
         setFieldValue(FIELD_NAMES.CAR_COST, res.currency.iso_code)
         setFieldValue(FIELD_NAMES.IS_INSURED, !!res.is_insurance)
         setFieldValue(FIELD_NAMES.ADDITIONAL_DETAILS, res.car_info)
+        message.success('Car found')
       } catch (e) {
+        message.error('Car not found')
         console.error(e)
       }
     }
