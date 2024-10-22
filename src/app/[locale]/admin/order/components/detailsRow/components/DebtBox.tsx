@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 
 import infoIcon from '@/assets/icons/infoIconEmpty.svg'
 import { useTranslations } from 'next-intl'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 
 type Props = { isEditing: boolean }
 

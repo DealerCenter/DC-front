@@ -10,7 +10,7 @@ import {
 import theme from '@/app/[locale]/theme'
 
 import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 
 type Props = {
   setFormStep: React.Dispatch<React.SetStateAction<number>>

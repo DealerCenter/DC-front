@@ -1,4 +1,4 @@
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useState } from 'react'

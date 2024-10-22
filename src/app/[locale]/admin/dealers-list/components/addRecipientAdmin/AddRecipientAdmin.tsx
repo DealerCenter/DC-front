@@ -5,8 +5,8 @@ import styled from 'styled-components'
 
 import AppButton from '@/common/components/appButton/AppButton'
 import ChooseButton from '@/common/components/appButton/ChooseButton'
-import FileDropZone from '@/common/components/inputElements/FileDropZone'
-import TextInput from '@/common/components/inputElements/TextInput'
+import FileDropZone from '@/common/components/InputElements/FileDropZone'
+import TextInput from '@/common/components/InputElements/TextInput'
 import useAddRecipientsAdmin, {
   FIELD_NAMES,
 } from './hooks/useAddRecipientAdmin'
@@ -31,8 +31,8 @@ type Props = {
 const AddRecipientAdmin = ({
   onClose,
   receiverData,
-  // setUpdatedSuccessfully,
-}: Props) => {
+}: // setUpdatedSuccessfully,
+Props) => {
   const [isIdImageUploaded, setIsIdImageUploaded] = useState(false)
   const t = useTranslations('')
 

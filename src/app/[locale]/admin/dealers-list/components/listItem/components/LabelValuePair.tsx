@@ -1,5 +1,5 @@
 import theme from '@/app/[locale]/theme'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import React from 'react'
 import styled from 'styled-components'
 

@@ -8,8 +8,8 @@ import {
   useRegisterFormContextIndividual,
 } from '../../../hooks/useRegistrationFormIndividual'
 import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/inputElements/TextInput'
-import FileDropZone from '@/common/components/inputElements/FileDropZone'
+import TextInput from '@/common/components/InputElements/TextInput'
+import FileDropZone from '@/common/components/InputElements/FileDropZone'
 import theme from '@/app/[locale]/theme'
 
 type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }

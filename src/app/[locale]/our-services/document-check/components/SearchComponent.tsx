@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive'
 import Image from 'next/image'
 
 import theme from '@/app/[locale]/theme'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 
 import searchIcon from '@/assets/icons/searchIconGray.svg'
 

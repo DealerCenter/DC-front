@@ -9,7 +9,7 @@ import ImagesUploadComponent from '../../../components/common/ImagesUploadCompon
 import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
 import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
 import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
-import FileDropZone from '@/common/components/inputElements/FileDropZone'
+import FileDropZone from '@/common/components/InputElements/FileDropZone'
 
 const INPUT_WIDTH_MOBILE_UPLOAD = 311
 const INPUT_WIDTH_TABLET_UPLOAD = 896

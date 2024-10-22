@@ -3,13 +3,14 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import { css } from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import { Locations } from '@/app/[locale]/admin/create-order/image-upload/components/InputFieldAndImageUploadPair'
 
 type Props = {
   isEditing: boolean
@@ -52,6 +53,17 @@ const TextInputFieldPair = ({
               options={selectItems}
               onChange={() => {}}
               placeholder={t('select')}
+              selectedLocations={{
+                towTruckImages: false,
+                abroadPortImages: false,
+                containerImages: false,
+                homePortImages: false,
+              }}
+              setSelectedLocations={function (
+                value: React.SetStateAction<Locations>
+              ): void {
+                throw new Error('Function not implemented.')
+              }}
             />
           ) : (
             <TextInput
