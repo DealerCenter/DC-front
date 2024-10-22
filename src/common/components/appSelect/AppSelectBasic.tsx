@@ -80,11 +80,11 @@ const AppSelectBasic = ({
     }
   }
 
-  console.log({
-    selectedLocations,
-    // selectedValue,
-    // trali: selectedLocations[selectedValue],
-  })
+  // console.log({
+  //   selectedLocations,
+  //   // selectedValue,
+  //   // trali: selectedLocations[selectedValue],
+  // })
 
   useEffect(() => {
     return () => {

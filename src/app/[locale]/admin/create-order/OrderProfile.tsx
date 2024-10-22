@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { routeName } from '@/common/helpers/constants'
@@ -16,12 +16,15 @@ import LeftFrame from './components/leftFrame/LeftFrame'
 import RightFrame from './components/rightFrame/RightFrame'
 import { useCreateOrderContext } from './hooks/useCreateOrderContext'
 import ImagesUploadComponentDummy from '../components/common/ImagesUploadComponentDummy'
+import AppModalFullScreen from '@/common/components/modal/AppModalFullScreen'
+import ImageUpload from './image-upload/ImageUpload'
 
 const isAdmin = true
 
 type Props = { id?: string }
 
 const OrderProfile = ({ id }: Props) => {
+  const [isUploadImagesOpen, setIsUploadImagesOpen] = useState(false)
   const t = useTranslations('')
   const router = useRouter()
   const { handleSubmit, isButtonDisabled, prefillFormikValues, setOrderId } =
@@ -71,7 +74,8 @@ const OrderProfile = ({ id }: Props) => {
 
         <ImagesUploadComponentDummy
           text={t('add photos of vehicle')}
-          onClick={() => router.push(routeName.adminCreateOrderImageUpload)}
+          // onClick={() => router.push(routeName.adminCreateOrderImageUpload)}
+          onClick={() => setIsUploadImagesOpen(true)}
           height={372}
         />
         <DetailsRow />
@@ -81,6 +85,13 @@ const OrderProfile = ({ id }: Props) => {
         <LeftFrame />
         <RightFrame />
       </BottomFrame>
+
+      <AppModalFullScreen
+        isOpen={isUploadImagesOpen}
+        onRequestClose={() => setIsUploadImagesOpen(false)}
+      >
+        <ImageUpload onClose={() => setIsUploadImagesOpen(false)} />
+      </AppModalFullScreen>
     </Container>
   )
 }

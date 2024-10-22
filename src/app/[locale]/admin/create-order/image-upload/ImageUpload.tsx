@@ -14,8 +14,9 @@ import InputFieldAndImageUploadPair from './components/InputFieldAndImageUploadP
 
 import checkedIcon from '@/assets/icons/doneIcon.svg'
 import closeX from '@/assets/icons/closeX.svg'
+import { message } from 'antd'
 
-type Props = {}
+type Props = { onClose: () => void }
 
 const dropdownOptions = [
   { value: IMAGE_LOCATIONS.TOW_TRUCK },
@@ -31,9 +32,8 @@ const ImageLocations = [
   IMAGE_LOCATIONS.HOME_PORT,
 ]
 
-const ImageUpload = (props: Props) => {
+const ImageUpload = ({ onClose }: Props) => {
   const t = useTranslations('')
-  const router = useRouter()
 
   const [selectedLocations, setSelectedLocations] = useState({
     [IMAGE_LOCATIONS.TOW_TRUCK]: false,
@@ -51,12 +51,16 @@ const ImageUpload = (props: Props) => {
     if (numOfPairs > 0) setNumOfPairs((num) => num - 1)
   }
 
+  const handleSubmit = () => {
+    message.success('submitted photos to upload')
+    onClose()
+  }
+
   return (
     <Container>
-      <AppGoBackButton
-        onClick={() => router.push(routeName.adminCreateOrder)}
-        text={t('go back')}
-      />
+      <GoBackButtonFrame>
+        <AppGoBackButton onClick={onClose} text={t('go back')} />
+      </GoBackButtonFrame>
       <Box>
         {dropdownOptions.map(
           (_, i) =>
@@ -83,12 +87,12 @@ const ImageUpload = (props: Props) => {
               <ButtonIcon>
                 <Image src={closeX} alt='close icon' width={16} />
               </ButtonIcon>
-              <ButtonText>{t('cancel')}</ButtonText>
+              <ButtonText>{t('cancel field')}</ButtonText>
             </BasicButton>
           ) : (
             <div></div>
           )}
-          <BasicButton onClick={() => {}} padding={16}>
+          <BasicButton onClick={handleSubmit} padding={16} htmlType='submit'>
             <ButtonIcon>
               <Image src={checkedIcon} alt='done icon' width={15} />
             </ButtonIcon>
@@ -105,13 +109,17 @@ export default ImageUpload
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 
-  margin-bottom: unset;
+  /* margin-bottom: unset; */
   gap: 22px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  background-color: ${({ theme }) => theme.colors?.white};
 
   @media ${({ theme }) => theme.media?.sm} {
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
     gap: 16px;
   }
 `
@@ -137,4 +145,19 @@ const ButtonText = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   cursor: pointer;
+`
+
+const GoBackButtonFrame = styled.div`
+  display: flex;
+  justify-content: flex-start;
+
+  width: 1200px;
+
+  @media ${({ theme }) => theme.media?.md} {
+    width: 960px;
+  }
+
+  @media ${({ theme }) => theme.media?.sm} {
+    width: unset;
+  }
 `
