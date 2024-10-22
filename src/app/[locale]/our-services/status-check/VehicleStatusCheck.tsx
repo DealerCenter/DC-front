@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive'
 
 import theme from '../../theme'
 import InfoBox from './components/InfoBox'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import PageHeader from '@/common/components/pageHeader/PageHeader'
 
 import searchIcon from '@/assets/icons/searchIconGray.svg'

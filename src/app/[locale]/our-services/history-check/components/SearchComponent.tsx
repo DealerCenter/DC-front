@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive'
 import Image from 'next/image'
 
 import theme from '@/app/[locale]/theme'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 
 import searchIcon from '@/assets/icons/searchIconGray.svg'
 
@@ -44,8 +44,8 @@ const SearchComponent = ({ placeholder }: Props) => {
           isMobile
             ? INPUT_WIDTH_MOBILE
             : isTablet
-              ? INPUT_WIDTH_TABLET
-              : INPUT_WIDTH_DESKTOP
+            ? INPUT_WIDTH_TABLET
+            : INPUT_WIDTH_DESKTOP
         }
         paddingLeft={isMobile ? INPUT_PADDING_LEFT_MOBILE : INPUT_PADDING_LEFT}
         iconPaddingLeft={

@@ -9,6 +9,7 @@ import { useRouter } from '@/navigation'
 import { endpoints } from '@/api/endpoints'
 import { handleAuthResponse } from '@/common/helpers/utils'
 import { routeName } from '@/common/helpers/constants'
+import { REGISTER_RES } from '@/api/apiTypes'
 
 const FormikContext = createContext<FormikValues | null>(null)
 
@@ -161,7 +162,7 @@ export const RegisterFormProviderLegalPerson = ({
 
 export const useRegisterFormContextLegalPerson = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {},
+  ExtraProps = {}
 >() => {
   const context = useContext(FormikContext)
   if (!context) {

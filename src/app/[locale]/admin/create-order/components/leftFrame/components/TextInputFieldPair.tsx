@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import theme from '@/app/[locale]/theme'
 import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
 import AppSelectTrueFalse from '@/common/components/appSelect/AppSelectTrueFalse'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 
 type Props = {
   title: string

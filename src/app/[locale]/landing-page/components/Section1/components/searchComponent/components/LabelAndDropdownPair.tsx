@@ -1,4 +1,4 @@
-import DropdownInputField from '@/common/components/inputElements/DropdownInputField'
+import DropdownInputField from '@/common/components/InputElements/DropdownInputField'
 import React from 'react'
 import styled from 'styled-components'
 

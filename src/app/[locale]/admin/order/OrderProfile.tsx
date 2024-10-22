@@ -56,7 +56,7 @@ const OrderProfile = (props: Props) => {
 
         {isEditing ? (
           <ImagesUploadComponent
-            onClick={() => router.push(routeName.adminOrderImageUpload)}
+            // onClick={() => router.push(routeName.adminOrderImageUpload)}
             width={isMobile ? 343 : isTablet ? 960 : 1200}
             height={372}
           />

@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 
 type Props = {}
 

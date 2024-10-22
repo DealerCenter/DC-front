@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import AppButton from '@/common/components/appButton/AppButton'
-import FileDropZone from '@/common/components/inputElements/FileDropZone'
-import TextInput from '@/common/components/inputElements/TextInput'
+import FileDropZone from '@/common/components/InputElements/FileDropZone'
+import TextInput from '@/common/components/InputElements/TextInput'
 import ChooseButton from '../../../../../../common/components/appButton/ChooseButton'
 
 import closeIcon from '@/assets/icons/closeX.svg'

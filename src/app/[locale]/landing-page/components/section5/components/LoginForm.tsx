@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
 import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import useLoginForm from '@/app/[locale]/auth/hooks/useLoginForm'
 
 import emailIcon from '@/assets/icons/email.svg'
