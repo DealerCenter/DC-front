@@ -25,13 +25,6 @@ const dropdownOptions = [
   { value: IMAGE_LOCATIONS.HOME_PORT },
 ]
 
-const ImageLocations = [
-  IMAGE_LOCATIONS.TOW_TRUCK,
-  IMAGE_LOCATIONS.ABROAD_PORT,
-  IMAGE_LOCATIONS.CONTAINER,
-  IMAGE_LOCATIONS.HOME_PORT,
-]
-
 const ImageUpload = ({ onClose }: Props) => {
   const t = useTranslations('')
 

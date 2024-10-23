@@ -34,28 +34,22 @@ const receiversDropdownList = [
   },
 ]
 
-const INPUT_WIDTH_MOBILE = 311
-const INPUT_WIDTH_TABLET = 333
-const INPUT_WIDTH_DESKTOP = 391
+const dealersDropdownList = [
+  {
+    label: 'dealer 1',
+    id: 1,
+  },
+  {
+    label: 'dealer 2',
+    id: 2,
+  },
+]
 
 type Props = {}
 
 const RightFrame = ({}: Props) => {
-  const [textInputWidth, setTextInputWidth] = useState(INPUT_WIDTH_TABLET)
   const { values, setFieldValue } = useCreateOrderContext()
-  const isMobile = useMediaQuery({ query: theme.media?.sm })
-  const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
-
-  useEffect(() => {
-    setTextInputWidth(
-      isMobile
-        ? INPUT_WIDTH_MOBILE
-        : isTablet
-        ? INPUT_WIDTH_TABLET
-        : INPUT_WIDTH_DESKTOP
-    )
-  }, [isMobile, isTablet, setTextInputWidth])
 
   const handleSetReceiverValue = (id: number) => {
     setFieldValue(FIELD_NAMES.RECEIVER_ID, id)
@@ -64,6 +58,14 @@ const RightFrame = ({}: Props) => {
   const handleSetContainerValue = (id: number) => {
     setFieldValue(FIELD_NAMES.CONTAINER_ID, id)
   }
+
+  const handleSetDealerValue = (id: number) => {
+    setFieldValue(FIELD_NAMES.DEALER_ID, id)
+  }
+
+  useEffect(() => {
+    console.log('dealer Id', values[FIELD_NAMES.DEALER_ID])
+  }, [values])
 
   return (
     <Container>
@@ -90,13 +92,27 @@ const RightFrame = ({}: Props) => {
         </Frame>
       </Box>
       <Box>
-        <Header>{t('dealer data')}</Header> <Line />
+        <Header>{t('recipient data')}</Header> <Line />
         <Frame>
           <Frame2>
             <AppSelectAntDesign
               value={values[FIELD_NAMES.RECEIVER_ID]}
               optionsWithId={receiversDropdownList}
               onChangeId={handleSetReceiverValue}
+              placeholder={t('select')}
+              fontSize={13}
+            />
+          </Frame2>
+        </Frame>
+      </Box>
+      <Box>
+        <Header>{t('dealer data')}</Header> <Line />
+        <Frame>
+          <Frame2>
+            <AppSelectAntDesign
+              value={values[FIELD_NAMES.DEALER_ID]}
+              optionsWithId={dealersDropdownList}
+              onChangeId={handleSetDealerValue}
               placeholder={t('select')}
               fontSize={13}
             />

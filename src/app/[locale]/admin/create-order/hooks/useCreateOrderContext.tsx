@@ -1,13 +1,20 @@
 'use client'
 import { FormikValues, useFormik } from 'formik'
 import { useTranslations } from 'next-intl'
-import { ReactNode, createContext, useContext, useState } from 'react'
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import * as yup from 'yup'
 
 import axiosInstance from '@/api/apiClient'
 import { ORDER_DATA } from '@/api/apiTypes'
 import { endpoints } from '@/api/endpoints'
 import { message } from 'antd'
+import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
 
 const FormikContext = createContext<FormikValues | null>(null)
 
@@ -25,16 +32,25 @@ export const FIELD_NAMES = {
   MILEAGE: 'mileage',
   STATUS: 'status',
   CONTAINER_ID: 'containerId',
-  // DEALER_ID: 'dealerId',
+  DEALER_ID: 'dealerId',
   RECEIVER_ID: 'receiverId',
   ADDITIONAL_DETAILS: 'additionalDetails',
   CAR_DETAILS: 'carDetails',
+  TOW_TRUCK_IMAGES: IMAGE_LOCATIONS.TOW_TRUCK,
+  ABROAD_PORT_IMAGES: IMAGE_LOCATIONS.ABROAD_PORT,
+  CONTAINER_IMAGES: IMAGE_LOCATIONS.CONTAINER,
+  HOME_PORT_IMAGES: IMAGE_LOCATIONS.HOME_PORT,
 }
 
 export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
   const t = useTranslations('')
 
   const [orderId, setOrderId] = useState<number | null>(null)
+  const [uploadedTowTruckImages, setUploadedTowTruckImages] = useState<Blob[]>()
+
+  useEffect(() => {
+    console.log('from context: ', uploadedTowTruckImages)
+  }, [uploadedTowTruckImages])
 
   const initialValues = {
     [FIELD_NAMES.MANUFACTURER]: '',
@@ -50,17 +66,21 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     [FIELD_NAMES.MILEAGE]: '',
     [FIELD_NAMES.STATUS]: '',
     [FIELD_NAMES.CONTAINER_ID]: '',
-    // [FIELD_NAMES.DEALER_ID]: "",
+    [FIELD_NAMES.DEALER_ID]: '',
     [FIELD_NAMES.RECEIVER_ID]: '',
     [FIELD_NAMES.ADDITIONAL_DETAILS]: '',
     [FIELD_NAMES.CAR_DETAILS]: '',
+    // [FIELD_NAMES.TOW_TRUCK_IMAGES]: '',
+    // [FIELD_NAMES.ABROAD_PORT_IMAGES]: '',
+    // [FIELD_NAMES.CONTAINER_IMAGES]: '',
+    // [FIELD_NAMES.HOME_PORT_IMAGES]: '',
   }
+
+  const formData = new FormData()
 
   const formik = useFormik({
     initialValues,
     onSubmit: async (values, { resetForm }) => {
-      console.log('onSubmit:', values)
-
       const numericValues: {
         [x: string]: string | number
       } = { ...values }
@@ -83,7 +103,10 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         }
       })
 
-      // console.log('onSubmit with numeric values:', numericValues)
+      const data = { ...numericValues }
+      Object.keys(data).forEach((key) => formData.append(key, values[key]))
+      uploadedTowTruckImages &&
+        formData.append(FIELD_NAMES.TOW_TRUCK_IMAGES, uploadedTowTruckImages[0])
 
       try {
         const response = orderId
@@ -91,7 +114,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
               `${endpoints.ORDERS_ADMIN}/${orderId}`,
               numericValues
             )
-          : await axiosInstance.post(endpoints.ORDERS_ADMIN, numericValues)
+          : await axiosInstance.post(endpoints.ORDERS_ADMIN, formData)
 
         message.success(
           orderId
@@ -142,7 +165,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
       [FIELD_NAMES.CONTAINER_ID]: yup
         .number()
         .required(t('container ID required')),
-      // [FIELD_NAMES.DEALER_ID]: yup.number().required(t('dealer ID required')),
+      [FIELD_NAMES.DEALER_ID]: yup.number().required(t('dealer ID required')),
       [FIELD_NAMES.RECEIVER_ID]: yup
         .number()
         .required(t('receiver ID required')),
@@ -173,7 +196,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     formik.values[FIELD_NAMES.MANUFACTURE_YEAR] === undefined ||
     formik.values[FIELD_NAMES.MANUFACTURE_YEAR] === '' ||
     isNaN(Number(formik.values[FIELD_NAMES.MANUFACTURE_YEAR])) ||
-    // formik.values[FIELD_NAMES.DEALER_ID] !== 'number' ||
+    typeof formik.values[FIELD_NAMES.DEALER_ID] !== 'number' ||
     typeof formik.values[FIELD_NAMES.STATE_ID] !== 'number' ||
     typeof formik.values[FIELD_NAMES.CONTAINER_ID] !== 'number' ||
     typeof formik.values[FIELD_NAMES.RECEIVER_ID] !== 'number'
@@ -235,6 +258,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         prefillFormikValues,
         resetForm,
         setOrderId,
+        setUploadedTowTruckImages,
       }}
     >
       {children}

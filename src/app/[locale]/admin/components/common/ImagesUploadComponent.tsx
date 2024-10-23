@@ -19,6 +19,8 @@ type Props = {
   width?: number
   onDropAdditional?: (file: any) => void
   setIsUploaded?: (arg: boolean) => void
+  setUploadedImages?: (files: Blob[]) => void
+  isDisabled?: boolean
 }
 
 const ImagesUploadComponent = ({
@@ -29,6 +31,8 @@ const ImagesUploadComponent = ({
   width,
   onDropAdditional,
   setIsUploaded,
+  setUploadedImages,
+  isDisabled,
 }: Props) => {
   const t = useTranslations('')
 
@@ -41,11 +45,15 @@ const ImagesUploadComponent = ({
       setIsDropped(true)
       setIsUploaded && setIsUploaded(true)
       if (onDropAdditional) onDropAdditional(acceptedFiles[0])
+      if (setUploadedImages) setUploadedImages(acceptedFiles)
     },
-    [onDropAdditional, setIsUploaded]
+    [onDropAdditional, setIsUploaded, setUploadedImages]
   )
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    disabled: isDisabled,
+  })
 
   return (
     <Container {...getRootProps()} width={width} height={height}>
@@ -65,7 +73,12 @@ const ImagesUploadComponent = ({
         ) : (
           <Text>{text}</Text>
         )}
-        <BasicButton onClick={() => {}} padding={16} width={155}>
+        <BasicButton
+          onClick={() => {}}
+          padding={16}
+          width={155}
+          isDisabled={isDisabled}
+        >
           <ButtonIcon>
             <Image src={plusIcon} alt='check icon' width={15} />
           </ButtonIcon>

@@ -8,6 +8,7 @@ import { handleAuthResponse } from '@/common/helpers/utils'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 import { message } from 'antd'
+import { REGISTER_RES } from '@/api/apiTypes'
 
 const FormikContext = createContext<FormikValues | null>(null)
 

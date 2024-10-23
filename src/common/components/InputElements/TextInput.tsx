@@ -77,7 +77,7 @@ const TextInput = ({
         isWidthFill={isWidthFill}
         backgroundColor={backgroundColor}
         disabled={isDisabled}
-        hasCheck={true}
+        hasCheck={!!onCheck}
       />
       {/* {rightComponent ? rightComponent : null} */}
       {optionalInfo && (
