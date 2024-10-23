@@ -8,10 +8,6 @@ import theme from '@/app/[locale]/theme'
 import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
 import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
 import ImagesUploadComponent from '../../../components/common/ImagesUploadComponent'
-import {
-  FIELD_NAMES,
-  useCreateOrderContext,
-} from '../../hooks/useCreateOrderContext'
 
 const INPUT_WIDTH_MOBILE_UPLOAD = 311
 const INPUT_WIDTH_TABLET_UPLOAD = 896
@@ -76,8 +72,8 @@ const InputFieldAndImageUploadPair = ({
           isMobile
             ? INPUT_WIDTH_MOBILE_UPLOAD
             : isTablet
-              ? INPUT_WIDTH_TABLET_UPLOAD
-              : INPUT_WIDTH_DESKTOP_UPLOAD
+            ? INPUT_WIDTH_TABLET_UPLOAD
+            : INPUT_WIDTH_DESKTOP_UPLOAD
         }
         height={222}
         text={t('add photos of vehicle')}

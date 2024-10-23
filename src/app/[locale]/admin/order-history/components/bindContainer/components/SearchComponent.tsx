@@ -2,7 +2,7 @@ import Image from 'next/image'
 import styled from 'styled-components'
 
 import closeX from '@/assets/icons/closeX.svg'
-import searchIcon from '@/assets/icons/SearchIconBlack.svg'
+import searchIcon from '@/assets/icons/searchIconBlack.svg'
 
 type Props = {
   searchQuery: string

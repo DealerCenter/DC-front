@@ -4,7 +4,7 @@ import { useRouter, usePathname } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 
 import DocumentCheck from './document-check/DocumentCheck'
-import HistoryCheck from './history-check/HistoryCheck'
+// import HistoryCheck from './history-check/HistoryCheck'
 import StatusCheck from './status-check/VehicleStatusCheck'
 import TransportationCalculator from './transportation-calculator/TransportationCalculator'
 
@@ -22,8 +22,8 @@ const Page = (props: Props) => {
     switch (pathname) {
       case routeName.documentCheck:
         return <DocumentCheck />
-      case routeName.historyCheck:
-        return <HistoryCheck />
+      // case routeName.historyCheck:
+      //   return <HistoryCheck />
       case routeName.statusCheck:
         return <StatusCheck />
       case routeName.transportationCalculator:

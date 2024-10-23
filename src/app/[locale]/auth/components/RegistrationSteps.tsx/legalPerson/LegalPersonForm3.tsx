@@ -8,7 +8,7 @@ import {
 } from '../../../hooks/useRegistrationFormLegalPerson'
 import theme from '@/app/[locale]/theme'
 
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import AppButton from '@/common/components/appButton/AppButton'
 import ValidateTextBox from '@/common/components/passwordValidateTextBox/ValidateTextBox'
 import usePasswordValidation from '../../../hooks/usePasswordValidation'

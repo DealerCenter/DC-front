@@ -7,6 +7,7 @@ import theme from '@/app/[locale]/theme'
 
 import ImagesUploadComponent from '../../../components/common/ImagesUploadComponent'
 import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
+import { Locations } from '../../../create-order/image-upload/components/InputFieldAndImageUploadPair'
 
 type Props = { dropdownOptions: { value: string }[] }
 
@@ -25,12 +26,23 @@ const InputFieldAndImageUploadPair = ({ dropdownOptions }: Props) => {
           width={isMobile ? 311 : 493}
           placeHolderIsBold={true}
           placeHolderIsGray={true}
+          selectedLocations={{
+            towTruckImages: false,
+            abroadPortImages: false,
+            containerImages: false,
+            homePortImages: false,
+          }}
+          setSelectedLocations={function (
+            value: React.SetStateAction<Locations>
+          ): void {
+            throw new Error('Function not implemented.')
+          }}
         />
       </AppSelectBasicFrame>
       <ImagesUploadComponent
-        onClick={() => {
-          console.log('clicked')
-        }}
+        // onClick={() => {
+        //   console.log('clicked')
+        // }}
         width={isMobile ? 311 : isTablet ? 896 : 1136}
         height={222}
       />

@@ -127,7 +127,7 @@ export const RegisterFormProviderIndividual = ({
 
 export const useRegisterFormContextIndividual = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {},
+  ExtraProps = {}
 >() => {
   const context = useContext(FormikContext)
   if (!context) {

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 
 import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 
 import closeIcon from '@/assets/icons/closeX.svg'
 import useAddContainer, { FIELD_NAMES } from './hooks/useAddContainer'

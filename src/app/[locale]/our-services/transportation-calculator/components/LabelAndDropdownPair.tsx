@@ -1,5 +1,5 @@
 import theme from '@/app/[locale]/theme'
-import DropdownInputField from '@/common/components/inputElements/DropdownInputField'
+import DropdownInputField from '@/common/components/InputElements/DropdownInputField'
 import React from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'

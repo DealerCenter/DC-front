@@ -30,8 +30,8 @@ const DeleteWarning = ({
       </Icon>
       <FrameTop>
         <H3Bold>{header}</H3Bold>
-        <Label>{text}</Label>
-        {deletingItemText && <Label>{deletingItemText}</Label>}
+        {/* <Label>{text}</Label> */}
+        {/* {deletingItemText && <Label>{deletingItemText}</Label>} */}
       </FrameTop>
       <ButtonsFrame>
         <ChooseButton

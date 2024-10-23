@@ -1,5 +1,5 @@
 import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import React, { Dispatch, SetStateAction } from 'react'
 
 import Image from 'next/image'

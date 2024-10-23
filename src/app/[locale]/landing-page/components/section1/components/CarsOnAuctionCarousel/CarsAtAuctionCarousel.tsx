@@ -48,8 +48,8 @@ const CarsAtAuctionCarousel = ({ onSeeAllClick }: Props) => {
   const settings = isMobile
     ? isMobileSettings
     : isTablet
-      ? isTabletSettings
-      : isDesktopSettings
+    ? isTabletSettings
+    : isDesktopSettings
 
   return (
     <Container>
