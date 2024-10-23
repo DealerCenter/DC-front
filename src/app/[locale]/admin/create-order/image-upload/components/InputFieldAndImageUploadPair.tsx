@@ -8,7 +8,10 @@ import theme from '@/app/[locale]/theme'
 import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
 import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
 import ImagesUploadComponent from '../../../components/common/ImagesUploadComponent'
-import { useCreateOrderContext } from '../../hooks/useCreateOrderContext'
+import {
+  FIELD_NAMES,
+  useCreateOrderContext,
+} from '../../hooks/useCreateOrderContext'
 
 const INPUT_WIDTH_MOBILE_UPLOAD = 311
 const INPUT_WIDTH_TABLET_UPLOAD = 896
@@ -40,7 +43,8 @@ const InputFieldAndImageUploadPair = ({
   const t = useTranslations('')
   const previousValue = useRef<string>()
 
-  const { setUploadedTowTruckImages } = useCreateOrderContext()
+  // const { setUploadedTowTruckImages, setFieldValue, values } =
+  //   useCreateOrderContext()
 
   console.log('previousValue:', previousValue)
 
@@ -79,7 +83,6 @@ const InputFieldAndImageUploadPair = ({
         text={t('add photos of vehicle')}
         dropText={t('drop the files here')}
         uploadedText={t('photos uploaded')}
-        setUploadedImages={setUploadedTowTruckImages}
         isDisabled={previousValue.current === undefined}
       />
     </Container>

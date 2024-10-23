@@ -46,11 +46,6 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
   const t = useTranslations('')
 
   const [orderId, setOrderId] = useState<number | null>(null)
-  const [uploadedTowTruckImages, setUploadedTowTruckImages] = useState<Blob[]>()
-
-  useEffect(() => {
-    console.log('from context: ', uploadedTowTruckImages)
-  }, [uploadedTowTruckImages])
 
   const initialValues = {
     [FIELD_NAMES.MANUFACTURER]: '',
@@ -70,7 +65,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     [FIELD_NAMES.RECEIVER_ID]: '',
     [FIELD_NAMES.ADDITIONAL_DETAILS]: '',
     [FIELD_NAMES.CAR_DETAILS]: '',
-    // [FIELD_NAMES.TOW_TRUCK_IMAGES]: '',
+    [FIELD_NAMES.TOW_TRUCK_IMAGES]: [],
     // [FIELD_NAMES.ABROAD_PORT_IMAGES]: '',
     // [FIELD_NAMES.CONTAINER_IMAGES]: '',
     // [FIELD_NAMES.HOME_PORT_IMAGES]: '',
@@ -103,10 +98,12 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         }
       })
 
+      console.log('field values:', numericValues.towTruckImages)
+
       const data = { ...numericValues }
       Object.keys(data).forEach((key) => formData.append(key, values[key]))
-      uploadedTowTruckImages &&
-        formData.append(FIELD_NAMES.TOW_TRUCK_IMAGES, uploadedTowTruckImages[0])
+      // uploadedTowTruckImages &&
+      //   formData.append(FIELD_NAMES.TOW_TRUCK_IMAGES, uploadedTowTruckImages[0])
 
       try {
         const response = orderId
@@ -123,7 +120,9 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         )
 
         // Reset all fields
-        resetForm()
+        // resetForm()
+
+        // გადავიდეს შეკვეთების გვერდზე
 
         return response
       } catch (error) {
@@ -258,7 +257,6 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         prefillFormikValues,
         resetForm,
         setOrderId,
-        setUploadedTowTruckImages,
       }}
     >
       {children}

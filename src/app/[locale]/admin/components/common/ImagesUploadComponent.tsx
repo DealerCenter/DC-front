@@ -10,6 +10,10 @@ import BasicButton from '@/common/components/appButton/BasicButton'
 import plusIcon from '@/assets/icons/plusIconWhite.svg'
 import uploadIcon from '@/assets/icons/fileUpload/uploadIconWithArrow.svg'
 import uploadedIcon from '@/assets/icons/fileUpload/fileUploadedEmpty.svg'
+import {
+  FIELD_NAMES,
+  useCreateOrderContext,
+} from '../../create-order/hooks/useCreateOrderContext'
 
 type Props = {
   text?: string
@@ -19,7 +23,6 @@ type Props = {
   width?: number
   onDropAdditional?: (file: any) => void
   setIsUploaded?: (arg: boolean) => void
-  setUploadedImages?: (files: Blob[]) => void
   isDisabled?: boolean
 }
 
@@ -31,23 +34,25 @@ const ImagesUploadComponent = ({
   width,
   onDropAdditional,
   setIsUploaded,
-  setUploadedImages,
   isDisabled,
 }: Props) => {
   const t = useTranslations('')
 
   const [isDropped, setIsDropped] = useState(false)
 
+  const { setFieldValue, values } = useCreateOrderContext()
+
   const onDrop = useCallback(
     <T extends File>(acceptedFiles: T[]) => {
       // Do something with the files
       console.log('accepted files: ', acceptedFiles)
+      console.log('accepted files[0]: ', acceptedFiles[0])
       setIsDropped(true)
       setIsUploaded && setIsUploaded(true)
       if (onDropAdditional) onDropAdditional(acceptedFiles[0])
-      if (setUploadedImages) setUploadedImages(acceptedFiles)
+      setFieldValue('towTruckImages', acceptedFiles[0])
     },
-    [onDropAdditional, setIsUploaded, setUploadedImages]
+    [onDropAdditional, setIsUploaded, setFieldValue]
   )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
