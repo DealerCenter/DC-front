@@ -1,4 +1,4 @@
-import FileDropZone from '@/common/components/inputElements/FileDropZone'
+import FileDropZone from '@/common/components/InputElements/FileDropZone'
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'

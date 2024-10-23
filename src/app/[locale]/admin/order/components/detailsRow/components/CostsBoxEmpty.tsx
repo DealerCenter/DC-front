@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { useTranslations } from 'next-intl'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 
 import paperClip from '@/assets/icons/paperClip.svg'
 

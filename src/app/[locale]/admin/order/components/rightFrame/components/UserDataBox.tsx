@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import BasicButton from '@/common/components/appButton/BasicButton'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'

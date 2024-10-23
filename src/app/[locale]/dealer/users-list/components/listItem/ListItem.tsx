@@ -8,6 +8,7 @@ import ListItemFull from './ListItemFull'
 import theme from '@/app/[locale]/theme'
 import AppModal from '@/common/components/modal/AppModal'
 import AddRecipient from '../addRecipient/AddRecipient'
+import { VERIFICATION_STATUS_NAME } from '@/common/helpers/constants'
 
 type Props = {
   receiverData: {
@@ -70,7 +71,7 @@ const ListItem = ({
           personalId={personalId}
           phoneNumber={phoneNumber}
           createdAt={createdAt}
-          verificationStatus={verificationStatus}
+          verificationStatus={verificationStatus as VERIFICATION_STATUS_NAME}
           handleDelete={handleDelete}
           handleEdit={() => setIsModalOpen(true)}
         />

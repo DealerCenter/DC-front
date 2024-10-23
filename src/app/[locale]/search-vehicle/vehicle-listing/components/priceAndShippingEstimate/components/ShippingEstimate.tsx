@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import BoxWithHeaderAndFooter from '../common/BoxWithHeaderAndFooter'
 import styled from 'styled-components'
 

@@ -6,7 +6,7 @@ import { dummyShippingSteps2 } from '@/assets/DummyData'
 import Image from 'next/image'
 
 import boxIcon from '@/assets/icons/boxBlack.svg'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import UserDataBox from './components/UserDataBox'
 import Box from '../../../components/common/Box'
 import { useMediaQuery } from 'react-responsive'
@@ -31,11 +31,11 @@ const RightFrame = ({ isEditing }: Props) => {
       <Box>
         <Header>{t('status')}</Header>
         <Line />
-        <ShippingStateBox
+        {/* <ShippingStateBox
           shippingSteps={dummyShippingSteps2}
           currentStep={1}
           isEditing={isEditing}
-        />
+        /> */}
       </Box>
       <Box>
         <Header>{t('container data')}</Header> <Line />

@@ -7,8 +7,8 @@ import {
   useRegisterFormContextLegalPerson,
 } from '../../../hooks/useRegistrationFormLegalPerson'
 
-import TextInput from '@/common/components/inputElements/TextInput'
-import FileDropZone from '@/common/components/inputElements/FileDropZone'
+import TextInput from '@/common/components/InputElements/TextInput'
+import FileDropZone from '@/common/components/InputElements/FileDropZone'
 import AppButton from '@/common/components/appButton/AppButton'
 import theme from '@/app/[locale]/theme'
 import { useMediaQuery } from 'react-responsive'

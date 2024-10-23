@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 
 import CheckBox from '@/common/components/appCheckBox/Checkbox'
 import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import useLoginForm, { FIELD_NAMES } from './useLoginFormAdmin'
 
 import Image from 'next/image'

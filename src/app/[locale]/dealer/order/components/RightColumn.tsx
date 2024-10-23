@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
-import ShippingStateBox from '../../order-history/components/ShippingStateBox'
+// import ShippingStateBox from '../../order-history/components/ShippingStateBox'
 import { dummyShippingSteps2 } from '@/assets/DummyData'
 import Image from 'next/image'
 
@@ -16,7 +16,8 @@ const RightColumn = (props: Props) => {
   return (
     <Container>
       <BoxWithHeader headerText='status'>
-        <ShippingStateBox shippingSteps={dummyShippingSteps2} currentStep={1} />
+        {/* <ShippingStateBox shippingSteps={dummyShippingSteps2} currentStep={1} /> */}
+        <div></div>
       </BoxWithHeader>
       <ContainerData />
       <DataOfRecipient />

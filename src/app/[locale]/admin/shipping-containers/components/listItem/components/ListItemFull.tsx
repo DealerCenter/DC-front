@@ -10,6 +10,7 @@ import AppModal from '@/common/components/modal/AppModal'
 import DeleteWarning from '../../../../order-history/components/bindContainer/components/DeleteWarning'
 import DropdownIcon from '@/common/components/readyIcons/DropdownIcon'
 import ListItemFullDropdown from './ListItemFullDropdown'
+import { ORDER_DATA } from '@/api/apiTypes'
 
 const orderData = {
   additionalDetails: null,
@@ -108,12 +109,12 @@ const ListItemFull = ({
           <ListItemFullDropdown
             key={`listItemFullDropdown$}`}
             onClick={() => {}}
-            orderData={orderData}
+            orderData={orderData as unknown as ORDER_DATA}
           />
           <ListItemFullDropdown
             key={`listItemFullDropdown$}`}
             onClick={() => {}}
-            orderData={orderData}
+            orderData={orderData as unknown as ORDER_DATA}
             dashedLineHeight={107}
           />
         </>

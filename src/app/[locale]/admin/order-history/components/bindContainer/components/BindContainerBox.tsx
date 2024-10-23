@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import SearchComponent from './SearchComponent'
 import ContainersListBox from './ContainersListBox'
 import AppButton from '@/common/components/appButton/AppButton'
-import TextInput from '@/common/components/inputElements/TextInput'
+import TextInput from '@/common/components/InputElements/TextInput'
 import { getContainersAdmin } from '@/api/apiCalls'
 import { CONTAINER_GET_RES } from '@/api/apiTypes'
 
