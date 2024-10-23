@@ -1,16 +1,14 @@
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
-import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
 
-import theme from '@/app/[locale]/theme'
 import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
 import Box from '../../../components/common/Box'
+import ShippingStatusBox from '../../../order-history/components/shippingStateBox/ShippingStatusBox'
 import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../hooks/useCreateOrderContext'
-import ShippingStatusBox from '../../../order-history/components/shippingStateBox/ShippingStatusBox'
+import DropdownWithSearch from './DropdownWithSearch'
 
 const containersDropdownList = [
   {
@@ -63,10 +61,6 @@ const RightFrame = ({}: Props) => {
     setFieldValue(FIELD_NAMES.DEALER_ID, id)
   }
 
-  useEffect(() => {
-    console.log('dealer Id', values[FIELD_NAMES.DEALER_ID])
-  }, [values])
-
   return (
     <Container>
       <Box>
@@ -95,11 +89,9 @@ const RightFrame = ({}: Props) => {
         <Header>{t('recipient data')}</Header> <Line />
         <Frame>
           <Frame2>
-            <AppSelectAntDesign
-              value={values[FIELD_NAMES.RECEIVER_ID]}
-              optionsWithId={receiversDropdownList}
-              onChangeId={handleSetReceiverValue}
-              placeholder={t('select')}
+            <DropdownWithSearch
+              searchType='receiver'
+              placeholder={t('search')}
               fontSize={13}
             />
           </Frame2>
@@ -109,11 +101,9 @@ const RightFrame = ({}: Props) => {
         <Header>{t('dealer data')}</Header> <Line />
         <Frame>
           <Frame2>
-            <AppSelectAntDesign
-              value={values[FIELD_NAMES.DEALER_ID]}
-              optionsWithId={dealersDropdownList}
-              onChangeId={handleSetDealerValue}
-              placeholder={t('select')}
+            <DropdownWithSearch
+              searchType='dealer'
+              placeholder={t('search')}
               fontSize={13}
             />
           </Frame2>
