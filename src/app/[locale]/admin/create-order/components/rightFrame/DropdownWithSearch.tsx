@@ -1,13 +1,11 @@
+import { useState } from 'react'
+
 import { getDealersAdmin, getReceiversAdmin } from '@/api/apiCalls'
 import AppSelectAntDesignWithFetch from '@/common/components/appSelect/AppSelectAntDesignWithFetch'
-import MySelectComponent from '@/common/components/appSelect/MySelectComp'
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../hooks/useCreateOrderContext'
-import { useTranslations } from 'next-intl'
 
 type Props = {
   searchType: 'receiver' | 'dealer'
@@ -24,10 +22,11 @@ const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
   >([])
   const [loading, setLoading] = useState<boolean>(false) // Loading state
 
-  const { values, setFieldValue } = useCreateOrderContext()
+  const { setFieldValue } = useCreateOrderContext()
 
-  const handleSetReceiverValue = (id: number) => {
-    setFieldValue(FIELD_NAMES.RECEIVER_ID, id)
+  const handleSetValue = (id: number) => {
+    searchType === 'dealer' && setFieldValue(FIELD_NAMES.DEALER_ID, id)
+    searchType === 'receiver' && setFieldValue(FIELD_NAMES.RECEIVER_ID, id)
   }
 
   const fetchData = async (searchQuery: string) => {
@@ -68,27 +67,15 @@ const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
   }
 
   return (
-    <Container>
-      <AppSelectAntDesignWithFetch
-        value={values[FIELD_NAMES.RECEIVER_ID]}
-        options={options}
-        onSearch={handleSearch}
-        onChange={handleSetReceiverValue}
-        isLoading={loading}
-        placeholder={placeholder}
-        fontSize={fontSize}
-      />
-    </Container>
+    <AppSelectAntDesignWithFetch
+      options={options}
+      onSearch={handleSearch}
+      onChange={handleSetValue}
+      isLoading={loading}
+      placeholder={placeholder}
+      fontSize={fontSize}
+    />
   )
 }
 
 export default DropdownWithSearch
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  gap: 40px;
-
-  width: 100%;
-`

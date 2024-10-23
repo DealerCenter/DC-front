@@ -1,6 +1,8 @@
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import { getContainersAdmin } from '@/api/apiCalls'
 import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
 import Box from '../../../components/common/Box'
 import ShippingStatusBox from '../../../order-history/components/shippingStateBox/ShippingStatusBox'
@@ -10,56 +12,51 @@ import {
 } from '../../hooks/useCreateOrderContext'
 import DropdownWithSearch from './DropdownWithSearch'
 
-const containersDropdownList = [
-  {
-    label: 'container 1',
-    id: 1,
-  },
-  {
-    label: 'container 3',
-    id: 3,
-  },
-]
-
-const receiversDropdownList = [
-  {
-    label: 'receiver 1',
-    id: 1,
-  },
-  {
-    label: 'receiver 2',
-    id: 2,
-  },
-]
-
-const dealersDropdownList = [
-  {
-    label: 'dealer 1',
-    id: 1,
-  },
-  {
-    label: 'dealer 2',
-    id: 2,
-  },
-]
-
 type Props = {}
 
 const RightFrame = ({}: Props) => {
   const { values, setFieldValue } = useCreateOrderContext()
   const t = useTranslations('')
-
-  const handleSetReceiverValue = (id: number) => {
-    setFieldValue(FIELD_NAMES.RECEIVER_ID, id)
-  }
+  const [containerOptions, setContainerOptions] = useState<
+    {
+      label: string
+      id: number
+    }[]
+  >([])
 
   const handleSetContainerValue = (id: number) => {
     setFieldValue(FIELD_NAMES.CONTAINER_ID, id)
   }
 
-  const handleSetDealerValue = (id: number) => {
-    setFieldValue(FIELD_NAMES.DEALER_ID, id)
+  const fetchContainerData = async () => {
+    try {
+      const response = await getContainersAdmin()
+
+      console.log('containers data', response)
+
+      setContainerOptions([])
+
+      response?.map((item) =>
+        setContainerOptions((prev) => [
+          ...prev,
+          {
+            label: item.name,
+            id: item.id,
+          },
+        ])
+      )
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    }
   }
+
+  useEffect(() => {
+    fetchContainerData()
+  }, [])
+
+  useEffect(() => {
+    console.log('dropdown options', containerOptions)
+  }, [containerOptions])
 
   return (
     <Container>
@@ -77,7 +74,7 @@ const RightFrame = ({}: Props) => {
           <Frame2>
             <AppSelectAntDesign
               value={values[FIELD_NAMES.CONTAINER_ID]}
-              optionsWithId={containersDropdownList}
+              optionsWithId={containerOptions}
               onChangeId={handleSetContainerValue}
               placeholder={t('select')}
               fontSize={13}

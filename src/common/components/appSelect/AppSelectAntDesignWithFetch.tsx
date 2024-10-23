@@ -1,16 +1,15 @@
 import { ConfigProvider, Select, Spin } from 'antd'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
+import theme from '@/app/[locale]/theme'
 import arrowDown from '@/assets/icons/arrowDown.svg'
 import ErrorMessage from '../errorMessage/ErrorMessage'
-import styled, { CSSProperties } from 'styled-components'
-import theme from '@/app/[locale]/theme'
 
 const { Option } = Select
 
 type Props = {
-  value?: string | number
   options: {
     label: string
     id: number
@@ -25,7 +24,6 @@ type Props = {
 }
 
 const AppSelectAntDesignWithFetch = ({
-  value,
   options,
   onSearch,
   width,
@@ -45,16 +43,6 @@ const AppSelectAntDesignWithFetch = ({
   const handleOnSearch = (value: string) => {
     onSearch && onSearch(value)
   }
-
-  //   useEffect(() => {
-  //     if (typeof value === 'string' || typeof value === 'number') {
-  //       const label = options.find((item) => item.id === value)?.label
-  //       setSelectedItem(label ? label : value)
-  //     }
-  //     if (value === '') {
-  //       setSelectedItem(undefined)
-  //     }
-  //   }, [value, options])
 
   useEffect(() => {
     console.log('options:', options)
