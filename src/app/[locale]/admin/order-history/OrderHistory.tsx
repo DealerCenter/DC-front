@@ -60,18 +60,6 @@ const OrderHistory = (props: Props) => {
     setContainerToBind(null)
   }
 
-  useEffect(() => {
-    console.log('sortByCost:', sortByCost)
-  }, [sortByCost])
-  useEffect(() => {
-    console.log('sortByDate:', sortByCreateDate)
-  }, [sortByCost, sortByCreateDate])
-  // useEffect(() => {
-  //   console.log('shipping status:', shippingStatus)
-  //   console.log('dealer id:', typeof dealerId)
-  //   console.log('receiver id:', typeof receiverId)
-  // }, [dealerId, receiverId, shippingStatus])
-
   const handleEditSubmit = async () => {
     if (checkedOrderIds.length > 0) {
       try {
@@ -86,7 +74,7 @@ const OrderHistory = (props: Props) => {
           message.success(t('order edited successfully'))
         }
         // clearing info after requests are done
-        handleClearEdit()
+        handleClearEdit
       } catch (error) {
         message.error(t('could not edit order'))
         console.error('Error editing orders:', error)
