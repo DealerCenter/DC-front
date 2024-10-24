@@ -68,6 +68,8 @@ export type OrdersQueryType =
       sortByCreateDate?: 'asc' | 'desc' | null
       sortByCost?: 'asc' | 'desc' | null
       status?: ShippingStatus
+      receiverId?: number
+      carManufacturer?: string
       dealerId?: number
     }
   | undefined

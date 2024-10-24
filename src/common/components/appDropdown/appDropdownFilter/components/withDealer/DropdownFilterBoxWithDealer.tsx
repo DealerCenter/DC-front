@@ -16,14 +16,14 @@ import SingleDropdown from '../common/SingleDropdown'
 type Props = {
   toggleDropdown: () => void
   setShippingStatus: (arg: ShippingStatus) => void
-  setDealerId: (arg: number | null) => void
-  setReceiverId: (arg: number | null) => void
+  setDealerId: (arg: number | undefined) => void
+  setReceiverId: (arg: number | undefined) => void
   checkedShippingStatus: ShippingStatus
   setCheckedShippingStatus: (arg: ShippingStatus) => void
-  checkedDealerId: number | null
-  setCheckedDealerId: (arg: number | null) => void
-  checkedRecipientId: number | null
-  setCheckedRecipientId: (arg: number | null) => void
+  checkedDealerId: number | undefined
+  setCheckedDealerId: (arg: number | undefined) => void
+  checkedRecipientId: number | undefined
+  setCheckedRecipientId: (arg: number | undefined) => void
   clearFilterStates: () => void
 }
 

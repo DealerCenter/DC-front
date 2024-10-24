@@ -27,16 +27,16 @@ type Props = {
   isButtonsDisabled: boolean
   shippingStatus: ShippingStatus
   setShippingStatus: (arg: ShippingStatus) => void
-  dealerId: number | null
-  setDealerId: (arg: number | null) => void
-  receiverId: number | null
-  setReceiverId: (arg: number | null) => void
-  clearOrderIdsList: () => void
+  dealerId: number | undefined
+  setDealerId: (arg: number | undefined) => void
+  receiverId: number | undefined
+  setReceiverId: (arg: number | undefined) => void
   shippingStatusOnEdit: string | null
   setShippingStatusOnEdit: (arg: string | null) => void
   handleEditSubmit: () => void
   containerToBind: CONTAINER_GET_RES | null
   setContainerToBind: (arg: CONTAINER_GET_RES | null) => void
+  clearEdit: () => void
 }
 
 const ButtonsRow = ({
@@ -51,12 +51,12 @@ const ButtonsRow = ({
   setDealerId,
   receiverId,
   setReceiverId,
-  clearOrderIdsList,
   shippingStatusOnEdit,
   setShippingStatusOnEdit,
   handleEditSubmit,
   containerToBind,
   setContainerToBind,
+  clearEdit,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
@@ -91,7 +91,7 @@ const ButtonsRow = ({
               padding={16}
               color='white'
             >
-              <ButtonText onClick={clearOrderIdsList}>{t('cancel')}</ButtonText>
+              <ButtonText onClick={clearEdit}>{t('cancel')}</ButtonText>
             </BasicButton>
             <BasicButton onClick={() => setIsEditing(false)} padding={16}>
               <ButtonIcon>

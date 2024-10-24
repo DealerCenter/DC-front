@@ -1,7 +1,6 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import DropdownItem from '../../../../../../common/components/appDropdown/DropdownItem'
 import BindContainerBox from './components/BindContainerBox'
 import { CONTAINER_GET_RES } from '@/api/apiTypes'
 
