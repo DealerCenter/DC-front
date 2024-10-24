@@ -8,6 +8,7 @@ type Props = {
   values?: { id: number; firstName: string; lastName: string }[]
   checkedOption: number | null
   setCheckedId: (arg: number | null) => void
+  searchQuery: string
   setSearchQuery: (arg: string) => void
 }
 
@@ -15,6 +16,7 @@ const SingleDropdown = ({
   values,
   checkedOption,
   setCheckedId,
+  searchQuery,
   setSearchQuery,
 }: Props) => {
   const t = useTranslations('')
@@ -31,7 +33,11 @@ const SingleDropdown = ({
     return (
       <Container>
         <SearchBox>
-          <SearchSmall placeholder={t('search')} onSubmit={setSearchQuery} />
+          <SearchSmall
+            placeholder={t('search')}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
         </SearchBox>
         <List>
           {values.map((value, i) => (

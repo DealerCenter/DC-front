@@ -46,10 +46,10 @@ const DropdownFilterBoxWithDealer = ({
     'status' | 'recipient' | 'dealer' | null
   >('status')
 
-  const [receiversList, setReceiversList] = useState<RECEIVER_DATA[]>()
+  const [receiversList, setReceiversList] = useState<RECEIVER_DATA[]>([])
   const [receiversSearchQuery, setReceiversSearchQuery] = useState('')
 
-  const [dealersList, setDealersList] = useState<DEALERS_DATA[]>()
+  const [dealersList, setDealersList] = useState<DEALERS_DATA[]>([])
   const [dealersSearchQuery, setDealersSearchQuery] = useState('')
 
   const handleCancel = () => {
@@ -66,8 +66,7 @@ const DropdownFilterBoxWithDealer = ({
   }
 
   const getRecipients = async () => {
-    const res = await getReceiversAdmin({ search: '' })
-    res && console.log('fetched receivers list:', receiversSearchQuery)
+    const res = await getReceiversAdmin({ search: receiversSearchQuery })
     res && setReceiversList(res.data)
   }
 
@@ -77,8 +76,7 @@ const DropdownFilterBoxWithDealer = ({
   }, [receiversSearchQuery])
 
   const getDealers = async () => {
-    const res = await getDealersAdmin({})
-    res && console.log('fetched dealers list:', dealersSearchQuery)
+    const res = await getDealersAdmin({ firstName: dealersSearchQuery })
     res && setDealersList(res.data)
   }
 
@@ -111,6 +109,7 @@ const DropdownFilterBoxWithDealer = ({
                 lastName,
               }))
             }
+            searchQuery={receiversSearchQuery}
             setSearchQuery={setReceiversSearchQuery}
           />
         ) : (
@@ -126,6 +125,7 @@ const DropdownFilterBoxWithDealer = ({
               }
               checkedOption={checkedDealerId}
               setCheckedId={setCheckedDealerId}
+              searchQuery={dealersSearchQuery}
               setSearchQuery={setDealersSearchQuery}
             />
           )

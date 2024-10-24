@@ -1,43 +1,26 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import search from '@/assets/icons/searchForButton.svg'
 
 type Props = {
   placeholder?: string
-  onSubmit?: (arg: string) => void
+  searchQuery: string
+  setSearchQuery: (arg: string) => void
 }
 
-const SearchSmall = ({ placeholder, onSubmit }: Props) => {
-  const [inputValue, setInputValue] = useState('')
-
-  const handleSubmit = () => {
-    if (!inputValue) return
-    onSubmit && onSubmit(inputValue)
-    setInputValue('')
-  }
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      // Handle Enter key press here
-      handleSubmit()
-    }
-  }
-
+const SearchSmall = ({ placeholder, searchQuery, setSearchQuery }: Props) => {
   return (
     <Container>
-      <IconBox onClick={handleSubmit}>
+      <IconBox>
         <Image src={search} alt='search icon' />
       </IconBox>
 
       <StyledInput
         type='text'
         placeholder={placeholder ? placeholder : ''}
-        // ref={inputRef}
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={handleKeyDown}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
     </Container>
   )
