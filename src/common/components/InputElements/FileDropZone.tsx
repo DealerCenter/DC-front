@@ -29,11 +29,11 @@ const FileDropZone = ({
 
   const onDrop = useCallback(
     <T extends File>(acceptedFiles: T[]) => {
-      // Do something with the files
-      console.log('accepted files: ', acceptedFiles)
       setIsDropped(true)
-      setIsUploaded && setIsUploaded(true)
-      if (onDropAdditional) onDropAdditional(acceptedFiles[0])
+      if (onDropAdditional) {
+        onDropAdditional(acceptedFiles[0])
+        setIsUploaded && setIsUploaded(true)
+      }
     },
     [onDropAdditional, setIsUploaded]
   )

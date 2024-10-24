@@ -51,22 +51,30 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
           type='text'
           name={FIELD_NAMES.FIRST_NAME}
           placeholder={t('name')}
-          value={values.name}
+          value={values[FIELD_NAMES.FIRST_NAME]}
           onChange={handleChange}
           onBlur={handleBlur}
           isHalfSize={true}
-          errorMessage={errors.name && touched.name ? errors.name : ''}
+          errorMessage={
+            errors[FIELD_NAMES.FIRST_NAME] && touched[FIELD_NAMES.FIRST_NAME]
+              ? errors[FIELD_NAMES.FIRST_NAME]
+              : ''
+          }
         />
         <TextInput
           width={442}
           type='text'
           name={FIELD_NAMES.LAST_NAME}
           placeholder={t('surname')}
-          value={values.surname}
+          value={values[FIELD_NAMES.LAST_NAME]}
           onChange={handleChange}
           onBlur={handleBlur}
           isHalfSize={true}
-          errorMessage={errors.surname && touched.surname ? errors.surname : ''}
+          errorMessage={
+            errors[FIELD_NAMES.LAST_NAME] && touched[FIELD_NAMES.LAST_NAME]
+              ? errors[FIELD_NAMES.LAST_NAME]
+              : ''
+          }
         />
       </Frame>
       <TextInput
@@ -74,11 +82,13 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         type='date'
         name={FIELD_NAMES.BIRTH_DATE}
         placeholder={t('date of birth')}
-        value={values.dateOfBirth}
+        value={values[FIELD_NAMES.BIRTH_DATE]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.dateOfBirth && touched.dateOfBirth ? errors.dateOfBirth : ''
+          errors[FIELD_NAMES.BIRTH_DATE] && touched[FIELD_NAMES.BIRTH_DATE]
+            ? errors[FIELD_NAMES.BIRTH_DATE]
+            : ''
         }
       />
       <TextInput
@@ -86,12 +96,12 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         type='text'
         name={FIELD_NAMES.ADDRESS}
         placeholder={t('actual address')}
-        value={values.actualAddress}
+        value={values[FIELD_NAMES.ADDRESS]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.actualAddress && touched.actualAddress
-            ? errors.actualAddress
+          errors[FIELD_NAMES.ADDRESS] && touched[FIELD_NAMES.ADDRESS]
+            ? errors[FIELD_NAMES.ADDRESS]
             : ''
         }
       />
@@ -100,12 +110,13 @@ const IndividualForm1 = ({ setFormStep, goToLogin }: Props) => {
         type='text'
         name={FIELD_NAMES.CONTACT_NUMBER}
         placeholder={t('contact number')}
-        value={values.contactNumber}
+        value={values[FIELD_NAMES.CONTACT_NUMBER]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.contactNumber && touched.contactNumber
-            ? errors.contactNumber
+          errors[FIELD_NAMES.CONTACT_NUMBER] &&
+          touched[FIELD_NAMES.CONTACT_NUMBER]
+            ? errors[FIELD_NAMES.CONTACT_NUMBER]
             : ''
         }
       />
