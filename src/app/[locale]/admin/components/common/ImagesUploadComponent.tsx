@@ -10,6 +10,10 @@ import BasicButton from '@/common/components/appButton/BasicButton'
 import plusIcon from '@/assets/icons/plusIconWhite.svg'
 import uploadIcon from '@/assets/icons/fileUpload/uploadIconWithArrow.svg'
 import uploadedIcon from '@/assets/icons/fileUpload/fileUploadedEmpty.svg'
+import {
+  FIELD_NAMES,
+  useCreateOrderContext,
+} from '../../create-order/hooks/useCreateOrderContext'
 
 type Props = {
   text?: string
@@ -19,6 +23,7 @@ type Props = {
   width?: number
   onDropAdditional?: (file: any) => void
   setIsUploaded?: (arg: boolean) => void
+  isDisabled?: boolean
 }
 
 const ImagesUploadComponent = ({
@@ -29,23 +34,31 @@ const ImagesUploadComponent = ({
   width,
   onDropAdditional,
   setIsUploaded,
+  isDisabled,
 }: Props) => {
   const t = useTranslations('')
 
   const [isDropped, setIsDropped] = useState(false)
 
+  const { setFieldValue, values } = useCreateOrderContext()
+
   const onDrop = useCallback(
     <T extends File>(acceptedFiles: T[]) => {
       // Do something with the files
       console.log('accepted files: ', acceptedFiles)
+      console.log('accepted files[0]: ', acceptedFiles[0])
       setIsDropped(true)
       setIsUploaded && setIsUploaded(true)
       if (onDropAdditional) onDropAdditional(acceptedFiles[0])
+      setFieldValue('towTruckImages', acceptedFiles[0])
     },
-    [onDropAdditional, setIsUploaded]
+    [onDropAdditional, setIsUploaded, setFieldValue]
   )
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    disabled: isDisabled,
+  })
 
   return (
     <Container {...getRootProps()} width={width} height={height}>
@@ -65,7 +78,12 @@ const ImagesUploadComponent = ({
         ) : (
           <Text>{text}</Text>
         )}
-        <BasicButton onClick={() => {}} padding={16} width={155}>
+        <BasicButton
+          onClick={() => {}}
+          padding={16}
+          width={155}
+          isDisabled={isDisabled}
+        >
           <ButtonIcon>
             <Image src={plusIcon} alt='check icon' width={15} />
           </ButtonIcon>

@@ -67,6 +67,7 @@ export const RegisterFormProviderIndividual = ({
         router.push(routeName.dealer)
       } catch (error) {
         message.error(t('you could not register'))
+        // error?.response && message.error(error?.response?.data?.message[0])
         console.error('Error:', error)
       }
     },
@@ -127,7 +128,7 @@ export const RegisterFormProviderIndividual = ({
 
 export const useRegisterFormContextIndividual = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {}
+  ExtraProps = {},
 >() => {
   const context = useContext(FormikContext)
   if (!context) {

@@ -1,4 +1,4 @@
-import { AUCTiONS_API } from '@/api/apiClient'
+import { AUCTIONS_API } from '@/api/apiClient'
 import axios, { AxiosResponse } from 'axios'
 import Cookies from 'js-cookie'
 
@@ -28,7 +28,7 @@ export const handleLogout = () => {
 
 export const getCarDetailsByVin = async (vin: string) => {
   const response = await axios.post<AuctionApiResponse>(
-    `${AUCTiONS_API}/api/v1/get-car-vin?api_token=${process.env.NEXT_PUBLIC_AUCTIONS_API_TOKEN}&vin_number=${vin}`
+    `${AUCTIONS_API}/api/v1/get-car-vin?api_token=${process.env.NEXT_PUBLIC_AUCTIONS_API_TOKEN}&vin_number=${vin}`
   )
   return response.data
 }

@@ -26,7 +26,7 @@ type Props = {
   isWidthFill?: boolean
   backgroundColor?: string
   isDisabled?: boolean
-  rightComponent?: ReactNode
+  onCheck?: () => void
 }
 
 const TextInput = ({
@@ -51,7 +51,7 @@ const TextInput = ({
   isWidthFill,
   backgroundColor,
   isDisabled = false,
-  rightComponent,
+  onCheck,
 }: Props) => {
   return (
     <Container>
@@ -77,8 +77,9 @@ const TextInput = ({
         isWidthFill={isWidthFill}
         backgroundColor={backgroundColor}
         disabled={isDisabled}
+        hasCheck={!!onCheck}
       />
-      {rightComponent ? rightComponent : null}
+      {/* {rightComponent ? rightComponent : null} */}
       {optionalInfo && (
         <TextBox>
           <Image src={infoIcon} alt='info icon' width={16} height={16} />
@@ -86,6 +87,7 @@ const TextInput = ({
         </TextBox>
       )}
       {errorMessage && <ErrorMessage text={errorMessage} top={48} left={12} />}
+      {onCheck && <CheckButton onClick={onCheck}>Check</CheckButton>}
     </Container>
   )
 }
@@ -112,6 +114,7 @@ type InputProps = {
   hasShadow?: boolean
   isWidthFill?: boolean
   backgroundColor?: string
+  hasCheck?: boolean
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -164,6 +167,15 @@ const StyledInput = styled.input<InputProps>`
           padding-left: ${paddingLeft}px;
         `}
 
+  ${({ hasCheck }) =>
+    hasCheck
+      ? css`
+          padding-right: 72px;
+        `
+      : css`
+          padding-right: 10px;
+        `}
+
   ${({ hasShadow }) =>
     hasShadow
       ? css`
@@ -178,12 +190,12 @@ ${({ isHalfSize, width }) =>
           width: 213px;
         `
       : width
-      ? css`
-          width: ${width}px;
-        `
-      : css`
-          width: 350px;
-        `}
+        ? css`
+            width: ${width}px;
+          `
+        : css`
+            width: 350px;
+          `}
 
   ${({ height }) =>
     height
@@ -216,12 +228,12 @@ ${({ isHalfSize, width }) =>
             width: 167.5px;
           `
         : width
-        ? css`
-            width: ${width}px;
-          `
-        : css`
-            width: 350px;
-          `}
+          ? css`
+              width: ${width}px;
+            `
+          : css`
+              width: 350px;
+            `}
   }
 
   ${({ isWidthFill }) =>
@@ -272,4 +284,29 @@ const IconBox = styled.div<IconBoxProps>`
         `}
 
   z-index: 1000;
+`
+
+const CheckButton = styled.div`
+  position: absolute;
+
+  padding: 10px 8px;
+  border-radius: 10px;
+
+  right: 5px;
+  font-size: 16px;
+  font-weight: normal;
+  background-color: ${({ theme }) => theme.colors?.main_gray_10};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors?.main_gray_16};
+  }
+
+  &:active {
+    background-color: ${({ theme }) => theme.colors?.main_gray_26};
+  }
+
+  user-select: none; /* For modern browsers */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
+  -ms-user-select: none; /* For older IE versions */
 `

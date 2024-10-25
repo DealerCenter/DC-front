@@ -10,6 +10,7 @@ type Props = {
   padding?: number
   isBorder?: boolean
   isDisabled?: boolean
+  htmlType?: 'button' | 'submit' | 'reset'
 }
 
 const BasicButton = ({
@@ -21,6 +22,7 @@ const BasicButton = ({
   padding,
   isBorder = false,
   isDisabled,
+  htmlType,
 }: Props) => {
   return (
     <StyledButton
@@ -31,6 +33,7 @@ const BasicButton = ({
       padding={padding}
       isBorder={isBorder}
       disabled={isDisabled}
+      type={htmlType ? htmlType : 'button'}
     >
       {children}
     </StyledButton>

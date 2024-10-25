@@ -1,15 +1,13 @@
-import React, { Dispatch, SetStateAction, useRef } from 'react'
-import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import styled from 'styled-components'
 
 import theme from '@/app/[locale]/theme'
 
-import ImagesUploadComponent from '../../../components/common/ImagesUploadComponent'
 import AppSelectBasic from '@/common/components/appSelect/AppSelectBasic'
-import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
 import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
-import FileDropZone from '@/common/components/InputElements/FileDropZone'
+import ImagesUploadComponent from '../../../components/common/ImagesUploadComponent'
 
 const INPUT_WIDTH_MOBILE_UPLOAD = 311
 const INPUT_WIDTH_TABLET_UPLOAD = 896
@@ -41,6 +39,20 @@ const InputFieldAndImageUploadPair = ({
   const t = useTranslations('')
   const previousValue = useRef<string>()
 
+  // const { setUploadedTowTruckImages, setFieldValue, values } =
+  //   useCreateOrderContext()
+
+  console.log('previousValue:', previousValue)
+
+  const handleChange = (e: string) => {
+    setSelectedLocations((prev) => ({
+      ...prev,
+      [`${e}`]: true,
+      [`${previousValue.current}`]: false,
+    }))
+    previousValue.current = e
+  }
+
   return (
     <Container>
       <AppSelectBasicFrame>
@@ -48,28 +60,12 @@ const InputFieldAndImageUploadPair = ({
           options={dropdownOptions}
           selectedLocations={selectedLocations}
           setSelectedLocations={setSelectedLocations}
-          onChange={(e) => {
-            setSelectedLocations((prev) => ({
-              ...prev,
-              [`${e}`]: true,
-              [`${previousValue.current}`]: false,
-            }))
-            previousValue.current = e
-          }}
+          onChange={(e) => handleChange(e)}
           placeholder={t('mark photo location')}
           width={isMobile ? INPUT_WIDTH_MOBILE : INPUT_WIDTH_DESKTOP}
           placeHolderIsBold={true}
           placeHolderIsGray={true}
         />
-        {/* <AppSelectAntDesign
-          // value={value}
-          optionsBasic={dropdownOptions}
-          // onChangeString={handleSetValueBasic ? handleSetValueBasic : () => {}}
-          // errorMessage={errorMessage}
-          placeholder={t('mark photo location')}
-          width={isMobile ? INPUT_WIDTH_MOBILE : INPUT_WIDTH_DESKTOP}
-          fontSize={13}
-        /> */}
       </AppSelectBasicFrame>
       <ImagesUploadComponent
         width={
@@ -83,6 +79,7 @@ const InputFieldAndImageUploadPair = ({
         text={t('add photos of vehicle')}
         dropText={t('drop the files here')}
         uploadedText={t('photos uploaded')}
+        isDisabled={previousValue.current === undefined}
       />
     </Container>
   )

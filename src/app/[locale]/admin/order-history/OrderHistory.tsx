@@ -32,15 +32,15 @@ const OrderHistory = (props: Props) => {
   const [sortByCreateDate, setSortByCreateDate] = useState<
     'asc' | 'desc' | null
   >(null)
-  const [shippingStatus, setShippingStatus] = useState<ShippingStatus>(null)
 
   const [shippingStatusOnEdit, setShippingStatusOnEdit] = useState<
     string | null
   >(null)
 
-  // for filter when backend adds it
-  const [dealerId, setDealerId] = useState<number | null>(null)
-  const [receiverId, setReceiverId] = useState<number | null>(null)
+  // for filter
+  const [shippingStatus, setShippingStatus] = useState<ShippingStatus>(null)
+  const [dealerId, setDealerId] = useState<number>()
+  const [receiverId, setReceiverId] = useState<number>()
 
   const [checkedOrderIds, setCheckedOrderIds] = useState<number[] | []>([])
   const [containerToBind, setContainerToBind] =
@@ -54,12 +54,11 @@ const OrderHistory = (props: Props) => {
     setCheckedOrderIds((prev) => prev.filter((orderId) => orderId !== id))
   }
 
-  // Has to be done after backend is fixed
-  // useEffect(() => {
-  //   console.log('shipping status:', shippingStatus)
-  //   console.log('dealer id:', dealerId)
-  //   console.log('receiver id:', receiverId)
-  // }, [dealerId, receiverId, shippingStatus])
+  const handleClearEdit = () => {
+    setCheckedOrderIds([])
+    setShippingStatusOnEdit(null)
+    setContainerToBind(null)
+  }
 
   const handleEditSubmit = async () => {
     if (checkedOrderIds.length > 0) {
@@ -75,9 +74,7 @@ const OrderHistory = (props: Props) => {
           message.success(t('order edited successfully'))
         }
         // clearing info after requests are done
-        setCheckedOrderIds([])
-        setShippingStatusOnEdit(null)
-        setContainerToBind(null)
+        handleClearEdit
       } catch (error) {
         message.error(t('could not edit order'))
         console.error('Error editing orders:', error)
@@ -97,6 +94,8 @@ const OrderHistory = (props: Props) => {
         sortByCreateDate: sortByCreateDate,
         sortByCost: sortByCost,
         status: shippingStatus,
+        receiverId: receiverId,
+        dealerId: dealerId,
       },
       isAdmin
     )
@@ -112,7 +111,14 @@ const OrderHistory = (props: Props) => {
   useEffect(() => {
     handleGetOrders()
     //eslint-disable-next-line
-  }, [sortByCost, sortByCreateDate, shippingStatus, currentPage])
+  }, [
+    sortByCost,
+    sortByCreateDate,
+    shippingStatus,
+    currentPage,
+    receiverId,
+    dealerId,
+  ])
 
   if (!isPageLoaded) {
     return (
@@ -141,7 +147,7 @@ const OrderHistory = (props: Props) => {
           setDealerId={setDealerId}
           receiverId={receiverId}
           setReceiverId={setReceiverId}
-          clearOrderIdsList={() => setCheckedOrderIds([])}
+          clearEdit={handleClearEdit}
           shippingStatusOnEdit={shippingStatusOnEdit}
           setShippingStatusOnEdit={setShippingStatusOnEdit}
           handleEditSubmit={handleEditSubmit}

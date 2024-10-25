@@ -57,21 +57,27 @@ const IndividualForm3 = ({ setFormStep }: Props) => {
         type='email'
         name={FIELD_NAMES.EMAIL}
         placeholder={t('email')}
-        value={values.email}
+        value={values[FIELD_NAMES.EMAIL]}
         onChange={handleChange}
         onBlur={handleBlur}
-        errorMessage={errors.email && touched.email ? errors.email : ''}
+        errorMessage={
+          errors[FIELD_NAMES.EMAIL] && touched[FIELD_NAMES.EMAIL]
+            ? errors[FIELD_NAMES.EMAIL]
+            : ''
+        }
       />
       <TextInput
         width={isMobile ? undefined : 442}
         type='password'
         name={FIELD_NAMES.PASSWORD}
         placeholder={t('password')}
-        value={values.password}
+        value={values[FIELD_NAMES.PASSWORD]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.password && touched.password ? errors.password : ''
+          errors[FIELD_NAMES.PASSWORD] && touched[FIELD_NAMES.PASSWORD]
+            ? errors[FIELD_NAMES.PASSWORD]
+            : ''
         }
       />
       <PasswordErrorBox>
@@ -94,12 +100,13 @@ const IndividualForm3 = ({ setFormStep }: Props) => {
         type='password'
         name={FIELD_NAMES.REPEAT_PASSWORD}
         placeholder={t('repeat password')}
-        value={values.repeatPassword}
+        value={values[FIELD_NAMES.REPEAT_PASSWORD]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.repeatPassword && touched.repeatPassword
-            ? errors.repeatPassword
+          errors[FIELD_NAMES.REPEAT_PASSWORD] &&
+          touched[FIELD_NAMES.REPEAT_PASSWORD]
+            ? errors[FIELD_NAMES.REPEAT_PASSWORD]
             : ''
         }
       />

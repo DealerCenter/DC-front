@@ -42,7 +42,6 @@ const AdminLayout = ({ children }: Props) => {
         </Frame>
       </Container>
       {isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
-      <Footer />
     </>
   )
 }
@@ -50,16 +49,19 @@ const AdminLayout = ({ children }: Props) => {
 export default AdminLayout
 
 const Container = styled.div`
+  min-height: 100vh;
   padding: 0 8%;
-  margin-bottom: 100px;
+  padding-bottom: 100px;
 
   @media ${({ theme }) => theme.media?.md} {
     padding: 0 3%;
+    padding-bottom: 100px;
   }
 
   @media ${({ theme }) => theme.media?.sm} {
     padding: 0 5%;
     margin-bottom: unset;
+    min-height: unset;
   }
 `
 

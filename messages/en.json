@@ -393,8 +393,6 @@
   "document is required": "Document is required",
   "id image is required": "ID Image is required",
 
-
-
   "to improve our services and functionalities together": "To improve our services and functionalities together",
   "fill out the form and tell us what you would like to improve": "Fill out the form and tell us what you would like to improve",
 
@@ -455,5 +453,7 @@
   "towTruckImages": "Evacuator",
   "abroadPortImages": "USA Port",
   "containerImages": "Container",
-  "homePortImages": "Georgian port"
+  "homePortImages": "Georgian port",
+
+  "cancel field": "Cancel field"
 }

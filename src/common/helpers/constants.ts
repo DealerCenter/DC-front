@@ -16,7 +16,7 @@ export const routeName = {
   adminPersonalInformation: '/admin/personal-information',
   adminOrder: '/admin/order',
   adminCreateOrder: '/admin/create-order',
-  adminCreateOrderImageUpload: '/admin/create-order/image-upload',
+  // adminCreateOrderImageUpload: '/admin/create-order/image-upload',
   adminOrderImageUpload: '/admin/order/image-upload',
   adminDealersList: '/admin/dealers-list',
   adminUserProfile: '/admin/user-profile',
@@ -68,6 +68,8 @@ export type OrdersQueryType =
       sortByCreateDate?: 'asc' | 'desc' | null
       sortByCost?: 'asc' | 'desc' | null
       status?: ShippingStatus
+      receiverId?: number
+      carManufacturer?: string
       dealerId?: number
     }
   | undefined

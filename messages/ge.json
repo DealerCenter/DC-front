@@ -377,7 +377,6 @@
 
   "update information": "ინფორმაციის განახლება",
 
-
   "to improve our services and functionalities together": "ერთად გავაუმჯობესოთ ჩვენი სერვისები და ფუნქციონალები",
   "fill out the form and tell us what you would like to improve": "შეავსე ფორმა და მოგვწერე რის გაუმჯობესებას ისურვებდი",
 
@@ -458,5 +457,7 @@
   "towTruckImages": "ევაკუატორი",
   "abroadPortImages": "აშშ პორტი",
   "containerImages": "კონტეინერი",
-  "homePortImages": "საქართველოს პორტი"
+  "homePortImages": "საქართველოს პორტი",
+
+  "cancel field": "ველის გაუქმება"
 }

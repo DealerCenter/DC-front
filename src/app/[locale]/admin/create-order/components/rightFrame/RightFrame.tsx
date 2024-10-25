@@ -1,69 +1,62 @@
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
 
-import theme from '@/app/[locale]/theme'
+import { getContainersAdmin } from '@/api/apiCalls'
 import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
 import Box from '../../../components/common/Box'
+import ShippingStatusBox from '../../../order-history/components/shippingStateBox/ShippingStatusBox'
 import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../hooks/useCreateOrderContext'
-import ShippingStatusBox from '../../../order-history/components/shippingStateBox/ShippingStatusBox'
-
-const containersDropdownList = [
-  {
-    label: 'container 1',
-    id: 1,
-  },
-  {
-    label: 'container 3',
-    id: 3,
-  },
-]
-
-const receiversDropdownList = [
-  {
-    label: 'receiver 1',
-    id: 1,
-  },
-  {
-    label: 'receiver 2',
-    id: 2,
-  },
-]
-
-const INPUT_WIDTH_MOBILE = 311
-const INPUT_WIDTH_TABLET = 333
-const INPUT_WIDTH_DESKTOP = 391
+import DropdownWithSearch from './DropdownWithSearch'
 
 type Props = {}
 
 const RightFrame = ({}: Props) => {
-  const [textInputWidth, setTextInputWidth] = useState(INPUT_WIDTH_TABLET)
   const { values, setFieldValue } = useCreateOrderContext()
-  const isMobile = useMediaQuery({ query: theme.media?.sm })
-  const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
-
-  useEffect(() => {
-    setTextInputWidth(
-      isMobile
-        ? INPUT_WIDTH_MOBILE
-        : isTablet
-        ? INPUT_WIDTH_TABLET
-        : INPUT_WIDTH_DESKTOP
-    )
-  }, [isMobile, isTablet, setTextInputWidth])
-
-  const handleSetReceiverValue = (id: number) => {
-    setFieldValue(FIELD_NAMES.RECEIVER_ID, id)
-  }
+  const [containerOptions, setContainerOptions] = useState<
+    {
+      label: string
+      id: number
+    }[]
+  >([])
 
   const handleSetContainerValue = (id: number) => {
     setFieldValue(FIELD_NAMES.CONTAINER_ID, id)
   }
+
+  const fetchContainerData = async () => {
+    try {
+      const response = await getContainersAdmin()
+
+      console.log('containers data', response)
+
+      setContainerOptions([])
+
+      response?.map((item) =>
+        setContainerOptions((prev) => [
+          ...prev,
+          {
+            label: item.name,
+            id: item.id,
+          },
+        ])
+      )
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    }
+  }
+
+  useEffect(() => {
+    fetchContainerData()
+  }, [])
+
+  useEffect(() => {
+    console.log('dropdown options', containerOptions)
+  }, [containerOptions])
 
   return (
     <Container>
@@ -81,9 +74,21 @@ const RightFrame = ({}: Props) => {
           <Frame2>
             <AppSelectAntDesign
               value={values[FIELD_NAMES.CONTAINER_ID]}
-              optionsWithId={containersDropdownList}
+              optionsWithId={containerOptions}
               onChangeId={handleSetContainerValue}
               placeholder={t('select')}
+              fontSize={13}
+            />
+          </Frame2>
+        </Frame>
+      </Box>
+      <Box>
+        <Header>{t('recipient data')}</Header> <Line />
+        <Frame>
+          <Frame2>
+            <DropdownWithSearch
+              searchType='receiver'
+              placeholder={t('search')}
               fontSize={13}
             />
           </Frame2>
@@ -93,11 +98,9 @@ const RightFrame = ({}: Props) => {
         <Header>{t('dealer data')}</Header> <Line />
         <Frame>
           <Frame2>
-            <AppSelectAntDesign
-              value={values[FIELD_NAMES.RECEIVER_ID]}
-              optionsWithId={receiversDropdownList}
-              onChangeId={handleSetReceiverValue}
-              placeholder={t('select')}
+            <DropdownWithSearch
+              searchType='dealer'
+              placeholder={t('search')}
               fontSize={13}
             />
           </Frame2>
