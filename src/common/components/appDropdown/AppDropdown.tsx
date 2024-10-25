@@ -107,7 +107,9 @@ const AppDropdown = ({
                 item={item}
                 key={`${item.label}12ij${i}`}
                 modalStyle={modalStyle}
-                // onClick={() => setActiveLabel && setActiveLabel(item.label)}
+                onItemClick={
+                  setActiveLabel ? () => setActiveLabel(item.label) : () => {}
+                }
               />
             ))}
         </DropdownMenu>

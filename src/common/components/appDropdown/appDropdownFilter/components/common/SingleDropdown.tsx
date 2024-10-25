@@ -6,8 +6,9 @@ import SearchSmall from '@/common/components/search/SearchSmall'
 
 type Props = {
   values?: { id: number; firstName: string; lastName: string }[]
-  checkedOption: number | null
-  setCheckedId: (arg: number | null) => void
+  checkedOption: number | undefined
+  setCheckedId: (arg: number | undefined) => void
+  searchQuery: string
   setSearchQuery: (arg: string) => void
 }
 
@@ -15,13 +16,14 @@ const SingleDropdown = ({
   values,
   checkedOption,
   setCheckedId,
+  searchQuery,
   setSearchQuery,
 }: Props) => {
   const t = useTranslations('')
 
-  const handleClick = (value: number | null) => {
+  const handleClick = (value: number | undefined) => {
     if (value === checkedOption) {
-      setCheckedId(null)
+      setCheckedId(undefined)
     } else {
       setCheckedId(value)
     }
@@ -31,7 +33,11 @@ const SingleDropdown = ({
     return (
       <Container>
         <SearchBox>
-          <SearchSmall placeholder={t('search')} onSubmit={setSearchQuery} />
+          <SearchSmall
+            placeholder={t('search')}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
         </SearchBox>
         <List>
           {values.map((value, i) => (

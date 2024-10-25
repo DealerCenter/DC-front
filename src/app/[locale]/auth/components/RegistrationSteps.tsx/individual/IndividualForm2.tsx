@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 import { useMediaQuery } from 'react-responsive'
@@ -16,6 +16,7 @@ type Props = { setFormStep: React.Dispatch<React.SetStateAction<number>> }
 
 const IndividualForm2 = ({ setFormStep }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const [isPhotoUploaded, setIsPhotoUploaded] = useState(false)
 
   const t = useTranslations('')
   const {
@@ -35,7 +36,8 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
     }
   }
 
-  const isButtonDisabled = values[FIELD_NAMES.PERSONAL_ID].length === 0
+  const isButtonDisabled =
+    values[FIELD_NAMES.PERSONAL_ID].length === 0 || !isPhotoUploaded
 
   return (
     <StyledForm>
@@ -44,12 +46,12 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
         type='text'
         name={FIELD_NAMES.PERSONAL_ID}
         placeholder={t('personal number')}
-        value={values.personalNumber}
+        value={values[FIELD_NAMES.PERSONAL_ID]}
         onChange={handleChange}
         onBlur={handleBlur}
         errorMessage={
-          errors.personalNumber && touched.personalNumber
-            ? errors.personalNumber
+          errors[FIELD_NAMES.PERSONAL_ID] && touched[FIELD_NAMES.PERSONAL_ID]
+            ? errors[FIELD_NAMES.PERSONAL_ID]
             : ''
         }
       />
@@ -59,6 +61,7 @@ const IndividualForm2 = ({ setFormStep }: Props) => {
         text={t('upload an ID photo')}
         uploadedText={t('photo uploaded')}
         onDropAdditional={setUploadFile}
+        setIsUploaded={setIsPhotoUploaded}
       />
       <AppButton
         width={442}

@@ -50,12 +50,10 @@ const UserList = ({
     if (response) {
       setReceiversData(response.data)
       setNumOfPages(response.pageCount)
-      console.log('receiver updated')
     }
-    if (searchQuery && !response) {
+    if (searchQuery && response?.data.length === 0) {
       message.error('could not find recipient')
     }
-    setSearchQuery('')
     setIsLoading(false)
   }
 

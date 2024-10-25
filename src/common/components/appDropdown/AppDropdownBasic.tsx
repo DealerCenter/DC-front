@@ -47,11 +47,9 @@ const AppDropdownBasic = ({
     }
   }
 
-  const handleItemClick = (label?: string) => {
+  const handleItemClick = () => {
     !isNoActionOnClick && setIsOpen(false)
     handleClose && handleClose()
-
-    setActiveValue && label && setActiveValue(label)
   }
 
   useEffect(() => {
@@ -72,7 +70,7 @@ const AppDropdownBasic = ({
           modalStyle={modalStyle}
           left={left}
           top={top}
-          onClick={() => {}}
+          onClick={handleItemClick}
           width={width}
           isBorder={isBorder}
         >
@@ -82,7 +80,9 @@ const AppDropdownBasic = ({
                 item={item}
                 key={`${item.label}12ij${i}`}
                 modalStyle={modalStyle}
-                // onItemClick={handleItemClick}
+                onItemClick={
+                  setActiveValue ? () => setActiveValue(item.label) : () => {}
+                }
               />
             ))}
         </DropdownMenu>

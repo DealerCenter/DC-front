@@ -1,65 +1,52 @@
-import theme from '@/app/[locale]/theme'
-import { ConfigProvider, Select } from 'antd'
+import { ConfigProvider, Select, Spin } from 'antd'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+
+import theme from '@/app/[locale]/theme'
+import arrowDown from '@/assets/icons/arrowDown.svg'
 import ErrorMessage from '../errorMessage/ErrorMessage'
 
-import arrowDown from '@/assets/icons/arrowDown.svg'
+const { Option } = Select
 
 type Props = {
-  value?: string | number
-  optionsBasic?: string[]
-  optionsWithId?: { id: number; label: string }[]
-  onSearch?: (arg: string | number) => void
-  onChangeString?: (arg: string) => void
-  onChangeId?: (id: number) => void
+  options: {
+    label: string
+    id: number
+  }[]
+  onSearch?: (arg: string) => void
   width?: number
   placeholder?: string
   errorMessage?: string
   fontSize?: number
+  isLoading: boolean
+  onChange: (value: number) => void
 }
 
-const AppSelectAntDesign = ({
-  value,
-  optionsBasic,
-  optionsWithId = [
-    { id: 1, label: '1' },
-    { id: 2, label: '2' },
-  ],
+const AppSelectAntDesignWithFetch = ({
+  options,
   onSearch,
-  onChangeString,
-  onChangeId,
   width,
   placeholder,
-  errorMessage,
   fontSize,
+  isLoading,
+  errorMessage,
+  onChange,
 }: Props) => {
-  const [selectedItem, setSelectedItem] = useState<number | string | undefined>(
-    undefined
-  )
+  const [selectedItem, setSelectedItem] = useState<number>()
 
-  const handleOnChange = (value: string | number) => {
+  const handleOnChange = (value: number) => {
     setSelectedItem(value)
-    onChangeString && onChangeString(value.toString())
-    onChangeId && onChangeId(Number(value))
+    onChange && onChange(value)
   }
 
-  const handleOnSearch = (value: string | number) => {
+  const handleOnSearch = (value: string) => {
     onSearch && onSearch(value)
   }
 
   useEffect(() => {
-    if (typeof value === 'string' || typeof value === 'number') {
-      const label =
-        optionsWithId && optionsWithId.find((item) => item.id === value)?.label
-
-      setSelectedItem(label ? label : value)
-    }
-    if (value === '') {
-      setSelectedItem(undefined)
-    }
-  }, [value, optionsWithId])
+    console.log('options:', options)
+  }, [options])
 
   return (
     <Container>
@@ -89,31 +76,28 @@ const AppSelectAntDesign = ({
           value={selectedItem}
           onChange={handleOnChange}
           onSearch={handleOnSearch}
+          filterOption={false}
           style={{
             width: `${width ? `${width}px` : '100%'}`,
             border: `2px solid ${theme.colors?.main_gray_04}`,
             borderRadius: '12px',
           }}
-          options={
-            optionsBasic
-              ? optionsBasic.map((item, i) => ({
-                  value: item,
-                  label: item,
-                }))
-              : optionsWithId?.map((item) => ({
-                  value: item.id.toString(),
-                  label: item.label,
-                }))
-          }
           suffixIcon={<Image src={arrowDown} alt='arrow icon' />}
-        />
+          notFoundContent={isLoading ? <Spin size='small' /> : null} // Show isLoading spinner
+        >
+          {options.map((option) => (
+            <Option key={option.id} value={option.id}>
+              {option.label}
+            </Option>
+          ))}
+        </Select>
       </ConfigProvider>
       {errorMessage && <ErrorMessage text={errorMessage} top={48} left={12} />}
     </Container>
   )
 }
 
-export default AppSelectAntDesign
+export default AppSelectAntDesignWithFetch
 
 const Container = styled.div`
   position: relative;

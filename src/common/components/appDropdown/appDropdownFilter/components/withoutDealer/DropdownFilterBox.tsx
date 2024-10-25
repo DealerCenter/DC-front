@@ -14,11 +14,11 @@ import OptionsBox from './OptionsBox'
 type Props = {
   toggleDropdown: () => void
   setShippingStatus: (arg: ShippingStatus) => void
-  setReceiverId: (arg: number | null) => void
+  setReceiverId: (arg: number | undefined) => void
   checkedShippingStatus: ShippingStatus
   setCheckedShippingStatus: (arg: ShippingStatus) => void
-  checkedRecipientId: number | null
-  setCheckedRecipientId: (arg: number | null) => void
+  checkedRecipientId: number | undefined
+  setCheckedRecipientId: (arg: number | undefined) => void
   clearFilterStates: () => void
 }
 
@@ -88,6 +88,7 @@ const DropdownFilterBox = ({
                   lastName,
                 }))
               }
+              searchQuery={receiversSearchQuery}
               setSearchQuery={setReceiversSearchQuery}
             />
           )
