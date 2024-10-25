@@ -29,7 +29,7 @@ const OrderHistoryFilter = ({
 }: Props) => {
   const [checkedShippingStatus, setCheckedShippingStatus] =
     useState<ShippingStatus>(null)
-  const [checkedRecipientId, setCheckedRecipientId] = useState<number>()
+  const [checkedRecipientId, setCheckedRecipientId] = useState<any>()
 
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 

@@ -26,9 +26,8 @@ const AdminLayout = ({ children }: Props) => {
   const isSideBarVisible =
     pathname !== routeName.adminOrder &&
     pathname !== routeName.adminOrderImageUpload &&
-    pathname !== routeName.adminCreateOrderImageUpload &&
     !pathname.startsWith(routeName.adminCreateOrder) &&
-    !pathname.startsWith(routeName.adminUserProfile)
+    !pathname.startsWith(routeName.adminDealerProfile)
 
   return (
     <>

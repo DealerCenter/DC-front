@@ -79,7 +79,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     initialValues,
     onSubmit: async (values, { resetForm }) => {
       const numericValues: {
-        [x: string]: string | number
+        [x: string]: string | number | number[]
       } = { ...values }
       const numberFields = [
         FIELD_NAMES.MANUFACTURE_YEAR,
@@ -103,7 +103,9 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
       console.log('field values:', numericValues.towTruckImages)
 
       const data = { ...numericValues }
-      Object.keys(data).forEach((key) => formData.append(key, values[key]))
+      Object.keys(data).forEach((key) =>
+        formData.append(key, values[key] as string | Blob)
+      )
       // uploadedTowTruckImages &&
       //   formData.append(FIELD_NAMES.TOW_TRUCK_IMAGES, uploadedTowTruckImages[0])
 
