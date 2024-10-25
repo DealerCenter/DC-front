@@ -19,6 +19,9 @@ export const handleAuthResponse = (response: AxiosResponse) => {
     sameSite: 'Strict',
     httpOnly: false,
   })
+
+  localStorage.setItem('ACCESS_TOKEN', accessToken)
+  localStorage.setItem('REFRESH_TOKEN', refreshToken)
 }
 
 export const handleLogout = () => {
