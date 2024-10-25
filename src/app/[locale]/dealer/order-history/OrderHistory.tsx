@@ -93,7 +93,7 @@ const OrderHistory = (props: Props) => {
           orderData={ordersList}
         />
       ) : (
-        <NoOrders>no orders</NoOrders>
+        <NoOrders>No orders</NoOrders>
       )}
       <PaginationFrame>
         <Pagination
@@ -151,4 +151,6 @@ const NoOrders = styled.div`
   font-size: ${({ theme }) => theme.fontSizes?.large};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   width: 100%;
+  opacity: 0.7;
+  margin-left: 32px;
 `

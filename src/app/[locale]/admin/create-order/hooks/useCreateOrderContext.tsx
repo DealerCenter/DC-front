@@ -1,6 +1,7 @@
 'use client'
 import { FormikValues, useFormik } from 'formik'
 import { useTranslations } from 'next-intl'
+import { useRouter } from '@/navigation'
 import {
   ReactNode,
   createContext,
@@ -14,7 +15,7 @@ import axiosInstance from '@/api/apiClient'
 import { ORDER_DATA } from '@/api/apiTypes'
 import { endpoints } from '@/api/endpoints'
 import { message } from 'antd'
-import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
+import { IMAGE_LOCATIONS, routeName } from '@/common/helpers/constants'
 
 const FormikContext = createContext<FormikValues | null>(null)
 
@@ -44,6 +45,7 @@ export const FIELD_NAMES = {
 
 export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
   const t = useTranslations('')
+  const router = useRouter()
 
   const [orderId, setOrderId] = useState<number | null>(null)
 
@@ -119,10 +121,8 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
             : t('order created successfully')
         )
 
-        // Reset all fields
-        // resetForm()
-
-        // გადავიდეს შეკვეთების გვერდზე
+        resetForm()
+        router.push(routeName.adminOrderHistory)
 
         return response
       } catch (error) {
@@ -266,7 +266,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
 
 export const useCreateOrderContext = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {},
+  ExtraProps = {}
 >() => {
   const context = useContext(FormikContext)
   if (!context) {

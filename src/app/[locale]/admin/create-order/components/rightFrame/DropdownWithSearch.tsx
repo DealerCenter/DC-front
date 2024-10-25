@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { getDealersAdmin, getReceiversAdmin } from '@/api/apiCalls'
 import AppSelectAntDesignWithFetch from '@/common/components/appSelect/AppSelectAntDesignWithFetch'
@@ -22,7 +22,7 @@ const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
   >([])
   const [loading, setLoading] = useState<boolean>(false) // Loading state
 
-  const { setFieldValue } = useCreateOrderContext()
+  const { setFieldValue, values } = useCreateOrderContext()
 
   const handleSetValue = (id: number) => {
     searchType === 'dealer' && setFieldValue(FIELD_NAMES.DEALER_ID, id)
@@ -34,22 +34,22 @@ const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
     try {
       const response =
         searchType === 'receiver'
-          ? await getReceiversAdmin({ search: searchQuery })
+          ? await getReceiversAdmin({ pageSize: 100, search: searchQuery })
           : searchType === 'dealer' &&
-            (await getDealersAdmin({ firstName: searchQuery }))
+            (await getDealersAdmin({
+              pageSize: 100,
+              firstName: searchQuery,
+            }))
 
-      setOptions([])
-
-      // MY_BUG
-      response?.data?.map((item) =>
-        setOptions((prev) => [
-          ...prev,
-          {
+      if (response && response.data) {
+        const mapped = response.data.map((item) => {
+          return {
             label: `${item.firstName} ${item.lastName}`,
             id: item.id,
-          },
-        ])
-      )
+          }
+        })
+        setOptions(mapped)
+      }
     } catch (error) {
       console.error('Error fetching data:', error)
     } finally {
@@ -65,6 +65,10 @@ const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
     }
   }
 
+  useEffect(() => {
+    fetchData('')
+  }, [])
+
   return (
     <AppSelectAntDesignWithFetch
       options={options}
@@ -73,6 +77,16 @@ const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
       isLoading={loading}
       placeholder={placeholder}
       fontSize={fontSize}
+      value={
+        searchType === 'dealer'
+          ? values[FIELD_NAMES.DEALER_ID]
+          : values[FIELD_NAMES.RECEIVER_ID]
+      }
+      setValue={
+        searchType === 'dealer'
+          ? (value) => setFieldValue(FIELD_NAMES.DEALER_ID, value)
+          : (value) => setFieldValue(FIELD_NAMES.RECEIVER_ID, value)
+      }
     />
   )
 }

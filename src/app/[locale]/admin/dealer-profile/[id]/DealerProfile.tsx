@@ -139,6 +139,7 @@ const Frame = styled.div`
   display: flex;
   flex-direction: row;
   gap: 18px;
+  flex-wrap: wrap;
 
   align-items: center;
   @media ${({ theme }) => theme.media?.sm} {
