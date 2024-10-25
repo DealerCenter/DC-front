@@ -29,7 +29,7 @@ const DealersList = ({ dealersData, onDeleteDealer }: Props) => {
               labels={[
                 t('full name'),
                 t('mobile'),
-                t('date of Joining'),
+                t('date of joining'),
                 t('debt'),
                 t('num of cars'),
               ]}
@@ -41,7 +41,7 @@ const DealersList = ({ dealersData, onDeleteDealer }: Props) => {
               userData={data}
               key={`ListItem${data.id}`}
               onClick={() =>
-                router.push(`${routeName.adminUserProfile}/${data.id}`)
+                router.push(`${routeName.adminDealerProfile}/${data.id}`)
               }
               onDeleteDealer={onDeleteDealer}
             />

@@ -41,7 +41,7 @@ const OrderHistory = (props: Props) => {
   >(null)
   const [shippingStatus, setShippingStatus] = useState<ShippingStatus>(null)
 
-  const [receiverId, setReceiverId] = useState<number | null>(null)
+  const [receiverId, setReceiverId] = useState<number>()
 
   const t = useTranslations('')
   const router = useRouter()
@@ -54,6 +54,7 @@ const OrderHistory = (props: Props) => {
       sortByCreateDate: sortByCreateDate,
       sortByCost: sortByCost,
       status: shippingStatus,
+      receiverId: receiverId,
     })
     if (response) {
       setIsPageLoaded(true)
@@ -67,7 +68,7 @@ const OrderHistory = (props: Props) => {
   useEffect(() => {
     handleGetOrders()
     //eslint-disable-next-line
-  }, [sortByCost, sortByCreateDate, shippingStatus, currentPage])
+  }, [sortByCost, sortByCreateDate, shippingStatus, currentPage, receiverId])
 
   return (
     <Container>
@@ -86,15 +87,20 @@ const OrderHistory = (props: Props) => {
           />
         </ButtonFrame>
       </TopFrame>
-      <OrderList
-        onClick={() => router.push(routeName.dealerOrder)}
-        orderData={ordersList}
-      />
+      {ordersList?.length !== 0 ? (
+        <OrderList
+          onClick={() => router.push(routeName.dealerOrder)}
+          orderData={ordersList}
+        />
+      ) : (
+        <NoOrders>no orders</NoOrders>
+      )}
       <PaginationFrame>
         <Pagination
           currentPage={currentPage}
           numOfPages={totalPages}
           setCurrentPage={setCurrentPage}
+          isDisabled={isLoading}
         />
       </PaginationFrame>
     </Container>
@@ -139,4 +145,10 @@ const PaginationFrame = styled.div`
   display: flex;
   justify-content: center;
   padding: ${({ theme }) => theme.spacing?.md};
+`
+
+const NoOrders = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes?.large};
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
+  width: 100%;
 `
