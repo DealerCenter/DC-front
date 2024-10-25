@@ -15,8 +15,8 @@ const BUTTON_WIDTH_ON_MOBILE = 160
 type Props = {
   shippingStatus: ShippingStatus
   setShippingStatus: (arg: ShippingStatus) => void
-  receiverId: number | null
-  setReceiverId: (arg: number | null) => void
+  receiverId: number | undefined
+  setReceiverId: (arg: number | undefined) => void
   isDisabled?: boolean
 }
 
@@ -29,9 +29,7 @@ const OrderHistoryFilter = ({
 }: Props) => {
   const [checkedShippingStatus, setCheckedShippingStatus] =
     useState<ShippingStatus>(null)
-  const [checkedRecipientId, setCheckedRecipientId] = useState<number | null>(
-    null
-  )
+  const [checkedRecipientId, setCheckedRecipientId] = useState<number>()
 
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
@@ -44,7 +42,7 @@ const OrderHistoryFilter = ({
 
   const clearFilterStates = () => {
     setShippingStatus(null)
-    setReceiverId(null)
+    setReceiverId(undefined)
 
     setCheckedShippingStatus(null)
     setCheckedRecipientId(null)
@@ -58,7 +56,7 @@ const OrderHistoryFilter = ({
       setCheckedShippingStatus={setCheckedShippingStatus}
       checkedRecipientId={checkedRecipientId}
       setCheckedRecipientId={setCheckedRecipientId}
-      checkedDealerId={null}
+      checkedDealerId={undefined}
       setCheckedDealerId={() => {}}
       setDealerId={() => {}}
       clearFilterStates={clearFilterStates}

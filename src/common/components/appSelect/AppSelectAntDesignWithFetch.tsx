@@ -21,6 +21,8 @@ type Props = {
   fontSize?: number
   isLoading: boolean
   onChange: (value: number) => void
+  value: number
+  setValue: (arg: any) => void
 }
 
 const AppSelectAntDesignWithFetch = ({
@@ -32,21 +34,17 @@ const AppSelectAntDesignWithFetch = ({
   isLoading,
   errorMessage,
   onChange,
+  setValue,
+  value,
 }: Props) => {
-  const [selectedItem, setSelectedItem] = useState<number>()
-
   const handleOnChange = (value: number) => {
-    setSelectedItem(value)
+    setValue(value)
     onChange && onChange(value)
   }
 
   const handleOnSearch = (value: string) => {
     onSearch && onSearch(value)
   }
-
-  useEffect(() => {
-    console.log('options:', options)
-  }, [options])
 
   return (
     <Container>
@@ -73,7 +71,7 @@ const AppSelectAntDesignWithFetch = ({
           showSearch
           placeholder={placeholder}
           optionFilterProp='label'
-          value={selectedItem}
+          value={value}
           onChange={handleOnChange}
           onSearch={handleOnSearch}
           filterOption={false}

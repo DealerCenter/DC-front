@@ -8,6 +8,12 @@ import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign
 import AppSelectTrueFalse from '@/common/components/appSelect/AppSelectTrueFalse'
 import TextInput from '@/common/components/InputElements/TextInput'
 
+const TEXT_INPUT_WIDTH_MOBILE = 160
+const TEXT_INPUT_WIDTH_TABLET = 220
+const TEXT_INPUT_WIDTH_DESKTOP = 240
+const TEXT_INPUT_WIDTH_MOBILE_2 = 143
+const TEXT_INPUT_WIDTH_DESKTOP_2 = 220
+
 type Props = {
   title: string
   value: string | number
@@ -17,10 +23,7 @@ type Props = {
   onBlur?: ChangeEventHandler<HTMLInputElement>
   onChange?: ChangeEventHandler<HTMLInputElement>
   errorMessage?: string
-  selectOptions?: {
-    option1: { value: string; onChoose: () => void }
-    option2: { value: string; onChoose: () => void }
-  }
+
   optionsListWidthID?: { label: string; id: number }[]
   handleSetValueWithId?: (id: number) => void
   selectOptionsBasic?: string[]
@@ -37,7 +40,6 @@ const TextInputFieldPair = ({
   onBlur,
   onChange,
   errorMessage,
-  selectOptions,
   optionsListWidthID,
   handleSetValueWithId,
   selectOptionsBasic,
@@ -51,11 +53,19 @@ const TextInputFieldPair = ({
   const t = useTranslations('')
 
   useEffect(() => {
-    setTextInputWidth(isMobile ? 160 : isTablet ? 220 : 240)
+    setTextInputWidth(
+      isMobile
+        ? TEXT_INPUT_WIDTH_MOBILE
+        : isTablet
+          ? TEXT_INPUT_WIDTH_TABLET
+          : TEXT_INPUT_WIDTH_DESKTOP
+    )
   }, [isMobile, isTablet, setTextInputWidth])
 
   useEffect(() => {
-    setTextInputWidth2(isMobile ? 143 : 220)
+    setTextInputWidth2(
+      isMobile ? TEXT_INPUT_WIDTH_MOBILE_2 : TEXT_INPUT_WIDTH_DESKTOP_2
+    )
   }, [isMobile, setTextInputWidth2])
 
   return (
@@ -80,6 +90,7 @@ const TextInputFieldPair = ({
           onChange={onYesOrNoChange}
           placeholder={t('select')}
           errorMessage={errorMessage}
+          width={textInputWidth2}
           fontSize={13}
         />
       ) : optionsListWidthID ? (
@@ -89,6 +100,7 @@ const TextInputFieldPair = ({
           onChangeId={handleSetValueWithId ? handleSetValueWithId : () => {}}
           placeholder={t('select')}
           errorMessage={errorMessage}
+          width={textInputWidth2}
           fontSize={13}
         />
       ) : selectOptionsBasic ? (

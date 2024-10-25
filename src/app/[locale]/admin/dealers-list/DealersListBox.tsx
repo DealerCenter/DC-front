@@ -11,7 +11,6 @@ import plusIcon from '@/assets/icons/plus.svg'
 import AppModal from '@/common/components/modal/AppModal'
 import Pagination from '@/common/components/pagination/Pagination'
 import SearchButton from '@/common/components/searchButton/SearchButton'
-// import AddRecipient from './components/addRecipient/AddRecipient'
 import DealersList from './components/DealersList'
 import AddRecipientAdmin from './components/addRecipientAdmin/AddRecipientAdmin'
 

@@ -52,7 +52,7 @@ const DealerProfile = ({ dealerId }: Props) => {
       {
         page: currentPage,
         pageSize: ITEMS_PER_PAGE,
-        dealerId: undefined,
+        dealerId: Number(dealerId),
       },
       true
     )
@@ -64,7 +64,7 @@ const DealerProfile = ({ dealerId }: Props) => {
   useEffect(() => {
     handleGetOrders()
     //eslint-disable-next-line
-  }, [])
+  }, [dealerId])
 
   if (!dealerData) {
     return (
@@ -95,9 +95,9 @@ const DealerProfile = ({ dealerId }: Props) => {
         {isMobile && <PdfAndImageBox image={userImage.src} />}
         <DealerDataBox dealerData={dealerData} />
         <MiddleFrame>
-          <LabelValueBox label={t('current debt')} value={'$ 5,750'} />
-          <LabelValueBox label={t('cars on the way')} value={'12'} />
-          <LabelValueBox label={t('total imported cars')} value={'24'} />
+          <LabelValueBox label={t('current debt')} value={'NA'} />
+          <LabelValueBox label={t('cars on the way')} value={'NA'} />
+          <LabelValueBox label={t('total imported cars')} value={'NA'} />
         </MiddleFrame>
         {!isMobile && <PdfAndImageBox image={userImage.src} />}
       </Frame>
@@ -139,6 +139,7 @@ const Frame = styled.div`
   display: flex;
   flex-direction: row;
   gap: 18px;
+  flex-wrap: wrap;
 
   align-items: center;
   @media ${({ theme }) => theme.media?.sm} {

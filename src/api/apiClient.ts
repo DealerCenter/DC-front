@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+// const BASE_URL = 'http://localhost:7070'
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 export const AUCTIONS_API = 'https://copart-iaai-api.com'
 

@@ -66,8 +66,8 @@ export const RegisterFormProviderIndividual = ({
         message.success(t('you registered successfully'))
         router.push(routeName.dealer)
       } catch (error) {
-        message.error(t('you could not register'))
-        // error?.response && message.error(error?.response?.data?.message[0])
+        ;(error as any)?.response &&
+          message.error((error as any)?.response?.data?.message[0])
         console.error('Error:', error)
       }
     },
