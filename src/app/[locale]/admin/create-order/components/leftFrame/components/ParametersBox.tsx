@@ -45,7 +45,7 @@ const ParametersBox = ({}: Props) => {
         <TextInputFieldPair
           title='insurance'
           value=''
-          selectOptions={selectOptions}
+          // selectOptions={selectOptions}
           onYesOrNoChange={handleChooseIsInsured}
           booleanValue={
             values[FIELD_NAMES.IS_INSURED] && values[FIELD_NAMES.IS_INSURED]

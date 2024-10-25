@@ -71,6 +71,7 @@ export type OrdersQueryType =
       receiverId?: number
       carManufacturer?: string
       dealerId?: number
+      orderId?: number
     }
   | undefined
 

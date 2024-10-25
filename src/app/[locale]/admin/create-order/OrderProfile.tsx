@@ -31,7 +31,7 @@ const OrderProfile = ({ id }: Props) => {
     useCreateOrderContext()
 
   const handleGetOrderData = async () => {
-    const response = await getOrders({}, isAdmin)
+    const response = await getOrders({ orderId: Number(id) }, isAdmin)
     response?.data && prefillFormikValues(response?.data[0])
   }
 
@@ -75,7 +75,6 @@ const OrderProfile = ({ id }: Props) => {
 
         <ImagesUploadComponentDummy
           text={t('add photos of vehicle')}
-          // onClick={() => router.push(routeName.adminCreateOrderImageUpload)}
           onClick={() => setIsUploadImagesOpen(true)}
           height={372}
         />

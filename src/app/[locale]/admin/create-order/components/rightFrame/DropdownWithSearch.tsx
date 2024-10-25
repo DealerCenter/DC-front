@@ -41,7 +41,6 @@ const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
       setOptions([])
 
       // MY_BUG
-      // @ts-ignore
       response?.data?.map((item) =>
         setOptions((prev) => [
           ...prev,

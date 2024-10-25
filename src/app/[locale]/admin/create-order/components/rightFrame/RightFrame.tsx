@@ -32,8 +32,6 @@ const RightFrame = ({}: Props) => {
     try {
       const response = await getContainersAdmin()
 
-      console.log('containers data', response)
-
       setContainerOptions([])
 
       response?.map((item) =>
@@ -53,10 +51,6 @@ const RightFrame = ({}: Props) => {
   useEffect(() => {
     fetchContainerData()
   }, [])
-
-  useEffect(() => {
-    console.log('dropdown options', containerOptions)
-  }, [containerOptions])
 
   return (
     <Container>
