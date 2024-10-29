@@ -17,6 +17,7 @@ export const FIELD_NAMES = {
 }
 
 const useLoginForm = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
@@ -29,6 +30,7 @@ const useLoginForm = () => {
       [FIELD_NAMES.PASSWORD]: '',
     },
     onSubmit: async (values) => {
+      setIsLoading(true)
       try {
         const response = await axiosInstance.post<LOGIN_RES>(
           endpoints.LOGIN_ADMIN,
@@ -48,6 +50,8 @@ const useLoginForm = () => {
           console.error('Unknown Error:', error)
           setAxiosError(undefined) // Handle non-Axios errors if needed
         }
+      } finally {
+        setIsLoading(false)
       }
     },
 
@@ -65,6 +69,7 @@ const useLoginForm = () => {
     errors: formik.errors,
     touched: formik.touched,
     axiosError: axiosError,
+    isLoading,
   }
 }
 

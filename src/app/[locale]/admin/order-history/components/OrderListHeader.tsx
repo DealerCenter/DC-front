@@ -2,10 +2,6 @@ import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
 
-import upDownIcon from '@/assets/icons/upDownArrows.svg'
-import AtoZIcon from '@/assets/icons/AtoZSort.svg'
-import Image from 'next/image'
-
 type Props = {}
 
 const OrderListHeader = (props: Props) => {
@@ -14,35 +10,20 @@ const OrderListHeader = (props: Props) => {
   return (
     <Container>
       <CarDetails>
-        <Icon>
-          <Image src={AtoZIcon} alt='up down arrow icon' />
-        </Icon>
         <Text>{t('vehicle data')}</Text>
       </CarDetails>
       <BoxesFrame>
         <RecipientBox>
           <Text>{t('recipient')}</Text>
-          <Icon>
-            <Image src={upDownIcon} alt='up down arrow icon' />
-          </Icon>
         </RecipientBox>
         <DealerBox>
           <Text>{t('dealer')}</Text>{' '}
-          <Icon>
-            <Image src={upDownIcon} alt='up down arrow icon' />
-          </Icon>
         </DealerBox>
         <StatusBox>
           <Text>{t('status')}</Text>{' '}
-          <Icon>
-            <Image src={upDownIcon} alt='up down arrow icon' />
-          </Icon>
         </StatusBox>
         <MoneyBox>
           <Text>{t('amount')}</Text>{' '}
-          <Icon>
-            <Image src={upDownIcon} alt='up down arrow icon' />
-          </Icon>
         </MoneyBox>
       </BoxesFrame>
     </Container>
@@ -115,11 +96,4 @@ const Text = styled.label`
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   color: ${({ theme }) => theme.colors?.button_black};
-`
-const Icon = styled.div`
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `

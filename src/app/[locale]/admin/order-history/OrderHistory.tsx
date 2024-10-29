@@ -74,7 +74,7 @@ const OrderHistory = (props: Props) => {
           message.success(t('order edited successfully'))
         }
         // clearing info after requests are done
-        handleClearEdit
+        handleClearEdit()
       } catch (error) {
         message.error(t('could not edit order'))
         console.error('Error editing orders:', error)

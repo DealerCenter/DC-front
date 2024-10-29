@@ -75,9 +75,9 @@ const ListItemFull = ({
         </LabelBox>
         <Label>{phoneNumber}</Label>
         <Label>{formatDate(createdAt)}</Label>
-        <DebtLabel>{`$ 5750`}</DebtLabel>
+        <DebtLabel>{`$ NA`}</DebtLabel>
         <IconBox>
-          {withReceivers ? (
+          {isDropdownOpen && receivers ? (
             <>
               <ReceiversNumberLabel>{receivers.length}</ReceiversNumberLabel>
               <VerificationIcon

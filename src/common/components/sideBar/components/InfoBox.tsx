@@ -7,17 +7,17 @@ import notificationBell from '@/assets/icons/notificationBell.svg'
 import NotificationDot from '../../notificationDot/NotificationDot'
 
 type Props = {
-  refreshDate: string
   name: string
-  notificationCount: number
   isHovered: boolean
+  refreshDate?: string
+  notificationCount?: number
 }
 
 const InfoBox = ({
-  refreshDate,
   name,
-  notificationCount,
   isHovered,
+  refreshDate,
+  notificationCount,
 }: Props) => {
   const t = useTranslations('')
 
@@ -29,20 +29,26 @@ const InfoBox = ({
             <Text isHovered={isHovered}>{t('hello')}, &nbsp;</Text>
             <TextName isHovered={isHovered}>{name}</TextName>
           </TextBox>
-          <DateText isHovered={isHovered}>{refreshDate}</DateText>
+          {refreshDate && (
+            <DateText isHovered={isHovered}>{refreshDate}</DateText>
+          )}
         </Frame>
-        <IconBox isHovered={isHovered}>
-          <BellBox>
-            <Image src={notificationBell} alt='notification bell icon' />
-            <NotificationDot number={notificationCount} />
-          </BellBox>
-        </IconBox>
-        <IconBoxOnWide isHovered={isHovered}>
-          <BellBox>
-            <Image src={notificationBell} alt='notification bell icon' />
-            <NotificationDot number={notificationCount} />
-          </BellBox>
-        </IconBoxOnWide>
+        {notificationCount && (
+          <>
+            <IconBox isHovered={isHovered}>
+              <BellBox>
+                <Image src={notificationBell} alt='notification bell icon' />
+                <NotificationDot number={notificationCount} />
+              </BellBox>
+            </IconBox>
+            <IconBoxOnWide isHovered={isHovered}>
+              <BellBox>
+                <Image src={notificationBell} alt='notification bell icon' />
+                <NotificationDot number={notificationCount} />
+              </BellBox>
+            </IconBoxOnWide>
+          </>
+        )}
       </Container>
     </>
   )

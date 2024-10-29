@@ -87,8 +87,8 @@ const SideBarAdmin = ({ routes }: Props) => {
           <InfoBox
             isHovered={isHovered}
             name={adminData ? adminData.username : ''}
-            refreshDate='last refresh jul 11 2034'
-            notificationCount={9}
+            // refreshDate='last refresh jul 11 2034'
+            // notificationCount={9}
           />
           <AddOrderButton
             text={t('add order')}
