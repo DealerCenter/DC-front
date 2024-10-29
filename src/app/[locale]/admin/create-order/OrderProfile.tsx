@@ -9,14 +9,12 @@ import { routeName } from '@/common/helpers/constants'
 import { getOrders } from '@/api/apiCalls'
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
 import FormSaveButton from '@/common/components/appButton/FormSaveButton'
-import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
+import AppModalFullScreen from '@/common/components/modal/AppModalFullScreen'
+import ImagesUploadComponentDummy from '../components/common/ImagesUploadComponentDummy'
 import DetailsRow from './components/detailsRow/DetailsRow'
-import IdAndDateBox from './components/IdAndDateBox'
 import LeftFrame from './components/leftFrame/LeftFrame'
 import RightFrame from './components/rightFrame/RightFrame'
 import { useCreateOrderContext } from './hooks/useCreateOrderContext'
-import ImagesUploadComponentDummy from '../components/common/ImagesUploadComponentDummy'
-import AppModalFullScreen from '@/common/components/modal/AppModalFullScreen'
 import ImageUpload from './image-upload/ImageUpload'
 
 const isAdmin = true
@@ -59,18 +57,6 @@ const OrderProfile = ({ id }: Props) => {
         />
       </TopButtonsFrame>
       <ImageFrame>
-        <IdAndDateFrame>
-          <IdAndDateBox
-            auctionId='932874929'
-            orderId='2387498739'
-            dateOfPurchase='20/04/2025'
-          />
-        </IdAndDateFrame>
-
-        <StateBoxFrame>
-          <ArrivalStateBox arrivalState='arrived' />
-        </StateBoxFrame>
-
         <ImagesUploadComponentDummy
           text={t('add photos of vehicle')}
           onClick={() => setIsUploadImagesOpen(true)}

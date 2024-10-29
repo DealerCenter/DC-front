@@ -40,16 +40,16 @@ const CarDetailsBoxEmpty = (props: Props) => {
     const vin = values[FIELD_NAMES.VIN]
     if (vin) {
       try {
-        // const res = (await getCarDetailsByVin(vin)).result[0]
-        // setFieldValue(FIELD_NAMES.MANUFACTURER, res.make)
-        // setFieldValue(FIELD_NAMES.MANUFACTURE_YEAR, res.year)
-        // setFieldValue(FIELD_NAMES.MODEL, res.model)
-        // setFieldValue(FIELD_NAMES.VIN, vin)
-        // setFieldValue(FIELD_NAMES.CAR_CATEGORY, res.vehicle_type)
-        // setFieldValue(FIELD_NAMES.MILEAGE, res.odometer)
-        // setFieldValue(FIELD_NAMES.CAR_COST, res.currency.iso_code)
-        // setFieldValue(FIELD_NAMES.IS_INSURED, !!res.is_insurance)
-        // setFieldValue(FIELD_NAMES.ADDITIONAL_DETAILS, res.car_info)
+        const res = (await getCarDetailsByVin(vin)).result[0]
+        setFieldValue(FIELD_NAMES.MANUFACTURER, res.make)
+        setFieldValue(FIELD_NAMES.MANUFACTURE_YEAR, res.year)
+        setFieldValue(FIELD_NAMES.MODEL, res.model)
+        setFieldValue(FIELD_NAMES.VIN, vin)
+        setFieldValue(FIELD_NAMES.CAR_CATEGORY, res.vehicle_type)
+        setFieldValue(FIELD_NAMES.MILEAGE, res.odometer)
+        setFieldValue(FIELD_NAMES.CAR_COST, res.currency.iso_code)
+        setFieldValue(FIELD_NAMES.IS_INSURED, !!res.is_insurance)
+        setFieldValue(FIELD_NAMES.ADDITIONAL_DETAILS, res.car_info)
         message.success('Car found')
       } catch (e) {
         message.error('Car not found')
@@ -129,15 +129,6 @@ const CarDetailsBoxEmpty = (props: Props) => {
             : ''
         }
         onCheck={checkCarByVin}
-        // rightComponent={
-        //   <AppButton
-        //     text='Check'
-        //     height='medium'
-        //     onClick={checkCarByVin}
-        //     isSmall
-        //     type='outlined'
-        //   />
-        // }
       />
     </CarDetailsBox>
   )
