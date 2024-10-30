@@ -39,7 +39,7 @@ const ListItemMobile = ({
         <LabelAndIconBox>
           <NameLabel>{brandName}</NameLabel>
         </LabelAndIconBox>
-        <IconBox>
+        {/* <IconBox>
           <Icon>
             <Image
               src={editPencil}
@@ -58,7 +58,7 @@ const ListItemMobile = ({
               }}
             />
           </Icon>
-        </IconBox>
+        </IconBox> */}
       </NameFrame>
       <DetailsFrame>
         <DetailsBox>

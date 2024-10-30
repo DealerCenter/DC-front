@@ -50,4 +50,7 @@ const Container = styled.div<DropdownIconProps>`
     `}
 
   cursor: pointer;
+
+  /* needed, so it is clickable in certain cases where other elements are overlapping */
+  z-index: 10;
 `
