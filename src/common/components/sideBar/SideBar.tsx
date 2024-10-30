@@ -74,8 +74,8 @@ const SideBar = ({ routes }: Props) => {
           <InfoBox
             isHovered={isHovered}
             name={userData ? userData?.firstName : ''}
-            refreshDate='last refresh jul 11 2034'
-            notificationCount={9}
+            // refreshDate='last refresh jul 11 2034'
+            // notificationCount={9}
           />
           <GrayContainer
             icon={wallet}

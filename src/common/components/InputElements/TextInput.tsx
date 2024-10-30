@@ -54,41 +54,45 @@ const TextInput = ({
   onCheck,
 }: Props) => {
   return (
-    <Container>
-      {icon ? (
-        <IconBox iconPaddingLeft={iconPaddingLeft}>{icon}</IconBox>
-      ) : null}
-      <StyledInput
-        width={width}
-        height={height}
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        value={value ? String(value) : ''}
-        onChange={onChange}
-        onBlur={onBlur}
-        icon={icon}
-        isHalfSize={isHalfSize}
-        fontWeight={fontWeight}
-        fontSize={fontSize}
-        isOutline={isOutline}
-        paddingLeft={paddingLeft}
-        hasShadow={hasShadow}
-        isWidthFill={isWidthFill}
-        backgroundColor={backgroundColor}
-        disabled={isDisabled}
-        hasCheck={!!onCheck}
-      />
-      {/* {rightComponent ? rightComponent : null} */}
+    <div>
+      <Container>
+        {icon ? (
+          <IconBox iconPaddingLeft={iconPaddingLeft}>{icon}</IconBox>
+        ) : null}
+        <StyledInput
+          width={width}
+          height={height}
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          value={value ? String(value) : ''}
+          onChange={onChange}
+          onBlur={onBlur}
+          icon={icon}
+          isHalfSize={isHalfSize}
+          fontWeight={fontWeight}
+          fontSize={fontSize}
+          isOutline={isOutline}
+          paddingLeft={paddingLeft}
+          hasShadow={hasShadow}
+          isWidthFill={isWidthFill}
+          backgroundColor={backgroundColor}
+          disabled={isDisabled}
+          hasCheck={!!onCheck}
+        />
+        {/* {rightComponent ? rightComponent : null} */}
+        {errorMessage && (
+          <ErrorMessage text={errorMessage} top={48} left={12} />
+        )}
+        {onCheck && <CheckButton onClick={onCheck}>Check</CheckButton>}
+      </Container>
       {optionalInfo && (
         <TextBox>
           <Image src={infoIcon} alt='info icon' width={16} height={16} />
           <OptionalText>{optionalInfo}</OptionalText>
         </TextBox>
       )}
-      {errorMessage && <ErrorMessage text={errorMessage} top={48} left={12} />}
-      {onCheck && <CheckButton onClick={onCheck}>Check</CheckButton>}
-    </Container>
+    </div>
   )
 }
 
@@ -96,7 +100,6 @@ export default TextInput
 
 const Container = styled.div`
   position: relative;
-
   display: flex;
   flex-direction: row;
   align-items: center;

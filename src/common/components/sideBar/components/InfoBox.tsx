@@ -1,23 +1,22 @@
-import React from 'react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
-import { useTranslations } from 'next-intl'
 
 import notificationBell from '@/assets/icons/notificationBell.svg'
 import NotificationDot from '../../notificationDot/NotificationDot'
 
 type Props = {
-  refreshDate: string
   name: string
-  notificationCount: number
   isHovered: boolean
+  refreshDate?: string
+  notificationCount?: number
 }
 
 const InfoBox = ({
-  refreshDate,
   name,
-  notificationCount,
   isHovered,
+  refreshDate,
+  notificationCount,
 }: Props) => {
   const t = useTranslations('')
 
@@ -29,20 +28,26 @@ const InfoBox = ({
             <Text isHovered={isHovered}>{t('hello')}, &nbsp;</Text>
             <TextName isHovered={isHovered}>{name}</TextName>
           </TextBox>
-          <DateText isHovered={isHovered}>{refreshDate}</DateText>
+          {refreshDate && (
+            <DateText isHovered={isHovered}>{refreshDate}</DateText>
+          )}
         </Frame>
-        <IconBox isHovered={isHovered}>
-          <BellBox>
-            <Image src={notificationBell} alt='notification bell icon' />
-            <NotificationDot number={notificationCount} />
-          </BellBox>
-        </IconBox>
-        <IconBoxOnWide isHovered={isHovered}>
-          <BellBox>
-            <Image src={notificationBell} alt='notification bell icon' />
-            <NotificationDot number={notificationCount} />
-          </BellBox>
-        </IconBoxOnWide>
+        {notificationCount && (
+          <>
+            <IconBox isHovered={isHovered}>
+              <BellBox>
+                <Image src={notificationBell} alt='notification bell icon' />
+                <NotificationDot number={notificationCount} />
+              </BellBox>
+            </IconBox>
+            <IconBoxOnWide isHovered={isHovered}>
+              <BellBox>
+                <Image src={notificationBell} alt='notification bell icon' />
+                <NotificationDot number={notificationCount} />
+              </BellBox>
+            </IconBoxOnWide>
+          </>
+        )}
       </Container>
     </>
   )
@@ -197,22 +202,4 @@ const BellBox = styled.div`
   align-items: center;
   width: 32px;
   height: 32px;
-`
-const DotBox = styled.div`
-  position: absolute;
-  right: 0px;
-  top: 0px;
-
-  display: grid;
-  place-items: center;
-`
-const DotBox1 = styled.div`
-  display: flex;
-`
-
-const DotNumber = styled.span`
-  position: absolute;
-  font-size: 10px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors?.white};
 `
