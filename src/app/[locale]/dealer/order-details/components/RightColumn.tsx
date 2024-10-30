@@ -14,15 +14,15 @@ import { ORDER_DATA } from '@/api/apiTypes'
 type Props = { orderData: ORDER_DATA }
 
 const RightColumn = ({ orderData }: Props) => {
-  console.log('shipping status:', orderData.status)
+  const { status, container, receiver } = orderData
 
   return (
     <Container>
       <BoxWithHeader headerText='status'>
-        <ShippingStateBox isEditing={false} value={orderData.status} />
+        <ShippingStateBox isEditing={false} value={status} />
       </BoxWithHeader>
-      <ContainerData containerData={orderData.container} />
-      <DataOfRecipient receiverData={orderData.receiver} />
+      <ContainerData containerData={container} />
+      <DataOfRecipient receiverData={receiver} />
       {/* <DealerData /> */}
     </Container>
   )

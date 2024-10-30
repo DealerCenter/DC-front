@@ -1,24 +1,20 @@
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
-
-import { routeName } from '@/common/helpers/constants'
-
-import CarImagesAndDetailsBox from './components/CarImagesAndDetailsBox'
-import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
-import IdAndDateBox from './components/IdAndDateBox'
-
-import leftArrow from '@/assets/icons/arrows/arrowLeftThinBlack.svg'
+import { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
-import theme from '../../theme'
-import LeftColumn from './components/LeftColumn'
-import RightColumn from './components/RightColumn'
-import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
+import styled from 'styled-components'
+
 import { getOrders } from '@/api/apiCalls'
 import { ORDER_DATA } from '@/api/apiTypes'
-import { message } from 'antd'
+import { routeName } from '@/common/helpers/constants'
+import theme from '../../theme'
+
+import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
+import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
+import CarImagesAndDetailsBox from './components/CarImagesAndDetailsBox'
+import IdAndDateBox from './components/IdAndDateBox'
+import LeftColumn from './components/LeftColumn'
+import RightColumn from './components/RightColumn'
 
 type Props = { id?: string }
 
@@ -32,12 +28,12 @@ const OrderProfile = ({ id }: Props) => {
   const getOrderData = async () => {
     const response = await getOrders({ orderId: Number(id) })
     response && setOrderData(response?.data[0])
-    console.log('res:', response)
     response?.data.length === 0 && setOrderNotFound(true)
   }
 
   useEffect(() => {
     getOrderData()
+    //eslint-disable-next-line
   }, [])
 
   if (!orderData) {
