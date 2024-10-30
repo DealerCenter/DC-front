@@ -75,21 +75,27 @@ const ListItemMobile = ({
       <DetailsFrame>
         <LabelValuePair label={t('personal number')} value={personalId} />
         <LabelValuePair label={t('mobile')} value={phoneNumber} />
-        <LabelValuePair label={t('num of cars')} value={'15'} />
+        <LabelValuePair label={t('num of cars')} value={'NA'} />
       </DetailsFrame>
-      <DropdownBox>
-        <DropdownArrow onClick={handleDropdown}>
-          <Image src={downArrowGray} alt='down arrow' />
-        </DropdownArrow>
-        <TextBold16Gray>{t('see all recipients')}</TextBold16Gray>
-      </DropdownBox>
-      {isDropdownOpen && <></>}
+      {receivers?.length !== 0 && (
+        <DropdownBox onClick={handleDropdown}>
+          <DropdownArrow>
+            <Image src={downArrowGray} alt='down arrow' />
+          </DropdownArrow>
+          <TextBold16Gray>{t('see all recipients')}</TextBold16Gray>
+        </DropdownBox>
+      )}
       {isDropdownOpen &&
         receivers &&
         receivers.map((receiver, i) => (
           <ListItemMobileDropdown
             key={`listItemFullDropdown${receiver.personalId}`}
-            onClick={() => {}}
+            onEditClick={() =>
+              console.log('NOT WORKING edit ', receiver.firstName)
+            }
+            onDeleteClick={() =>
+              console.log('NOT WORKING delete ', receiver.firstName)
+            }
             receiverData={receiver}
           />
         ))}
@@ -191,6 +197,8 @@ const DropdownBox = styled.div`
   justify-content: center;
   align-items: center;
   height: 44px;
+
+  cursor: pointer;
 `
 
 const DropdownArrow = styled.div`
@@ -208,4 +216,6 @@ const TextBold16Gray = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 `

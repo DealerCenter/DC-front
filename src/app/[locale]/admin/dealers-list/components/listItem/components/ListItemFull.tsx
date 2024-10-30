@@ -70,7 +70,7 @@ const ListItemFull = ({
           />
           <NameAndIdBox>
             <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
-            <IdLabel>{id}</IdLabel>
+            <IdLabel>{personalId}</IdLabel>
           </NameAndIdBox>
         </LabelBox>
         <Label>{phoneNumber}</Label>
