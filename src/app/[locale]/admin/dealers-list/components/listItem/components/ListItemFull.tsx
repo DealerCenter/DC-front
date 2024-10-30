@@ -70,7 +70,7 @@ const ListItemFull = ({
           />
           <NameAndIdBox>
             <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
-            <IdLabel>{personalId}</IdLabel>
+            <IdLabel>{id}</IdLabel>
           </NameAndIdBox>
         </LabelBox>
         <Label>{phoneNumber}</Label>
@@ -116,6 +116,7 @@ const ListItemFull = ({
           onDelete={handleUserDelete}
           header={t('delete recipient')}
           text={t('delete data warning')}
+          deletingItemText={`${firstName} ${lastName}`}
         />
       </AppModal>
       {isDropdownOpen && receivers && (

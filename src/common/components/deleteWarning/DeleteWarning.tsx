@@ -30,8 +30,8 @@ const DeleteWarning = ({
       </Icon>
       <FrameTop>
         <H3Bold>{header}</H3Bold>
-        {/* <Label>{text}</Label> */}
-        {/* {deletingItemText && <Label>{deletingItemText}</Label>} */}
+        <StyledP>{text}</StyledP>
+        {deletingItemText && <StyledPBold>{deletingItemText}</StyledPBold>}
       </FrameTop>
       <ButtonsFrame>
         <ChooseButton
@@ -68,8 +68,17 @@ const Icon = styled.div`
 `
 
 const StyledP = styled.p`
-  font-size: 13px;
-  font-weight: 400;
+  font-size: ${({ theme }) => theme.fontSizes?.small_13};
+  font-weight: ${({ theme }) => theme.fontWeight?.normal};
+
+  margin: 0;
+
+  cursor: default;
+`
+
+const StyledPBold = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes?.small_13};
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
   margin: 0;
 
   cursor: default;
@@ -77,7 +86,7 @@ const StyledP = styled.p`
 
 const H3Bold = styled.h3`
   font-size: 19px;
-  font-weight: 700;
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
   margin: 0;
 
   cursor: default;

@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 
-import { getDealersAdmin } from '@/api/apiCalls'
+import { deleteDealerAdmin, getDealersAdmin } from '@/api/apiCalls'
 import { DEALERS_DATA } from '@/api/apiTypes'
 import plusIcon from '@/assets/icons/plus.svg'
 import AppModal from '@/common/components/modal/AppModal'
@@ -13,6 +13,7 @@ import Pagination from '@/common/components/pagination/Pagination'
 import SearchButton from '@/common/components/searchButton/SearchButton'
 import DealersList from './components/DealersList'
 import AddRecipientAdmin from './components/addRecipientAdmin/AddRecipientAdmin'
+import { message } from 'antd'
 
 const ITEMS_PER_PAGE = 8
 
@@ -47,7 +48,14 @@ const DealersListBox = (props: Props) => {
   }
 
   const handleDeleteDealer = async (dealerId: number) => {
-    console.log('request delete dealer:', dealerId)
+    try {
+      const response = await deleteDealerAdmin(dealerId.toString())
+      // console.log('delete res:', response)
+      response && message.success(t('dealer deleted successfully'))
+      // handleGetDealers()
+    } catch (error) {
+      message.error(t('could not delete dealer'))
+    }
   }
 
   useEffect(() => {

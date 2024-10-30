@@ -459,5 +459,8 @@
   "containerImages": "კონტეინერი",
   "homePortImages": "საქართველოს პორტი",
 
-  "cancel field": "ველის გაუქმება"
+  "cancel field": "ველის გაუქმება",
+
+  "dealer deleted successfully": "დილერი წარმატებით წაიშალა",
+  "could not delete dealer": "დილერის წაშლა ვერ მოხერხდა"
 }

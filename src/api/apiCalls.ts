@@ -196,6 +196,17 @@ export const getDealerWithId = async (id: string) => {
   }
 }
 
+export const deleteDealerAdmin = async (id: string) => {
+  try {
+    const response = await axiosInstance.delete(
+      `${endpoints.DEALERS_ADMIN}/${id}`
+    )
+    return response
+  } catch (error) {
+    console.error('Failed to delete dealer:', error)
+  }
+}
+
 export const getReceivers = async (payload: {
   page?: number
   pageSize?: number
