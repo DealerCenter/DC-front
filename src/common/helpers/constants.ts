@@ -7,7 +7,7 @@ export const routeName = {
   dealerManageNotifications: '/dealer/manage-notifications',
   dealerUsersList: '/dealer/users-list',
   dealerPersonalInformation: '/dealer/personal-information',
-  dealerOrder: '/dealer/order',
+  dealerOrder: '/dealer/order-details',
 
   admin: '/admin',
   adminOrderHistory: '/admin/order-history',
