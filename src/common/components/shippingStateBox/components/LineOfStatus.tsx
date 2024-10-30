@@ -58,7 +58,8 @@ const LineOfStatus = ({
           variant={step <= currentStep ? 'filled' : 'outlined'}
         />
       ) : (
-        <Date>{step <= currentStep && `22/04${!isMobile ? '/2022' : ''}`}</Date>
+        // <Date>{step <= currentStep && `22/04${!isMobile ? '/2022' : ''}`}</Date>
+        <Date>NA</Date>
       )}
       <IconBox>
         {step > currentStep ? (

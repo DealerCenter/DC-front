@@ -15,16 +15,19 @@ const SHIPPING_STEPS = [
 ]
 
 type Props = {
-  isEditing: boolean
   value: ShippingStatus
+  isEditing: boolean
+  setStatusFieldValue?: (arg: ShippingStatus) => void
 }
 
 type ShippingStepType = { value: SHIPPING_STATUS | null; step: number }
 
-const ShippingStatusBox = ({ isEditing, value }: Props) => {
+const ShippingStatusBox = ({
+  value,
+  isEditing,
+  setStatusFieldValue,
+}: Props) => {
   const t = useTranslations('')
-
-  // const { setFieldValue } = useCreateOrderContext()
 
   const [currentStep, setCurrentStep] = useState<ShippingStepType>({
     value: null,
@@ -52,14 +55,13 @@ const ShippingStatusBox = ({ isEditing, value }: Props) => {
     dateString: string | string[],
     step: ShippingStepType
   ) => {
-    // console.log(date, dateString, `Step: ${step.value}`)
-
     // Update the current step based on the step of the changed DatePicker
     if (date) {
       setCurrentStep(step)
 
       // Update the Formik value for the status field
-      // setFieldValue(FIELD_NAMES.STATUS, SHIPPING_STEPS[step.step - 1].value)
+      setStatusFieldValue &&
+        setStatusFieldValue(SHIPPING_STEPS[step.step - 1].value)
     }
   }
 
