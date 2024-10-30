@@ -80,7 +80,7 @@ const SideBar = ({ routes }: Props) => {
           <GrayContainer
             icon={wallet}
             text={t('balance')}
-            balance={'$ 9873.32'}
+            balance={'$ NA'}
             isHovered={isHovered}
           />
           <ButtonFrame>
