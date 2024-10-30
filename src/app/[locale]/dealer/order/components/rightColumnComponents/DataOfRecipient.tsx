@@ -9,20 +9,19 @@ import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import addPersonIcon from '@/assets/icons/addPersonBlack.svg'
 import editIcon from '@/assets/icons/editPencil.svg'
 import { useTranslations } from 'next-intl'
+import { RECEIVER_DATA } from '@/api/apiTypes'
 
-const dummyUserData = [{ name: 'Luka Tsilosani', mobile: '+995 123 456 789' }]
+type Props = { receiverData?: RECEIVER_DATA }
 
-type Props = {}
-
-const DataOfRecipient = (props: Props) => {
+const DataOfRecipient = ({ receiverData }: Props) => {
   const t = useTranslations('')
 
   return (
-    <BoxWithHeader headerText='data of the recipient'>
-      {dummyUserData.length !== 0 ? (
+    <BoxWithHeader headerText='recipient data'>
+      {receiverData ? (
         <DataFrame>
-          <Name>{dummyUserData[0].name}</Name>
-          <Value>{dummyUserData[0].mobile}</Value>
+          <Name>{`${receiverData.firstName} ${receiverData.lastName}`}</Name>
+          <Value>{receiverData.phoneNumber}</Value>
           <IconBox>
             <Icon>
               <Image src={checkedGreen} alt='checked icon' />

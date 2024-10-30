@@ -455,5 +455,7 @@
   "containerImages": "Container",
   "homePortImages": "Georgian port",
 
-  "cancel field": "Cancel field"
+  "cancel field": "Cancel field",
+  "text copied": "Text copied",
+  "order not found": "Order not found"
 }

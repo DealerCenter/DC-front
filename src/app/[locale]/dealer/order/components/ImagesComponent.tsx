@@ -155,6 +155,8 @@ const ImageFrame = styled.div`
     width: unset;
     height: unset;
   }
+
+  border: 2px solid red;
 `
 
 type ButtonProps = { left?: number; right?: number }

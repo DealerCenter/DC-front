@@ -88,10 +88,7 @@ const OrderHistory = (props: Props) => {
         </ButtonFrame>
       </TopFrame>
       {ordersList?.length !== 0 ? (
-        <OrderList
-          onClick={() => router.push(routeName.dealerOrder)}
-          orderData={ordersList}
-        />
+        <OrderList orderData={ordersList} />
       ) : (
         <NoOrders>No orders</NoOrders>
       )}

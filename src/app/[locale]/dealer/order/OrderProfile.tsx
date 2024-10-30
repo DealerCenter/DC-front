@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
@@ -16,43 +16,75 @@ import theme from '../../theme'
 import LeftColumn from './components/LeftColumn'
 import RightColumn from './components/RightColumn'
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
+import { getOrders } from '@/api/apiCalls'
+import { ORDER_DATA } from '@/api/apiTypes'
+import { message } from 'antd'
 
-type Props = {}
+type Props = { id?: string }
 
-const OrderProfile = (props: Props) => {
+const OrderProfile = ({ id }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const router = useRouter()
+  const [orderData, setOrderData] = useState<ORDER_DATA>()
+  const [orderNotFound, setOrderNotFound] = useState(false)
+
+  const getOrderData = async () => {
+    const response = await getOrders({ orderId: Number(id) })
+    response && setOrderData(response?.data[0])
+    console.log('res:', response)
+    response?.data.length === 0 && setOrderNotFound(true)
+  }
+
+  useEffect(() => {
+    getOrderData()
+  }, [])
+
+  if (!orderData) {
+    return (
+      <Container>
+        <BackToOrderButton>
+          <AppGoBackButton
+            onClick={() => router.push(routeName.dealerOrderHistory)}
+            text={t('back to orders')}
+          />
+        </BackToOrderButton>
+        {orderNotFound && (
+          <NotFoundMessage>{t('order not found')}</NotFoundMessage>
+        )}
+      </Container>
+    )
+  }
 
   return (
     <Container>
-      <TopFrame>
-        <IdAndDateFrame>
-          <IdAndDateBox
-            auctionId='932874929'
-            orderId='2387498739'
-            dateOfPurchase='20/04/2025'
-          />
-        </IdAndDateFrame>
-        {!isMobile && (
-          <>
-            <StateBoxFrame>
-              <ArrivalStateBox arrivalState='arrived' />
-            </StateBoxFrame>
-            <BackToOrderButton>
-              <AppGoBackButton
-                onClick={() => router.push(routeName.dealerOrderHistory)}
-                text={t('back to orders')}
-              />
-            </BackToOrderButton>
-          </>
-        )}
-        <CarImagesAndDetailsBox />
-      </TopFrame>
-      <BottomFrame>
-        <LeftColumn />
-        <RightColumn />
-      </BottomFrame>
+      {orderData && (
+        <>
+          <TopFrame>
+            <IdAndDateFrame>
+              <IdAndDateBox orderData={orderData} />
+            </IdAndDateFrame>
+            {!isMobile && (
+              <>
+                <StateBoxFrame>
+                  <ArrivalStateBox arrivalState='arrived' />
+                </StateBoxFrame>
+                <BackToOrderButton>
+                  <AppGoBackButton
+                    onClick={() => router.push(routeName.dealerOrderHistory)}
+                    text={t('back to orders')}
+                  />
+                </BackToOrderButton>
+              </>
+            )}
+            <CarImagesAndDetailsBox orderData={orderData} />
+          </TopFrame>
+          <BottomFrame>
+            <LeftColumn orderData={orderData} />
+            <RightColumn orderData={orderData} />
+          </BottomFrame>
+        </>
+      )}
     </Container>
   )
 }
@@ -86,6 +118,8 @@ const StateBoxFrame = styled.div`
   left: 0;
 
   z-index: 10;
+
+  border: 2px solid red;
 `
 
 const IdAndDateFrame = styled.div`
@@ -111,4 +145,9 @@ const BottomFrame = styled.div`
     flex-direction: column;
     gap: 8px;
   }
+`
+
+const NotFoundMessage = styled.h3`
+  display: flex;
+  justify-content: center;
 `

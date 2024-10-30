@@ -4,10 +4,13 @@ import styled from 'styled-components'
 import Image from 'next/image'
 
 import boxIcon from '@/assets/icons/boxBlack.svg'
+import { CONTAINER_GET_RES, ORDER_DATA } from '@/api/apiTypes'
 
-type Props = {}
+type Props = { containerData: CONTAINER_GET_RES }
 
-const ContainerData = (props: Props) => {
+const ContainerData = ({ containerData }: Props) => {
+  const { name, trackingUrl } = containerData
+
   return (
     <BoxWithHeader headerText='container data'>
       <Frame>
@@ -15,8 +18,8 @@ const ContainerData = (props: Props) => {
           <Image src={boxIcon} alt='icon' width={16} height={16} />
         </Icon>
         <Frame2>
-          <Name>Maerski something</Name>
-          <StyledLink>maerski.com/your tracking code</StyledLink>
+          <Name>{name}</Name>
+          <StyledLink>{trackingUrl}</StyledLink>
         </Frame2>
       </Frame>
     </BoxWithHeader>

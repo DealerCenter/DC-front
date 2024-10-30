@@ -6,15 +6,16 @@ import ImagesComponent from './ImagesComponent'
 import { useTranslations } from 'next-intl'
 import DetailsRow from './DetailsRow'
 import ButtonsRow from './ButtonsRow'
+import { ORDER_DATA } from '@/api/apiTypes'
 
-type Props = {}
+type Props = { orderData: ORDER_DATA }
 
-const CarImagesAndDetailsBox = (props: Props) => {
+const CarImagesAndDetailsBox = ({ orderData }: Props) => {
   return (
     <Container>
       <ImagesComponent />
       <ButtonsRow />
-      <DetailsRow />
+      <DetailsRow orderData={orderData} />
     </Container>
   )
 }

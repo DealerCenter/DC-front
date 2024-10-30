@@ -24,7 +24,7 @@ const DealerLayout = ({ children }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const pathname = usePathname()
 
-  const isSideBarVisible = pathname !== routeName.dealerOrder
+  const isSideBarVisible = !pathname.startsWith(routeName.dealerOrder)
 
   return (
     <>

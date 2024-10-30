@@ -1,6 +1,4 @@
-import AppMessage from '@/common/components/appMessage/AppMessage'
 import CopyButton from '@/common/components/copyToClipboard/CopyButton'
-import React from 'react'
 import styled from 'styled-components'
 
 type Props = {}
@@ -18,9 +16,7 @@ const CarDetailsBox = (props: Props) => {
       <VinCodeBox>
         <VinLabel>VIN:</VinLabel>
         <VinCode>{DummyVinCode}</VinCode>
-        <AppMessage messageText='Text copied'>
-          <CopyButton textToCopy={DummyVinCode} />
-        </AppMessage>
+        <CopyButton textToCopy={DummyVinCode} />
       </VinCodeBox>
     </Container>
   )

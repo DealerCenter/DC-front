@@ -101,6 +101,8 @@ const Container = styled.li<IndexProp>`
     height: unset;
     gap: 24px;
   }
+
+  cursor: pointer;
 `
 const MiddleFrame = styled.div`
   display: flex;
