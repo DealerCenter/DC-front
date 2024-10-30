@@ -462,5 +462,6 @@
   "cancel field": "ველის გაუქმება",
 
   "dealer deleted successfully": "დილერი წარმატებით წაიშალა",
-  "could not delete dealer": "დილერის წაშლა ვერ მოხერხდა"
+  "could not delete dealer": "დილერის წაშლა ვერ მოხერხდა",
+  "dealer not found": "დილერი ვერ მოიძებნა"
 }

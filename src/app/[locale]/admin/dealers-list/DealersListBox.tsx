@@ -26,6 +26,7 @@ const DealersListBox = (props: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [dealersList, setDealersList] = useState<DEALERS_DATA[]>()
+  const [searchQuery, setSearchQuery] = useState('')
   const t = useTranslations('')
 
   const handleGetDealers = async () => {
@@ -33,13 +34,14 @@ const DealersListBox = (props: Props) => {
     const response = await getDealersAdmin({
       page: currentPage,
       pageSize: ITEMS_PER_PAGE,
-      firstName: '',
+      firstName: searchQuery,
       lastName: '',
       email: '',
       phoneNumber: '',
       personalId: '',
     })
     if (response) {
+      response.data.length === 0 && message.error(t('dealer not found'))
       setDealersList(response.data)
       setCurrentPage(response.page)
       setTotalPages(response.pageCount)
@@ -61,7 +63,7 @@ const DealersListBox = (props: Props) => {
   useEffect(() => {
     handleGetDealers()
     //eslint-disable-next-line
-  }, [currentPage])
+  }, [currentPage, searchQuery])
 
   return (
     <Container>
@@ -73,8 +75,8 @@ const DealersListBox = (props: Props) => {
             setIsActive={setIsSearchActive}
             text={t('search')}
             placeholder={t('search for dealer')}
-            onSubmit={() => {}}
-            onCloseSearch={() => {}}
+            onSubmit={setSearchQuery}
+            onCloseSearch={() => setSearchQuery('')}
           />
           <SecondaryButton
             text={t('add recipient')}
