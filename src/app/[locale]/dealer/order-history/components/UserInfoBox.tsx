@@ -5,49 +5,51 @@ import styled from 'styled-components'
 import checkmarkGreen from '@/assets/icons/checkedGreen.svg'
 import boxIcon from '@/assets/icons/boxBlack.svg'
 import Link from 'next/link'
+import { ORDER_DATA, RECEIVER_DATA } from '@/api/apiTypes'
 
 type Props = {
-  isArrived: boolean
-  buyerFullName: string
-  buyerPhoneNumber: string
+  orderData: ORDER_DATA
 }
 
-const UserInfoBox = ({ isArrived, buyerFullName, buyerPhoneNumber }: Props) => {
+const UserInfoBox = ({ orderData }: Props) => {
+  const { receiver, container } = orderData
+
   return (
-    <Container isArrived={isArrived}>
-      <Frame>
-        <IconBox>
-          <Image src={checkmarkGreen} alt='icon' width={16} height={16} />
-        </IconBox>
-        <Box>
-          <TextBold>{buyerFullName}</TextBold>
-          <Text>{buyerPhoneNumber}</Text>
-        </Box>
-      </Frame>
-      <Frame>
-        <IconBox>
-          <Image src={boxIcon} alt='icon' width={16} height={16} />
-        </IconBox>
-        <Box>
-          <TextBold>Maerski something</TextBold>
-          <StyledLink>maerski.com/your tracking code</StyledLink>
-        </Box>
-      </Frame>
+    <Container>
+      {receiver && (
+        <Frame>
+          <IconBox>
+            <Image src={checkmarkGreen} alt='icon' width={16} height={16} />
+          </IconBox>
+          <Box>
+            <TextBold>{`${receiver.firstName} ${receiver.lastName}`}</TextBold>
+            <Text>{receiver.phoneNumber}</Text>
+          </Box>
+        </Frame>
+      )}
+      {container && (
+        <Frame>
+          <IconBox>
+            <Image src={boxIcon} alt='icon' width={16} height={16} />
+          </IconBox>
+          <Box>
+            <TextBold>{container.name}</TextBold>
+            <StyledLink>{container.trackingUrl}</StyledLink>
+          </Box>
+        </Frame>
+      )}
     </Container>
   )
 }
 
 export default UserInfoBox
 
-type ContainerProps = { isArrived: boolean }
-
-const Container = styled.div<ContainerProps>`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 160px;
   height: 150px;
-  visibility: ${({ isArrived }) => (isArrived ? 'unset' : 'hidden')};
 `
 
 const Frame = styled.div`

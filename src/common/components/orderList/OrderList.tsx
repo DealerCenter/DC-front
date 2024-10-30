@@ -8,23 +8,22 @@ import { routeName, SHIPPING_STATUS } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
 
 type Props = {
-  orderData?: ORDER_DATA[]
+  ordersList?: ORDER_DATA[]
 }
 
-const OrderList = ({ orderData }: Props) => {
+const OrderList = ({ ordersList }: Props) => {
   const router = useRouter()
 
   return (
     <ListFrame>
-      {orderData &&
-        orderData.map((order, i) => (
+      {ordersList &&
+        ordersList.map((order, i) => (
           <OrderListItem
             onClick={() => router.push(`${routeName.dealerOrder}/${order.id}`)}
             imageLink={DummyImage.src}
             orderData={order}
             key={`${order.vin}82kj32${i}`}
             index={i}
-            shippingStatus={SHIPPING_STATUS.IN_CONTAINER}
           />
         ))}
     </ListFrame>

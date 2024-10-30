@@ -1,66 +1,37 @@
-import Image from 'next/image'
-import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { useMediaQuery } from 'react-responsive'
-import { dummyShippingSteps } from '@/assets/DummyData'
-import theme from '@/app/[locale]/theme'
 import { ORDER_DATA } from '@/api/apiTypes'
+import theme from '@/app/[locale]/theme'
+import { useMediaQuery } from 'react-responsive'
 
 import CarDetailsBox from '../../../app/[locale]/dealer/order-history/components/CarDetailsBox'
 import DebtBox from '../../../app/[locale]/dealer/order-history/components/DebtBox'
 import UserInfoBox from '../../../app/[locale]/dealer/order-history/components/UserInfoBox'
 import ShippingStatusBox from '../shippingStateBox/ShippingStatusBox'
-import { SHIPPING_STATUS } from '@/common/helpers/constants'
 
 type Props = {
   imageLink: string
   index: number
-  shippingStatus: SHIPPING_STATUS
   orderData: ORDER_DATA
   onClick: () => void
 }
 
-const OrderListItem = ({
-  imageLink,
-  orderData,
-  index,
-  shippingStatus,
-  onClick,
-}: Props) => {
+const OrderListItem = ({ imageLink, orderData, index, onClick }: Props) => {
   const isTablet = useMediaQuery({
     query: theme.media?.md,
   })
 
-  const {
-    manufacturer,
-    model,
-    vin,
-    manufactureYear,
-    status,
-    receiver,
-    transportationCost,
-  } = orderData
+  const { status, transportationCost, carCost } = orderData
 
   return (
     <Container index={index} onClick={onClick}>
       <Frame>
-        <CarDetailsBox
-          imageLink={imageLink}
-          brand={manufacturer}
-          model={model}
-          year={manufactureYear.toString()}
-          vinCode={vin}
-        />
+        <CarDetailsBox imageLink={imageLink} orderData={orderData} />
         <MiddleFrame>
-          <UserInfoBox
-            isArrived={true}
-            buyerFullName={`${receiver.firstName} ${receiver.lastName}`}
-            buyerPhoneNumber={receiver.phoneNumber}
-          />
+          <UserInfoBox orderData={orderData} />
           {isTablet || (
             <ShippingStateBoxFrame>
-              <ShippingStatusBox isEditing={false} value={shippingStatus} />
+              <ShippingStatusBox isEditing={false} value={status} />
             </ShippingStateBoxFrame>
           )}
         </MiddleFrame>
