@@ -31,6 +31,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
     axiosError,
     errors,
     touched,
+    isLoading,
   } = useLoginForm()
 
   useEffect(() => {
@@ -96,7 +97,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
         <AppButton
           type='filled'
           text={t('login')}
-          disabled={false}
+          disabled={isLoading}
           onClick={handleSubmit}
           width={442}
           htmlType='submit'
