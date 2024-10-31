@@ -68,9 +68,9 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     [FIELD_NAMES.ADDITIONAL_DETAILS]: '',
     [FIELD_NAMES.CAR_DETAILS]: '',
     [FIELD_NAMES.TOW_TRUCK_IMAGES]: [],
-    // [FIELD_NAMES.ABROAD_PORT_IMAGES]: '',
-    // [FIELD_NAMES.CONTAINER_IMAGES]: '',
-    // [FIELD_NAMES.HOME_PORT_IMAGES]: '',
+    [FIELD_NAMES.ABROAD_PORT_IMAGES]: [],
+    [FIELD_NAMES.CONTAINER_IMAGES]: [],
+    [FIELD_NAMES.HOME_PORT_IMAGES]: [],
   }
 
   const formData = new FormData()
@@ -100,7 +100,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         }
       })
 
-      console.log('field values:', numericValues.towTruckImages)
+      console.log('field values:', numericValues)
 
       const data = { ...numericValues }
       Object.keys(data).forEach((key) =>

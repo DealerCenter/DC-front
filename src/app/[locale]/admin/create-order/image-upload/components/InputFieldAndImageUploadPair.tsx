@@ -23,26 +23,35 @@ export type Locations = {
   homePortImages: boolean
 }
 
+// const dropdownOptions = [
+//   { value: IMAGE_LOCATIONS.TOW_TRUCK },
+//   { value: IMAGE_LOCATIONS.ABROAD_PORT },
+//   { value: IMAGE_LOCATIONS.CONTAINER },
+//   { value: IMAGE_LOCATIONS.HOME_PORT },
+// ]
+
 type Props = {
-  dropdownOptions: { value: IMAGE_LOCATIONS }[]
   setSelectedLocations: Dispatch<SetStateAction<Locations>>
   selectedLocations: Locations
+  ImageLocations: IMAGE_LOCATIONS[]
 }
 
 const InputFieldAndImageUploadPair = ({
-  dropdownOptions,
   setSelectedLocations,
   selectedLocations,
+
+  ImageLocations,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
   const previousValue = useRef<string>()
+  const [currentLocation, setCurrentLocation] = useState<IMAGE_LOCATIONS>()
 
   // const { setUploadedTowTruckImages, setFieldValue, values } =
   //   useCreateOrderContext()
 
-  console.log('previousValue:', previousValue)
+  // console.log('previousValue:', previousValue)
 
   const handleChange = (e: string) => {
     setSelectedLocations((prev) => ({
@@ -57,7 +66,8 @@ const InputFieldAndImageUploadPair = ({
     <Container>
       <AppSelectBasicFrame>
         <AppSelectBasic
-          options={dropdownOptions}
+          // options={dropdownOptions}
+          optionsLocations={ImageLocations}
           selectedLocations={selectedLocations}
           setSelectedLocations={setSelectedLocations}
           onChange={(e) => handleChange(e)}
@@ -65,6 +75,7 @@ const InputFieldAndImageUploadPair = ({
           width={isMobile ? INPUT_WIDTH_MOBILE : INPUT_WIDTH_DESKTOP}
           placeHolderIsBold={true}
           placeHolderIsGray={true}
+          setCurrentLocation={setCurrentLocation}
         />
       </AppSelectBasicFrame>
       <ImagesUploadComponent
@@ -72,14 +83,15 @@ const InputFieldAndImageUploadPair = ({
           isMobile
             ? INPUT_WIDTH_MOBILE_UPLOAD
             : isTablet
-            ? INPUT_WIDTH_TABLET_UPLOAD
-            : INPUT_WIDTH_DESKTOP_UPLOAD
+              ? INPUT_WIDTH_TABLET_UPLOAD
+              : INPUT_WIDTH_DESKTOP_UPLOAD
         }
         height={222}
         text={t('add photos of vehicle')}
         dropText={t('drop the files here')}
         uploadedText={t('photos uploaded')}
         isDisabled={previousValue.current === undefined}
+        currentLocation={currentLocation}
       />
     </Container>
   )
