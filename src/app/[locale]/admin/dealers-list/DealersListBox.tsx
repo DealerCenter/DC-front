@@ -14,6 +14,7 @@ import SearchButton from '@/common/components/searchButton/SearchButton'
 import DealersList from './components/DealersList'
 import AddRecipientAdmin from './components/addRecipientAdmin/AddRecipientAdmin'
 import { message } from 'antd'
+import Loader from '@/common/components/loader/Loader'
 
 const ITEMS_PER_PAGE = 8
 
@@ -22,6 +23,7 @@ type Props = {}
 const DealersListBox = (props: Props) => {
   const [isSearchActive, setIsSearchActive] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isPageLoaded, setIsPageLoaded] = useState(false)
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -42,6 +44,7 @@ const DealersListBox = (props: Props) => {
     })
     if (response) {
       response.data.length === 0 && message.error(t('dealer not found'))
+      setIsPageLoaded(true)
       setDealersList(response.data)
       setCurrentPage(response.page)
       setTotalPages(response.pageCount)
@@ -64,6 +67,15 @@ const DealersListBox = (props: Props) => {
     handleGetDealers()
     //eslint-disable-next-line
   }, [currentPage, searchQuery])
+
+  if (!isPageLoaded) {
+    return (
+      <Container>
+        <HeaderH4Bold text={t('dealers list')} />
+        <Loader height={300} />
+      </Container>
+    )
+  }
 
   return (
     <Container>
@@ -91,6 +103,7 @@ const DealersListBox = (props: Props) => {
         <DealersList
           dealersData={dealersList}
           onDeleteDealer={handleDeleteDealer}
+          isLoading={isLoading}
         />
       )}
       <PaginationFrame>

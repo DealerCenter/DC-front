@@ -16,12 +16,14 @@ import LeftFrame from './components/leftFrame/LeftFrame'
 import RightFrame from './components/rightFrame/RightFrame'
 import { useCreateOrderContext } from './hooks/useCreateOrderContext'
 import ImageUpload from './image-upload/ImageUpload'
+import LoadingOverlay from '@/common/components/loader/LoadingOverlay'
 
 const isAdmin = true
 
 type Props = { id?: string }
 
 const OrderProfile = ({ id }: Props) => {
+  const [isLoading, setIsLoading] = useState(false)
   const [isUploadImagesOpen, setIsUploadImagesOpen] = useState(false)
   const t = useTranslations('')
   const router = useRouter()
@@ -29,12 +31,15 @@ const OrderProfile = ({ id }: Props) => {
     useCreateOrderContext()
 
   const handleGetOrderData = async () => {
+    setIsLoading(true)
     const response = await getOrders({ orderId: Number(id) }, isAdmin)
     response?.data && prefillFormikValues(response?.data[0])
+    setIsLoading(false)
   }
 
   useEffect(() => {
     id && handleGetOrderData()
+    //eslint-disable-next-line
   }, [])
 
   useEffect(() => {
@@ -43,6 +48,7 @@ const OrderProfile = ({ id }: Props) => {
 
   return (
     <Container>
+      <LoadingOverlay isLoading={isLoading} />
       <TopButtonsFrame>
         <AppGoBackButton
           onClick={() => router.push(routeName.adminOrderHistory)}

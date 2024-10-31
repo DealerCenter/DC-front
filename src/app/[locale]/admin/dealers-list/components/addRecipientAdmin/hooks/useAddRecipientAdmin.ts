@@ -64,6 +64,7 @@ const useAddRecipientsAdmin = (
       uploadIdImage && legalFormData.append(FIELD_NAMES.ID_IMAGE, uploadIdImage)
 
       console.log('submit data addRecipient', legalFormData)
+      message.error('backend not active')
 
       // try {
       //   const response = receiverData
