@@ -225,6 +225,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     setFieldValue(FIELD_NAMES.STATUS, orderDetails.status)
     setFieldValue(FIELD_NAMES.CONTAINER_ID, orderDetails.container.id)
     setFieldValue(FIELD_NAMES.RECEIVER_ID, orderDetails.receiver.id)
+    setFieldValue(FIELD_NAMES.DEALER_ID, orderDetails.dealer.id)
     setFieldValue(
       FIELD_NAMES.ADDITIONAL_DETAILS,
       orderDetails.additionalDetails
@@ -268,7 +269,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
 
 export const useCreateOrderContext = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {}
+  ExtraProps = {},
 >() => {
   const context = useContext(FormikContext)
   if (!context) {

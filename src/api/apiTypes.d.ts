@@ -162,6 +162,7 @@ type ORDER_DATA = {
     trackingUrl: string
   }
   receiver: RECEIVER_DATA
+  dealer: DEALERS_DATA
   carImages: CAR_IMAGE[]
 }
 
