@@ -1,9 +1,8 @@
-import Image from 'next/image'
-import React, { useState } from 'react'
-import styled from 'styled-components'
 import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import styled from 'styled-components'
 
 import { routeName } from '@/common/helpers/constants'
 import theme from '../../theme'
@@ -11,15 +10,13 @@ import theme from '../../theme'
 import IdAndDateBox from './components/IdAndDateBox'
 import LeftFrame from './components/leftFrame/LeftFrame'
 import RightFrame from './components/rightFrame/RightFrame'
-import BasicButton from '@/common/components/appButton/BasicButton'
-import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
 import ImagesUploadComponent from '../components/common/ImagesUploadComponent'
-import ImagesComponent from './components/ImagesComponent'
 import DetailsRow from './components/detailsRow/DetailsRow'
+import ImagesComponent from './components/ImagesComponent'
 
-import leftArrow from '@/assets/icons/arrows/arrowLeftThinBlack.svg'
-import EditButton from '../components/common/EditButton'
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
+import DummyShipping from '@/common/components/ShippingStatusButton/DummyShipping'
+import EditButton from '../components/common/EditButton'
 
 type Props = {}
 
@@ -51,7 +48,7 @@ const OrderProfile = (props: Props) => {
         </IdAndDateFrame>
 
         <StateBoxFrame>
-          <ArrivalStateBox arrivalState='arrived' />
+          <DummyShipping />
         </StateBoxFrame>
 
         {isEditing ? (

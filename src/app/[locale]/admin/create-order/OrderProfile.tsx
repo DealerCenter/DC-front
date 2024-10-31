@@ -14,9 +14,15 @@ import ImagesUploadComponentDummy from '../components/common/ImagesUploadCompone
 import DetailsRow from './components/detailsRow/DetailsRow'
 import LeftFrame from './components/leftFrame/LeftFrame'
 import RightFrame from './components/rightFrame/RightFrame'
-import { useCreateOrderContext } from './hooks/useCreateOrderContext'
+import {
+  FIELD_NAMES,
+  useCreateOrderContext,
+} from './hooks/useCreateOrderContext'
 import ImageUpload from './image-upload/ImageUpload'
 import LoadingOverlay from '@/common/components/loader/LoadingOverlay'
+import IdAndDateBox from '@/common/components/idAndDateBox/IdAndDateBox'
+import DummyShipping from '@/common/components/ShippingStatusButton/DummyShipping'
+import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
 
 const isAdmin = true
 
@@ -27,8 +33,13 @@ const OrderProfile = ({ id }: Props) => {
   const [isUploadImagesOpen, setIsUploadImagesOpen] = useState(false)
   const t = useTranslations('')
   const router = useRouter()
-  const { handleSubmit, isButtonDisabled, prefillFormikValues, setOrderId } =
-    useCreateOrderContext()
+  const {
+    values,
+    handleSubmit,
+    isButtonDisabled,
+    prefillFormikValues,
+    setOrderId,
+  } = useCreateOrderContext()
 
   const handleGetOrderData = async () => {
     setIsLoading(true)
@@ -63,6 +74,18 @@ const OrderProfile = ({ id }: Props) => {
         />
       </TopButtonsFrame>
       <ImageFrame>
+        {id && (
+          <>
+            <StateBoxFrame>
+              <ShippingStatusButton
+                shippingStatus={values[FIELD_NAMES.STATUS]}
+              />
+            </StateBoxFrame>
+            <IdAndDateFrame>
+              <IdAndDateBox auctionId='NA' orderId='NA' dateOfPurchase='NA' />
+            </IdAndDateFrame>
+          </>
+        )}
         <ImagesUploadComponentDummy
           text={t('add photos of vehicle')}
           onClick={() => setIsUploadImagesOpen(true)}

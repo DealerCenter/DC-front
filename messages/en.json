@@ -14,7 +14,7 @@
   "legal person": "Legal person",
   "company name": "Company name",
   "identification code": "Identification code",
-
+  "identification number": "საიდენტიფიკაციო ნომერი",
   "upload a certificate": " Upload a certificate of commercial activity from the public register",
   "drop the files here": "Drop the files here ...",
   "drop the file here": "Drop the file here ...",
@@ -126,6 +126,7 @@
   "cost of vehicle": "The cost of the vehicle",
   "total debt": "Total debt",
   "status": "Status",
+  "in auction": "In auction",
   "is in american warehouse": "It is in the American warehouse",
   "in container": "It's in the container",
   "undergoes customs procedures": "Undergoes customs procedures",
@@ -455,5 +456,17 @@
   "containerImages": "Container",
   "homePortImages": "Georgian port",
 
-  "cancel field": "Cancel field"
+  "cancel field": "Cancel field",
+
+  "dealer deleted successfully": "Dealer deleted successfully",
+  "could not delete dealer": "Could not delete dealer",
+  "dealer not found": "Dealer not found",
+
+  "statusButton": {
+    "InAuction": "In Auction",
+    "InAmericanWarehouse": "In Warehouse",
+    "InContainer": "In Container",
+    "UndergoesCustomsProcedures": "In Customs",
+    "Sent": "Sent"
+  }
 }

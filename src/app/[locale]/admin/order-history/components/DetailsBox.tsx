@@ -1,27 +1,17 @@
-import SecondaryButton from '@/common/components/appButton/SecondaryButton'
-import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import checkmarkGreen from '@/assets/icons/checkedGreen.svg'
-
-import ArrivalStateBox from '../../../../../common/components/arrivalState/ArrivalStateBox'
+import DummyShipping from '@/common/components/ShippingStatusButton/DummyShipping'
 
 type Props = {
   amount: number
-  arrivalState: 'arrived' | 'onTheWay' | 'inWarehouse'
   buyerFullName: string
   buyerPhoneNumber: string
   vinCode: string
 }
 
-const DetailsBox = ({
-  amount,
-  arrivalState,
-  buyerFullName,
-  buyerPhoneNumber,
-}: Props) => {
+const DetailsBox = ({ amount, buyerFullName, buyerPhoneNumber }: Props) => {
   return (
     <Container>
       <Frame>
@@ -42,9 +32,9 @@ const DetailsBox = ({
           <Text>{buyerPhoneNumber}</Text>
         </Box>
       </Frame>
-      <ArrivalStateBoxFrame>
-        <ArrivalStateBox arrivalState={arrivalState} />
-      </ArrivalStateBoxFrame>
+      <ShippingStatusButtonFrame>
+        <DummyShipping />
+      </ShippingStatusButtonFrame>
       <Money>{`$ ${amount.toString()}`}</Money>
     </Container>
   )
@@ -60,7 +50,7 @@ const Container = styled.div`
   flex: 1;
 `
 
-const ArrivalStateBoxFrame = styled.div`
+const ShippingStatusButtonFrame = styled.div`
   width: 120px;
   display: flex;
   justify-content: center;

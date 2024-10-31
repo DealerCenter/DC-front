@@ -1,21 +1,18 @@
-import Image from 'next/image'
-import React from 'react'
-import styled from 'styled-components'
 import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
+import styled from 'styled-components'
 
 import { routeName } from '@/common/helpers/constants'
 
 import CarImagesAndDetailsBox from './components/CarImagesAndDetailsBox'
-import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
-import IdAndDateBox from './components/IdAndDateBox'
+import IdAndDateBox from '../../../../common/components/idAndDateBox/IdAndDateBox'
 
-import leftArrow from '@/assets/icons/arrows/arrowLeftThinBlack.svg'
+import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
+import DummyShipping from '@/common/components/ShippingStatusButton/DummyShipping'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../../theme'
 import LeftColumn from './components/LeftColumn'
 import RightColumn from './components/RightColumn'
-import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
 
 type Props = {}
 
@@ -37,7 +34,7 @@ const OrderProfile = (props: Props) => {
         {!isMobile && (
           <>
             <StateBoxFrame>
-              <ArrivalStateBox arrivalState='arrived' />
+              <DummyShipping />
             </StateBoxFrame>
             <BackToOrderButton>
               <AppGoBackButton
@@ -100,6 +97,7 @@ const IdAndDateFrame = styled.div`
 
   z-index: 10;
 `
+
 const TopFrame = styled.div``
 
 const BottomFrame = styled.div`
