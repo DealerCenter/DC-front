@@ -1,11 +1,13 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import LoaderForButton from '../loader/LoaderForButton'
 
 type Props = {
   text: string
   onClick: () => void
   disabled?: boolean
   htmlType?: 'submit' | 'button' | 'reset'
+  isLoading?: boolean
 }
 
 const FormSaveButton = ({
@@ -13,15 +15,16 @@ const FormSaveButton = ({
   onClick,
   disabled = false,
   htmlType = 'button',
+  isLoading,
 }: Props) => {
   return (
     <StyledButton
       onClick={onClick}
       disabled={disabled}
-      isDisabled={disabled}
+      isDisabled={isLoading ? true : disabled}
       type={htmlType}
     >
-      {text}
+      {isLoading ? <LoaderForButton /> : text}
     </StyledButton>
   )
 }

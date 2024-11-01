@@ -470,5 +470,6 @@
     "Sent": "Sent"
   },
   "text copied": "Text copied",
-  "order not found": "Order not found"
+  "order not found": "Order not found",
+  "receiver not found": "Receiver could not be found"
 }

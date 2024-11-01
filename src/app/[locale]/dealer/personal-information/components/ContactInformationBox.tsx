@@ -15,6 +15,7 @@ type Props = { type: 'representative' | 'individual' | 'company' }
 const ContactInformationBox = ({ type }: Props) => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(true)
   const [isSaved, setIsSaved] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -26,7 +27,7 @@ const ContactInformationBox = ({ type }: Props) => {
   })
 
   const t = useTranslations('')
-  const { userData, setUserData } = useUserData()
+  const { userData, setUserData, fetchUserData } = useUserData()
 
   useEffect(() => {
     if (userData) {
@@ -62,7 +63,7 @@ const ContactInformationBox = ({ type }: Props) => {
               websiteUrl: userData.juridicalInfo?.websiteUrl,
             },
           }
-
+    setIsLoading(true)
     const response = await updateUserData(data)
     setUserData(response)
 
@@ -71,7 +72,9 @@ const ContactInformationBox = ({ type }: Props) => {
       setIsSaved(true)
     } else {
       message.error(t('information not updated'))
+      fetchUserData()
     }
+    setIsLoading(false)
   }
 
   const renderInputFields = () => {
@@ -147,10 +150,15 @@ const ContactInformationBox = ({ type }: Props) => {
       />
       {isOpenDropdown && (
         <>
-          <InputFieldsFrame>{renderInputFields()}</InputFieldsFrame>
+          <InputFieldsFrom>{renderInputFields()}</InputFieldsFrom>
           {!isSaved && (
             <ButtonFrame>
-              <FormSaveButton text={t('save')} onClick={handleSave} />
+              <FormSaveButton
+                text={t('save')}
+                onClick={handleSave}
+                isLoading={isLoading}
+                htmlType='submit'
+              />
             </ButtonFrame>
           )}
         </>
@@ -167,7 +175,7 @@ const Container = styled.div`
   gap: 24px;
 `
 
-const InputFieldsFrame = styled.div`
+const InputFieldsFrom = styled.div`
   padding: 0px 32px;
   display: flex;
   flex-direction: column;

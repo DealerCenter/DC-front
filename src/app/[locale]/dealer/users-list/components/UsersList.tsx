@@ -12,28 +12,28 @@ import ListItem from './listItem/ListItem'
 import LabelsContainer from '@/common/components/labelsContainer/LabelsContainer'
 import Pagination from '@/common/components/pagination/Pagination'
 import UserListEmpty from './UserListEmpty'
+import Loader from '@/common/components/loader/Loader'
 
 const RECEIVERS_PER_PAGE = 10
 
 type Props = {
   setIsModalOpen: (arg: boolean) => void
   searchQuery: string
-  setSearchQuery: (arg: string) => void
   updatedSuccessfully: boolean
   setUpdatedSuccessfully: (arg: boolean) => void
+  isLoading: boolean
+  setIsLoading: (arg: boolean) => void
 }
 
 const UserList = ({
   setIsModalOpen,
   searchQuery,
-  setSearchQuery,
   updatedSuccessfully,
   setUpdatedSuccessfully,
+  isLoading,
+  setIsLoading,
 }: Props) => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [receiversData, setReceiversData] = useState<
-    RECEIVER_DATA[] | undefined
-  >(undefined)
+  const [receiversData, setReceiversData] = useState<RECEIVER_DATA[]>()
 
   const [numOfPages, setNumOfPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
@@ -52,7 +52,7 @@ const UserList = ({
       setNumOfPages(response.pageCount)
     }
     if (searchQuery && response?.data.length === 0) {
-      message.error('could not find recipient')
+      message.error(t('receiver not found'))
     }
     setIsLoading(false)
   }
@@ -88,12 +88,22 @@ const UserList = ({
     }
   }
 
+  if (isLoading) {
+    return <Loader />
+  }
+
   if (!receiversData) {
     return <Container />
   }
 
   if (receiversData.length === 0 && searchQuery.length === 0) {
     return <UserListEmpty onClick={() => setIsModalOpen(true)} />
+  }
+
+  if (receiversData.length === 0 && searchQuery.length !== 0) {
+    return (
+      <CouldNotFindReceiver>{t('receiver not found')}</CouldNotFindReceiver>
+    )
   }
 
   return (
@@ -140,4 +150,15 @@ const Container = styled.div``
 const PaginationBox = styled.div`
   display: flex;
   justify-content: center;
+`
+
+const CouldNotFindReceiver = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+
+  font-size: ${({ theme }) => theme.fontSizes?.large};
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
+  color: ${({ theme }) => theme.colors?.main_gray_56};
 `

@@ -166,9 +166,15 @@ const OrderHistory = (props: Props) => {
           isLoading={isLoading}
         />
       ) : (
-        <AddYourFirstTask
-          onClick={() => router.push(routeName.adminCreateOrder)}
-        />
+        <>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <AddYourFirstTask
+              onClick={() => router.push(routeName.adminCreateOrder)}
+            />
+          )}
+        </>
       )}
       <PaginationFrame>
         <Pagination
