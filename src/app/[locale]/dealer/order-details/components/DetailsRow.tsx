@@ -6,17 +6,18 @@ import { useTranslations } from 'next-intl'
 import CarDetailsBox from './DetailsRowComponents/CarDetailsBox'
 import DebtBox from './DetailsRowComponents/DebtBox'
 import CostsBox from './DetailsRowComponents/CostsBox'
+import { ORDER_DATA } from '@/api/apiTypes'
 
-type Props = {}
+type Props = { orderData: ORDER_DATA }
 
-const DetailsRow = (props: Props) => {
+const DetailsRow = ({ orderData }: Props) => {
   const t = useTranslations('')
 
   return (
     <Container>
-      <CarDetailsBox />
+      <CarDetailsBox orderData={orderData} />
       <OnMobileFlipFrame>
-        <CostsBox />
+        <CostsBox orderData={orderData} />
         <DebtBox />
       </OnMobileFlipFrame>
     </Container>

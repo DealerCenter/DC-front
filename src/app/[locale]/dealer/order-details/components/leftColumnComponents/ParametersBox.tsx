@@ -5,12 +5,21 @@ import Image from 'next/image'
 
 import BoxWithHeader from '../BoxWithHeader'
 
-import checkedGreen from '@/assets/icons/checkedGreen.svg'
+import { ORDER_DATA } from '@/api/apiTypes'
+import IsInsuredIcon from '@/common/components/readyIcons/IsInsuredIcon'
 
-type Props = {}
+type Props = { orderData: ORDER_DATA }
 
-const ParametersBox = (props: Props) => {
+const ParametersBox = ({ orderData }: Props) => {
   const t = useTranslations('')
+  const {
+    isInsured,
+    manufacturer,
+    model,
+    manufactureYear,
+    carCategory,
+    mileage,
+  } = orderData
 
   return (
     <BoxWithHeader headerText='parameters'>
@@ -18,31 +27,31 @@ const ParametersBox = (props: Props) => {
         <LabelPair>
           <Label>{t('insurance')}</Label>
           <IconLabelBox>
-            <Value>{t('yes')}</Value>
+            <Value>{isInsured ? t('yes') : t('no')}</Value>
             <IconBox>
-              <Image src={checkedGreen} alt='checked icon' />
+              <IsInsuredIcon isInsured={isInsured} />
             </IconBox>
           </IconLabelBox>
         </LabelPair>
         <LabelPair>
           <Label>{t('manufacturer')}</Label>
-          <Value>dummy text</Value>
+          <Value>{manufacturer}</Value>
         </LabelPair>
         <LabelPair>
           <Label>{t('model')}</Label>
-          <Value>dummy text</Value>
+          <Value>{model}</Value>
         </LabelPair>
         <LabelPair>
           <Label>{t('year')}</Label>
-          <Value>dummy text</Value>
+          <Value>{manufactureYear}</Value>
         </LabelPair>
         <LabelPair>
           <Label>{t('category')}</Label>
-          <Value>dummy text</Value>
+          <Value>{carCategory}</Value>
         </LabelPair>
         <LabelPair>
           <Label>{t('mileage')}</Label>
-          <Value>dummy text</Value>
+          <Value>{mileage}</Value>
         </LabelPair>
       </LabelsFrame>
     </BoxWithHeader>

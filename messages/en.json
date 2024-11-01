@@ -468,5 +468,7 @@
     "InContainer": "In Container",
     "UndergoesCustomsProcedures": "In Customs",
     "Sent": "Sent"
-  }
+  },
+  "text copied": "Text copied",
+  "order not found": "Order not found"
 }

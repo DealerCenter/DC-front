@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
-import { useRouter } from '@/navigation'
-import { routeName, ShippingStatus } from '@/common/helpers/constants'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
+import { getOrders } from '@/api/apiCalls'
+import { ORDER_DATA } from '@/api/apiTypes'
 import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
+import { ShippingStatus } from '@/common/helpers/constants'
 import OrderList from '../../../../common/components/orderList/OrderList'
-
-import filterIconBlack from '@/assets/icons/filterBlack.svg'
-import Pagination from '@/common/components/pagination/Pagination'
 
 import arrowDown from '@/assets/icons/sortArrows/arrowSortDown.svg'
 import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
-import { ORDER_DATA } from '@/api/apiTypes'
-import { getOrders } from '@/api/apiCalls'
 import AppSort from '@/common/components/appSort/AppSort'
+import Pagination from '@/common/components/pagination/Pagination'
 import OrderHistoryFilter from './components/OrderHistoryFilter'
 
 const sortOptions = [
@@ -33,7 +30,6 @@ const OrderHistory = (props: Props) => {
   const [isPageLoaded, setIsPageLoaded] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
-  const [isEditing, setIsEditing] = useState(false)
   const [ordersList, setOrdersList] = useState<ORDER_DATA[]>()
   const [sortByCost, setSortByCost] = useState<'asc' | 'desc' | null>(null)
   const [sortByCreateDate, setSortByCreateDate] = useState<
@@ -44,7 +40,6 @@ const OrderHistory = (props: Props) => {
   const [receiverId, setReceiverId] = useState<number>()
 
   const t = useTranslations('')
-  const router = useRouter()
 
   const handleGetOrders = async () => {
     setIsLoading(true)
@@ -88,10 +83,7 @@ const OrderHistory = (props: Props) => {
         </ButtonFrame>
       </TopFrame>
       {ordersList?.length !== 0 ? (
-        <OrderList
-          onClick={() => router.push(routeName.dealerOrder)}
-          orderData={ordersList}
-        />
+        <OrderList ordersList={ordersList} />
       ) : (
         <NoOrders>No orders</NoOrders>
       )}

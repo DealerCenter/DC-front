@@ -18,7 +18,8 @@ type Props = {
 
 const LoginForm = ({ goToRegistration }: Props) => {
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, handleSubmit } = useLoginForm()
+  const { values, handleBlur, handleChange, handleSubmit, isLoading } =
+    useLoginForm()
 
   return (
     <Container>
@@ -79,7 +80,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
         <AppButton
           type='outlined'
           text={t('register')}
-          disabled={false}
+          disabled={isLoading}
           onClick={goToRegistration}
           width={442}
         />

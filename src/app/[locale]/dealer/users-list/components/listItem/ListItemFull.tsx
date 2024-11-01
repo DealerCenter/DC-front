@@ -78,7 +78,7 @@ const ListItemFull = ({
           }}
           header={t('delete recipient')}
           text={t('delete data warning')}
-          deletingItemText={`${t('recipient person')} ${firstName} ${lastName}`}
+          deletingItemText={`${firstName} ${lastName}`}
         />
       </AppModal>
     </>

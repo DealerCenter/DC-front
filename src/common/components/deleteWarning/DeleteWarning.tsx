@@ -70,9 +70,7 @@ const Icon = styled.div`
 const StyledP = styled.p`
   font-size: ${({ theme }) => theme.fontSizes?.small_13};
   font-weight: ${({ theme }) => theme.fontWeight?.normal};
-
   margin: 0;
-
   cursor: default;
 `
 

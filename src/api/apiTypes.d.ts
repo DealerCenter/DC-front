@@ -117,10 +117,10 @@ type CONTAINER_POST_RES = {
 
 type CONTAINER_GET_RES = {
   name: string
-  trackingUrl: string
-  id: number
   createdAt: string
   updatedAt: string
+  id: number
+  trackingUrl: string
 }
 
 type ORDERS_GET_RES = {
@@ -154,13 +154,7 @@ type ORDER_DATA = {
     updatedAt: string // DateTime
     name: string
   }
-  container: {
-    id: number
-    createdAt: string // DateTime
-    updatedAt: string // DateTime
-    name: string
-    trackingUrl: string
-  }
+  container: CONTAINER_GET_RES
   receiver: RECEIVER_DATA
   dealer: DEALERS_DATA
   carImages: CAR_IMAGE[]

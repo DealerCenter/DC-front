@@ -14,6 +14,7 @@ type Props = {
   height: number
   href: string
   isHovered: boolean
+  isFlexibleOnDesktop?: boolean
 }
 
 const BarButton = ({
@@ -24,12 +25,17 @@ const BarButton = ({
   height,
   href,
   isHovered,
+  isFlexibleOnDesktop,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   return (
     <StyledLink href={href}>
-      <Container active={active} isHovered={isHovered}>
+      <Container
+        active={active}
+        isHovered={isHovered}
+        isFlexibleOnDesktop={isFlexibleOnDesktop}
+      >
         <IconBox>
           <Image src={icon} alt='icon' width={width} height={height} />
         </IconBox>
@@ -47,11 +53,13 @@ const StyledLink = styled(Link)`
   border-radius: 12px;
 `
 
-type ButtonProps = { active: boolean; isHovered: boolean }
+type ContainerProps = {
+  active: boolean
+  isHovered: boolean
+  isFlexibleOnDesktop?: boolean
+}
 
-type IsHoveredProps = { isHovered: boolean }
-
-const Container = styled.div<ButtonProps>`
+const Container = styled.div<ContainerProps>`
   flex-direction: row;
   display: flex;
   align-items: center;
@@ -76,17 +84,32 @@ const Container = styled.div<ButtonProps>`
           }
         `}
 
-  @media  ${({ theme }) => theme.media?.md} {
-    ${({ isHovered }) =>
-      isHovered
-        ? css`
-            transition: width 500ms ease-in-out;
-          `
-        : css`
-            transition: width 500ms ease-in-out;
-            width: 64px;
-          `}
-  }
+  ${({ isFlexibleOnDesktop, isHovered }) =>
+    isFlexibleOnDesktop
+      ? css`
+          @media ${({ theme }) => theme.media?.notSm} {
+            ${isHovered
+              ? css`
+                  transition: width 500ms ease-in-out;
+                `
+              : css`
+                  transition: width 500ms ease-in-out;
+                  width: 64px;
+                `}
+          }
+        `
+      : css`
+          @media ${({ theme }) => theme.media?.md} {
+            ${isHovered
+              ? css`
+                  transition: width 500ms ease-in-out;
+                `
+              : css`
+                  transition: width 500ms ease-in-out;
+                  width: 64px;
+                `}
+          }
+        `}
 
   @media ${({ theme }) => theme.media?.sm} {
     height: 52px;
@@ -114,22 +137,41 @@ const IconBox = styled.div`
   margin: 0 10px 0 18px;
 `
 
-const Label = styled.label<IsHoveredProps>`
+type LabelProps = { isHovered: boolean; isFlexibleOnDesktop?: boolean }
+
+const Label = styled.label<LabelProps>`
   opacity: 1;
 
-  @media ${({ theme }) => theme.media?.md} {
-    ${({ isHovered }) =>
-      isHovered
-        ? css`
-            transition: all 300ms ease-in-out 300ms;
-            opacity: 1;
-            width: unset;
-          `
-        : css`
-            opacity: 0;
-            width: 0;
-          `}
-  }
+  ${({ isFlexibleOnDesktop, isHovered }) =>
+    isFlexibleOnDesktop
+      ? css`
+          @media ${({ theme }) => theme.media?.notSm} {
+            ${isHovered
+              ? css`
+                  transition: all 300ms ease-in-out 300ms;
+                  opacity: 1;
+                  width: unset;
+                `
+              : css`
+                  opacity: 0;
+                  width: 0;
+                `}
+          }
+        `
+      : css`
+          @media ${({ theme }) => theme.media?.md} {
+            ${isHovered
+              ? css`
+                  transition: all 300ms ease-in-out 300ms;
+                  opacity: 1;
+                  width: unset;
+                `
+              : css`
+                  opacity: 0;
+                  width: 0;
+                `}
+          }
+        `}
 
   cursor: pointer;
 `

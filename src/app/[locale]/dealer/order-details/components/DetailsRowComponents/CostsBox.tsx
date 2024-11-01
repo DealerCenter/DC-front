@@ -4,18 +4,21 @@ import styled from 'styled-components'
 
 import pdfIcon from '@/assets/icons/pdf.svg'
 import { useTranslations } from 'next-intl'
+import { ORDER_DATA } from '@/api/apiTypes'
 
-type Props = {}
+type Props = { orderData: ORDER_DATA }
 
-const CostsBox = (props: Props) => {
+const CostsBox = ({ orderData }: Props) => {
   const t = useTranslations('')
+
+  const { carCost, transportationCost } = orderData
 
   return (
     <Container>
       <CostFrame>
         <CostLabelsFrame>
           <Text16BoldGray>{t('cost of transportation')}</Text16BoldGray>
-          <Text23Bold>$ 1,600</Text23Bold>
+          <Text23Bold>{`$ ${transportationCost}`}</Text23Bold>
         </CostLabelsFrame>
         <IconBoxPdf>
           <Image src={pdfIcon} alt='pdf icon' />
@@ -24,7 +27,7 @@ const CostsBox = (props: Props) => {
       <CostFrame>
         <CostLabelsFrame>
           <Text16BoldGray>{t('cost of the car')}</Text16BoldGray>
-          <Text23Bold>$ 7,500</Text23Bold>
+          <Text23Bold>{`$ ${carCost}`}</Text23Bold>
         </CostLabelsFrame>
         <IconBoxPdf>
           <Image src={pdfIcon} alt='pdf icon' />
@@ -34,7 +37,7 @@ const CostsBox = (props: Props) => {
       <CostFrame>
         <CostLabelsFrame>
           <Text16BoldGray>{t('total cost')}</Text16BoldGray>
-          <Text23Bold>$ 9,100</Text23Bold>
+          <Text23Bold>{`$ ${carCost + transportationCost}`}</Text23Bold>
         </CostLabelsFrame>
         <IconBoxPdf />
       </CostFrame>

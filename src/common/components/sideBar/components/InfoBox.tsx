@@ -1,7 +1,6 @@
-import React from 'react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
-import { useTranslations } from 'next-intl'
 
 import notificationBell from '@/assets/icons/notificationBell.svg'
 import NotificationDot from '../../notificationDot/NotificationDot'
@@ -203,22 +202,4 @@ const BellBox = styled.div`
   align-items: center;
   width: 32px;
   height: 32px;
-`
-const DotBox = styled.div`
-  position: absolute;
-  right: 0px;
-  top: 0px;
-
-  display: grid;
-  place-items: center;
-`
-const DotBox1 = styled.div`
-  display: flex;
-`
-
-const DotNumber = styled.span`
-  position: absolute;
-  font-size: 10px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors?.white};
 `

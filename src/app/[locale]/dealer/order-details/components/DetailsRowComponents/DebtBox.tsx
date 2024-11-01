@@ -23,7 +23,7 @@ const DebtBox = (props: Props) => {
         <Text16BoldGray>{t('current debt')}</Text16BoldGray>
         <AppTooltip tooltipValue={<DebtTooltipContainer />} maxWidth={500}>
           <DebtLabelBox>
-            <DebtLabel>$ 1,600</DebtLabel>
+            <DebtLabel>$ NA</DebtLabel>
             <Image src={infoIcon} alt='info icon' />
           </DebtLabelBox>
         </AppTooltip>

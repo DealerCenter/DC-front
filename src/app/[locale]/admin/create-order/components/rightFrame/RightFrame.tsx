@@ -5,12 +5,13 @@ import styled from 'styled-components'
 import { getContainersAdmin } from '@/api/apiCalls'
 import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
 import Box from '../../../components/common/Box'
-import ShippingStatusBox from '../../../order-history/components/shippingStateBox/ShippingStatusBox'
+// import ShippingStatusBox from '../../../order-history/components/shippingStateBox/ShippingStatusBox'
 import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../hooks/useCreateOrderContext'
 import DropdownWithSearch from './DropdownWithSearch'
+import ShippingStatusBox from '@/common/components/shippingStateBox/ShippingStatusBox'
 
 type Props = {}
 
@@ -60,6 +61,9 @@ const RightFrame = ({}: Props) => {
         <ShippingStatusBox
           isEditing={true}
           value={values[FIELD_NAMES.STATUS]}
+          setStatusFieldValue={(value) =>
+            setFieldValue(FIELD_NAMES.STATUS, value)
+          }
         />
       </Box>
       <Box>

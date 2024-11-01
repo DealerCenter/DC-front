@@ -1,26 +1,26 @@
-import AppMessage from '@/common/components/appMessage/AppMessage'
+import { ORDER_DATA } from '@/api/apiTypes'
 import CopyButton from '@/common/components/copyToClipboard/CopyButton'
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
 
-const DummyVinCode = 'WD4PG2EE1J3371314'
+type Props = { orderData: ORDER_DATA }
 
-type Props = {}
+const CarDetailsBox = ({ orderData }: Props) => {
+  const t = useTranslations('')
+  const { manufactureYear, model, manufacturer, vin } = orderData
 
-const CarDetailsBox = (props: Props) => {
   return (
     <Container>
       <BrandLabelBox>
-        <BrandLabel>Mercedes Benz</BrandLabel>
-        <YearLabel>2020</YearLabel>
+        <BrandLabel>{manufacturer}</BrandLabel>
+        <YearLabel>{manufactureYear}</YearLabel>
       </BrandLabelBox>
-      <CarModel>E class, Diezel</CarModel>
+      <CarModel>{model}</CarModel>
       <VinCodeBox>
         <VinLabel>VIN:</VinLabel>
-        <VinCode>{DummyVinCode}</VinCode>
-        <AppMessage messageText='Text copied'>
-          <CopyButton textToCopy={DummyVinCode} />
-        </AppMessage>
+        <VinCode>{vin}</VinCode>
+        <CopyButton textToCopy={vin} />
       </VinCodeBox>
     </Container>
   )
@@ -33,6 +33,7 @@ const Container = styled.div`
   width: 420px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background-color: ${({ theme }) => theme.colors?.white};
   border-radius: ${({ theme }) => theme.radius?.lg};
   padding: 32px;
