@@ -43,7 +43,6 @@ const OrderListItem = ({
     carCost,
     transportationCost: amount,
     status: shippingStatus,
-
     createdAt: date,
     id: orderId,
   } = item
@@ -75,7 +74,10 @@ const OrderListItem = ({
           </CheckboxFrame>
         )}
         {isMobile && (
-          <StatusAndDebtBoxMobile arrivalState={'arrived'} amount={amount} />
+          <StatusAndDebtBoxMobile
+            shippingStatus={shippingStatus}
+            amount={amount}
+          />
         )}
         <CarImageAndModelBox
           imageLink={imageLink}
@@ -103,10 +105,9 @@ const OrderListItem = ({
       ) : (
         <DetailsBox
           amount={amount}
-          arrivalState={'arrived'}
+          shippingStatus={shippingStatus}
           buyerFullName={buyerFullName}
           buyerPhoneNumber={buyerPhoneNumber}
-          vinCode={vinCode}
         />
       )}
     </Container>

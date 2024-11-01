@@ -7,19 +7,19 @@ import { useTranslations } from 'use-intl'
 import { ORDER_DATA } from '@/api/apiTypes'
 
 type Props = {
-  orderData: ORDER_DATA
+  orderId: string
+  auctionId: string
+  dateOfPurchase: string
 }
 
-const IdAndDateBox = ({ orderData }: Props) => {
+const IdAndDateBox = ({ orderId, auctionId, dateOfPurchase }: Props) => {
   const t = useTranslations('')
-
-  const { id: orderId } = orderData
 
   return (
     <Container>
       <Frame>
         <Title>{t('auction id')}</Title>
-        <Value>NA</Value>
+        <Value>{auctionId}</Value>
       </Frame>
       <Image src={splitGrayLine} alt='line icon' />
       <Frame>
@@ -29,7 +29,7 @@ const IdAndDateBox = ({ orderData }: Props) => {
       <Image src={splitGrayLine} alt='line icon' />
       <Frame>
         <Title>{t('date of purchase')}</Title>
-        <Value>NA</Value>
+        <Value>{dateOfPurchase}</Value>
       </Frame>
     </Container>
   )

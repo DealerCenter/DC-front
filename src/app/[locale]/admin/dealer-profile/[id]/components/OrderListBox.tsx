@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import Pagination from '@/common/components/pagination/Pagination'
 import OrderList from '@/common/components/orderList/OrderList'
+import Pagination from '@/common/components/pagination/Pagination'
 import HeaderH5Bold from '@/common/components/textComponents/HeaderH5Bold'
 
-import { orderedCars } from '@/assets/DummyData'
-import { getOrders } from '@/api/apiCalls'
 import { ORDER_DATA, ORDERS_GET_RES } from '@/api/apiTypes'
 import LoadingText from '@/common/components/readyComponents/LoadingText'
 
 const itemsPerPageCurrent = 4
-const totalPagesCurrent = Math.ceil(orderedCars.length / itemsPerPageCurrent)
 
 const itemsPerPageArchive = 2
-const totalPagesArchive = Math.ceil(orderedCars.length / itemsPerPageArchive)
 
 type Props = { headerText: string; ordersResponse: ORDERS_GET_RES }
 
@@ -40,7 +36,7 @@ const OrderListBox = ({ headerText, ordersResponse }: Props) => {
       <HeaderFrame>
         <HeaderH5Bold text={headerText} />
       </HeaderFrame>
-      <OrderList onClick={() => {}} orderData={ordersResponse.data} />
+      <OrderList ordersList={ordersResponse.data} />
       <PaginationFrame>
         <Pagination
           currentPage={ordersResponse.page}

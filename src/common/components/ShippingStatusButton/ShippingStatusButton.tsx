@@ -13,55 +13,18 @@ type Props = { shippingStatus: SHIPPING_STATUS }
 const ShippingStatusButton = ({ shippingStatus }: Props) => {
   const t = useTranslations('statusButton')
 
-  // const icon =
-  //   arrivalState === 'arrived'
-  //     ? checkmarkIcon
-  //     : arrivalState === 'onTheWay'
-  //       ? clockIcon
-  //       : arrivalState === 'inWarehouse' && boxIcon
-
-  // switch (shippingStatus) {
-  //   case SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE:
-  //     setIcon()
-  //     break
-  //   case SHIPPING_STATUS.IN_AUCTION:
-  //     setIcon()
-  //     break
-  //   case SHIPPING_STATUS.IN_CONTAINER:
-  //     setIcon(boxIcon)
-  //     break
-  //   case SHIPPING_STATUS.SENT:
-  //     setIcon(boxIcon)
-  //     break
-  //   case SHIPPING_STATUS.UNDERGOES_CUSTOMS:
-  //     setIcon(clockIcon)
-  //     break
-  // }
-
-  // const label =
-  //   arrivalState === 'arrived'
-  //     ? 'arrived'
-  //     : arrivalState === 'onTheWay'
-  //       ? 'on the way'
-  //       : arrivalState === 'inWarehouse' && 'in warehouse'
-
-  // if (!icon) return
-
   return (
-    <Container isArrived={true}>
-      {/* <IconBox>
-        <Image src={icon} alt='icon' />
-      </IconBox> */}
-      <Label isArrived={true}>{t(shippingStatus)}</Label>
+    <Container noStatus={!shippingStatus}>
+      <Label>{shippingStatus && t(shippingStatus)}</Label>
     </Container>
   )
 }
 
 export default ShippingStatusButton
 
-type ArrivedProps = { isArrived: boolean }
+type ContainerProps = { noStatus?: boolean }
 
-const Container = styled.div<ArrivedProps>`
+const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
   height: 42px;
   border-radius: ${({ theme }) => theme.radius?.lg};
@@ -71,36 +34,20 @@ const Container = styled.div<ArrivedProps>`
   align-items: center;
   padding: 8px;
 
-  ${({ isArrived, theme }) =>
-    isArrived
+  ${({ noStatus }) =>
+    noStatus
       ? css`
-          background-color: ${theme.colors?.green};
+          background-color: unset;
         `
       : css`
-          background-color: ${theme.colors?.yellow};
-        `};
+          background-color: ${({ theme }) => theme.colors?.green};
+        `}
 `
 
-const Label = styled.label<ArrivedProps>`
+const Label = styled.label`
   color: ${({ theme }) => theme.colors?.white};
   font-size: 13px;
   font-weight: 700;
   padding: 8px;
-
-  ${({ isArrived, theme }) =>
-    isArrived
-      ? css`
-          color: ${theme.colors?.white};
-        `
-      : css`
-          color: ${theme.colors?.main_gray_100};
-        `};
-`
-
-const IconBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
+  color: ${({ theme }) => theme.colors?.white};
 `

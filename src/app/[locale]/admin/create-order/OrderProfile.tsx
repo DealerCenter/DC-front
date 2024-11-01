@@ -21,7 +21,6 @@ import {
 import ImageUpload from './image-upload/ImageUpload'
 import LoadingOverlay from '@/common/components/loader/LoadingOverlay'
 import IdAndDateBox from '@/common/components/idAndDateBox/IdAndDateBox'
-import DummyShipping from '@/common/components/ShippingStatusButton/DummyShipping'
 import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
 
 const isAdmin = true
@@ -82,7 +81,7 @@ const OrderProfile = ({ id }: Props) => {
               />
             </StateBoxFrame>
             <IdAndDateFrame>
-              <IdAndDateBox auctionId='NA' orderId='NA' dateOfPurchase='NA' />
+              <IdAndDateBox auctionId='NA' orderId={id} dateOfPurchase='NA' />
             </IdAndDateFrame>
           </>
         )}
