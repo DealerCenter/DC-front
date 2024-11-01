@@ -1,27 +1,35 @@
 import React from 'react'
 import styled from 'styled-components'
+
+import splitGrayLine from '@/assets/icons/splitGrayLine.svg'
+import Image from 'next/image'
 import { useTranslations } from 'use-intl'
+import { ORDER_DATA } from '@/api/apiTypes'
 
-type Props = { auctionId: string; orderId: string; dateOfPurchase: string }
+type Props = {
+  orderData: ORDER_DATA
+}
 
-const IdAndDateBox = ({ auctionId, orderId, dateOfPurchase }: Props) => {
+const IdAndDateBox = ({ orderData }: Props) => {
   const t = useTranslations('')
+
+  const { id: orderId } = orderData
 
   return (
     <Container>
       <Frame>
         <Title>{t('auction id')}</Title>
-        <Value>{auctionId}</Value>
+        <Value>NA</Value>
       </Frame>
-      <Line />
+      <Image src={splitGrayLine} alt='line icon' />
       <Frame>
         <Title>{t('order id')}</Title>
         <Value>{orderId}</Value>
       </Frame>
-      <Line />
+      <Image src={splitGrayLine} alt='line icon' />
       <Frame>
         <Title>{t('date of purchase')}</Title>
-        <Value>{dateOfPurchase}</Value>
+        <Value>NA</Value>
       </Frame>
     </Container>
   )
@@ -41,25 +49,13 @@ const Container = styled.div`
   border-radius: 16px;
 
   @media ${({ theme }) => theme.media?.sm} {
-    width: 155px;
-    height: unset;
+    width: unset;
     padding: 8px;
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   box-shadow: 0 10px 45px 0 ${({ theme }) => theme.colors?.main_gray_16};
-`
 
-const Line = styled.div`
-  height: 26px;
-  width: 1px;
-  background-color: ${({ theme }) => theme.colors?.main_gray_10};
-
-  @media ${({ theme }) => theme.media?.sm} {
-    width: 140px;
-    height: 1px;
-  }
+  border: 2px solid red;
 `
 
 const Frame = styled.div`

@@ -12,6 +12,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import ErrorMessage from '../errorMessage/ErrorMessage'
 import { Locations } from '@/app/[locale]/admin/create-order/image-upload/components/InputFieldAndImageUploadPair'
+import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
 
 type Option = {
   value: string
@@ -21,6 +22,7 @@ type Props = {
   onChange: (value: string) => void
   options?: Option[]
   optionsBasic?: string[]
+  optionsLocations?: IMAGE_LOCATIONS[]
   placeholder?: string
   width?: number
   placeHolderIsBold?: boolean
@@ -28,11 +30,13 @@ type Props = {
   errorMessage?: string
   selectedLocations: Locations
   setSelectedLocations: Dispatch<SetStateAction<Locations>>
+  setCurrentLocation?: (arg: IMAGE_LOCATIONS) => void
 }
 
 const AppSelectBasic = ({
   options,
   optionsBasic,
+  optionsLocations,
   onChange,
   placeholder,
   width,
@@ -41,6 +45,7 @@ const AppSelectBasic = ({
   errorMessage,
   selectedLocations,
   setSelectedLocations,
+  setCurrentLocation,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedValue, setSelectedValue] = useState<string | null>(null)
@@ -77,6 +82,9 @@ const AppSelectBasic = ({
     }
     if (optionsBasic) {
       return optionsBasic.find((option) => option === selectedValue)
+    }
+    if (optionsLocations) {
+      return t(optionsLocations.find((option) => option === selectedValue))
     }
   }
 
@@ -134,6 +142,25 @@ const AppSelectBasic = ({
                 </OptionItem>
               </React.Fragment>
             ))}
+          {optionsLocations &&
+            optionsLocations
+              .filter(
+                (option) =>
+                  selectedLocations[option as keyof Locations] === false
+              )
+              .map((option) => (
+                <React.Fragment key={`OptionsLocationsOption${option}`}>
+                  <OptionItem
+                    key={option}
+                    onClick={() => {
+                      handleOptionClick(option)
+                      setCurrentLocation && setCurrentLocation(option)
+                    }}
+                  >
+                    <OptionLabel>{t(option)}</OptionLabel>
+                  </OptionItem>
+                </React.Fragment>
+              ))}
         </SelectOptions>
       )}
       {errorMessage && <ErrorMessage text={errorMessage} top={48} left={12} />}

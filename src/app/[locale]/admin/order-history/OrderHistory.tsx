@@ -9,11 +9,12 @@ import OrderList from './components/OrderList'
 
 import { changeOrderAdmin, getOrders } from '@/api/apiCalls'
 import { CONTAINER_GET_RES, ORDER_DATA } from '@/api/apiTypes'
+import Loader from '@/common/components/loader/Loader'
 import { routeName, ShippingStatus } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
-import AddYourFirstTask from './components/AddYourFirstTask'
-import LoadingText from '@/common/components/readyComponents/LoadingText'
 import { message } from 'antd'
+import AddYourFirstTask from './components/AddYourFirstTask'
+import LoadingOverlay from '@/common/components/loader/LoadingOverlay'
 
 const ITEMS_PER_PAGE = 8
 
@@ -62,6 +63,7 @@ const OrderHistory = (props: Props) => {
 
   const handleEditSubmit = async () => {
     if (checkedOrderIds.length > 0) {
+      setIsLoading(true)
       try {
         for (const id of checkedOrderIds) {
           const response = await changeOrderAdmin(
@@ -73,8 +75,9 @@ const OrderHistory = (props: Props) => {
           )
           message.success(t('order edited successfully'))
         }
+        setIsLoading(false)
         // clearing info after requests are done
-        handleClearEdit
+        handleClearEdit()
       } catch (error) {
         message.error(t('could not edit order'))
         console.error('Error editing orders:', error)
@@ -124,9 +127,7 @@ const OrderHistory = (props: Props) => {
     return (
       <Container>
         <HeaderH4Bold text={t('order history')} />
-        <LoaderBox>
-          <LoadingText />
-        </LoaderBox>
+        <Loader height={300} />
       </Container>
     )
   }
@@ -162,6 +163,7 @@ const OrderHistory = (props: Props) => {
           isEditing={isEditing}
           addOrderId={handleAddOrderIdToList}
           removeOrderId={handleRemoveOrderIdFromList}
+          isLoading={isLoading}
         />
       ) : (
         <AddYourFirstTask
@@ -205,11 +207,4 @@ const PaginationFrame = styled.div`
   display: flex;
   justify-content: center;
   padding: ${({ theme }) => theme.spacing?.md};
-`
-
-const LoaderBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 300px;
 `

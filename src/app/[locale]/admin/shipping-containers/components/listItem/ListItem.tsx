@@ -12,25 +12,10 @@ import { formatDate } from '@/common/helpers/simpleFunctions'
 type Props = {
   onClick: () => void
   containerData: CONTAINER_GET_RES
-
-  // containerData: {
-  //   brandName: string
-  //   link: string
-  //   departureDate: string
-  //   arrivalDate: string
-  //   numberOfCars: string
-  // }
-
-  // name: string
-  // trackingUrl: string
-  // id: number
-  // createdAt: string
-  // updatedAt: string
 }
 
 const ListItem = ({
   onClick,
-  // containerData: { brandName, link, departureDate, arrivalDate, numberOfCars },
   containerData: { name, trackingUrl, id, createdAt, updatedAt },
 }: Props) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)

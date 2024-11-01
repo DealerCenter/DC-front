@@ -68,9 +68,9 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     [FIELD_NAMES.ADDITIONAL_DETAILS]: '',
     [FIELD_NAMES.CAR_DETAILS]: '',
     [FIELD_NAMES.TOW_TRUCK_IMAGES]: [],
-    // [FIELD_NAMES.ABROAD_PORT_IMAGES]: '',
-    // [FIELD_NAMES.CONTAINER_IMAGES]: '',
-    // [FIELD_NAMES.HOME_PORT_IMAGES]: '',
+    [FIELD_NAMES.ABROAD_PORT_IMAGES]: [],
+    [FIELD_NAMES.CONTAINER_IMAGES]: [],
+    [FIELD_NAMES.HOME_PORT_IMAGES]: [],
   }
 
   const formData = new FormData()
@@ -100,7 +100,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         }
       })
 
-      console.log('field values:', numericValues.towTruckImages)
+      console.log('field values:', numericValues)
 
       const data = { ...numericValues }
       Object.keys(data).forEach((key) =>
@@ -225,6 +225,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     setFieldValue(FIELD_NAMES.STATUS, orderDetails.status)
     setFieldValue(FIELD_NAMES.CONTAINER_ID, orderDetails.container.id)
     setFieldValue(FIELD_NAMES.RECEIVER_ID, orderDetails.receiver.id)
+    setFieldValue(FIELD_NAMES.DEALER_ID, orderDetails.dealer.id)
     setFieldValue(
       FIELD_NAMES.ADDITIONAL_DETAILS,
       orderDetails.additionalDetails
@@ -268,7 +269,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
 
 export const useCreateOrderContext = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {}
+  ExtraProps = {},
 >() => {
   const context = useContext(FormikContext)
   if (!context) {

@@ -135,7 +135,7 @@ const Container = styled.div`
 
   border: 1px solid ${({ theme }) => theme.colors?.main_gray_04};
 
-  cursor: pointer;
+  /* cursor: pointer; */
 `
 
 const LabelBox = styled.div`
@@ -155,7 +155,7 @@ const Label = styled.label`
   color: ${({ theme }) => theme.colors?.main_gray_100};
   font-size: ${({ theme }) => theme.fontSizes?.small_13};
   font-weight: ${({ theme }) => theme.fontWeight?.normal};
-  cursor: pointer;
+  /* cursor: pointer; */
 `
 
 const NameLabel = styled(Label)`

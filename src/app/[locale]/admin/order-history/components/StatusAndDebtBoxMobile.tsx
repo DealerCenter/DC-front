@@ -1,6 +1,5 @@
-import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
+import DummyShipping from '@/common/components/ShippingStatusButton/DummyShipping'
 import { useTranslations } from 'next-intl'
-import React from 'react'
 import styled from 'styled-components'
 
 type Props = {
@@ -13,7 +12,7 @@ const StatusAndDebtBoxMobile = ({ arrivalState, amount }: Props) => {
 
   return (
     <Container>
-      <ArrivalStateBox arrivalState={arrivalState} />
+      <DummyShipping />
       <TextFrame>
         <Text>{t('debt')}</Text>
         <Money>{`$ ${amount.toString()}`}</Money>

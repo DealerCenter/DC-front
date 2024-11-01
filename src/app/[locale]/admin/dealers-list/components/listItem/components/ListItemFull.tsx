@@ -75,9 +75,9 @@ const ListItemFull = ({
         </LabelBox>
         <Label>{phoneNumber}</Label>
         <Label>{formatDate(createdAt)}</Label>
-        <DebtLabel>{`$ 5750`}</DebtLabel>
+        <DebtLabel>{`$ NA`}</DebtLabel>
         <IconBox>
-          {withReceivers ? (
+          {isDropdownOpen && receivers ? (
             <>
               <ReceiversNumberLabel>{receivers.length}</ReceiversNumberLabel>
               <VerificationIcon
@@ -89,19 +89,11 @@ const ListItemFull = ({
               <VerificationIcon
                 verificationStatus={idImageVerificationStatus}
               />
-              <Icon>
-                <Image
-                  src={editPencil}
-                  alt='edit icon'
-                  onClick={isDisabled ? () => {} : onClick}
-                />
+              <Icon onClick={isDisabled ? () => {} : onClick}>
+                <Image src={editPencil} alt='edit icon' />
               </Icon>
-              <Icon>
-                <Image
-                  src={trashCan}
-                  alt='trash icon'
-                  onClick={() => setIsModalOpen(true)}
-                />
+              <Icon onClick={() => setIsModalOpen(true)}>
+                <Image src={trashCan} alt='trash icon' />
               </Icon>
             </>
           )}
@@ -116,6 +108,7 @@ const ListItemFull = ({
           onDelete={handleUserDelete}
           header={t('delete recipient')}
           text={t('delete data warning')}
+          deletingItemText={`${firstName} ${lastName}`}
         />
       </AppModal>
       {isDropdownOpen && receivers && (
@@ -161,7 +154,6 @@ const IconBox = styled.div`
   justify-content: center;
   gap: 8px;
   width: 128px;
-  cursor: pointer;
 `
 
 const Label = styled.label`
@@ -201,6 +193,7 @@ const Icon = styled.div`
   align-items: center;
   width: 40px;
   height: 40px;
+  cursor: pointer;
 `
 
 const DebtLabel = styled.div`
@@ -211,6 +204,7 @@ const DebtLabel = styled.div`
   font-size: ${({ theme }) => theme.fontSizes?.large};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   color: ${({ theme }) => theme.colors?.main_gray_100};
+  cursor: default;
 `
 
 const NameAndIdBox = styled.div`

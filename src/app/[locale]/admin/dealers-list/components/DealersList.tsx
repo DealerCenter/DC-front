@@ -9,16 +9,22 @@ import theme from '@/app/[locale]/theme'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
 import { DEALERS_DATA } from '@/api/apiTypes'
+import Loader from '@/common/components/loader/Loader'
 
 type Props = {
   dealersData: DEALERS_DATA[]
   onDeleteDealer: (dealerId: number) => void
+  isLoading: boolean
 }
 
-const DealersList = ({ dealersData, onDeleteDealer }: Props) => {
+const DealersList = ({ dealersData, onDeleteDealer, isLoading }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const router = useRouter()
+
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />
+  }
 
   return (
     <Container>

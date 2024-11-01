@@ -31,6 +31,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
     axiosError,
     errors,
     touched,
+    isLoading,
   } = useLoginForm()
 
   // useEffect(() => {
@@ -97,10 +98,10 @@ const LoginForm = ({ goToRegistration }: Props) => {
         <AppButton
           type='filled'
           text={t('login')}
-          disabled={false}
           onClick={handleSubmit}
           width={442}
           htmlType='submit'
+          disabled={isLoading}
         />
       </StyledForm>
       <div>
@@ -108,9 +109,9 @@ const LoginForm = ({ goToRegistration }: Props) => {
         <AppButton
           type='outlined'
           text={t('register')}
-          disabled={false}
           onClick={goToRegistration}
           width={442}
+          disabled={false}
         />
       </div>
     </Container>

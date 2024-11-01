@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
 import { useRouter } from '@/navigation'
@@ -18,11 +18,11 @@ import { message } from 'antd'
 
 type Props = { onClose: () => void }
 
-const dropdownOptions = [
-  { value: IMAGE_LOCATIONS.TOW_TRUCK },
-  { value: IMAGE_LOCATIONS.ABROAD_PORT },
-  { value: IMAGE_LOCATIONS.CONTAINER },
-  { value: IMAGE_LOCATIONS.HOME_PORT },
+const ImageLocations: IMAGE_LOCATIONS[] = [
+  IMAGE_LOCATIONS.TOW_TRUCK,
+  IMAGE_LOCATIONS.ABROAD_PORT,
+  IMAGE_LOCATIONS.CONTAINER,
+  IMAGE_LOCATIONS.HOME_PORT,
 ]
 
 const ImageUpload = ({ onClose }: Props) => {
@@ -38,7 +38,7 @@ const ImageUpload = ({ onClose }: Props) => {
   const [numOfPairs, setNumOfPairs] = useState(0)
 
   const handleAdd = () => {
-    if (numOfPairs < dropdownOptions.length) setNumOfPairs((num) => num + 1)
+    if (numOfPairs < ImageLocations.length) setNumOfPairs((num) => num + 1)
   }
   const handleCancel = () => {
     if (numOfPairs > 0) setNumOfPairs((num) => num - 1)
@@ -55,11 +55,11 @@ const ImageUpload = ({ onClose }: Props) => {
         <AppGoBackButton onClick={onClose} text={t('go back')} />
       </GoBackButtonFrame>
       <Box>
-        {dropdownOptions.map(
+        {ImageLocations.map(
           (_, i) =>
             i <= numOfPairs && (
               <InputFieldAndImageUploadPair
-                dropdownOptions={dropdownOptions}
+                ImageLocations={ImageLocations}
                 key={`InputFieldAndImageUploadPair${i}`}
                 setSelectedLocations={setSelectedLocations}
                 selectedLocations={selectedLocations}

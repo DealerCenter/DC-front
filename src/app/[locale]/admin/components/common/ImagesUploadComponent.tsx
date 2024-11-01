@@ -1,5 +1,5 @@
 import FileDropZone from '@/common/components/InputElements/FileDropZone'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
@@ -14,6 +14,7 @@ import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../create-order/hooks/useCreateOrderContext'
+import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
 
 type Props = {
   text?: string
@@ -24,6 +25,7 @@ type Props = {
   onDropAdditional?: (file: any) => void
   setIsUploaded?: (arg: boolean) => void
   isDisabled?: boolean
+  currentLocation?: IMAGE_LOCATIONS
 }
 
 const ImagesUploadComponent = ({
@@ -35,6 +37,7 @@ const ImagesUploadComponent = ({
   onDropAdditional,
   setIsUploaded,
   isDisabled,
+  currentLocation,
 }: Props) => {
   const t = useTranslations('')
 
@@ -45,15 +48,19 @@ const ImagesUploadComponent = ({
   const onDrop = useCallback(
     <T extends File>(acceptedFiles: T[]) => {
       // Do something with the files
-      console.log('accepted files: ', acceptedFiles)
-      console.log('accepted files[0]: ', acceptedFiles[0])
+      // console.log('accepted files: ', acceptedFiles)
+      // console.log('accepted files[0]: ', acceptedFiles[0])
       setIsDropped(true)
       setIsUploaded && setIsUploaded(true)
       if (onDropAdditional) onDropAdditional(acceptedFiles[0])
-      setFieldValue('towTruckImages', acceptedFiles[0])
+      setFieldValue(currentLocation, acceptedFiles)
     },
-    [onDropAdditional, setIsUploaded, setFieldValue]
+    [onDropAdditional, setIsUploaded, setFieldValue, currentLocation]
   )
+
+  useEffect(() => {
+    console.log('currentLocation: ', currentLocation)
+  }, [currentLocation])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

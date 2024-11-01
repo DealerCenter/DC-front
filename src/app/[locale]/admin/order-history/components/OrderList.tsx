@@ -1,26 +1,38 @@
 import styled from 'styled-components'
 import OrderListItem from './OrderListItem'
+import { useRouter } from '@/navigation'
+import { useMediaQuery } from 'react-responsive'
 
 import { ORDER_DATA } from '@/api/apiTypes'
 import theme from '@/app/[locale]/theme'
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
+import Loader from '@/common/components/loader/Loader'
 import { routeName } from '@/common/helpers/constants'
-import { useRouter } from '@/navigation'
-import { useMediaQuery } from 'react-responsive'
 import OrderListHeader from './OrderListHeader'
-import { useEffect, useState } from 'react'
+import { List } from 'antd'
 
 type Props = {
   list: ORDER_DATA[]
   isEditing: boolean
   addOrderId: (id: number) => void
   removeOrderId: (id: number) => void
+  isLoading: boolean
 }
 
-const OrderList = ({ list, isEditing, addOrderId, removeOrderId }: Props) => {
+const OrderList = ({
+  list,
+  isEditing,
+  addOrderId,
+  removeOrderId,
+  isLoading,
+}: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   const router = useRouter()
+
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />
+  }
 
   return (
     <ListFrame>

@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 
-import { getDealersAdmin } from '@/api/apiCalls'
+import { deleteDealerAdmin, getDealersAdmin } from '@/api/apiCalls'
 import { DEALERS_DATA } from '@/api/apiTypes'
 import plusIcon from '@/assets/icons/plus.svg'
 import AppModal from '@/common/components/modal/AppModal'
@@ -13,6 +13,8 @@ import Pagination from '@/common/components/pagination/Pagination'
 import SearchButton from '@/common/components/searchButton/SearchButton'
 import DealersList from './components/DealersList'
 import AddRecipientAdmin from './components/addRecipientAdmin/AddRecipientAdmin'
+import { message } from 'antd'
+import Loader from '@/common/components/loader/Loader'
 
 const ITEMS_PER_PAGE = 8
 
@@ -21,10 +23,12 @@ type Props = {}
 const DealersListBox = (props: Props) => {
   const [isSearchActive, setIsSearchActive] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isPageLoaded, setIsPageLoaded] = useState(false)
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [dealersList, setDealersList] = useState<DEALERS_DATA[]>()
+  const [searchQuery, setSearchQuery] = useState('')
   const t = useTranslations('')
 
   const handleGetDealers = async () => {
@@ -32,13 +36,15 @@ const DealersListBox = (props: Props) => {
     const response = await getDealersAdmin({
       page: currentPage,
       pageSize: ITEMS_PER_PAGE,
-      firstName: '',
+      firstName: searchQuery,
       lastName: '',
       email: '',
       phoneNumber: '',
       personalId: '',
     })
     if (response) {
+      response.data.length === 0 && message.error(t('dealer not found'))
+      setIsPageLoaded(true)
       setDealersList(response.data)
       setCurrentPage(response.page)
       setTotalPages(response.pageCount)
@@ -47,13 +53,29 @@ const DealersListBox = (props: Props) => {
   }
 
   const handleDeleteDealer = async (dealerId: number) => {
-    console.log('request delete dealer:', dealerId)
+    try {
+      const response = await deleteDealerAdmin(dealerId.toString())
+      // console.log('delete res:', response)
+      response && message.success(t('dealer deleted successfully'))
+      // handleGetDealers()
+    } catch (error) {
+      message.error(t('could not delete dealer'))
+    }
   }
 
   useEffect(() => {
     handleGetDealers()
     //eslint-disable-next-line
-  }, [currentPage])
+  }, [currentPage, searchQuery])
+
+  if (!isPageLoaded) {
+    return (
+      <Container>
+        <HeaderH4Bold text={t('dealers list')} />
+        <Loader height={300} />
+      </Container>
+    )
+  }
 
   return (
     <Container>
@@ -65,8 +87,8 @@ const DealersListBox = (props: Props) => {
             setIsActive={setIsSearchActive}
             text={t('search')}
             placeholder={t('search for dealer')}
-            onSubmit={() => {}}
-            onCloseSearch={() => {}}
+            onSubmit={setSearchQuery}
+            onCloseSearch={() => setSearchQuery('')}
           />
           <SecondaryButton
             text={t('add recipient')}
@@ -81,6 +103,7 @@ const DealersListBox = (props: Props) => {
         <DealersList
           dealersData={dealersList}
           onDeleteDealer={handleDeleteDealer}
+          isLoading={isLoading}
         />
       )}
       <PaginationFrame>

@@ -1,19 +1,13 @@
-import SecondaryButton from '@/common/components/appButton/SecondaryButton'
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
-import React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-import checkmarkIcon from '@/assets/icons/checkmarkCircleWhite.svg'
-import boxIcon from '@/assets/icons/boxBlack.svg'
-import ArrivalStateBox from '../../../../../common/components/arrivalState/ArrivalStateBox'
+import DummyShipping from '@/common/components/ShippingStatusButton/DummyShipping'
 
 type Props = {
   amount: number
-  arrivalState: 'arrived' | 'onTheWay' | 'inWarehouse'
 }
 
-const DebtBox = ({ amount, arrivalState }: Props) => {
+const DebtBox = ({ amount }: Props) => {
   const t = useTranslations('')
 
   return (
@@ -22,7 +16,7 @@ const DebtBox = ({ amount, arrivalState }: Props) => {
         <Text>{t('debt')}</Text>
         <Money>$ {amount}</Money>
       </Frame>
-      <ArrivalStateBox arrivalState={arrivalState} />
+      <DummyShipping />
     </Container>
   )
 }

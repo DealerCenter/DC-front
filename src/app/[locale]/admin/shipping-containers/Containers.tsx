@@ -13,15 +13,23 @@ import AddContainer from './components/addContainer/AddContainer'
 import ContainersList from './components/ContainersList'
 
 import plusIcon from '@/assets/icons/plus.svg'
+import Loader from '@/common/components/loader/Loader'
 
 type Props = {}
 
 const Containers = (props: Props) => {
   const t = useTranslations('')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isPageLoaded, setIsPageLoaded] = useState(false)
   const [isSearchActive, setIsSearchActive] = useState(false)
   const [uploadedSuccessfully, setUploadedSuccessfully] = useState(false)
   const [containersData, setContainersData] = useState<CONTAINER_GET_RES[]>()
+
+  const fetchContainerData = async () => {
+    const response = await getContainersAdmin()
+    response && setContainersData(response)
+    setIsPageLoaded(true)
+  }
 
   useEffect(() => {
     if (uploadedSuccessfully) {
@@ -30,14 +38,18 @@ const Containers = (props: Props) => {
     }
   }, [uploadedSuccessfully])
 
-  const fetchContainerData = async () => {
-    const response = await getContainersAdmin()
-    response && setContainersData(response)
-  }
-
   useEffect(() => {
     fetchContainerData()
   }, [uploadedSuccessfully])
+
+  if (!isPageLoaded) {
+    return (
+      <Container>
+        <HeaderH4Bold text={t('containers')} />
+        <Loader height={300} />
+      </Container>
+    )
+  }
 
   return (
     <Container>

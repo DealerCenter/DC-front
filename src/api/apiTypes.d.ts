@@ -156,6 +156,7 @@ type ORDER_DATA = {
   }
   container: CONTAINER_GET_RES
   receiver: RECEIVER_DATA
+  dealer: DEALERS_DATA
   carImages: CAR_IMAGE[]
 }
 

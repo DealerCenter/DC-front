@@ -15,11 +15,13 @@ import { formatDate } from '@/common/helpers/simpleFunctions'
 
 type Props = {
   receiverData: RECEIVER_DATA
-  onClick: () => void
+  onEditClick: () => void
+  onDeleteClick: () => void
 }
 
 const ListItemMobileDropdown = ({
-  onClick,
+  onEditClick,
+  onDeleteClick,
   receiverData: {
     id,
     personalId,
@@ -33,7 +35,7 @@ const ListItemMobileDropdown = ({
   const t = useTranslations('')
 
   return (
-    <Container onClick={onClick}>
+    <Container>
       <TopFrame>
         <NameAndDebtBox>
           <NameLabel>{`${firstName} ${lastName}`}</NameLabel>
@@ -68,14 +70,14 @@ const ListItemMobileDropdown = ({
         />
       </DetailsFrame>
       <BottomFrame>
-        <IconBox>
+        <IconBox onClick={onEditClick}>
           <Icon>
-            <Image src={editPencil} alt='edit icon' onClick={onClick} />
+            <Image src={editPencil} alt='edit icon' />
           </Icon>
         </IconBox>
-        <IconBox>
+        <IconBox onClick={onDeleteClick}>
           <Icon>
-            <Image src={trashCan} alt='trash icon' onClick={() => {}} />
+            <Image src={trashCan} alt='trash icon' />
           </Icon>
         </IconBox>
       </BottomFrame>
@@ -158,6 +160,8 @@ const IconBox = styled.div`
   align-items: center;
   width: 40px;
   height: 40px;
+
+  cursor: pointer;
 `
 
 const DetailsFrame = styled.div`

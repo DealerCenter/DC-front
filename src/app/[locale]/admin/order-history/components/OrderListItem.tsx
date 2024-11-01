@@ -68,14 +68,9 @@ const OrderListItem = ({
         {!isMobile && (
           <CheckboxFrame>
             {isEditing && (
-              <>
-                <IconBox>
-                  <Image src={grabHandle} alt='grab handle icon' />
-                </IconBox>
-                <IconBox>
-                  <CheckBox isChecked={isChecked} />
-                </IconBox>
-              </>
+              <IconBox>
+                <CheckBox isChecked={isChecked} />
+              </IconBox>
             )}
           </CheckboxFrame>
         )}
@@ -124,6 +119,7 @@ const CheckboxFrame = styled.div`
   width: 56px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 `
 
 const IconBox = styled.div`
