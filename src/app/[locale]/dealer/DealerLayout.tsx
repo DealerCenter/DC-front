@@ -24,6 +24,8 @@ const DealerLayout = ({ children }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const pathname = usePathname()
 
+  const isFlexibleOnDesktop = pathname === routeName.dealerOrderHistory
+
   const isSideBarVisible = !pathname.startsWith(routeName.dealerOrder)
 
   return (
@@ -31,7 +33,12 @@ const DealerLayout = ({ children }: Props) => {
       <Header />
       <Container>
         <Frame>
-          {isSideBarVisible && <SideBar routes={routeNames} />}
+          {isSideBarVisible && (
+            <SideBar
+              routes={routeNames}
+              isFlexibleOnDesktop={isFlexibleOnDesktop}
+            />
+          )}
           {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
         </Frame>
       </Container>

@@ -42,6 +42,7 @@ const useLoginForm = () => {
         message.success(t('you are logged in'))
         router.push(routeName.dealer)
       } catch (error) {
+        setIsLoading(false)
         message.error(t('you could not log in'))
         if (error instanceof AxiosError) {
           console.error('Axios Error:', error)
@@ -50,8 +51,6 @@ const useLoginForm = () => {
           console.error('Unknown Error:', error)
           setAxiosError(undefined) // Handle non-Axios errors if needed
         }
-      } finally {
-        setIsLoading(false)
       }
     },
 

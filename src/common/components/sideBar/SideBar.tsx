@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import { usePathname, useRouter } from '@/navigation'
 import { message } from 'antd'
@@ -32,9 +32,10 @@ type Props = {
     usersList: string
     manageNotifications: string
   }
+  isFlexibleOnDesktop?: boolean
 }
 
-const SideBar = ({ routes }: Props) => {
+const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
   const pathname = usePathname()
@@ -69,6 +70,7 @@ const SideBar = ({ routes }: Props) => {
       <BarContainer
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        isFlexibleOnDesktop={isFlexibleOnDesktop}
       >
         <Frame>
           <InfoBox
@@ -146,24 +148,41 @@ const SideBar = ({ routes }: Props) => {
           />
         )}
       </BarContainer>
-      <EmptyContainer></EmptyContainer>
+      <EmptyContainer
+        isFlexibleOnDesktop={isFlexibleOnDesktop}
+      ></EmptyContainer>
     </>
   )
 }
 
 export default SideBar
 
-const EmptyContainer = styled.div`
+type EmptyContainerProps = { isFlexibleOnDesktop?: boolean }
+
+const EmptyContainer = styled.div<EmptyContainerProps>`
   display: none;
 
-  @media ${({ theme }) => theme.media?.md} {
-    width: 112px;
-    height: 902px;
-    display: unset;
-  }
+  ${({ isFlexibleOnDesktop }) =>
+    isFlexibleOnDesktop
+      ? css`
+          @media ${({ theme }) => theme.media?.notSm} {
+            width: 112px;
+            height: 902px;
+            display: unset;
+          }
+        `
+      : css`
+          @media ${({ theme }) => theme.media?.md} {
+            width: 112px;
+            height: 902px;
+            display: unset;
+          }
+        `}
 `
 
-const BarContainer = styled.div`
+type BarContainerProps = { isFlexibleOnDesktop?: boolean }
+
+const BarContainer = styled.div<BarContainerProps>`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -186,17 +205,34 @@ const BarContainer = styled.div`
     border: 1px solid ${({ theme }) => theme.colors?.main_gray_10};
   }
 
-  @media ${({ theme }) => theme.media?.md} {
-    transition: all 0.5s ease-in-out;
-    position: absolute;
-    width: 112px;
-    align-items: flex-start;
+  ${({ isFlexibleOnDesktop }) =>
+    isFlexibleOnDesktop
+      ? css`
+          @media ${({ theme }) => theme.media?.notSm} {
+            transition: all 0.5s ease-in-out;
+            position: absolute;
+            width: 112px;
+            align-items: flex-start;
 
-    &:hover {
-      width: 334px;
-      box-shadow: 0px 10px 45px rgba(0, 0, 0, 0.15);
-    }
-  }
+            &:hover {
+              width: 334px;
+              box-shadow: 0px 10px 45px rgba(0, 0, 0, 0.15);
+            }
+          }
+        `
+      : css`
+          @media ${({ theme }) => theme.media?.md} {
+            transition: all 0.5s ease-in-out;
+            position: absolute;
+            width: 112px;
+            align-items: flex-start;
+
+            &:hover {
+              width: 334px;
+              box-shadow: 0px 10px 45px rgba(0, 0, 0, 0.15);
+            }
+          }
+        `}
 
   min-width: unset;
   border: unset;
@@ -204,7 +240,9 @@ const BarContainer = styled.div`
   height: 902px;
 `
 
-const Frame = styled.div`
+type FrameProps = { isFlexibleOnDesktop?: boolean }
+
+const Frame = styled.div<FrameProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -215,9 +253,18 @@ const Frame = styled.div`
   }
   width: unset;
 
-  @media ${({ theme }) => theme.media?.md} {
-    align-items: flex-start;
-  }
+  ${({ isFlexibleOnDesktop }) =>
+    isFlexibleOnDesktop
+      ? css`
+          @media ${({ theme }) => theme.media?.notSm} {
+            align-items: flex-start;
+          }
+        `
+      : css`
+          @media ${({ theme }) => theme.media?.md} {
+            align-items: flex-start;
+          }
+        `}
 `
 
 const ButtonFrame = styled.div`
