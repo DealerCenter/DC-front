@@ -459,5 +459,7 @@
   "containerImages": "კონტეინერი",
   "homePortImages": "საქართველოს პორტი",
 
-  "cancel field": "ველის გაუქმება"
+  "cancel field": "ველის გაუქმება",
+  "text copied": "ტექსტი დაკოპირებულია",
+  "order not found": "შეკვეთა არ მოიძებნა"
 }

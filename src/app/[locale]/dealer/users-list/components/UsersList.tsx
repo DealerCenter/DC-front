@@ -57,7 +57,7 @@ const UserList = ({
     setIsLoading(false)
   }
 
-  // getData when search query comes in, or when the page changes
+  // Fetch data when currentPage changes or update is successful
   useEffect(() => {
     getData()
 
@@ -66,7 +66,17 @@ const UserList = ({
       setUpdatedSuccessfully(false)
     }
     //eslint-disable-next-line
-  }, [searchQuery, currentPage, updatedSuccessfully])
+  }, [currentPage, updatedSuccessfully])
+
+  // Reset currentPage when searchQuery changes without triggering getData
+  useEffect(() => {
+    if (currentPage !== 1) {
+      setCurrentPage(1) // This will trigger the first useEffect due to the currentPage change
+    } else {
+      getData() // Call getData directly if already on the first page
+    }
+    //eslint-disable-next-line
+  }, [searchQuery])
 
   const handleDelete = async (id: number) => {
     try {

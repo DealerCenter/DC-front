@@ -20,6 +20,7 @@ const useLoginForm = () => {
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
+  const [isLoading, setIsLoading] = useState(false)
   const t = useTranslations('')
   const router = useRouter()
 
@@ -29,6 +30,7 @@ const useLoginForm = () => {
       [FIELD_NAMES.PASSWORD]: '',
     },
     onSubmit: async (values) => {
+      setIsLoading(true)
       try {
         const response = await axiosInstance.post<LOGIN_RES>(
           endpoints.LOGIN,
@@ -40,6 +42,7 @@ const useLoginForm = () => {
         message.success(t('you are logged in'))
         router.push(routeName.dealer)
       } catch (error) {
+        setIsLoading(false)
         message.error(t('you could not log in'))
         if (error instanceof AxiosError) {
           console.error('Axios Error:', error)
@@ -68,6 +71,7 @@ const useLoginForm = () => {
     errors: formik.errors,
     touched: formik.touched,
     axiosError: axiosError,
+    isLoading,
   }
 }
 

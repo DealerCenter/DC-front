@@ -88,4 +88,6 @@ const ButtonsFrame = styled.div`
   padding: 6px;
 
   gap: 8px;
+
+  border: 2px solid red;
 `

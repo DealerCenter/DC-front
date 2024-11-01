@@ -4,24 +4,32 @@ import styled, { css } from 'styled-components'
 
 import copyIcon from '@/assets/icons/copyIcons/copy.svg'
 import copyIconFull from '@/assets/icons/copyIcons/copyFull.svg'
+import { message } from 'antd'
+import { useTranslations } from 'next-intl'
 
 type Props = { textToCopy: string }
 
 const CopyButton = ({ textToCopy }: Props) => {
   const [isActive, setIsActive] = useState(false)
+  const t = useTranslations('')
 
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(textToCopy)
       setIsActive(true)
-      setTimeout(() => setIsActive(false), 2000)
+      setTimeout(() => setIsActive(false), 3000)
+      message.success(t('text copied'))
     } catch (err) {
       console.error('Failed to copy text: ', err)
+    } finally {
     }
   }
 
   return (
-    <IconBox onClick={copyToClipboard} isActive={isActive}>
+    <IconBox
+      onClick={isActive ? () => {} : copyToClipboard}
+      isActive={isActive}
+    >
       {isActive ? (
         <Image src={copyIconFull} alt='copy icon' />
       ) : (

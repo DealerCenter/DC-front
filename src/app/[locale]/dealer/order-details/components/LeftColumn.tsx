@@ -8,20 +8,27 @@ import theme from '@/app/[locale]/theme'
 import LocationBox from './leftColumnComponents/LocationBox'
 import ParametersBox from './leftColumnComponents/ParametersBox'
 import BoxWithHeader from './BoxWithHeader'
+import { ORDER_DATA } from '@/api/apiTypes'
 
-type Props = {}
+type Props = { orderData: ORDER_DATA }
 
-const LeftColumn = (props: Props) => {
+const LeftColumn = ({ orderData }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
+  const { additionalDetails } = orderData
+
   return (
     <Container>
-      <LocationBox />
-      <ParametersBox />
+      <LocationBox orderData={orderData} />
+      <ParametersBox orderData={orderData} />
       {!isMobile && (
         <BoxWithHeader headerText='more details'>
-          <TextArea placeholder={t('description')} />
+          <TextArea
+            placeholder={t('description')}
+            value={additionalDetails ? additionalDetails : ''}
+            disabled
+          />
         </BoxWithHeader>
       )}
     </Container>

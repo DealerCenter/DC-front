@@ -3,22 +3,25 @@ import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
 import BoxWithHeader from '../BoxWithHeader'
+import { ORDER_DATA } from '@/api/apiTypes'
 
-type Props = {}
+type Props = { orderData: ORDER_DATA }
 
-const LocationBox = (props: Props) => {
+const LocationBox = ({ orderData }: Props) => {
   const t = useTranslations('')
+
+  const { state, exactAddress } = orderData
 
   return (
     <BoxWithHeader headerText='location'>
       <LabelsFrame>
         <LabelPair>
           <Label>{t('state')}</Label>
-          <Value>California</Value>
+          <Value>{state.name}</Value>
         </LabelPair>
         <LabelPair>
           <Label>{t('address')}</Label>
-          <Value>Beverly hills, 235</Value>
+          <Value>{exactAddress}</Value>
         </LabelPair>
       </LabelsFrame>
     </BoxWithHeader>

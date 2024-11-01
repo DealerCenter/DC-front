@@ -1,37 +1,41 @@
+import { ORDER_DATA } from '@/api/apiTypes'
+import { VisualElement } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
 import styled from 'styled-components'
 
+const IMAGE_WIDTH = 168
+const IMAGE_HEIGHT = 150
+
 type Props = {
   imageLink: string
-  brand: string
-  model: string
-  year: string
-  vinCode: string
+  orderData: ORDER_DATA
 }
 
-const CarDetailsBox = ({ imageLink, brand, model, year, vinCode }: Props) => {
+const CarDetailsBox = ({ orderData, imageLink }: Props) => {
+  const { manufactureYear, manufacturer, model, vin } = orderData
+
   return (
     <ImageFrame>
       <ImageBox>
         <Image
           src={imageLink}
           alt='image'
-          width={168}
-          height={150}
-          style={{ objectFit: 'cover' }}
+          width={IMAGE_WIDTH}
+          height={IMAGE_HEIGHT}
+          style={{ objectFit: 'fill' }}
         />
       </ImageBox>
       <DetailsBox>
         <CarBrandFrame>
           <CarBrandBox>
-            <CarBrand>{brand}</CarBrand>
-            <TextGray>{year}</TextGray>
+            <CarBrand>{manufacturer}</CarBrand>
+            <TextGray>{manufactureYear}</TextGray>
           </CarBrandBox>
           <TextGray>{model}</TextGray>
         </CarBrandFrame>
         <VinCodeBox>
-          <Text>{vinCode}</Text>
+          <Text>{vin}</Text>
         </VinCodeBox>
       </DetailsBox>
     </ImageFrame>
@@ -51,10 +55,8 @@ const ImageFrame = styled.div`
 `
 
 const ImageBox = styled.div`
-  position: relative;
-  width: 100%;
-  width: 168px;
-  height: 150px;
+  width: ${IMAGE_WIDTH}px;
+  height: ${IMAGE_HEIGHT}px;
   overflow: hidden;
   border-radius: 18px;
 `
@@ -64,6 +66,7 @@ const DetailsBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 150px;
+  width: 160px;
 `
 
 const CarBrandFrame = styled.div`
