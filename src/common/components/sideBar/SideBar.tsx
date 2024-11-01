@@ -72,10 +72,11 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
         onMouseLeave={handleMouseLeave}
         isFlexibleOnDesktop={isFlexibleOnDesktop}
       >
-        <Frame>
+        <Frame isFlexibleOnDesktop={isFlexibleOnDesktop}>
           <InfoBox
             isHovered={isHovered}
             name={userData ? userData?.firstName : ''}
+            isFlexibleOnDesktop={isFlexibleOnDesktop}
             // refreshDate='last refresh jul 11 2034'
             // notificationCount={9}
           />
@@ -84,6 +85,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
             text={t('balance')}
             balance={'$ NA'}
             isHovered={isHovered}
+            isFlexibleOnDesktop={isFlexibleOnDesktop}
           />
           <ButtonFrame>
             <BarButton
@@ -94,6 +96,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
               width={20}
               height={20}
               href={routes.orderHistory}
+              isFlexibleOnDesktop={isFlexibleOnDesktop}
             />
             <BarButton
               isHovered={isHovered}
@@ -107,6 +110,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
               width={20}
               height={20}
               href={routes.personalInformation}
+              isFlexibleOnDesktop={isFlexibleOnDesktop}
             />
             <BarButton
               isHovered={isHovered}
@@ -120,6 +124,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
               width={20}
               height={20}
               href={routes.usersList}
+              isFlexibleOnDesktop={isFlexibleOnDesktop}
             />
             <BarButton
               isHovered={isHovered}
@@ -133,6 +138,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
               width={20}
               height={20}
               href={routes.manageNotifications}
+              isFlexibleOnDesktop={isFlexibleOnDesktop}
             />
           </ButtonFrame>
         </Frame>
@@ -145,6 +151,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
             onClick={handleLogout}
             isCursorPointer={true}
             disabled={isLoggingOut}
+            isFlexibleOnDesktop={isFlexibleOnDesktop}
           />
         )}
       </BarContainer>
