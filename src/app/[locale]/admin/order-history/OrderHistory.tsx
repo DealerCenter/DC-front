@@ -32,7 +32,7 @@ const OrderHistory = (props: Props) => {
   const [sortByCost, setSortByCost] = useState<'asc' | 'desc' | null>(null)
   const [sortByCreateDate, setSortByCreateDate] = useState<
     'asc' | 'desc' | null
-  >(null)
+  >('desc')
 
   const [shippingStatusOnEdit, setShippingStatusOnEdit] = useState<
     string | null

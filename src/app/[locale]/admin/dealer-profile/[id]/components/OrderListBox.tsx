@@ -40,7 +40,7 @@ const OrderListBox = ({ headerText, ordersResponse }: Props) => {
       <HeaderFrame>
         <HeaderH5Bold text={headerText} />
       </HeaderFrame>
-      <OrderList onClick={() => {}} orderData={ordersResponse.data} />
+      <OrderList ordersList={ordersResponse.data} />
       <PaginationFrame>
         <Pagination
           currentPage={ordersResponse.page}

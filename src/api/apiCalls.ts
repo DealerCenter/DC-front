@@ -164,7 +164,7 @@ export const getOrders = async (
 
   try {
     const response = await axiosInstance.get<ORDERS_GET_RES>(endpoint, {
-      params: payload, // Pass payload as query parameters
+      params: payload,
     })
     return response.data
   } catch (error) {
