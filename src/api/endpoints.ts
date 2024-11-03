@@ -22,4 +22,6 @@ export const endpoints = {
   LOGIN_ADMIN: '/admins/login',
   LOGOUT_ADMIN: '/admins/logout',
   CHANGE_PASSWORD_ADMIN: '/admins/change-password',
+  STATES: '/api/states',
+  STATES_ADMIN: '/states',
 }

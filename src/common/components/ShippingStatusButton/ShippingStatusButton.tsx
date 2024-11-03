@@ -1,67 +1,53 @@
-import React, { useState } from 'react'
-import styled, { css } from 'styled-components'
+import React from 'react'
+import styled from 'styled-components'
 
-import checkmarkIcon from '@/assets/icons/checkmarkCircleWhite.svg'
-import boxIcon from '@/assets/icons/boxBlack.svg'
+import theme from '@/app/[locale]/theme'
 import clockIcon from '@/assets/icons/clock2Black.svg'
-import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { SHIPPING_STATUS } from '@/common/helpers/constants'
 
-type Props = { shippingStatus: SHIPPING_STATUS }
+type Props = {
+  shippingStatus: SHIPPING_STATUS
+}
 
 const ShippingStatusButton = ({ shippingStatus }: Props) => {
-  const t = useTranslations('statusButton')
+  const statusText = () => {
+    switch (shippingStatus) {
+      case SHIPPING_STATUS.IN_AUCTION:
+        return 'Auction'
+      case SHIPPING_STATUS.IN_CONTAINER:
+        return 'Container'
+      case SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE:
+        return 'Warehouse'
+      case SHIPPING_STATUS.SENT:
+        return 'Sent'
+      case SHIPPING_STATUS.UNDERGOES_CUSTOMS:
+        return 'Customs'
+      default:
+        return ''
+    }
+  }
 
-  // const icon =
-  //   arrivalState === 'arrived'
-  //     ? checkmarkIcon
-  //     : arrivalState === 'onTheWay'
-  //       ? clockIcon
-  //       : arrivalState === 'inWarehouse' && boxIcon
-
-  // switch (shippingStatus) {
-  //   case SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE:
-  //     setIcon()
-  //     break
-  //   case SHIPPING_STATUS.IN_AUCTION:
-  //     setIcon()
-  //     break
-  //   case SHIPPING_STATUS.IN_CONTAINER:
-  //     setIcon(boxIcon)
-  //     break
-  //   case SHIPPING_STATUS.SENT:
-  //     setIcon(boxIcon)
-  //     break
-  //   case SHIPPING_STATUS.UNDERGOES_CUSTOMS:
-  //     setIcon(clockIcon)
-  //     break
-  // }
-
-  // const label =
-  //   arrivalState === 'arrived'
-  //     ? 'arrived'
-  //     : arrivalState === 'onTheWay'
-  //       ? 'on the way'
-  //       : arrivalState === 'inWarehouse' && 'in warehouse'
-
-  // if (!icon) return
+  if (!shippingStatus) return
 
   return (
-    <Container isArrived={true}>
-      {/* <IconBox>
-        <Image src={icon} alt='icon' />
-      </IconBox> */}
-      <Label isArrived={true}>{t(shippingStatus)}</Label>
+    <Container
+      isSent={
+        shippingStatus === SHIPPING_STATUS.SENT ||
+        shippingStatus === SHIPPING_STATUS.UNDERGOES_CUSTOMS
+      }
+    >
+      <IconBox>
+        <Image src={clockIcon} alt='icon' />
+      </IconBox>
+      <Label>{statusText()}</Label>
     </Container>
   )
 }
 
 export default ShippingStatusButton
 
-type ArrivedProps = { isArrived: boolean }
-
-const Container = styled.div<ArrivedProps>`
+const Container = styled.div`
   box-sizing: border-box;
   height: 42px;
   border-radius: ${({ theme }) => theme.radius?.lg};
@@ -70,31 +56,15 @@ const Container = styled.div<ArrivedProps>`
   justify-content: center;
   align-items: center;
   padding: 8px;
-
-  ${({ isArrived, theme }) =>
-    isArrived
-      ? css`
-          background-color: ${theme.colors?.green};
-        `
-      : css`
-          background-color: ${theme.colors?.yellow};
-        `};
+  background-color: ${({ isSent, theme }: { isSent: boolean; theme: any }) =>
+    isSent ? theme.colors?.green : theme.colors?.yellow};
 `
 
-const Label = styled.label<ArrivedProps>`
-  color: ${({ theme }) => theme.colors?.white};
+const Label = styled.label`
+  color: ${({ theme }) => theme.colors?.black};
   font-size: 13px;
   font-weight: 700;
   padding: 8px;
-
-  ${({ isArrived, theme }) =>
-    isArrived
-      ? css`
-          color: ${theme.colors?.white};
-        `
-      : css`
-          color: ${theme.colors?.main_gray_100};
-        `};
 `
 
 const IconBox = styled.div`

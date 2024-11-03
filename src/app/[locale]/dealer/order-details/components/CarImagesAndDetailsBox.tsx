@@ -1,20 +1,45 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import ImagesComponent from './ImagesComponent'
 
-import { useTranslations } from 'next-intl'
 import DetailsRow from './DetailsRow'
 import ButtonsRow from './ButtonsRow'
 import { ORDER_DATA } from '@/api/apiTypes'
+import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
 
 type Props = { orderData: ORDER_DATA }
 
 const CarImagesAndDetailsBox = ({ orderData }: Props) => {
+  const availableLocations = [
+    ...new Set(orderData.carImages.map((item) => item.type)),
+  ].map((location) => ({
+    value: location,
+  })) as { value: IMAGE_LOCATIONS }[]
+
+  const [selectedImageLocation, setSelectedImageLocation] =
+    useState<IMAGE_LOCATIONS>(availableLocations[0]?.value)
+
+  const images = useMemo(() => {
+    return orderData.carImages.filter(
+      (image) => image.type === selectedImageLocation
+    )
+  }, [selectedImageLocation])
+
+  console.log({ availableLocations })
+
   return (
     <Container>
-      <ImagesComponent />
-      <ButtonsRow />
+      {images.length > 0 ? (
+        <ImagesComponent carImages={images} />
+      ) : (
+        <div style={{ marginTop: 20 }} />
+      )}
+      <ButtonsRow
+        selectedImageLocation={selectedImageLocation}
+        setSelectedImageLocation={setSelectedImageLocation}
+        availableLocations={availableLocations}
+      />
       <DetailsRow orderData={orderData} />
     </Container>
   )

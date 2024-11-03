@@ -15,8 +15,8 @@ import DetailsRow from './components/detailsRow/DetailsRow'
 import ImagesComponent from './components/ImagesComponent'
 
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
-import DummyShipping from '@/common/components/ShippingStatusButton/DummyShipping'
 import EditButton from '../components/common/EditButton'
+import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
 
 type Props = {}
 
@@ -47,9 +47,7 @@ const OrderProfile = (props: Props) => {
           />
         </IdAndDateFrame>
 
-        <StateBoxFrame>
-          <DummyShipping />
-        </StateBoxFrame>
+        <StateBoxFrame>{/* <ShippingStatusButton /> */}</StateBoxFrame>
 
         {isEditing ? (
           <ImagesUploadComponent

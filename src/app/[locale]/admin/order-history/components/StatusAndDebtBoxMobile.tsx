@@ -1,18 +1,19 @@
-import DummyShipping from '@/common/components/ShippingStatusButton/DummyShipping'
+import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
+import { SHIPPING_STATUS } from '@/common/helpers/constants'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
 type Props = {
-  arrivalState: 'arrived' | 'onTheWay' | 'inWarehouse'
+  shippingStatus: SHIPPING_STATUS
   amount: number
 }
 
-const StatusAndDebtBoxMobile = ({ arrivalState, amount }: Props) => {
+const StatusAndDebtBoxMobile = ({ shippingStatus, amount }: Props) => {
   const t = useTranslations('')
 
   return (
     <Container>
-      <DummyShipping />
+      <ShippingStatusButton shippingStatus={shippingStatus} />
       <TextFrame>
         <Text>{t('debt')}</Text>
         <Money>{`$ ${amount.toString()}`}</Money>

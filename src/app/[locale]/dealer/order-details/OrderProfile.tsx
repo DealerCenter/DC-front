@@ -10,11 +10,11 @@ import { routeName } from '@/common/helpers/constants'
 import theme from '../../theme'
 
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
-import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
 import CarImagesAndDetailsBox from './components/CarImagesAndDetailsBox'
 import IdAndDateBox from './components/IdAndDateBox'
 import LeftColumn from './components/LeftColumn'
 import RightColumn from './components/RightColumn'
+import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
 
 type Props = { id?: string }
 
@@ -63,7 +63,7 @@ const OrderProfile = ({ id }: Props) => {
             {!isMobile && (
               <>
                 <StateBoxFrame>
-                  <ArrivalStateBox arrivalState='arrived' />
+                  <ShippingStatusButton shippingStatus={orderData.status} />
                 </StateBoxFrame>
                 <BackToOrderButton>
                   <AppGoBackButton
@@ -114,8 +114,6 @@ const StateBoxFrame = styled.div`
   left: 0;
 
   z-index: 10;
-
-  border: 2px solid red;
 `
 
 const IdAndDateFrame = styled.div`

@@ -5,18 +5,17 @@ import arrowDown from '@/assets/icons/arrowDown.svg'
 import Image from 'next/image'
 import AppCheckmarkCircle from '@/common/components/appCheckBox/AppCheckmarkCircle'
 import { useTranslations } from 'next-intl'
+import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
 
 type Option = {
-  value: stateOptions
+  value: IMAGE_LOCATIONS
 }
-
-type stateOptions = 'evacuator' | 'usa port' | 'container' | 'georgian port'
 
 type Props = {
   options: Option[]
   placeholder?: string
-  selectedOption: stateOptions
-  setSelectedOption: (arg: stateOptions) => void
+  selectedOption: IMAGE_LOCATIONS
+  setSelectedOption: (arg: IMAGE_LOCATIONS) => void
 }
 
 const AppSelect = ({
@@ -28,7 +27,7 @@ const AppSelect = ({
   const [isOpen, setIsOpen] = useState(false)
   const t = useTranslations('')
 
-  const handleOptionClick = (value: stateOptions) => {
+  const handleOptionClick = (value: IMAGE_LOCATIONS) => {
     setSelectedOption(value)
     setIsOpen(false)
   }

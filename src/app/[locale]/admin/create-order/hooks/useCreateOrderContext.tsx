@@ -49,6 +49,13 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
 
   const [orderId, setOrderId] = useState<number | null>(null)
 
+  const [images, setImages] = useState({
+    [IMAGE_LOCATIONS.TOW_TRUCK]: [],
+    [IMAGE_LOCATIONS.ABROAD_PORT]: [],
+    [IMAGE_LOCATIONS.CONTAINER]: [],
+    [IMAGE_LOCATIONS.HOME_PORT]: [],
+  })
+
   const initialValues = {
     [FIELD_NAMES.MANUFACTURER]: '',
     [FIELD_NAMES.MANUFACTURE_YEAR]: '',
@@ -100,14 +107,19 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         }
       })
 
-      console.log('field values:', numericValues)
-
       const data = { ...numericValues }
       Object.keys(data).forEach((key) =>
         formData.append(key, values[key] as string | Blob)
       )
-      // uploadedTowTruckImages &&
-      //   formData.append(FIELD_NAMES.TOW_TRUCK_IMAGES, uploadedTowTruckImages[0])
+
+      //Add images to formdata
+      Object.entries(images).forEach(([key, items]) => {
+        if (items.length > 0) {
+          items.forEach((item) => {
+            formData.append(key, item)
+          })
+        }
+      })
 
       try {
         const response = orderId
@@ -260,6 +272,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         prefillFormikValues,
         resetForm,
         setOrderId,
+        setImages,
       }}
     >
       {children}
@@ -269,7 +282,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
 
 export const useCreateOrderContext = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {},
+  ExtraProps = {}
 >() => {
   const context = useContext(FormikContext)
   if (!context) {

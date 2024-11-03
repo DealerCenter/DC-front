@@ -93,10 +93,10 @@
   "order id": "შეკვეთის ID",
   "date of purchase": "ყიდვის თარიღი",
 
-  "evacuator": "ევაკუატორი",
-  "usa port": "აშშ პორტი",
-  "container": "კონტეინერი",
-  "georgian port": "საქართველოს პორტი",
+  "TOW_TRUCK": "ევაკუატორი",
+  "ABROAD_PORT": "აშშ პორტი",
+  "CONTAINER": "კონტეინერი",
+  "HOME_PORT": "საქართველოს პორტი",
 
   "date descending": "თარიღი კლებადი",
   "date ascending": "თარიღი ზრდადი",

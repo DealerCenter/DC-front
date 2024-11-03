@@ -259,3 +259,11 @@ type OrderPutAdminType = {
   containerImages?: any[]
   homePortImages?: any[]
 }
+
+type STATES_RES = {
+  id: number
+  createdAt: string
+  updatedAt: string
+  name: string
+  abbreviation: string
+}

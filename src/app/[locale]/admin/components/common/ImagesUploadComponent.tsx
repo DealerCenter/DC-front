@@ -43,19 +43,29 @@ const ImagesUploadComponent = ({
 
   const [isDropped, setIsDropped] = useState(false)
 
-  const { setFieldValue, values } = useCreateOrderContext()
+  const { setFieldValue, values, setTowTruckImage, setImages } =
+    useCreateOrderContext()
 
   const onDrop = useCallback(
     <T extends File>(acceptedFiles: T[]) => {
-      // Do something with the files
-      // console.log('accepted files: ', acceptedFiles)
-      // console.log('accepted files[0]: ', acceptedFiles[0])
-      setIsDropped(true)
-      setIsUploaded && setIsUploaded(true)
-      if (onDropAdditional) onDropAdditional(acceptedFiles[0])
-      setFieldValue(currentLocation, acceptedFiles)
+      setImages(
+        (prev: {
+          [IMAGE_LOCATIONS.TOW_TRUCK]: []
+          [IMAGE_LOCATIONS.ABROAD_PORT]: []
+          [IMAGE_LOCATIONS.CONTAINER]: []
+          [IMAGE_LOCATIONS.HOME_PORT]: []
+        }) => {
+          return { ...prev, [String(currentLocation)]: acceptedFiles }
+        }
+      )
     },
-    [onDropAdditional, setIsUploaded, setFieldValue, currentLocation]
+    [
+      onDropAdditional,
+      setIsUploaded,
+      setFieldValue,
+      currentLocation,
+      setTowTruckImage,
+    ]
   )
 
   useEffect(() => {
