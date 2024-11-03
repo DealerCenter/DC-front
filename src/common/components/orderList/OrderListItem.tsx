@@ -36,7 +36,7 @@ const OrderListItem = ({ imageLink, orderData, index, onClick }: Props) => {
           )}
         </MiddleFrame>
       </Frame>
-      <DebtBox amount={transportationCost} arrivalState={'arrived'} />
+      <DebtBox amount={transportationCost} shippingStatus={status} />
     </Container>
   )
 }

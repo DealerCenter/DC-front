@@ -1,13 +1,13 @@
 import theme from '@/app/[locale]/theme'
 import Image, { StaticImageData } from 'next/image'
 import React from 'react'
-import { useMediaQuery } from 'react-responsive'
 import styled, { StyledInterface } from 'styled-components'
 import { LeftButton, RightButton } from './Buttons'
 import { css } from 'styled-components'
+import { CAR_IMAGE } from '@/api/apiTypes'
 
 type Props = {
-  currentItems: { image: StaticImageData; id: string }[]
+  currentItems: CAR_IMAGE[]
   handleMoveLeft: () => void
   handleMoveRight: () => void
   currentImageId: string
@@ -28,14 +28,14 @@ const ImageCarousel = ({
         {currentItems.map((item, i) => (
           <ImageBox
             key={`image398jk${i}`}
-            isActive={item.id === currentImageId}
+            isActive={item.id.toString() === currentImageId}
           >
             <Image
-              id={item.id}
+              id={item.id.toString()}
               onClick={() => {
-                setCurrentImageId(item.id)
+                setCurrentImageId(item.id.toString())
               }}
-              src={item.image}
+              src={item.url}
               alt='image'
               width={160}
               height={160}

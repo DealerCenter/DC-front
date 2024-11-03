@@ -4,16 +4,16 @@ import styled from 'styled-components'
 import splitGrayLine from '@/assets/icons/splitGrayLine.svg'
 import Image from 'next/image'
 import { useTranslations } from 'use-intl'
-import { ORDER_DATA } from '@/api/apiTypes'
+import moment from 'moment'
 
 type Props = {
-  orderData: ORDER_DATA
+  auctionId: string
+  orderId: number
+  dateOfPurchase: string
 }
 
-const IdAndDateBox = ({ orderData }: Props) => {
+const IdAndDateBox = ({ auctionId, orderId, dateOfPurchase }: Props) => {
   const t = useTranslations('')
-
-  const { id: orderId } = orderData
 
   return (
     <Container>
@@ -29,7 +29,7 @@ const IdAndDateBox = ({ orderData }: Props) => {
       <Image src={splitGrayLine} alt='line icon' />
       <Frame>
         <Title>{t('date of purchase')}</Title>
-        <Value>NA</Value>
+        <Value>{moment(dateOfPurchase).format('DD-MMM-YYYY')}</Value>
       </Frame>
     </Container>
   )
@@ -54,8 +54,6 @@ const Container = styled.div`
   }
 
   box-shadow: 0 10px 45px 0 ${({ theme }) => theme.colors?.main_gray_16};
-
-  border: 2px solid red;
 `
 
 const Frame = styled.div`

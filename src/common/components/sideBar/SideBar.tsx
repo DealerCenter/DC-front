@@ -70,7 +70,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
       <BarContainer
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        isFlexibleOnDesktop={isFlexibleOnDesktop}
+        isFlexibleOnDesktop={false}
       >
         <Frame>
           <InfoBox
@@ -148,9 +148,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
           />
         )}
       </BarContainer>
-      <EmptyContainer
-        isFlexibleOnDesktop={isFlexibleOnDesktop}
-      ></EmptyContainer>
+      <EmptyContainer isFlexibleOnDesktop={false}></EmptyContainer>
     </>
   )
 }

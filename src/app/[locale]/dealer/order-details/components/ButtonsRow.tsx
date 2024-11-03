@@ -8,34 +8,19 @@ import AppSelect from './AppSelect'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 import BasicButton from '@/common/components/appButton/BasicButton'
+import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
 
-type Props = {}
-
-type stateOptions = 'evacuator' | 'usa port' | 'container' | 'georgian port'
-
-type Option = {
-  value: stateOptions
+type Props = {
+  selectedImageLocation: IMAGE_LOCATIONS
+  setSelectedImageLocation: (arg: IMAGE_LOCATIONS) => void
+  availableLocations: { value: IMAGE_LOCATIONS }[]
 }
 
-const options: Option[] = [
-  {
-    value: 'evacuator',
-  },
-  {
-    value: 'usa port',
-  },
-  {
-    value: 'container',
-  },
-  {
-    value: 'georgian port',
-  },
-]
-
-const ButtonsRow = (props: Props) => {
-  const [selectedOption, setSelectedOption] =
-    useState<stateOptions>('container')
-
+const ButtonsRow = ({
+  selectedImageLocation,
+  setSelectedImageLocation,
+  availableLocations,
+}: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
@@ -43,13 +28,13 @@ const ButtonsRow = (props: Props) => {
     <>
       {isMobile ? (
         <AppSelect
-          options={options}
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
+          options={availableLocations}
+          selectedOption={selectedImageLocation}
+          setSelectedOption={setSelectedImageLocation}
         />
       ) : (
         <ButtonsFrame>
-          {options.map((option, i) => (
+          {availableLocations.map((option, i) => (
             <React.Fragment key={`shippingOptionButtonFragment${i}`}>
               {i !== 0 && (
                 <Image
@@ -61,10 +46,12 @@ const ButtonsRow = (props: Props) => {
               <BasicButton
                 key={`shippingOptionButton${i}`}
                 onClick={() => {
-                  setSelectedOption(option.value)
+                  setSelectedImageLocation(option.value)
                 }}
                 height={48}
-                color={option.value === selectedOption ? 'black' : 'white'}
+                color={
+                  option.value === selectedImageLocation ? 'black' : 'white'
+                }
               >
                 {t(option.value)}
               </BasicButton>
@@ -88,6 +75,4 @@ const ButtonsFrame = styled.div`
   padding: 6px;
 
   gap: 8px;
-
-  border: 2px solid red;
 `

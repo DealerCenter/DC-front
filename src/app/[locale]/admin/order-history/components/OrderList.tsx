@@ -42,7 +42,7 @@ const OrderList = ({
           onClick={() =>
             router.push(`${routeName.adminCreateOrder}/${order.id}`)
           }
-          imageLink={DummyImage.src}
+          imageLink={order.carImages[0]?.url ?? DummyImage.src}
           item={order}
           key={`${order.id}82kj32${i}`}
           isEditing={isEditing}

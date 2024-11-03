@@ -8,17 +8,8 @@ import {
   useCreateOrderContext,
 } from '../../../hooks/useCreateOrderContext'
 import TextInputFieldPair from './TextInputFieldPair'
-
-const dummyDropdownList = [
-  {
-    label: 'LA',
-    id: 1,
-  },
-  {
-    label: 'NY',
-    id: 2,
-  },
-]
+import { useEffect, useState } from 'react'
+import { getStates } from '@/api/apiCalls'
 
 type Props = {}
 
@@ -26,6 +17,20 @@ const LocationBox = ({}: Props) => {
   const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
     useCreateOrderContext()
   const t = useTranslations('')
+  const [countryStates, setCountryStates] = useState([])
+
+  useEffect(() => {
+    const fetchStates = async () => {
+      const res = await getStates(true)
+      const formatted = res?.map((state) => ({
+        id: state.id,
+        label: state.name,
+      }))
+      // @ts-ignore
+      setCountryStates(formatted)
+    }
+    fetchStates()
+  }, [])
 
   const handleSetStateId = (id: number) => {
     setFieldValue(FIELD_NAMES.STATE_ID, id)
@@ -47,7 +52,7 @@ const LocationBox = ({}: Props) => {
               ? errors[FIELD_NAMES.STATE_ID]
               : ''
           }
-          optionsListWidthID={dummyDropdownList}
+          optionsListWidthID={countryStates}
           handleSetValueWithId={handleSetStateId}
         />
         <TextInputFieldPair

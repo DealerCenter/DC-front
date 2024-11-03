@@ -2,16 +2,23 @@ import Image from 'next/image'
 import styled from 'styled-components'
 
 import checkmarkGreen from '@/assets/icons/checkedGreen.svg'
-import DummyShipping from '@/common/components/ShippingStatusButton/DummyShipping'
+import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
+import { SHIPPING_STATUS } from '@/common/helpers/constants'
 
 type Props = {
   amount: number
   buyerFullName: string
   buyerPhoneNumber: string
   vinCode: string
+  shippingStatus: SHIPPING_STATUS
 }
 
-const DetailsBox = ({ amount, buyerFullName, buyerPhoneNumber }: Props) => {
+const DetailsBox = ({
+  amount,
+  buyerFullName,
+  buyerPhoneNumber,
+  shippingStatus,
+}: Props) => {
   return (
     <Container>
       <Frame>
@@ -33,7 +40,7 @@ const DetailsBox = ({ amount, buyerFullName, buyerPhoneNumber }: Props) => {
         </Box>
       </Frame>
       <ShippingStatusButtonFrame>
-        <DummyShipping />
+        <ShippingStatusButton shippingStatus={shippingStatus} />
       </ShippingStatusButtonFrame>
       <Money>{`$ ${amount.toString()}`}</Money>
     </Container>
