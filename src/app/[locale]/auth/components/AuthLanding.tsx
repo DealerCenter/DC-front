@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import landingPicture from '@/assets/images/landingPicture.svg'
 import Image from 'next/image'
 import theme from '../../theme'
+import Header from '@/common/components/header/Header'
 
 type Props = { goToLogin: () => void; goToRegistration: () => void }
 
@@ -14,45 +15,58 @@ const AuthLanding = ({ goToLogin, goToRegistration }: Props) => {
   const t = useTranslations('')
 
   return (
-    <Container>
-      <Frame>
-        <TextFrame>
-          <Text>{t('bring your car')}</Text>
-        </TextFrame>
-        <ButtonFrame>
-          <AppButton
-            type='outlined'
-            text={t('register')}
-            disabled={false}
-            onClick={goToRegistration}
-            isSmall={true}
-          />
+    <>
+      <HeaderBox>
+        <Header />
+      </HeaderBox>
+      <Container>
+        <Frame>
+          <TextFrame>
+            <Text>{t('bring your car')}</Text>
+          </TextFrame>
+          <ButtonFrame>
+            <AppButton
+              type='outlined'
+              text={t('register')}
+              disabled={false}
+              onClick={goToRegistration}
+              isSmall={true}
+            />
 
-          <AppButton
-            type='filled'
-            text={t('login')}
-            disabled={false}
-            onClick={goToLogin}
-            isSmall={true}
-          />
-        </ButtonFrame>
-      </Frame>
-      {!isMobile && (
-        <ImageWrapper>
-          <Image
-            src={landingPicture}
-            alt='landing picture'
-            style={{ objectFit: 'cover' }}
-            priority
-            fill
-          />
-        </ImageWrapper>
-      )}
-    </Container>
+            <AppButton
+              type='filled'
+              text={t('login')}
+              disabled={false}
+              onClick={goToLogin}
+              isSmall={true}
+            />
+          </ButtonFrame>
+        </Frame>
+        {!isMobile && (
+          <ImageWrapper>
+            <Image
+              src={landingPicture}
+              alt='landing picture'
+              style={{ objectFit: 'cover' }}
+              priority
+              fill
+            />
+          </ImageWrapper>
+        )}
+      </Container>
+    </>
   )
 }
 
 export default AuthLanding
+
+const HeaderBox = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  width: 100%;
+`
 
 const Container = styled.div`
   display: flex;
@@ -74,6 +88,12 @@ const ButtonFrame = styled.div`
   justify-content: space-between;
   width: 416px;
   gap: ${({ theme }) => theme.spacing?.md};
+
+  @media ${({ theme }) => theme.media?.sm} {
+    align-items: center;
+    flex-direction: column-reverse;
+    gap: ${({ theme }) => theme.spacing?.xl};
+  }
 `
 
 const Frame = styled.div`
