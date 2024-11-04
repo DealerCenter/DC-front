@@ -62,8 +62,6 @@ export default AuthLanding
 
 const HeaderBox = styled.div`
   position: absolute;
-  display: flex;
-  justify-content: center;
   z-index: 1000;
   width: 100%;
 `

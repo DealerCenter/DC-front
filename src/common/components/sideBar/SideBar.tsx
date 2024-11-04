@@ -61,8 +61,6 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
       message.success(t('you are logged out'))
       router.push(routeName.landing)
     }
-    // message.success(t('you are logged out'))
-    // router.push(routeName.landing)
     if (!response) {
       setIsLoggingOut(false)
       message.error(t('you could not log out'))
