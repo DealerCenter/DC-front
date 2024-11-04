@@ -24,6 +24,7 @@ import bellIconBlack from '@/assets/icons/bell/bell-black.svg'
 import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
+import LoadingOverlay from '../loader/LoadingOverlay'
 
 type Props = {
   routes: {
@@ -54,12 +55,15 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
   }
 
   const handleLogout = async () => {
-    try {
-      setIsLoggingOut(true)
-      await logoutUser()
+    setIsLoggingOut(true)
+    const response = await logoutUser()
+    if (response) {
       message.success(t('you are logged out'))
       router.push(routeName.landing)
-    } catch (error) {
+    }
+    // message.success(t('you are logged out'))
+    // router.push(routeName.landing)
+    if (!response) {
       setIsLoggingOut(false)
       message.error(t('you could not log out'))
     }
@@ -67,6 +71,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
 
   return (
     <>
+      <LoadingOverlay isLoading={isLoggingOut} />
       <BarContainer
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
