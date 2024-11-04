@@ -12,7 +12,7 @@ type Props = {
   setIsActive: (arg1: boolean) => void
 }
 
-const SearchIcon = ({ isActive, setIsActive }: Props) => {
+const SearchButtonDynamic = ({ isActive, setIsActive }: Props) => {
   const [inputValue, setInputValue] = useState('')
   const t = useTranslations('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -80,7 +80,7 @@ const SearchIcon = ({ isActive, setIsActive }: Props) => {
   )
 }
 
-export default SearchIcon
+export default SearchButtonDynamic
 
 type IsActiveProp = { isActive: boolean }
 
