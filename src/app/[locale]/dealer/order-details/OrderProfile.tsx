@@ -10,7 +10,6 @@ import { routeName } from '@/common/helpers/constants'
 import theme from '../../theme'
 
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
-// import ArrivalStateBox from '@/common/components/arrivalState/ArrivalStateBox'
 import CarImagesAndDetailsBox from './components/CarImagesAndDetailsBox'
 import IdAndDateBox from './components/IdAndDateBox'
 import LeftColumn from './components/LeftColumn'

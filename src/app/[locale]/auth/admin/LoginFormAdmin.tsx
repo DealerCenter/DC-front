@@ -104,7 +104,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
           disabled={isLoading}
         />
       </StyledForm>
-      <div>
+      {/* <div>
         <StyledP>{t('not registered?')}</StyledP>
         <AppButton
           type='outlined'
@@ -113,7 +113,7 @@ const LoginForm = ({ goToRegistration }: Props) => {
           width={442}
           disabled={false}
         />
-      </div>
+      </div> */}
     </Container>
   )
 }

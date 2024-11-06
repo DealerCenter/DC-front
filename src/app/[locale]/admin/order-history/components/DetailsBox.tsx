@@ -9,6 +9,7 @@ type Props = {
   amount: number
   buyerFullName: string
   buyerPhoneNumber: string
+  vinCode: string
   shippingStatus: SHIPPING_STATUS
 }
 

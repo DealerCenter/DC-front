@@ -92,14 +92,14 @@ const DealerProfile = ({ dealerId }: Props) => {
         <EditButton onClick={() => {}} />
       </TopButtonsFrame>
       <Frame>
-        {isMobile && <PdfAndImageBox image={userImage.src} />}
+        {isMobile && <PdfAndImageBox image={dealerData?.idImageUrl} />}
         <DealerDataBox dealerData={dealerData} />
         <MiddleFrame>
           <LabelValueBox label={t('current debt')} value={'NA'} />
           <LabelValueBox label={t('cars on the way')} value={'NA'} />
           <LabelValueBox label={t('total imported cars')} value={'NA'} />
         </MiddleFrame>
-        {!isMobile && <PdfAndImageBox image={userImage.src} />}
+        {!isMobile && <PdfAndImageBox image={dealerData?.idImageUrl} />}
       </Frame>
       {ordersResponse && (
         <OrderListBox

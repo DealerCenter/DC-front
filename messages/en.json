@@ -93,10 +93,12 @@
   "order id": "Order id",
   "date of purchase": "Date of purchase",
 
-  "evacuator": "Evacuator",
-  "usa port": "USA Port",
-  "container": "Container",
-  "georgian port": "Georgian port",
+  "TOW_TRUCK": "Evacuator",
+  "ABROAD_PORT": "USA Port",
+  "CONTAINER": "Container",
+  "HOME_PORT": "Georgian port",
+
+
 
   "date descending": "Date descending",
   "date ascending": "Date ascending",

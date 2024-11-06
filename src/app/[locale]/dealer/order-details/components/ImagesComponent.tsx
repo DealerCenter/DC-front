@@ -2,45 +2,18 @@ import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
 
-import DummyImage from '@/assets/images/DummyCarImage.jpg'
-import DummyImage2 from '@/assets/images/DummyCarImage2.jpg'
-import DummyImage3 from '@/assets/images/DummyCarImage3.jpg'
 import arrowLeft from '@/assets/icons/arrows/arrowLeftBlack.svg'
 import arrowRight from '@/assets/icons/arrows/arrowRightBlack.svg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 import AppGallery from '@/common/components/gallery/AppGallery'
+import { CAR_IMAGE } from '@/api/apiTypes'
 
-const dummyImagesArray = [
-  { image: DummyImage, id: '1' },
-  { image: DummyImage2, id: '2' },
-  { image: DummyImage3, id: '3' },
-  { image: DummyImage, id: '12' },
-  { image: DummyImage2, id: '22' },
-  { image: DummyImage3, id: '32' },
-  { image: DummyImage, id: '13' },
-  { image: DummyImage2, id: '23' },
-  { image: DummyImage3, id: '33' },
-  { image: DummyImage, id: '14' },
-  { image: DummyImage2, id: '24' },
-  { image: DummyImage3, id: '34' },
-  { image: DummyImage, id: '15' },
-  { image: DummyImage2, id: '25' },
-  { image: DummyImage3, id: '35' },
-  { image: DummyImage, id: '16' },
-  { image: DummyImage2, id: '26' },
-  { image: DummyImage3, id: '36' },
-  { image: DummyImage, id: '17' },
-  { image: DummyImage2, id: '27' },
-  { image: DummyImage3, id: '37' },
-  { image: DummyImage, id: '18' },
-  { image: DummyImage2, id: '28' },
-  { image: DummyImage3, id: '38' },
-]
+type Props = {
+  carImages: CAR_IMAGE[]
+}
 
-type Props = {}
-
-const ImagesComponent = (props: Props) => {
+const ImagesComponent = ({ carImages }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
 
@@ -51,7 +24,7 @@ const ImagesComponent = (props: Props) => {
 
   const itemsPerPage = isMobile ? 1 : isTablet ? 10 : 12
 
-  const items = dummyImagesArray
+  const items = carImages
 
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
@@ -89,15 +62,16 @@ const ImagesComponent = (props: Props) => {
           handleClose={() => setIsOpen(false)}
           currentImageId={currentImageId}
           setCurrentImageId={setCurrentImageId}
+          carImages={carImages}
         />
       )}
       <ImageFrame>
         {currentItems.map((item, i) => (
           <ImageBox key={`image398jk${i}`}>
             <Image
-              id={item.id}
-              onClick={() => handleImageClick(item.id)}
-              src={item.image}
+              id={item.id.toString()}
+              onClick={() => handleImageClick(item.id.toString())}
+              src={item.url}
               alt='image'
               width={isMobile ? 343 : 180}
               height={isMobile ? 260 : 180}
@@ -141,7 +115,7 @@ const ImageFrame = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: ${({ theme }) => theme.spacing?.sm};
   width: 1140px;
-  height: 372px;
+  max-height: 372px;
 
   @media ${({ theme }) => theme.media?.md} {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -155,8 +129,6 @@ const ImageFrame = styled.div`
     width: unset;
     height: unset;
   }
-
-  border: 2px solid red;
 `
 
 type ButtonProps = { left?: number; right?: number }

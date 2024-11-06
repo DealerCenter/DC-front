@@ -16,39 +16,14 @@ import { CloseButton } from './components/Buttons'
 import { motion, AnimatePresence } from 'framer-motion'
 import ImageCarousel from './components/ImageCarousel'
 import AppOverlay from '../overlay/AppOverlay'
-
-const dummyImagesArray = [
-  { image: DummyImage, id: '1' },
-  { image: DummyImage2, id: '2' },
-  { image: DummyImage3, id: '3' },
-  { image: DummyImage, id: '12' },
-  { image: DummyImage2, id: '22' },
-  { image: DummyImage3, id: '32' },
-  { image: DummyImage, id: '13' },
-  { image: DummyImage2, id: '23' },
-  { image: DummyImage3, id: '33' },
-  { image: DummyImage, id: '14' },
-  { image: DummyImage2, id: '24' },
-  { image: DummyImage3, id: '34' },
-  { image: DummyImage, id: '15' },
-  { image: DummyImage2, id: '25' },
-  { image: DummyImage3, id: '35' },
-  { image: DummyImage, id: '16' },
-  { image: DummyImage2, id: '26' },
-  { image: DummyImage3, id: '36' },
-  { image: DummyImage, id: '17' },
-  { image: DummyImage2, id: '27' },
-  { image: DummyImage3, id: '37' },
-  { image: DummyImage, id: '18' },
-  { image: DummyImage2, id: '28' },
-  { image: DummyImage3, id: '38' },
-]
+import { CAR_IMAGE } from '@/api/apiTypes'
 
 type Props = {
   isOpen: boolean
   handleClose: () => void
   currentImageId: string
   setCurrentImageId: (id: string) => void
+  carImages: CAR_IMAGE[]
 }
 
 const variants = {
@@ -71,6 +46,7 @@ const AppGallery = ({
   handleClose,
   currentImageId,
   setCurrentImageId,
+  carImages,
 }: Props) => {
   const isTablet = useMediaQuery({ query: theme.media?.md })
 
@@ -78,14 +54,16 @@ const AppGallery = ({
 
   const [currentThumbnailPage, setCurrentThumbnailPage] = useState(1)
 
-  const items = dummyImagesArray
+  const items = carImages
   const itemsPerPage = isTablet ? 3 : 5
   const startIndex = (currentThumbnailPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
   const currentItems = items.slice(startIndex, endIndex)
   const totalPages = Math.ceil(items.length / itemsPerPage)
 
-  const currentIndex = items.findIndex((item) => item.id === currentImageId)
+  const currentIndex = items.findIndex(
+    (item) => item.id.toString() === currentImageId
+  )
 
   useEffect(() => {
     const newThumbnailPage = Math.floor(currentIndex / itemsPerPage) + 1
@@ -93,8 +71,8 @@ const AppGallery = ({
   }, [currentIndex, itemsPerPage])
 
   const findItemById = (id: string) => {
-    const itemFound = items.find((item) => item.id === id)
-    if (itemFound) return itemFound.image
+    const itemFound = items.find((item) => item.id.toString() === id)
+    if (itemFound) return itemFound.url
     else return ImageNotFound
   }
 
@@ -115,7 +93,7 @@ const AppGallery = ({
   const handleMoveRight = () => {
     if (currentIndex < items.length - 1) {
       const nextIndex = (currentIndex + 1) % items.length
-      setCurrentImageId(items[nextIndex].id)
+      setCurrentImageId(items[nextIndex].id.toString())
       paginate(1)
 
       handlePageMoveRight(currentIndex)
@@ -125,7 +103,7 @@ const AppGallery = ({
   const handleMoveLeft = () => {
     if (currentIndex > 0) {
       const prevIndex = (currentIndex - 1) % items.length
-      setCurrentImageId(items[prevIndex].id)
+      setCurrentImageId(items[prevIndex].id.toString())
       paginate(-1)
       handlePageMoveLeft(currentIndex)
     }
@@ -136,6 +114,9 @@ const AppGallery = ({
   const paginate = (newDirection: number) => {
     setIndex([index + newDirection, newDirection])
   }
+
+  console.log({ currentImage })
+  console.log({ currentItems })
 
   return (
     <>
@@ -150,7 +131,8 @@ const AppGallery = ({
               <AnimatePresence initial={false} custom={direction}>
                 <CarouselImage
                   key={index}
-                  src={currentImage.src}
+                  // @ts-ignore
+                  src={currentImage}
                   custom={direction}
                   variants={variants}
                   initial='enter'

@@ -60,7 +60,7 @@ const AppSort = ({ setSortByCost, setSortByDate, isDisabled }: Props) => {
   const onClearSort = (e: any) => {
     e.stopPropagation()
     setSortByCost(null)
-    setSortByDate(null)
+    setSortByDate('desc')
     setActiveSortLabel('sort')
   }
 

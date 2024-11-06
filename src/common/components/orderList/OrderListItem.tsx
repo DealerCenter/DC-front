@@ -21,12 +21,7 @@ const OrderListItem = ({ imageLink, orderData, index, onClick }: Props) => {
     query: theme.media?.md,
   })
 
-  const {
-    status,
-    transportationCost,
-    carCost,
-    status: shippingStatus,
-  } = orderData
+  const { status, transportationCost, carCost } = orderData
 
   return (
     <Container index={index} onClick={onClick}>
@@ -41,7 +36,7 @@ const OrderListItem = ({ imageLink, orderData, index, onClick }: Props) => {
           )}
         </MiddleFrame>
       </Frame>
-      <DebtBox amount={transportationCost} shippingStatus={shippingStatus} />
+      <DebtBox amount={transportationCost} shippingStatus={status} />
     </Container>
   )
 }

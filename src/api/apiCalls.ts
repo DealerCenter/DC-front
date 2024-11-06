@@ -15,6 +15,7 @@ import {
   OrderPutAdminType,
   ORDERS_GET_RES,
   RECEIVER_GET_RES,
+  STATES_RES,
 } from './apiTypes'
 import { endpoints } from './endpoints'
 
@@ -163,7 +164,7 @@ export const getOrders = async (
 
   try {
     const response = await axiosInstance.get<ORDERS_GET_RES>(endpoint, {
-      params: payload, // Pass payload as query parameters
+      params: payload,
     })
     return response.data
   } catch (error) {
@@ -290,6 +291,17 @@ export const getContainersAdmin = async () => {
 export const checkHealth = async () => {
   try {
     const response = await axiosInstance.get(endpoints.HEALTH)
+    return response.data
+  } catch (error) {
+    console.error('Error getting health:', error)
+  }
+}
+
+export const getStates = async (isAdmin?: boolean) => {
+  try {
+    const response = await axiosInstance.get<STATES_RES[]>(
+      isAdmin ? endpoints.STATES_ADMIN : endpoints.STATES
+    )
     return response.data
   } catch (error) {
     console.error('Error getting health:', error)

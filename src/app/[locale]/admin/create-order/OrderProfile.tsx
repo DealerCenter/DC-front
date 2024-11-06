@@ -22,6 +22,7 @@ import ImageUpload from './image-upload/ImageUpload'
 import LoadingOverlay from '@/common/components/loader/LoadingOverlay'
 import IdAndDateBox from '@/common/components/idAndDateBox/IdAndDateBox'
 import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
+import { ORDER_DATA } from '@/api/apiTypes'
 
 const isAdmin = true
 
@@ -30,6 +31,7 @@ type Props = { id?: string }
 const OrderProfile = ({ id }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isUploadImagesOpen, setIsUploadImagesOpen] = useState(false)
+  const [orderData, setOrderData] = useState<ORDER_DATA | null>(null)
   const t = useTranslations('')
   const router = useRouter()
   const {
@@ -43,7 +45,10 @@ const OrderProfile = ({ id }: Props) => {
   const handleGetOrderData = async () => {
     setIsLoading(true)
     const response = await getOrders({ orderId: Number(id) }, isAdmin)
-    response?.data && prefillFormikValues(response?.data[0])
+    if (response?.data) {
+      prefillFormikValues(response?.data[0])
+      setOrderData(response.data[0])
+    }
     setIsLoading(false)
   }
 
@@ -80,9 +85,15 @@ const OrderProfile = ({ id }: Props) => {
                 shippingStatus={values[FIELD_NAMES.STATUS]}
               />
             </StateBoxFrame>
-            <IdAndDateFrame>
-              <IdAndDateBox auctionId='NA' orderId={id} dateOfPurchase='NA' />
-            </IdAndDateFrame>
+            {orderData && (
+              <IdAndDateFrame>
+                <IdAndDateBox
+                  auctionId='NA'
+                  orderId={orderData.id}
+                  dateOfPurchase={orderData.createdAt}
+                />
+              </IdAndDateFrame>
+            )}
           </>
         )}
         <ImagesUploadComponentDummy

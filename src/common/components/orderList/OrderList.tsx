@@ -26,7 +26,7 @@ const OrderList = ({ ordersList, isLoading }: Props) => {
         ordersList.map((order, i) => (
           <OrderListItem
             onClick={() => router.push(`${routeName.dealerOrder}/${order.id}`)}
-            imageLink={DummyImage.src}
+            imageLink={order.carImages[0]?.url || DummyImage.src}
             orderData={order}
             key={`${order.vin}82kj32${i}`}
             index={i}
