@@ -28,7 +28,9 @@ const StyledLogo = styled.label`
     font-size: 23px;
     font-weight: ${({ theme }) => theme.fontWeight?.bold};
     padding: 12px 8px 12px 8px;
+    cursor: default;
   }
 
+  user-select: none;
   cursor: pointer;
 `

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import BurgerHeaderMenu from './components/BurgerHeaderMenu'
@@ -7,6 +7,7 @@ import Logo from '../Logo'
 import burger from '@/assets/icons/burger.svg'
 import LoginButton from '../LoginButton'
 import SearchButton from './components/SearchButton'
+import { usePathname } from '@/navigation'
 
 type Props = {
   mainItems: { label: string; onClick: () => void }[]
@@ -15,6 +16,11 @@ type Props = {
 
 const BurgerHeader = ({ mainItems, servicesItems }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathName = usePathname()
+
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [pathName])
 
   return (
     <Container>

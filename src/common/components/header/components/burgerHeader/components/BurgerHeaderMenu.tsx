@@ -31,30 +31,28 @@ const BurgerHeaderMenu = ({
     document.body.style.overflow = isOpen ? 'hidden' : 'auto'
   }, [isOpen])
 
+  if (!isOpen) return
+
   return (
-    <>
-      {isOpen && (
-        <BackgroundOverlay>
-          <Container>
-            <TopFrame>
-              <Logo>DUX</Logo>
-              <CloseButton onClick={handleClose}>
-                <Image src={closeX} alt='close icon' />
-              </CloseButton>
-            </TopFrame>
-            <MiddleFrame>
-              <MiddleBox mainItems={mainItems} servicesItems={servicesItems} />
-              <Line />
-            </MiddleFrame>
-            <BottomFrame>
-              <SearchButton onClick={() => {}} height={44} width={56} />
-              <LoginButton text={t('login')} />
-              <LangChangeButton left={7} top={56} width={76} />
-            </BottomFrame>
-          </Container>
-        </BackgroundOverlay>
-      )}
-    </>
+    <BackgroundOverlay>
+      <Container>
+        <TopFrame>
+          <Logo>DUX</Logo>
+          <CloseButton onClick={handleClose}>
+            <Image src={closeX} alt='close icon' />
+          </CloseButton>
+        </TopFrame>
+        <MiddleFrame>
+          <MiddleBox mainItems={mainItems} servicesItems={servicesItems} />
+          <Line />
+        </MiddleFrame>
+        <BottomFrame>
+          <SearchButton onClick={() => {}} height={44} width={56} />
+          <LoginButton text={t('login')} />
+          <LangChangeButton left={7} top={56} width={76} />
+        </BottomFrame>
+      </Container>
+    </BackgroundOverlay>
   )
 }
 

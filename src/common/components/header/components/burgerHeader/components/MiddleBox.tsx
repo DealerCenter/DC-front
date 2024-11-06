@@ -71,6 +71,7 @@ const DropdownItem = styled.div`
   border-radius: ${({ theme }) => theme.radius?.lg};
 
   cursor: default;
+  user-select: none;
 `
 
 const Item = styled.div`
@@ -93,7 +94,8 @@ const Item = styled.div`
 
   gap: 10px;
 
-  cursor: pointer;
+  cursor: default;
+  user-select: none;
 `
 type IconProps = { isOpen: boolean }
 
