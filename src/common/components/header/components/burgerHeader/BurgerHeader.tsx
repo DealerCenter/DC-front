@@ -4,10 +4,9 @@ import styled from 'styled-components'
 
 import BurgerHeaderMenu from './components/BurgerHeaderMenu'
 import Logo from '../Logo'
-import search from '@/assets/icons/search.svg'
-import person from '@/assets/icons/person.svg'
 import burger from '@/assets/icons/burger.svg'
 import LoginButton from '../LoginButton'
+import SearchButton from './components/SearchButton'
 
 type Props = {
   mainItems: { label: string; onClick: () => void }[]
@@ -27,9 +26,7 @@ const BurgerHeader = ({ mainItems, servicesItems }: Props) => {
       />
       <Logo />
       <Frame>
-        <Item>
-          <Image width={20} height={20} src={search} alt='search icon' />
-        </Item>
+        <SearchButton onClick={() => {}} />
         <LoginButton />
         <Item onClick={() => setIsMenuOpen(true)}>
           <Image width={18} src={burger} alt='burger icon' />
@@ -64,6 +61,7 @@ const Frame = styled.div`
 `
 
 const Item = styled.div`
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -24,6 +24,7 @@ import bellIconBlack from '@/assets/icons/bell/bell-black.svg'
 import bellIconWhite from '@/assets/icons/bell/bell-white.svg'
 import wallet from '@/assets/icons/wallet.svg'
 import exitIcon from '@/assets/icons/exit.svg'
+import LoadingOverlay from '../loader/LoadingOverlay'
 
 type Props = {
   routes: {
@@ -54,12 +55,13 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
   }
 
   const handleLogout = async () => {
-    try {
-      setIsLoggingOut(true)
-      await logoutUser()
+    setIsLoggingOut(true)
+    const response = await logoutUser()
+    if (response) {
       message.success(t('you are logged out'))
       router.push(routeName.landing)
-    } catch (error) {
+    }
+    if (!response) {
       setIsLoggingOut(false)
       message.error(t('you could not log out'))
     }
@@ -67,15 +69,17 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
 
   return (
     <>
+      <LoadingOverlay isLoading={isLoggingOut} />
       <BarContainer
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         isFlexibleOnDesktop={false}
       >
-        <Frame>
+        <Frame isFlexibleOnDesktop={isFlexibleOnDesktop}>
           <InfoBox
             isHovered={isHovered}
             name={userData ? userData?.firstName : ''}
+            isFlexibleOnDesktop={isFlexibleOnDesktop}
             // refreshDate='last refresh jul 11 2034'
             // notificationCount={9}
           />
@@ -84,6 +88,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
             text={t('balance')}
             balance={'$ NA'}
             isHovered={isHovered}
+            isFlexibleOnDesktop={isFlexibleOnDesktop}
           />
           <ButtonFrame>
             <BarButton
@@ -94,6 +99,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
               width={20}
               height={20}
               href={routes.orderHistory}
+              isFlexibleOnDesktop={isFlexibleOnDesktop}
             />
             <BarButton
               isHovered={isHovered}
@@ -107,6 +113,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
               width={20}
               height={20}
               href={routes.personalInformation}
+              isFlexibleOnDesktop={isFlexibleOnDesktop}
             />
             <BarButton
               isHovered={isHovered}
@@ -120,6 +127,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
               width={20}
               height={20}
               href={routes.usersList}
+              isFlexibleOnDesktop={isFlexibleOnDesktop}
             />
             <BarButton
               isHovered={isHovered}
@@ -133,6 +141,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
               width={20}
               height={20}
               href={routes.manageNotifications}
+              isFlexibleOnDesktop={isFlexibleOnDesktop}
             />
           </ButtonFrame>
         </Frame>
@@ -145,6 +154,7 @@ const SideBar = ({ routes, isFlexibleOnDesktop }: Props) => {
             onClick={handleLogout}
             isCursorPointer={true}
             disabled={isLoggingOut}
+            isFlexibleOnDesktop={isFlexibleOnDesktop}
           />
         )}
       </BarContainer>

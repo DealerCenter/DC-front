@@ -33,6 +33,7 @@ type Props = {}
 const ManageNotifications = (props: Props) => {
   const [errorMessage, setErrorMessage] = useState(false)
   const [successMessage, setSuccessMessage] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [isEmailSaved, setIsEmailSaved] = useState(true)
   const [isSmsSaved, setIsSmsSaved] = useState(true)
   const [notifications, setNotifications] = useState<NotificationSetting[]>([])
@@ -46,10 +47,6 @@ const ManageNotifications = (props: Props) => {
     const notificationData = await getNotificationSettings(userData.id)
     setNotifications(notificationData)
   }
-
-  notifications.sort((a, b) => {
-    return a.notificationCategory.id - b.notificationCategory.id
-  })
 
   // when userData updates and we have users' id, then we get the settings
   useEffect(() => {
@@ -69,7 +66,7 @@ const ManageNotifications = (props: Props) => {
   // Function to send PUT request to update settings
   const saveChanges = async () => {
     if (!userData) return
-
+    setIsLoading(true)
     try {
       const updatedData = notifications.map(({ id, enabled }) => ({
         notificationId: id,
@@ -89,15 +86,7 @@ const ManageNotifications = (props: Props) => {
       message.error(t('failed to update notification settings'))
       console.error('Error updating settings', error)
     }
-  }
-
-  if (!userData) {
-    return (
-      <Loading>
-        {t('loading')}
-        {'...'}
-      </Loading>
-    )
+    setIsLoading(false)
   }
 
   return (
@@ -111,6 +100,7 @@ const ManageNotifications = (props: Props) => {
           onChange={updateNotification}
           isSaved={isEmailSaved}
           setIsSaved={setIsEmailSaved}
+          isLoading={isLoading}
         />
         <OptionFieldsBox
           headerText={t('sms notifications')}
@@ -119,6 +109,7 @@ const ManageNotifications = (props: Props) => {
           onChange={updateNotification}
           isSaved={isSmsSaved}
           setIsSaved={setIsSmsSaved}
+          isLoading={isLoading}
         />
       </Frame>
     </Container>

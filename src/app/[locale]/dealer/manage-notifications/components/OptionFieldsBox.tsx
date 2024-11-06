@@ -31,6 +31,7 @@ type Props = {
   onChange: (id: number, enabled: boolean) => void
   isSaved: boolean
   setIsSaved: (arg: boolean) => void
+  isLoading?: boolean
 }
 
 const OptionFieldsBox = ({
@@ -40,6 +41,7 @@ const OptionFieldsBox = ({
   onChange,
   isSaved,
   setIsSaved,
+  isLoading,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(true)
 
@@ -71,7 +73,11 @@ const OptionFieldsBox = ({
       )}
       {!isSaved && (
         <ButtonFrame>
-          <FormSaveButton text={t('save')} onClick={saveChanges} />
+          <FormSaveButton
+            text={t('save')}
+            onClick={saveChanges}
+            isLoading={isLoading}
+          />
         </ButtonFrame>
       )}
     </InputFieldsBox>

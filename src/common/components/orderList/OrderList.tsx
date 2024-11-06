@@ -6,13 +6,19 @@ import DummyImage from '@/assets/images/DummyCarImage.jpg'
 import { ORDER_DATA } from '@/api/apiTypes'
 import { routeName, SHIPPING_STATUS } from '@/common/helpers/constants'
 import { useRouter } from '@/navigation'
+import Loader from '../loader/Loader'
 
 type Props = {
   ordersList?: ORDER_DATA[]
+  isLoading?: boolean
 }
 
-const OrderList = ({ ordersList }: Props) => {
+const OrderList = ({ ordersList, isLoading }: Props) => {
   const router = useRouter()
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <ListFrame>

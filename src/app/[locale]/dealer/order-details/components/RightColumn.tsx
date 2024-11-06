@@ -1,15 +1,10 @@
-import { useTranslations } from 'next-intl'
-import React from 'react'
-import styled from 'styled-components'
 import ShippingStateBox from '@/common/components/shippingStateBox/ShippingStatusBox'
-import { dummyShippingSteps2 } from '@/assets/DummyData'
-import Image from 'next/image'
+import styled from 'styled-components'
 
+import { ORDER_DATA } from '@/api/apiTypes'
 import BoxWithHeader from './BoxWithHeader'
 import ContainerData from './rightColumnComponents/ContainerData'
 import DataOfRecipient from './rightColumnComponents/DataOfRecipient'
-import DealerData from './rightColumnComponents/DealerData'
-import { ORDER_DATA } from '@/api/apiTypes'
 
 type Props = { orderData: ORDER_DATA }
 

@@ -39,7 +39,14 @@ const BarButton = ({
         <IconBox>
           <Image src={icon} alt='icon' width={width} height={height} />
         </IconBox>
-        {!isMobile && <Label isHovered={isHovered}>{text}</Label>}
+        {!isMobile && (
+          <Label
+            isHovered={isHovered}
+            isFlexibleOnDesktop={isFlexibleOnDesktop}
+          >
+            {text}
+          </Label>
+        )}
       </Container>
     </StyledLink>
   )

@@ -25,6 +25,7 @@ import plusIcon from '@/assets/icons/plusInCircle24.svg'
 import { fetchMeAdmin, logoutUser } from '@/api/apiCalls'
 import { message } from 'antd'
 import { ADMIN_GET_RES } from '@/api/apiTypes'
+import LoadingOverlay from '@/common/components/loader/LoadingOverlay'
 
 const isAdmin = true
 
@@ -66,12 +67,13 @@ const SideBarAdmin = ({ routes }: Props) => {
   }, [])
 
   const handleLogout = async () => {
-    try {
-      setIsLoggingOut(true)
-      await logoutUser(isAdmin)
+    setIsLoggingOut(true)
+    const response = await logoutUser(isAdmin)
+    if (response) {
       message.success(t('you are logged out'))
       router.push(routeName.landing)
-    } catch (error) {
+    }
+    if (!response) {
       setIsLoggingOut(false)
       message.error(t('you could not log out'))
     }
@@ -79,6 +81,7 @@ const SideBarAdmin = ({ routes }: Props) => {
 
   return (
     <>
+      <LoadingOverlay isLoading={isLoggingOut} />
       <BarContainer
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}

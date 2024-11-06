@@ -6,21 +6,13 @@ import { useUserData } from '@/common/store/userDataStore'
 import HeaderH4Bold from '../../../../common/components/textComponents/HeaderH4Bold'
 import ChangePasswordBox from './components/ChangePasswordBox'
 import ContactInformationBox from './components/ContactInformationBox'
+import Loader from '@/common/components/loader/Loader'
 
 type Props = {}
 
 const PersonalInformation = (props: Props) => {
   const t = useTranslations('')
   const { userData } = useUserData()
-
-  if (!userData) {
-    return (
-      <Loading>
-        {t('loading')}
-        {'...'}
-      </Loading>
-    )
-  }
 
   return (
     <Container>
@@ -57,14 +49,4 @@ const Frame = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
-`
-
-const Loading = styled.div`
-  margin: 10px;
-
-  color: ${({ theme }) => theme.colors?.main_gray_56};
-
-  @media ${({ theme }) => theme.media?.sm} {
-    margin: 30px;
-  }
 `

@@ -1,9 +1,8 @@
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
-import DummyShipping from '@/common/components/ShippingStatusButton/DummyShipping'
-import { SHIPPING_STATUS } from '@/common/helpers/constants'
 import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
+import { SHIPPING_STATUS } from '@/common/helpers/constants'
 
 type Props = {
   amount: number

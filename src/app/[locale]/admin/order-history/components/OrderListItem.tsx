@@ -43,7 +43,6 @@ const OrderListItem = ({
     carCost,
     transportationCost: amount,
     status: shippingStatus,
-
     createdAt: date,
     id: orderId,
   } = item
@@ -106,10 +105,10 @@ const OrderListItem = ({
       ) : (
         <DetailsBox
           amount={amount}
+          shippingStatus={shippingStatus}
           buyerFullName={buyerFullName}
           buyerPhoneNumber={buyerPhoneNumber}
           vinCode={vinCode}
-          shippingStatus={shippingStatus}
         />
       )}
     </Container>

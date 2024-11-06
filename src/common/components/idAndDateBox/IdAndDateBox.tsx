@@ -19,7 +19,7 @@ const IdAndDateBox = ({ auctionId, orderId, dateOfPurchase }: Props) => {
     <Container>
       <Frame>
         <Title>{t('auction id')}</Title>
-        <Value>NA</Value>
+        <Value>{auctionId}</Value>
       </Frame>
       <Image src={splitGrayLine} alt='line icon' />
       <Frame>

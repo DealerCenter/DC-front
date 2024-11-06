@@ -10,10 +10,12 @@ import AppModal from '@/common/components/modal/AppModal'
 import SearchButton from '@/common/components/searchButton/SearchButton'
 import HeaderH4Bold from '@/common/components/textComponents/HeaderH4Bold'
 import AddRecipient from './components/addRecipient/AddRecipient'
+import Loader from '@/common/components/loader/Loader'
 
 type Props = {}
 
 const UsersListBox = (props: Props) => {
+  const [isLoading, setIsLoading] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isSearchActive, setIsSearchActive] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -41,6 +43,7 @@ const UsersListBox = (props: Props) => {
               placeholder={t('search for recipient')}
               onSubmit={onSearch}
               onCloseSearch={handleCloseSearch}
+              isDisabled={isLoading}
             />
             <SecondaryButton
               text={t('add recipient')}
@@ -55,9 +58,10 @@ const UsersListBox = (props: Props) => {
         <UsersList
           setIsModalOpen={setIsModalOpen}
           searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
           updatedSuccessfully={updatedSuccessfully}
           setUpdatedSuccessfully={setUpdatedSuccessfully}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
         />
       </Container>
 

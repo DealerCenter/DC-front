@@ -13,6 +13,7 @@ import arrowUp from '@/assets/icons/sortArrows/arrowSortUp.svg'
 import AppSort from '@/common/components/appSort/AppSort'
 import Pagination from '@/common/components/pagination/Pagination'
 import OrderHistoryFilter from './components/OrderHistoryFilter'
+import Loader from '@/common/components/loader/Loader'
 
 const sortOptions = [
   { label: 'date descending', icon: arrowDown },
@@ -65,6 +66,15 @@ const OrderHistory = (props: Props) => {
     //eslint-disable-next-line
   }, [sortByCost, sortByCreateDate, shippingStatus, currentPage, receiverId])
 
+  if (!isPageLoaded) {
+    return (
+      <Container>
+        <HeaderH4Bold text={t('order history')} />
+        <Loader height={300} />
+      </Container>
+    )
+  }
+
   return (
     <Container>
       <TopFrame>
@@ -83,9 +93,15 @@ const OrderHistory = (props: Props) => {
         </ButtonFrame>
       </TopFrame>
       {ordersList?.length !== 0 ? (
-        <OrderList ordersList={ordersList} />
+        <OrderList ordersList={ordersList} isLoading={isLoading} />
       ) : (
-        <NoOrders>No orders</NoOrders>
+        <>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <NoOrders>{t('orders not found')}</NoOrders>
+          )}
+        </>
       )}
       <PaginationFrame>
         <Pagination
@@ -140,6 +156,10 @@ const PaginationFrame = styled.div`
 `
 
 const NoOrders = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
   font-size: ${({ theme }) => theme.fontSizes?.large};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   width: 100%;

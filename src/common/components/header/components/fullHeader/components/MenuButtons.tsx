@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import SearchIcon from './SearchIcon'
+import SearchButtonDynamic from './SearchButtonDynamic'
 import LoginButton from '../../LoginButton'
 import LangChangeButton from './LangChangeButton'
 
@@ -11,7 +11,10 @@ const MenuButtons = (props: Props) => {
 
   return (
     <Container>
-      <SearchIcon isActive={isSearchActive} setIsActive={setIsSearchActive} />
+      <SearchButtonDynamic
+        isActive={isSearchActive}
+        setIsActive={setIsSearchActive}
+      />
       {!isSearchActive && (
         <>
           <LoginButton />

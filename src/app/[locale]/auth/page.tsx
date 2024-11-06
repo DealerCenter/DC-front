@@ -1,14 +1,12 @@
 'use client'
+import Header from '@/common/components/header/Header'
 import { useState } from 'react'
+import AuthLanding from './components/AuthLanding'
+import ChooseUserType from './components/ChooseUserType'
+import InputFormIndividual from './components/InputFormIndividual'
+import InputFormLegalPerson from './components/InputFormLegalPerson'
 import LoginForm from './components/LoginForm'
 import RegistrationForm from './components/RegistrationForm'
-import InputFormIndividual from './components/InputFormIndividual'
-import ChooseUserType from './components/ChooseUserType'
-import InputFormLegalPerson from './components/InputFormLegalPerson'
-import AppButton from '@/common/components/appButton/AppButton'
-import Header from '@/common/components/header/Header'
-import AuthLanding from './components/AuthLanding'
-import { useUserData } from '@/common/store/userDataStore'
 
 type Props = {}
 

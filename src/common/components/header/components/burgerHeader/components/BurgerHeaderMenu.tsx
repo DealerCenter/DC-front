@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 
@@ -9,6 +9,8 @@ import LangChangeButton from '../../fullHeader/components/LangChangeButton'
 
 import closeX from '@/assets/icons/closeXWhite.svg'
 import search from '@/assets/icons/search.svg'
+import SearchButton from './SearchButton'
+import SearchButtonDynamic from '../../fullHeader/components/SearchButtonDynamic'
 
 type Props = {
   isOpen: boolean
@@ -45,9 +47,7 @@ const BurgerHeaderMenu = ({
               <Line />
             </MiddleFrame>
             <BottomFrame>
-              <Item>
-                <Image width={20} height={20} src={search} alt='search icon' />
-              </Item>
+              <SearchButton onClick={() => {}} height={44} width={56} />
               <LoginButton text={t('login')} />
               <LangChangeButton left={7} top={56} width={76} />
             </BottomFrame>
@@ -127,17 +127,4 @@ const Line = styled.div`
   height: 1px;
   background-color: ${({ theme }) => theme.colors?.white_24};
   margin: 0px 24px;
-`
-
-const Item = styled.div`
-  height: 44px;
-  width: 56px;
-  min-width: 56px;
-  border: 2px solid ${({ theme }) => theme.colors?.white_24};
-  border-radius: ${({ theme }) => theme.radius?.lg};
-  color: ${({ theme }) => theme.colors?.white};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
 `

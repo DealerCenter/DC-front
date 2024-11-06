@@ -31,7 +31,7 @@ const OrderList = ({
   const router = useRouter()
 
   if (isLoading) {
-    return <Loader isLoading={isLoading} />
+    return <Loader />
   }
 
   return (

@@ -1,3 +1,7 @@
 .ant-spin .ant-spin-dot-item {
   background-color: black;
 }
+
+.ant-spin-lg .ant-spin-dot {
+  color: white;
+}

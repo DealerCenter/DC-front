@@ -11,6 +11,7 @@ type Props = {
   isHovered: boolean
   isCursorPointer?: boolean
   disabled?: boolean
+  isFlexibleOnDesktop?: boolean
 }
 
 const GrayContainer = ({
@@ -22,6 +23,7 @@ const GrayContainer = ({
   isHovered,
   isCursorPointer,
   disabled = false,
+  isFlexibleOnDesktop,
 }: Props) => {
   return (
     <Container
@@ -29,16 +31,25 @@ const GrayContainer = ({
       onClick={disabled ? () => {} : onClick}
       isHovered={isHovered}
       isCursorPointer={isCursorPointer}
+      isFlexibleOnDesktop={isFlexibleOnDesktop}
     >
       <IconBox>
         <Image src={icon} alt='icon' />
       </IconBox>
       <Frame>
-        <Text isHovered={isHovered} isCursorPointer={isCursorPointer}>
+        <Text
+          isHovered={isHovered}
+          isCursorPointer={isCursorPointer}
+          isFlexibleOnDesktop={isFlexibleOnDesktop}
+        >
           {text}
         </Text>
         {balance && (
-          <Balance isHovered={isHovered} isCursorPointer={isCursorPointer}>
+          <Balance
+            isHovered={isHovered}
+            isCursorPointer={isCursorPointer}
+            isFlexibleOnDesktop={isFlexibleOnDesktop}
+          >
             {balance}
           </Balance>
         )}
@@ -53,9 +64,14 @@ type ContainerProps = {
   height?: string
   isHovered: boolean
   isCursorPointer?: boolean
+  isFlexibleOnDesktop?: boolean
 }
 
-type TextProps = { isHovered: boolean; isCursorPointer?: boolean }
+type TextProps = {
+  isHovered: boolean
+  isCursorPointer?: boolean
+  isFlexibleOnDesktop?: boolean
+}
 
 const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
@@ -88,17 +104,35 @@ const Container = styled.div<ContainerProps>`
           cursor: default;
         `}
 
-  @media  ${({ theme }) => theme.media?.md} {
-    ${({ isHovered }) =>
-      isHovered
-        ? css`
-            transition: width 500ms ease-in-out;
-          `
-        : css`
-            transition: width 500ms ease-in-out;
-            width: 64px;
-          `}
-  }
+
+        ${({ isFlexibleOnDesktop, isHovered }) =>
+    isFlexibleOnDesktop
+      ? css`
+          @media ${({ theme }) => theme.media?.notSm} {
+            ${isHovered
+              ? css`
+                  transition: width 500ms ease-in-out;
+                `
+              : css`
+                  transition: width 500ms ease-in-out;
+                  width: 64px;
+                `}
+          }
+        `
+      : css`
+          @media ${({ theme }) => theme.media?.md} {
+            ${isHovered
+              ? css`
+                  transition: width 500ms ease-in-out;
+                `
+              : css`
+                  transition: width 500ms ease-in-out;
+                  width: 64px;
+                `}
+          }
+        `}
+
+ 
 
   @media ${({ theme }) => theme.media?.sm} {
     width: 100%;
@@ -116,19 +150,36 @@ const Text = styled.p<TextProps>`
   font-size: 16px;
   font-weight: 700;
 
-  @media ${({ theme }) => theme.media?.md} {
-    ${({ isHovered }) =>
-      isHovered
-        ? css`
-            transition: all 300ms ease-in-out 300ms;
-            opacity: 1;
-            width: unset;
-          `
-        : css`
-            opacity: 0;
-            width: 0;
-          `};
-  }
+  ${({ isFlexibleOnDesktop, isHovered }) =>
+    isFlexibleOnDesktop
+      ? css`
+          @media ${({ theme }) => theme.media?.notSm} {
+            ${isHovered
+              ? css`
+                  transition: all 300ms ease-in-out 300ms;
+                  opacity: 1;
+                  width: unset;
+                `
+              : css`
+                  opacity: 0;
+                  width: 0;
+                `}
+          }
+        `
+      : css`
+          @media ${({ theme }) => theme.media?.md} {
+            ${isHovered
+              ? css`
+                  transition: all 300ms ease-in-out 300ms;
+                  opacity: 1;
+                  width: unset;
+                `
+              : css`
+                  opacity: 0;
+                  width: 0;
+                `}
+          }
+        `}
 
   ${({ isCursorPointer }) =>
     isCursorPointer
@@ -144,19 +195,36 @@ const Balance = styled.p<TextProps>`
   font-size: 18px;
   font-weight: 400;
 
-  @media ${({ theme }) => theme.media?.md} {
-    ${({ isHovered }) =>
-      isHovered
-        ? css`
-            transition: all 300ms ease-in-out 300ms;
-            opacity: 1;
-            width: unset;
-          `
-        : css`
-            opacity: 0;
-            width: 0;
-          `};
-  }
+  ${({ isFlexibleOnDesktop, isHovered }) =>
+    isFlexibleOnDesktop
+      ? css`
+          @media ${({ theme }) => theme.media?.notSm} {
+            ${isHovered
+              ? css`
+                  transition: all 300ms ease-in-out 300ms;
+                  opacity: 1;
+                  width: unset;
+                `
+              : css`
+                  opacity: 0;
+                  width: 0;
+                `}
+          }
+        `
+      : css`
+          @media ${({ theme }) => theme.media?.md} {
+            ${isHovered
+              ? css`
+                  transition: all 300ms ease-in-out 300ms;
+                  opacity: 1;
+                  width: unset;
+                `
+              : css`
+                  opacity: 0;
+                  width: 0;
+                `}
+          }
+        `}
 
   ${({ isCursorPointer }) =>
     isCursorPointer

@@ -15,6 +15,7 @@ type Props = {
   placeholder?: string
   onSubmit?: (arg: string) => void
   onCloseSearch?: () => void
+  isDisabled?: boolean
 }
 
 const SearchButton = ({
@@ -24,6 +25,7 @@ const SearchButton = ({
   placeholder,
   onSubmit,
   onCloseSearch,
+  isDisabled,
 }: Props) => {
   const [inputValue, setInputValue] = useState('')
   const t = useTranslations('')
@@ -72,12 +74,13 @@ const SearchButton = ({
     }
   }
 
+  const handleClick = () => {
+    if (isDisabled) return
+    setIsActive(true)
+  }
+
   return (
-    <Container
-      isActive={isActive}
-      text={text}
-      onClick={() => setIsActive(true)}
-    >
+    <Container isActive={isActive} text={text} onClick={handleClick}>
       <IconBox onClick={handleSubmit}>
         <Image src={search} alt='search icon' />
       </IconBox>
