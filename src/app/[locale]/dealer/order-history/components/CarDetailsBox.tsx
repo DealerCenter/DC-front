@@ -47,6 +47,7 @@ export default CarDetailsBox
 const ImageFrame = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: ${({ theme }) => theme.spacing?.md};
 
   @media ${({ theme }) => theme.media?.sm} {

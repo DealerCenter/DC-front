@@ -15,6 +15,7 @@ import IdAndDateBox from './components/IdAndDateBox'
 import LeftColumn from './components/LeftColumn'
 import RightColumn from './components/RightColumn'
 import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
+import Loader from '@/common/components/loader/Loader'
 
 type Props = { id?: string }
 
@@ -45,8 +46,10 @@ const OrderProfile = ({ id }: Props) => {
             text={t('back to orders')}
           />
         </BackToOrderButton>
-        {orderNotFound && (
+        {orderNotFound ? (
           <NotFoundMessage>{t('order not found')}</NotFoundMessage>
+        ) : (
+          <Loader />
         )}
       </Container>
     )
