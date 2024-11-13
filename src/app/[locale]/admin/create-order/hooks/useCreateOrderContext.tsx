@@ -15,7 +15,11 @@ import axiosInstance from '@/api/apiClient'
 import { ORDER_DATA } from '@/api/apiTypes'
 import { endpoints } from '@/api/endpoints'
 import { message } from 'antd'
-import { IMAGE_LOCATIONS, routeName } from '@/common/helpers/constants'
+import {
+  IMAGE_LOCATIONS,
+  routeName,
+  SHIPPING_STATUS,
+} from '@/common/helpers/constants'
 
 const FormikContext = createContext<FormikValues | null>(null)
 
@@ -31,12 +35,12 @@ export const FIELD_NAMES = {
   IS_INSURED: 'isInsured',
   CAR_CATEGORY: 'carCategory',
   MILEAGE: 'mileage',
-  STATUS: 'status',
   CONTAINER_ID: 'containerId',
   DEALER_ID: 'dealerId',
   RECEIVER_ID: 'receiverId',
   ADDITIONAL_DETAILS: 'additionalDetails',
   CAR_DETAILS: 'carDetails',
+  STATUS_AND_DATES: 'statusAndDates',
   TOW_TRUCK_IMAGES: IMAGE_LOCATIONS.TOW_TRUCK,
   ABROAD_PORT_IMAGES: IMAGE_LOCATIONS.ABROAD_PORT,
   CONTAINER_IMAGES: IMAGE_LOCATIONS.CONTAINER,
@@ -68,12 +72,12 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     [FIELD_NAMES.IS_INSURED]: '',
     [FIELD_NAMES.CAR_CATEGORY]: '',
     [FIELD_NAMES.MILEAGE]: '',
-    [FIELD_NAMES.STATUS]: '',
     [FIELD_NAMES.CONTAINER_ID]: '',
     [FIELD_NAMES.DEALER_ID]: '',
     [FIELD_NAMES.RECEIVER_ID]: '',
     [FIELD_NAMES.ADDITIONAL_DETAILS]: '',
     [FIELD_NAMES.CAR_DETAILS]: '',
+    [FIELD_NAMES.STATUS_AND_DATES]: [],
     [FIELD_NAMES.TOW_TRUCK_IMAGES]: [],
     [FIELD_NAMES.ABROAD_PORT_IMAGES]: [],
     [FIELD_NAMES.CONTAINER_IMAGES]: [],
@@ -87,6 +91,12 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     onSubmit: async (values, { resetForm }) => {
       const numericValues: {
         [x: string]: string | number | number[]
+        // | {
+        //     status: SHIPPING_STATUS
+        //     date: string
+        //     order: number
+        //     isCurrent: boolean
+        //   }
       } = { ...values }
       const numberFields = [
         FIELD_NAMES.MANUFACTURE_YEAR,
@@ -174,7 +184,9 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         .string()
         .required(t('car category required')),
       [FIELD_NAMES.MILEAGE]: yup.number().required(t('mileage required')),
-      [FIELD_NAMES.STATUS]: yup.string().required(t('status required')),
+      [FIELD_NAMES.STATUS_AND_DATES]: yup
+        .string()
+        .required(t('status required')),
       [FIELD_NAMES.CONTAINER_ID]: yup
         .number()
         .required(t('container ID required')),
@@ -191,7 +203,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     formik.values[FIELD_NAMES.VIN].length === 0 ||
     formik.values[FIELD_NAMES.EXACT_ADDRESS].length === 0 ||
     formik.values[FIELD_NAMES.CAR_CATEGORY].length === 0 ||
-    formik.values[FIELD_NAMES.STATUS].length === 0 ||
+    formik.values[FIELD_NAMES.STATUS_AND_DATES].length === 0 ||
     formik.values[FIELD_NAMES.MILEAGE] === null ||
     formik.values[FIELD_NAMES.TRANSPORTATION_COST] === null ||
     formik.values[FIELD_NAMES.TRANSPORTATION_COST] === undefined ||
@@ -234,7 +246,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     setFieldValue(FIELD_NAMES.IS_INSURED, orderDetails.isInsured)
     setFieldValue(FIELD_NAMES.CAR_CATEGORY, orderDetails.carCategory)
     setFieldValue(FIELD_NAMES.MILEAGE, orderDetails.mileage)
-    setFieldValue(FIELD_NAMES.STATUS, orderDetails.status)
+    setFieldValue(FIELD_NAMES.STATUS_AND_DATES, orderDetails.status)
     setFieldValue(FIELD_NAMES.CONTAINER_ID, orderDetails.container.id)
     setFieldValue(FIELD_NAMES.RECEIVER_ID, orderDetails.receiver.id)
     setFieldValue(FIELD_NAMES.DEALER_ID, orderDetails.dealer.id)
@@ -282,7 +294,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
 
 export const useCreateOrderContext = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {}
+  ExtraProps = {},
 >() => {
   const context = useContext(FormikContext)
   if (!context) {
