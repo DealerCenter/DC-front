@@ -1,18 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import theme from '@/app/[locale]/theme'
 import clockIcon from '@/assets/icons/clock2Black.svg'
 import Image from 'next/image'
-import { SHIPPING_STATUS } from '@/common/helpers/constants'
+import {
+  SHIPPING_STATUS,
+  ShippingStatusAndDates,
+} from '@/common/helpers/constants'
 
 type Props = {
-  shippingStatus: SHIPPING_STATUS
+  // shippingStatus: SHIPPING_STATUS
+  statusAndDates: ShippingStatusAndDates[]
 }
 
-const ShippingStatusButton = ({ shippingStatus }: Props) => {
+const ShippingStatusButton = ({ statusAndDates }: Props) => {
+  const [currentStatus, setCurrentStatus] = useState<SHIPPING_STATUS>()
+
+  useEffect(() => {
+    statusAndDates &&
+      statusAndDates.map((item) => {
+        item.isCurrent && setCurrentStatus(item.status)
+      })
+  }, [statusAndDates])
+
   const statusText = () => {
-    switch (shippingStatus) {
+    switch (currentStatus) {
       case SHIPPING_STATUS.IN_AUCTION:
         return 'Auction'
       case SHIPPING_STATUS.IN_CONTAINER:
@@ -28,13 +41,13 @@ const ShippingStatusButton = ({ shippingStatus }: Props) => {
     }
   }
 
-  if (!shippingStatus) return
+  if (!currentStatus) return
 
   return (
     <Container
       isSent={
-        shippingStatus === SHIPPING_STATUS.SENT ||
-        shippingStatus === SHIPPING_STATUS.UNDERGOES_CUSTOMS
+        currentStatus === SHIPPING_STATUS.SENT ||
+        currentStatus === SHIPPING_STATUS.UNDERGOES_CUSTOMS
       }
     >
       <IconBox>

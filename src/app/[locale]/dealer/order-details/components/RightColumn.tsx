@@ -9,12 +9,12 @@ import DataOfRecipient from './rightColumnComponents/DataOfRecipient'
 type Props = { orderData: ORDER_DATA }
 
 const RightColumn = ({ orderData }: Props) => {
-  const { status, container, receiver } = orderData
+  const { statusAndDates, container, receiver } = orderData
 
   return (
     <Container>
       <BoxWithHeader headerText='status'>
-        <ShippingStateBox isEditing={false} value={status} />
+        <ShippingStateBox isEditing={false} value={statusAndDates} />
       </BoxWithHeader>
       <ContainerData containerData={container} />
       <DataOfRecipient receiverData={receiver} />

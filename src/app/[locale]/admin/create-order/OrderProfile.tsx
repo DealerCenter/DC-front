@@ -7,9 +7,13 @@ import styled from 'styled-components'
 import { routeName } from '@/common/helpers/constants'
 
 import { getOrders } from '@/api/apiCalls'
+import { ORDER_DATA } from '@/api/apiTypes'
 import AppGoBackButton from '@/common/components/appButton/AppGoBackButton'
 import FormSaveButton from '@/common/components/appButton/FormSaveButton'
+import IdAndDateBox from '@/common/components/idAndDateBox/IdAndDateBox'
+import LoadingOverlay from '@/common/components/loader/LoadingOverlay'
 import AppModalFullScreen from '@/common/components/modal/AppModalFullScreen'
+import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
 import ImagesUploadComponentDummy from '../components/common/ImagesUploadComponentDummy'
 import DetailsRow from './components/detailsRow/DetailsRow'
 import LeftFrame from './components/leftFrame/LeftFrame'
@@ -19,10 +23,6 @@ import {
   useCreateOrderContext,
 } from './hooks/useCreateOrderContext'
 import ImageUpload from './image-upload/ImageUpload'
-import LoadingOverlay from '@/common/components/loader/LoadingOverlay'
-import IdAndDateBox from '@/common/components/idAndDateBox/IdAndDateBox'
-import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
-import { ORDER_DATA } from '@/api/apiTypes'
 
 const isAdmin = true
 
@@ -82,7 +82,7 @@ const OrderProfile = ({ id }: Props) => {
           <>
             <StateBoxFrame>
               <ShippingStatusButton
-                shippingStatus={values[FIELD_NAMES.STATUS_AND_DATES].status}
+                statusAndDates={values[FIELD_NAMES.STATUS_AND_DATES]}
               />
             </StateBoxFrame>
             {orderData && (

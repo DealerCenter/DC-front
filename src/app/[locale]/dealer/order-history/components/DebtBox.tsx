@@ -2,14 +2,14 @@ import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
 import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
-import { SHIPPING_STATUS } from '@/common/helpers/constants'
+import { ShippingStatusAndDates } from '@/common/helpers/constants'
 
 type Props = {
   amount: number
-  shippingStatus: SHIPPING_STATUS
+  statusAndDates: ShippingStatusAndDates[]
 }
 
-const DebtBox = ({ amount, shippingStatus }: Props) => {
+const DebtBox = ({ amount, statusAndDates }: Props) => {
   const t = useTranslations('')
 
   return (
@@ -18,7 +18,7 @@ const DebtBox = ({ amount, shippingStatus }: Props) => {
         <Text>{t('debt')}</Text>
         <Money>$ {amount}</Money>
       </Frame>
-      <ShippingStatusButton shippingStatus={shippingStatus} />
+      <ShippingStatusButton statusAndDates={statusAndDates} />
     </Container>
   )
 }

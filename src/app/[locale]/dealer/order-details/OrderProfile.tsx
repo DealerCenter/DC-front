@@ -63,7 +63,9 @@ const OrderProfile = ({ id }: Props) => {
             {!isMobile && (
               <>
                 <StateBoxFrame>
-                  <ShippingStatusButton shippingStatus={orderData.status} />
+                  <ShippingStatusButton
+                    statusAndDates={orderData.statusAndDates}
+                  />
                 </StateBoxFrame>
                 <BackToOrderButton>
                   <AppGoBackButton

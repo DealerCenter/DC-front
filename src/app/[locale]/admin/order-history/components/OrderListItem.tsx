@@ -42,7 +42,7 @@ const OrderListItem = ({
     receiver,
     carCost,
     transportationCost: amount,
-    status: shippingStatus,
+    statusAndDates,
     createdAt: date,
     id: orderId,
   } = item
@@ -75,7 +75,7 @@ const OrderListItem = ({
         )}
         {isMobile && (
           <StatusAndDebtBoxMobile
-            shippingStatus={shippingStatus}
+            statusAndDates={statusAndDates}
             amount={amount}
           />
         )}
@@ -105,7 +105,7 @@ const OrderListItem = ({
       ) : (
         <DetailsBox
           amount={amount}
-          shippingStatus={shippingStatus}
+          statusAndDates={statusAndDates}
           buyerFullName={buyerFullName}
           buyerPhoneNumber={buyerPhoneNumber}
           vinCode={vinCode}
@@ -152,19 +152,19 @@ const Container = styled.li<IndexProp>`
           border: 2px solid ${({ theme }) => theme.colors?.white};
         `
       : isMobile && isSelected
-      ? css`
-          border-radius: ${({ theme }) => theme.radius?.lg};
-          background-color: ${({ theme }) => theme.colors?.main_gray_04};
-          border: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
-        `
-      : !isMobile
-      ? css`
-          border: 1px solid ${({ theme }) => theme.colors?.main_gray_10};
-          border-top: 0;
-        `
-      : css`
-          border: none;
-        `}
+        ? css`
+            border-radius: ${({ theme }) => theme.radius?.lg};
+            background-color: ${({ theme }) => theme.colors?.main_gray_04};
+            border: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
+          `
+        : !isMobile
+          ? css`
+              border: 1px solid ${({ theme }) => theme.colors?.main_gray_10};
+              border-top: 0;
+            `
+          : css`
+              border: none;
+            `}
 
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;

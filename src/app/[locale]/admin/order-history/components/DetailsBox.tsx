@@ -3,21 +3,21 @@ import styled from 'styled-components'
 
 import checkmarkGreen from '@/assets/icons/checkedGreen.svg'
 import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
-import { SHIPPING_STATUS } from '@/common/helpers/constants'
+import { ShippingStatusAndDates } from '@/common/helpers/constants'
 
 type Props = {
   amount: number
   buyerFullName: string
   buyerPhoneNumber: string
   vinCode: string
-  shippingStatus: SHIPPING_STATUS
+  statusAndDates: ShippingStatusAndDates[]
 }
 
 const DetailsBox = ({
   amount,
   buyerFullName,
   buyerPhoneNumber,
-  shippingStatus,
+  statusAndDates,
 }: Props) => {
   return (
     <Container>
@@ -40,7 +40,7 @@ const DetailsBox = ({
         </Box>
       </Frame>
       <ShippingStatusButtonFrame>
-        <ShippingStatusButton shippingStatus={shippingStatus} />
+        <ShippingStatusButton statusAndDates={statusAndDates} />
       </ShippingStatusButtonFrame>
       <Money>{`$ ${amount.toString()}`}</Money>
     </Container>

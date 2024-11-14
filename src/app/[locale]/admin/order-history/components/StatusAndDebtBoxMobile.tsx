@@ -1,19 +1,19 @@
 import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
-import { SHIPPING_STATUS } from '@/common/helpers/constants'
+import { ShippingStatusAndDates } from '@/common/helpers/constants'
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
 type Props = {
-  shippingStatus: SHIPPING_STATUS
+  statusAndDates: ShippingStatusAndDates[]
   amount: number
 }
 
-const StatusAndDebtBoxMobile = ({ shippingStatus, amount }: Props) => {
+const StatusAndDebtBoxMobile = ({ statusAndDates, amount }: Props) => {
   const t = useTranslations('')
 
   return (
     <Container>
-      <ShippingStatusButton shippingStatus={shippingStatus} />
+      <ShippingStatusButton statusAndDates={statusAndDates} />
       <TextFrame>
         <Text>{t('debt')}</Text>
         <Money>{`$ ${amount.toString()}`}</Money>

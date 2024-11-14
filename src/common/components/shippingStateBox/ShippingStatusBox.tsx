@@ -100,18 +100,16 @@ const ShippingStatusBox = ({
   }
 
   useEffect(() => {
-    console.log('current array of status:', currentStatusAndDates)
-
-    setCurrentStep(
-      currentStatusAndDates.reduce((max, current) => {
-        return current.order > max.order ? current : max
-      }, currentStatusAndDates[0])
-    )
+    // console.log('current array of status:', currentStatusAndDates)
+    // setCurrentStep(
+    //   currentStatusAndDates.reduce((max, current) => {
+    //     return current.order > max.order ? current : max
+    //   }, currentStatusAndDates[0])
+    // )
   }, [currentStatusAndDates])
 
   useEffect(() => {
-    console.log('currentStep:', currentStep)
-
+    // console.log('currentStep:', currentStep)
     // setCurrentStatusAndDates((prevStatuses) =>
     //   prevStatuses.map((status) => ({
     //     ...status,

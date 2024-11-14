@@ -1,6 +1,7 @@
 import {
   ORDER_CONSTANTS,
   SHIPPING_STATUS,
+  ShippingStatusAndDates,
   VERIFICATION_STATUS_NAME,
 } from '@/common/helpers/constants'
 
@@ -147,7 +148,7 @@ type ORDER_DATA = {
   isInsured: boolean
   carCategory: string
   mileage: number
-  status: SHIPPING_STATUS
+  statusAndDates: ShippingStatusAndDates[]
   state: {
     id: number
     createdAt: string // DateTime
