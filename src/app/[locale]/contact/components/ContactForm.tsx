@@ -2,8 +2,7 @@ import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 import theme from '../../theme'
 
-import BasicButton from '@/common/components/appButton/BasicButton'
-import InputsFrame from './InputsFrame'
+import InputsForm from './InputsForm'
 import PageHeader from './PageHeader'
 
 type Props = { headerText: string; text: string; isHeaderCentered?: boolean }
@@ -20,10 +19,7 @@ const ContactForm = ({ headerText, text, isHeaderCentered }: Props) => {
         textColor={theme.colors?.main_gray_42}
         isHeaderCentered={isHeaderCentered}
       />
-      <InputsFrame />
-      <BasicButton onClick={() => {}} height={56}>
-        <ButtonLabel>{t('send message')}</ButtonLabel>
-      </BasicButton>
+      <InputsForm />
     </Container>
   )
 }

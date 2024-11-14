@@ -266,6 +266,7 @@
   "possibility to bring car from any us state": "შესაძლებლობა ჩამოიყვანოთ ავტომობილი ამერიკის ნებისმიერი შტატიდან!",
 
   "send message": "გააგზავნე შეტყობინება",
+  "sending": "იგზავნება...",
   "message": "შეტყობინება",
 
   "statement": "განცხადება",
@@ -474,5 +475,7 @@
   },
   "text copied": "ტექსტი დაკოპირებულია",
   "order not found": "შეკვეთა არ მოიძებნა",
-  "receiver not found": "მიმღები ვერ მოიძებნა"
+  "receiver not found": "მიმღები ვერ მოიძებნა",
+  "your info sent successfully": "თქვენი ინფორმაცია წარმატებით გაიგზავნა",
+  "your info not sent": "თქვენი ინფორმაცია ვერ გაიგზავნა"
 }
