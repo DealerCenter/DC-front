@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 
 import { SHIPPING_STATUS, ShippingStatus } from '@/common/helpers/constants'
 import LineOfStatus from './components/LineOfStatus'
+import ErrorMessage from '../errorMessage/ErrorMessage'
 
 const SHIPPING_STEPS = [
   { value: SHIPPING_STATUS.IN_AUCTION, step: 1 },
@@ -18,6 +19,7 @@ type Props = {
   value: ShippingStatus
   isEditing: boolean
   setStatusFieldValue?: (arg: ShippingStatus) => void
+  errorMessage?: string
 }
 
 type ShippingStepType = { value: SHIPPING_STATUS | null; step: number }
@@ -26,6 +28,7 @@ const ShippingStatusBox = ({
   value,
   isEditing,
   setStatusFieldValue,
+  errorMessage,
 }: Props) => {
   const t = useTranslations('')
 
@@ -78,6 +81,9 @@ const ShippingStatusBox = ({
           onChange={(date, dateString) => onChange(date, dateString, step)}
         />
       ))}
+      {errorMessage && (
+        <ErrorMessage text={errorMessage} bottom={-15} left={12} />
+      )}
     </Container>
   )
 }
@@ -87,6 +93,7 @@ export default ShippingStatusBox
 type ContainerProps = { isEditing: boolean }
 
 const Container = styled.div<ContainerProps>`
+  position: relative;
   display: flex;
   flex-direction: column;
 

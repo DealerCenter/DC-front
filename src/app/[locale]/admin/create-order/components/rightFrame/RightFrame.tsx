@@ -16,7 +16,7 @@ import ShippingStatusBox from '@/common/components/shippingStateBox/ShippingStat
 type Props = {}
 
 const RightFrame = ({}: Props) => {
-  const { values, setFieldValue } = useCreateOrderContext()
+  const { values, setFieldValue, errors, touched } = useCreateOrderContext()
   const t = useTranslations('')
   const [containerOptions, setContainerOptions] = useState<
     {
@@ -64,6 +64,11 @@ const RightFrame = ({}: Props) => {
           setStatusFieldValue={(value) =>
             setFieldValue(FIELD_NAMES.STATUS, value)
           }
+          errorMessage={
+            errors[FIELD_NAMES.STATUS] && touched[FIELD_NAMES.STATUS]
+              ? errors[FIELD_NAMES.STATUS]
+              : ''
+          }
         />
       </Box>
       <Box>
@@ -76,6 +81,12 @@ const RightFrame = ({}: Props) => {
               onChangeId={handleSetContainerValue}
               placeholder={t('select')}
               fontSize={13}
+              errorMessage={
+                errors[FIELD_NAMES.CONTAINER_ID] &&
+                touched[FIELD_NAMES.CONTAINER_ID]
+                  ? errors[FIELD_NAMES.CONTAINER_ID]
+                  : ''
+              }
             />
           </Frame2>
         </Frame>
@@ -88,6 +99,12 @@ const RightFrame = ({}: Props) => {
               searchType='receiver'
               placeholder={t('search')}
               fontSize={13}
+              errorMessage={
+                errors[FIELD_NAMES.RECEIVER_ID] &&
+                touched[FIELD_NAMES.RECEIVER_ID]
+                  ? errors[FIELD_NAMES.RECEIVER_ID]
+                  : ''
+              }
             />
           </Frame2>
         </Frame>
@@ -100,6 +117,11 @@ const RightFrame = ({}: Props) => {
               searchType='dealer'
               placeholder={t('search')}
               fontSize={13}
+              errorMessage={
+                errors[FIELD_NAMES.DEALER_ID] && touched[FIELD_NAMES.DEALER_ID]
+                  ? errors[FIELD_NAMES.DEALER_ID]
+                  : ''
+              }
             />
           </Frame2>
         </Frame>

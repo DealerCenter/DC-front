@@ -50,6 +50,11 @@ const ParametersBox = ({}: Props) => {
           booleanValue={
             values[FIELD_NAMES.IS_INSURED] && values[FIELD_NAMES.IS_INSURED]
           }
+          errorMessage={
+            errors[FIELD_NAMES.IS_INSURED] && touched[FIELD_NAMES.IS_INSURED]
+              ? errors[FIELD_NAMES.IS_INSURED]
+              : ''
+          }
         />
         <TextInputFieldPair
           title='manufacturer'

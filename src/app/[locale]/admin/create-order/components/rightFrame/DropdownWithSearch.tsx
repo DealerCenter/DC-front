@@ -11,9 +11,15 @@ type Props = {
   searchType: 'receiver' | 'dealer'
   placeholder?: string
   fontSize?: number
+  errorMessage?: string
 }
 
-const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
+const DropdownWithSearch = ({
+  searchType,
+  placeholder,
+  fontSize,
+  errorMessage,
+}: Props) => {
   const [options, setOptions] = useState<
     {
       label: string
@@ -67,6 +73,7 @@ const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
 
   useEffect(() => {
     fetchData('')
+    // eslint-disable-next-line
   }, [])
 
   return (
@@ -87,6 +94,7 @@ const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
           ? (value) => setFieldValue(FIELD_NAMES.DEALER_ID, value)
           : (value) => setFieldValue(FIELD_NAMES.RECEIVER_ID, value)
       }
+      errorMessage={errorMessage}
     />
   )
 }
