@@ -32,6 +32,7 @@ const InputsForm = (props: Props) => {
         () => {
           message.success(t('your info sent successfully'))
           setIsSubmitting(false)
+          form.current?.reset() // Clears the form
         },
         (error: any) => {
           message.error(t('your info not sent'))
