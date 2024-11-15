@@ -34,9 +34,7 @@ const AdminLayout = ({ children }: Props) => {
       <Header />
       <Container>
         <Frame>
-          {isSideBarVisible && !isMobile && (
-            <SideBarAdmin routes={routeNames} />
-          )}
+          {isSideBarVisible && <SideBarAdmin routes={routeNames} />}
           {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
         </Frame>
       </Container>
