@@ -7,13 +7,14 @@ import styled from 'styled-components'
 import TextInput from '@/common/components/InputElements/TextInput'
 import BasicButton from '@/common/components/appButton/BasicButton'
 
-const SERVICE_ID = 'service_tx6rd1e'
-const TEMPLATE_ID = 'contact_form'
-const PUBLIC_KEY = 'esI0VcWP2iktxJyA8'
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAIL_SERVICE_ID ?? ''
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAIL_TEMPLATE_ID ?? ''
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAIL_PUBLIC_KEY ?? ''
 
 type Props = {}
 
 const InputsForm = (props: Props) => {
+  console.log('serviceid:', SERVICE_ID)
   const t = useTranslations('')
   const form = useRef<HTMLFormElement>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
