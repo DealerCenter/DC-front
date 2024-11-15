@@ -65,21 +65,24 @@ const Container = styled.button<ContainerProps>`
           padding: 0 20px 0 14px;
         `};
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors?.main_gray_04};
+  @media ${({ theme }) => theme.media?.notSm} {
+    &:hover {
+      background-color: ${({ theme }) => theme.colors?.main_gray_04};
+    }
+    &:active {
+      background-color: ${({ theme }) => theme.colors?.main_gray_16};
+    }
+    cursor: pointer;
   }
-  &:active {
-    background-color: ${({ theme }) => theme.colors?.main_gray_16};
-  }
-
-  cursor: pointer;
   user-select: none;
 `
 const Label = styled.label`
   color: ${({ theme }) => theme.colors?.main_gray_100};
   font-size: 16px;
   font-weight: 700;
-  cursor: pointer;
+  @media ${({ theme }) => theme.media?.notSm} {
+    cursor: pointer;
+  }
 `
 
 const IconBox = styled.div`

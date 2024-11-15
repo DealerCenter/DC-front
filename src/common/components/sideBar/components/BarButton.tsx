@@ -58,6 +58,10 @@ const StyledLink = styled(Link)`
   position: relative;
   text-decoration: none;
   border-radius: 12px;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    cursor: default;
+  }
 `
 
 type ContainerProps = {
@@ -86,8 +90,10 @@ const Container = styled.div<ContainerProps>`
           background-color: ${theme.colors?.white};
           color: ${theme.colors?.main_gray_100};
 
-          &:hover {
-            background-color: ${theme.colors?.main_gray_04};
+          @media ${({ theme }) => theme.media?.notSm} {
+            &:hover {
+              background-color: ${theme.colors?.main_gray_04};
+            }
           }
         `}
 
@@ -180,5 +186,7 @@ const Label = styled.label<LabelProps>`
           }
         `}
 
-  cursor: pointer;
+  @media ${({ theme }) => theme.media?.notSm} {
+    cursor: default;
+  }
 `

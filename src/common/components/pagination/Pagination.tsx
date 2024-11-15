@@ -146,14 +146,18 @@ const Box = styled.div<BoxProps>`
       : css`
           border: 1px solid ${({ theme }) => theme.colors?.main_gray_26};
         `}
-
-  cursor: pointer;
+                    
+  @media ${({ theme }) => theme.media?.notSm} {
+    cursor: pointer;
+  }
 `
 
 const Num = styled.label`
   font-size: 20px;
   font-weight: 500;
-  cursor: pointer;
+  @media ${({ theme }) => theme.media?.notSm} {
+    cursor: pointer;
+  }
 `
 
 const DotsBox = styled.div`
