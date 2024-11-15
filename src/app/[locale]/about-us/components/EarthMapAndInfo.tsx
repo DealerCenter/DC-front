@@ -1,29 +1,54 @@
-import React from 'react'
+import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 import InfoBox from './InfoBox'
-import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 
-import earthDots from '@/assets/images/earthDotsOnWhite.png'
-import earthDotsSmall from '@/assets/images/earthMapOnWhiteSmall.png'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../../theme'
+// import EarthMap from './EarthMap'
+import { useMemo } from 'react'
+import dynamic from 'next/dynamic'
+
+import { LatLngExpression, LatLngTuple } from 'leaflet'
 
 type Props = {}
 
+const locations = [
+  {
+    latLng: [36.778259, -119.417931],
+    color: theme.colors?.main_gray_100,
+    radius: 100,
+    text: 'California',
+  },
+  {
+    latLng: [42.138499446, 41.67249731],
+    color: theme.colors?.main_gray_100,
+    radius: 10,
+    text: 'Poti',
+  },
+]
+
 const EarthMapAndInfo = (props: Props) => {
-  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
+
+  const Map = useMemo(
+    () =>
+      dynamic(() => import('./EarthMap'), {
+        loading: () => <p>A map is loading</p>,
+        ssr: false,
+      }),
+    []
+  )
 
   return (
     <Container>
-      <ImageContainer>
-        {isMobile ? (
-          <Image src={earthDotsSmall} alt='earth shape dots small' />
-        ) : (
-          <Image src={earthDots} alt='earth shape dots' />
-        )}
-      </ImageContainer>
+      <MapContainer>
+        <Map
+          posix={[42.138499446, 41.67249731]}
+          height={500}
+          zoom={2}
+          locationsArray={locations}
+        />
+      </MapContainer>
       <InfoBoxesFrame>
         <InfoBox
           header='Support'
@@ -51,28 +76,15 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 64px;
   width: 100%;
 `
 
-const ImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  line-height: 0;
-
-  padding: 64px 0;
-
-  /* @media ${({ theme }) => theme.media?.md} {
-    width: 960px;
-    overflow-x: hidden;
-  } */
-  width: 100%;
-  overflow-x: hidden;
-
-  @media ${({ theme }) => theme.media?.sm} {
-    width: 343px;
-    overflow-x: hidden;
-    padding: 32px 0;
-  }
+const MapContainer = styled.div`
+  height: 500px;
+  width: 90%;
+  border-radius: ${({ theme }) => theme.radius?.lg};
+  overflow: hidden;
 `
 
 const InfoBoxesFrame = styled.div`
