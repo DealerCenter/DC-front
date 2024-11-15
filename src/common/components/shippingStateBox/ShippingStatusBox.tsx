@@ -23,26 +23,31 @@ import Item from 'antd/es/list/Item'
 const DATE_FORMAT = 'YYYY-MM-DD'
 
 const SHIPPING_STEPS = [
-  { status: SHIPPING_STATUS.IN_AUCTION, date: '', order: 1, isCurrent: false },
+  {
+    status: SHIPPING_STATUS.IN_AUCTION,
+    date: null,
+    order: 1,
+    isCurrent: false,
+  },
   {
     status: SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE,
-    date: '',
+    date: null,
     order: 2,
     isCurrent: false,
   },
   {
     status: SHIPPING_STATUS.IN_CONTAINER,
-    date: '',
+    date: null,
     order: 3,
     isCurrent: false,
   },
   {
     status: SHIPPING_STATUS.UNDERGOES_CUSTOMS,
-    date: '',
+    date: null,
     order: 4,
     isCurrent: false,
   },
-  { status: SHIPPING_STATUS.SENT, date: '', order: 5, isCurrent: false },
+  { status: SHIPPING_STATUS.SENT, date: null, order: 5, isCurrent: false },
 ]
 
 type Props = {
