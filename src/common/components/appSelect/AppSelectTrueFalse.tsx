@@ -39,7 +39,7 @@ const AppSelectTrueFalse = ({
     if (typeof booleanValue === 'boolean') {
       setSelectedOption(booleanValue)
     }
-    if (!booleanValue) {
+    if (typeof booleanValue !== 'boolean') {
       setSelectedOption(undefined)
     }
   }, [booleanValue])
