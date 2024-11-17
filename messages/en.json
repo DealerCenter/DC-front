@@ -98,8 +98,6 @@
   "CONTAINER": "Container",
   "HOME_PORT": "Georgian port",
 
-
-
   "date descending": "Date descending",
   "date ascending": "Date ascending",
   "price descending": "Price descending",
@@ -265,6 +263,7 @@
   "possibility to bring car from any us state": "Possibility to bring a car from any US state!",
 
   "send message": "Send message",
+  "sending": "Sending...",
   "message": "Message",
 
   "statement": "Statement",
@@ -471,7 +470,10 @@
     "UndergoesCustomsProcedures": "In Customs",
     "Sent": "Sent"
   },
+
   "text copied": "Text copied",
   "order not found": "Order not found",
-  "receiver not found": "Receiver could not be found"
+  "receiver not found": "Receiver could not be found",
+  "your info sent successfully": "Your information has been sent successfully",
+  "your info not sent": "Your information could not be sent"
 }

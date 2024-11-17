@@ -10,39 +10,52 @@ import { setHeapSnapshotNearHeapLimit } from 'v8'
 import { DatePicker, DatePickerProps } from 'antd'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
-import { SHIPPING_STATUS, ShippingStatus } from '@/common/helpers/constants'
+import {
+  SHIPPING_STATUS,
+  ShippingStatus,
+  ShippingStatusAndDates,
+} from '@/common/helpers/constants'
+import dayjs from 'dayjs'
 
 type Props = {
   isEditing: boolean
   title: string
   step: number
-  currentStep: number
+  // date: string
+  currentStep?: number
   totalSteps: number
+  statusAndDates?: ShippingStatusAndDates[]
   onChange: (
     date: DatePickerProps['value'],
     dateString: string | string[],
     step: number
   ) => void
+  isDisabled?: boolean
 }
 
 const LineOfStatus = ({
   isEditing,
   title,
   step,
-  currentStep,
+  // date,
+  currentStep = 0,
+  statusAndDates,
   totalSteps,
   onChange,
+  isDisabled,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
-  const [dateValue, setDateValue] = useState<DatePickerProps['value']>(null)
+  // console.log('date: ', date)
+
+  const [dateValue, setDateValue] = useState<DatePickerProps['value']>()
 
   // Effect to clear the DatePicker when step <= currentStep
-  useEffect(() => {
-    if (step > currentStep) {
-      setDateValue(null)
-    }
-  }, [step, currentStep])
+  // useEffect(() => {
+  //   if (step > currentStep) {
+  //     setDateValue(null)
+  //   }
+  // }, [step, currentStep])
 
   const handleDateChange: DatePickerProps['onChange'] = (date, dateString) => {
     setDateValue(date) // Update the date state
@@ -56,6 +69,7 @@ const LineOfStatus = ({
           value={dateValue}
           onChange={handleDateChange}
           variant={step <= currentStep ? 'filled' : 'outlined'}
+          disabled={isDisabled}
         />
       ) : (
         // <Date>{step <= currentStep && `22/04${!isMobile ? '/2022' : ''}`}</Date>

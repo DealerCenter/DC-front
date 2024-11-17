@@ -12,6 +12,35 @@ import {
 } from '../../hooks/useCreateOrderContext'
 import DropdownWithSearch from './DropdownWithSearch'
 import ShippingStatusBox from '@/common/components/shippingStateBox/ShippingStatusBox'
+import { SHIPPING_STATUS } from '@/common/helpers/constants'
+
+const SHIPPING_STEPS = [
+  {
+    status: SHIPPING_STATUS.IN_AUCTION,
+    date: '2020-10-23',
+    order: 1,
+    isCurrent: false,
+  },
+  {
+    status: SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE,
+    date: '2021-11-26',
+    order: 2,
+    isCurrent: false,
+  },
+  {
+    status: SHIPPING_STATUS.IN_CONTAINER,
+    date: '2022-04-13',
+    order: 3,
+    isCurrent: false,
+  },
+  {
+    status: SHIPPING_STATUS.UNDERGOES_CUSTOMS,
+    date: '2022-08-10',
+    order: 4,
+    isCurrent: true,
+  },
+  // { status: SHIPPING_STATUS.SENT, date: '', order: 5, isCurrent: false },
+]
 
 type Props = {}
 
@@ -60,9 +89,9 @@ const RightFrame = ({}: Props) => {
         <Line />
         <ShippingStatusBox
           isEditing={true}
-          value={values[FIELD_NAMES.STATUS]}
+          value={values[FIELD_NAMES.STATUS_AND_DATES]}
           setStatusFieldValue={(value) =>
-            setFieldValue(FIELD_NAMES.STATUS, value)
+            setFieldValue(FIELD_NAMES.STATUS_AND_DATES, value)
           }
         />
       </Box>

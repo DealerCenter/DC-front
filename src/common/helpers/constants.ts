@@ -61,6 +61,13 @@ export type LocalesType = 'en' | 'ge' | 'ru'
 
 export type ShippingStatus = SHIPPING_STATUS | null
 
+export type ShippingStatusAndDates = {
+  status: SHIPPING_STATUS
+  date: string
+  order: number
+  isCurrent: boolean
+}
+
 export type OrdersQueryType =
   | {
       page?: number

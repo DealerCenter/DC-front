@@ -82,7 +82,7 @@ const OrderProfile = ({ id }: Props) => {
           <>
             <StateBoxFrame>
               <ShippingStatusButton
-                shippingStatus={values[FIELD_NAMES.STATUS]}
+                shippingStatus={values[FIELD_NAMES.STATUS_AND_DATES].status}
               />
             </StateBoxFrame>
             {orderData && (
