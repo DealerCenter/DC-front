@@ -20,5 +20,7 @@ const Label = styled.label`
 
   color: rgba(52, 64, 84, 1);
 
+  background-color: red;
+
   cursor: default;
 `
