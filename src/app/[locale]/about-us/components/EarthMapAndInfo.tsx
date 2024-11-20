@@ -1,33 +1,32 @@
 import { useTranslations } from 'next-intl'
+import dynamic from 'next/dynamic'
+import { useMemo } from 'react'
+import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
+
+import theme from '../../theme'
 import InfoBox from './InfoBox'
 
-import { useMediaQuery } from 'react-responsive'
-import theme from '../../theme'
-// import EarthMap from './EarthMap'
-import { useMemo } from 'react'
-import dynamic from 'next/dynamic'
-
-import { LatLngExpression, LatLngTuple } from 'leaflet'
-
 type Props = {}
+
+const MAP_HEIGHT = 500
+const MAP_HEIGHT_ON_MOBILE = 400
 
 const locations = [
   {
     latLng: [36.778259, -119.417931],
-    color: theme.colors?.main_gray_100,
-    radius: 100,
-    text: 'California',
+    header: 'California',
+    text: 'Text about California',
   },
   {
     latLng: [42.138499446, 41.67249731],
-    color: theme.colors?.main_gray_100,
-    radius: 10,
-    text: 'Poti',
+    header: 'Poti',
+    text: 'Text about Poti port',
   },
 ]
 
 const EarthMapAndInfo = (props: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
   const Map = useMemo(
@@ -41,11 +40,11 @@ const EarthMapAndInfo = (props: Props) => {
 
   return (
     <Container>
-      <MapContainer>
+      <MapContainer height={isMobile ? MAP_HEIGHT_ON_MOBILE : MAP_HEIGHT}>
         <Map
-          posix={[42.138499446, 41.67249731]}
-          height={500}
-          zoom={2}
+          center={[35, -30]}
+          height={isMobile ? MAP_HEIGHT_ON_MOBILE : MAP_HEIGHT}
+          zoom={isMobile ? 1 : 2}
           locationsArray={locations}
         />
       </MapContainer>
@@ -80,9 +79,12 @@ const Container = styled.div`
   width: 100%;
 `
 
-const MapContainer = styled.div`
-  height: 500px;
+type MapContainerProps = { height: number }
+
+const MapContainer = styled.div<MapContainerProps>`
+  height: ${({ height }) => `${height}px`};
   width: 90%;
+  max-width: 1280px;
   border-radius: ${({ theme }) => theme.radius?.lg};
   overflow: hidden;
 `
