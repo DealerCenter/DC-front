@@ -1,29 +1,53 @@
-import React from 'react'
-import styled from 'styled-components'
-import InfoBox from './InfoBox'
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
-
-import earthDots from '@/assets/images/earthDotsOnWhite.png'
-import earthDotsSmall from '@/assets/images/earthMapOnWhiteSmall.png'
+import dynamic from 'next/dynamic'
+import { useMemo } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import styled from 'styled-components'
+
 import theme from '../../theme'
+import InfoBox from './InfoBox'
 
 type Props = {}
+
+const MAP_HEIGHT = 500
+const MAP_HEIGHT_ON_MOBILE = 400
+
+const locations = [
+  {
+    latLng: [36.778259, -119.417931],
+    header: 'California',
+    text: 'Text about California',
+  },
+  {
+    latLng: [42.138499446, 41.67249731],
+    header: 'Poti',
+    text: 'Text about Poti port',
+  },
+]
 
 const EarthMapAndInfo = (props: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
+  const Map = useMemo(
+    () =>
+      dynamic(() => import('./EarthMap'), {
+        loading: () => <p>A map is loading</p>,
+        ssr: false,
+      }),
+    []
+  )
+
   return (
     <Container>
-      <ImageContainer>
-        {isMobile ? (
-          <Image src={earthDotsSmall} alt='earth shape dots small' />
-        ) : (
-          <Image src={earthDots} alt='earth shape dots' />
-        )}
-      </ImageContainer>
+      <MapContainer height={isMobile ? MAP_HEIGHT_ON_MOBILE : MAP_HEIGHT}>
+        <Map
+          center={[35, -30]}
+          height={isMobile ? MAP_HEIGHT_ON_MOBILE : MAP_HEIGHT}
+          zoom={isMobile ? 1 : 2}
+          locationsArray={locations}
+        />
+      </MapContainer>
       <InfoBoxesFrame>
         <InfoBox
           header='Support'
@@ -51,28 +75,18 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 64px;
   width: 100%;
 `
 
-const ImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  line-height: 0;
+type MapContainerProps = { height: number }
 
-  padding: 64px 0;
-
-  /* @media ${({ theme }) => theme.media?.md} {
-    width: 960px;
-    overflow-x: hidden;
-  } */
-  width: 100%;
-  overflow-x: hidden;
-
-  @media ${({ theme }) => theme.media?.sm} {
-    width: 343px;
-    overflow-x: hidden;
-    padding: 32px 0;
-  }
+const MapContainer = styled.div<MapContainerProps>`
+  height: ${({ height }) => `${height}px`};
+  width: 90%;
+  max-width: 1280px;
+  border-radius: ${({ theme }) => theme.radius?.lg};
+  overflow: hidden;
 `
 
 const InfoBoxesFrame = styled.div`
