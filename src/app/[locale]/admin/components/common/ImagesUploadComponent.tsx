@@ -58,6 +58,7 @@ const ImagesUploadComponent = ({
           return { ...prev, [String(currentLocation)]: acceptedFiles }
         }
       )
+      setIsDropped(true)
     },
     [
       onDropAdditional,

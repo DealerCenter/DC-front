@@ -48,11 +48,6 @@ const InputFieldAndImageUploadPair = ({
   const previousValue = useRef<string>()
   const [currentLocation, setCurrentLocation] = useState<IMAGE_LOCATIONS>()
 
-  // const { setUploadedTowTruckImages, setFieldValue, values } =
-  //   useCreateOrderContext()
-
-  // console.log('previousValue:', previousValue)
-
   const handleChange = (e: string) => {
     setSelectedLocations((prev) => ({
       ...prev,
@@ -83,8 +78,8 @@ const InputFieldAndImageUploadPair = ({
           isMobile
             ? INPUT_WIDTH_MOBILE_UPLOAD
             : isTablet
-              ? INPUT_WIDTH_TABLET_UPLOAD
-              : INPUT_WIDTH_DESKTOP_UPLOAD
+            ? INPUT_WIDTH_TABLET_UPLOAD
+            : INPUT_WIDTH_DESKTOP_UPLOAD
         }
         height={222}
         text={t('add photos of vehicle')}

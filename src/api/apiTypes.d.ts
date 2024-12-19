@@ -148,6 +148,7 @@ type ORDER_DATA = {
   carCategory: string
   mileage: number
   status: SHIPPING_STATUS
+  statusAndDates: ShippingStatusAndDates[]
   state: {
     id: number
     createdAt: string // DateTime
