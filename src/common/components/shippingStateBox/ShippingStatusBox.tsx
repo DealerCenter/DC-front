@@ -12,38 +12,7 @@ import LineOfStatus from './components/LineOfStatus'
 import dayjs from 'dayjs'
 import Item from 'antd/es/list/Item'
 
-// const SHIPPING_STEPS = [
-//   { value: SHIPPING_STATUS.IN_AUCTION, step: 1 },
-//   { value: SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE, step: 2 },
-//   { value: SHIPPING_STATUS.IN_CONTAINER, step: 3 },
-//   { value: SHIPPING_STATUS.UNDERGOES_CUSTOMS, step: 4 },
-//   { value: SHIPPING_STATUS.SENT, step: 5 },
-// ]
-
 const DATE_FORMAT = 'YYYY-MM-DD'
-
-const SHIPPING_STEPS = [
-  { status: SHIPPING_STATUS.IN_AUCTION, date: '', order: 1, isCurrent: false },
-  {
-    status: SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE,
-    date: '',
-    order: 2,
-    isCurrent: false,
-  },
-  {
-    status: SHIPPING_STATUS.IN_CONTAINER,
-    date: '',
-    order: 3,
-    isCurrent: false,
-  },
-  {
-    status: SHIPPING_STATUS.UNDERGOES_CUSTOMS,
-    date: '',
-    order: 4,
-    isCurrent: false,
-  },
-  { status: SHIPPING_STATUS.SENT, date: '', order: 5, isCurrent: false },
-]
 
 type Props = {
   value: ShippingStatusAndDates[]
@@ -58,69 +27,73 @@ const ShippingStatusBox = ({
 }: Props) => {
   const t = useTranslations('')
 
+  const SHIPPING_STEPS = [
+    {
+      status: SHIPPING_STATUS.IN_AUCTION,
+      date: '',
+      order: 1,
+      isCurrent: false,
+    },
+    {
+      status: SHIPPING_STATUS.IN_AMERICAN_WAREHOUSE,
+      date: '',
+      order: 2,
+      isCurrent: false,
+    },
+    {
+      status: SHIPPING_STATUS.IN_CONTAINER,
+      date: '',
+      order: 3,
+      isCurrent: false,
+    },
+    {
+      status: SHIPPING_STATUS.UNDERGOES_CUSTOMS,
+      date: '',
+      order: 4,
+      isCurrent: false,
+    },
+    { status: SHIPPING_STATUS.SENT, date: '', order: 5, isCurrent: true },
+  ]
+
   const [currentStatusAndDates, setCurrentStatusAndDates] = useState<
     ShippingStatusAndDates[]
   >([])
 
-  const [currentStep, setCurrentStep] = useState<ShippingStatusAndDates>()
-
   useEffect(() => {
-    if (value.length > 0) {
-      setCurrentStatusAndDates(value)
-      // setCurrentStep(value.find((item) => item.isCurrent === true))
-    }
+    setCurrentStatusAndDates(
+      typeof value === 'string' ? JSON.parse(value) : value
+    )
   }, [value])
-
-  // console.log('status in formik:', values[FIELD_NAMES.STATUS])
 
   const onChange = (
     date: DatePickerProps['value'],
     dateString: string | string[],
     step: ShippingStatusAndDates
   ) => {
-    // Update the current step based on the step of the changed DatePicker
-    if (date) {
+    console.log({ currentStatusAndDates })
+    if (date && setStatusFieldValue) {
       const formattedDate = date.format(DATE_FORMAT)
-      if (currentStatusAndDates.length > 0) {
-        setCurrentStatusAndDates([
-          ...currentStatusAndDates,
-          { ...step, date: formattedDate },
-        ])
-      } else {
-        // setting status if its the first one
-        setCurrentStatusAndDates([
-          { ...step, date: formattedDate, isCurrent: true },
-        ])
-      }
 
-      // Update the Formik value for the status field
-      // setStatusFieldValue &&
-      //   setStatusFieldValue(SHIPPING_STEPS[step.step - 1].value)
+      setCurrentStatusAndDates((prev) => {
+        return [...prev, { ...step, date: formattedDate }]
+      })
     }
   }
 
-  useEffect(() => {
-    console.log('current array of status:', currentStatusAndDates)
+  const setHighestOrderToCurrent = (array: ShippingStatusAndDates[]) => {
+    const maxOrder = Math.max(...array.map((item) => item.order))
+    return array.map((item) => ({
+      ...item,
+      isCurrent: item.order === maxOrder ? true : false,
+    }))
+  }
 
-    setCurrentStep(
-      currentStatusAndDates.reduce((max, current) => {
-        return current.order > max.order ? current : max
-      }, currentStatusAndDates[0])
-    )
+  useEffect(() => {
+    setStatusFieldValue &&
+      setStatusFieldValue(
+        JSON.stringify(setHighestOrderToCurrent(currentStatusAndDates))
+      )
   }, [currentStatusAndDates])
-
-  useEffect(() => {
-    console.log('currentStep:', currentStep)
-
-    // setCurrentStatusAndDates((prevStatuses) =>
-    //   prevStatuses.map((status) => ({
-    //     ...status,
-    //     isCurrent: status.status === currentStep?.status,
-    //   }))
-    // )
-  }, [currentStep])
-
-  // if (currentStatusAndDates.length === 0) return
 
   return (
     <Container isEditing={isEditing}>
@@ -130,11 +103,17 @@ const ShippingStatusBox = ({
           isEditing={isEditing}
           title={t(step.status)}
           step={step.order}
-          currentStep={currentStep?.order}
+          prefilledValue={currentStatusAndDates.find(
+            (i) => i.order === step.order
+          )}
+          currentStep={Math.max(
+            ...currentStatusAndDates.map((item) => item.order)
+          )}
           statusAndDates={currentStatusAndDates}
           totalSteps={SHIPPING_STEPS.length}
           onChange={(date, dateString) => onChange(date, dateString, step)}
           isDisabled={false}
+          setCurrentStatusAndDates={setCurrentStatusAndDates}
         />
       ))}
     </Container>

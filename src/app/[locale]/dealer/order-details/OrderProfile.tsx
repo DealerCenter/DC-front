@@ -15,6 +15,7 @@ import IdAndDateBox from './components/IdAndDateBox'
 import LeftColumn from './components/LeftColumn'
 import RightColumn from './components/RightColumn'
 import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
+import Loader from '@/common/components/loader/Loader'
 
 type Props = { id?: string }
 
@@ -24,17 +25,24 @@ const OrderProfile = ({ id }: Props) => {
   const router = useRouter()
   const [orderData, setOrderData] = useState<ORDER_DATA>()
   const [orderNotFound, setOrderNotFound] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const getOrderData = async () => {
+    setIsLoading(true)
     const response = await getOrders({ orderId: Number(id) })
     response && setOrderData(response?.data[0])
     response?.data.length === 0 && setOrderNotFound(true)
+    setIsLoading(false)
   }
 
   useEffect(() => {
     getOrderData()
     //eslint-disable-next-line
   }, [])
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   if (!orderData) {
     return (

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import pdfIcon from '@/assets/icons/pdf.svg'
 import { useTranslations } from 'next-intl'
 import { ORDER_DATA } from '@/api/apiTypes'
+import DownloadButton from '@/assets/invoices/invoice'
 
 type Props = { orderData: ORDER_DATA }
 
@@ -20,9 +21,7 @@ const CostsBox = ({ orderData }: Props) => {
           <Text16BoldGray>{t('cost of transportation')}</Text16BoldGray>
           <Text23Bold>{`$ ${transportationCost}`}</Text23Bold>
         </CostLabelsFrame>
-        <IconBoxPdf>
-          <Image src={pdfIcon} alt='pdf icon' />
-        </IconBoxPdf>
+        <IconBoxPdf>{/* <Image src={pdfIcon} alt='pdf icon' /> */}</IconBoxPdf>
       </CostFrame>
       <CostFrame>
         <CostLabelsFrame>
@@ -30,7 +29,7 @@ const CostsBox = ({ orderData }: Props) => {
           <Text23Bold>{`$ ${carCost}`}</Text23Bold>
         </CostLabelsFrame>
         <IconBoxPdf>
-          <Image src={pdfIcon} alt='pdf icon' />
+          <DownloadButton data={orderData} />
         </IconBoxPdf>
       </CostFrame>
       <Line />

@@ -31,6 +31,8 @@ type Props = {
     step: number
   ) => void
   isDisabled?: boolean
+  prefilledValue: ShippingStatusAndDates
+  setCurrentStatusAndDates?: (arg: ShippingStatusAndDates[]) => void
 }
 
 const LineOfStatus = ({
@@ -43,21 +45,28 @@ const LineOfStatus = ({
   totalSteps,
   onChange,
   isDisabled,
+  prefilledValue,
+  setCurrentStatusAndDates,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   // console.log('date: ', date)
 
   const [dateValue, setDateValue] = useState<DatePickerProps['value']>()
-
-  // Effect to clear the DatePicker when step <= currentStep
-  // useEffect(() => {
-  //   if (step > currentStep) {
-  //     setDateValue(null)
-  //   }
-  // }, [step, currentStep])
+  useEffect(() => {
+    if (prefilledValue) {
+      setDateValue(dayjs(prefilledValue.date))
+    }
+  }, [prefilledValue])
 
   const handleDateChange: DatePickerProps['onChange'] = (date, dateString) => {
+    if (date === null) {
+      setCurrentStatusAndDates &&
+        setCurrentStatusAndDates((prev: ShippingStatusAndDates[]) => {
+          return prev.filter((item) => item.order !== step)
+        })
+    }
+
     setDateValue(date) // Update the date state
     onChange(date, dateString, step)
   }
@@ -71,12 +80,13 @@ const LineOfStatus = ({
           variant={step <= currentStep ? 'filled' : 'outlined'}
           disabled={isDisabled}
         />
+      ) : dateValue ? (
+        <Date>{dayjs(dateValue).format('DD-MM-YYYY')}</Date>
       ) : (
-        // <Date>{step <= currentStep && `22/04${!isMobile ? '/2022' : ''}`}</Date>
-        <Date>NA</Date>
+        <Date></Date>
       )}
       <IconBox>
-        {step > currentStep ? (
+        {!dateValue ? (
           <>
             <DoneIconGrayEmpty />
             {step !== totalSteps && <LineGray />}
