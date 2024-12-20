@@ -69,6 +69,7 @@ const CarDetailsBoxEmpty = (props: Props) => {
         value={values[FIELD_NAMES.MODEL]}
         onChange={handleChange}
         onBlur={handleBlur}
+        hasLabel={true}
         errorMessage={
           errors[FIELD_NAMES.MODEL] && touched[FIELD_NAMES.MODEL]
             ? errors[FIELD_NAMES.MODEL]
@@ -86,6 +87,7 @@ const CarDetailsBoxEmpty = (props: Props) => {
         value={values[FIELD_NAMES.MANUFACTURE_YEAR]}
         onChange={handleChange}
         onBlur={handleBlur}
+        hasLabel={true}
         errorMessage={
           errors[FIELD_NAMES.MANUFACTURE_YEAR] &&
           touched[FIELD_NAMES.MANUFACTURE_YEAR]
@@ -104,6 +106,7 @@ const CarDetailsBoxEmpty = (props: Props) => {
         value={values[FIELD_NAMES.CAR_DETAILS] ?? ''}
         onChange={handleChange}
         onBlur={handleBlur}
+        hasLabel={true}
         errorMessage={
           errors[FIELD_NAMES.CAR_DETAILS] && touched[FIELD_NAMES.CAR_DETAILS]
             ? errors[FIELD_NAMES.CAR_DETAILS]
@@ -120,6 +123,7 @@ const CarDetailsBoxEmpty = (props: Props) => {
         name={FIELD_NAMES.VIN}
         value={values[FIELD_NAMES.VIN]}
         onChange={handleChange}
+        hasLabel={true}
         onBlur={handleBlur}
         errorMessage={
           errors[FIELD_NAMES.VIN] && touched[FIELD_NAMES.VIN]
@@ -142,7 +146,7 @@ const CarDetailsBox = styled.div`
   background-color: ${({ theme }) => theme.colors?.white};
   border-radius: ${({ theme }) => theme.radius?.lg};
   padding: 32px;
-  gap: ${({ theme }) => theme.spacing?.sm};
+  gap: ${({ theme }) => theme.spacing?.lg};
 
   @media ${({ theme }) => theme.media?.md} {
     width: 306px;

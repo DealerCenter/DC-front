@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, ReactNode } from 'react'
+import React, { ChangeEventHandler, ReactNode, useState } from 'react'
 import styled, { css } from 'styled-components'
 import infoIcon from '@/assets/icons/info.svg'
 import Image from 'next/image'
@@ -27,6 +27,7 @@ type Props = {
   backgroundColor?: string
   isDisabled?: boolean
   onCheck?: () => void
+  hasLabel?: boolean
 }
 
 const TextInput = ({
@@ -52,7 +53,10 @@ const TextInput = ({
   backgroundColor,
   isDisabled = false,
   onCheck,
+  hasLabel,
 }: Props) => {
+  const [isFocused, setIsFocused] = useState(false)
+
   return (
     <div>
       <Container>
@@ -64,10 +68,14 @@ const TextInput = ({
           height={height}
           type={type}
           name={name}
-          placeholder={placeholder}
+          placeholder={hasLabel ? '' : placeholder}
           value={value ? String(value) : undefined}
           onChange={onChange}
-          onBlur={onBlur}
+          onFocus={() => setIsFocused(true)}
+          onBlur={(e) => {
+            onBlur(e)
+            setIsFocused(false)
+          }}
           icon={icon}
           isHalfSize={isHalfSize}
           fontWeight={fontWeight}
@@ -79,8 +87,15 @@ const TextInput = ({
           backgroundColor={backgroundColor}
           disabled={isDisabled}
           hasCheck={!!onCheck}
+          id={placeholder}
         />
-        {/* {rightComponent ? rightComponent : null} */}
+
+        {hasLabel && (
+          <SLabel htmlFor={placeholder} isFocused={!!isFocused || !!value}>
+            {placeholder}
+          </SLabel>
+        )}
+
         {errorMessage && (
           <ErrorMessage text={errorMessage} top={48} left={12} />
         )}
@@ -119,6 +134,26 @@ type InputProps = {
   backgroundColor?: string
   hasCheck?: boolean
 }
+
+const SLabel = styled.label<{ isFocused?: boolean }>`
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  font-weight: 600;
+  font-size: 12px;
+  color: #747373;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  cursor: text;
+
+  ${({ isFocused }) =>
+    isFocused &&
+    css`
+      top: -3px;
+      left: 15px;
+      background-color: white;
+    `}
+`
 
 const StyledInput = styled.input<InputProps>`
   position: relative;
@@ -193,12 +228,12 @@ ${({ isHalfSize, width }) =>
           width: 213px;
         `
       : width
-        ? css`
-            width: ${width}px;
-          `
-        : css`
-            width: 350px;
-          `}
+      ? css`
+          width: ${width}px;
+        `
+      : css`
+          width: 350px;
+        `}
 
   ${({ height }) =>
     height
@@ -231,12 +266,12 @@ ${({ isHalfSize, width }) =>
             width: 167.5px;
           `
         : width
-          ? css`
-              width: ${width}px;
-            `
-          : css`
-              width: 350px;
-            `}
+        ? css`
+            width: ${width}px;
+          `
+        : css`
+            width: 350px;
+          `}
   }
 
   ${({ isWidthFill }) =>
