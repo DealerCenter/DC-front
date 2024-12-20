@@ -140,7 +140,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         )
 
         resetForm()
-        router.push(routeName.adminOrderHistory)
+        router.back()
 
         return response
       } catch (error) {
@@ -197,7 +197,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     formik.values[FIELD_NAMES.VIN].length === 0 ||
     formik.values[FIELD_NAMES.EXACT_ADDRESS].length === 0 ||
     formik.values[FIELD_NAMES.CAR_CATEGORY].length === 0 ||
-    JSON.parse(formik.values[FIELD_NAMES.STATUS_AND_DATES]).length === 0 ||
+    //  JSON.parse(formik.values[FIELD_NAMES.STATUS_AND_DATES])?.length === 0 ||
     formik.values[FIELD_NAMES.MILEAGE] === null ||
     formik.values[FIELD_NAMES.TRANSPORTATION_COST] === null ||
     formik.values[FIELD_NAMES.TRANSPORTATION_COST] === undefined ||

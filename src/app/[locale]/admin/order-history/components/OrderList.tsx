@@ -40,7 +40,7 @@ const OrderList = ({
       {list.map((order, i) => (
         <OrderListItem
           onClick={() =>
-            router.push(`${routeName.adminCreateOrder}/${order.id}`)
+            router.push(`${routeName.adminOrderDetails}/${order.id}`)
           }
           imageLink={order.carImages[0]?.url ?? DummyImage.src}
           item={order}

@@ -8,6 +8,7 @@ export const routeName = {
   dealerUsersList: '/dealer/users-list',
   dealerPersonalInformation: '/dealer/personal-information',
   dealerOrder: '/dealer/order-details',
+  adminOrderDetails: '/admin/order-details',
 
   admin: '/admin',
   adminOrderHistory: '/admin/order-history',
