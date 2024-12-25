@@ -18,13 +18,14 @@ import { routeName } from '@/common/helpers/constants'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../theme'
 import SelectedFiltersFrame from './components/SelectedFiltersFrame'
+import { getVehicleList } from '@/common/helpers/utils'
+import { useSearchVehicle } from './hooks/useSearchVehicle'
 
 type Props = { setIsFooterShowing: (arg: boolean) => void }
 
 const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const [isFilterOn, setIsFilterOn] = useState(false)
-
   const [isFilterOpenOnMobile, setIsFilterOpenOnMobile] = useState(false)
 
   const [itemsList, setItemsList] = useState<string[]>([
@@ -34,6 +35,8 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
     'manual',
     'IAAI',
   ])
+
+  const { vehicleList, pagination } = useSearchVehicle()
 
   const t = useTranslations('')
 
@@ -52,7 +55,7 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
     }
   }, [isMobile])
 
-  // hide footer when filter open
+  // hide footer when filter open (on mobile)
   useEffect(() => {
     if (isFilterOpenOnMobile) {
       setIsFooterShowing(false)
@@ -68,16 +71,16 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
     }
   }
 
-  const router = useRouter()
-
   return (
     <Container>
       {!isMobile && <SearchPanel />}
       <ListFrame>
-        <TextBold19>
-          {`${'65'} `}
-          {t('statement')}
-        </TextBold19>
+        {pagination && (
+          <TextBold19>
+            {`${pagination.total} `}
+            {t('statement')}
+          </TextBold19>
+        )}
         <SortFrame>
           <SortBox>
             <SecondaryButton
@@ -93,6 +96,7 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
             onClick={() => router.push(routeName.vehicleListing)}
             icon={checkboxFilled}
           /> */}
+
           {!isMobile && (
             <SelectedFiltersFrame
               itemsList={itemsList}
@@ -106,7 +110,11 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
             withoutLabel={isMobile}
           />
         </SortFrame>
-        {isFilterOpenOnMobile ? <SearchPanel /> : <SearchResultsList />}
+        {isFilterOpenOnMobile ? (
+          <SearchPanel />
+        ) : (
+          <>{vehicleList && <SearchResultsList vehicleList={vehicleList} />}</>
+        )}
       </ListFrame>
     </Container>
   )

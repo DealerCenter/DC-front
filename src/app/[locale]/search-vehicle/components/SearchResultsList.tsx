@@ -2,15 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import SearchListItem from './SearchListItem'
 
-type Props = {}
+type Props = { vehicleList: VehicleListResult[] }
 
-const SearchResultsList = (props: Props) => {
+const SearchResultsList = ({ vehicleList }: Props) => {
   return (
     <Container>
-      <SearchListItem auctionState={'not sold'} />
-      <SearchListItem auctionState={'pending'} />
-      <SearchListItem auctionState={'sold'} />
-      <SearchListItem auctionState={'not sold'} />
+      {vehicleList.map((item) => (
+        <SearchListItem key={`searchListItem${item.vin}`} vehicleList={item} />
+      ))}
     </Container>
   )
 }

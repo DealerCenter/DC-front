@@ -2,13 +2,19 @@ import CheckBox from '@/common/components/appCheckBox/Checkbox'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-type Props = { label: string }
+type Props = {
+  label: string
+  onClick?: () => void
+  isChecked: boolean
+}
 
-const CheckItemBox = ({ label }: Props) => {
-  const [isChecked, setIsChecked] = useState(false)
+const CheckItemBox = ({ label, onClick, isChecked }: Props) => {
+  const handleClick = () => {
+    onClick && onClick()
+  }
 
   return (
-    <Container onClick={() => setIsChecked((is) => !is)}>
+    <Container onClick={handleClick}>
       <CheckBox isChecked={isChecked} />
       <Label>{label}</Label>
     </Container>

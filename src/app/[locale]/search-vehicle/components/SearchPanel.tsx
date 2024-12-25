@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import { useState } from 'react'
+import styled from 'styled-components'
 
-import OptionBox from './OptionBox'
-import CheckItemBox from './CheckItemBox'
-import FromUptoBox from './FromUptoBox'
 import BasicButton from '@/common/components/appButton/BasicButton'
 import SecondaryButton from '@/common/components/appButton/SecondaryButton'
+import OptionBox from './OptionBox'
 
-import searchIcon from '@/assets/icons/searchSidePanel/searchIconWhite.svg'
 import filterIconWithCancel from '@/assets/icons/filterIcon2WithCancel.svg'
+import searchIcon from '@/assets/icons/searchSidePanel/searchIconWhite.svg'
+import LoaderForButton from '@/common/components/loader/LoaderForButton'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../../theme'
+import ChooseAuctionBox from './ChooseAuctionBox'
+import { useSearchParams } from 'next/navigation'
+import { FIELD_NAMES, useSearchVehicle } from '../hooks/useSearchVehicle'
+import AppDropdown from '@/common/components/appDropdown/AppDropdown'
+import DropdownWithSearch from '../../admin/create-order/components/rightFrame/DropdownWithSearch'
+import DropdownMakeSearch from './DropdownMakeSearch'
 
 const dummyBrands = ['Acura', 'Alfa Romeo', 'Audi', 'Aston Martin', 'Mercedes']
 
@@ -21,56 +26,84 @@ const BUTTON_WIDTH_MOBILE = 343
 
 type Props = {}
 
-const SearchPanel = (props: Props) => {
+const SearchPanel = ({}: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const [isFilterSelected, setIsFilterSelected] = useState(false)
   const t = useTranslations('')
+
+  const handleSearchClick = () => {
+    setIsFilterSelected((is) => !is)
+  }
+
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    errors,
+    touched,
+    handleSubmit,
+    isLoading,
+    setFieldValue,
+  } = useSearchVehicle()
 
   return (
     <Container>
       <OptionBox label={t('auction')}>
         <ChecklistBox>
-          <CheckItemBox label='IAAI' />
-          <CheckItemBox label='Copart' />
+          <ChooseAuctionBox />
         </ChecklistBox>
       </OptionBox>
-      <OptionBox label={'Buy now'}>
+      {/* <OptionBox label={'Buy now'}>
         <FromUptoBox type='text' />
-      </OptionBox>
+      </OptionBox> */}
       <OptionBox label={t('brand')}>
         <ChecklistBox>
-          {dummyBrands.map((brand, i) => (
+          {/* {dummyBrands.map((brand, i) => (
             <CheckItemBox label={brand} key={`brandName23ijf8${i}`} />
-          ))}
+          ))} */}
+          <DropdownMakeSearch />
         </ChecklistBox>
       </OptionBox>
       <OptionBox label={t('year')}>
+        <FromUpToBox>
+          <StyledInput
+            name={FIELD_NAMES.YEAR_FROM}
+            value={values[FIELD_NAMES.YEAR_FROM]}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            type='text'
+            placeholder={t('from')}
+          />
+          <StyledInput
+            name={FIELD_NAMES.YEAR_TO}
+            value={values[FIELD_NAMES.YEAR_TO]}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            type='text'
+            placeholder={t('up to')}
+          />
+        </FromUpToBox>
+      </OptionBox>
+
+      {/* <OptionBox label={t('mileage')}>
         <FromUptoBox type='text' />
-      </OptionBox>
-      <OptionBox label={t('transmission')}>
-        <ChecklistBox>
-          <CheckItemBox label={t('automatic')} />
-          <CheckItemBox label={t('manual')} />
-        </ChecklistBox>
-      </OptionBox>
-      <OptionBox label={t('mileage')}>
-        <FromUptoBox type='text' />
-      </OptionBox>
-      <OptionBox label={t('damage')} startingState={false}>
-        children goes here
-      </OptionBox>
-      <OptionBox label={t('auction location')} startingState={false}>
-        children goes here
-      </OptionBox>
+      </OptionBox> */}
+
       <ButtonsFrame>
         <BasicButton
           width={isMobile ? BUTTON_WIDTH_MOBILE : BUTTON_WIDTH}
-          onClick={() => setIsFilterSelected((is) => !is)}
+          onClick={handleSubmit}
         >
-          <ButtonIcon>
-            <Image src={searchIcon} alt='edit icon' width={18} />
-          </ButtonIcon>
-          <ButtonLabel>{t('search')}</ButtonLabel>
+          {isLoading ? (
+            <LoaderForButton />
+          ) : (
+            <>
+              <ButtonIcon>
+                <Image src={searchIcon} alt='edit icon' width={18} />
+              </ButtonIcon>
+              <ButtonLabel>{t('search')}</ButtonLabel>
+            </>
+          )}
         </BasicButton>
         {isFilterSelected && (
           <SecondaryButton
@@ -135,4 +168,25 @@ const ButtonLabel = styled.label`
   font-weight: ${({ theme }) => theme.fontWeight?.normal};
   cursor: pointer;
   user-select: none;
+`
+
+const StyledInput = styled.input`
+  box-sizing: border-box;
+  background-color: ${({ theme }) => theme.colors?.white};
+
+  width: 114px;
+  height: 40px;
+
+  border-radius: ${({ theme }) => theme.radius?.lg};
+
+  padding: 4px 4px 4px 10px;
+  gap: 6px;
+  border: 2px solid ${({ theme }) => theme.colors?.main_gray_04};
+`
+
+const FromUpToBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing?.xsm};
 `

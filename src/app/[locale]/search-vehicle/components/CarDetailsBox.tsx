@@ -18,6 +18,8 @@ type Props = {
   mileage: string
   year: string
   location: string
+  engineType: string
+  color: string
 }
 
 const CarDetailsBox = ({
@@ -27,6 +29,8 @@ const CarDetailsBox = ({
   mileage,
   year,
   location,
+  engineType,
+  color,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
@@ -51,13 +55,13 @@ const CarDetailsBox = ({
             <TextGray>{model}</TextGray>
             <TextGray>{mileage}</TextGray>
             <SmallDetailsBox>
-              <TextGray>4cyl</TextGray>
+              <TextGray>{engineType}</TextGray>
               <Line />
-              <TextGray>SE</TextGray>
-              <Line />
+              {/* <TextGray>SE</TextGray>
+              <Line /> */}
               <ColorBox>
-                <ColorDot />
-                <TextGray>Green</TextGray>
+                {/* <ColorDot /> */}
+                <TextGray>{color}</TextGray>
               </ColorBox>
             </SmallDetailsBox>
           </SmallDetailsFrame>

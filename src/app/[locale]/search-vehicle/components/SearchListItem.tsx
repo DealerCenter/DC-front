@@ -5,20 +5,33 @@ import CarDetailsBox from './CarDetailsBox'
 import dummyCarImage from '@/assets/images/DummyCarImage.jpg'
 import PriceAndStatusBox from './PriceAndStatusBox'
 
-type Props = { auctionState: 'sold' | 'not sold' | 'pending' }
+type Props = { vehicleList: VehicleListResult }
 
-const SearchListItem = ({ auctionState }: Props) => {
+const SearchListItem = ({ vehicleList }: Props) => {
+  const {
+    odometer,
+    year,
+    car_photo,
+    make,
+    model,
+    location,
+    engine_type,
+    color,
+  } = vehicleList
+
   return (
     <Container>
       <CarDetailsBox
         imageLink={dummyCarImage.src}
-        brand='Mercedes Benz'
-        year='2020'
-        model='E class, Diesel'
-        mileage='57,557 miles'
-        location='Troy, MI'
+        brand={make}
+        year={year.toString()}
+        model={model}
+        mileage={`${odometer} miles`}
+        location={location}
+        engineType={engine_type}
+        color={color}
       />
-      <PriceAndStatusBox amount={5750} auctionState={auctionState} />
+      {/* <PriceAndStatusBox amount={5750} auctionState={auctionState} /> */}
     </Container>
   )
 }
