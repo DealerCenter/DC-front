@@ -79,6 +79,8 @@ const Icon = styled.div`
 
   cursor: pointer;
   user-select: none;
+
+  border: 1px solid red;
 `
 
 const Line = styled.div`

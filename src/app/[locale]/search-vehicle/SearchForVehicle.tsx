@@ -13,13 +13,13 @@ import Pagination from '@/common/components/pagination/Pagination'
 import SearchResultsList from './components/SearchResultsList'
 
 import checkboxFilled from '@/assets/icons/checkboxFilled.svg'
-import { useRouter } from '@/navigation'
+
 import { routeName } from '@/common/helpers/constants'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../theme'
 import SelectedFiltersFrame from './components/SelectedFiltersFrame'
 import { getVehicleList } from '@/common/helpers/utils'
-import { useSearchVehicle } from './hooks/useSearchVehicle'
+import { FIELD_NAMES, useSearchVehicle } from './hooks/useSearchVehicle'
 
 type Props = { setIsFooterShowing: (arg: boolean) => void }
 
@@ -28,24 +28,25 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
   const [isFilterOn, setIsFilterOn] = useState(false)
   const [isFilterOpenOnMobile, setIsFilterOpenOnMobile] = useState(false)
 
-  const [itemsList, setItemsList] = useState<string[]>([
-    'from-2003',
-    'filter',
-    'Mercedes',
-    'manual',
-    'IAAI',
-  ])
+  const { vehicleList, pagination, values } = useSearchVehicle()
 
-  const { vehicleList, pagination } = useSearchVehicle()
+  const [selectedFiltersList, setSelectedFiltersList] = useState<string[]>([
+    'DUMMY',
+    'DUMMY',
+    'DUMMY',
+    'DUMMY',
+  ])
 
   const t = useTranslations('')
 
   const handleAddItemToFilterList = (itemToAdd: string) => {
-    setItemsList((list) => [...list, itemToAdd])
+    setSelectedFiltersList((list) => [...list, itemToAdd])
   }
 
   const handleRemoveItemFromFilterList = (itemToRemove: string) => {
-    setItemsList(itemsList.filter((item) => item !== itemToRemove))
+    setSelectedFiltersList(
+      selectedFiltersList.filter((item) => item !== itemToRemove)
+    )
   }
 
   // in case filter is open and user switches to bigger display
@@ -83,12 +84,14 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
         )}
         <SortFrame>
           <SortBox>
-            <SecondaryButton
-              text=''
-              onClick={handleFilterToggleOnMobile}
-              icon={isFilterOn ? filterIconWithCancel : filterIcon}
-              withoutLabel={true}
-            />
+            <NotWorking>
+              <SecondaryButton
+                text=''
+                onClick={handleFilterToggleOnMobile}
+                icon={isFilterOn ? filterIconWithCancel : filterIcon}
+                withoutLabel={true}
+              />
+            </NotWorking>
             <Line />
           </SortBox>
           {/* <SecondaryButton
@@ -96,19 +99,22 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
             onClick={() => router.push(routeName.vehicleListing)}
             icon={checkboxFilled}
           /> */}
-
-          {!isMobile && (
-            <SelectedFiltersFrame
-              itemsList={itemsList}
-              handleRemoveFromList={handleRemoveItemFromFilterList}
+          <NotWorking>
+            {!isMobile && (
+              <SelectedFiltersFrame
+                itemsList={selectedFiltersList}
+                handleRemoveFromList={handleRemoveItemFromFilterList}
+              />
+            )}
+          </NotWorking>
+          <NotWorking>
+            <SecondaryButton
+              text={t('sort')}
+              onClick={() => {}}
+              icon={sortIconBlack}
+              withoutLabel={isMobile}
             />
-          )}
-          <SecondaryButton
-            text={t('sort')}
-            onClick={() => {}}
-            icon={sortIconBlack}
-            withoutLabel={isMobile}
-          />
+          </NotWorking>
         </SortFrame>
         {isFilterOpenOnMobile ? (
           <SearchPanel />
@@ -183,4 +189,8 @@ const Line = styled.div`
   height: 24px;
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors?.main_gray_10};
+`
+
+const NotWorking = styled.div`
+  border: 1px solid red;
 `

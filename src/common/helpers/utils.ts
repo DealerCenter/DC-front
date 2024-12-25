@@ -60,3 +60,10 @@ export const getMakeNames = async () => {
   )
   return response.data
 }
+
+export const getModelByMake = async (makeId: number) => {
+  const response = await axios.post<getModelByMakeResponse>(
+    `${AUCTIONS_API}/api/v1/get-model-by-make/${makeId}?api_token=${process.env.NEXT_PUBLIC_AUCTIONS_API_TOKEN}`
+  )
+  return response.data
+}

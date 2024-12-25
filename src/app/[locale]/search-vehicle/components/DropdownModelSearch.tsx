@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { getDealersAdmin, getReceiversAdmin } from '@/api/apiCalls'
 import AppSelectAntDesignWithFetch from '@/common/components/appSelect/AppSelectAntDesignWithFetch'
 import { FIELD_NAMES, useSearchVehicle } from '../hooks/useSearchVehicle'
-import { getMakeNames } from '@/common/helpers/utils'
+import { getMakeNames, getModelByMake } from '@/common/helpers/utils'
 import theme from '@/app/[locale]/theme'
 import arrowDown from '@/assets/icons/arrowDown.svg'
 import ErrorMessage from '@/common/components/errorMessage/ErrorMessage'
@@ -20,7 +20,7 @@ type Props = {
   width?: number
 }
 
-const DropdownMakeSearch = ({
+const DropdownModelSearch = ({
   placeholder,
   fontSize,
   errorMessage,
@@ -32,16 +32,17 @@ const DropdownMakeSearch = ({
   const [filteredOptions, setFilteredOptions] = useState<
     { label: string; id: number }[]
   >([])
-  const { setFieldValue, values, setMakeId } = useSearchVehicle()
+  const { setFieldValue, values, makeId } = useSearchVehicle()
 
   const fetchData = async () => {
     try {
-      const response = await getMakeNames()
+      const response = await getModelByMake(makeId)
 
+      console.log('res from model:', response)
       if (response) {
         const mapped = response.result.map((item) => {
           return {
-            label: `${item.make}`,
+            label: `${item.model}`,
             id: item.id,
           }
         })
@@ -61,15 +62,10 @@ const DropdownMakeSearch = ({
     setFilteredOptions(filtered)
   }
 
-  const handleChange = (value: string) => {
-    setFieldValue(FIELD_NAMES.MAKE, value)
-    setMakeId(allOptions.find((item) => item.label === value)?.id)
-  }
-
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line
-  }, [])
+  }, [makeId])
 
   return (
     <Container>
@@ -96,8 +92,10 @@ const DropdownMakeSearch = ({
           showSearch
           placeholder={placeholder}
           optionFilterProp='label'
-          value={values[FIELD_NAMES.MAKE]}
-          onChange={(value) => handleChange(value)}
+          value={values[FIELD_NAMES.MODEL]}
+          onChange={(value) => {
+            setFieldValue(FIELD_NAMES.MODEL, value)
+          }}
           onSearch={handleSearch}
           filterOption={false}
           style={{
@@ -119,7 +117,7 @@ const DropdownMakeSearch = ({
   )
 }
 
-export default DropdownMakeSearch
+export default DropdownModelSearch
 
 const Container = styled.div`
   position: relative;

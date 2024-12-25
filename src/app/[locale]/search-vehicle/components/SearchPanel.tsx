@@ -18,6 +18,7 @@ import { FIELD_NAMES, useSearchVehicle } from '../hooks/useSearchVehicle'
 import AppDropdown from '@/common/components/appDropdown/AppDropdown'
 import DropdownWithSearch from '../../admin/create-order/components/rightFrame/DropdownWithSearch'
 import DropdownMakeSearch from './DropdownMakeSearch'
+import DropdownModelSearch from './DropdownModelSearch'
 
 const dummyBrands = ['Acura', 'Alfa Romeo', 'Audi', 'Aston Martin', 'Mercedes']
 
@@ -30,6 +31,8 @@ const SearchPanel = ({}: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const [isFilterSelected, setIsFilterSelected] = useState(false)
   const t = useTranslations('')
+
+  const { makeId } = useSearchVehicle()
 
   const handleSearchClick = () => {
     setIsFilterSelected((is) => !is)
@@ -57,12 +60,10 @@ const SearchPanel = ({}: Props) => {
         <FromUptoBox type='text' />
       </OptionBox> */}
       <OptionBox label={t('brand')}>
-        <ChecklistBox>
-          {/* {dummyBrands.map((brand, i) => (
-            <CheckItemBox label={brand} key={`brandName23ijf8${i}`} />
-          ))} */}
-          <DropdownMakeSearch />
-        </ChecklistBox>
+        <DropdownMakeSearch />
+      </OptionBox>
+      <OptionBox label={t('model')}>
+        {makeId && <DropdownModelSearch />}
       </OptionBox>
       <OptionBox label={t('year')}>
         <FromUpToBox>
@@ -84,10 +85,26 @@ const SearchPanel = ({}: Props) => {
           />
         </FromUpToBox>
       </OptionBox>
-
-      {/* <OptionBox label={t('mileage')}>
-        <FromUptoBox type='text' />
-      </OptionBox> */}
+      <OptionBox label={t('mileage')}>
+        <FromUpToBox>
+          <StyledInput
+            name={FIELD_NAMES.ODOMETER_FROM}
+            value={values[FIELD_NAMES.ODOMETER_FROM]}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            type='text'
+            placeholder={t('from')}
+          />
+          <StyledInput
+            name={FIELD_NAMES.ODOMETER_TO}
+            value={values[FIELD_NAMES.ODOMETER_TO]}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            type='text'
+            placeholder={t('up to')}
+          />
+        </FromUpToBox>
+      </OptionBox>
 
       <ButtonsFrame>
         <BasicButton

@@ -220,10 +220,25 @@ type getMakesResponse = {
   api_request_left: number
   result: getMakesResult[]
 }
+
 type getMakesResult = {
   id: number
   make: string
   make_slug: string
+  created_at: string // ISO 8601 format
+  updated_at: string // ISO 8601 format
+}
+
+type getModelByMakeResponse = {
+  api_request_left: number
+  result: getModelByMakeResult[]
+}
+
+type getModelByMakeResult = {
+  id: number
+  make_id: number
+  model: string
+  model_slug: string
   created_at: string // ISO 8601 format
   updated_at: string // ISO 8601 format
 }

@@ -28,6 +28,7 @@ export const SearchVehicleProvider = ({
   const [isLoading, setIsLoading] = useState(false)
   const [vehicleList, setVehicleList] = useState<VehicleListResult[]>()
   const [pagination, setPagination] = useState<VehicleListPagination>()
+  const [makeId, setMakeId] = useState<number>()
 
   const initialValues = {
     [FIELD_NAMES.PAGE]: 1,
@@ -100,6 +101,8 @@ export const SearchVehicleProvider = ({
         isLoading,
         vehicleList,
         pagination,
+        makeId,
+        setMakeId,
       }}
     >
       {children}

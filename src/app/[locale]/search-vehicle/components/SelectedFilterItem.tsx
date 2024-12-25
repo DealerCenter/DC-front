@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import closeXIcon from '@/assets/icons/closeX.svg'
+import theme from '../../theme'
 
 type Props = { label: string; onCancel: (arg: string) => void }
 
@@ -26,7 +27,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* line-height: 36px; */
   height: 36px;
   padding: 8px;
   border-radius: ${({ theme }) => theme.radius?.lg};
@@ -40,6 +40,17 @@ const IconBox = styled.div`
   align-items: center;
   height: 24px;
   width: 24px;
+  border-radius: 5px;
+
+  @media ${theme.media?.notSm} {
+    &:hover {
+      background-color: ${({ theme }) => theme.colors?.main_gray_10};
+    }
+    &:active {
+      background-color: unset;
+    }
+    cursor: pointer;
+  }
 `
 
 const Label = styled.label`

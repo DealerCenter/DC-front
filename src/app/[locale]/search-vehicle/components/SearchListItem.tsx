@@ -5,9 +5,9 @@ import CarDetailsBox from './CarDetailsBox'
 import dummyCarImage from '@/assets/images/DummyCarImage.jpg'
 import PriceAndStatusBox from './PriceAndStatusBox'
 
-type Props = { vehicleList: VehicleListResult }
+type Props = { vehicleList: VehicleListResult; onClick: () => void }
 
-const SearchListItem = ({ vehicleList }: Props) => {
+const SearchListItem = ({ vehicleList, onClick }: Props) => {
   const {
     odometer,
     year,
@@ -20,7 +20,7 @@ const SearchListItem = ({ vehicleList }: Props) => {
   } = vehicleList
 
   return (
-    <Container>
+    <Container onClick={onClick}>
       <CarDetailsBox
         imageLink={dummyCarImage.src}
         brand={make}
