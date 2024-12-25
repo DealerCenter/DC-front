@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-import DamageAuctionVehicleInfo from './components/damageAuctionVehicleInfo/DamageAuctionVehicleInfo'
-import ImageAndBid from './components/imageAndBid/ImageAndBid'
-import PriceAndShippingEstimate from './components/priceAndShippingEstimate/PriceAndShippingEstimate'
-import PreviousLots from './components/previousLots/PreviousLots'
-import SimilarLots from './components/similarLots/SimilarLots'
+import DamageAuctionVehicleInfo from '../components/damageAuctionVehicleInfo/DamageAuctionVehicleInfo'
+import ImageAndBid from '../components/imageAndBid/ImageAndBid'
+import PriceAndShippingEstimate from '../components/priceAndShippingEstimate/PriceAndShippingEstimate'
+import PreviousLots from '../components/previousLots/PreviousLots'
+import SimilarLots from '../components/similarLots/SimilarLots'
 
 type Props = {}
 
