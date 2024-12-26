@@ -3,34 +3,50 @@ import styled from 'styled-components'
 import BidBox from './components/BidBox'
 import BidBoxFinalBid from './components/BidBoxFinalBid'
 import ImagesBox from './components/ImagesBox'
+import { formatDate } from '@/common/helpers/simpleFunctions'
 
-type Props = {}
+type Props = { carDetails: AuctionResult }
 
-const ImageAndBid = (props: Props) => {
+const ImageAndBid = ({ carDetails }: Props) => {
   const [isFinal, setIsFinal] = useState(false)
+
+  const {
+    year,
+    make,
+    model,
+    fuel,
+    vin,
+    lot_number,
+    highlights,
+    active_bidding,
+    sales_history,
+  } = carDetails
+
+  const date = new Date('1335812800000')
+  console.log('date:', date.toString())
 
   return (
     <Container>
       <ImagesBox />
       <CarModelAndBidFrame>
         <CarBrandAndModel>
-          <BrandLabel>2020 Mercedes Benz </BrandLabel>
-          <ModelLabel>E class, Diezel</ModelLabel>
+          <BrandLabel>{`${year} ${make}`}</BrandLabel>
+          <ModelLabel>{`${model}, ${fuel}`}</ModelLabel>
           <button onClick={() => setIsFinal((is) => !is)}>
             switch bid box
           </button>
         </CarBrandAndModel>
         {isFinal ? (
           <BidBoxFinalBid
-            finalBid={18250}
-            vinCode='7SAYGDEF7NF349929'
-            lotNumber={38738009}
-            dateOfSale='06/02/2023'
-            condition='Stationary'
+            finalBid={9999}
+            vinCode={vin}
+            lotNumber={lot_number}
+            dateOfSale={active_bidding[0].sale_date}
+            condition={highlights}
             auctionState='pending'
           />
         ) : (
-          <BidBox />
+          <BidBox carDetails={carDetails} />
         )}
       </CarModelAndBidFrame>
     </Container>

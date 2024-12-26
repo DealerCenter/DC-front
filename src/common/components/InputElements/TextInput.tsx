@@ -163,6 +163,7 @@ const StyledInput = styled.input<InputProps>`
 
   width: 350px;
 
+  /* padding: 50px 10px 15px 77px; */
   padding: 10px 10px 10px 16px;
   border-radius: ${({ theme }) => theme.radius?.lg};
 
@@ -195,6 +196,12 @@ const StyledInput = styled.input<InputProps>`
           height: 52px;
         `}
 
+  ${({ icon }) =>
+    icon &&
+    css`
+      padding-left: 50px;
+    `}
+
   ${({ icon, paddingLeft }) =>
     icon && !paddingLeft
       ? css`
@@ -204,6 +211,7 @@ const StyledInput = styled.input<InputProps>`
         css`
           padding-left: ${paddingLeft}px;
         `}
+
 
   ${({ hasCheck }) =>
     hasCheck
@@ -228,12 +236,12 @@ ${({ isHalfSize, width }) =>
           width: 213px;
         `
       : width
-      ? css`
-          width: ${width}px;
-        `
-      : css`
-          width: 350px;
-        `}
+        ? css`
+            width: ${width}px;
+          `
+        : css`
+            width: 350px;
+          `}
 
   ${({ height }) =>
     height
@@ -244,11 +252,7 @@ ${({ isHalfSize, width }) =>
           height: 52px;
         `}       
 
-  ${({ icon }) =>
-    icon &&
-    css`
-      padding-left: 50px;
-    `}
+
 
   ${({ backgroundColor }) =>
     backgroundColor
@@ -266,12 +270,12 @@ ${({ isHalfSize, width }) =>
             width: 167.5px;
           `
         : width
-        ? css`
-            width: ${width}px;
-          `
-        : css`
-            width: 350px;
-          `}
+          ? css`
+              width: ${width}px;
+            `
+          : css`
+              width: 350px;
+            `}
   }
 
   ${({ isWidthFill }) =>

@@ -1,14 +1,13 @@
 'use client'
-import React from 'react'
 import VehicleListing from './VehicleListing'
 import VehicleListingLayout from './VehicleListingLayout'
 
-type Props = {}
+type Props = { params: { vin: string } }
 
-const Page = (props: Props) => {
+const Page = ({ params }: Props) => {
   return (
     <VehicleListingLayout>
-      <VehicleListing />
+      <VehicleListing vin={params.vin} />
     </VehicleListingLayout>
   )
 }

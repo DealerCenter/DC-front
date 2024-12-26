@@ -30,13 +30,19 @@ const BidBoxFinalBid = ({
           <FinalBidLabel>Final Bid</FinalBidLabel>
           <FinalBidAmount>{`$ ${finalBid}`}</FinalBidAmount>
         </FinalBidBox>
-        <AuctionStateBox auctionState={auctionState} />
+        <div style={{ color: 'red' }}>
+          NOT WORKING
+          <AuctionStateBox auctionState={auctionState} />
+        </div>
       </FinalBidFrame>
       <Line />
       <ListFrame>
         <LabelValuePair label={t('vin code')} value={vinCode} />
         <LabelValuePair label={t('lot number')} value={lotNumber.toString()} />
-        <LabelValuePair label={t('date of sale')} value={dateOfSale} />
+        <div style={{ color: 'red' }}>
+          NOT WORKING
+          <LabelValuePair label={t('date of sale')} value={dateOfSale} />
+        </div>
         <LabelValuePair label={t('condition')} value={condition} />
       </ListFrame>
     </Container>

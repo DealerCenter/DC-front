@@ -5,12 +5,10 @@ import SearchForVehicleLayout from './SearchForVehicleLayout'
 import SearchForVehicle from './SearchForVehicle'
 import { SearchVehicleProvider } from './hooks/useSearchVehicle'
 
-type Props = { params: { id: string[] } }
+type Props = {}
 
-const Page = ({ params }: Props) => {
+const Page = (props: Props) => {
   const [isFooterShowing, setIsFooterShowing] = useState(true)
-
-  console.log('params id:', params.id)
 
   return (
     <SearchVehicleProvider>

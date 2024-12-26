@@ -33,7 +33,7 @@ type AuctionResult = {
   currency_code_id: number
   created_at: string
   car_photo: CarPhoto
-  car_info: string | null
+  car_info: CarInfo
   sales_history: SalesHistory[]
   active_bidding: ActiveBidding[]
   buy_now_car: string | null

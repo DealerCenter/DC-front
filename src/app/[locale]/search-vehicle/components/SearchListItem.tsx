@@ -17,6 +17,7 @@ const SearchListItem = ({ vehicleList, onClick }: Props) => {
     location,
     engine_type,
     color,
+    active_bidding,
   } = vehicleList
 
   return (
@@ -31,7 +32,10 @@ const SearchListItem = ({ vehicleList, onClick }: Props) => {
         engineType={engine_type}
         color={color}
       />
-      {/* <PriceAndStatusBox amount={5750} auctionState={auctionState} /> */}
+      <PriceAndStatusBox
+        amount={active_bidding[0].current_bid}
+        auctionState={'not sold'}
+      />
     </Container>
   )
 }
@@ -49,4 +53,8 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors?.white};
 
   flex: 1;
+
+  @media ${({ theme }) => theme.media?.notSm} {
+    cursor: pointer;
+  }
 `

@@ -16,7 +16,7 @@ const SearchResultsList = ({ vehicleList }: Props) => {
         <SearchListItem
           key={`searchListItem${item.vin}`}
           vehicleList={item}
-          onClick={() => router.push(`${routeName.vehicleListing}`)}
+          onClick={() => router.push(`${routeName.vehicleListing}/${item.vin}`)}
         />
       ))}
     </Container>
