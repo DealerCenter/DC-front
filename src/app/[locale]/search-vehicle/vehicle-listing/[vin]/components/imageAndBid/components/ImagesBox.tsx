@@ -1,71 +1,35 @@
-import Image from 'next/image'
-
 import theme from '@/app/[locale]/theme'
-
-import dummyCarImage from '@/assets/images/DummyCarImage.jpg'
+import Image from 'next/image'
+import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
 
-type Props = {}
+type Props = { images: string[] }
 
-const ImagesBox = (props: Props) => {
+const ImagesBox = ({ images }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const [selectedImage, setSelectedImage] = useState(images[0])
 
+  console.log('images:', images)
   return (
     <ImagesFrame>
       {!isMobile && (
-        <SmallImagesFrame>
-          <SmallImageBox>
-            <Image
-              src={dummyCarImage}
-              alt='image'
-              width={100}
-              height={83}
-              style={{ objectFit: 'cover' }}
+        <Carousel>
+          {images.map((image, index) => (
+            <Thumbnail
+              key={index}
+              src={image}
+              alt={`Thumbnail ${index + 1}`}
+              isActive={image === selectedImage} // Highlight selected image
+              onClick={() => setSelectedImage(image)} // Change main photo on click
             />
-          </SmallImageBox>
-          <SmallImageBox>
-            <Image
-              src={dummyCarImage}
-              alt='image'
-              width={100}
-              height={83}
-              style={{ objectFit: 'cover' }}
-            />
-          </SmallImageBox>
-          <SmallImageBox>
-            <Image
-              src={dummyCarImage}
-              alt='image'
-              width={100}
-              height={83}
-              style={{ objectFit: 'cover' }}
-            />
-          </SmallImageBox>
-          <SmallImageBox>
-            <Image
-              src={dummyCarImage}
-              alt='image'
-              width={100}
-              height={83}
-              style={{ objectFit: 'cover' }}
-            />
-          </SmallImageBox>
-          <SmallImageBox>
-            <Image
-              src={dummyCarImage}
-              alt='image'
-              width={100}
-              height={83}
-              style={{ objectFit: 'cover' }}
-            />
-          </SmallImageBox>
-        </SmallImagesFrame>
+          ))}
+        </Carousel>
       )}
       <ImageBox>
         <Image
-          src={dummyCarImage}
-          alt='image'
+          src={selectedImage}
+          alt='Main photo'
           width={600}
           height={450}
           style={{ objectFit: 'cover' }}
@@ -103,20 +67,38 @@ const ImageBox = styled.div`
   }
 `
 
-const SmallImagesFrame = styled.div`
+const Carousel = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing?.xsm};
+  gap: 10px;
+  padding: 4px;
+  overflow-x: auto;
+  max-width: 100%;
+
+  /* Hide the scrollbar */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+
+  &::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
 `
 
-const SmallImageBox = styled.div`
-  width: 100px;
-  height: 83px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const Thumbnail = styled.img<{ isActive: boolean }>`
+  width: 80px;
+  height: 60px;
   border-radius: 16px;
-  overflow: hidden;
-  line-height: 0;
+  object-fit: cover;
+  cursor: pointer;
+  border: ${({ isActive }) =>
+    isActive
+      ? `2px solid ${theme.colors?.link_blue}`
+      : '2px solid transparent'};
+  transition:
+    transform 0.2s,
+    border 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `

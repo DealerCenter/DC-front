@@ -5,28 +5,19 @@ import styled, { css } from 'styled-components'
 import downIcon from '@/assets/icons/searchSidePanel/arrowDownBlack.svg'
 import downIconGray from '@/assets/icons/searchSidePanel/arrowDownGray.svg'
 
-type Props = { children: ReactNode; label: string; startingState?: boolean }
+type Props = {
+  children: ReactNode
+  label: string
+  isActive?: boolean
+}
 
-const OptionBox = ({ children, label, startingState = true }: Props) => {
-  const [isOpenDropdown, setIsOpenDropdown] = useState(startingState)
-
+const OptionBox = ({ children, label, isActive = true }: Props) => {
   return (
     <Container>
       <LabelAndIconBox>
-        <Label
-          isOpen={isOpenDropdown}
-          onClick={() => setIsOpenDropdown((is) => !is)}
-        >
-          {label}
-        </Label>
-        <Icon onClick={() => setIsOpenDropdown((is) => !is)}>
-          <Image
-            src={isOpenDropdown ? downIcon : downIconGray}
-            alt='down arrow icon'
-          />
-        </Icon>
+        <Label isActive={isActive}>{label}</Label>
       </LabelAndIconBox>
-      {isOpenDropdown && children}
+      {isActive && children}
       <Line />
     </Container>
   )
@@ -34,7 +25,7 @@ const OptionBox = ({ children, label, startingState = true }: Props) => {
 
 export default OptionBox
 
-type IsOpenProps = { isOpen: boolean }
+type IsActiveProps = { isActive: boolean }
 
 const Container = styled.div`
   display: flex;
@@ -52,13 +43,13 @@ const LabelAndIconBox = styled.label`
   align-items: center;
 `
 
-const Label = styled.label<IsOpenProps>`
+const Label = styled.label<IsActiveProps>`
   font-size: ${({ theme }) => theme.fontSizes?.medium};
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
 
   transition: transform 0.3s ease-in-out;
-  ${({ isOpen }) =>
-    isOpen
+  ${({ isActive }) =>
+    isActive
       ? css`
           color: ${({ theme }) => theme.colors?.main_gray_100};
         `
@@ -68,19 +59,6 @@ const Label = styled.label<IsOpenProps>`
 
   cursor: pointer;
   user-select: none;
-`
-
-const Icon = styled.div`
-  width: 24px;
-  height: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  cursor: pointer;
-  user-select: none;
-
-  border: 1px solid red;
 `
 
 const Line = styled.div`

@@ -28,25 +28,13 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
   const [isFilterOn, setIsFilterOn] = useState(false)
   const [isFilterOpenOnMobile, setIsFilterOpenOnMobile] = useState(false)
 
-  const { vehicleList, pagination, values } = useSearchVehicle()
-
-  const [selectedFiltersList, setSelectedFiltersList] = useState<string[]>([
-    'DUMMY',
-    'DUMMY',
-    'DUMMY',
-    'DUMMY',
-  ])
+  const { vehicleList, pagination, values, activeFilters, setFieldValue } =
+    useSearchVehicle()
 
   const t = useTranslations('')
 
-  const handleAddItemToFilterList = (itemToAdd: string) => {
-    setSelectedFiltersList((list) => [...list, itemToAdd])
-  }
-
-  const handleRemoveItemFromFilterList = (itemToRemove: string) => {
-    setSelectedFiltersList(
-      selectedFiltersList.filter((item) => item !== itemToRemove)
-    )
+  const handleRemoveFromFilters = (key: string) => {
+    setFieldValue(key, '') // Reset the filter value
   }
 
   // in case filter is open and user switches to bigger display
@@ -82,39 +70,29 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
             {t('statement')}
           </TextBold19>
         )}
+
         <SortFrame>
           <SortBox>
-            <NotWorking>
-              <SecondaryButton
-                text=''
-                onClick={handleFilterToggleOnMobile}
-                icon={isFilterOn ? filterIconWithCancel : filterIcon}
-                withoutLabel={true}
-              />
-            </NotWorking>
+            <SecondaryButton
+              text=''
+              onClick={handleFilterToggleOnMobile}
+              icon={isFilterOn ? filterIconWithCancel : filterIcon}
+              withoutLabel={true}
+            />
             <Line />
           </SortBox>
+          {!isMobile && (
+            <SelectedFiltersFrame
+              activeFilters={activeFilters}
+              handleRemoveFromFilters={handleRemoveFromFilters}
+            />
+          )}
           {/* <SecondaryButton
-            text='temporary vehicle listing link'
-            onClick={() => router.push(routeName.vehicleListing)}
-            icon={checkboxFilled}
-          /> */}
-          <NotWorking>
-            {!isMobile && (
-              <SelectedFiltersFrame
-                itemsList={selectedFiltersList}
-                handleRemoveFromList={handleRemoveItemFromFilterList}
-              />
-            )}
-          </NotWorking>
-          <NotWorking>
-            <SecondaryButton
               text={t('sort')}
               onClick={() => {}}
               icon={sortIconBlack}
               withoutLabel={isMobile}
-            />
-          </NotWorking>
+            /> */}
         </SortFrame>
         {isFilterOpenOnMobile ? (
           <SearchPanel />
@@ -189,8 +167,4 @@ const Line = styled.div`
   height: 24px;
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors?.main_gray_10};
-`
-
-const NotWorking = styled.div`
-  border: 1px solid red;
 `

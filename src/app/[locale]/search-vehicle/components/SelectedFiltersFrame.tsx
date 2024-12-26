@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import SelectedFilterItem from './SelectedFilterItem'
 
 type Props = {
-  itemsList: string[]
-  handleRemoveFromList: (arg: string) => void
+  activeFilters: Record<string, any> // Accepts key-value pairs
+  handleRemoveFromFilters: (key: string) => void // Handles removal by key
 }
 
-const SelectedFiltersFrame = ({ itemsList, handleRemoveFromList }: Props) => {
+const SelectedFiltersFrame = ({
+  activeFilters,
+  handleRemoveFromFilters,
+}: Props) => {
   return (
     <Container>
-      {itemsList.map((item, i) => (
+      {Object.entries(activeFilters).map(([key, value], i) => (
         <SelectedFilterItem
           key={i}
-          label={item}
-          onCancel={handleRemoveFromList}
+          label={`${key}: ${value}`} // Display key-value pairs
+          onCancel={() => handleRemoveFromFilters(key)} // Pass key for removal
         />
       ))}
     </Container>
@@ -28,5 +31,3 @@ const Container = styled.div`
   flex-wrap: wrap;
   gap: 10px;
 `
-
-const Item = styled.div``

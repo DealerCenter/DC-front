@@ -62,8 +62,8 @@ const SearchPanel = ({}: Props) => {
       <OptionBox label={t('brand')}>
         <DropdownMakeSearch />
       </OptionBox>
-      <OptionBox label={t('model')}>
-        {makeId && <DropdownModelSearch />}
+      <OptionBox label={t('model')} isActive={!!makeId}>
+        <DropdownModelSearch />
       </OptionBox>
       <OptionBox label={t('year')}>
         <FromUpToBox>

@@ -77,17 +77,35 @@ const DamageAuctionVehicleInfo = ({ carDetails }: Props) => {
         </FrameColumn>
         <BoxWithHeader header={t('damage')} width={468}>
           <FrameForPairs>
-            <LabelValuePair label={t('odometer')} value={`${odometer} miles`} />
-            <LabelValuePair label={t('keys')} value={car_keys} />
+            <LabelValuePair
+              label={t('odometer')}
+              value={odometer ? `${odometer} miles` : 'NA'}
+            />
+            <LabelValuePair
+              label={t('keys')}
+              value={car_keys ? car_keys : 'NA'}
+            />
             <LabelValuePair
               label={t('engine type')}
               value={engine_type ? engine_type : 'NA'}
             />
-            <LabelValuePair label={t('drivetrain')} value={drive} />
-            <LabelValuePair label={t('transmission')} value={transmission} />
-            <LabelValuePair label={t('fuel')} value={fuel} />
-            <LabelValuePair label={t('cylinders')} value={cylinders} />
-            <LabelValuePair label={t('body style')} value={body_style} />
+            <LabelValuePair
+              label={t('drivetrain')}
+              value={drive ? drive : 'NA'}
+            />
+            <LabelValuePair
+              label={t('transmission')}
+              value={transmission ? transmission : 'NA'}
+            />
+            <LabelValuePair label={t('fuel')} value={fuel ? fuel : 'NA'} />
+            <LabelValuePair
+              label={t('cylinders')}
+              value={cylinders ? cylinders : 'NA'}
+            />
+            <LabelValuePair
+              label={t('body style')}
+              value={body_style ? body_style : 'NA'}
+            />
           </FrameForPairs>
         </BoxWithHeader>
       </Frame>

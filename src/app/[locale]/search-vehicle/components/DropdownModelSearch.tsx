@@ -38,7 +38,6 @@ const DropdownModelSearch = ({
     try {
       const response = await getModelByMake(makeId)
 
-      console.log('res from model:', response)
       if (response) {
         const mapped = response.result.map((item) => {
           return {

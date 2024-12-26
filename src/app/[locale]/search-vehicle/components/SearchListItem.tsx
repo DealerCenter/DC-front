@@ -23,7 +23,7 @@ const SearchListItem = ({ vehicleList, onClick }: Props) => {
   return (
     <Container onClick={onClick}>
       <CarDetailsBox
-        imageLink={dummyCarImage.src}
+        imageLink={car_photo.photo[0]}
         brand={make}
         year={year.toString()}
         model={model}
@@ -33,7 +33,7 @@ const SearchListItem = ({ vehicleList, onClick }: Props) => {
         color={color}
       />
       <PriceAndStatusBox
-        amount={active_bidding[0].current_bid}
+        amount={active_bidding ? active_bidding[0]?.current_bid : 0}
         auctionState={'not sold'}
       />
     </Container>
