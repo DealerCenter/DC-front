@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-type Props = { children: React.ReactNode; width?: number }
+type Props = { children: any; width?: number }
 
 const Box = ({ children, width }: Props) => {
   return <Container width={width}>{children}</Container>
