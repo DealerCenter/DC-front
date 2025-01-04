@@ -47,8 +47,8 @@ const Calculator = (props: Props) => {
             dropText='Drop file here'
             uploadedText='File dropped'
             onDropAdditional={setFile}
-            shouldShowName
-            fileType={fileType}
+            // shouldShowName
+            // fileType={fileType}
           />
           <MT20 />
           <AppButton text='Upload' onClick={handleUpload} type='filled' />
