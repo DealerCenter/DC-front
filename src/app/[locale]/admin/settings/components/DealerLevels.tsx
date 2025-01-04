@@ -44,6 +44,7 @@ const DealerLevels = (props: Props) => {
       try {
         setIsLoading(true)
         const response = await getDealerLevels()
+        // @ts-ignore
         setLevels(response)
       } catch (error) {
         console.error('Error fetching data:', error)

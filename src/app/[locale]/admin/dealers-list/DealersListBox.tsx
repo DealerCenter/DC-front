@@ -36,10 +36,10 @@ const DealersListBox = (props: Props) => {
     const response = await getDealersAdmin({
       page: currentPage,
       pageSize: ITEMS_PER_PAGE,
-      firstName: searchQuery,
-      lastName: '',
+      search: searchQuery,
+      // lastName: '',
       email: '',
-      phoneNumber: '',
+      // phoneNumber: '',
       personalId: '',
     })
     if (response) {

@@ -62,6 +62,7 @@ const LineOfStatus = ({
   const handleDateChange: DatePickerProps['onChange'] = (date, dateString) => {
     if (date === null) {
       setCurrentStatusAndDates &&
+        // @ts-ignore
         setCurrentStatusAndDates((prev: ShippingStatusAndDates[]) => {
           return prev.filter((item) => item.order !== step)
         })

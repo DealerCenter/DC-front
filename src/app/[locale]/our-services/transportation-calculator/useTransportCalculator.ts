@@ -50,12 +50,19 @@ const useTransportCalculator = () => {
       console.log({ test, selectedCargoType })
       const res = await getCalculatedPrice({
         cargoType: test?.vehicle_type ?? '',
-
         auctionLocation: selectedLocation,
         destination: selectedDestination,
       })
 
-      setCalculatedResult(res)
+      setCalculatedResult(
+        res ?? {
+          totalPrice: 0,
+          auctionName: '',
+          cargoType: '',
+          auctionLocation: '',
+          destination: '',
+        }
+      )
     } catch (error) {
       console.error('Error calculating price:', error)
     } finally {

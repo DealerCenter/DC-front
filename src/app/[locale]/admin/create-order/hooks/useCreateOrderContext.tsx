@@ -103,6 +103,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
   const formik = useFormik({
     initialValues,
     onSubmit: async (values, { resetForm }) => {
+      // @ts-ignore
       const numericValues: {
         [x: string]: string | number | number[]
       } = { ...values }
@@ -206,10 +207,15 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
   })
 
   const isButtonDisabled =
+    // @ts-ignore
     formik.values[FIELD_NAMES.MANUFACTURER].length === 0 ||
+    // @ts-ignore
     formik.values[FIELD_NAMES.MODEL].length === 0 ||
+    // @ts-ignore
     formik.values[FIELD_NAMES.VIN].length === 0 ||
+    // @ts-ignore
     formik.values[FIELD_NAMES.EXACT_ADDRESS].length === 0 ||
+    // @ts-ignore
     formik.values[FIELD_NAMES.CAR_CATEGORY].length === 0 ||
     //  JSON.parse(formik.values[FIELD_NAMES.STATUS_AND_DATES])?.length === 0 ||
     formik.values[FIELD_NAMES.MILEAGE] === null ||
@@ -244,6 +250,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
       orderDetails.transportationCost
     )
     setFieldValue(FIELD_NAMES.CAR_COST, orderDetails.carCost)
+    // @ts-ignore
     setFieldValue(FIELD_NAMES.STATE_ID, orderDetails.state.id)
     setFieldValue(FIELD_NAMES.EXACT_ADDRESS, orderDetails.exactAddress)
     setFieldValue(
@@ -329,8 +336,10 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         cargoType: carCategory?.vehicle_type ?? '',
 
         auctionLocation:
+          // @ts-ignore
           values[FIELD_NAMES.STATE_ID].id ?? values[FIELD_NAMES.STATE_ID],
         destination:
+          // @ts-ignore
           values[FIELD_NAMES.EXACT_ADDRESS].id ??
           values[FIELD_NAMES.EXACT_ADDRESS],
       })

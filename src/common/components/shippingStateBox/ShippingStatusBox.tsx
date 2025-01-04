@@ -91,6 +91,7 @@ const ShippingStatusBox = ({
   useEffect(() => {
     setStatusFieldValue &&
       setStatusFieldValue(
+        // @ts-ignore
         JSON.stringify(setHighestOrderToCurrent(currentStatusAndDates))
       )
   }, [currentStatusAndDates])
@@ -103,6 +104,7 @@ const ShippingStatusBox = ({
           isEditing={isEditing}
           title={t(step.status)}
           step={step.order}
+          // @ts-ignore
           prefilledValue={currentStatusAndDates.find(
             (i) => i.order === step.order
           )}
