@@ -18,6 +18,7 @@ import {
   STATES_RES,
 } from './apiTypes'
 import { endpoints } from './endpoints'
+import { message } from 'antd'
 
 export const fetchMe = async () => {
   try {
@@ -305,5 +306,204 @@ export const getStates = async (isAdmin?: boolean) => {
     return response.data
   } catch (error) {
     console.error('Error getting health:', error)
+  }
+}
+
+export const getSingleMail = async (id: string) => {
+  try {
+    const response = await axiosInstance.get<any>(
+      `${endpoints.GET_SINGLE_MAIL}/${id}`
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error getting mail:', error)
+  }
+}
+
+export const uploadCalculatorData = async (file: FormData) => {
+  try {
+    const response = await axiosInstance.post<any>(
+      endpoints.UPLOAD_CALCULATOR_DATA,
+      file
+    )
+    message.success('File uploaded successfully!')
+    return response.data
+  } catch (error) {
+    console.error('Error getting mail:', error)
+    message.error('Error uploading file!')
+  }
+}
+
+export const downloadCalculatorExcel = async () => {
+  try {
+    const response = await axiosInstance.get(endpoints.DOWNLOAD_CALCULATOR_DATA)
+    if (!response) {
+      throw new Error('Failed to fetch the file')
+    }
+    const blob = new Blob([response.data])
+    const link = document.createElement('a')
+
+    const url = window.URL.createObjectURL(blob)
+    link.href = url
+    link.download = 'ExportedData.xlsx'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+    return response
+  } catch (error) {
+    console.error('Error downloading file:', error)
+  }
+}
+
+export const getAuctionsList = async () => {
+  try {
+    const response = await axiosInstance.get<string[]>(`${endpoints.AUCTIONS}`)
+    return response.data
+  } catch (error) {
+    console.error('Error getting auctions list:', error)
+  }
+}
+
+export const getLocationList = async () => {
+  try {
+    const response = await axiosInstance.get<string[]>(`${endpoints.LOCATIONS}`)
+    return response.data
+  } catch (error) {
+    console.error('Error getting locations list:', error)
+  }
+}
+
+export const getCargoTypes = async () => {
+  try {
+    const response = await axiosInstance.get<string[]>(
+      `${endpoints.CARGO_TYPES}`
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error getting cargo types:', error)
+  }
+}
+
+export const getDestinationList = async () => {
+  try {
+    const response = await axiosInstance.get<string[]>(
+      `${endpoints.DESTINATIONS}`
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error getting destinations list:', error)
+  }
+}
+
+export const getAuctionsAndLocations = async () => {
+  try {
+    const response = await axiosInstance.get<string[]>(
+      `${endpoints.AUCTIONS_AND_LOCATIONS}`
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error getting auctions and locations:', error)
+  }
+}
+
+export const getCalculatedPrice = async (data: {
+  cargoType: string
+  auctionLocation: string
+  destination: string
+}) => {
+  try {
+    const response = await axiosInstance.post<{
+      totalPrice: number
+      auctionName: string
+      cargoType: string
+      auctionLocation: string
+      destination: string
+    }>(`${endpoints.CALCULATE_PRICE}`, { data })
+    return response.data
+  } catch (error) {
+    console.error('Error getting calculated price:', error)
+  }
+}
+
+export const verifyDealer = async (id: string) => {
+  try {
+    const response = await axiosInstance.put(`/dealers/${id}/verify-id-image`)
+    return response
+  } catch (error) {
+    console.error('Error verifying dealer:', error)
+  }
+}
+
+export const unVerifyDealer = async (id: string) => {
+  try {
+    const response = await axiosInstance.put(`/dealers/${id}/unverify-id-image`)
+    return response
+  } catch (error) {
+    console.error('Error verifying dealer:', error)
+  }
+}
+
+export const verifyReceiver = async (id: string) => {
+  try {
+    const response = await axiosInstance.put(`/receivers/${id}/verify`)
+    return response
+  } catch (error) {
+    console.error('Error verifying receiver:', error)
+  }
+}
+
+export const unVerifyReceiver = async (id: string) => {
+  try {
+    const response = await axiosInstance.put(`/receivers/${id}/unverify`)
+    return response
+  } catch (error) {
+    console.error('Error verifying receiver:', error)
+  }
+}
+
+export const createDealerLevels = async (
+  data: {
+    level: string
+    cost: string
+  }[]
+) => {
+  try {
+    const response = await axiosInstance.post(endpoints.DEALER_LEVELS, {
+      data,
+    })
+    message.success('Dealer levels created successfully!')
+    return response
+  } catch (error) {
+    console.error('Error creating dealer levels:', error)
+  }
+}
+
+export const getDealerLevels = async () => {
+  try {
+    const response = await axiosInstance.get<
+      {
+        id: number
+        level: string
+        cost: string
+      }[]
+    >(endpoints.DEALER_LEVELS)
+    return response.data
+  } catch (error) {
+    console.error('Error getting dealer levels:', error)
+  }
+}
+
+export const assignDealerLevel = async (dealerId: string, levelId: string) => {
+  try {
+    const response = await axiosInstance.patch(endpoints.ASSIGN_DEALER_LEVEL, {
+      dealerId,
+      levelId,
+    })
+    message.success('Dealer level assigned successfully!')
+    return response
+  } catch (error) {
+    message.error('Error assigning dealer level')
+    console.error('Error assigning dealer level:', error)
   }
 }

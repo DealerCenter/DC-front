@@ -132,9 +132,9 @@
   "undergoes customs procedures": "Undergoes customs procedures",
   "was sent": "Was sent",
 
-  "container data": "Container data",
-  "recipient data": "Recipient data",
-  "dealer data": "Dealer data",
+  "container data": "Container",
+  "recipient data": "Recipient",
+  "dealer data": "Dealer",
   "date of joining": "Date of joining",
 
   "website": "Website",
@@ -182,7 +182,7 @@
   "name of vehicle": "Name of the vehicle",
   "release year": "Release year",
   "vehicle feature": "Vehicle feature",
-  "vin code": "Vin code",
+  "vin code": "VIN",
 
   "mark photo location": "Mark the photo location",
   "go back": "Go back",
@@ -475,5 +475,11 @@
   "order not found": "Order not found",
   "receiver not found": "Receiver could not be found",
   "your info sent successfully": "Your information has been sent successfully",
-  "your info not sent": "Your information could not be sent"
+  "your info not sent": "Your information could not be sent",
+  "calculator": "Calculator",
+  "calculate transport price": "Calculate transport price",
+  "name surname" : "Name & Surname",
+  "phone number" : "Phone num."
+
+
 }

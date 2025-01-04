@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 })
 
 // Define the PDF document
-const InvoicePDF = ({ data }) => {
+const InvoicePDF = ({ data }: { data: any }) => {
   const {
     id,
     createdAt,
@@ -190,11 +190,12 @@ const InvoicePDF = ({ data }) => {
 }
 
 // Button to download the PDF
-const DownloadButton = ({ data }) => (
+const DownloadButton = ({ data }: { data: any }) => (
   <PDFDownloadLink
     document={<InvoicePDF data={data} />}
     fileName={`car_invoice_${data.id}.pdf`}
   >
+    {/* @ts-ignore */}
     {({ loading }) =>
       loading ? 'Generating PDF...' : <Image src={pdfIcon} alt='pdf icon' />
     }

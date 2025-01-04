@@ -13,12 +13,21 @@ import {
 import DropdownWithSearch from './DropdownWithSearch'
 import ShippingStatusBox from '@/common/components/shippingStateBox/ShippingStatusBox'
 import { SHIPPING_STATUS } from '@/common/helpers/constants'
+import useFilters from './useFilters'
 
 type Props = {}
 
 const RightFrame = ({}: Props) => {
   const { values, setFieldValue } = useCreateOrderContext()
   const t = useTranslations('')
+  const {
+    handleReceiverNameSearch,
+    fetchReceiverDataByName,
+    receiverNameOptions,
+    handleDealerSearch,
+    fetchDealerOptions,
+    dealerOptions,
+  } = useFilters()
   const [containerOptions, setContainerOptions] = useState<
     {
       label: string
@@ -87,9 +96,17 @@ const RightFrame = ({}: Props) => {
           <Frame2>
             <DropdownWithSearch
               searchType='receiver'
-              placeholder={t('search')}
+              placeholder={t('name surname')}
               fontSize={13}
+              fetchData={fetchReceiverDataByName}
+              handleSearch={handleReceiverNameSearch}
+              options={receiverNameOptions}
             />
+            {/* <DropdownWithSearch
+              searchType='receiver'
+              placeholder={t('phone number')}
+              fontSize={13}
+            /> */}
           </Frame2>
         </Frame>
       </Box>
@@ -99,9 +116,17 @@ const RightFrame = ({}: Props) => {
           <Frame2>
             <DropdownWithSearch
               searchType='dealer'
-              placeholder={t('search')}
+              placeholder={t('name surname')}
               fontSize={13}
+              fetchData={fetchDealerOptions}
+              handleSearch={handleDealerSearch}
+              options={dealerOptions}
             />
+            {/* <DropdownWithSearch
+              searchType='dealer'
+              placeholder={t('phone number')}
+              fontSize={13}
+            /> */}
           </Frame2>
         </Frame>
       </Box>
@@ -189,7 +214,6 @@ const Frame = styled.div`
 `
 const Frame2 = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
   gap: 8px;
   width: 100%;

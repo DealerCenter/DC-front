@@ -17,7 +17,7 @@ const LocationBox = ({ orderData }: Props) => {
       <LabelsFrame>
         <LabelPair>
           <Label>{t('state')}</Label>
-          <Value>{state.name}</Value>
+          <Value>{state}</Value>
         </LabelPair>
         <LabelPair>
           <Label>{t('address')}</Label>

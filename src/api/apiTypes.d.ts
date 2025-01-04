@@ -149,12 +149,7 @@ type ORDER_DATA = {
   mileage: number
   status: SHIPPING_STATUS
   statusAndDates: ShippingStatusAndDates[]
-  state: {
-    id: number
-    createdAt: string // DateTime
-    updatedAt: string // DateTime
-    name: string
-  }
+  state: string
   container: CONTAINER_GET_RES
   receiver: RECEIVER_DATA
   dealer: DEALERS_DATA
@@ -202,7 +197,12 @@ type DEALERS_DATA = {
   juridicalDocUrl: string | null
   juridicalDocVerificationStatus: VERIFICATION_STATUS_NAME
   receivers?: RECEIVER_DATA[] | []
-  juridicalInfo?: JURIDICAL_INFO // Optional if not always present
+  juridicalInfo?: JURIDICAL_INFO
+  level?: {
+    id: number
+    level: string
+    cost: number
+  }
 }
 
 type JURIDICAL_INFO = {

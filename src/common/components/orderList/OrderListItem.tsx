@@ -31,6 +31,7 @@ const OrderListItem = ({ imageLink, orderData, index, onClick }: Props) => {
           <UserInfoBox orderData={orderData} />
           {isTablet || (
             <ShippingStateBoxFrame>
+              {/* @ts-ignore */}
               <ShippingStatusBox isEditing={false} value={status} />
             </ShippingStateBoxFrame>
           )}

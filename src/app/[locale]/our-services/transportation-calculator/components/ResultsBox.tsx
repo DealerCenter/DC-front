@@ -10,53 +10,74 @@ import reloadIconBlack from '@/assets/icons/reloadIconBlack.svg'
 import Image from 'next/image'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import Loader from '@/common/components/loader/Loader'
 
-type Props = {}
+type Props = {
+  calculatedResult: {
+    totalPrice: number
+    cargoType: string
+    auctionLocation: string
+    destination: string
+  }
+  isCalculating: boolean
+}
 
-const ResultsBox = (props: Props) => {
+const ResultsBox = ({ calculatedResult, isCalculating }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
+  const splitName =
+    calculatedResult?.auctionLocation.length > 0
+      ? calculatedResult.auctionLocation.split('-')
+      : ''
+
+  console.log({ splitName })
+
   return (
     <Container>
-      {isMobile && (
-        <Icon>
-          <Image src={reloadIconBlack} alt='icon' />
-        </Icon>
+      {isCalculating ? (
+        <LoaderContainer>
+          <Loader />
+        </LoaderContainer>
+      ) : (
+        <>
+          {isMobile && (
+            <Icon>
+              <Image src={reloadIconBlack} alt='icon' />
+            </Icon>
+          )}
+          <LeftFrame>
+            <LabelIconValueBox
+              label={t('auction')}
+              icon={documentIcon}
+              value={
+                splitName.length > 0 ? `${splitName[splitName.length - 1]}` : ''
+              }
+            />
+            <LabelIconValueBox
+              label={t('vehicle type')}
+              icon={carIconBlack}
+              value={calculatedResult.cargoType}
+            />
+            <LabelIconValueBox
+              label={t('from where')}
+              icon={locationIconBlack}
+              value={splitName ? `${splitName[0]}, ${splitName[1]}` : ''}
+            />
+            <LabelIconValueBox
+              label={t('to where')}
+              icon={locationIconBlack}
+              value={calculatedResult.destination}
+            />
+          </LeftFrame>
+          <RightFrame>
+            <LabelAndCostBox>
+              <Label>{t('cost of transportation')}</Label>
+              <Cost>${calculatedResult.totalPrice}</Cost>
+            </LabelAndCostBox>
+          </RightFrame>
+        </>
       )}
-      <LeftFrame>
-        <LabelIconValueBox
-          label={t('auction')}
-          icon={documentIcon}
-          value='IAAI'
-        />
-        <LabelIconValueBox
-          label={t('vehicle type')}
-          icon={carIconBlack}
-          value='ჯიპი'
-        />
-        <LabelIconValueBox
-          label={t('from where')}
-          icon={locationIconBlack}
-          value='Delaware, USA'
-        />
-        <LabelIconValueBox
-          label={t('to where')}
-          icon={locationIconBlack}
-          value='Poti port'
-        />
-      </LeftFrame>
-      <RightFrame>
-        {!isMobile && (
-          <Icon>
-            <Image src={reloadIconBlack} alt='icon' />
-          </Icon>
-        )}
-        <LabelAndCostBox>
-          <Label>{t('cost of transportation')}</Label>
-          <Cost>{'$ 5750'}</Cost>
-        </LabelAndCostBox>
-      </RightFrame>
     </Container>
   )
 }
@@ -82,6 +103,10 @@ const Container = styled.div`
   }
 `
 
+const LoaderContainer = styled.div`
+  align-self: center;
+`
+
 const LeftFrame = styled.div`
   display: flex;
   flex-direction: column;
@@ -101,6 +126,7 @@ const LabelAndCostBox = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.xsm};
   align-items: flex-end;
+  text-align: right;
 `
 
 const Icon = styled.div`

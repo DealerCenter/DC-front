@@ -76,7 +76,7 @@ const DropdownFilterBoxWithDealer = ({
   }, [receiversSearchQuery])
 
   const getDealers = async () => {
-    const res = await getDealersAdmin({ firstName: dealersSearchQuery })
+    const res = await getDealersAdmin({ search: dealersSearchQuery })
     res && setDealersList(res.data)
   }
 
