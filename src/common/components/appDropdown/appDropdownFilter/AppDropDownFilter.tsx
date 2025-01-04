@@ -63,7 +63,11 @@ const AppDropdownFilter = ({
 
   return (
     <Dropdown ref={dropdownRef}>
-      <DropdownTrigger onClick={toggleDropdown}>{children}</DropdownTrigger>
+      {/* @ts-ignore */}
+      <DropdownTrigger onClick={toggleDropdown}>
+        {/* @ts-ignore */}
+        {children}
+      </DropdownTrigger>
       {isOpen && (
         <DropdownMenu left={left} top={top}>
           {isWithDealer ? (

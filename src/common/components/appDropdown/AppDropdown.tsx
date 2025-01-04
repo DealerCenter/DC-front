@@ -80,7 +80,9 @@ const AppDropdown = ({
 
   return (
     <Dropdown ref={dropdownRef}>
+      {/* @ts-ignore */}
       <DropdownTrigger onClick={isDisabled ? () => {} : toggleDropdown}>
+        {/* @ts-ignore */}
         {children}
       </DropdownTrigger>
       {isOpen && (
