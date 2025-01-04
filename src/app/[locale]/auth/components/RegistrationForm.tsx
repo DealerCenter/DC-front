@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { RegisterFormProviderLegalPerson } from '../hooks/useRegistrationFormLegalPerson'
 import { RegisterFormProviderIndividual } from '../hooks/useRegistrationFormIndividual'
 
-type Props = { children: JSX.Element }
+type Props = { children: any }
 
 const RegistrationForm = ({ children }: Props) => {
   return (

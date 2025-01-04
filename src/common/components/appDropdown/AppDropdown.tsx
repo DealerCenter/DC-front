@@ -11,7 +11,7 @@ type SortOption = {
 }
 
 type Props = {
-  children: ReactNode
+  children: any
   modalStyle?: 'white' | 'black'
   items?:
     | { href: { pathname: string }; locale: string; label: string }[]
@@ -102,6 +102,7 @@ const AppDropdown = ({
                 modalStyle={modalStyle}
               />
             ))}
+          {/* @ts-ignore */}
           {ReadyComponent && ReadyComponent}
           {sortOptions &&
             sortOptions.map((item, i) => (

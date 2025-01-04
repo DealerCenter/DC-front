@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 
 type Props = {
-  children: React.ReactNode
+  children: any
   tooltipValue: React.ReactNode
   arrow?: boolean
   radius?: number

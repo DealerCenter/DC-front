@@ -6,7 +6,7 @@ import DropdownFilterBoxWithDealer from './components/withDealer/DropdownFilterB
 import DropdownFilterBox from './components/withoutDealer/DropdownFilterBox'
 
 type Props = {
-  children: ReactNode
+  children: any
   left?: number
   top?: number
   setShippingStatus: (arg: ShippingStatus) => void

@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import DropdownItem from './DropdownItem'
 
 type Props = {
-  children: ReactNode
+  children: any
   modalStyle?: 'white' | 'black'
   items: { label: string }[]
   left?: number

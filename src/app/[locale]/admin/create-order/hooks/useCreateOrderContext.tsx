@@ -52,7 +52,7 @@ export const FIELD_NAMES = {
   HOME_PORT_IMAGES: IMAGE_LOCATIONS.HOME_PORT,
 }
 
-export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
+export const CreateOrderProvider = ({ children }: { children: any }) => {
   const t = useTranslations('')
   const router = useRouter()
 

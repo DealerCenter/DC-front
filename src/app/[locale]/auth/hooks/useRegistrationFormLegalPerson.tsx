@@ -34,7 +34,7 @@ export const FIELD_NAMES = {
 export const RegisterFormProviderLegalPerson = ({
   children,
 }: {
-  children: ReactNode
+  children: any
 }) => {
   const [uploadDocument, setUploadDocument] = useState<Blob>()
   const [uploadIdImage, setUploadIdImage] = useState<Blob>()

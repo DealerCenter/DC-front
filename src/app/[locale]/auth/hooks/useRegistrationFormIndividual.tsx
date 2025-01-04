@@ -28,7 +28,7 @@ export const FIELD_NAMES = {
 export const RegisterFormProviderIndividual = ({
   children,
 }: {
-  children: ReactNode
+  children: any
 }) => {
   const t = useTranslations('')
   const router = useRouter()
@@ -128,7 +128,7 @@ export const RegisterFormProviderIndividual = ({
 
 export const useRegisterFormContextIndividual = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {},
+  ExtraProps = {}
 >() => {
   const context = useContext(FormikContext)
   if (!context) {
