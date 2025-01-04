@@ -62,7 +62,7 @@ const CarsAtAuctionCarousel = ({ onSeeAllClick }: Props) => {
       <MediaCutDiv>
         <CarsCarouselFrame>
           {/* @ts-ignore */}
-          <Slider ref={null} {...settings}>
+          <Slider ref={null} refs={null} {...settings}>
             <CarDetailsBox />
             <CarDetailsBox />
             <CarDetailsBox />
