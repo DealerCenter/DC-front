@@ -2,7 +2,7 @@ import React, { ReactHTMLElement } from 'react'
 import styled, { css } from 'styled-components'
 
 type Props = {
-  children: React.ReactNode
+  children: any
   onClick: () => void
   height?: number
   width?: number
