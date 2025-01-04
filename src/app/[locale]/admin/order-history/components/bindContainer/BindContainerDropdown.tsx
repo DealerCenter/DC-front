@@ -5,7 +5,7 @@ import BindContainerBox from './components/BindContainerBox'
 import { CONTAINER_GET_RES } from '@/api/apiTypes'
 
 type Props = {
-  children: ReactNode
+  children: any
   left?: number
   top?: number
   isDisabled?: boolean
