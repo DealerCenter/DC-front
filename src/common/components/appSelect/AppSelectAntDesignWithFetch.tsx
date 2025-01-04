@@ -12,7 +12,7 @@ const { Option } = Select
 type Props = {
   options: {
     label: string
-    id: number
+    id: number | string
   }[]
   onSearch?: (arg: string) => void
   width?: number
@@ -21,8 +21,9 @@ type Props = {
   fontSize?: number
   isLoading: boolean
   onChange: (value: number) => void
-  value: number
+  value: number | string
   setValue: (arg: any) => void
+  hideDropdownIcon?: boolean
 }
 
 const AppSelectAntDesignWithFetch = ({
@@ -36,6 +37,7 @@ const AppSelectAntDesignWithFetch = ({
   onChange,
   setValue,
   value,
+  hideDropdownIcon,
 }: Props) => {
   const handleOnChange = (value: number) => {
     setValue(value)
@@ -45,6 +47,8 @@ const AppSelectAntDesignWithFetch = ({
   const handleOnSearch = (value: string) => {
     onSearch && onSearch(value)
   }
+
+  console.log({ value })
 
   return (
     <Container>
@@ -71,19 +75,25 @@ const AppSelectAntDesignWithFetch = ({
           showSearch
           placeholder={placeholder}
           optionFilterProp='label'
-          value={value}
+          // @ts-ignore
+          value={value.toString()?.length > 0 ? value : null}
           onChange={handleOnChange}
           onSearch={handleOnSearch}
-          filterOption={false}
+          filterOption={(input, option) =>
+            // @ts-ignore
+            option.children.toLowerCase().includes(input.toLowerCase())
+          }
           style={{
             width: `${width ? `${width}px` : '100%'}`,
             border: `2px solid ${theme.colors?.main_gray_04}`,
             borderRadius: '12px',
           }}
-          suffixIcon={<Image src={arrowDown} alt='arrow icon' />}
-          notFoundContent={isLoading ? <Spin size='small' /> : null} // Show isLoading spinner
+          suffixIcon={
+            hideDropdownIcon ? null : <Image src={arrowDown} alt='arrow icon' />
+          }
+          // notFoundContent={isLoading ? <Spin size='small' /> : null}
         >
-          {options.map((option) => (
+          {options?.map((option) => (
             <Option key={option.id} value={option.id}>
               {option.label}
             </Option>

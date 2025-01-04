@@ -1,20 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 
 import BoxWithHeader from '../BoxWithHeader'
 import BasicButton from '@/common/components/appButton/BasicButton'
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
+import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 
 import addPersonIcon from '@/assets/icons/addPersonBlack.svg'
 import editIcon from '@/assets/icons/editPencil.svg'
 import { useTranslations } from 'next-intl'
 import { RECEIVER_DATA } from '@/api/apiTypes'
+import AppModal from '@/common/components/modal/AppModal'
+import AddRecipient from '../../../users-list/components/addRecipient/AddRecipient'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
 
-type Props = { receiverData?: RECEIVER_DATA }
+type Props = { receiverData?: RECEIVER_DATA; getOrderData: () => void }
 
-const DataOfRecipient = ({ receiverData }: Props) => {
+const DataOfRecipient = ({ receiverData, getOrderData }: Props) => {
   const t = useTranslations('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <BoxWithHeader headerText='recipient data'>
@@ -24,9 +29,11 @@ const DataOfRecipient = ({ receiverData }: Props) => {
           <Value>{receiverData.phoneNumber}</Value>
           <IconBox>
             <Icon>
-              <Image src={checkedGreen} alt='checked icon' />
+              <VerificationIcon
+                verificationStatus={receiverData.verificationStatus}
+              />
             </Icon>
-            <Icon>
+            <Icon onClick={() => setIsModalOpen(true)}>
               <Image src={editIcon} alt='pencil icon' />
             </Icon>
           </IconBox>
@@ -38,6 +45,19 @@ const DataOfRecipient = ({ receiverData }: Props) => {
           <BasicButton onClick={() => {}}>{t('add recipient')}</BasicButton>
         </AddPersonFrame>
       )}
+
+      <AppModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <AddRecipient
+          onClose={() => setIsModalOpen(false)}
+          receiverData={receiverData}
+          setUpdatedSuccessfully={() => {}}
+          isReadOnly
+          getOrderData={getOrderData}
+        />
+      </AppModal>
     </BoxWithHeader>
   )
 }

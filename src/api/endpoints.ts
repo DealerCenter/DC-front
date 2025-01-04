@@ -24,4 +24,18 @@ export const endpoints = {
   CHANGE_PASSWORD_ADMIN: '/admins/change-password',
   STATES: '/api/states',
   STATES_ADMIN: '/states',
+  GET_INBOX: '/api/email-api/get-inbox',
+  GET_SINGLE_MAIL: '/api/email-api/get-single-mail',
+
+  //Calculator
+  UPLOAD_CALCULATOR_DATA: '/calculator/upload',
+  AUCTIONS: '/calculator/auctions-list',
+  AUCTIONS_AND_LOCATIONS: '/calculator/auction-and-locations',
+  LOCATIONS: '/calculator/location-list',
+  CARGO_TYPES: '/calculator/cargo-types',
+  DESTINATIONS: '/calculator/destination-list',
+  CALCULATE_PRICE: '/calculator/calculated-price',
+  DOWNLOAD_CALCULATOR_DATA: '/calculator/download',
+  DEALER_LEVELS: '/dealer-levels',
+  ASSIGN_DEALER_LEVEL: '/dealer-levels/assign-level',
 }

@@ -40,6 +40,7 @@ const CostsBoxEmpty = (props: Props) => {
               ? errors[FIELD_NAMES.TRANSPORTATION_COST]
               : ''
           }
+          icon='$'
         />
         <IconBox>
           <Image src={paperClip} alt='pdf icon' />
@@ -63,6 +64,7 @@ const CostsBoxEmpty = (props: Props) => {
               ? errors[FIELD_NAMES.CAR_COST]
               : ''
           }
+          icon='$'
         />
         <IconBox>
           <Image src={paperClip} alt='pdf icon' />
@@ -85,6 +87,7 @@ const CostsBoxEmpty = (props: Props) => {
           onBlur={() => {}}
           fontWeight='bold'
           fontSize={13}
+          icon='$'
         />
         <IconBox />
       </CostFrame>

@@ -186,7 +186,7 @@
   "name of vehicle": "ავტომობილის დასახელება",
   "release year": "გამოშვების წელი",
   "vehicle feature": "ავტომობილის მახასიათებელი",
-  "vin code": "Vin კოდი",
+  "vin code": "VIN",
 
   "mark photo location": "მონიშნე ფოტოს გადაღების ადგილმდებარეობა",
   "go back": "უკან დაბრუნება",
@@ -477,5 +477,11 @@
   "order not found": "შეკვეთა არ მოიძებნა",
   "receiver not found": "მიმღები ვერ მოიძებნა",
   "your info sent successfully": "თქვენი ინფორმაცია წარმატებით გაიგზავნა",
-  "your info not sent": "თქვენი ინფორმაცია ვერ გაიგზავნა"
+  "your info not sent": "თქვენი ინფორმაცია ვერ გაიგზავნა",
+  "calculator": "კალკულატორი",
+  "calculate transport price": "ტრანსპორტირების ფასის გამოთვლა",
+  "name surname" : "სახელი და გვარი",
+  "phone number" : "მობ. ნომერი"
+
+
 }

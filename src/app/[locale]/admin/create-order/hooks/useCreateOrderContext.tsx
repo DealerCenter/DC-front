@@ -15,11 +15,16 @@ import axiosInstance from '@/api/apiClient'
 import { ORDER_DATA } from '@/api/apiTypes'
 import { endpoints } from '@/api/endpoints'
 import { message } from 'antd'
-import {
-  IMAGE_LOCATIONS,
-  routeName,
-  SHIPPING_STATUS,
-} from '@/common/helpers/constants'
+import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
+import { getAuctionsAndLocations, getDestinationList } from '@/api/apiCalls'
+import { vehicleTypes } from '@/types/vehicleTypes'
+import { getCalculatedPrice } from '@/api/apiCalls'
+import { CalculatedResult } from '@/app/[locale]/our-services/transportation-calculator/useTransportCalculator'
+
+export type SelectOption = {
+  label: string
+  id: string
+}
 
 const FormikContext = createContext<FormikValues | null>(null)
 
@@ -30,7 +35,7 @@ export const FIELD_NAMES = {
   VIN: 'vin',
   TRANSPORTATION_COST: 'transportationCost',
   CAR_COST: 'carCost',
-  STATE_ID: 'stateId',
+  STATE_ID: 'state',
   EXACT_ADDRESS: 'exactAddress',
   IS_INSURED: 'isInsured',
   CAR_CATEGORY: 'carCategory',
@@ -52,6 +57,15 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
 
   const [orderId, setOrderId] = useState<number | null>(null)
+  const [locations, setLocations] = useState<SelectOption[]>([])
+  const [destinations, setDestinations] = useState<SelectOption[]>([])
+  const [calculatedResult, setCalculatedResult] = useState<CalculatedResult>({
+    totalPrice: 0,
+    auctionName: '',
+    cargoType: '',
+    auctionLocation: '',
+    destination: '',
+  })
 
   const [images, setImages] = useState({
     [IMAGE_LOCATIONS.TOW_TRUCK]: [],
@@ -167,7 +181,7 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         .number()
         .required(t('transportation cost required')),
       [FIELD_NAMES.CAR_COST]: yup.number().required(t('car cost required')),
-      [FIELD_NAMES.STATE_ID]: yup.number().required(t('state required')),
+      [FIELD_NAMES.STATE_ID]: yup.string().required(t('state required')),
       [FIELD_NAMES.EXACT_ADDRESS]: yup
         .string()
         .required(t('exact address required')),
@@ -181,9 +195,9 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
       // [FIELD_NAMES.STATUS_AND_DATES]: yup
       //   .string()
       //   .required(t('status required')),
-      [FIELD_NAMES.CONTAINER_ID]: yup
-        .number()
-        .required(t('container ID required')),
+      // [FIELD_NAMES.CONTAINER_ID]: yup
+      //   .number()
+      //   .required(t('container ID required')),
       [FIELD_NAMES.DEALER_ID]: yup.number().required(t('dealer ID required')),
       [FIELD_NAMES.RECEIVER_ID]: yup
         .number()
@@ -216,9 +230,9 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     formik.values[FIELD_NAMES.MANUFACTURE_YEAR] === '' ||
     isNaN(Number(formik.values[FIELD_NAMES.MANUFACTURE_YEAR])) ||
     typeof formik.values[FIELD_NAMES.DEALER_ID] !== 'number' ||
-    typeof formik.values[FIELD_NAMES.STATE_ID] !== 'number' ||
-    typeof formik.values[FIELD_NAMES.CONTAINER_ID] !== 'number' ||
+    typeof formik.values[FIELD_NAMES.STATE_ID] !== 'string' ||
     typeof formik.values[FIELD_NAMES.RECEIVER_ID] !== 'number'
+  // typeof formik.values[FIELD_NAMES.CONTAINER_ID] !== 'number' ||
 
   const prefillFormikValues = (orderDetails: ORDER_DATA) => {
     setFieldValue(FIELD_NAMES.MANUFACTURER, orderDetails.manufacturer)
@@ -263,6 +277,73 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
     resetForm,
   } = formik
 
+  useEffect(() => {
+    const fetchLocations = async () => {
+      const response = await getAuctionsAndLocations()
+      if (!response) return
+      setLocations(
+        response.map((location) => ({
+          label: location,
+          id: location,
+        }))
+      )
+    }
+
+    const fetchDestinations = async () => {
+      const response = await getDestinationList()
+      if (!response) return
+      setDestinations(
+        response.map((destination) => ({
+          label: destination,
+          id: destination,
+        }))
+      )
+    }
+
+    fetchLocations()
+    fetchDestinations()
+  }, [])
+
+  const handleCalculate = async () => {
+    if (!values[FIELD_NAMES.CAR_CATEGORY]) {
+      message.error('Please select car category')
+      return
+    }
+
+    if (!values[FIELD_NAMES.STATE_ID]) {
+      message.error('Please select location')
+      return
+    }
+
+    if (!values[FIELD_NAMES.EXACT_ADDRESS]) {
+      message.error('Please select destination')
+      return
+    }
+
+    try {
+      const carCategory = vehicleTypes.find((veh) =>
+        veh.body_class.includes(values[FIELD_NAMES.CAR_CATEGORY].toString())
+      )
+
+      const res = await getCalculatedPrice({
+        cargoType: carCategory?.vehicle_type ?? '',
+
+        auctionLocation:
+          values[FIELD_NAMES.STATE_ID].id ?? values[FIELD_NAMES.STATE_ID],
+        destination:
+          values[FIELD_NAMES.EXACT_ADDRESS].id ??
+          values[FIELD_NAMES.EXACT_ADDRESS],
+      })
+
+      if (res) {
+        setFieldValue(FIELD_NAMES.TRANSPORTATION_COST, res.totalPrice)
+        setCalculatedResult(res)
+      }
+    } catch (error) {
+      console.error('Error calculating price:', error)
+    }
+  }
+
   return (
     <FormikContext.Provider
       value={{
@@ -279,6 +360,9 @@ export const CreateOrderProvider = ({ children }: { children: ReactNode }) => {
         resetForm,
         setOrderId,
         setImages,
+        locations,
+        destinations,
+        handleCalculate,
       }}
     >
       {children}
