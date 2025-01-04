@@ -96,7 +96,7 @@ const OrderDetails = ({ id }: Props) => {
           </TopFrame>
           <BottomFrame>
             <LeftColumn orderData={orderData} />
-            <RightColumn orderData={orderData} />
+            <RightColumn orderData={orderData} getOrderData={getOrderData} />
           </BottomFrame>
         </>
       )}

@@ -11,6 +11,8 @@ import ChooseButton from '../../../../../../common/components/appButton/ChooseBu
 import closeIcon from '@/assets/icons/closeX.svg'
 import splitGrayLine from '@/assets/icons/splitGrayLine.svg'
 import useAddRecipients, { FIELD_NAMES } from './hooks/useAddRecipient'
+import { unVerifyReceiver, verifyReceiver } from '@/api/apiCalls'
+import { message } from 'antd'
 
 type Props = {
   onClose: () => void
@@ -22,7 +24,10 @@ type Props = {
     phoneNumber: string
     createdAt: string
     verificationStatus: string
+    idImageUrl: string
   }
+  isReadOnly?: boolean
+  getOrderData?: () => void
   setUpdatedSuccessfully: (arg: boolean) => void
 }
 
@@ -30,6 +35,8 @@ const AddRecipient = ({
   onClose,
   receiverData,
   setUpdatedSuccessfully,
+  isReadOnly,
+  getOrderData,
 }: Props) => {
   const [isIdImageUploaded, setIsIdImageUploaded] = useState(false)
   const t = useTranslations('')
@@ -49,14 +56,39 @@ const AddRecipient = ({
   const isButtonDisabledNative =
     isButtonDisabled || (!receiverData && !isIdImageUploaded)
 
+  const handleVerify = async () => {
+    try {
+      await verifyReceiver(receiverData?.id.toString() ?? '')
+      getOrderData && getOrderData()
+      message.success('Receiver verified successfully')
+    } catch (error) {
+      console.error('Error verifying receiver:', error)
+    }
+  }
+
+  const handleUnVerify = async () => {
+    try {
+      await unVerifyReceiver(receiverData?.id.toString() ?? '')
+      getOrderData && getOrderData()
+      message.success('Receiver Unverified successfully')
+    } catch (error) {
+      console.error('Error verifying receiver:', error)
+    }
+  }
+
   return (
     <Container>
       <Icon onClick={onClose}>
         <Image src={closeIcon} alt='close icon' width={12} height={12} />
       </Icon>
       <FrameTop>
-        <H3Bold>{t('add recipient')}</H3Bold>
-        <Label>{t('enter recipient data')}</Label>
+        <H3Bold>
+          {isReadOnly ? t('recipient person') : t('add recipient')}
+        </H3Bold>
+
+        <Label>
+          {isReadOnly ? t('recipient data') : t('enter recipient data')}
+        </Label>
         {!receiverData && (
           <ChooseTypeFrame>
             <ChooseButton
@@ -87,6 +119,8 @@ const AddRecipient = ({
               ? errors[FIELD_NAMES.FIRST_NAME]
               : ''
           }
+          hasLabel
+          isDisabled={isReadOnly}
         ></TextInput>
         <TextInput
           type='text'
@@ -100,6 +134,8 @@ const AddRecipient = ({
               ? errors[FIELD_NAMES.LAST_NAME]
               : ''
           }
+          hasLabel
+          isDisabled={isReadOnly}
         ></TextInput>
         <TextInput
           type='text'
@@ -113,6 +149,8 @@ const AddRecipient = ({
               ? errors[FIELD_NAMES.PERSONAL_ID]
               : ''
           }
+          hasLabel
+          isDisabled={isReadOnly}
         ></TextInput>
         <TextInput
           type='text'
@@ -127,26 +165,53 @@ const AddRecipient = ({
               ? errors[FIELD_NAMES.CONTACT_NUMBER]
               : ''
           }
+          hasLabel
+          isDisabled={isReadOnly}
         ></TextInput>
-        <FileDropZone
-          dropText={t('drop the file here')}
-          text={t('upload an ID photo')}
-          uploadedText={t('photo uploaded')}
-          warningText={t('add an id photo')}
-          onDropAdditional={setUploadIdImage}
-          setIsUploaded={setIsIdImageUploaded}
-        />
+
+        {isReadOnly ? (
+          <Image
+            src={receiverData?.idImageUrl ?? ''}
+            alt='photo'
+            width={100}
+            height={100}
+          />
+        ) : (
+          <FileDropZone
+            dropText={t('drop the file here')}
+            text={t('upload an ID photo')}
+            uploadedText={t('photo uploaded')}
+            warningText={t('add an id photo')}
+            onDropAdditional={setUploadIdImage}
+            setIsUploaded={setIsIdImageUploaded}
+          />
+        )}
       </InputFieldsFrame>
 
-      <AppButton
-        text={receiverData ? t('update information') : t('add')}
-        type='filled'
-        disabled={isButtonDisabledNative}
-        onClick={handleSubmit}
-        isSmall={false}
-        height='medium'
-        htmlType='submit'
-      ></AppButton>
+      {isReadOnly ? (
+        <VerificationButtons>
+          <AppButton
+            text='Verify status'
+            onClick={handleVerify}
+            type='filled'
+          />
+          <AppButton
+            text='Unverify status'
+            onClick={handleUnVerify}
+            type='outlined'
+          />
+        </VerificationButtons>
+      ) : (
+        <AppButton
+          text={receiverData ? t('update information') : t('add')}
+          type='filled'
+          disabled={isButtonDisabledNative}
+          onClick={handleSubmit}
+          isSmall={false}
+          height='medium'
+          htmlType='submit'
+        />
+      )}
     </Container>
   )
 }
@@ -213,4 +278,11 @@ const Container = styled.div`
   @media ${({ theme }) => theme.media?.sm} {
     padding: 32px 16px;
   }
+`
+
+const VerificationButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  gap: ${({ theme }) => theme.spacing?.md};
 `

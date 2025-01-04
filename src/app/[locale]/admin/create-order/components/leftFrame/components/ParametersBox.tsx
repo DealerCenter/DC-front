@@ -4,12 +4,11 @@ import { useTranslations } from 'next-intl'
 
 import Box from '../../../../components/common/Box'
 import TextInputFieldPair from './TextInputFieldPair'
-import AddFieldButton from '../../../../components/common/AddFieldButton'
 import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../../hooks/useCreateOrderContext'
-import { carCategories } from '@/common/helpers/constants'
+import { vehicleTypes } from '@/types/vehicleTypes'
 
 type Props = {}
 
@@ -101,7 +100,7 @@ const ParametersBox = ({}: Props) => {
               ? errors[FIELD_NAMES.CAR_CATEGORY]
               : ''
           }
-          selectOptionsBasic={carCategories}
+          selectOptionsBasic={vehicleTypes.map((veh) => veh.body_class)}
           handleSetValueBasic={handleSetCarCategory}
         />
         <TextInputFieldPair
@@ -117,7 +116,7 @@ const ParametersBox = ({}: Props) => {
           }
         />
       </LabelsFrame>
-      <AddFieldButton onClick={() => {}} />
+      {/* <AddFieldButton onClick={() => {}} /> */}
     </Box>
   )
 }

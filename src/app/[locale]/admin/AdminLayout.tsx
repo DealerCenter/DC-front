@@ -15,6 +15,7 @@ const routeNames = {
   dealers: routeName.adminDealersList,
   containers: routeName.adminContainers,
   settings: routeName.adminPersonalInformation,
+  adminSettings: routeName.adminSettings,
 }
 
 type Props = { children: React.JSX.Element }

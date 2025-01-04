@@ -6,11 +6,13 @@ import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
 import {
   FIELD_NAMES,
+  SelectOption,
   useCreateOrderContext,
 } from '../../../hooks/useCreateOrderContext'
 import AppButton from '@/common/components/appButton/AppButton'
 import { getCarDetailsByVin } from '@/common/helpers/utils'
 import { message } from 'antd'
+import { vehicleTypes } from '@/types/vehicleTypes'
 
 type Props = {}
 
@@ -23,8 +25,16 @@ const CarDetailsBoxEmpty = (props: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const t = useTranslations('')
-  const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
-    useCreateOrderContext()
+  const {
+    values,
+    handleBlur,
+    handleChange,
+    errors,
+    touched,
+    setFieldValue,
+    locations,
+    destinations,
+  } = useCreateOrderContext()
 
   useEffect(() => {
     setTextInputWidth(
@@ -41,13 +51,37 @@ const CarDetailsBoxEmpty = (props: Props) => {
     if (vin) {
       try {
         const res = (await getCarDetailsByVin(vin)).result[0]
+
+        const detectedLocation =
+          locations.find((location: SelectOption) => {
+            const locationFilter =
+              res.auction_name.toUpperCase() === 'COPART'
+                ? location.id
+                    .toUpperCase()
+                    .includes(res.location.split('-')[1]?.toUpperCase().trim())
+                : location.id
+                    .toUpperCase()
+                    .includes(res.location.split(' ')[0]?.toUpperCase())
+
+            return (
+              location.label.toUpperCase().includes(res.auction_name) &&
+              locationFilter
+            )
+          }) || ''
+
+        const detectedVehicleType =
+          vehicleTypes.find((veh) =>
+            veh.body_class.includes(res.body_style?.toUpperCase())
+          )?.body_class ?? ''
+
         setFieldValue(FIELD_NAMES.MANUFACTURER, res.make)
         setFieldValue(FIELD_NAMES.MANUFACTURE_YEAR, res.year)
         setFieldValue(FIELD_NAMES.MODEL, res.model)
         setFieldValue(FIELD_NAMES.VIN, vin)
-        setFieldValue(FIELD_NAMES.CAR_CATEGORY, res.vehicle_type)
+        setFieldValue(FIELD_NAMES.CAR_CATEGORY, detectedVehicleType)
         setFieldValue(FIELD_NAMES.MILEAGE, res.odometer)
-        setFieldValue(FIELD_NAMES.IS_INSURED, !!res.is_insurance)
+        setFieldValue(FIELD_NAMES.STATE_ID, detectedLocation?.id)
+        setFieldValue(FIELD_NAMES.EXACT_ADDRESS, destinations[0].id)
         message.success('Car found')
       } catch (e) {
         message.error('Car not found')
@@ -65,14 +99,14 @@ const CarDetailsBoxEmpty = (props: Props) => {
         fontSize={13}
         type='text'
         placeholder={t('name of vehicle')}
-        name={FIELD_NAMES.MODEL}
-        value={values[FIELD_NAMES.MODEL]}
+        name={FIELD_NAMES.MANUFACTURER}
+        value={values[FIELD_NAMES.MANUFACTURER]}
         onChange={handleChange}
         onBlur={handleBlur}
         hasLabel={true}
         errorMessage={
-          errors[FIELD_NAMES.MODEL] && touched[FIELD_NAMES.MODEL]
-            ? errors[FIELD_NAMES.MODEL]
+          errors[FIELD_NAMES.MANUFACTURER] && touched[FIELD_NAMES.MANUFACTURER]
+            ? errors[FIELD_NAMES.MANUFACTURER]
             : ''
         }
       />

@@ -82,6 +82,7 @@ const ListItem = ({
       >
         <AddRecipient
           onClose={() => setIsModalOpen(false)}
+          // @ts-ignore
           receiverData={receiverData}
           setUpdatedSuccessfully={setUpdatedSuccessfully}
         />

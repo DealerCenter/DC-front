@@ -1,76 +1,68 @@
 import { useTranslations } from 'next-intl'
 import styled from 'styled-components'
 
-import AddFieldButton from '../../../../components/common/AddFieldButton'
 import Box from '../../../../components/common/Box'
 import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../../hooks/useCreateOrderContext'
-import TextInputFieldPair from './TextInputFieldPair'
-import { useEffect, useState } from 'react'
-import { getStates } from '@/api/apiCalls'
+
+import AppSelectAntDesignWithFetch from '@/common/components/appSelect/AppSelectAntDesignWithFetch'
+import AppButton from '@/common/components/appButton/AppButton'
 
 type Props = {}
 
 const LocationBox = ({}: Props) => {
-  const { values, handleBlur, handleChange, errors, touched, setFieldValue } =
+  const { values, setFieldValue, locations, destinations, handleCalculate } =
     useCreateOrderContext()
   const t = useTranslations('')
-  const [countryStates, setCountryStates] = useState([])
 
-  useEffect(() => {
-    const fetchStates = async () => {
-      const res = await getStates(true)
-      const formatted = res?.map((state) => ({
-        id: state.id,
-        label: state.name,
-      }))
-      // @ts-ignore
-      setCountryStates(formatted)
-    }
-    fetchStates()
-  }, [])
+  const handleSetState = (value: string) => {
+    setFieldValue(FIELD_NAMES.STATE_ID, value)
+  }
 
-  const handleSetStateId = (id: number) => {
-    setFieldValue(FIELD_NAMES.STATE_ID, id)
+  const handleSetDestination = (value: string) => {
+    setFieldValue(FIELD_NAMES.EXACT_ADDRESS, value)
   }
 
   return (
     <Box>
       <Header>{t('location')}</Header>
       <Line />
-      <LabelsFrame>
-        <TextInputFieldPair
-          title='state'
-          name={FIELD_NAMES.STATE_ID}
+
+      <LabelsPair>
+        <SLabel>{t('from where')}</SLabel>
+        <AppSelectAntDesignWithFetch
+          options={locations}
+          // placeholder={t('which city/state is it coming from')}
           value={values[FIELD_NAMES.STATE_ID]}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errorMessage={
-            errors[FIELD_NAMES.STATE_ID] && touched[FIELD_NAMES.STATE_ID]
-              ? errors[FIELD_NAMES.STATE_ID]
-              : ''
-          }
-          optionsListWidthID={countryStates}
-          handleSetValueWithId={handleSetStateId}
+          setValue={handleSetState}
+          isLoading={false}
+          onChange={() => {}}
         />
-        <TextInputFieldPair
-          title='address'
-          placeholder={t('specify an address')}
-          name={FIELD_NAMES.EXACT_ADDRESS}
+      </LabelsPair>
+
+      <LabelsPair>
+        <SLabel>{t('to where')}</SLabel>
+        <AppSelectAntDesignWithFetch
+          options={destinations}
+          // placeholder={t('what city/port does it arrive at')}
           value={values[FIELD_NAMES.EXACT_ADDRESS]}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          errorMessage={
-            errors[FIELD_NAMES.EXACT_ADDRESS] &&
-            touched[FIELD_NAMES.EXACT_ADDRESS]
-              ? errors[FIELD_NAMES.EXACT_ADDRESS]
-              : ''
-          }
+          setValue={handleSetDestination}
+          isLoading={false}
+          // onChange={(value) => setSelectedDestination(value.toString())}
+          onChange={() => {}}
         />
-      </LabelsFrame>
-      <AddFieldButton onClick={() => {}} />
+      </LabelsPair>
+
+      <AppButton
+        text={t('calculate transport price')}
+        onClick={handleCalculate}
+        type='outlined'
+        // @ts-ignore
+        width={'100%'}
+        height='medium'
+      />
     </Box>
   )
 }
@@ -96,4 +88,22 @@ const LabelsFrame = styled.div<LabelsFrameProps>`
   display: flex;
   flex-direction: column;
   gap: ${({ isEditing }) => (isEditing ? `8px` : `4px`)};
+`
+
+const LabelsPair = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing?.md};
+  flex: 1;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing?.xsm};
+  }
+`
+
+const SLabel = styled.label`
+  font-size: 14px;
+  font-weight: ${({ theme }) => theme.fontWeight?.bold};
+  color: ${({ theme }) => theme.colors?.black};
 `

@@ -17,6 +17,7 @@ export const routeName = {
   adminPersonalInformation: '/admin/personal-information',
   adminOrder: '/admin/order',
   adminCreateOrder: '/admin/create-order',
+  adminSettings: '/admin/settings',
   // adminCreateOrderImageUpload: '/admin/create-order/image-upload',
   adminOrderImageUpload: '/admin/order/image-upload',
   adminDealersList: '/admin/dealers-list',
@@ -85,13 +86,15 @@ export type OrdersQueryType =
 
 export type DealersQueryType =
   | {
+      // firstName?: string
+      // lastName?: string
+      // phoneNumber?: string
+
+      personalId?: string
+      email?: string
       page?: number
       pageSize?: number
-      firstName?: string
-      lastName?: string
-      email?: string
-      phoneNumber?: string
-      personalId?: string
+      search?: string
     }
   | undefined
 

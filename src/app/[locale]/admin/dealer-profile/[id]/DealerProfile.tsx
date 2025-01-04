@@ -13,12 +13,12 @@ import DealerDataBox from './components/DealerDataBox'
 import LabelValueBox from './components/LabelValueBox'
 import PdfAndImageBox from './components/PdfAndImageBox'
 
-import userImage from '@/assets/images/userImage.png'
 import OrderListBox from './components/OrderListBox'
 import { getDealerWithId, getOrders } from '@/api/apiCalls'
 import { DEALERS_DATA, ORDER_DATA, ORDERS_GET_RES } from '@/api/apiTypes'
 import LoadingText from '@/common/components/readyComponents/LoadingText'
-import Page from '../../../page'
+import AppModal from '@/common/components/modal/AppModal'
+import EditModal from './components/EditModal'
 
 const ITEMS_PER_PAGE = 8
 
@@ -27,6 +27,7 @@ type Props = { dealerId: string }
 const DealerProfile = ({ dealerId }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [dealerData, setDealerData] = useState<DEALERS_DATA>()
   const [ordersResponse, setOrdersResponse] = useState<ORDERS_GET_RES>()
   const isMobile = useMediaQuery({ query: theme.media?.sm })
@@ -89,7 +90,7 @@ const DealerProfile = ({ dealerId }: Props) => {
           text={t('return to dealers list')}
           noTextOnMobile={true}
         />
-        <EditButton onClick={() => {}} />
+        <EditButton onClick={() => setIsEditModalOpen(true)} />
       </TopButtonsFrame>
       <Frame>
         {isMobile && <PdfAndImageBox image={dealerData?.idImageUrl} />}
@@ -107,6 +108,17 @@ const DealerProfile = ({ dealerId }: Props) => {
           ordersResponse={ordersResponse}
         />
       )}
+
+      <AppModal
+        isOpen={isEditModalOpen}
+        onRequestClose={() => setIsEditModalOpen(false)}
+      >
+        <EditModal
+          dealerId={dealerId}
+          getDealerData={handleGetDealer}
+          currentLevelId={dealerData.level?.id}
+        />
+      </AppModal>
     </Container>
   )
 }

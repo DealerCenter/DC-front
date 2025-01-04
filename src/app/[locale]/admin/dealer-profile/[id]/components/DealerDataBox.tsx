@@ -25,6 +25,7 @@ const DealerDataBox = ({
     personalId,
     createdAt,
     idImageVerificationStatus,
+    level,
   },
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
@@ -46,6 +47,9 @@ const DealerDataBox = ({
           label={t('date of joining')}
           value={formatDate(createdAt)}
         />
+        {level?.level && (
+          <LabelValuePair label='Dealer level' value={level.level} />
+        )}
         <LabelFrame>
           <Label>{t('authentication')}</Label>
           <VerificationIcon verificationStatus={idImageVerificationStatus} />
@@ -66,7 +70,7 @@ const Line = styled.div`
 const Frame = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing?.md};
+  gap: ${({ theme }) => theme.spacing?.sm};
 `
 
 const LabelFrame = styled.div`

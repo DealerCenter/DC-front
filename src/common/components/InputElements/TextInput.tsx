@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import infoIcon from '@/assets/icons/info.svg'
 import Image from 'next/image'
 import ErrorMessage from '../errorMessage/ErrorMessage'
+import { SearchOutlined } from '@ant-design/icons'
 
 type Props = {
   type: string
@@ -99,7 +100,11 @@ const TextInput = ({
         {errorMessage && (
           <ErrorMessage text={errorMessage} top={48} left={12} />
         )}
-        {onCheck && <CheckButton onClick={onCheck}>Check</CheckButton>}
+        {onCheck && (
+          <CheckButton onClick={onCheck}>
+            <SearchOutlined />
+          </CheckButton>
+        )}
       </Container>
       {optionalInfo && (
         <TextBox>
@@ -326,8 +331,7 @@ const IconBox = styled.div<IconBoxProps>`
 
 const CheckButton = styled.div`
   position: absolute;
-
-  padding: 10px 8px;
+  padding: 10px;
   border-radius: 10px;
 
   right: 5px;

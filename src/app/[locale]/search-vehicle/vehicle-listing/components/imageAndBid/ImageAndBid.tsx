@@ -4,14 +4,14 @@ import BidBox from './components/BidBox'
 import BidBoxFinalBid from './components/BidBoxFinalBid'
 import ImagesBox from './components/ImagesBox'
 
-type Props = {}
+type Props = { imageSrcs: string[] }
 
-const ImageAndBid = (props: Props) => {
+const ImageAndBid = ({ imageSrcs }: Props) => {
   const [isFinal, setIsFinal] = useState(false)
 
   return (
     <Container>
-      <ImagesBox />
+      <ImagesBox imageSrcs={imageSrcs} />
       <CarModelAndBidFrame>
         <CarBrandAndModel>
           <BrandLabel>2020 Mercedes Benz </BrandLabel>

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.2",
     "@emailjs/browser": "^4.4.1",
     "@react-pdf/renderer": "^4.1.5",
     "@types/js-cookie": "^3.0.6",

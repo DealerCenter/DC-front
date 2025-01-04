@@ -35,6 +35,7 @@ type Props = {
     dealers: string
     containers: string
     settings: string
+    adminSettings: string
   }
 }
 
@@ -136,19 +137,20 @@ const SideBarAdmin = ({ routes }: Props) => {
               height={20}
               href={routes.containers}
             />
-            {/* <BarButton
+
+            <BarButton
               isHovered={isHovered}
-              active={pathname === routes.settings}
+              active={pathname === routes.adminSettings}
               text={t('settings')}
               icon={
-                pathname === routes.settings
+                pathname === routes.adminSettings
                   ? settingsGearWhite
                   : settingsGearBlack
               }
               width={20}
               height={20}
-              href={routes.settings}
-            /> */}
+              href={routes.adminSettings}
+            />
           </ButtonFrame>
         </Frame>
         {!isMobile && (

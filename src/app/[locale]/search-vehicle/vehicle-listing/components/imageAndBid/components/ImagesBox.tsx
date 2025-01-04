@@ -6,9 +6,11 @@ import dummyCarImage from '@/assets/images/DummyCarImage.jpg'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
 
-type Props = {}
+type Props = {
+  imageSrcs: string[]
+}
 
-const ImagesBox = (props: Props) => {
+const ImagesBox = ({ imageSrcs }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
   return (
@@ -17,7 +19,7 @@ const ImagesBox = (props: Props) => {
         <SmallImagesFrame>
           <SmallImageBox>
             <Image
-              src={dummyCarImage}
+              src={imageSrcs[1] || dummyCarImage}
               alt='image'
               width={100}
               height={83}
@@ -26,7 +28,7 @@ const ImagesBox = (props: Props) => {
           </SmallImageBox>
           <SmallImageBox>
             <Image
-              src={dummyCarImage}
+              src={imageSrcs[2] || dummyCarImage}
               alt='image'
               width={100}
               height={83}
@@ -35,7 +37,7 @@ const ImagesBox = (props: Props) => {
           </SmallImageBox>
           <SmallImageBox>
             <Image
-              src={dummyCarImage}
+              src={imageSrcs[3] || dummyCarImage}
               alt='image'
               width={100}
               height={83}
@@ -44,7 +46,7 @@ const ImagesBox = (props: Props) => {
           </SmallImageBox>
           <SmallImageBox>
             <Image
-              src={dummyCarImage}
+              src={imageSrcs[4] || dummyCarImage}
               alt='image'
               width={100}
               height={83}
@@ -53,7 +55,7 @@ const ImagesBox = (props: Props) => {
           </SmallImageBox>
           <SmallImageBox>
             <Image
-              src={dummyCarImage}
+              src={imageSrcs[5] || dummyCarImage}
               alt='image'
               width={100}
               height={83}
@@ -64,7 +66,7 @@ const ImagesBox = (props: Props) => {
       )}
       <ImageBox>
         <Image
-          src={dummyCarImage}
+          src={imageSrcs[6] || dummyCarImage}
           alt='image'
           width={600}
           height={450}

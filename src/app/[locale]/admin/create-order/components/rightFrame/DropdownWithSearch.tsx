@@ -11,15 +11,28 @@ type Props = {
   searchType: 'receiver' | 'dealer'
   placeholder?: string
   fontSize?: number
+  fetchData: (searchQuery: string) => void
+  handleSearch: (value: string) => void
+  options: {
+    label: string
+    id: number
+  }[]
 }
 
-const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
-  const [options, setOptions] = useState<
-    {
-      label: string
-      id: number
-    }[]
-  >([])
+const DropdownWithSearch = ({
+  searchType,
+  placeholder,
+  fontSize,
+  fetchData,
+  handleSearch,
+  options,
+}: Props) => {
+  // const [options, setOptions] = useState<
+  //   {
+  //     label: string
+  //     id: number
+  //   }[]
+  // >([])
   const [loading, setLoading] = useState<boolean>(false) // Loading state
 
   const { setFieldValue, values } = useCreateOrderContext()
@@ -27,42 +40,6 @@ const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
   const handleSetValue = (id: number) => {
     searchType === 'dealer' && setFieldValue(FIELD_NAMES.DEALER_ID, id)
     searchType === 'receiver' && setFieldValue(FIELD_NAMES.RECEIVER_ID, id)
-  }
-
-  const fetchData = async (searchQuery: string) => {
-    setLoading(true)
-    try {
-      const response =
-        searchType === 'receiver'
-          ? await getReceiversAdmin({ pageSize: 100, search: searchQuery })
-          : searchType === 'dealer' &&
-            (await getDealersAdmin({
-              pageSize: 100,
-              firstName: searchQuery,
-            }))
-
-      if (response && response.data) {
-        const mapped = response.data.map((item) => {
-          return {
-            label: `${item.firstName} ${item.lastName}`,
-            id: item.id,
-          }
-        })
-        setOptions(mapped)
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleSearch = (value: string) => {
-    if (value) {
-      fetchData(value) // Fetch data as user types
-    } else {
-      setOptions([]) // Clear options if search is empty
-    }
   }
 
   useEffect(() => {
@@ -77,6 +54,7 @@ const DropdownWithSearch = ({ searchType, placeholder, fontSize }: Props) => {
       isLoading={loading}
       placeholder={placeholder}
       fontSize={fontSize}
+      hideDropdownIcon
       value={
         searchType === 'dealer'
           ? values[FIELD_NAMES.DEALER_ID]

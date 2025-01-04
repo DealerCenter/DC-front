@@ -66,41 +66,41 @@ const useAddRecipientsAdmin = (
       console.log('submit data addRecipient', legalFormData)
       message.error('backend not active')
 
-      // try {
-      //   const response = receiverData
-      //     ? await axiosInstance.put<RECEIVER_POST_RES>(
-      //         `${endpoints.RECEIVERS}/${receiverData.id}`,
-      //         legalFormData
-      //       )
-      //     : await axiosInstance.post<RECEIVER_POST_RES>(
-      //         endpoints.RECEIVERS,
-      //         legalFormData
-      //       )
+      try {
+        const response = receiverData
+          ? await axiosInstance.put<RECEIVER_POST_RES>(
+              `${endpoints.RECEIVERS}/${receiverData.id}`,
+              legalFormData
+            )
+          : await axiosInstance.post<RECEIVER_POST_RES>(
+              endpoints.RECEIVERS,
+              legalFormData
+            )
 
-      //   setUpdatedSuccessfully && setUpdatedSuccessfully(true)
+        setUpdatedSuccessfully && setUpdatedSuccessfully(true)
 
-      //   message.success(
-      //     receiverData
-      //       ? t('receiver updated successfully')
-      //       : t('receiver uploaded successfully')
-      //   )
+        message.success(
+          receiverData
+            ? t('receiver updated successfully')
+            : t('receiver uploaded successfully')
+        )
 
-      //   return response
-      // } catch (error) {
-      //   message.error(
-      //     receiverData
-      //       ? t('receiver could not be updated')
-      //       : t('receiver could not be uploaded')
-      //   )
-      //   console.error('Error:', error)
-      //   if (error instanceof AxiosError) {
-      //     console.error('Axios Error:', error)
-      //     setAxiosError(error)
-      //   } else {
-      //     console.error('Unknown Error:', error)
-      //     setAxiosError(undefined) // Handle non-Axios errors if needed
-      //   }
-      // }
+        return response
+      } catch (error) {
+        message.error(
+          receiverData
+            ? t('receiver could not be updated')
+            : t('receiver could not be uploaded')
+        )
+        console.error('Error:', error)
+        if (error instanceof AxiosError) {
+          console.error('Axios Error:', error)
+          setAxiosError(error)
+        } else {
+          console.error('Unknown Error:', error)
+          setAxiosError(undefined) // Handle non-Axios errors if needed
+        }
+      }
     },
 
     validationSchema: yup.object({
