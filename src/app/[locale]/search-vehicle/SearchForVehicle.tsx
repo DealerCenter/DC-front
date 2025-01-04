@@ -13,36 +13,28 @@ import Pagination from '@/common/components/pagination/Pagination'
 import SearchResultsList from './components/SearchResultsList'
 
 import checkboxFilled from '@/assets/icons/checkboxFilled.svg'
-import { useRouter } from '@/navigation'
+
 import { routeName } from '@/common/helpers/constants'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../theme'
 import SelectedFiltersFrame from './components/SelectedFiltersFrame'
+import { getVehicleList } from '@/common/helpers/utils'
+import { FIELD_NAMES, useSearchVehicle } from './hooks/useSearchVehicle'
 
 type Props = { setIsFooterShowing: (arg: boolean) => void }
 
 const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const [isFilterOn, setIsFilterOn] = useState(false)
-
   const [isFilterOpenOnMobile, setIsFilterOpenOnMobile] = useState(false)
 
-  const [itemsList, setItemsList] = useState<string[]>([
-    'from-2003',
-    'filter',
-    'Mercedes',
-    'manual',
-    'IAAI',
-  ])
+  const { vehicleList, pagination, values, activeFilters, setFieldValue } =
+    useSearchVehicle()
 
   const t = useTranslations('')
 
-  const handleAddItemToFilterList = (itemToAdd: string) => {
-    setItemsList((list) => [...list, itemToAdd])
-  }
-
-  const handleRemoveItemFromFilterList = (itemToRemove: string) => {
-    setItemsList(itemsList.filter((item) => item !== itemToRemove))
+  const handleRemoveFromFilters = (key: string) => {
+    setFieldValue(key, '') // Reset the filter value
   }
 
   // in case filter is open and user switches to bigger display
@@ -52,7 +44,7 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
     }
   }, [isMobile])
 
-  // hide footer when filter open
+  // hide footer when filter open (on mobile)
   useEffect(() => {
     if (isFilterOpenOnMobile) {
       setIsFooterShowing(false)
@@ -68,16 +60,17 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
     }
   }
 
-  const router = useRouter()
-
   return (
     <Container>
       {!isMobile && <SearchPanel />}
       <ListFrame>
-        <TextBold19>
-          {`${'65'} `}
-          {t('statement')}
-        </TextBold19>
+        {pagination && (
+          <TextBold19>
+            {`${pagination.total} `}
+            {t('statement')}
+          </TextBold19>
+        )}
+
         <SortFrame>
           <SortBox>
             <SecondaryButton
@@ -88,25 +81,24 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
             />
             <Line />
           </SortBox>
-          {/* <SecondaryButton
-            text='temporary vehicle listing link'
-            onClick={() => router.push(routeName.vehicleListing)}
-            icon={checkboxFilled}
-          /> */}
           {!isMobile && (
             <SelectedFiltersFrame
-              itemsList={itemsList}
-              handleRemoveFromList={handleRemoveItemFromFilterList}
+              activeFilters={activeFilters}
+              handleRemoveFromFilters={handleRemoveFromFilters}
             />
           )}
-          <SecondaryButton
-            text={t('sort')}
-            onClick={() => {}}
-            icon={sortIconBlack}
-            withoutLabel={isMobile}
-          />
+          {/* <SecondaryButton
+              text={t('sort')}
+              onClick={() => {}}
+              icon={sortIconBlack}
+              withoutLabel={isMobile}
+            /> */}
         </SortFrame>
-        {isFilterOpenOnMobile ? <SearchPanel /> : <SearchResultsList />}
+        {isFilterOpenOnMobile ? (
+          <SearchPanel />
+        ) : (
+          <>{vehicleList && <SearchResultsList vehicleList={vehicleList} />}</>
+        )}
       </ListFrame>
     </Container>
   )

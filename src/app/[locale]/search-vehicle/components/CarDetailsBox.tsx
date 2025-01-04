@@ -18,6 +18,8 @@ type Props = {
   mileage: string
   year: string
   location: string
+  engineType: string
+  color: string
 }
 
 const CarDetailsBox = ({
@@ -27,6 +29,8 @@ const CarDetailsBox = ({
   mileage,
   year,
   location,
+  engineType,
+  color,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
 
@@ -51,14 +55,17 @@ const CarDetailsBox = ({
             <TextGray>{model}</TextGray>
             <TextGray>{mileage}</TextGray>
             <SmallDetailsBox>
-              <TextGray>4cyl</TextGray>
-              <Line />
-              <TextGray>SE</TextGray>
-              <Line />
-              <ColorBox>
-                <ColorDot />
-                <TextGray>Green</TextGray>
-              </ColorBox>
+              <EngineTypeBox>
+                <TextGray>{engineType}</TextGray>
+              </EngineTypeBox>
+              {color && (
+                <>
+                  <Line />
+                  <ColorBox>
+                    <TextGray>{color}</TextGray>
+                  </ColorBox>
+                </>
+              )}
             </SmallDetailsBox>
           </SmallDetailsFrame>
         </CarBrandFrame>
@@ -136,6 +143,10 @@ const CarBrandBox = styled.div`
   }
 `
 
+const EngineTypeBox = styled.div`
+  max-width: 130px;
+`
+
 const SmallDetailsBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -155,13 +166,6 @@ const Line = styled.div`
   height: 8px;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors?.main_gray_10};
-`
-
-const ColorDot = styled.div`
-  width: 8px;
-  height: 8px;
-  border-radius: 12px;
-  background-color: ${({ theme }) => theme.colors?.green};
 `
 
 const CarBrand = styled.h3`

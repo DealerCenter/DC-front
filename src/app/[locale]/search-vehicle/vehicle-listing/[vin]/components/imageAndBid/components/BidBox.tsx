@@ -12,11 +12,15 @@ import AppModal from '@/common/components/modal/AppModal'
 import dollarSign from '@/assets/icons/dollarSignBlack.svg'
 import infoIconEmpty from '@/assets/icons/infoIconEmpty.svg'
 
-type Props = {}
+type Props = { carDetails: AuctionResult }
 
-const BidBox = (props: Props) => {
+const BidBox = ({ carDetails }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+
+  const { active_bidding, currency } = carDetails
+
+  const { id, current_bid } = active_bidding[0]
 
   const t = useTranslations('')
 
@@ -41,7 +45,9 @@ const BidBox = (props: Props) => {
         />
         <CurrentBidBox>
           <AppTooltip
-            tooltipValue={<ToolTipTextBox text='This is a tooltip' />}
+            tooltipValue={
+              <ToolTipTextBox text={`${current_bid} ${currency.char_code}`} />
+            }
           >
             <Image src={infoIconEmpty} alt='info icon' width={20} height={20} />
           </AppTooltip>
@@ -97,6 +103,8 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors?.white};
 
   height: 100%;
+
+  border: 1px solid red;
 `
 
 const TimeLeftBox = styled.div`
@@ -104,6 +112,8 @@ const TimeLeftBox = styled.div`
   flex-direction: column;
   align-items: flex-end;
   gap: 4px;
+
+  border: 1px solid red;
 `
 
 const TimeLeftLabel = styled.label`

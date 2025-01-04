@@ -13,6 +13,8 @@ const nextConfig = {
       'production-dc-orders.s3.eu-central-1.amazonaws.com',
       'production-dc-orders.s3.amazonaws.com',
       'images.cdn.manheim.com',
+      'vis.iaai.com',
+      'cs.copart.com',
     ],
   },
 }

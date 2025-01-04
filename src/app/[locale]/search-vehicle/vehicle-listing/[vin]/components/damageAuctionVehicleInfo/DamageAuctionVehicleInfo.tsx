@@ -6,10 +6,26 @@ import ToolTipTextWithHeader from '@/common/components/appTooltip/ToolTipTextWit
 import BoxWithHeader from '../common/BoxWithHeader'
 import LabelValuePair from '../common/LabelValuePair'
 
-type Props = {}
+type Props = { carDetails: AuctionResult }
 
-const DamageAuctionVehicleInfo = (props: Props) => {
+const DamageAuctionVehicleInfo = ({ carDetails }: Props) => {
   const t = useTranslations('')
+
+  const {
+    primary_damage,
+    highlights,
+    vin,
+    lot_number,
+    seller,
+    odometer,
+    car_keys,
+    engine_type,
+    drive,
+    transmission,
+    fuel,
+    cylinders,
+    body_style,
+  } = carDetails
 
   return (
     <Container>
@@ -19,12 +35,12 @@ const DamageAuctionVehicleInfo = (props: Props) => {
             <FrameForPairs>
               <LabelValuePair
                 label={t('damage')}
-                value={t('undercarriage')}
+                value={primary_damage}
                 tooltipValue={<ToolTipTextBox text='This is a tooltip' />}
               />
               <LabelValuePair
                 label={t('condition')}
-                value={t('wont start')}
+                value={highlights}
                 tooltipValue={
                   <ToolTipTextWithHeader
                     header='This is a tooltip'
@@ -32,46 +48,64 @@ const DamageAuctionVehicleInfo = (props: Props) => {
                   />
                 }
               />
-              <LabelValuePair
-                label={t('title')}
-                value={t('certification of title')}
-              />
+              <LabelValuePair label={t('title')} value={'NA'} />
             </FrameForPairs>
           </BoxWithHeader>
           <BoxWithHeader header={t('damage')} width={716}>
             <FrameForPairs>
-              <LabelValuePair label={t('vin')} value={t('undercarriage')} />
-              <LabelValuePair label={t('lot number')} value={t('wont start')} />
+              <LabelValuePair label={t('vin')} value={vin} />
+              <LabelValuePair
+                label={t('lot number')}
+                value={lot_number.toString()}
+              />
               <LabelValuePair
                 label={t('date added')}
-                value={t('certification of title')}
+                value={'not in backend'}
               />
               <LabelValuePair
                 label={t('date of auction')}
-                value={t('certification of title')}
+                value={'not in backend'}
                 tooltipValue={<ToolTipTextBox text='This is a tooltip' />}
               />
-              <LabelValuePair
-                label={t('facility')}
-                value={t('certification of title')}
-              />
+              <LabelValuePair label={t('facility')} value={'not in backend'} />
               <LabelValuePair
                 label={t('seller')}
-                value={t('certification of title')}
+                value={seller ? seller : 'NA'}
               />
             </FrameForPairs>
           </BoxWithHeader>
         </FrameColumn>
         <BoxWithHeader header={t('damage')} width={468}>
           <FrameForPairs>
-            <LabelValuePair label={t('odometer')} value={'129,000 mi'} />
-            <LabelValuePair label={t('keys')} value={t('yes')} />
-            <LabelValuePair label={t('engine type')} value={'3.5L'} />
-            <LabelValuePair label={t('drivetrain')} value={'FWD'} />
-            <LabelValuePair label={t('transmission')} value={t('automatic')} />
-            <LabelValuePair label={t('fuel')} value={t('gas')} />
-            <LabelValuePair label={t('cylinders')} value={'sedan'} />
-            <LabelValuePair label={t('body style')} value={'Silver'} />
+            <LabelValuePair
+              label={t('odometer')}
+              value={odometer ? `${odometer} miles` : 'NA'}
+            />
+            <LabelValuePair
+              label={t('keys')}
+              value={car_keys ? car_keys : 'NA'}
+            />
+            <LabelValuePair
+              label={t('engine type')}
+              value={engine_type ? engine_type : 'NA'}
+            />
+            <LabelValuePair
+              label={t('drivetrain')}
+              value={drive ? drive : 'NA'}
+            />
+            <LabelValuePair
+              label={t('transmission')}
+              value={transmission ? transmission : 'NA'}
+            />
+            <LabelValuePair label={t('fuel')} value={fuel ? fuel : 'NA'} />
+            <LabelValuePair
+              label={t('cylinders')}
+              value={cylinders ? cylinders : 'NA'}
+            />
+            <LabelValuePair
+              label={t('body style')}
+              value={body_style ? body_style : 'NA'}
+            />
           </FrameForPairs>
         </BoxWithHeader>
       </Frame>

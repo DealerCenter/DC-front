@@ -1,37 +1,50 @@
-import { useState } from 'react'
+import { formatDateNum } from '@/common/helpers/simpleFunctions'
 import styled from 'styled-components'
-import BidBox from './components/BidBox'
 import BidBoxFinalBid from './components/BidBoxFinalBid'
 import ImagesBox from './components/ImagesBox'
+import { useState } from 'react'
 
-type Props = { imageSrcs: string[] }
+type Props = { carDetails: AuctionResult }
 
-const ImageAndBid = ({ imageSrcs }: Props) => {
-  const [isFinal, setIsFinal] = useState(false)
+const ImageAndBid = ({ carDetails }: Props) => {
+  const [formattedDate, setFormattedDate] = useState('')
+
+  const {
+    year,
+    make,
+    model,
+    fuel,
+    vin,
+    lot_number,
+    highlights,
+    active_bidding,
+    sales_history,
+    car_photo,
+  } = carDetails
+
+  if (active_bidding[0]?.sale_date) {
+    setFormattedDate(formatDateNum(Number(active_bidding[0].sale_date)))
+  }
 
   return (
     <Container>
-      <ImagesBox imageSrcs={imageSrcs} />
+      <ImagesBox images={car_photo.photo} />
       <CarModelAndBidFrame>
         <CarBrandAndModel>
-          <BrandLabel>2020 Mercedes Benz </BrandLabel>
-          <ModelLabel>E class, Diezel</ModelLabel>
-          <button onClick={() => setIsFinal((is) => !is)}>
-            switch bid box
-          </button>
+          <BrandLabel>{`${year} ${make}`}</BrandLabel>
+          <ModelLabel>{`${model}, ${fuel}`}</ModelLabel>
         </CarBrandAndModel>
-        {isFinal ? (
-          <BidBoxFinalBid
-            finalBid={18250}
-            vinCode='7SAYGDEF7NF349929'
-            lotNumber={38738009}
-            dateOfSale='06/02/2023'
-            condition='Stationary'
-            auctionState='pending'
-          />
-        ) : (
-          <BidBox />
-        )}
+
+        <BidBoxFinalBid
+          finalBid={9999}
+          vinCode={vin}
+          lotNumber={lot_number}
+          dateOfSale={formattedDate}
+          condition={highlights}
+          auctionState='pending'
+        />
+
+        {/* <BidBox carDetails={carDetails} /> */}
       </CarModelAndBidFrame>
     </Container>
   )

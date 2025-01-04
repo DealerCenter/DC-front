@@ -35,3 +35,35 @@ export const getCarDetailsByVin = async (vin: string) => {
   )
   return response.data
 }
+
+export const getVehicleList = async (payload: {
+  page: number
+  per_page?: number
+  auction_name?: 'COPART' | 'IAAI'
+  make?: string // manufacturer
+  model?: string
+  year_from?: string
+  year_to?: string
+  odometer_from?: number
+  odometer_to?: number
+}) => {
+  const response = await axios.post<VehicleListApiResponse>(
+    `${AUCTIONS_API}/api/v2/get-cars?api_token=${process.env.NEXT_PUBLIC_AUCTIONS_API_TOKEN}`,
+    payload
+  )
+  return response.data
+}
+
+export const getMakeNames = async () => {
+  const response = await axios.post<getMakesResponse>(
+    `${AUCTIONS_API}/api/v1/get-makes?api_token=${process.env.NEXT_PUBLIC_AUCTIONS_API_TOKEN}`
+  )
+  return response.data
+}
+
+export const getModelByMake = async (makeId: number) => {
+  const response = await axios.post<getModelByMakeResponse>(
+    `${AUCTIONS_API}/api/v1/get-model-by-make/${makeId}?api_token=${process.env.NEXT_PUBLIC_AUCTIONS_API_TOKEN}`
+  )
+  return response.data
+}
