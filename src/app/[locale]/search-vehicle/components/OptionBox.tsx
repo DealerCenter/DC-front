@@ -6,7 +6,7 @@ import downIcon from '@/assets/icons/searchSidePanel/arrowDownBlack.svg'
 import downIconGray from '@/assets/icons/searchSidePanel/arrowDownGray.svg'
 
 type Props = {
-  children: ReactNode
+  children: any
   label: string
   isActive?: boolean
 }
