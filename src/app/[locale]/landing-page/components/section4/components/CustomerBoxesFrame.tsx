@@ -34,7 +34,7 @@ const CustomerBoxesFrame = (props: Props) => {
       {isMobile ? (
         <MediaCutDiv>
           <CarsCarouselFrame>
-            <Slider {...isMobileSettings}>
+            <Slider ref={null} {...isMobileSettings}>
               <CustomerBox
                 customerImage={customerImage1.src}
                 customerName={'Lauren M.'}
