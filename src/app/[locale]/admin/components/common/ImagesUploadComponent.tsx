@@ -79,7 +79,7 @@ const ImagesUploadComponent = ({
   })
 
   return (
-    <Container {...getRootProps()} width={width} height={height}>
+    <Container {...getRootProps()} width={width ?? 0} height={height ?? 0}>
       <Frame>
         <IconBox>
           <Image
