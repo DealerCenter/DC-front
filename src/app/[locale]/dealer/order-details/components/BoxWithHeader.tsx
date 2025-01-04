@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl'
 import React from 'react'
 import styled from 'styled-components'
 
-type Props = { children: React.ReactNode; headerText: string }
+type Props = { children: any; headerText: string }
 
 const BoxWithHeader = ({ children, headerText }: Props) => {
   const t = useTranslations('')
