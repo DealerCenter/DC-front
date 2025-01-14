@@ -4,6 +4,7 @@ import styled from 'styled-components'
 type Props = { children: React.ReactNode }
 
 const AppOverlay = ({ children }: Props) => {
+  // @ts-ignore
   return <BackgroundOverlay>{children}</BackgroundOverlay>
 }
 
