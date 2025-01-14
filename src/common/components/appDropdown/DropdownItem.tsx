@@ -120,7 +120,7 @@ const Container = styled.div<ContainerProps>`
   cursor: pointer;
 `
 
-const LinkContainer = styled(Link)<ContainerProps>`
+const LinkContainer = styled(Link)<any>`
   list-style: none;
   font-size: 16px;
   font-weight: 400;
