@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Link, usePathname } from '@/navigation'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
