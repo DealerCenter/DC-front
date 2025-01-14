@@ -102,7 +102,7 @@ const AppDropdown = ({
                 modalStyle={modalStyle}
               />
             ))}
-          {/* {ReadyComponent && ReadyComponent} */}
+          {ReadyComponent && ReadyComponent}
           {sortOptions &&
             sortOptions.map((item, i) => (
               <DropdownItem
