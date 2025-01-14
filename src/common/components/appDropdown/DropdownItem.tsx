@@ -39,10 +39,12 @@ const DropdownItem = ({ item, modalStyle, onItemClick }: Props) => {
           onClick={onClick ? onClick : () => {}}
         >
           <Frame>
-            {icon && (
+            {icon ? (
               <Icon>
                 <Image src={icon} alt='icon' />
               </Icon>
+            ) : (
+              <div />
             )}
             {label && label}
           </Frame>
@@ -120,7 +122,7 @@ const Container = styled.div<ContainerProps>`
   cursor: pointer;
 `
 
-const LinkContainer = styled(Link)<any>`
+const LinkContainer = styled(Link)<ContainerProps>`
   list-style: none;
   font-size: 16px;
   font-weight: 400;
