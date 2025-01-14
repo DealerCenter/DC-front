@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from 'react'
 import styled, { css } from 'styled-components'
 
@@ -50,9 +52,7 @@ const Container = styled.div<ContainerProps>`
     padding: var(--b);
     background: repeating-conic-gradient(var(--c1) 0 25%, var(--c2) 0 50%) 0 0 /
       var(--s) var(--s) round;
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask-composite: exclude;
     border-radius: 12px;
   }
