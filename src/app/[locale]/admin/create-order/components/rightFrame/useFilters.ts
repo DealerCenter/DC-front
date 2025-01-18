@@ -1,22 +1,22 @@
 import { getDealersAdmin, getReceiversAdmin } from '@/api/apiCalls'
+import { VERIFICATION_STATUS_NAME } from '@/common/helpers/constants'
 import React, { useState } from 'react'
 
-type Props = {}
+type Options = {
+  label: string
+  id: number
+  verificationStatus: VERIFICATION_STATUS_NAME
+}[]
 
 const useFilters = () => {
-  const [receiverNameOptions, setReceiverNameOptions] = useState<
-    {
-      label: string
-      id: number
-    }[]
-  >([])
+  const [receiverNameOptions, setReceiverNameOptions] = useState<Options>([])
+  const [receiverPhoneOptions, setReceiverPhoneOptions] = useState<Options>([])
 
-  const [dealerOptions, setDealerOptions] = useState<
-    {
-      label: string
-      id: number
-    }[]
-  >([])
+  const [dealerNameOptions, setDealerNameOptions] = useState<Options>([])
+  const [dealerPhoneOptions, setDealerPhoneOptions] = useState<Options>([])
+
+  const [isAddReceiverModalOpen, setIsAddReceiverModalOpen] = useState(false)
+  const [isAddContainerModalOpen, setIsAddContainerModalOpen] = useState(false)
 
   const fetchReceiverDataByName = async (searchQuery: string) => {
     // setLoading(true)
@@ -27,13 +27,22 @@ const useFilters = () => {
       })
 
       if (response && response.data) {
-        const mapped = response.data.map((item) => {
+        const mappedNames = response.data.map((item) => {
           return {
             label: `${item.firstName} ${item.lastName}`,
             id: item.id,
+            verificationStatus: item.verificationStatus,
           }
         })
-        setReceiverNameOptions(mapped)
+        const mappedPhones = response.data.map((item) => {
+          return {
+            label: `${item.phoneNumber}`,
+            id: item.id,
+            verificationStatus: item.verificationStatus,
+          }
+        })
+        setReceiverNameOptions(mappedNames)
+        setReceiverPhoneOptions(mappedPhones)
       }
     } catch (error) {
       console.error('Error fetching data:', error)
@@ -47,6 +56,7 @@ const useFilters = () => {
       fetchReceiverDataByName(value)
     } else {
       setReceiverNameOptions([])
+      setReceiverPhoneOptions([])
     }
   }
 
@@ -58,13 +68,23 @@ const useFilters = () => {
       })
 
       if (response && response.data) {
-        const mapped = response.data.map((item) => {
+        const mappedNames = response.data.map((item) => {
           return {
             label: `${item.firstName} ${item.lastName}`,
             id: item.id,
+            verificationStatus: item.idImageVerificationStatus,
           }
         })
-        setDealerOptions(mapped)
+        const mappedPhones = response.data.map((item) => {
+          return {
+            label: `${item.phoneNumber}`,
+            id: item.id,
+            verificationStatus: item.idImageVerificationStatus,
+          }
+        })
+
+        setDealerNameOptions(mappedNames)
+        setDealerPhoneOptions(mappedPhones)
       }
     } catch (error) {
       console.error('Error fetching data:', error)
@@ -75,7 +95,8 @@ const useFilters = () => {
     if (value) {
       fetchDealerOptions(value) // Fetch data as user types
     } else {
-      setDealerOptions([]) // Clear options if search is empty
+      setDealerNameOptions([])
+      setDealerPhoneOptions([])
     }
   }
 
@@ -83,9 +104,15 @@ const useFilters = () => {
     handleReceiverNameSearch,
     fetchReceiverDataByName,
     receiverNameOptions,
+    receiverPhoneOptions,
     handleDealerSearch,
     fetchDealerOptions,
-    dealerOptions,
+    dealerNameOptions,
+    dealerPhoneOptions,
+    setIsAddReceiverModalOpen,
+    isAddReceiverModalOpen,
+    isAddContainerModalOpen,
+    setIsAddContainerModalOpen,
   }
 }
 

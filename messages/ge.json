@@ -225,6 +225,7 @@
   "not added recipient data": "მიმღები პირის მონაცემები ჯერ არ გაქვს დამატებული ",
 
   "specify type of document and get detailed information": "მიუთითე საბუთის ტიპი და მიიღე დეტალური ინფორმაცია სასურველი ავტომობილის შესახებ.",
+  "specify doc type" : "მიუთითე საბუთის ტიპი",
   "find out if problematic and how good an investment it can be": "გაიგე, არის თუ არა პრობლემური და რამდენად კარგი ინვესტიცია შეიძლება იყოს",
   "specify details and calculate exact shipping cost": "მიუთითეთ დეტალები და დათვალეთ ტრანსპორტირების ზუსტი ხარჯი",
 
@@ -424,6 +425,7 @@
   "enter container data": "შეიყვანეთ კონტეინერის მონაცემები",
   "container created successfully": "კონტეინერი წარმატებით შეიქმნა",
   "container could not be created": "კონტეინერი ვერ შეიქმნა",
+  "container could not be found": "კონტეინერი ვერ მოიძებნა",
 
   "must be a number": "უნდა იყოს რიცხვი",
   "order created successfully": "შეკვეთა წარმატებით შეიქმნა",
@@ -481,7 +483,12 @@
   "calculator": "კალკულატორი",
   "calculate transport price": "ტრანსპორტირების ფასის გამოთვლა",
   "name surname" : "სახელი და გვარი",
-  "phone number" : "მობ. ნომერი"
+  "phone number" : "მობ. ნომერი",
 
+  "document" : {
+    "problem": "პრობლემური",
+    "problem free": "უპრობლემო",
+    "contact auction": "დაუკავშირდით აუქციონს"
+  }
 
 }

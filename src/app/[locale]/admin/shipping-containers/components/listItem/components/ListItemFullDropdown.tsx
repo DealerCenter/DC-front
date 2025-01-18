@@ -36,6 +36,9 @@ const ListItemFullDropdown = ({
     createdAt,
     status,
     receiver,
+    dealer,
+    carImages,
+    transportationCost,
   },
   dashedLineHeight = 85,
 }: Props) => {
@@ -59,7 +62,12 @@ const ListItemFullDropdown = ({
           fullName={`${receiver.firstName} ${receiver.lastName}`}
           phoneNumber={receiver.phoneNumber}
         />
-        <DebtLabel>{`$ ${carCost}`}</DebtLabel>
+        <ReceiverBox
+          verificationStatus={dealer?.idImageVerificationStatus}
+          fullName={`${dealer.firstName} ${dealer.lastName}`}
+          phoneNumber={dealer.phoneNumber}
+        />
+        <DebtLabel>{`$ ${carCost + transportationCost}`}</DebtLabel>
       </ReceiverAndDebtFrame>
     </Container>
   )

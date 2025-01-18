@@ -9,7 +9,8 @@ import { CONTAINER_GET_RES, ORDER_DATA } from '@/api/apiTypes'
 type Props = { containerData: CONTAINER_GET_RES }
 
 const ContainerData = ({ containerData }: Props) => {
-  const { name, trackingUrl } = containerData
+  const name = containerData?.name ?? 'No container assigned'
+  const trackingUrl = containerData?.trackingUrl ?? ''
 
   return (
     <BoxWithHeader headerText='container data'>

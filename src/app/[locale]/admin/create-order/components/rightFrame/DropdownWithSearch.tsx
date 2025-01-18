@@ -1,18 +1,14 @@
-import { useEffect, useState } from 'react'
-
-import { getDealersAdmin, getReceiversAdmin } from '@/api/apiCalls'
+import { ReactNode, useEffect, useState } from 'react'
 import AppSelectAntDesignWithFetch from '@/common/components/appSelect/AppSelectAntDesignWithFetch'
-import {
-  FIELD_NAMES,
-  useCreateOrderContext,
-} from '../../hooks/useCreateOrderContext'
 
 type Props = {
-  searchType: 'receiver' | 'dealer'
   placeholder?: string
   fontSize?: number
+  notFoundContent?: ReactNode
   fetchData: (searchQuery: string) => void
   handleSearch: (value: string) => void
+  value: string
+  setValue: (value: number) => void
   options: {
     label: string
     id: number
@@ -20,27 +16,16 @@ type Props = {
 }
 
 const DropdownWithSearch = ({
-  searchType,
   placeholder,
   fontSize,
   fetchData,
   handleSearch,
   options,
+  value,
+  setValue,
+  notFoundContent,
 }: Props) => {
-  // const [options, setOptions] = useState<
-  //   {
-  //     label: string
-  //     id: number
-  //   }[]
-  // >([])
-  const [loading, setLoading] = useState<boolean>(false) // Loading state
-
-  const { setFieldValue, values } = useCreateOrderContext()
-
-  const handleSetValue = (id: number) => {
-    searchType === 'dealer' && setFieldValue(FIELD_NAMES.DEALER_ID, id)
-    searchType === 'receiver' && setFieldValue(FIELD_NAMES.RECEIVER_ID, id)
-  }
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     fetchData('')
@@ -50,21 +35,14 @@ const DropdownWithSearch = ({
     <AppSelectAntDesignWithFetch
       options={options}
       onSearch={handleSearch}
-      onChange={handleSetValue}
+      onChange={setValue}
       isLoading={loading}
       placeholder={placeholder}
       fontSize={fontSize}
       hideDropdownIcon
-      value={
-        searchType === 'dealer'
-          ? values[FIELD_NAMES.DEALER_ID]
-          : values[FIELD_NAMES.RECEIVER_ID]
-      }
-      setValue={
-        searchType === 'dealer'
-          ? (value) => setFieldValue(FIELD_NAMES.DEALER_ID, value)
-          : (value) => setFieldValue(FIELD_NAMES.RECEIVER_ID, value)
-      }
+      value={value}
+      setValue={setValue}
+      notFoundContent={notFoundContent}
     />
   )
 }

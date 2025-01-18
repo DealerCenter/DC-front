@@ -1,9 +1,12 @@
 import Image from 'next/image'
 import styled from 'styled-components'
 
-import checkmarkGreen from '@/assets/icons/checkedGreen.svg'
 import ShippingStatusButton from '@/common/components/ShippingStatusButton/ShippingStatusButton'
-import { SHIPPING_STATUS } from '@/common/helpers/constants'
+import {
+  SHIPPING_STATUS,
+  VERIFICATION_STATUS_NAME,
+} from '@/common/helpers/constants'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
 
 type Props = {
   amount: number
@@ -11,6 +14,10 @@ type Props = {
   buyerPhoneNumber: string
   vinCode: string
   shippingStatus: SHIPPING_STATUS
+  dealerFullName: string
+  dealerPhoneNumber: string
+  dealerVerificationStatus: VERIFICATION_STATUS_NAME
+  receiverVerificationStatus: VERIFICATION_STATUS_NAME
 }
 
 const DetailsBox = ({
@@ -18,25 +25,25 @@ const DetailsBox = ({
   buyerFullName,
   buyerPhoneNumber,
   shippingStatus,
+  dealerFullName,
+  dealerPhoneNumber,
+  dealerVerificationStatus,
+  receiverVerificationStatus,
 }: Props) => {
   return (
     <Container>
       <Frame>
-        <IconBox>
-          <Image src={checkmarkGreen} alt='icon' width={16} height={16} />
-        </IconBox>
+        <VerificationIcon verificationStatus={receiverVerificationStatus} />
         <Box>
           <TextBold>{buyerFullName}</TextBold>
           <Text>{buyerPhoneNumber}</Text>
         </Box>
       </Frame>
       <Frame>
-        <IconBox>
-          <Image src={checkmarkGreen} alt='icon' width={16} height={16} />
-        </IconBox>
+        <VerificationIcon verificationStatus={dealerVerificationStatus} />
         <Box>
-          <TextBold>{buyerFullName}</TextBold>
-          <Text>{buyerPhoneNumber}</Text>
+          <TextBold>{dealerFullName}</TextBold>
+          <Text>{dealerPhoneNumber}</Text>
         </Box>
       </Frame>
       <ShippingStatusButtonFrame>

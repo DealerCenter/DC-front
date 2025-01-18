@@ -29,6 +29,7 @@ type Props = {
   isDisabled?: boolean
   onCheck?: () => void
   hasLabel?: boolean
+  onFocus?: () => void
 }
 
 const TextInput = ({
@@ -55,6 +56,7 @@ const TextInput = ({
   isDisabled = false,
   onCheck,
   hasLabel,
+  onFocus,
 }: Props) => {
   const [isFocused, setIsFocused] = useState(false)
 
@@ -72,9 +74,12 @@ const TextInput = ({
           placeholder={hasLabel ? '' : placeholder}
           value={value ? String(value) : undefined}
           onChange={onChange}
-          onFocus={() => setIsFocused(true)}
+          onFocus={() => {
+            setIsFocused(true)
+            onFocus && onFocus()
+          }}
           onBlur={(e) => {
-            onBlur(e)
+            onBlur && onBlur(e)
             setIsFocused(false)
           }}
           icon={icon}
@@ -241,12 +246,12 @@ ${({ isHalfSize, width }) =>
           width: 213px;
         `
       : width
-        ? css`
-            width: ${width}px;
-          `
-        : css`
-            width: 350px;
-          `}
+      ? css`
+          width: ${width}px;
+        `
+      : css`
+          width: 350px;
+        `}
 
   ${({ height }) =>
     height
@@ -275,12 +280,12 @@ ${({ isHalfSize, width }) =>
             width: 167.5px;
           `
         : width
-          ? css`
-              width: ${width}px;
-            `
-          : css`
-              width: 350px;
-            `}
+        ? css`
+            width: ${width}px;
+          `
+        : css`
+            width: 350px;
+          `}
   }
 
   ${({ isWidthFill }) =>

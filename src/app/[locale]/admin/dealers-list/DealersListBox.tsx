@@ -15,12 +15,16 @@ import DealersList from './components/DealersList'
 import AddRecipientAdmin from './components/addRecipientAdmin/AddRecipientAdmin'
 import { message } from 'antd'
 import Loader from '@/common/components/loader/Loader'
+import DropdownWithSearch from '../create-order/components/rightFrame/DropdownWithSearch'
 
 const ITEMS_PER_PAGE = 8
 
-type Props = {}
+type Options = {
+  label: string
+  id: number
+}
 
-const DealersListBox = (props: Props) => {
+const DealersListBox = () => {
   const [isSearchActive, setIsSearchActive] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isPageLoaded, setIsPageLoaded] = useState(false)
@@ -28,6 +32,15 @@ const DealersListBox = (props: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [dealersList, setDealersList] = useState<DEALERS_DATA[]>()
+  const [selectedDealerId, setSelectedDealerId] = useState('')
+  const [dealerDropdownOptions, setDealerDropdownOptions] = useState<Options[]>(
+    [
+      {
+        label: '',
+        id: 0,
+      },
+    ]
+  )
   const [searchQuery, setSearchQuery] = useState('')
   const t = useTranslations('')
 
@@ -48,6 +61,15 @@ const DealersListBox = (props: Props) => {
       setDealersList(response.data)
       setCurrentPage(response.page)
       setTotalPages(response.pageCount)
+
+      const mapped = response.data.map((item) => {
+        return {
+          label: `${item.firstName} ${item.lastName}`,
+          id: item.id,
+          // verificationStatus: item.verificationStatus,
+        }
+      })
+      setDealerDropdownOptions(mapped)
     }
     setIsLoading(false)
   }
@@ -118,7 +140,27 @@ const DealersListBox = (props: Props) => {
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
       >
-        <AddRecipientAdmin onClose={() => setIsModalOpen(false)} />
+        <AddRecipientAdmin
+          onSuccess={() => {
+            handleGetDealers()
+            setIsModalOpen(false)
+          }}
+          dealerId={Number(selectedDealerId)}
+          dealerSection={
+            <div>
+              <DropdownWithSearch
+                placeholder={t('name surname')}
+                fontSize={13}
+                fetchData={handleGetDealers}
+                handleSearch={() => {}}
+                options={dealerDropdownOptions}
+                value={selectedDealerId}
+                setValue={(value) => setSelectedDealerId(value.toString())}
+              />
+            </div>
+          }
+          onClose={() => setIsModalOpen(false)}
+        />
       </AppModal>
     </Container>
   )

@@ -1,4 +1,4 @@
-import { downloadCalculatorExcel, uploadCalculatorData } from '@/api/apiCalls'
+import { downloadDocumentsData, uploadDocumentsData } from '@/api/apiCalls'
 import FileDropZone from '@/common/components/InputElements/FileDropZone'
 import AppButton from '@/common/components/appButton/AppButton'
 import React, { useState } from 'react'
@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 type Props = {}
 
-const Calculator = (props: Props) => {
+const DocCheck = (props: Props) => {
   const [file, setFile] = useState(null)
 
   const handleUpload = async () => {
@@ -16,7 +16,7 @@ const Calculator = (props: Props) => {
     formData.append('file', file)
 
     try {
-      uploadCalculatorData(formData)
+      uploadDocumentsData(formData)
     } catch (error) {
       console.error('Error uploading file:', error)
     }
@@ -24,7 +24,7 @@ const Calculator = (props: Props) => {
 
   const handleDownload = async () => {
     try {
-      await downloadCalculatorExcel()
+      await downloadDocumentsData()
     } catch (error) {
       console.error('Error downloading file:', error)
     }
@@ -39,7 +39,8 @@ const Calculator = (props: Props) => {
 
   return (
     <div>
-      <Title>Transportation Calculator</Title>
+      <MT20 />
+      <Title>Documents Check</Title>
       <Container>
         <div>
           <FileDropZone
@@ -66,7 +67,7 @@ const Calculator = (props: Props) => {
   )
 }
 
-export default Calculator
+export default DocCheck
 
 const MT20 = styled.div`
   margin-top: 20px;

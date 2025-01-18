@@ -14,7 +14,10 @@ export const FIELD_NAMES = {
   TRACKING_URL: 'trackingUrl',
 }
 
-const useAddContainer = (setUploadedSuccessfully: (arg: boolean) => void) => {
+const useAddContainer = (
+  setUploadedSuccessfully: (arg: boolean) => void,
+  onClose?: () => void
+) => {
   const [isLoading, setIsLoading] = useState(false)
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
@@ -36,7 +39,7 @@ const useAddContainer = (setUploadedSuccessfully: (arg: boolean) => void) => {
         )
 
         setUploadedSuccessfully(true)
-
+        onClose && onClose()
         message.success(t('container created successfully'))
 
         return response

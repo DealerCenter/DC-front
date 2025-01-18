@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
 import uncheckedYellow from '@/assets/icons/uncheckedYellow.svg'
+import checkGray from '@/assets/icons/checkedIconEmpty.svg'
 
 import { VERIFICATION_STATUS_NAME } from '@/common/helpers/constants'
 
@@ -17,6 +18,8 @@ const VerificationIcon = ({ verificationStatus }: Props) => {
         <Image src={checkedGreen} alt='checked icon' width={20} height={20} />
       ) : verificationStatus === VERIFICATION_STATUS_NAME.UNVERIFIED ? (
         <Image src={uncheckedRed} alt='unchecked icon' width={20} height={20} />
+      ) : verificationStatus === VERIFICATION_STATUS_NAME.UNKNOWN ? (
+        <Image src={checkGray} alt='unchecked icon' width={20} height={20} />
       ) : (
         verificationStatus === VERIFICATION_STATUS_NAME.PENDING && (
           <Image

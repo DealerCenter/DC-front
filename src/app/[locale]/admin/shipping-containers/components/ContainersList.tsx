@@ -23,17 +23,13 @@ const ContainersList = ({ containersData }: Props) => {
         <>
           {!isMobile && (
             <LabelsContainer
+              paddingRight={40}
               labels={[
-                // t('brand name'),
-                // t('link'),
-                // t('departure date'),
                 // t('arrival date'),
-                // t('num of cars'),
-                'name',
-                'trackingUrl',
-                'createdAt',
-                'updatedAt',
-                'id',
+                t('brand name'),
+                t('link'),
+                t('departure date'),
+                t('num of cars'),
               ]}
               height={88}
             />

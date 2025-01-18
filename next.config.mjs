@@ -15,6 +15,7 @@ const nextConfig = {
       'images.cdn.manheim.com',
       'vis.iaai.com',
       'cs.copart.com',
+      'production-dc-receivers.s3.amazonaws.com',
     ],
   },
 }

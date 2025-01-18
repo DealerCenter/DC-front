@@ -26,7 +26,7 @@ const AddContainer = ({ onClose, setUploadedSuccessfully }: Props) => {
     touched,
     isButtonDisabled,
     isLoading,
-  } = useAddContainer(setUploadedSuccessfully)
+  } = useAddContainer(setUploadedSuccessfully, onClose)
 
   return (
     <Container>
@@ -39,7 +39,7 @@ const AddContainer = ({ onClose, setUploadedSuccessfully }: Props) => {
       </FrameTop>
       <TextInput
         type='text'
-        placeholder={'name'}
+        placeholder={t('brand name')}
         width={323}
         isOutline={false}
         name={FIELD_NAMES.NAME}
@@ -54,7 +54,7 @@ const AddContainer = ({ onClose, setUploadedSuccessfully }: Props) => {
       ></TextInput>
       <TextInput
         type='text'
-        placeholder={'trackingUrl'}
+        placeholder={t('link')}
         width={323}
         isOutline={false}
         name={FIELD_NAMES.TRACKING_URL}

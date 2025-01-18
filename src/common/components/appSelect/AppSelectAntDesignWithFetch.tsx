@@ -1,6 +1,5 @@
 import { ConfigProvider, Select, Spin } from 'antd'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import theme from '@/app/[locale]/theme'
@@ -24,6 +23,7 @@ type Props = {
   value: number | string
   setValue: (arg: any) => void
   hideDropdownIcon?: boolean
+  notFoundContent?: React.ReactNode | null
 }
 
 const AppSelectAntDesignWithFetch = ({
@@ -38,6 +38,7 @@ const AppSelectAntDesignWithFetch = ({
   setValue,
   value,
   hideDropdownIcon,
+  notFoundContent,
 }: Props) => {
   const handleOnChange = (value: number) => {
     setValue(value)
@@ -47,8 +48,6 @@ const AppSelectAntDesignWithFetch = ({
   const handleOnSearch = (value: string) => {
     onSearch && onSearch(value)
   }
-
-  console.log({ value })
 
   return (
     <Container>
@@ -72,16 +71,17 @@ const AppSelectAntDesignWithFetch = ({
       >
         <Select
           //   mode='multiple'
+          notFoundContent={notFoundContent}
           showSearch
           placeholder={placeholder}
           optionFilterProp='label'
           // @ts-ignore
-          value={value.toString()?.length > 0 ? value : null}
+          value={value?.toString()?.length > 0 ? value : null}
           onChange={handleOnChange}
           onSearch={handleOnSearch}
           filterOption={(input, option) =>
             // @ts-ignore
-            option.children.toLowerCase().includes(input.toLowerCase())
+            option?.children?.toLowerCase().includes(input.toLowerCase())
           }
           style={{
             width: `${width ? `${width}px` : '100%'}`,
@@ -93,8 +93,8 @@ const AppSelectAntDesignWithFetch = ({
           }
           // notFoundContent={isLoading ? <Spin size='small' /> : null}
         >
-          {options?.map((option) => (
-            <Option key={option.id} value={option.id}>
+          {options?.map((option, index) => (
+            <Option key={`${option.id}${index}`} value={option.id}>
               {option.label}
             </Option>
           ))}

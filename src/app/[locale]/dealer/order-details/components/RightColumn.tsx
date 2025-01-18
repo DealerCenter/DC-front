@@ -5,11 +5,12 @@ import { ORDER_DATA } from '@/api/apiTypes'
 import BoxWithHeader from './BoxWithHeader'
 import ContainerData from './rightColumnComponents/ContainerData'
 import DataOfRecipient from './rightColumnComponents/DataOfRecipient'
+import DealerData from './rightColumnComponents/DealerData'
 
 type Props = { orderData: ORDER_DATA; getOrderData: () => void }
 
 const RightColumn = ({ orderData, getOrderData }: Props) => {
-  const { statusAndDates, container, receiver } = orderData
+  const { statusAndDates, container, receiver, dealer } = orderData
 
   return (
     <Container>
@@ -18,7 +19,7 @@ const RightColumn = ({ orderData, getOrderData }: Props) => {
       </BoxWithHeader>
       <ContainerData containerData={container} />
       <DataOfRecipient receiverData={receiver} getOrderData={getOrderData} />
-      {/* <DealerData /> */}
+      <DealerData data={dealer} />
     </Container>
   )
 }

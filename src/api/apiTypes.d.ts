@@ -121,6 +121,7 @@ type CONTAINER_GET_RES = {
   updatedAt: string
   id: number
   trackingUrl: string
+  orders: ORDER_DATA[]
 }
 
 type ORDERS_GET_RES = {
@@ -154,6 +155,14 @@ type ORDER_DATA = {
   receiver: RECEIVER_DATA
   dealer: DEALERS_DATA
   carImages: CAR_IMAGE[]
+}
+
+type DOCUMENT_CHECK_RES = {
+  id: number
+  document: string
+  description: string
+  code: string
+  label: string
 }
 
 type CAR_IMAGE = {

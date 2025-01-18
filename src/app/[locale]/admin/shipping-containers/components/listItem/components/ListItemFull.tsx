@@ -12,45 +12,6 @@ import DropdownIcon from '@/common/components/readyIcons/DropdownIcon'
 import ListItemFullDropdown from './ListItemFullDropdown'
 import { ORDER_DATA } from '@/api/apiTypes'
 
-const orderData = {
-  additionalDetails: null,
-  carCategory: 'Jeep',
-  carCost: 9000,
-  carDetails: null,
-  carImages: [],
-  container: {},
-  createdAt: '2024-07-20T07:43:55.763Z',
-  exactAddress: 'Somewhere',
-  id: 1,
-  isInsured: true,
-  manufactureYear: 2012,
-  manufacturer: 'Toyota',
-  mileage: 70000,
-  model: 'Rav 4',
-  receiver: {
-    createdAt: '2024-09-18T06:34:16.261Z',
-    firstName: 'dssdd',
-    id: 43,
-    idImageUrl: '43/personal_id.png',
-    isJuridical: false,
-    lastName: 'sdsddds',
-    personalId: '2333443',
-    phoneNumber: '34434343',
-    updatedAt: '2024-09-18T06:34:16.537Z',
-    verificationStatus: 'PENDING',
-  },
-  state: {
-    id: 1,
-    createdAt: '2024-07-20T07:43:00.906Z',
-    updatedAt: '2024-07-20T07:43:00.906Z',
-    name: 'California',
-  },
-  status: 'InAmericanWarehouse',
-  transportationCost: 2200,
-  updatedAt: '2024-10-02T12:45:55.728Z',
-  vin: '233444',
-}
-
 type Props = {
   onClick: () => void
   brandName: string
@@ -61,6 +22,7 @@ type Props = {
 
   isDropdownOpen: boolean
   setIsDropdownOpen: (arg: boolean) => void
+  orders: ORDER_DATA[]
 }
 
 const ListItemFull = ({
@@ -72,6 +34,7 @@ const ListItemFull = ({
   id,
   isDropdownOpen,
   setIsDropdownOpen,
+  orders,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -84,16 +47,21 @@ const ListItemFull = ({
     <>
       <Container onClick={onClick}>
         <LabelBox>
-          <DropdownIcon
-            isOpen={isDropdownOpen}
-            onClickWithEvent={handleDropdown}
-          />
+          {orders?.length > 0 ? (
+            <DropdownIcon
+              isOpen={isDropdownOpen}
+              onClickWithEvent={handleDropdown}
+            />
+          ) : (
+            <div style={{ width: 36 }} />
+          )}
+
           <NameLabel>{brandName}</NameLabel>
         </LabelBox>
         <LinkLabel>{link}</LinkLabel>
         <Label>{departureDate}</Label>
-        <Label>{arrivalDate}</Label>
-        <Label>{id}</Label>
+        {/* <Label>{arrivalDate}</Label> */}
+        <Label>{`${orders.length}/4`}</Label>
       </Container>
       <AppModal
         isOpen={isModalOpen}
@@ -104,21 +72,15 @@ const ListItemFull = ({
           onDelete={() => console.log('delete')}
         />
       </AppModal>
-      {isDropdownOpen && (
-        <>
+      {isDropdownOpen &&
+        orders.length > 0 &&
+        orders.map((i) => (
           <ListItemFullDropdown
-            key={`listItemFullDropdown$}`}
+            key={i.id}
             onClick={() => {}}
-            orderData={orderData as unknown as ORDER_DATA}
+            orderData={i as unknown as ORDER_DATA}
           />
-          <ListItemFullDropdown
-            key={`listItemFullDropdown$}`}
-            onClick={() => {}}
-            orderData={orderData as unknown as ORDER_DATA}
-            dashedLineHeight={107}
-          />
-        </>
-      )}
+        ))}
     </>
   )
 }

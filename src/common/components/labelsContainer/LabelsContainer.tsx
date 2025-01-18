@@ -22,7 +22,6 @@ const LabelsContainer = ({ labels, height, paddingRight }: Props) => {
       {labels.map((label, i) => (
         <Label key={i}>{label}</Label>
       ))}
-      {is4Labels && <Label></Label>}
     </Container>
   )
 }

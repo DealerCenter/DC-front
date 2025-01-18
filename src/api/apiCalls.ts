@@ -10,6 +10,7 @@ import {
   CONTAINER_POST_RES,
   DEALERS_DATA,
   DEALERS_RES,
+  DOCUMENT_CHECK_RES,
   ME_RES,
   OrderPostAdminType,
   OrderPutAdminType,
@@ -334,6 +335,53 @@ export const uploadCalculatorData = async (file: FormData) => {
   }
 }
 
+export const uploadDocumentsData = async (file: FormData) => {
+  try {
+    const response = await axiosInstance.post<any>(
+      endpoints.DOCUMENTS_CHECK,
+      file
+    )
+    message.success('File uploaded successfully!')
+    return response.data
+  } catch (error) {
+    console.error('Error getting mail:', error)
+    message.error('Error uploading file!')
+  }
+}
+
+export const downloadDocumentsData = async () => {
+  try {
+    const response = await axiosInstance.get(endpoints.DOCUMENTS_CHECK_DOWNLOAD)
+    if (!response) {
+      throw new Error('Failed to fetch the file')
+    }
+    const blob = new Blob([response.data])
+    const link = document.createElement('a')
+
+    const url = window.URL.createObjectURL(blob)
+    link.href = url
+    link.download = 'DocumentsData.xlsx'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+    return response
+  } catch (error) {
+    console.error('Error downloading file:', error)
+  }
+}
+
+export const getDocumentsData = async () => {
+  try {
+    const response = await axiosInstance.get<DOCUMENT_CHECK_RES[]>(
+      endpoints.DOCUMENTS_CHECK
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error getting documents data:', error)
+  }
+}
+
 export const downloadCalculatorExcel = async () => {
   try {
     const response = await axiosInstance.get(endpoints.DOWNLOAD_CALCULATOR_DATA)
@@ -345,7 +393,7 @@ export const downloadCalculatorExcel = async () => {
 
     const url = window.URL.createObjectURL(blob)
     link.href = url
-    link.download = 'ExportedData.xlsx'
+    link.download = 'CalculatorData.xlsx'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
