@@ -173,8 +173,8 @@ const AddRecipient = ({
           <Image
             src={receiverData?.idImageUrl ?? ''}
             alt='photo'
-            width={100}
-            height={100}
+            width={350}
+            height={200}
           />
         ) : (
           <FileDropZone
@@ -234,7 +234,7 @@ const Icon = styled.div`
 const InputFieldsFrame = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 `
 
 const Label = styled.label`

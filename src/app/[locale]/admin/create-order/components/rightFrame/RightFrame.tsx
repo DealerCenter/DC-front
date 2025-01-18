@@ -5,15 +5,19 @@ import styled from 'styled-components'
 import { getContainersAdmin } from '@/api/apiCalls'
 import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
 import Box from '../../../components/common/Box'
-// import ShippingStatusBox from '../../../order-history/components/shippingStateBox/ShippingStatusBox'
 import {
   FIELD_NAMES,
   useCreateOrderContext,
 } from '../../hooks/useCreateOrderContext'
 import DropdownWithSearch from './DropdownWithSearch'
 import ShippingStatusBox from '@/common/components/shippingStateBox/ShippingStatusBox'
-import { SHIPPING_STATUS } from '@/common/helpers/constants'
+import { VERIFICATION_STATUS_NAME } from '@/common/helpers/constants'
 import useFilters from './useFilters'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
+import NotFoundSelect from '@/common/components/notFoundSelect/NotFoundSelect'
+import AddRecipientAdmin from '../../../dealers-list/components/addRecipientAdmin/AddRecipientAdmin'
+import AppModal from '@/common/components/modal/AppModal'
+import AddContainer from '../../../shipping-containers/components/addContainer/AddContainer'
 
 type Props = {}
 
@@ -23,10 +27,16 @@ const RightFrame = ({}: Props) => {
   const {
     handleReceiverNameSearch,
     fetchReceiverDataByName,
-    receiverNameOptions,
     handleDealerSearch,
     fetchDealerOptions,
-    dealerOptions,
+    receiverNameOptions,
+    receiverPhoneOptions,
+    dealerNameOptions,
+    dealerPhoneOptions,
+    setIsAddReceiverModalOpen,
+    isAddReceiverModalOpen,
+    isAddContainerModalOpen,
+    setIsAddContainerModalOpen,
   } = useFilters()
   const [containerOptions, setContainerOptions] = useState<
     {
@@ -62,7 +72,6 @@ const RightFrame = ({}: Props) => {
   useEffect(() => {
     fetchContainerData()
   }, [])
-
   return (
     <Container>
       <Box>
@@ -86,6 +95,12 @@ const RightFrame = ({}: Props) => {
               onChangeId={handleSetContainerValue}
               placeholder={t('select')}
               fontSize={13}
+              notFoundContent={
+                <NotFoundSelect
+                  text={t('container could not be found')}
+                  handlePress={() => setIsAddContainerModalOpen(true)}
+                />
+              }
             />
           </Frame2>
         </Frame>
@@ -95,18 +110,47 @@ const RightFrame = ({}: Props) => {
         <Frame>
           <Frame2>
             <DropdownWithSearch
-              searchType='receiver'
               placeholder={t('name surname')}
               fontSize={13}
               fetchData={fetchReceiverDataByName}
-              handleSearch={handleReceiverNameSearch}
+              handleSearch={() => {}}
               options={receiverNameOptions}
+              value={values[FIELD_NAMES.RECEIVER_ID]}
+              setValue={(value) =>
+                setFieldValue(FIELD_NAMES.RECEIVER_ID, value)
+              }
+              notFoundContent={
+                <NotFoundSelect
+                  text={t('receiver not found')}
+                  handlePress={() => setIsAddReceiverModalOpen(true)}
+                />
+              }
             />
-            {/* <DropdownWithSearch
-              searchType='receiver'
+            <DropdownWithSearch
               placeholder={t('phone number')}
               fontSize={13}
-            /> */}
+              fetchData={fetchReceiverDataByName}
+              handleSearch={() => {}}
+              options={receiverPhoneOptions}
+              value={values[FIELD_NAMES.RECEIVER_ID]}
+              setValue={(value) =>
+                setFieldValue(FIELD_NAMES.RECEIVER_ID, value)
+              }
+              notFoundContent={
+                <NotFoundSelect
+                  text={t('receiver not found')}
+                  handlePress={() => setIsAddReceiverModalOpen(true)}
+                />
+              }
+            />
+            <Gap4 />
+            <VerificationIcon
+              verificationStatus={
+                receiverNameOptions?.find(
+                  (i) => i.id === values[FIELD_NAMES.RECEIVER_ID]
+                )?.verificationStatus ?? VERIFICATION_STATUS_NAME.UNKNOWN
+              }
+            />
           </Frame2>
         </Frame>
       </Box>
@@ -115,21 +159,95 @@ const RightFrame = ({}: Props) => {
         <Frame>
           <Frame2>
             <DropdownWithSearch
-              searchType='dealer'
               placeholder={t('name surname')}
               fontSize={13}
               fetchData={fetchDealerOptions}
-              handleSearch={handleDealerSearch}
-              options={dealerOptions}
+              handleSearch={() => {}}
+              options={dealerNameOptions}
+              value={values[FIELD_NAMES.DEALER_ID]}
+              setValue={(value) => setFieldValue(FIELD_NAMES.DEALER_ID, value)}
             />
-            {/* <DropdownWithSearch
-              searchType='dealer'
+            <DropdownWithSearch
               placeholder={t('phone number')}
               fontSize={13}
-            /> */}
+              options={dealerPhoneOptions}
+              handleSearch={() => {}}
+              fetchData={() => {}}
+              value={values[FIELD_NAMES.DEALER_ID]}
+              setValue={(value) => setFieldValue(FIELD_NAMES.DEALER_ID, value)}
+            />
+            <Gap4 />
+            <VerificationIcon
+              verificationStatus={
+                dealerNameOptions?.find(
+                  (i) => i.id === values[FIELD_NAMES.DEALER_ID]
+                )?.verificationStatus ?? VERIFICATION_STATUS_NAME.UNKNOWN
+              }
+            />
           </Frame2>
         </Frame>
       </Box>
+
+      <AppModal
+        isOpen={isAddReceiverModalOpen}
+        onRequestClose={() => setIsAddReceiverModalOpen(false)}
+      >
+        <AddRecipientAdmin
+          dealerId={values[FIELD_NAMES.DEALER_ID]}
+          onSuccess={() => {
+            fetchReceiverDataByName('')
+            setIsAddReceiverModalOpen(false)
+          }}
+          dealerSection={
+            <Frame2>
+              <DropdownWithSearch
+                placeholder={t('name surname')}
+                fontSize={13}
+                fetchData={fetchDealerOptions}
+                handleSearch={() => {}}
+                options={dealerNameOptions}
+                value={values[FIELD_NAMES.DEALER_ID]}
+                setValue={(value) =>
+                  setFieldValue(FIELD_NAMES.DEALER_ID, value)
+                }
+              />
+              <DropdownWithSearch
+                placeholder={t('phone number')}
+                fontSize={13}
+                options={dealerPhoneOptions}
+                handleSearch={() => {}}
+                fetchData={() => {}}
+                value={values[FIELD_NAMES.DEALER_ID]}
+                setValue={(value) =>
+                  setFieldValue(FIELD_NAMES.DEALER_ID, value)
+                }
+              />
+              <Gap4 />
+              <VerificationIcon
+                verificationStatus={
+                  dealerNameOptions?.find(
+                    (i) => i.id === values[FIELD_NAMES.DEALER_ID]
+                  )?.verificationStatus ?? VERIFICATION_STATUS_NAME.UNKNOWN
+                }
+              />
+            </Frame2>
+          }
+          onClose={() => setIsAddReceiverModalOpen(false)}
+        />
+      </AppModal>
+
+      <AppModal
+        isOpen={isAddContainerModalOpen}
+        onRequestClose={() => setIsAddContainerModalOpen(false)}
+      >
+        <AddContainer
+          onClose={() => {
+            setIsAddContainerModalOpen(false)
+            fetchContainerData()
+          }}
+          setUploadedSuccessfully={() => {}}
+        />
+      </AppModal>
     </Container>
   )
 }
@@ -161,49 +279,8 @@ const Header = styled.h6`
   font-weight: ${({ theme }) => theme.fontWeight?.bold};
   color: ${({ theme }) => theme.colors?.main_gray_100};
 `
-
-const DataFrame = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 4px;
-`
-
-const Name = styled.label`
-  display: flex;
-  align-items: center;
-  font-size: ${({ theme }) => theme.fontSizes?.small_13};
-  font-weight: ${({ theme }) => theme.fontWeight?.bold};
-  color: ${({ theme }) => theme.colors?.main_gray_100};
-`
-
-const Value = styled.label`
-  display: flex;
-  align-items: center;
-  font-size: ${({ theme }) => theme.fontSizes?.small_13};
-  font-weight: ${({ theme }) => theme.fontWeight?.normal};
-  color: ${({ theme }) => theme.colors?.main_gray_100};
-`
-
-const IconBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing?.lg};
-`
-const Icon = styled.div`
-  width: 24px;
-  height: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-const StyledLink = styled.a`
-  width: 112px;
-  font-size: 13px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.colors?.link_blue};
+const Gap4 = styled.div`
+  margin-left: 4px;
 `
 
 const Frame = styled.div`
@@ -214,7 +291,7 @@ const Frame = styled.div`
 `
 const Frame2 = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
   width: 100%;
   white-space: nowrap;

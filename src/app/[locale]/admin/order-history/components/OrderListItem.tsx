@@ -40,13 +40,23 @@ const OrderListItem = ({
     manufactureYear: year,
     vin: vinCode,
     receiver,
+    dealer,
     carCost,
     transportationCost: amount,
     status: shippingStatus,
     createdAt: date,
     id: orderId,
   } = item
-  const { firstName: buyerFullName, phoneNumber: buyerPhoneNumber } = receiver
+  const {
+    firstName: buyerFullName,
+    phoneNumber: buyerPhoneNumber,
+    verificationStatus: receiverVerificationStatus,
+  } = receiver
+  const {
+    firstName: dealerFullName,
+    phoneNumber: dealerPhoneNumber,
+    idImageVerificationStatus: dealerVerificationStatus,
+  } = dealer
 
   useEffect(() => {
     !isEditing && setIsChecked(false)
@@ -76,7 +86,7 @@ const OrderListItem = ({
         {isMobile && (
           <StatusAndDebtBoxMobile
             shippingStatus={shippingStatus}
-            amount={amount}
+            amount={amount + carCost}
           />
         )}
         <CarImageAndModelBox
@@ -98,16 +108,20 @@ const OrderListItem = ({
           />
           <PersonFrameMobile
             header={t('dealer')}
-            fullName={buyerFullName}
-            mobileNumber={buyerPhoneNumber}
+            fullName={dealerFullName}
+            mobileNumber={dealerPhoneNumber}
           />
         </BottomFrameMobile>
       ) : (
         <DetailsBox
-          amount={amount}
+          amount={amount + carCost}
           shippingStatus={shippingStatus}
           buyerFullName={buyerFullName}
           buyerPhoneNumber={buyerPhoneNumber}
+          dealerFullName={dealerFullName}
+          dealerPhoneNumber={dealerPhoneNumber}
+          dealerVerificationStatus={dealerVerificationStatus}
+          receiverVerificationStatus={receiverVerificationStatus}
           vinCode={vinCode}
         />
       )}

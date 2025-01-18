@@ -251,7 +251,7 @@ export const CreateOrderProvider = ({ children }: { children: any }) => {
     )
     setFieldValue(FIELD_NAMES.CAR_COST, orderDetails.carCost)
     // @ts-ignore
-    setFieldValue(FIELD_NAMES.STATE_ID, orderDetails.state.id)
+    setFieldValue(FIELD_NAMES.STATE_ID, orderDetails.state)
     setFieldValue(FIELD_NAMES.EXACT_ADDRESS, orderDetails.exactAddress)
     setFieldValue(
       FIELD_NAMES.ADDITIONAL_DETAILS,
@@ -262,7 +262,7 @@ export const CreateOrderProvider = ({ children }: { children: any }) => {
     setFieldValue(FIELD_NAMES.CAR_CATEGORY, orderDetails.carCategory)
     setFieldValue(FIELD_NAMES.MILEAGE, orderDetails.mileage)
     setFieldValue(FIELD_NAMES.STATUS_AND_DATES, orderDetails.statusAndDates)
-    setFieldValue(FIELD_NAMES.CONTAINER_ID, orderDetails.container.id)
+    setFieldValue(FIELD_NAMES.CONTAINER_ID, orderDetails?.container?.id ?? '')
     setFieldValue(FIELD_NAMES.RECEIVER_ID, orderDetails.receiver.id)
     setFieldValue(FIELD_NAMES.DEALER_ID, orderDetails.dealer.id)
     setFieldValue(

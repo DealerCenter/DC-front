@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 
 import InfoBox from './components/InfoBox'
-import SearchComponent from './components/SearchComponent'
 import ButtonsBox from './components/buttonsBox/ButtonsBox'
 import PageHeader from '@/common/components/pageHeader/PageHeader'
+import AppSelectAntDesignWithFetch from '@/common/components/appSelect/AppSelectAntDesignWithFetch'
+import { getDocumentsData } from '@/api/apiCalls'
+import { DOCUMENT_CHECK_RES } from '@/api/apiTypes'
+import StatusIndicator from './components/StatusIndicator'
 
 type Props = {}
 
@@ -15,22 +18,76 @@ const DocumentCheck = (props: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
+  const [data, setData] = useState<DOCUMENT_CHECK_RES[]>([])
+  const [selectedDocument, setSelectedDocument] = useState('')
+  const [selectedDocDetails, setSelectedDocDetails] =
+    useState<DOCUMENT_CHECK_RES>({
+      id: NaN,
+      label: '',
+      description: '',
+      document: '',
+      code: '',
+    })
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await getDocumentsData()
+      if (res) {
+        const mapped: DOCUMENT_CHECK_RES[] = res.map(
+          (i: DOCUMENT_CHECK_RES) => ({
+            id: i.id,
+            document: i.document,
+            description: i.description,
+            code: i.code,
+            label: i.document,
+          })
+        )
+        setData(mapped)
+      }
+    }
+
+    getData()
+  }, [])
+
+  useEffect(() => {
+    // @ts-ignore
+    setSelectedDocDetails(data.find((i: any) => i.id == selectedDocument))
+  }, [selectedDocument])
+
   return (
     <Container>
       <SearchFrame>
         <PageHeader
           headerText={t('document check')}
-          text={`${t('specify type of document and get detailed information')} ${
+          text={`${t(
+            'specify type of document and get detailed information'
+          )} ${
             !isMobile &&
             t('find out if problematic and how good an investment it can be')
           }`}
           textColor={theme.colors?.main_gray_42}
         />
         <SearchBox>
-          <SearchComponent placeholder='blalblabl' />
+          <AppSelectAntDesignWithFetch
+            options={data}
+            isLoading={false}
+            onChange={() => {}}
+            value={selectedDocument}
+            setValue={setSelectedDocument}
+          />
+
           <ButtonsBox />
         </SearchBox>
       </SearchFrame>
+      {selectedDocument && selectedDocDetails && (
+        <SelectedDoc>
+          <h3>Document details</h3>
+          <StatusIndicatorFrame>
+            <DocText>{selectedDocDetails.document}</DocText>
+            <StatusIndicator statusCode={Number(selectedDocDetails.code)} />
+          </StatusIndicatorFrame>
+        </SelectedDoc>
+      )}
       <TextBoxesFrame>
         <InfoBox
           header={t('enter the name of the document')}
@@ -101,4 +158,21 @@ const TextBoxesFrame = styled.div`
     flex-direction: column;
     gap: 8px;
   }
+`
+
+const SelectedDoc = styled.div`
+  background-color: white;
+  width: 80%;
+  border-radius: 16px;
+  padding: 16px;
+`
+const StatusIndicatorFrame = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+const DocText = styled.span`
+  font-size: 16px;
+  font-weight: 500;
 `

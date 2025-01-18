@@ -18,6 +18,8 @@ export const FIELD_NAMES = {
 }
 
 const useAddRecipientsAdmin = (
+  dealerId: number,
+  onSuccess: () => void,
   receiverData?: {
     id: number
     firstName: string
@@ -60,6 +62,7 @@ const useAddRecipientsAdmin = (
       })
 
       receiverData && legalFormData.delete(FIELD_NAMES.IS_JURIDICAL)
+      dealerId && legalFormData.append('dealerId', dealerId.toString())
 
       uploadIdImage && legalFormData.append(FIELD_NAMES.ID_IMAGE, uploadIdImage)
 
@@ -69,11 +72,11 @@ const useAddRecipientsAdmin = (
       try {
         const response = receiverData
           ? await axiosInstance.put<RECEIVER_POST_RES>(
-              `${endpoints.RECEIVERS}/${receiverData.id}`,
+              `${endpoints.RECEIVERS_ADMIN}/${receiverData.id}`,
               legalFormData
             )
           : await axiosInstance.post<RECEIVER_POST_RES>(
-              endpoints.RECEIVERS,
+              endpoints.RECEIVERS_ADMIN,
               legalFormData
             )
 
@@ -84,6 +87,7 @@ const useAddRecipientsAdmin = (
             ? t('receiver updated successfully')
             : t('receiver uploaded successfully')
         )
+        onSuccess()
 
         return response
       } catch (error) {

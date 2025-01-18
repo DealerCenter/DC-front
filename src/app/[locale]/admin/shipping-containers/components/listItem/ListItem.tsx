@@ -16,7 +16,7 @@ type Props = {
 
 const ListItem = ({
   onClick,
-  containerData: { name, trackingUrl, id, createdAt, updatedAt },
+  containerData: { name, trackingUrl, id, createdAt, updatedAt, orders },
 }: Props) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
@@ -48,6 +48,7 @@ const ListItem = ({
           id={id}
           isDropdownOpen={isDropdownOpen}
           setIsDropdownOpen={setIsDropdownOpen}
+          orders={orders}
         />
       )}
     </>

@@ -1,7 +1,7 @@
 import theme from '@/app/[locale]/theme'
 import { ConfigProvider, Select } from 'antd'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import ErrorMessage from '../errorMessage/ErrorMessage'
 
@@ -18,6 +18,7 @@ type Props = {
   placeholder?: string
   errorMessage?: string
   fontSize?: number
+  notFoundContent?: ReactNode
 }
 
 const AppSelectAntDesign = ({
@@ -34,6 +35,7 @@ const AppSelectAntDesign = ({
   placeholder,
   errorMessage,
   fontSize,
+  notFoundContent,
 }: Props) => {
   const [selectedItem, setSelectedItem] = useState<number | string | undefined>(
     undefined
@@ -83,6 +85,7 @@ const AppSelectAntDesign = ({
       >
         <Select
           //   mode='multiple'
+          notFoundContent={notFoundContent}
           showSearch
           placeholder={placeholder}
           optionFilterProp='label'

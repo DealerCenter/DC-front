@@ -16,7 +16,6 @@ import ChooseAuctionBox from './ChooseAuctionBox'
 import { useSearchParams } from 'next/navigation'
 import { FIELD_NAMES, useSearchVehicle } from '../hooks/useSearchVehicle'
 import AppDropdown from '@/common/components/appDropdown/AppDropdown'
-import DropdownWithSearch from '../../admin/create-order/components/rightFrame/DropdownWithSearch'
 import DropdownMakeSearch from './DropdownMakeSearch'
 import DropdownModelSearch from './DropdownModelSearch'
 

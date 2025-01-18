@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import styled from 'styled-components'
 
 import AppButton from '@/common/components/appButton/AppButton'
@@ -16,6 +16,7 @@ import splitGrayLine from '@/assets/icons/splitGrayLine.svg'
 
 type Props = {
   onClose: () => void
+  dealerSection: ReactNode
   receiverData?: {
     id: number
     firstName: string
@@ -25,12 +26,17 @@ type Props = {
     createdAt: string
     verificationStatus: string
   }
+  dealerId: number
+  onSuccess: () => void
   // setUpdatedSuccessfully: (arg: boolean) => void
 }
 
 const AddRecipientAdmin = ({
   onClose,
   receiverData,
+  dealerSection,
+  dealerId,
+  onSuccess,
 }: // setUpdatedSuccessfully,
 Props) => {
   const [isIdImageUploaded, setIsIdImageUploaded] = useState(false)
@@ -46,7 +52,7 @@ Props) => {
     setUploadIdImage,
     setFieldValue,
     isButtonDisabled,
-  } = useAddRecipientsAdmin(receiverData && receiverData)
+  } = useAddRecipientsAdmin(dealerId, onSuccess, receiverData && receiverData)
 
   const isButtonDisabledNative =
     isButtonDisabled || (!receiverData && !isIdImageUploaded)
@@ -130,6 +136,8 @@ Props) => {
               : ''
           }
         ></TextInput>
+        <Label>{t('dealer data')}</Label>
+        {dealerSection}
         <FileDropZone
           dropText={t('drop the file here')}
           text={t('upload an ID photo')}
@@ -215,4 +223,5 @@ const Container = styled.div`
   @media ${({ theme }) => theme.media?.sm} {
     padding: 32px 16px;
   }
+  overflow-y: auto;
 `

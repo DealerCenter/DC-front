@@ -5,20 +5,31 @@ import Image from 'next/image'
 
 import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import editIcon from '@/assets/icons/editPencil.svg'
+import { DEALERS_DATA } from '@/api/apiTypes'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
+import { useRouter } from '@/navigation'
+import { routeName } from '@/common/helpers/constants'
 
-type Props = {}
+type Props = {
+  data: DEALERS_DATA
+}
 
-const DealerData = (props: Props) => {
+const DealerData = ({ data }: Props) => {
+  const router = useRouter()
+
+  const handleEditClick = () =>
+    router.push(`${routeName.adminDealerProfile}/${data.id}`)
+
   return (
     <BoxWithHeader headerText='dealer data'>
       <DataFrame>
-        <Name>Luka Tsilosani</Name>
-        <Value>98237 293847 298</Value>
+        <Name>{`${data.firstName} ${data.lastName}`}</Name>
+        <Value>{data.phoneNumber}</Value>
         <IconBox>
-          <Icon>
-            <Image src={checkedGreen} alt='checked icon' />
-          </Icon>
-          <Icon>
+          <VerificationIcon
+            verificationStatus={data.idImageVerificationStatus}
+          />
+          <Icon onClick={handleEditClick}>
             <Image src={editIcon} alt='pencil icon' />
           </Icon>
         </IconBox>

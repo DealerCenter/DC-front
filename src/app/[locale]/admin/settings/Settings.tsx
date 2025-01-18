@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Calculator from './components/Calculator'
 import DealerLevels from './components/DealerLevels'
+import DocCheck from './components/DocCheck'
 
 type Props = {}
 
@@ -12,6 +13,7 @@ const Settings = (props: Props) => {
   return (
     <div>
       <Calculator />
+      <DocCheck />
       <DealerLevels />
     </div>
   )

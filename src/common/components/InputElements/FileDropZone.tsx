@@ -14,6 +14,8 @@ type Props = {
   width?: number
   onDropAdditional?: (file: any) => void
   setIsUploaded?: (arg: boolean) => void
+  fileType?: {}
+  shouldShowName?: boolean
 }
 
 const FileDropZone = ({
@@ -24,21 +26,28 @@ const FileDropZone = ({
   width,
   onDropAdditional,
   setIsUploaded,
+  fileType,
+  shouldShowName,
 }: Props) => {
   const [isDropped, setIsDropped] = useState(false)
+  const [fileName, setFileName] = useState('')
 
   const onDrop = useCallback(
     <T extends File>(acceptedFiles: T[]) => {
       setIsDropped(true)
       if (onDropAdditional) {
         onDropAdditional(acceptedFiles[0])
+        setFileName(acceptedFiles[0].name)
         setIsUploaded && setIsUploaded(true)
       }
     },
     [onDropAdditional, setIsUploaded]
   )
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: fileType,
+  })
 
   return (
     <>
@@ -53,7 +62,9 @@ const FileDropZone = ({
         </IconBox>
         <input {...getInputProps()} />
         {isDropped ? (
-          <StyledLabel isDropped={isDropped}>{uploadedText}</StyledLabel>
+          <StyledLabel isDropped={isDropped}>
+            {shouldShowName ? fileName : uploadedText}
+          </StyledLabel>
         ) : isDragActive ? (
           <StyledLabel>{dropText}</StyledLabel>
         ) : (

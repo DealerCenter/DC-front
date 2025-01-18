@@ -86,8 +86,8 @@ const DealerProfile = ({ dealerId }: Props) => {
     <Container>
       <TopButtonsFrame>
         <AppGoBackButton
-          onClick={() => router.push(routeName.adminDealersList)}
-          text={t('return to dealers list')}
+          onClick={() => router.back()}
+          text={t('go back')}
           noTextOnMobile={true}
         />
         <EditButton onClick={() => setIsEditModalOpen(true)} />

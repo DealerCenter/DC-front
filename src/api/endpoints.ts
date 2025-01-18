@@ -9,12 +9,12 @@ export const endpoints = {
   NOTIFICATION_SETTINGS_DEALERS: '/notifications/dealers',
   ORDERS: '/api/orders',
   RECEIVERS: '/api/receivers',
+  RECEIVERS_ADMIN: '/receivers',
   GET_CONTAINERS_BY_ORDER_ID: '/api/containers/by-order',
   HEALTH: '/health',
 
   ORDERS_ADMIN: '/orders',
   DEALERS_ADMIN: '/dealers',
-  RECEIVERS_ADMIN: '/receivers',
   CONTAINERS_ADMIN: '/containers',
   GET_CONTAINERS_BY_ORDER_ID_ADMIN: '/containers/by-order',
 
@@ -38,4 +38,6 @@ export const endpoints = {
   DOWNLOAD_CALCULATOR_DATA: '/calculator/download',
   DEALER_LEVELS: '/dealer-levels',
   ASSIGN_DEALER_LEVEL: '/dealer-levels/assign-level',
+  DOCUMENTS_CHECK: '/documents',
+  DOCUMENTS_CHECK_DOWNLOAD: '/documents/download',
 }
