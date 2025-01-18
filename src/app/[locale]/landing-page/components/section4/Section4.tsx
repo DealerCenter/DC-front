@@ -11,7 +11,7 @@ const Section4 = (props: Props) => {
     <Container>
       <OurServices />
       <SuccessStory />
-      <WhatCostumersAreSaying onSeeAllClick={() => {}} />
+      {/* <WhatCostumersAreSaying onSeeAllClick={() => {}} /> */}
     </Container>
   )
 }

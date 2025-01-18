@@ -9,8 +9,8 @@ type Props = {}
 const Section3 = (props: Props) => {
   return (
     <Container>
-      <VehicleStatusCheck />
-      <CheckVehicleHistory />
+      {/* <VehicleStatusCheck /> */}
+      {/* <CheckVehicleHistory /> */}
       <LogosLineBox />
     </Container>
   )
