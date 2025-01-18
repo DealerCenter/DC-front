@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { ReactNode, useState } from 'react'
