@@ -1,4 +1,4 @@
-import theme from '@/app/[locale]/theme'
+import theme from '@/app/[locale]/pilot/theme'
 import Image, { StaticImageData } from 'next/image'
 import React from 'react'
 import styled, { StyledInterface } from 'styled-components'

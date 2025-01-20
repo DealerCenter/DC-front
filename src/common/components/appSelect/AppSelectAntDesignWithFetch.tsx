@@ -2,7 +2,7 @@ import { ConfigProvider, Select, Spin } from 'antd'
 import Image from 'next/image'
 import styled from 'styled-components'
 
-import theme from '@/app/[locale]/theme'
+import theme from '@/app/[locale]/pilot/theme'
 import arrowDown from '@/assets/icons/arrowDown.svg'
 import ErrorMessage from '../errorMessage/ErrorMessage'
 

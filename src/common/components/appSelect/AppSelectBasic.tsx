@@ -11,7 +11,7 @@ import arrowDown from '@/assets/icons/arrowDown.svg'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import ErrorMessage from '../errorMessage/ErrorMessage'
-import { Locations } from '@/app/[locale]/admin/create-order/image-upload/components/InputFieldAndImageUploadPair'
+import { Locations } from '@/app/[locale]/pilot/admin/create-order/image-upload/components/InputFieldAndImageUploadPair'
 import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
 
 type Option = {

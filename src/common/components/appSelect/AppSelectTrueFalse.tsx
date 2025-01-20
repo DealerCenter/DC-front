@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ConfigProvider, Select } from 'antd'
 import { useTranslations } from 'next-intl'
-import theme from '@/app/[locale]/theme'
+import theme from '@/app/[locale]/pilot/theme'
 import styled from 'styled-components'
 import ErrorMessage from '../errorMessage/ErrorMessage'
 import Image from 'next/image'

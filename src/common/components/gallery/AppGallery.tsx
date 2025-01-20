@@ -4,7 +4,7 @@ import Image, { StaticImageData } from 'next/image'
 import { useMediaQuery } from 'react-responsive'
 import { useTranslations } from 'next-intl'
 
-import theme from '@/app/[locale]/theme'
+import theme from '@/app/[locale]/pilot/theme'
 
 import DummyImage from '@/assets/images/DummyCarImage.jpg'
 import DummyImage2 from '@/assets/images/DummyCarImage2.jpg'

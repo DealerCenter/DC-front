@@ -2,7 +2,7 @@
 'use client'
 
 import { ThemeProvider } from 'styled-components'
-import theme from '../app/[locale]/theme'
+import theme from '../app/[locale]/pilot/theme'
 
 export default function ThemeClient({
   children,

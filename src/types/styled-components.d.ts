@@ -1,4 +1,4 @@
-import theme from '@/app/[locale]/theme'
+import theme from '@/app/[locale]/pilot/theme'
 
 type Theme = typeof theme
 

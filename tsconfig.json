@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/[locale]/admin/create-order/components/AppSelectBooleantsx"
+    "src/app/[locale]/pilot/admin/create-order/components/AppSelectBooleantsx"
   ],
   "exclude": ["node_modules"]
 }

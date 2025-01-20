@@ -7,7 +7,7 @@ import { message } from 'antd'
 
 import { useUserData } from '@/common/store/userDataStore'
 import { logoutUser } from '@/api/apiCalls'
-import theme from '@/app/[locale]/theme'
+import theme from '@/app/[locale]/pilot/theme'
 import { routeName } from '@/common/helpers/constants'
 
 import InfoBox from './components/InfoBox'

@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive'
 import { useRouter } from '@/navigation'
 import { useTranslations } from 'next-intl'
 
-import theme from '@/app/[locale]/theme'
+import theme from '@/app/[locale]/pilot/theme'
 import { routeName } from '@/common/helpers/constants'
 
 import FullHeader from './components/fullHeader/FullHeader'

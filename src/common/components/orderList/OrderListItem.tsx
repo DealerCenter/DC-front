@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components'
 
 import { ORDER_DATA } from '@/api/apiTypes'
-import theme from '@/app/[locale]/theme'
+import theme from '@/app/[locale]/pilot/theme'
 import { useMediaQuery } from 'react-responsive'
 
-import CarDetailsBox from '../../../app/[locale]/dealer/order-history/components/CarDetailsBox'
-import DebtBox from '../../../app/[locale]/dealer/order-history/components/DebtBox'
-import UserInfoBox from '../../../app/[locale]/dealer/order-history/components/UserInfoBox'
+import CarDetailsBox from '../../../app/[locale]/pilot/dealer/order-history/components/CarDetailsBox'
+import DebtBox from '../../../app/[locale]/pilot/dealer/order-history/components/DebtBox'
+import UserInfoBox from '../../../app/[locale]/pilot/dealer/order-history/components/UserInfoBox'
 import ShippingStatusBox from '../shippingStateBox/ShippingStatusBox'
 
 type Props = {

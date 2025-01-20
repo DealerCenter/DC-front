@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 
-import theme from '@/app/[locale]/theme'
+import theme from '@/app/[locale]/pilot/theme'
 
 import SecondaryButton from '../appButton/SecondaryButton'
 import AppDropdown from '../appDropdown/AppDropdown'
