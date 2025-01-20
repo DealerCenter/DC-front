@@ -250,11 +250,6 @@ const Flex = styled.div`
   flex: 1;
   width: 100%;
 
-  @media ${({ theme }) => theme.media?.md} {
-    flex-direction: column;
-    margin-top: 10px;
-  }
-
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;
     margin-top: 20px;
