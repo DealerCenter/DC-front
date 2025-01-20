@@ -229,6 +229,7 @@ const LabelsPair = styled.div`
   @media ${({ theme }) => theme.media?.sm} {
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing?.xsm};
+    margin-left: unset;
   }
 `
 
@@ -248,4 +249,14 @@ const Flex = styled.div`
   display: flex;
   flex: 1;
   width: 100%;
+
+  @media ${({ theme }) => theme.media?.md} {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
+    margin-top: 20px;
+  }
 `
