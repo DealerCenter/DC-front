@@ -162,7 +162,7 @@ const Container = styled.div`
     padding: 64px 0;
     gap: 48px;
 
-    margin-top: 150px;
+    /* margin-top: 150px; */
   }
 `
 
