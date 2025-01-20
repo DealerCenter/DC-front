@@ -1,6 +1,6 @@
 import React from 'react'
 import { ConfigProvider, Tooltip } from 'antd'
-import theme from '@/app/[locale]/pilot/theme'
+import theme from '@/app/[locale]/theme'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 

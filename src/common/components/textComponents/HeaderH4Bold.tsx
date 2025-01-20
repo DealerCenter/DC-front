@@ -1,4 +1,4 @@
-import theme from '@/app/[locale]/pilot/theme'
+import theme from '@/app/[locale]/theme'
 import React from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled, { css } from 'styled-components'

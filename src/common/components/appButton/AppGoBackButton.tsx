@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import leftArrow from '@/assets/icons/arrows/arrowLeftThinBlack.svg'
 import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/pilot/theme'
+import theme from '@/app/[locale]/theme'
 
 type Props = { onClick: () => void; text: string; noTextOnMobile?: boolean }
 

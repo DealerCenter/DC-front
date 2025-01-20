@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import theme from '@/app/[locale]/pilot/theme'
+import theme from '@/app/[locale]/theme'
 import clockIcon from '@/assets/icons/clock2Black.svg'
 import Image from 'next/image'
 import { SHIPPING_STATUS } from '@/common/helpers/constants'

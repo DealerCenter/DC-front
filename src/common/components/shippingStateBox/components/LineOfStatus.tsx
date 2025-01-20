@@ -9,7 +9,7 @@ import {
 import { setHeapSnapshotNearHeapLimit } from 'v8'
 import { DatePicker, DatePickerProps } from 'antd'
 import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/pilot/theme'
+import theme from '@/app/[locale]/theme'
 import {
   SHIPPING_STATUS,
   ShippingStatus,

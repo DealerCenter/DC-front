@@ -1,4 +1,4 @@
-import theme from '@/app/[locale]/pilot/theme'
+import theme from '@/app/[locale]/theme'
 import { ConfigProvider, Select } from 'antd'
 import Image from 'next/image'
 import { ReactNode, useEffect, useState } from 'react'

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 import { useMediaQuery } from 'react-responsive'
-import theme from '@/app/[locale]/pilot/theme'
+import theme from '@/app/[locale]/theme'
 
 import soldIcon from '@/assets/icons/auctionStateBox/sold.svg'
 import notSoldIcon from '@/assets/icons/auctionStateBox/notSold.svg'
@@ -31,15 +31,15 @@ const AuctionStateBox = ({ auctionState, shrinkOnSm }: Props) => {
     auctionState === 'pending'
       ? pendingIcon
       : auctionState === 'not sold'
-      ? notSoldIcon
-      : auctionState === 'sold' && soldIcon
+        ? notSoldIcon
+        : auctionState === 'sold' && soldIcon
 
   const iconSmall =
     auctionState === 'pending'
       ? pendingIconSmall
       : auctionState === 'not sold'
-      ? notSoldIconSmall
-      : auctionState === 'sold' && soldIconSmall
+        ? notSoldIconSmall
+        : auctionState === 'sold' && soldIconSmall
 
   return (
     <Container auctionState={auctionState} shrinkOnSm={shrinkOnSm}>
@@ -87,13 +87,13 @@ const Container = styled.div<AuctionStateProps>`
           background-color: ${theme.colors?.green};
         `
       : auctionState === 'not sold'
-      ? css`
-          background-color: ${theme.colors?.gray_gray};
-        `
-      : auctionState === 'pending' &&
-        css`
-          background-color: ${theme.colors?.yellow};
-        `}
+        ? css`
+            background-color: ${theme.colors?.gray_gray};
+          `
+        : auctionState === 'pending' &&
+          css`
+            background-color: ${theme.colors?.yellow};
+          `}
 
   @media  ${({ theme }) => theme.media?.sm} {
     height: 32px;
