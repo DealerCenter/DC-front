@@ -35,9 +35,7 @@ const AdminLayout = ({ children }: Props) => {
       <Header />
       <Container>
         <Frame>
-          {isSideBarVisible && !isMobile && (
-            <SideBarAdmin routes={routeNames} />
-          )}
+          {isSideBarVisible && <SideBarAdmin routes={routeNames} />}
           {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
         </Frame>
       </Container>
@@ -60,7 +58,7 @@ const Container = styled.div`
 
   @media ${({ theme }) => theme.media?.sm} {
     padding: 0 5%;
-    margin-bottom: unset;
+    margin-bottom: 20px;
     min-height: unset;
   }
 `
@@ -77,4 +75,8 @@ const Frame = styled.div`
 `
 const ChildrenContainer = styled.div`
   flex: 1;
+
+  @media ${({ theme }) => theme.media?.sm} {
+    padding: 0 5%;
+  }
 `

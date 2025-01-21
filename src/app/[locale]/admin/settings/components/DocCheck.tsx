@@ -79,6 +79,9 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors?.white};
   padding: 20px;
   border-radius: ${({ theme }) => theme.radius?.lg};
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
+  }
 `
 
 const Title = styled.div`

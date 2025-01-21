@@ -124,6 +124,9 @@ const InputsPair = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
+  @media ${({ theme }) => theme.media?.sm} {
+    flex-direction: column;
+  }
 `
 
 const SubmitButton = styled.div`

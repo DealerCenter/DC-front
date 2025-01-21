@@ -94,13 +94,15 @@ const SideBarAdmin = ({ routes }: Props) => {
             // refreshDate='last refresh jul 11 2034'
             // notificationCount={9}
           />
-          <AddOrderButton
-            text={t('add order')}
-            icon={plusIcon}
-            isHovered={isHovered}
-            height={56}
-            onClick={() => router.push(routeName.adminCreateOrder)}
-          />
+          {pathname === routes.orders && (
+            <AddOrderButton
+              text={t('add order')}
+              icon={plusIcon}
+              isHovered={isHovered}
+              height={56}
+              onClick={() => router.push(routeName.adminCreateOrder)}
+            />
+          )}
           <ButtonFrame>
             <BarButton
               isHovered={isHovered}
@@ -231,6 +233,7 @@ const Frame = styled.div`
 
   @media ${({ theme }) => theme.media?.sm} {
     width: 100%;
+    gap: unset;
   }
   width: unset;
 
