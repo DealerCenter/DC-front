@@ -13,14 +13,11 @@ const SuccessStory = (props: Props) => {
     <Container>
       <PageHeader
         headerText={t('success story')}
-        text='აქ შეიძლება რაღაც სტატისტიკები ვაჩვენოთ როგორ ჩამოდიან ეს ავტომობილები'
+        text={t('successstorytext')}
       />
       <LabelsBox>
-        <InfoLabels
-          header='178 მომხმარებელი'
-          label='დარეგისტრირებული მომხმარებელი'
-        />
-        <InfoLabels header='245 შეკვეთა' label='ადგილზე ჩამოსული ავტომობილი' />
+        <InfoLabels header={t('customercount')} label={t('registered user')} />
+        <InfoLabels header={t('fulfilled orders')} label={t('deliveredcars')} />
       </LabelsBox>
     </Container>
   )

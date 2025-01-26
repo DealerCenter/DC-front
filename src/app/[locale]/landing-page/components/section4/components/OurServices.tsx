@@ -22,26 +22,24 @@ const OurServices = (props: Props) => {
       <HeaderBox>
         <PageHeader
           headerText={t('our services')}
-          text={
-            'რაღაც მოკლე ტექსტი სერვისების შესახებ, რას ვთავაზობთ და ასე შემდეგ'
-          }
+          text={t('ourservices')}
           headerColor='white'
           textColor='white'
         />
         <InfoBoxesFrame>
           <InfoBox
             headerText={t('help with auction')}
-            text={dummyText}
+            text={t('auctionhelp')}
             icon={magicIcon}
           />
           <InfoBox
             headerText={t('vehicle inspection')}
-            text={dummyText}
+            text={t('vehicleinspection')}
             icon={ufoIcon}
           />
           <InfoBox
             headerText={t('reliable import')}
-            text={dummyText}
+            text={t('trustworthy')}
             icon={partyIcon}
           />
         </InfoBoxesFrame>
