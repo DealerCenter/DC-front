@@ -66,7 +66,7 @@ const DealerLevels = (props: Props) => {
         <Loader />
       ) : (
         <Container>
-          {levels.map((level, index) => (
+          {levels?.map((level, index) => (
             <InputsPair key={index}>
               <TextInput
                 hasLabel

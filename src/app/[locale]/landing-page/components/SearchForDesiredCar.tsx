@@ -15,9 +15,7 @@ const SearchForDesiredCar = (props: Props) => {
     <Container>
       <PageHeader
         headerText={t('search for desired car')}
-        text={
-          'რაღაც ტექსტი იმის შესახებ თუ რამდენად მარტივად და ერთ სივრცეში შეგიძლია ავტომობილების მოძებნა და გაფილტვრა სხვადსხვა მახასიათებლით'
-        }
+        text={t('landingsearch')}
         textColor={theme.colors?.main_gray_42}
       />
       <SearchComponent />
