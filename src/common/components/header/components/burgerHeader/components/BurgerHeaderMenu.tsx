@@ -37,7 +37,7 @@ const BurgerHeaderMenu = ({
     <BackgroundOverlay>
       <Container>
         <TopFrame>
-          <Logo>DUX</Logo>
+          <Logo>DC</Logo>
           <CloseButton onClick={handleClose}>
             <Image src={closeX} alt='close icon' />
           </CloseButton>

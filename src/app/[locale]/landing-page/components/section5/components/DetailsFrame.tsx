@@ -14,17 +14,17 @@ const DetailsFrame = (props: Props) => {
       <DetailsBox
         headerText={'Support'}
         text={t('our team is ready to help')}
-        textBlue={'support@gmail.com'}
+        textBlue={'Info@DealerCenter.ge'}
       />
       <DetailsBox
         headerText={'Sales'}
-        text={t('have questions? Contact us')}
-        textBlue={'support@gmail.com'}
+        text={t('have questions? contact us')}
+        textBlue={'Sales@DealerCenter.ge'}
       />
       <DetailsBox
         headerText={'Phone'}
         text={t('monday-friday 9-5')}
-        textBlue={'+1 (555) 000-0000'}
+        textBlue={'+1 (949) 880-6820'}
       />
     </Container>
   )

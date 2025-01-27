@@ -10,7 +10,7 @@ const Logo = (props: Props) => {
 
   return (
     <StyledLogo onClick={() => router.push(routeName.landingPage)}>
-      DUX
+      DC
     </StyledLogo>
   )
 }
