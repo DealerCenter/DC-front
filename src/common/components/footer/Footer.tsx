@@ -19,7 +19,9 @@ const Footer = (props: Props) => {
     <Container>
       <TopFrame>
         <LeftBox>
-          <Logo onClick={() => router.push(routeName.landingPage)}>DUX</Logo>
+          <Logo onClick={() => router.push(routeName.landingPage)}>
+            DealerCenter
+          </Logo>
           <LeftBoxText>{t('shipping company text')}</LeftBoxText>
         </LeftBox>
         <RightBox>

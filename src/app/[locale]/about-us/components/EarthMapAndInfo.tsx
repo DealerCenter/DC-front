@@ -52,17 +52,17 @@ const EarthMapAndInfo = (props: Props) => {
         <InfoBox
           header='Support'
           text={t('our team is ready to help')}
-          blueText='support@gmail.com'
+          blueText='Info@DealerCenter.ge'
         />
         <InfoBox
           header='Sales'
-          text={t('have questions? Contact us')}
-          blueText='sales@gmail.com'
+          text={t('have questions? contact us')}
+          blueText='Sales@DealerCenter.ge'
         />
         <InfoBox
           header='Phone'
           text={t('monday-friday 9-5')}
-          blueText='+1 (555) 000-0000'
+          blueText='+1 (949) 880-6820'
         />
       </InfoBoxesFrame>
     </Container>

@@ -11,9 +11,9 @@ const LangChangeButton = ({ left = -3, top = 66, width }: Props) => {
   const locale = useLocale()
 
   const items = [
-    { href: { pathname }, locale: 'ge', label: 'Ge' },
-    { href: { pathname }, locale: 'en', label: 'En' },
-    { href: { pathname }, locale: 'ru', label: 'Ru' },
+    { href: { pathname }, locale: 'ge', label: 'GE' },
+    { href: { pathname }, locale: 'en', label: 'EN' },
+    { href: { pathname }, locale: 'ru', label: 'RU' },
   ]
 
   return (

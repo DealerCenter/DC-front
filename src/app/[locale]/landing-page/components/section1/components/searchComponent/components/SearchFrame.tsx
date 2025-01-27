@@ -18,10 +18,10 @@ const SearchFrame = (props: Props) => {
       <Frame>
         <LabelAndDropdownPair
           label={t('manufacturer')}
-          placeholder={'ავტ. მარკა'}
+          placeholder={t('manufacturer')}
         />
-        <LabelAndDropdownPair label={t('model')} placeholder={'მოდელი'} />
-        <LabelAndDropdownPair label={t('year')} placeholder={'გამ. წელი'} />
+        <LabelAndDropdownPair label={t('model')} placeholder={t('model')} />
+        <LabelAndDropdownPair label={t('year')} placeholder={t('year')} />
       </Frame>
       <BasicButton
         onClick={() => {}}

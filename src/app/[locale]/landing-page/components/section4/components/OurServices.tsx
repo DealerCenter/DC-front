@@ -10,9 +10,6 @@ import partyIcon from '@/assets/icons/infoBoxPastelIcons/yellowPartyIcon.svg'
 
 type Props = {}
 
-const dummyText =
-  'რაღაც ტექსტი როგორ შეიძლება გვერდში დაუდგე ადამიანს მანქანის შეძენისას და რაღაც რაღაც, ასე შემდეგ'
-
 const OurServices = (props: Props) => {
   const t = useTranslations('')
 
