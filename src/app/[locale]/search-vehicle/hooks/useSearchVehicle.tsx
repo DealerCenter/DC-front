@@ -25,6 +25,7 @@ export const FIELD_NAMES = {
   YEAR_TO: 'year_to',
   ODOMETER_FROM: 'odometer_from',
   ODOMETER_TO: 'odometer_to',
+  CAR_TYPE: 'car_info_vehicle_type',
 }
 
 type VehicleListFilters = {
@@ -37,6 +38,7 @@ type VehicleListFilters = {
   year_to?: string
   odometer_from?: number
   odometer_to?: number
+  car_info_vehicle_type?: string
 }
 
 export const SearchVehicleProvider = ({
@@ -72,6 +74,7 @@ export const SearchVehicleProvider = ({
     year_to: '',
     odometer_from: undefined,
     odometer_to: undefined,
+    car_info_vehicle_type: '',
   }
 
   const formik = useFormik({
@@ -162,7 +165,7 @@ export const SearchVehicleProvider = ({
 
 export const useSearchVehicle = <
   Values extends FormikValues = FormikValues,
-  ExtraProps = {},
+  ExtraProps = {}
 >() => {
   const context = useContext(FormikContext)
   if (!context) {

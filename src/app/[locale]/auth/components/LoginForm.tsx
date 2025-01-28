@@ -14,6 +14,8 @@ import passwordIcon from '@/assets/icons/password.svg'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../../theme'
 import { message } from 'antd'
+import { useRouter } from '@/navigation'
+import { routeName } from '@/common/helpers/constants'
 
 type Props = {
   goToRegistration: () => void
@@ -22,6 +24,7 @@ type Props = {
 const LoginForm = ({ goToRegistration }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const [isRemember, setIsRemember] = useState(false)
+  const router = useRouter()
   const t = useTranslations('')
   const {
     values,
@@ -91,7 +94,9 @@ const LoginForm = ({ goToRegistration }: Props) => {
               <RememberCheckbox isChecked={isRemember} />
               <StyledLabel>{t('remember')}</StyledLabel>
             </RememberPair>
-            <StyledLabel>{t('forgot password?')}</StyledLabel>
+            <StyledLabel onClick={() => router.push(routeName.resetPassword)}>
+              {t('forgot password?')}
+            </StyledLabel>
           </LabelContainer>
         </div>
         <AppButton

@@ -15,7 +15,7 @@ const PriceAndStatusBox = ({ amount, auctionState }: Props) => {
     <Container>
       <Frame>
         <Text>{t('price')}</Text>
-        <Money>$ {amount.toString()}</Money>
+        <Money>$ {amount?.toString()}</Money>
       </Frame>
       <AuctionStateBox auctionState={auctionState} />
     </Container>

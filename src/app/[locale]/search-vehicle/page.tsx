@@ -11,11 +11,9 @@ const Page = (props: Props) => {
   const [isFooterShowing, setIsFooterShowing] = useState(true)
 
   return (
-    <SearchVehicleProvider>
-      <SearchForVehicleLayout isFooterShowing={isFooterShowing}>
-        <SearchForVehicle setIsFooterShowing={setIsFooterShowing} />
-      </SearchForVehicleLayout>
-    </SearchVehicleProvider>
+    <SearchForVehicleLayout isFooterShowing={isFooterShowing}>
+      <SearchForVehicle setIsFooterShowing={setIsFooterShowing} />
+    </SearchForVehicleLayout>
   )
 }
 

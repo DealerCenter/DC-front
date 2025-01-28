@@ -1,14 +1,13 @@
-import DropdownInputField from '@/common/components/InputElements/DropdownInputField'
 import React from 'react'
 import styled from 'styled-components'
 
-type Props = { label: string; placeholder: string }
+type Props = { label: string; placeholder: string; input: React.ReactNode }
 
-const LabelAndDropdownPair = ({ label, placeholder }: Props) => {
+const LabelAndDropdownPair = ({ label, placeholder, input }: Props) => {
   return (
     <Container>
       <Label>{label}</Label>
-      <DropdownInputField placeholder={placeholder} />
+      {input}
     </Container>
   )
 }

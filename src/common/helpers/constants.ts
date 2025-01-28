@@ -34,6 +34,7 @@ export const routeName = {
   transportationCalculator: '/our-services/transportation-calculator',
   aboutUs: '/about-us',
   adminContainers: '/admin/shipping-containers',
+  resetPassword: '/auth/reset-password',
 }
 
 export const locales = ['en', 'ge', 'ru']

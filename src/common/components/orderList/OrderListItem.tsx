@@ -21,7 +21,7 @@ const OrderListItem = ({ imageLink, orderData, index, onClick }: Props) => {
     query: theme.media?.md,
   })
 
-  const { status, transportationCost, carCost } = orderData
+  const { status, transportationCost, carCost, statusAndDates } = orderData
 
   return (
     <Container index={index} onClick={onClick}>
@@ -32,7 +32,7 @@ const OrderListItem = ({ imageLink, orderData, index, onClick }: Props) => {
           {isTablet || (
             <ShippingStateBoxFrame>
               {/* @ts-ignore */}
-              <ShippingStatusBox isEditing={false} value={status} />
+              <ShippingStatusBox isEditing={false} value={statusAndDates} />
             </ShippingStateBoxFrame>
           )}
         </MiddleFrame>

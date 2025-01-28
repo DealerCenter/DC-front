@@ -40,4 +40,7 @@ export const endpoints = {
   ASSIGN_DEALER_LEVEL: '/dealer-levels/assign-level',
   DOCUMENTS_CHECK: '/documents',
   DOCUMENTS_CHECK_DOWNLOAD: '/documents/download',
+  RESET_PASS_INIT: '/auth/password-reset/initiate',
+  RESET_PASS_VALIDATE: '/auth/password-reset/initiate',
+  RESET_PASS_FINALIZE: '/auth/password-reset/finalize',
 }

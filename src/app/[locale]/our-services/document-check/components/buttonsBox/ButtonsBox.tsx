@@ -26,7 +26,7 @@ const Container = styled.div`
 
   @media ${({ theme }) => theme.media?.sm} {
     width: 343px;
-    overflow: hidden;
+    overflow: auto;
     justify-content: flex-start;
   }
 `

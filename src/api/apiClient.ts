@@ -12,6 +12,9 @@ const axiosInstance = axios.create({
   withCredentials: true,
 })
 
+// let isRefreshing = false
+let failedQueue: any[] = []
+
 axiosInstance.interceptors.request.use(
   function (config) {
     const accessToken = localStorage.getItem('ACCESS_TOKEN')
@@ -35,10 +38,43 @@ axiosInstance.interceptors.response.use(
   (response) => {
     return response
   },
-  (error) => {
+  async (error) => {
+    const originalRequest = error.config
     if (error.response && error.response.status === 403) {
-      // window.location.href = '/'
       message.error('You are not authorized to access this page')
+    }
+    if (error.response && error.response.status === 401) {
+      try {
+        const refreshToken = localStorage.getItem('REFRESH_TOKEN')
+        const response = await axios.post(
+          `${BASE_URL}/auth/refresh`,
+          {
+            // refresh_token: refreshToken,
+          },
+          {
+            headers: {
+              refresh_token: `${refreshToken}`,
+            },
+          }
+        )
+
+        const newAccessToken = response.data
+        console.log('newAccessToken', newAccessToken)
+
+        localStorage.setItem('ACCESS_TOKEN', newAccessToken)
+
+        // Retry the failed requests in the queue
+        failedQueue.forEach((request) => request(newAccessToken))
+        failedQueue = []
+
+        originalRequest.headers['Authorization'] = `${newAccessToken}`
+        return axios(originalRequest)
+      } catch (refreshError) {
+        console.error('Token refresh failed:', refreshError)
+        return Promise.reject(refreshError)
+      } finally {
+        // isRefreshing = false
+      }
     }
     return Promise.reject(error)
   }
