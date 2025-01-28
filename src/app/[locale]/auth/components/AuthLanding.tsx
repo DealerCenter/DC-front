@@ -109,6 +109,7 @@ const Frame = styled.div`
     margin-left: unset;
     gap: ${({ theme }) => theme.spacing?.xl};
     gap: 70px;
+    align-items: center;
   }
 `
 
@@ -120,7 +121,7 @@ const TextFrame = styled.div`
   }
 
   @media ${({ theme }) => theme.media?.sm} {
-    width: 416px;
+    width: 90%;
   }
 `
 

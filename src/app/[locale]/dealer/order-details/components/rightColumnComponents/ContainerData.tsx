@@ -62,7 +62,8 @@ const Name = styled.label`
 `
 
 const StyledLink = styled.a`
-  width: 112px;
+  max-width: 112px;
+  white-space: normal;
   font-size: 13px;
   font-weight: 400;
   color: ${({ theme }) => theme.colors?.link_blue};

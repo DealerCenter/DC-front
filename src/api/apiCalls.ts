@@ -555,3 +555,44 @@ export const assignDealerLevel = async (dealerId: string, levelId: string) => {
     console.error('Error assigning dealer level:', error)
   }
 }
+
+export const resetPassInit = async (email: string) => {
+  try {
+    const response = await axiosInstance.post(endpoints.RESET_PASS_INIT, {
+      email,
+    })
+    message.success('Password reset initiated successfully!')
+    return response
+  } catch (error) {
+    message.error('Error initiating password reset')
+    console.error('Error initiating password reset:', error)
+  }
+}
+
+export const resetPassValidate = async (email: string, otp: string) => {
+  try {
+    const response = await axiosInstance.post(endpoints.RESET_PASS_VALIDATE, {
+      email,
+      otp,
+    })
+    message.success('Password reset validated successfully!')
+    return response
+  } catch (error) {
+    message.error('Error validating password reset')
+    console.error('Error validating password reset:', error)
+  }
+}
+
+export const resetPassFinalize = async (email: string, password: string) => {
+  try {
+    const response = await axiosInstance.post(endpoints.RESET_PASS_FINALIZE, {
+      email,
+      password,
+    })
+    message.success('Password reset finalized successfully!')
+    return response
+  } catch (error) {
+    message.error('Error finalizing password reset')
+    console.error('Error finalizing password reset:', error)
+  }
+}

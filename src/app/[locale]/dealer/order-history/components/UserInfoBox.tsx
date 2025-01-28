@@ -6,6 +6,8 @@ import checkmarkGreen from '@/assets/icons/checkedGreen.svg'
 import boxIcon from '@/assets/icons/boxBlack.svg'
 import Link from 'next/link'
 import { ORDER_DATA, RECEIVER_DATA } from '@/api/apiTypes'
+import { Popover } from 'antd'
+import CopyButton from '@/common/components/copyToClipboard/CopyButton'
 
 type Props = {
   orderData: ORDER_DATA
@@ -34,7 +36,18 @@ const UserInfoBox = ({ orderData }: Props) => {
           </IconBox>
           <Box>
             <TextBold>{container.name}</TextBold>
-            <StyledLink>{container.trackingUrl}</StyledLink>
+            <Popover
+              content={
+                <PopoverText>
+                  <CopyButton textToCopy={container.trackingUrl} />
+                  <span>{container.trackingUrl}</span>
+                </PopoverText>
+              }
+              title='Copy URL'
+              trigger='hover'
+            >
+              <StyledLink>{container.trackingUrl}</StyledLink>
+            </Popover>
           </Box>
         </Frame>
       )}
@@ -86,9 +99,36 @@ const IconBox = styled.div`
   height: 24px;
 `
 
-const StyledLink = styled.a`
-  width: 112px;
+const PopoverText = styled.span`
   font-size: 13px;
   font-weight: 400;
   color: ${({ theme }) => theme.colors?.link_blue};
+  display: flex;
+  align-items: center;
+`
+
+const StyledLink = styled.a`
+  max-width: 112px;
+  font-size: 13px;
+
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors?.link_blue};
+
+  //For Ellipsis
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  position: relative;
+  line-height: 1.5;
+  max-height: 3em;
+
+  &:after {
+    content: '...';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: white;
+    padding-left: 5px;
+  }
 `

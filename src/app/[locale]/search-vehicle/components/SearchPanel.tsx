@@ -13,13 +13,11 @@ import LoaderForButton from '@/common/components/loader/LoaderForButton'
 import { useMediaQuery } from 'react-responsive'
 import theme from '../../theme'
 import ChooseAuctionBox from './ChooseAuctionBox'
-import { useSearchParams } from 'next/navigation'
 import { FIELD_NAMES, useSearchVehicle } from '../hooks/useSearchVehicle'
 import AppDropdown from '@/common/components/appDropdown/AppDropdown'
 import DropdownMakeSearch from './DropdownMakeSearch'
 import DropdownModelSearch from './DropdownModelSearch'
-
-const dummyBrands = ['Acura', 'Alfa Romeo', 'Audi', 'Aston Martin', 'Mercedes']
+import YearSelector from './YearSelector'
 
 const BUTTON_WIDTH = 236
 const BUTTON_WIDTH_MOBILE = 343
@@ -65,24 +63,7 @@ const SearchPanel = ({}: Props) => {
         <DropdownModelSearch />
       </OptionBox>
       <OptionBox label={t('year')}>
-        <FromUpToBox>
-          <StyledInput
-            name={FIELD_NAMES.YEAR_FROM}
-            value={values[FIELD_NAMES.YEAR_FROM]}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            type='text'
-            placeholder={t('from')}
-          />
-          <StyledInput
-            name={FIELD_NAMES.YEAR_TO}
-            value={values[FIELD_NAMES.YEAR_TO]}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            type='text'
-            placeholder={t('up to')}
-          />
-        </FromUpToBox>
+        <YearSelector />
       </OptionBox>
       <OptionBox label={t('mileage')}>
         <FromUpToBox>

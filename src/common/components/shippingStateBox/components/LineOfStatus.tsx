@@ -124,7 +124,7 @@ const Line = styled.div`
 `
 const Date = styled.label`
   @media ${({ theme }) => theme.media?.sm} {
-    width: 40px;
+    /* width: 40px; */
   }
 
   width: 75px;

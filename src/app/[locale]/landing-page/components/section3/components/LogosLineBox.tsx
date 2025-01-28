@@ -9,18 +9,23 @@ import evergreenLogo from '@/assets/icons/logosLine/evergreenLogo.svg'
 import coscoLogo from '@/assets/icons/logosLine/coscoShippingLogo.svg'
 
 import decorativeStarIcon from '@/assets/icons/decorativeStarIconBlack.svg'
+import { useMediaQuery } from 'react-responsive'
+import theme from '@/app/[locale]/theme'
 
 type Props = {}
 
 const LogosLineBox = (props: Props) => {
+  const isMobile = useMediaQuery({ query: theme.media?.sm })
+
   return (
     <Container>
+      {isMobile && <Image src={decorativeStarIcon} alt='star icon' />}
       <Image src={zimLogo} alt='logo' />
-      <Image src={decorativeStarIcon} alt='star icon' />
+      {!isMobile && <Image src={decorativeStarIcon} alt='star icon' />}
       <Image src={maerskLogo} alt='logo' />
-      <Image src={decorativeStarIcon} alt='star icon' />
+      {!isMobile && <Image src={decorativeStarIcon} alt='star icon' />}
       <Image src={mscLogo} alt='logo' />
-      <Image src={decorativeStarIcon} alt='star icon' />
+      {!isMobile && <Image src={decorativeStarIcon} alt='star icon' />}
       <Image src={evergreenLogo} alt='logo' />
     </Container>
   )
@@ -46,4 +51,8 @@ const Container = styled.div`
   border-width: 6px 0px 6px 0px;
   border-style: solid;
   border-color: rgba(0, 0, 0, 1);
+
+  @media ${({ theme }) => theme.media?.sm} {
+    overflow: auto;
+  }
 `

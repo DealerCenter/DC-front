@@ -7,6 +7,7 @@ import ThemeClient from '../../lib/ThemeClient'
 import '@/styles/styles.css'
 import 'normalize.css/normalize.css'
 import { Locale } from '@/lib/config'
+import { SearchVehicleProvider } from './search-vehicle/hooks/useSearchVehicle'
 
 const inter = Open_Sans({ weight: '500', subsets: ['latin'] })
 
@@ -28,7 +29,9 @@ export default async function RootLayout({
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
           <StyledComponentsRegistry>
-            <ThemeClient>{children}</ThemeClient>
+            <SearchVehicleProvider>
+              <ThemeClient>{children}</ThemeClient>
+            </SearchVehicleProvider>
           </StyledComponentsRegistry>
         </NextIntlClientProvider>
       </body>

@@ -13,8 +13,11 @@ const CopyButton = ({ textToCopy }: Props) => {
   const [isActive, setIsActive] = useState(false)
   const t = useTranslations('')
 
-  const copyToClipboard = async () => {
+  const copyToClipboard = async (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     try {
+      e.stopPropagation()
       await navigator.clipboard.writeText(textToCopy)
       setIsActive(true)
       setTimeout(() => setIsActive(false), 3000)
@@ -27,7 +30,7 @@ const CopyButton = ({ textToCopy }: Props) => {
 
   return (
     <IconBox
-      onClick={isActive ? () => {} : copyToClipboard}
+      onClick={isActive ? () => {} : (e) => copyToClipboard(e)}
       isActive={isActive}
     >
       {isActive ? (
