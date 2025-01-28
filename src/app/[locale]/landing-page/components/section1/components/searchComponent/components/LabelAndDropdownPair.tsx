@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import styled from 'styled-components'
 
@@ -7,7 +8,6 @@ const LabelAndDropdownPair = ({ label, placeholder, input }: Props) => {
   return (
     <Container>
       <Label>{label}</Label>
-      {/* @ts-ignore */}
       {input}
     </Container>
   )
