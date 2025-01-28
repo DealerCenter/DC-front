@@ -7,6 +7,7 @@ const LabelAndDropdownPair = ({ label, placeholder, input }: Props) => {
   return (
     <Container>
       <Label>{label}</Label>
+      {/* @ts-ignore */}
       {input}
     </Container>
   )
