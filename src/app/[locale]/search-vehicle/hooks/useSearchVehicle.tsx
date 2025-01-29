@@ -66,7 +66,7 @@ export const SearchVehicleProvider = ({
 
   const initialValues: VehicleListFilters = {
     page: 1,
-    per_page: 10,
+    per_page: 30,
     auction_name: undefined,
     make: '',
     model: '',
@@ -123,6 +123,10 @@ export const SearchVehicleProvider = ({
     setFieldValue,
     resetForm,
   } = formik
+
+  useEffect(() => {
+    handleSubmit()
+  }, [values.page])
 
   // Update active filters whenever values change
   useEffect(() => {

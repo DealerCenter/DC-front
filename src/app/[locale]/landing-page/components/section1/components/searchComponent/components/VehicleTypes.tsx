@@ -19,8 +19,8 @@ type Props = {}
 
 const VehicleTypes = (props: Props) => {
   const [selectedOption, setSelectedOption] = useState<
-    'VEHICLE' | 'TRUCK' | 'MOTORCYCLE'
-  >('VEHICLE')
+    'CAR' | 'TRUCK' | 'MOTORCYCLE'
+  >('CAR')
   const t = useTranslations('')
 
   const { setFieldValue } = useSearchVehicle()
@@ -34,9 +34,9 @@ const VehicleTypes = (props: Props) => {
       <VehicleBox
         icon={carIcon}
         iconSmall={carIconSmall}
-        isActive={selectedOption === 'VEHICLE'}
+        isActive={selectedOption === 'CAR'}
         label={t('car')}
-        onClick={() => setSelectedOption('VEHICLE')}
+        onClick={() => setSelectedOption('CAR')}
       />
       <VehicleBox
         icon={TruckBlack}
