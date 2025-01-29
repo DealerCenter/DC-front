@@ -4,11 +4,36 @@ import { useRouter } from '@/navigation'
 
 import SearchListItem from './SearchListItem'
 import { routeName } from '@/common/helpers/constants'
+import { Pagination } from 'antd'
+import { FormikHelpers } from 'formik'
+import Loader from '@/common/components/loader/Loader'
 
-type Props = { vehicleList: VehicleListResult[] }
+type Pagination = {
+  count: number
+  current_page: number
+  per_page: number
+  total: number
+  total_pages: number
+}
 
-const SearchResultsList = ({ vehicleList }: Props) => {
+type Props = {
+  vehicleList: VehicleListResult[]
+  pagination: Pagination
+  setFieldValue: FormikHelpers<any>['setFieldValue']
+  isLoading: boolean
+}
+
+const SearchResultsList = ({
+  vehicleList,
+  pagination,
+  setFieldValue,
+  isLoading,
+}: Props) => {
   const router = useRouter()
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <Container>
@@ -19,6 +44,20 @@ const SearchResultsList = ({ vehicleList }: Props) => {
           onClick={() => router.push(`${routeName.vehicleListing}/${item.vin}`)}
         />
       ))}
+      <Pagination
+        current={pagination.current_page}
+        total={pagination.total}
+        showSizeChanger={false}
+        showQuickJumper
+        onChange={(page) => {
+          setFieldValue('page', page)
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+          })
+        }}
+      />
     </Container>
   )
 }

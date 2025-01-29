@@ -46,6 +46,12 @@ const SearchPanel = ({}: Props) => {
     setFieldValue,
   } = useSearchVehicle()
 
+  const handleSearch = () => {
+    setFieldValue('page', 1)
+    setFieldValue('car_info_vehicle_type', '')
+    handleSubmit()
+  }
+
   return (
     <Container>
       <OptionBox label={t('auction')}>
@@ -89,7 +95,7 @@ const SearchPanel = ({}: Props) => {
       <ButtonsFrame>
         <BasicButton
           width={isMobile ? BUTTON_WIDTH_MOBILE : BUTTON_WIDTH}
-          onClick={handleSubmit}
+          onClick={handleSearch}
         >
           {isLoading ? (
             <LoaderForButton />

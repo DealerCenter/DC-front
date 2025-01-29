@@ -28,8 +28,14 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
   const [isFilterOn, setIsFilterOn] = useState(false)
   const [isFilterOpenOnMobile, setIsFilterOpenOnMobile] = useState(false)
 
-  const { vehicleList, pagination, values, activeFilters, setFieldValue } =
-    useSearchVehicle()
+  const {
+    vehicleList,
+    pagination,
+    values,
+    activeFilters,
+    setFieldValue,
+    isLoading,
+  } = useSearchVehicle()
 
   const t = useTranslations('')
 
@@ -97,7 +103,16 @@ const SearchForVehicle = ({ setIsFooterShowing }: Props) => {
         {isFilterOpenOnMobile ? (
           <SearchPanel />
         ) : (
-          <>{vehicleList && <SearchResultsList vehicleList={vehicleList} />}</>
+          <>
+            {vehicleList && (
+              <SearchResultsList
+                vehicleList={vehicleList}
+                pagination={pagination}
+                setFieldValue={setFieldValue}
+                isLoading={isLoading}
+              />
+            )}
+          </>
         )}
       </ListFrame>
     </Container>
