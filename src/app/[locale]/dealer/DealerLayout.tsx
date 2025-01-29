@@ -34,10 +34,7 @@ const DealerLayout = ({ children }: Props) => {
       <Container>
         <Frame>
           {isSideBarVisible && (
-            <SideBar
-              routes={routeNames}
-              isFlexibleOnDesktop={isFlexibleOnDesktop}
-            />
+            <SideBar routes={routeNames} isFlexibleOnDesktop={false} />
           )}
           {!isMobile && <ChildrenContainer>{children}</ChildrenContainer>}
         </Frame>

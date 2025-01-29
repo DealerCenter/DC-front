@@ -7,21 +7,31 @@ import { useTranslations } from 'next-intl'
 import { ORDER_DATA } from '@/api/apiTypes'
 import DownloadButton from '@/assets/invoices/invoice'
 
-type Props = { orderData: ORDER_DATA }
+type Props = { orderData: ORDER_DATA; isAdmin?: boolean }
 
-const CostsBox = ({ orderData }: Props) => {
+const CostsBox = ({ orderData, isAdmin }: Props) => {
   const t = useTranslations('')
 
-  const { carCost, transportationCost } = orderData
+  const { carCost, transportationCost, dealer } = orderData
+
+  const dealerCost = Number(dealer.level?.cost) ? Number(dealer.level?.cost) : 0
 
   return (
     <Container>
       <CostFrame>
         <CostLabelsFrame>
           <Text16BoldGray>{t('cost of transportation')}</Text16BoldGray>
-          <Text23Bold>{`$ ${transportationCost}`}</Text23Bold>
+          <Text23Bold>
+            {isAdmin
+              ? `$${transportationCost} + $${dealerCost}`
+              : `$${transportationCost + dealerCost}`}
+          </Text23Bold>
         </CostLabelsFrame>
-        <IconBoxPdf>{/* <Image src={pdfIcon} alt='pdf icon' /> */}</IconBoxPdf>
+        {!isAdmin && (
+          <IconBoxPdf>
+            {/* <Image src={pdfIcon} alt='pdf icon' /> */}
+          </IconBoxPdf>
+        )}
       </CostFrame>
       <CostFrame>
         <CostLabelsFrame>
@@ -36,7 +46,9 @@ const CostsBox = ({ orderData }: Props) => {
       <CostFrame>
         <CostLabelsFrame>
           <Text16BoldGray>{t('total cost')}</Text16BoldGray>
-          <Text23Bold>{`$ ${carCost + transportationCost}`}</Text23Bold>
+          <Text23Bold>{`$ ${
+            carCost + transportationCost + dealerCost
+          }`}</Text23Bold>
         </CostLabelsFrame>
         <IconBoxPdf />
       </CostFrame>

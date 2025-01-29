@@ -4,6 +4,7 @@ import {
   getAuctionsList,
   getCalculatedPrice,
   getCargoTypes,
+  getDealerLevels,
   getDestinationList,
   getLocationList,
 } from '@/api/apiCalls'
@@ -32,6 +33,7 @@ const useTransportCalculator = () => {
   const [selectedCargoType, setSelectedCargoType] = useState('')
   const [selectedDestination, setSelectedDestination] = useState('')
   const [isCalculating, setIsCalculating] = useState(false)
+  const [publicPrice, setPublicPrice] = useState<string | undefined>('')
 
   const [calculatedResult, setCalculatedResult] = useState<CalculatedResult>({
     totalPrice: 0,
@@ -153,7 +155,17 @@ const useTransportCalculator = () => {
     fetchDestinations()
   }, [])
 
-  console.log({ locations })
+  useEffect(() => {
+    getDealerLevels()
+    const getDealerLevelPrice = async () => {
+      const res = await getDealerLevels()
+      setPublicPrice(
+        res?.find((level) => level.level.toLowerCase() === 'public')?.cost
+      )
+    }
+
+    getDealerLevelPrice()
+  }, [])
 
   return {
     locations,
@@ -178,6 +190,7 @@ const useTransportCalculator = () => {
     checkCarByVin,
     vin,
     setVin,
+    publicPrice,
   }
 }
 

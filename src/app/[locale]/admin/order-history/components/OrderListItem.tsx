@@ -56,6 +56,7 @@ const OrderListItem = ({
     firstName: dealerFullName,
     phoneNumber: dealerPhoneNumber,
     idImageVerificationStatus: dealerVerificationStatus,
+    level: dealerLevel,
   } = dealer
 
   useEffect(() => {
@@ -114,7 +115,7 @@ const OrderListItem = ({
         </BottomFrameMobile>
       ) : (
         <DetailsBox
-          amount={amount + carCost}
+          amount={amount + carCost + Number(dealerLevel?.cost ?? 0)}
           shippingStatus={shippingStatus}
           buyerFullName={buyerFullName}
           buyerPhoneNumber={buyerPhoneNumber}

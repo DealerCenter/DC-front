@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Roboto, Open_Sans } from 'next/font/google'
+import { Inter, Open_Sans, Arimo } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 import StyledComponentsRegistry from '@/lib/registry'
@@ -9,7 +9,7 @@ import 'normalize.css/normalize.css'
 import { Locale } from '@/lib/config'
 import { SearchVehicleProvider } from './search-vehicle/hooks/useSearchVehicle'
 
-const inter = Open_Sans({ weight: '500', subsets: ['latin'] })
+const inter = Arimo({ weight: '500', subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Dealer Center',
