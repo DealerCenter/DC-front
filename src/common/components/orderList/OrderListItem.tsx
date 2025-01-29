@@ -18,10 +18,13 @@ type Props = {
 
 const OrderListItem = ({ imageLink, orderData, index, onClick }: Props) => {
   const isTablet = useMediaQuery({
-    query: theme.media?.md,
+    query: '(max-width: 1192px)',
   })
 
-  const { status, transportationCost, carCost, statusAndDates } = orderData
+  const { status, transportationCost, carCost, statusAndDates, dealer } =
+    orderData
+
+  const dealerLevelCost = Number(dealer.level?.cost) ?? 0
 
   return (
     <Container index={index} onClick={onClick}>
@@ -29,7 +32,7 @@ const OrderListItem = ({ imageLink, orderData, index, onClick }: Props) => {
         <CarDetailsBox imageLink={imageLink} orderData={orderData} />
         <MiddleFrame>
           <UserInfoBox orderData={orderData} />
-          {isTablet || (
+          {!isTablet && (
             <ShippingStateBoxFrame>
               {/* @ts-ignore */}
               <ShippingStatusBox isEditing={false} value={statusAndDates} />
@@ -37,7 +40,10 @@ const OrderListItem = ({ imageLink, orderData, index, onClick }: Props) => {
           )}
         </MiddleFrame>
       </Frame>
-      <DebtBox amount={transportationCost} shippingStatus={status} />
+      <DebtBox
+        amount={transportationCost + dealerLevelCost}
+        shippingStatus={status}
+      />
     </Container>
   )
 }

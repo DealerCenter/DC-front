@@ -8,16 +8,16 @@ import DebtBox from './DetailsRowComponents/DebtBox'
 import CostsBox from './DetailsRowComponents/CostsBox'
 import { ORDER_DATA } from '@/api/apiTypes'
 
-type Props = { orderData: ORDER_DATA }
+type Props = { orderData: ORDER_DATA; isAdmin?: boolean }
 
-const DetailsRow = ({ orderData }: Props) => {
+const DetailsRow = ({ orderData, isAdmin }: Props) => {
   const t = useTranslations('')
 
   return (
     <Container>
       <CarDetailsBox orderData={orderData} />
       <OnMobileFlipFrame>
-        <CostsBox orderData={orderData} />
+        <CostsBox orderData={orderData} isAdmin={isAdmin} />
         <DebtBox />
       </OnMobileFlipFrame>
     </Container>

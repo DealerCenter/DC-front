@@ -556,11 +556,12 @@ export const assignDealerLevel = async (dealerId: string, levelId: string) => {
   }
 }
 
-export const resetPassInit = async (email: string) => {
+export const resetPassInit = async (email: string, callback?: () => void) => {
   try {
     const response = await axiosInstance.post(endpoints.RESET_PASS_INIT, {
       email,
     })
+    callback && callback()
     message.success('Password reset initiated successfully!')
     return response
   } catch (error) {
@@ -569,13 +570,19 @@ export const resetPassInit = async (email: string) => {
   }
 }
 
-export const resetPassValidate = async (email: string, otp: string) => {
+export const resetPassValidate = async (
+  email: string,
+  otp: string,
+  callback?: () => void
+) => {
   try {
     const response = await axiosInstance.post(endpoints.RESET_PASS_VALIDATE, {
       email,
       otp,
     })
     message.success('Password reset validated successfully!')
+    callback && callback()
+
     return response
   } catch (error) {
     message.error('Error validating password reset')
@@ -583,13 +590,18 @@ export const resetPassValidate = async (email: string, otp: string) => {
   }
 }
 
-export const resetPassFinalize = async (email: string, password: string) => {
+export const resetPassFinalize = async (
+  email: string,
+  password: string,
+  callback?: () => void
+) => {
   try {
     const response = await axiosInstance.post(endpoints.RESET_PASS_FINALIZE, {
       email,
       password,
     })
     message.success('Password reset finalized successfully!')
+    callback && callback()
     return response
   } catch (error) {
     message.error('Error finalizing password reset')

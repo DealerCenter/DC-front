@@ -8,9 +8,9 @@ import ButtonsRow from './ButtonsRow'
 import { ORDER_DATA } from '@/api/apiTypes'
 import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
 
-type Props = { orderData: ORDER_DATA }
+type Props = { orderData: ORDER_DATA; isAdmin?: boolean }
 
-const CarImagesAndDetailsBox = ({ orderData }: Props) => {
+const CarImagesAndDetailsBox = ({ orderData, isAdmin }: Props) => {
   const availableLocations = [
     ...new Set(orderData.carImages.map((item) => item.type)),
   ].map((location) => ({
@@ -40,7 +40,7 @@ const CarImagesAndDetailsBox = ({ orderData }: Props) => {
         setSelectedImageLocation={setSelectedImageLocation}
         availableLocations={availableLocations}
       />
-      <DetailsRow orderData={orderData} />
+      <DetailsRow orderData={orderData} isAdmin={isAdmin} />
     </Container>
   )
 }

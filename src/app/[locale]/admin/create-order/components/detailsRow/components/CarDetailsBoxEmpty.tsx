@@ -75,6 +75,7 @@ const CarDetailsBoxEmpty = (props: Props) => {
           )?.body_class ?? ''
 
         setFieldValue(FIELD_NAMES.MANUFACTURER, res.make)
+        setFieldValue(FIELD_NAMES.CAR_DETAILS, res.lot_number)
         setFieldValue(FIELD_NAMES.MANUFACTURE_YEAR, res.year)
         setFieldValue(FIELD_NAMES.MODEL, res.model)
         setFieldValue(FIELD_NAMES.VIN, vin)
@@ -135,7 +136,7 @@ const CarDetailsBoxEmpty = (props: Props) => {
         type='text'
         fontSize={13}
         fontWeight='bold'
-        placeholder={t('vehicle feature')}
+        placeholder={t('lot number')}
         name={FIELD_NAMES.CAR_DETAILS}
         value={values[FIELD_NAMES.CAR_DETAILS] ?? ''}
         onChange={handleChange}

@@ -75,4 +75,5 @@ const Label = styled.label`
   width: 120px;
   color: ${({ theme }) => theme.colors?.white};
   white-space: nowrap;
+  text-wrap: auto;
 `

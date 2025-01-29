@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
@@ -37,6 +37,7 @@ const TransportationCalculator = (props: Props) => {
     checkCarByVin,
     vin,
     setVin,
+    publicPrice,
   } = useTransportCalculator()
 
   const isMobile = useMediaQuery({ query: theme.media?.sm })
@@ -137,6 +138,7 @@ const TransportationCalculator = (props: Props) => {
 
         <ResultsBox
           calculatedResult={calculatedResult}
+          publicPrice={publicPrice}
           isCalculating={isCalculating}
         />
       </Frame>

@@ -29,18 +29,15 @@ const ResetPassword = (props: Props) => {
   const [step, setStep] = useState(0)
 
   const handleInitReset = async () => {
-    resetPassInit(email)
-    setStep(1)
+    resetPassInit(email, () => setStep(1))
   }
 
   const handleValidate = async () => {
-    resetPassValidate(email, otp)
-    setStep(2)
+    resetPassValidate(email, otp, () => setStep(2))
   }
 
   const handleFinalize = async () => {
-    resetPassFinalize(email, password)
-    router.push(endpoints.LOGIN)
+    resetPassFinalize(email, password, () => router.push(endpoints.LOGIN))
   }
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/

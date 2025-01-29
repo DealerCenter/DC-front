@@ -86,13 +86,13 @@ const OrderDetails = ({ id }: Props) => {
                     }
                     text={t('edit')}
                     type='filled'
-                    width={100}
+                    width={150}
                     height='large'
                   />
                 </BackToOrderButton>
               </>
             )}
-            <CarImagesAndDetailsBox orderData={orderData} />
+            <CarImagesAndDetailsBox orderData={orderData} isAdmin />
           </TopFrame>
           <BottomFrame>
             <LeftColumn orderData={orderData} />

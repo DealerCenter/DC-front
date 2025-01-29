@@ -20,9 +20,14 @@ type Props = {
     destination: string
   }
   isCalculating: boolean
+  publicPrice: string | undefined
 }
 
-const ResultsBox = ({ calculatedResult, isCalculating }: Props) => {
+const ResultsBox = ({
+  calculatedResult,
+  isCalculating,
+  publicPrice,
+}: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
 
@@ -30,8 +35,6 @@ const ResultsBox = ({ calculatedResult, isCalculating }: Props) => {
     calculatedResult?.auctionLocation.length > 0
       ? calculatedResult.auctionLocation.split('-')
       : ''
-
-  console.log({ splitName })
 
   return (
     <Container>
@@ -73,7 +76,12 @@ const ResultsBox = ({ calculatedResult, isCalculating }: Props) => {
           <RightFrame>
             <LabelAndCostBox>
               <Label>{t('cost of transportation')}</Label>
-              <Cost>${calculatedResult.totalPrice}</Cost>
+              <Cost>
+                $
+                {calculatedResult.totalPrice
+                  ? calculatedResult.totalPrice + Number(publicPrice)
+                  : 0}
+              </Cost>
             </LabelAndCostBox>
           </RightFrame>
         </>
