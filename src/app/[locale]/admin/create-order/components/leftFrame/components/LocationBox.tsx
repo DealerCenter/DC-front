@@ -9,12 +9,16 @@ import {
 
 import AppSelectAntDesignWithFetch from '@/common/components/appSelect/AppSelectAntDesignWithFetch'
 import AppButton from '@/common/components/appButton/AppButton'
+import TextInput from '@/common/components/InputElements/TextInput'
+import CheckBox from '@/common/components/appCheckBox/Checkbox'
+import { useState } from 'react'
 
 type Props = {}
 
 const LocationBox = ({}: Props) => {
   const { values, setFieldValue, locations, destinations, handleCalculate } =
     useCreateOrderContext()
+  const [isAuctionCar, setIsAuctionCar] = useState(true)
   const t = useTranslations('')
 
   const handleSetState = (value: string) => {
@@ -31,15 +35,36 @@ const LocationBox = ({}: Props) => {
       <Line />
 
       <LabelsPair>
-        <SLabel>{t('from where')}</SLabel>
-        <AppSelectAntDesignWithFetch
-          options={locations}
-          // placeholder={t('which city/state is it coming from')}
-          value={values[FIELD_NAMES.STATE_ID]}
-          setValue={handleSetState}
-          isLoading={false}
-          onChange={() => {}}
-        />
+        <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <SLabel>{t('from where')}</SLabel>
+          <LabelsFrame onClick={() => setIsAuctionCar((prev) => !prev)}>
+            <CheckBox isChecked={isAuctionCar} />
+            COPART / IAAI
+          </LabelsFrame>
+        </span>
+
+        {isAuctionCar ? (
+          <AppSelectAntDesignWithFetch
+            options={locations}
+            // placeholder={t('which city/state is it coming from')}
+            value={values[FIELD_NAMES.STATE_ID]}
+            setValue={handleSetState}
+            isLoading={false}
+            onChange={() => {}}
+          />
+        ) : (
+          <TextInput
+            name='from_where'
+            type='text'
+            value={values[FIELD_NAMES.STATE_ID]}
+            onChange={(e) => handleSetState(e.target.value)}
+            // placeholder={t('which city/state is it coming from')}
+            placeholder=''
+            onBlur={() => {}}
+            isWidthFill
+            height={44}
+          />
+        )}
       </LabelsPair>
 
       <LabelsPair>
@@ -86,8 +111,8 @@ type LabelsFrameProps = { isEditing?: boolean }
 
 const LabelsFrame = styled.div<LabelsFrameProps>`
   display: flex;
-  flex-direction: column;
-  gap: ${({ isEditing }) => (isEditing ? `8px` : `4px`)};
+  align-items: center;
+  gap: ${({ isEditing }) => (isEditing ? `12px` : `8px`)};
 `
 
 const LabelsPair = styled.div`

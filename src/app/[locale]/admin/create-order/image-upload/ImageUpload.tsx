@@ -15,6 +15,7 @@ import InputFieldAndImageUploadPair from './components/InputFieldAndImageUploadP
 import checkedIcon from '@/assets/icons/doneIcon.svg'
 import closeX from '@/assets/icons/closeX.svg'
 import { message } from 'antd'
+import { useCreateOrderContext } from '../hooks/useCreateOrderContext'
 
 type Props = { onClose: () => void }
 
@@ -49,10 +50,22 @@ const ImageUpload = ({ onClose }: Props) => {
     onClose()
   }
 
+  const { setImages } = useCreateOrderContext()
+
+  const handleGoBack = () => {
+    onClose()
+    setImages({
+      [IMAGE_LOCATIONS.TOW_TRUCK]: [],
+      [IMAGE_LOCATIONS.ABROAD_PORT]: [],
+      [IMAGE_LOCATIONS.CONTAINER]: [],
+      [IMAGE_LOCATIONS.HOME_PORT]: [],
+    })
+  }
+
   return (
     <Container>
       <GoBackButtonFrame>
-        <AppGoBackButton onClick={onClose} text={t('go back')} />
+        <AppGoBackButton onClick={handleGoBack} text={t('go back')} />
       </GoBackButtonFrame>
       <Box>
         {ImageLocations.map(
@@ -89,7 +102,7 @@ const ImageUpload = ({ onClose }: Props) => {
             <ButtonIcon>
               <Image src={checkedIcon} alt='done icon' width={15} />
             </ButtonIcon>
-            <ButtonText>{t('done')}</ButtonText>
+            <ButtonText>{t('save')}</ButtonText>
           </BasicButton>
         </CancelAndDonePair>
       </Box>
