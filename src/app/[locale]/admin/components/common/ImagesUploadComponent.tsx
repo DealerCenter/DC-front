@@ -15,6 +15,7 @@ import {
   useCreateOrderContext,
 } from '../../create-order/hooks/useCreateOrderContext'
 import { IMAGE_LOCATIONS } from '@/common/helpers/constants'
+import ImagesComponent from '@/app/[locale]/dealer/order-details/components/ImagesComponent'
 
 type Props = {
   text?: string
@@ -43,7 +44,7 @@ const ImagesUploadComponent = ({
 
   const [isDropped, setIsDropped] = useState(false)
 
-  const { setFieldValue, values, setTowTruckImage, setImages } =
+  const { setFieldValue, values, setTowTruckImage, setImages, images } =
     useCreateOrderContext()
 
   const onDrop = useCallback(
@@ -55,7 +56,14 @@ const ImagesUploadComponent = ({
           [IMAGE_LOCATIONS.CONTAINER]: []
           [IMAGE_LOCATIONS.HOME_PORT]: []
         }) => {
-          return { ...prev, [String(currentLocation)]: acceptedFiles }
+          return {
+            ...prev,
+            [String(currentLocation)]: [
+              // @ts-ignore
+              ...(prev[currentLocation] ?? []),
+              ...acceptedFiles,
+            ],
+          }
         }
       )
       setIsDropped(true)
@@ -74,41 +82,82 @@ const ImagesUploadComponent = ({
   }, [currentLocation])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: {
+      'image/jpeg': [],
+      'image/png': [],
+    },
     onDrop,
     disabled: isDisabled,
   })
 
+  const removeImage = (id: number) => {
+    // @ts-ignore
+    const newBlobsArray = [...images[currentLocation]]
+    newBlobsArray.splice(id, 1)
+
+    console.log('neww', newBlobsArray)
+
+    setImages(
+      (prev: {
+        [IMAGE_LOCATIONS.TOW_TRUCK]: []
+        [IMAGE_LOCATIONS.ABROAD_PORT]: []
+        [IMAGE_LOCATIONS.CONTAINER]: []
+        [IMAGE_LOCATIONS.HOME_PORT]: []
+      }) => {
+        return {
+          ...prev,
+          [String(currentLocation)]: [...newBlobsArray],
+        }
+      }
+    )
+  }
+
   return (
-    <Container {...getRootProps()} width={width ?? 0} height={height ?? 0}>
-      <Frame>
-        <IconBox>
-          <Image
-            src={isDropped ? uploadedIcon : uploadIcon}
-            alt='upload icon'
-            height={30}
-          />
-        </IconBox>
-        <input {...getInputProps()} />
-        {isDropped ? (
-          <Text isDropped={isDropped}>{uploadedText}</Text>
-        ) : isDragActive ? (
-          <Text>{dropText}</Text>
-        ) : (
-          <Text>{text}</Text>
-        )}
-        <BasicButton
-          onClick={() => {}}
-          padding={16}
-          width={155}
-          isDisabled={isDisabled}
-        >
-          <ButtonIcon>
-            <Image src={plusIcon} alt='check icon' width={15} />
-          </ButtonIcon>
-          <ButtonText>{t('upload')}</ButtonText>
-        </BasicButton>
-      </Frame>
-    </Container>
+    <>
+      <Container {...getRootProps()} width={width ?? 0} height={height ?? 0}>
+        <Frame>
+          <IconBox>
+            <Image
+              src={isDropped ? uploadedIcon : uploadIcon}
+              alt='upload icon'
+              height={30}
+            />
+          </IconBox>
+          <input {...getInputProps()} />
+          {isDropped ? (
+            <Text isDropped={isDropped}>{uploadedText}</Text>
+          ) : isDragActive ? (
+            <Text>{dropText}</Text>
+          ) : (
+            <Text>{text}</Text>
+          )}
+          <BasicButton
+            onClick={() => {}}
+            padding={16}
+            width={155}
+            isDisabled={isDisabled}
+          >
+            <ButtonIcon>
+              <Image src={plusIcon} alt='check icon' width={15} />
+            </ButtonIcon>
+            <ButtonText>{t('upload')}</ButtonText>
+          </BasicButton>
+        </Frame>
+      </Container>
+      {/* @ts-ignore */}
+      {images?.[currentLocation]?.length > 0 && (
+        <ImagesComponent
+          onRemoveImage={removeImage}
+          // @ts-ignore
+          carImages={images[currentLocation]?.map((file, idx) => {
+            return {
+              id: idx,
+              url: URL.createObjectURL(file),
+            }
+          })}
+        />
+      )}
+    </>
   )
 }
 

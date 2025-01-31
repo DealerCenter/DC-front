@@ -11,9 +11,10 @@ import { CAR_IMAGE } from '@/api/apiTypes'
 
 type Props = {
   carImages: CAR_IMAGE[]
+  onRemoveImage?(id: number): void
 }
 
-const ImagesComponent = ({ carImages }: Props) => {
+const ImagesComponent = ({ carImages, onRemoveImage }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
 
@@ -75,8 +76,11 @@ const ImagesComponent = ({ carImages }: Props) => {
               alt='image'
               width={isMobile ? 343 : 180}
               height={isMobile ? 260 : 180}
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: 'cover', borderRadius: 18 }}
             />
+            {onRemoveImage && (
+              <RemoveIcon onClick={() => onRemoveImage(item.id)}>X</RemoveIcon>
+            )}
           </ImageBox>
         ))}
         <Button left={isMobile ? 10 : -30} onClick={handleMoveLeft}>
@@ -100,13 +104,29 @@ const ImageBox = styled.div`
   width: 100%;
   width: 180px;
   height: 180px;
-  overflow: hidden;
+  /* overflow: hidden; */
   border-radius: 18px;
+  position: relative;
 
   @media ${({ theme }) => theme.media?.sm} {
     width: 343px;
     height: 260px;
   }
+`
+
+const RemoveIcon = styled.div`
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: black;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 `
 
 const ImageFrame = styled.div`

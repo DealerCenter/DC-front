@@ -270,6 +270,23 @@ export const CreateOrderProvider = ({ children }: { children: any }) => {
       orderDetails.additionalDetails
     )
     setFieldValue(FIELD_NAMES.CAR_DETAILS, orderDetails.carDetails)
+    //images
+    // setFieldValue(
+    //   FIELD_NAMES.TOW_TRUCK_IMAGES,
+    //   orderDetails.carImages.filter((img) => img.type === 'TOW_TRUCK')
+    // )
+    // setFieldValue(
+    //   FIELD_NAMES.ABROAD_PORT_IMAGES,
+    //   orderDetails.carImages.filter((img) => img.type === 'ABROAD_PORT')
+    // )
+    // setFieldValue(
+    //   FIELD_NAMES.CONTAINER_IMAGES,
+    //   orderDetails.carImages.filter((img) => img.type === 'CONTAINER')
+    // )
+    // setFieldValue(
+    //   FIELD_NAMES.HOME_PORT_IMAGES,
+    //   orderDetails.carImages.filter((img) => img.type === 'HOME_PORT')
+    // )
   }
 
   const {
@@ -369,6 +386,7 @@ export const CreateOrderProvider = ({ children }: { children: any }) => {
         resetForm,
         setOrderId,
         setImages,
+        images,
         locations,
         destinations,
         handleCalculate,
