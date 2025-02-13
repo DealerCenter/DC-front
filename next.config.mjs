@@ -8,6 +8,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
+    unoptimized: true,
     domains: [
       'production-dc-dealers.s3.amazonaws.com',
       'production-dc-orders.s3.eu-central-1.amazonaws.com',
