@@ -27,6 +27,7 @@ export const handleAuthResponse = (response: AxiosResponse) => {
 export const handleLogout = () => {
   Cookies.remove(ACCESS_TOKEN)
   Cookies.remove(REFRESH_TOKEN)
+  localStorage.clear()
 }
 
 export const getCarDetailsByVin = async (vin: string) => {

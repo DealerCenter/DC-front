@@ -25,6 +25,8 @@ export const useUserData = create<UserDataState>((set) => ({
       set({ loading: true })
       const response = await fetchMe()
       set({ userData: response, isAuthenticated: !!response, loading: false })
+      response?.level?.level &&
+        localStorage.setItem('role', response?.level?.level)
     } catch (error) {
       console.error('Error fetching user:', error)
       set({ userData: null, loading: false })

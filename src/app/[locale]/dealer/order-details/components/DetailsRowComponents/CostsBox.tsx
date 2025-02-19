@@ -21,17 +21,9 @@ const CostsBox = ({ orderData, isAdmin }: Props) => {
       <CostFrame>
         <CostLabelsFrame>
           <Text16BoldGray>{t('cost of transportation')}</Text16BoldGray>
-          <Text23Bold>
-            {isAdmin
-              ? `$${transportationCost} + $${dealerCost}`
-              : `$${transportationCost + dealerCost}`}
-          </Text23Bold>
+          <Text23Bold>{`$${transportationCost + dealerCost}`}</Text23Bold>
         </CostLabelsFrame>
-        {!isAdmin && (
-          <IconBoxPdf>
-            {/* <Image src={pdfIcon} alt='pdf icon' /> */}
-          </IconBoxPdf>
-        )}
+        <IconBoxPdf>{/* <Image src={pdfIcon} alt='pdf icon' /> */}</IconBoxPdf>
       </CostFrame>
       <CostFrame>
         <CostLabelsFrame>
@@ -94,12 +86,14 @@ const Text23Bold = styled.label`
   font-weight: 700;
   color: ${({ theme }) => theme.colors?.black};
   white-space: nowrap;
+  flex: 1;
 `
 
 const Text16BoldGray = styled.label`
   font-size: 16px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors?.main_gray_68};
+  width: 180px;
 `
 
 const Line = styled.div`

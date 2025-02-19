@@ -11,13 +11,23 @@ import Loader from '../loader/Loader'
 type Props = {
   ordersList?: ORDER_DATA[]
   isLoading?: boolean
+  isAdmin?: boolean
 }
 
-const OrderList = ({ ordersList, isLoading }: Props) => {
+const OrderList = ({ ordersList, isLoading, isAdmin }: Props) => {
   const router = useRouter()
 
   if (isLoading) {
     return <Loader />
+  }
+
+  const handleClick = (order: ORDER_DATA) => {
+    if (isAdmin) {
+      router.push(`${routeName.adminOrderDetails}/${order.id}`)
+      return
+    }
+
+    router.push(`${routeName.dealerOrder}/${order.id}`)
   }
 
   return (
@@ -25,7 +35,7 @@ const OrderList = ({ ordersList, isLoading }: Props) => {
       {ordersList &&
         ordersList.map((order, i) => (
           <OrderListItem
-            onClick={() => router.push(`${routeName.dealerOrder}/${order.id}`)}
+            onClick={() => handleClick(order)}
             imageLink={order.carImages[0]?.url || DummyImage.src}
             orderData={order}
             key={`${order.vin}82kj32${i}`}

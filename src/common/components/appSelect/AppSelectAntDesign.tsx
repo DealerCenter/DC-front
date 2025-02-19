@@ -44,7 +44,8 @@ const AppSelectAntDesign = ({
   const handleOnChange = (value: string | number) => {
     setSelectedItem(value)
     onChangeString && onChangeString(value.toString())
-    onChangeId && onChangeId(Number(value))
+    // @ts-ignore
+    onChangeId && onChangeId(!value ? '' : Number(value))
   }
 
   const handleOnSearch = (value: string | number) => {
@@ -92,6 +93,7 @@ const AppSelectAntDesign = ({
           value={selectedItem}
           onChange={handleOnChange}
           onSearch={handleOnSearch}
+          allowClear
           style={{
             width: `${width ? `${width}px` : '100%'}`,
             border: `2px solid ${theme.colors?.main_gray_04}`,

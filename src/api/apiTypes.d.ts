@@ -30,6 +30,11 @@ type ME_RES = {
   idImageVerificationStatus: VERIFICATION_STATUS_NAME
   juridicalDocUrl: string | null
   juridicalDocVerificationStatus: VERIFICATION_STATUS_NAME
+  level?: {
+    id: number
+    level: string
+    cost: number
+  }
   juridicalInfo: {
     companyAddress: string
     id: number

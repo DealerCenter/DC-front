@@ -36,7 +36,7 @@ const OrderListBox = ({ headerText, ordersResponse }: Props) => {
       <HeaderFrame>
         <HeaderH5Bold text={headerText} />
       </HeaderFrame>
-      <OrderList ordersList={ordersResponse.data} />
+      <OrderList ordersList={ordersResponse.data} isAdmin />
       <PaginationFrame>
         <Pagination
           currentPage={ordersResponse.page}
