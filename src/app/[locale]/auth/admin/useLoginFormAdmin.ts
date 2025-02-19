@@ -38,6 +38,7 @@ const useLoginForm = () => {
         )
 
         handleAuthResponse(response)
+        localStorage.setItem('role', 'admin')
 
         message.success(t('you are logged in'))
         router.push(routeName.admin)

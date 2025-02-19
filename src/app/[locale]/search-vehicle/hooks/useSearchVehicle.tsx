@@ -89,9 +89,9 @@ export const SearchVehicleProvider = ({
       } catch (error) {
         // Error as AxiosError to safely access its properties
         if (error instanceof AxiosError) {
-          message.error(error?.response?.data?.message)
+          // message.error(error?.response?.data?.message)
         } else {
-          message.error('An unknown error occurred.')
+          // message.error('An unknown error occurred.')
         }
         console.error('Error fetching vehicles data:', error)
       } finally {

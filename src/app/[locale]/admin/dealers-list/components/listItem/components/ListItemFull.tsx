@@ -180,6 +180,7 @@ const NameLabel = styled(Label)`
   font-weight: 700;
   justify-content: start;
   text-align: start;
+  text-transform: capitalize;
 `
 
 const IdLabel = styled(Label)`

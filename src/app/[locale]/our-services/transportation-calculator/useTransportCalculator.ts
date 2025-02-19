@@ -159,9 +159,13 @@ const useTransportCalculator = () => {
     getDealerLevels()
     const getDealerLevelPrice = async () => {
       const res = await getDealerLevels()
-      setPublicPrice(
-        res?.find((level) => level.level.toLowerCase() === 'public')?.cost
-      )
+      const role = localStorage.getItem('role')
+      res &&
+        setPublicPrice(
+          res?.find(
+            (level) => level.level.toLowerCase() === role?.toLowerCase()
+          )?.cost ?? res[res?.length - 1].cost
+        )
     }
 
     getDealerLevelPrice()

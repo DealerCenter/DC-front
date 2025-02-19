@@ -11,11 +11,22 @@ type Props = { text?: string }
 const LoginButton = ({ text }: Props) => {
   const router = useRouter()
 
+  const handleClick = () => {
+    const role = localStorage.getItem('role')
+    if (!role) {
+      console.log('aqaa', role)
+      router.push(routeName.auth)
+      return
+    }
+    if (role === 'admin') {
+      router.push(routeName.admin)
+    } else {
+      router.push(routeName.dealer)
+    }
+  }
+
   return (
-    <Item
-      onClick={() => router.push(routeName.auth)}
-      isText={typeof text === 'string'}
-    >
+    <Item onClick={handleClick} isText={typeof text === 'string'}>
       <Image width={20} height={20} src={person} alt='person icon' />
       {text && <Text>{text}</Text>}
     </Item>

@@ -36,6 +36,13 @@ const ResultsBox = ({
       ? calculatedResult.auctionLocation.split('-')
       : ''
 
+  const isAdmin = localStorage.getItem('role') === 'admin'
+  const price = calculatedResult.totalPrice
+    ? isAdmin
+      ? calculatedResult.totalPrice
+      : calculatedResult.totalPrice + Number(publicPrice)
+    : 0
+
   return (
     <Container>
       {isCalculating ? (
@@ -76,12 +83,7 @@ const ResultsBox = ({
           <RightFrame>
             <LabelAndCostBox>
               <Label>{t('cost of transportation')}</Label>
-              <Cost>
-                $
-                {calculatedResult.totalPrice
-                  ? calculatedResult.totalPrice + Number(publicPrice)
-                  : 0}
-              </Cost>
+              <Cost>${price}</Cost>
             </LabelAndCostBox>
           </RightFrame>
         </>
