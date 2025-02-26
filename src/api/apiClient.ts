@@ -42,6 +42,8 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config
     if (error.response && error.response.status === 403) {
       message.error('You are not authorized to access this page')
+      window.location.href = '/'
+      localStorage.clear()
     }
     if (error.response && error.response.status === 401) {
       try {

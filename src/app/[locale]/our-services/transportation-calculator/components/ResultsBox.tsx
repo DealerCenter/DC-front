@@ -21,12 +21,14 @@ type Props = {
   }
   isCalculating: boolean
   publicPrice: string | undefined
+  isPendingStatus: boolean
 }
 
 const ResultsBox = ({
   calculatedResult,
   isCalculating,
   publicPrice,
+  isPendingStatus,
 }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const t = useTranslations('')
@@ -37,10 +39,17 @@ const ResultsBox = ({
       : ''
 
   const isAdmin = localStorage.getItem('role') === 'admin'
+
   const price = calculatedResult.totalPrice
     ? isAdmin
       ? calculatedResult.totalPrice
       : calculatedResult.totalPrice + Number(publicPrice)
+    : 0
+
+  const pendingPrice = calculatedResult.totalPrice
+    ? isPendingStatus
+      ? 100
+      : 0
     : 0
 
   return (
@@ -83,7 +92,7 @@ const ResultsBox = ({
           <RightFrame>
             <LabelAndCostBox>
               <Label>{t('cost of transportation')}</Label>
-              <Cost>${price}</Cost>
+              <Cost>${price + pendingPrice}</Cost>
             </LabelAndCostBox>
           </RightFrame>
         </>

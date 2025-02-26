@@ -14,6 +14,7 @@ import shipImage from '@/assets/images/shipImage.jpeg'
 import PageHeader from '@/common/components/pageHeader/PageHeader'
 import ResultsBox from './components/ResultsBox'
 import TextInput from '@/common/components/InputElements/TextInput'
+import CheckBox from '@/common/components/appCheckBox/Checkbox'
 
 const IMAGE_WIDTH = 386
 const IMAGE_HEIGHT = 292
@@ -38,6 +39,8 @@ const TransportationCalculator = (props: Props) => {
     vin,
     setVin,
     publicPrice,
+    isPendingStatus,
+    setIsPendingStatus,
   } = useTransportCalculator()
 
   const isMobile = useMediaQuery({ query: theme.media?.sm })
@@ -130,6 +133,10 @@ const TransportationCalculator = (props: Props) => {
                 </LabelsPair>
               </Flex>
             </InputsContainer>
+            <CheckboxFrame onClick={() => setIsPendingStatus((prev) => !prev)}>
+              Pending
+              <CheckBox isChecked={isPendingStatus} />
+            </CheckboxFrame>
             <BasicButton onClick={handleCalculate}>
               <ButtonLabel>{t('calculate')}</ButtonLabel>
             </BasicButton>
@@ -140,6 +147,7 @@ const TransportationCalculator = (props: Props) => {
           calculatedResult={calculatedResult}
           publicPrice={publicPrice}
           isCalculating={isCalculating}
+          isPendingStatus={isPendingStatus}
         />
       </Frame>
     </Container>
@@ -256,4 +264,12 @@ const Flex = styled.div`
     flex-direction: column;
     margin-top: 20px;
   }
+`
+
+const CheckboxFrame = styled.div`
+  display: flex;
+  user-select: none;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
 `

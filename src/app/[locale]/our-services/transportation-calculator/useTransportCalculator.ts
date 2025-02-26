@@ -34,6 +34,7 @@ const useTransportCalculator = () => {
   const [selectedDestination, setSelectedDestination] = useState('')
   const [isCalculating, setIsCalculating] = useState(false)
   const [publicPrice, setPublicPrice] = useState<string | undefined>('')
+  const [isPendingStatus, setIsPendingStatus] = useState(false)
 
   const [calculatedResult, setCalculatedResult] = useState<CalculatedResult>({
     totalPrice: 0,
@@ -195,6 +196,8 @@ const useTransportCalculator = () => {
     vin,
     setVin,
     publicPrice,
+    isPendingStatus,
+    setIsPendingStatus,
   }
 }
 
