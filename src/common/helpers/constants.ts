@@ -35,6 +35,7 @@ export const routeName = {
   aboutUs: '/about-us',
   adminContainers: '/admin/shipping-containers',
   resetPassword: '/auth/reset-password',
+  inboxCar: '/search-vehicle/inbox-car',
 }
 
 export const locales = ['en', 'ge', 'ru']

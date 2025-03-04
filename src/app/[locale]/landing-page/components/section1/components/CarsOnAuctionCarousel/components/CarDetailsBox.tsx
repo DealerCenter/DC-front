@@ -6,18 +6,53 @@ import carImage from '@/assets/images/DummyCarImage.jpg'
 import GelAndUsdSwitch from './GelAndUsdSwitch'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import { useRouter } from '@/navigation'
+import { routeName } from '@/common/helpers/constants'
 
-type Props = {}
+type Props = {
+  data: any
+}
 
-const CarDetailsBox = (props: Props) => {
+const CarDetailsBox = ({ data }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const router = useRouter()
+
+  function getImageSrc(htmlString: string) {
+    if (typeof window === 'undefined') {
+      return null
+    }
+
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(htmlString, 'text/html')
+
+    // Find the <img> element with alt="Main photo"
+    const imgElement = doc.querySelector('img[alt="Main photo"]')
+
+    // If found, return the src attribute, otherwise return null
+    return imgElement ? imgElement?.src : null
+  }
+
+  function getTitle(inputString) {
+    const result = inputString.replace('Fwd: Details for ', '')
+    return result
+  }
+
+  const html = data?.['parts']?.[1]?.['body']
+  const imageSrc = getImageSrc(html)
+  const title = getTitle(data?.['subject'])
 
   return (
-    <Container>
-      <Image src={carImage} alt='car image' width={isMobile ? 240 : 286} />
+    <Container onClick={() => router.push(`${routeName.inboxCar}/${data.id}`)}>
+      <Image
+        src={imageSrc}
+        alt='car image'
+        height={257}
+        width={isMobile ? 240 : 286}
+        objectFit='contain'
+      />
       <DetailsFrame>
         <HeaderFrame>
-          <Header>2021 Mercedes E-Class</Header>
+          <Header>{title}</Header>
           <CarModel>E class, Diezel</CarModel>
         </HeaderFrame>
         <MiddleFrame>
@@ -31,8 +66,8 @@ const CarDetailsBox = (props: Props) => {
           </LabelsBox>
         </MiddleFrame>
         <BottomFrame>
-          <Amount>5,600</Amount>
-          <GelAndUsdSwitch />
+          {/* <Amount>5,600</Amount>
+          <GelAndUsdSwitch /> */}
         </BottomFrame>
       </DetailsFrame>
     </Container>

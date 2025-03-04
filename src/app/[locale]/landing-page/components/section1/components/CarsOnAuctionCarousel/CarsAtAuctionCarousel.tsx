@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import { useTranslations } from 'next-intl'
@@ -10,6 +10,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import theme from '@/app/[locale]/theme'
 import CarDetailsBox from './components/CarDetailsBox'
 import { NextArrow, PrevArrow } from './components/CustomArrows'
+import { getMailinatorInbox } from '@/api/apiCalls'
 
 type Props = { onSeeAllClick: () => void }
 
@@ -43,6 +44,7 @@ const isMobileSettings = {
 const CarsAtAuctionCarousel = ({ onSeeAllClick }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const isTablet = useMediaQuery({ query: theme.media?.md })
+  const [mailinatorInbox, setMailinatorInbox] = useState([])
   const t = useTranslations('')
 
   const settings = isMobile
@@ -51,29 +53,45 @@ const CarsAtAuctionCarousel = ({ onSeeAllClick }: Props) => {
     ? isTabletSettings
     : isDesktopSettings
 
+  const fetchCars = async () => {
+    const res = await getMailinatorInbox()
+    console.log('res', res)
+    setMailinatorInbox(res)
+  }
+  useEffect(() => {
+    fetchCars()
+  }, [])
+  // console.log('car', mailinatorInbox[0]?.['parts']?.[1]['body'])
+  console.log({ mailinatorInbox })
+
   return (
     <Container>
-      <TopFrame>
-        <Header>{t('cars at auction')}</Header>
-        {!isMobile && (
+      {mailinatorInbox?.length > 0 && (
+        <>
+          <TopFrame>
+            <Header>{t('cars at auction')}</Header>
+            {/* {!isMobile && (
           <SeeAllLabel onClick={onSeeAllClick}>{t('see all')}</SeeAllLabel>
-        )}
-      </TopFrame>
-      <MediaCutDiv>
-        <CarsCarouselFrame>
-          {/* @ts-ignore */}
-          <Slider ref={null} refs={null} {...settings}>
-            <CarDetailsBox />
-            <CarDetailsBox />
-            <CarDetailsBox />
-            <CarDetailsBox />
-            <CarDetailsBox />
-          </Slider>
-        </CarsCarouselFrame>
-      </MediaCutDiv>
-      {isMobile && (
-        <SeeAllLabel onClick={onSeeAllClick}>{t('see all')}</SeeAllLabel>
+        )} */}
+          </TopFrame>
+          <MediaCutDiv>
+            <CarsCarouselFrame>
+              {mailinatorInbox?.length > 0 && (
+                // @ts-ignore
+                <Slider ref={null} refs={null} {...settings}>
+                  {mailinatorInbox.map((car, idx) => (
+                    <CarDetailsBox key={`mailinator${idx}`} data={car} />
+                  ))}
+                </Slider>
+              )}
+            </CarsCarouselFrame>
+          </MediaCutDiv>
+        </>
       )}
+
+      {/* {isMobile && (
+        <SeeAllLabel onClick={onSeeAllClick}>{t('see all')}</SeeAllLabel>
+      )} */}
     </Container>
   )
 }
