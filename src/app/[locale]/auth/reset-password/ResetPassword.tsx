@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import TextInput from '@/common/components/InputElements/TextInput'
 import { useTranslations } from 'next-intl'
@@ -14,7 +14,7 @@ import {
   resetPassValidate,
 } from '@/api/apiCalls'
 import { useRouter } from '@/navigation'
-import { endpoints } from '@/api/endpoints'
+import { routeName } from '@/common/helpers/constants'
 
 type Props = {}
 
@@ -27,9 +27,11 @@ const ResetPassword = (props: Props) => {
   const [otp, setOtp] = useState('')
   const [password, setPassword] = useState('')
   const [step, setStep] = useState(0)
+  const [seconds, setSeconds] = useState(60)
 
   const handleInitReset = async () => {
     resetPassInit(email, () => setStep(1))
+    setSeconds(60)
   }
 
   const handleValidate = async () => {
@@ -37,10 +39,20 @@ const ResetPassword = (props: Props) => {
   }
 
   const handleFinalize = async () => {
-    resetPassFinalize(email, password, () => router.push(endpoints.LOGIN))
+    resetPassFinalize(email, password, () => router.push(routeName.auth))
   }
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+  useEffect(() => {
+    if (seconds <= 0) return
+
+    const timer = setInterval(() => {
+      setSeconds((prevSeconds) => prevSeconds - 1)
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [seconds])
 
   return (
     <Container>
@@ -97,8 +109,12 @@ const ResetPassword = (props: Props) => {
               }
               width={isMobile ? undefined : 442}
             />
+            <div onClick={seconds > 0 ? () => {} : handleInitReset}>
+              <ResendBtn isDisabled={seconds > 0}>
+                Resend {seconds ? seconds : ''}
+              </ResendBtn>
+            </div>
           </TextInputContainer>
-
           <AppButton
             type='filled'
             text={t('send')}
@@ -164,15 +180,25 @@ const TextInputContainer = styled.div`
   position: relative;
 `
 
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-`
-
 const H4Bold = styled.h4`
   font-size: 28px;
   line-height: 33.6px;
   font-weight: 700;
   align-self: center;
+`
+
+const ResendBtn = styled.div<{ isDisabled: boolean }>`
+  margin-top: 8px;
+  float: right;
+
+  ${({ isDisabled }) =>
+    isDisabled
+      ? `
+    color: grey;
+    cursor: not-allowed;
+  `
+      : `
+    color: black;
+    cursor: pointer;
+  `}
 `
