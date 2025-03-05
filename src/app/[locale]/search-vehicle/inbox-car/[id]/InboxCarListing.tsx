@@ -23,14 +23,11 @@ const InboxCarListing = ({ id }: Props) => {
   // @ts-ignore
   const parsedData: CarData = extractData(html)
 
-  console.log({ parsedData })
-
   useEffect(() => {
     const getCar = async () => {
       setIsLoading(true)
       const res = await getMailinatorMessageById(id)
       setData(res)
-      console.log('res', res)
       setIsLoading(false)
     }
     getCar()

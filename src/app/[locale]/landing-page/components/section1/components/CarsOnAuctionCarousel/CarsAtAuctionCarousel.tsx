@@ -68,14 +68,11 @@ const CarsAtAuctionCarousel = ({ onSeeAllClick }: Props) => {
 
   const fetchCars = async () => {
     const res = await getMailinatorInbox()
-    console.log('res', res)
     setMailinatorInbox(res)
   }
   useEffect(() => {
     fetchCars()
   }, [])
-  // console.log('car', mailinatorInbox[0]?.['parts']?.[1]['body'])
-  console.log({ mailinatorInbox })
 
   return (
     <Container>

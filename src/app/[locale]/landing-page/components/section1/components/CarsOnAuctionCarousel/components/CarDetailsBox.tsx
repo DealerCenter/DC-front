@@ -34,9 +34,7 @@ const CarDetailsBox = ({ data, currencyRate }: Props) => {
 
     for (let i = 0; i < trs.length; i++) {
       if (trs[i].textContent?.includes('Price')) {
-        console.log('here')
         const nextTr = trs[i + 1]
-        console.log('here', nextTr)
 
         if (nextTr) {
           const priceValue = parseFloat(
