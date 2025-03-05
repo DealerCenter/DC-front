@@ -1,6 +1,5 @@
 import { getMailinatorMessageById } from '@/api/apiCalls'
 import React, { useEffect, useState } from 'react'
-import cheerio from 'cheerio'
 import ImagesBox from '../../vehicle-listing/[vin]/components/imageAndBid/components/ImagesBox'
 import styled from 'styled-components'
 import PriceAndShippingEstimate from '../../vehicle-listing/[vin]/components/priceAndShippingEstimate/PriceAndShippingEstimate'
