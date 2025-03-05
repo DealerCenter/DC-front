@@ -11,6 +11,7 @@ import theme from '@/app/[locale]/theme'
 import CarDetailsBox from './components/CarDetailsBox'
 import { NextArrow, PrevArrow } from './components/CustomArrows'
 import { getMailinatorInbox } from '@/api/apiCalls'
+import axios from 'axios'
 
 type Props = { onSeeAllClick: () => void }
 
@@ -46,6 +47,18 @@ const CarsAtAuctionCarousel = ({ onSeeAllClick }: Props) => {
   const isTablet = useMediaQuery({ query: theme.media?.md })
   const [mailinatorInbox, setMailinatorInbox] = useState([])
   const t = useTranslations('')
+  const [currencyRate, setCurrencyRate] = useState(NaN)
+
+  useEffect(() => {
+    const url =
+      'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json'
+    const fetchCurrencyRate = async () => {
+      const res = await axios.get(url)
+      setCurrencyRate(res.data.usd['gel'])
+    }
+
+    fetchCurrencyRate()
+  }, [])
 
   const settings = isMobile
     ? isMobileSettings
@@ -80,7 +93,11 @@ const CarsAtAuctionCarousel = ({ onSeeAllClick }: Props) => {
                 // @ts-ignore
                 <Slider ref={null} refs={null} {...settings}>
                   {mailinatorInbox.map((car, idx) => (
-                    <CarDetailsBox key={`mailinator${idx}`} data={car} />
+                    <CarDetailsBox
+                      key={`mailinator${idx}`}
+                      data={car}
+                      currencyRate={currencyRate}
+                    />
                   ))}
                 </Slider>
               )}

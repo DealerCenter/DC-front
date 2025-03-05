@@ -1,73 +1,94 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import carImage from '@/assets/images/DummyCarImage.jpg'
 import GelAndUsdSwitch from './GelAndUsdSwitch'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
 import { useRouter } from '@/navigation'
 import { routeName } from '@/common/helpers/constants'
+import useInboxCar, {
+  CarData,
+} from '@/app/[locale]/search-vehicle/inbox-car/[id]/useInboxCar'
 
 type Props = {
   data: any
+  currencyRate: number
 }
 
-const CarDetailsBox = ({ data }: Props) => {
+const CarDetailsBox = ({ data, currencyRate }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const router = useRouter()
-
-  function getImageSrc(htmlString: string) {
-    if (typeof window === 'undefined') {
-      return null
-    }
-
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(htmlString, 'text/html')
-
-    // Find the <img> element with alt="Main photo"
-    const imgElement = doc.querySelector('img[alt="Main photo"]')
-
-    // If found, return the src attribute, otherwise return null
-    return imgElement ? imgElement?.src : null
-  }
-
-  function getTitle(inputString) {
-    const result = inputString.replace('Fwd: Details for ', '')
-    return result
-  }
+  const [selectedCurrency, setSelectedCurrency] = useState<'gel' | 'usd'>('usd')
+  const [price, setPrice] = useState(0)
+  const { extractData, getMainImageSrc, getTitle, formatNumber } = useInboxCar()
 
   const html = data?.['parts']?.[1]?.['body']
-  const imageSrc = getImageSrc(html)
+  const imageSrc = getMainImageSrc(html)
   const title = getTitle(data?.['subject'])
+
+  useEffect(() => {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(html, 'text/html')
+    const trs = doc.querySelectorAll('tr')
+
+    for (let i = 0; i < trs.length; i++) {
+      if (trs[i].textContent?.includes('Price')) {
+        console.log('here')
+        const nextTr = trs[i + 1]
+        console.log('here', nextTr)
+
+        if (nextTr) {
+          const priceValue = parseFloat(
+            nextTr?.textContent?.replace(/[\$,]/g, '') || '0'
+          )
+          setPrice(priceValue)
+        }
+        break
+      }
+    }
+  }, [html])
+
+  // @ts-ignore
+  const parsedData: CarData = extractData(html)
 
   return (
     <Container onClick={() => router.push(`${routeName.inboxCar}/${data.id}`)}>
       <Image
-        src={imageSrc}
+        src={imageSrc || ''}
         alt='car image'
         height={257}
         width={isMobile ? 240 : 286}
-        objectFit='contain'
+        objectFit='cover'
       />
       <DetailsFrame>
         <HeaderFrame>
           <Header>{title}</Header>
-          <CarModel>E class, Diezel</CarModel>
+          <CarModel>{parsedData.vin}</CarModel>
         </HeaderFrame>
         <MiddleFrame>
           <LabelsBox>
-            <Label>2.0 ბენზინი</Label>
-            <Label>116,000 კმ</Label>
+            <Label>{`${parsedData.engine} ${parsedData.fuelType}`}</Label>
+            <Label>{parsedData.mileage}</Label>
           </LabelsBox>
           <LabelsBox>
-            <Label>მარცხენა საჭე</Label>
-            <Label>Run and Drive</Label>
+            <Label>Trans: {parsedData.transmission}</Label>
+            <Label>Interior: {parsedData.interior}</Label>
           </LabelsBox>
         </MiddleFrame>
-        <BottomFrame>
-          {/* <Amount>5,600</Amount>
-          <GelAndUsdSwitch /> */}
+
+        <BottomFrame style={{ visibility: price ? 'unset' : 'hidden' }}>
+          <Amount>
+            {selectedCurrency === 'gel'
+              ? formatNumber(
+                  Number((Number(price) * Number(currencyRate)).toFixed(0))
+                )
+              : formatNumber(Number(price))}
+          </Amount>
+          <GelAndUsdSwitch
+            selectedCurrency={selectedCurrency}
+            setSelectedCurrency={setSelectedCurrency}
+          />
         </BottomFrame>
       </DetailsFrame>
     </Container>

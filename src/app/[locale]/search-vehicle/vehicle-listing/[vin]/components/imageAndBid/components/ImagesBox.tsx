@@ -1,6 +1,6 @@
 import theme from '@/app/[locale]/theme'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
 
@@ -10,7 +10,10 @@ const ImagesBox = ({ images }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
   const [selectedImage, setSelectedImage] = useState(images[0])
 
-  console.log('images:', images)
+  useEffect(() => {
+    setSelectedImage(images[0])
+  }, [images])
+
   return (
     <ImagesFrame>
       {!isMobile && (
@@ -31,6 +34,7 @@ const ImagesBox = ({ images }: Props) => {
           src={selectedImage}
           alt='Main photo'
           width={600}
+          layout='responsive'
           height={450}
           style={{ objectFit: 'cover' }}
         />
@@ -45,6 +49,8 @@ const ImagesFrame = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.md};
+  height: 450px;
+  justify-content: center;
 `
 
 const ImageBox = styled.div`
@@ -56,10 +62,12 @@ const ImageBox = styled.div`
   line-height: 0;
   height: 450px;
 
-  width: 600px;
+  /* width: 600px; */
+  width: 82%;
+  max-width: 1200px;
 
   @media ${({ theme }) => theme.media?.md} {
-    width: 477px;
+    /* width: 477px; */
   }
   @media ${({ theme }) => theme.media?.sm} {
     width: 343px;
@@ -94,9 +102,7 @@ const Thumbnail = styled.img<{ isActive: boolean }>`
     isActive
       ? `2px solid ${theme.colors?.link_blue}`
       : '2px solid transparent'};
-  transition:
-    transform 0.2s,
-    border 0.2s;
+  transition: transform 0.2s, border 0.2s;
 
   &:hover {
     transform: scale(1.1);

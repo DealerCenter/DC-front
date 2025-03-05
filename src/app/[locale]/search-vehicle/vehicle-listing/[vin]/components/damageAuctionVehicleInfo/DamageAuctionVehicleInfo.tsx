@@ -25,6 +25,9 @@ const DamageAuctionVehicleInfo = ({ carDetails }: Props) => {
     fuel,
     cylinders,
     body_style,
+    isDamaged,
+    isPainted,
+    isDrivable,
   } = carDetails
 
   return (
@@ -34,24 +37,15 @@ const DamageAuctionVehicleInfo = ({ carDetails }: Props) => {
           <BoxWithHeader header={t('damage')} width={716}>
             <FrameForPairs>
               <LabelValuePair
-                label={t('damage')}
-                value={primary_damage}
-                tooltipValue={<ToolTipTextBox text='This is a tooltip' />}
+                label={t('structural damage')}
+                value={isDamaged}
+                // tooltipValue={<ToolTipTextBox text='This is a tooltip' />}
               />
-              <LabelValuePair
-                label={t('condition')}
-                value={highlights}
-                tooltipValue={
-                  <ToolTipTextWithHeader
-                    header='This is a tooltip'
-                    text='Tooltips are used to describe or identify an element. In most scenarios, tooltips help the user understand the meaning, function or alt-text of an element.'
-                  />
-                }
-              />
-              <LabelValuePair label={t('title')} value={'NA'} />
+              <LabelValuePair label={t('is painted')} value={isPainted} />
+              <LabelValuePair label={t('is drivable')} value={isDrivable} />
             </FrameForPairs>
           </BoxWithHeader>
-          <BoxWithHeader header={t('damage')} width={716}>
+          {/* <BoxWithHeader header={t('auction')} width={716}>
             <FrameForPairs>
               <LabelValuePair label={t('vin')} value={vin} />
               <LabelValuePair
@@ -73,18 +67,18 @@ const DamageAuctionVehicleInfo = ({ carDetails }: Props) => {
                 value={seller ? seller : 'NA'}
               />
             </FrameForPairs>
-          </BoxWithHeader>
+          </BoxWithHeader> */}
         </FrameColumn>
-        <BoxWithHeader header={t('damage')} width={468}>
+        <BoxWithHeader header={t('vehicle data')} width={468}>
           <FrameForPairs>
             <LabelValuePair
               label={t('odometer')}
-              value={odometer ? `${odometer} miles` : 'NA'}
+              value={odometer ? `${odometer}` : 'NA'}
             />
-            <LabelValuePair
+            {/* <LabelValuePair
               label={t('keys')}
               value={car_keys ? car_keys : 'NA'}
-            />
+            /> */}
             <LabelValuePair
               label={t('engine type')}
               value={engine_type ? engine_type : 'NA'}
@@ -102,10 +96,10 @@ const DamageAuctionVehicleInfo = ({ carDetails }: Props) => {
               label={t('cylinders')}
               value={cylinders ? cylinders : 'NA'}
             />
-            <LabelValuePair
+            {/* <LabelValuePair
               label={t('body style')}
               value={body_style ? body_style : 'NA'}
-            />
+            /> */}
           </FrameForPairs>
         </BoxWithHeader>
       </Frame>
@@ -119,6 +113,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.md};
+  justify-content: center;
 `
 
 const Frame = styled.div`

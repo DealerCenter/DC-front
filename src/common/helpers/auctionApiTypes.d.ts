@@ -39,6 +39,9 @@ type AuctionResult = {
   buy_now_car: string | null
   currency: Currency
   buy_now_price_histories: BuyNowPriceHistory[]
+  isPainted: string
+  isDamaged: string
+  isDrivable: string
 }
 
 type CarPhoto = {

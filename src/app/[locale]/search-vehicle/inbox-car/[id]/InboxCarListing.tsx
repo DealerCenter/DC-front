@@ -1,6 +1,12 @@
 import { getMailinatorMessageById } from '@/api/apiCalls'
 import React, { useEffect, useState } from 'react'
 import cheerio from 'cheerio'
+import ImagesBox from '../../vehicle-listing/[vin]/components/imageAndBid/components/ImagesBox'
+import styled from 'styled-components'
+import PriceAndShippingEstimate from '../../vehicle-listing/[vin]/components/priceAndShippingEstimate/PriceAndShippingEstimate'
+import DamageAuctionVehicleInfo from '../../vehicle-listing/[vin]/components/damageAuctionVehicleInfo/DamageAuctionVehicleInfo'
+import useInboxCar, { CarData } from './useInboxCar'
+import Loader from '@/common/components/loader/Loader'
 
 type Props = {
   id: string
@@ -8,101 +14,78 @@ type Props = {
 
 const InboxCarListing = ({ id }: Props) => {
   const [data, setData] = useState('')
+  // @ts-ignore
+  const html = data?.['parts']?.[1]?.['body']
+  const [isLoading, setIsLoading] = useState(false)
+
+  const { extractData, getMainImageSrc, getTitle } = useInboxCar()
+
+  // @ts-ignore
+  const parsedData: CarData = extractData(html)
+
+  console.log({ parsedData })
 
   useEffect(() => {
     const getCar = async () => {
+      setIsLoading(true)
       const res = await getMailinatorMessageById(id)
       setData(res)
       console.log('res', res)
+      setIsLoading(false)
     }
     getCar()
   }, [])
 
-  function removeDivByClassName(htmlString: string, className: string) {
+  function extractImageSources(html: string) {
     const parser = new DOMParser()
-    const doc = parser.parseFromString(htmlString, 'text/html')
+    const doc = parser.parseFromString(html, 'text/html')
+    const images = doc.querySelectorAll('img')
 
-    doc.querySelectorAll(`div.${className}`).forEach((div) => div.remove())
+    const srcs = Array.from(images).map((img) => img.src)
 
-    return doc.body.innerHTML
+    return srcs
   }
 
-  function removeSpecificText(htmlString, textToRemove) {
-    if (typeof window === 'undefined') {
-      return htmlString
-    }
+  const images = extractImageSources(html)
 
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(htmlString, 'text/html')
-
-    // Loop through all elements to find text nodes (nodeType === 3)
-    const allTextNodes = []
-    const walker = document.createTreeWalker(
-      doc.body,
-      NodeFilter.SHOW_TEXT, // Only text nodes
-      null,
-      false
-    )
-
-    // Collect all text nodes in the document
-    while (walker.nextNode()) {
-      allTextNodes.push(walker.currentNode)
-    }
-
-    // Loop through each text node and replace the text
-    allTextNodes.forEach((node) => {
-      if (node.textContent.includes(textToRemove)) {
-        // Remove the text to be removed
-        node.textContent = node.textContent.replace(
-          new RegExp(textToRemove, 'g'),
-          ''
-        )
-      }
-    })
-
-    return doc.body.innerHTML
+  const carDetails = {
+    primary_damage: '',
+    highlights: '',
+    vin: parsedData?.vin || '',
+    lot_number: '',
+    seller: '',
+    odometer: parsedData?.mileage || '',
+    car_keys: '',
+    engine_type: parsedData?.engine || '',
+    drive: parsedData?.drive || '',
+    transmission: parsedData?.transmission || '',
+    fuel: parsedData?.fuelType || '',
+    cylinders: parsedData?.cylinder || '',
+    body_style: '',
+    isDamaged: parsedData.isDamaged || '',
+    isPainted: parsedData.isPainted || '',
+    isDrivable: parsedData.isDrivable || '',
   }
 
-  function removeFirstFiveBrTags(htmlString: string) {
-    if (typeof window === 'undefined') {
-      return htmlString
-    }
-
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(htmlString, 'text/html')
-
-    // Select all <br> tags in the document
-    const brTags = doc.querySelectorAll('br')
-
-    // Remove the first five <br> tags
-    for (let i = 0; i < Math.min(7, brTags.length); i++) {
-      brTags[i].remove() // Remove each <br> tag
-    }
-
-    return doc.body.innerHTML
-  }
-
-  const modifiedHtml1 = removeDivByClassName(
-    data?.['parts']?.[1]?.['body'],
-    'gmail_attr'
-  )
-  const modifiedHtml2 = removeSpecificText(
-    modifiedHtml1,
-    'Here is a vehicle that might interest you.'
-  )
-  const modifiedHtml3 = removeSpecificText(
-    modifiedHtml2,
-    'Please contact me at:'
-  )
-  const modifiedHtml4 = removeFirstFiveBrTags(modifiedHtml3)
+  if (isLoading) return <Loader />
 
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: modifiedHtml4,
-      }}
-    />
+    <>
+      <Container>
+        <ImagesBox images={images} />
+        {/* @ts-ignore */}
+        <DamageAuctionVehicleInfo carDetails={carDetails} />
+        {/* <PriceAndShippingEstimate /> */}
+      </Container>
+    </>
   )
 }
 
 export default InboxCarListing
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing?.md};
+  padding: 16px 0;
+`
