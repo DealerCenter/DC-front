@@ -1,38 +1,92 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import carImage from '@/assets/images/DummyCarImage.jpg'
 import GelAndUsdSwitch from './GelAndUsdSwitch'
 import { useMediaQuery } from 'react-responsive'
 import theme from '@/app/[locale]/theme'
+import { useRouter } from '@/navigation'
+import { routeName } from '@/common/helpers/constants'
+import useInboxCar, {
+  CarData,
+} from '@/app/[locale]/search-vehicle/inbox-car/[id]/useInboxCar'
 
-type Props = {}
+type Props = {
+  data: any
+  currencyRate: number
+}
 
-const CarDetailsBox = (props: Props) => {
+const CarDetailsBox = ({ data, currencyRate }: Props) => {
   const isMobile = useMediaQuery({ query: theme.media?.sm })
+  const router = useRouter()
+  const [selectedCurrency, setSelectedCurrency] = useState<'gel' | 'usd'>('usd')
+  const [price, setPrice] = useState(0)
+  const { extractData, getMainImageSrc, getTitle, formatNumber } = useInboxCar()
+
+  const html = data?.['parts']?.[1]?.['body']
+  const imageSrc = getMainImageSrc(html)
+  const title = getTitle(data?.['subject'])
+
+  useEffect(() => {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(html, 'text/html')
+    const trs = doc.querySelectorAll('tr')
+
+    for (let i = 0; i < trs.length; i++) {
+      if (trs[i].textContent?.includes('Price')) {
+        const nextTr = trs[i + 1]
+
+        if (nextTr) {
+          const priceValue = parseFloat(
+            nextTr?.textContent?.replace(/[\$,]/g, '') || '0'
+          )
+          setPrice(priceValue)
+        }
+        break
+      }
+    }
+  }, [html])
+
+  // @ts-ignore
+  const parsedData: CarData = extractData(html)
 
   return (
-    <Container>
-      <Image src={carImage} alt='car image' width={isMobile ? 240 : 286} />
+    <Container onClick={() => router.push(`${routeName.inboxCar}/${data.id}`)}>
+      <Image
+        src={imageSrc || ''}
+        alt='car image'
+        height={257}
+        width={isMobile ? 240 : 286}
+        objectFit='cover'
+      />
       <DetailsFrame>
         <HeaderFrame>
-          <Header>2021 Mercedes E-Class</Header>
-          <CarModel>E class, Diezel</CarModel>
+          <Header>{title}</Header>
+          <CarModel>{parsedData.vin}</CarModel>
         </HeaderFrame>
         <MiddleFrame>
           <LabelsBox>
-            <Label>2.0 ბენზინი</Label>
-            <Label>116,000 კმ</Label>
+            <Label>{`${parsedData.engine} ${parsedData.fuelType}`}</Label>
+            <Label>{parsedData.mileage}</Label>
           </LabelsBox>
           <LabelsBox>
-            <Label>მარცხენა საჭე</Label>
-            <Label>Run and Drive</Label>
+            <Label>Trans: {parsedData.transmission}</Label>
+            <Label>Interior: {parsedData.interior}</Label>
           </LabelsBox>
         </MiddleFrame>
-        <BottomFrame>
-          <Amount>5,600</Amount>
-          <GelAndUsdSwitch />
+
+        <BottomFrame style={{ visibility: price ? 'unset' : 'hidden' }}>
+          <Amount>
+            {selectedCurrency === 'gel'
+              ? formatNumber(
+                  Number((Number(price) * Number(currencyRate)).toFixed(0))
+                )
+              : formatNumber(Number(price))}
+          </Amount>
+          <GelAndUsdSwitch
+            selectedCurrency={selectedCurrency}
+            setSelectedCurrency={setSelectedCurrency}
+          />
         </BottomFrame>
       </DetailsFrame>
     </Container>

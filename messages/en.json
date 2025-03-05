@@ -438,6 +438,9 @@
   "successstorytext": "The Number of Our Customers Continues to Grow, with Hundreds of Satisfied Clients Already Using Our Services",
   "deliveredcars": "Vehicles Delivered on Site",
   "customercount": "178 Customers",
-  "fulfilled orders": "245 Orders"
+  "fulfilled orders": "245 Orders",
+  "structural damage": "Structural damage",
+  "is painted": "Prior paint",
+  "is drivable" : "Drivable"
   
 }

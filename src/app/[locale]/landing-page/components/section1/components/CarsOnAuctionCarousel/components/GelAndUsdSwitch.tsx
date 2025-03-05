@@ -1,23 +1,32 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-type Props = {}
+type Props = {
+  selectedCurrency: 'gel' | 'usd'
+  setSelectedCurrency: (currency: 'gel' | 'usd') => void
+}
 
-const GelAndUsdSwitch = (props: Props) => {
-  const [activeOption, setActiveOption] = useState<'gel' | 'usd'>('gel')
-
+const GelAndUsdSwitch = ({ selectedCurrency, setSelectedCurrency }: Props) => {
   return (
     <Container>
       <Box
-        isActive={activeOption === 'gel'}
-        onClick={() => setActiveOption('gel')}
+        isActive={selectedCurrency === 'gel'}
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          setSelectedCurrency('gel')
+        }}
       >
         ₾
       </Box>
       <Line />
       <Box
-        isActive={activeOption === 'usd'}
-        onClick={() => setActiveOption('usd')}
+        isActive={selectedCurrency === 'usd'}
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          setSelectedCurrency('usd')
+        }}
       >
         $
       </Box>

@@ -608,3 +608,23 @@ export const resetPassFinalize = async (
     console.error('Error finalizing password reset:', error)
   }
 }
+
+export const getMailinatorInbox = async () => {
+  try {
+    const response = await axiosInstance.get(endpoints.MAILINATOR_INBOX)
+    return response.data
+  } catch (error) {
+    console.error('Error getting mailinator inbox:', error)
+  }
+}
+
+export const getMailinatorMessageById = async (id: string) => {
+  try {
+    const response = await axiosInstance.get(
+      `${endpoints.MAILINATOR_MESSAGE}/${id}`
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error getting mailinator message:', error)
+  }
+}
