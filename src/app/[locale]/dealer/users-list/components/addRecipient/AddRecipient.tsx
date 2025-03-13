@@ -26,7 +26,6 @@ type Props = {
     verificationStatus: string
     idImageUrl: string
   }
-  isReadOnly?: boolean
   getOrderData?: () => void
   setUpdatedSuccessfully: (arg: boolean) => void
 }
@@ -35,10 +34,10 @@ const AddRecipient = ({
   onClose,
   receiverData,
   setUpdatedSuccessfully,
-  isReadOnly,
   getOrderData,
 }: Props) => {
   const [isIdImageUploaded, setIsIdImageUploaded] = useState(false)
+
   const t = useTranslations('')
 
   const {
@@ -51,36 +50,23 @@ const AddRecipient = ({
     setUploadIdImage,
     setFieldValue,
     isButtonDisabled,
+    isReadOnly,
+    setIsReadOnly,
   } = useAddRecipients(receiverData && receiverData, setUpdatedSuccessfully)
 
   const isButtonDisabledNative =
     isButtonDisabled || (!receiverData && !isIdImageUploaded)
 
-  const handleVerify = async () => {
-    try {
-      await verifyReceiver(receiverData?.id.toString() ?? '')
-      getOrderData && getOrderData()
-      message.success('Receiver verified successfully')
-    } catch (error) {
-      console.error('Error verifying receiver:', error)
-    }
-  }
-
-  const handleUnVerify = async () => {
-    try {
-      await unVerifyReceiver(receiverData?.id.toString() ?? '')
-      getOrderData && getOrderData()
-      message.success('Receiver Unverified successfully')
-    } catch (error) {
-      console.error('Error verifying receiver:', error)
-    }
-  }
+  useEffect(() => {
+    !receiverData && setIsReadOnly(false)
+  }, [receiverData])
 
   return (
     <Container>
       <Icon onClick={onClose}>
         <Image src={closeIcon} alt='close icon' width={12} height={12} />
       </Icon>
+
       <FrameTop>
         <H3Bold>
           {isReadOnly ? t('recipient person') : t('add recipient')}
@@ -188,29 +174,26 @@ const AddRecipient = ({
         )}
       </InputFieldsFrame>
 
-      {isReadOnly ? (
-        <VerificationButtons>
-          <AppButton
-            text='Verify status'
-            onClick={handleVerify}
-            type='filled'
-          />
-          <AppButton
-            text='Unverify status'
-            onClick={handleUnVerify}
-            type='outlined'
-          />
-        </VerificationButtons>
-      ) : (
+      {isReadOnly && (
         <AppButton
-          text={receiverData ? t('update information') : t('add')}
+          text={t('edit')}
+          onClick={() => setIsReadOnly(false)}
           type='filled'
-          disabled={isButtonDisabledNative}
-          onClick={handleSubmit}
-          isSmall={false}
-          height='medium'
-          htmlType='submit'
         />
+      )}
+
+      {!isReadOnly && (
+        <>
+          <AppButton
+            text={receiverData ? t('update information') : t('add')}
+            type='filled'
+            disabled={isButtonDisabledNative}
+            onClick={handleSubmit}
+            isSmall={false}
+            height='medium'
+            htmlType='submit'
+          />
+        </>
       )}
     </Container>
   )
@@ -265,7 +248,7 @@ const Container = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  max-height: 715px;
+  /* max-height: 715px; */
   padding: 32px;
   gap: 24px;
   margin-top: 50px;
@@ -278,11 +261,4 @@ const Container = styled.div`
   @media ${({ theme }) => theme.media?.sm} {
     padding: 32px 16px;
   }
-`
-
-const VerificationButtons = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 24px;
-  gap: ${({ theme }) => theme.spacing?.md};
 `

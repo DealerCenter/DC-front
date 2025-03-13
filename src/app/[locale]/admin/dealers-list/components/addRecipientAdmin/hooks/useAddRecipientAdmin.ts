@@ -34,6 +34,7 @@ const useAddRecipientsAdmin = (
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
+  const [isReadOnly, setIsReadOnly] = useState(true)
 
   const [uploadIdImage, setUploadIdImage] = useState<Blob>()
 
@@ -65,9 +66,6 @@ const useAddRecipientsAdmin = (
       dealerId && legalFormData.append('dealerId', dealerId.toString())
 
       uploadIdImage && legalFormData.append(FIELD_NAMES.ID_IMAGE, uploadIdImage)
-
-      console.log('submit data addRecipient', legalFormData)
-      message.error('backend not active')
 
       try {
         const response = receiverData
@@ -139,6 +137,8 @@ const useAddRecipientsAdmin = (
     setUploadIdImage: setUploadIdImage,
     setFieldValue: formik.setFieldValue,
     isButtonDisabled,
+    isReadOnly,
+    setIsReadOnly,
   }
 }
 

@@ -32,6 +32,7 @@ const useAddRecipients = (
   const [axiosError, setAxiosError] = useState<AxiosError<unknown> | undefined>(
     undefined
   )
+  const [isReadOnly, setIsReadOnly] = useState(true)
 
   const [uploadIdImage, setUploadIdImage] = useState<Blob>()
 
@@ -78,7 +79,8 @@ const useAddRecipients = (
             ? t('receiver updated successfully')
             : t('receiver uploaded successfully')
         )
-
+        setIsReadOnly(false)
+        window.location.reload()
         return response
       } catch (error) {
         message.error(
@@ -129,6 +131,8 @@ const useAddRecipients = (
     setUploadIdImage: setUploadIdImage,
     setFieldValue: formik.setFieldValue,
     isButtonDisabled,
+    isReadOnly,
+    setIsReadOnly,
   }
 }
 

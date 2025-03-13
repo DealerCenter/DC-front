@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import AppButton from '@/common/components/appButton/AppButton'
@@ -14,6 +14,8 @@ import useAddRecipientsAdmin, {
 
 import closeIcon from '@/assets/icons/closeX.svg'
 import splitGrayLine from '@/assets/icons/splitGrayLine.svg'
+import { unVerifyReceiver, verifyReceiver } from '@/api/apiCalls'
+import { message } from 'antd'
 
 type Props = {
   onClose: () => void
@@ -29,7 +31,6 @@ type Props = {
   }
   dealerId: number
   onSuccess: () => void
-  // setUpdatedSuccessfully: (arg: boolean) => void
 }
 
 const AddRecipientAdmin = ({
@@ -38,8 +39,7 @@ const AddRecipientAdmin = ({
   dealerSection,
   dealerId,
   onSuccess,
-}: // setUpdatedSuccessfully,
-Props) => {
+}: Props) => {
   const [isIdImageUploaded, setIsIdImageUploaded] = useState(false)
   const t = useTranslations('')
 
@@ -53,10 +53,37 @@ Props) => {
     setUploadIdImage,
     setFieldValue,
     isButtonDisabled,
+    isReadOnly,
+    setIsReadOnly,
   } = useAddRecipientsAdmin(dealerId, onSuccess, receiverData && receiverData)
 
   const isButtonDisabledNative =
     isButtonDisabled || (!receiverData && !isIdImageUploaded)
+
+  const handleVerify = async () => {
+    try {
+      await verifyReceiver(receiverData?.id.toString() ?? '')
+      // getOrderData && getOrderData()
+      message.success('Receiver verified successfully')
+    } catch (error) {
+      console.error('Error verifying receiver:', error)
+    }
+  }
+
+  const handleUnVerify = async () => {
+    try {
+      await unVerifyReceiver(receiverData?.id.toString() ?? '')
+      // getOrderData && getOrderData()
+      message.success('Receiver Unverified successfully')
+    } catch (error) {
+      console.error('Error verifying receiver:', error)
+    }
+  }
+
+  // if dealerSection is passed, it means we are in add mode
+  useEffect(() => {
+    dealerSection && setIsReadOnly(false)
+  }, [dealerSection])
 
   return (
     <Container>
@@ -96,6 +123,7 @@ Props) => {
               ? errors[FIELD_NAMES.FIRST_NAME]
               : ''
           }
+          isDisabled={isReadOnly}
         ></TextInput>
         <TextInput
           type='text'
@@ -109,6 +137,7 @@ Props) => {
               ? errors[FIELD_NAMES.LAST_NAME]
               : ''
           }
+          isDisabled={isReadOnly}
         ></TextInput>
         <TextInput
           type='text'
@@ -122,6 +151,7 @@ Props) => {
               ? errors[FIELD_NAMES.PERSONAL_ID]
               : ''
           }
+          isDisabled={isReadOnly}
         ></TextInput>
         <TextInput
           type='text'
@@ -136,28 +166,65 @@ Props) => {
               ? errors[FIELD_NAMES.CONTACT_NUMBER]
               : ''
           }
+          isDisabled={isReadOnly}
         ></TextInput>
-        <Label>{t('dealer data')}</Label>
+        {dealerSection && <Label>{t('dealer data')}</Label>}
+
         {dealerSection}
-        <FileDropZone
-          dropText={t('drop the file here')}
-          text={t('upload an ID photo')}
-          uploadedText={t('photo uploaded')}
-          warningText={t('add an id photo')}
-          onDropAdditional={setUploadIdImage}
-          setIsUploaded={setIsIdImageUploaded}
-        />
+        {isReadOnly ? (
+          <Image
+            src={receiverData?.idImageUrl ?? ''}
+            alt='photo'
+            width={350}
+            height={200}
+          />
+        ) : (
+          <FileDropZone
+            dropText={t('drop the file here')}
+            text={t('upload an ID photo')}
+            uploadedText={t('photo uploaded')}
+            warningText={t('add an id photo')}
+            onDropAdditional={setUploadIdImage}
+            setIsUploaded={setIsIdImageUploaded}
+          />
+        )}
       </InputFieldsFrame>
 
-      <AppButton
-        text={receiverData ? t('update information') : t('add')}
-        type='filled'
-        disabled={isButtonDisabledNative}
-        onClick={handleSubmit}
-        isSmall={false}
-        height='medium'
-        htmlType='submit'
-      ></AppButton>
+      {isReadOnly && (
+        <AppButton
+          text={t('edit')}
+          onClick={() => setIsReadOnly(false)}
+          type='filled'
+        />
+      )}
+
+      {isReadOnly ? (
+        <>
+          <VerificationButtons>
+            <AppButton
+              text='Verify status'
+              onClick={handleVerify}
+              type='filled'
+            />
+            <AppButton
+              text='Unverify status'
+              onClick={handleUnVerify}
+              type='outlined'
+            />
+          </VerificationButtons>
+          <MB20 />
+        </>
+      ) : (
+        <AppButton
+          text={receiverData ? t('update information') : t('add')}
+          type='filled'
+          disabled={isButtonDisabledNative}
+          onClick={handleSubmit}
+          isSmall={false}
+          height='medium'
+          htmlType='submit'
+        />
+      )}
     </Container>
   )
 }
@@ -211,7 +278,8 @@ const Container = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  max-height: 715px;
+  /* max-height: 715px; */
+  overflow-y: auto;
   padding: 32px;
   gap: 24px;
   margin-top: 50px;
@@ -225,4 +293,15 @@ const Container = styled.div`
     padding: 32px 16px;
   }
   overflow-y: auto;
+`
+
+const VerificationButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  gap: ${({ theme }) => theme.spacing?.md};
+`
+
+const MB20 = styled.div`
+  margin-bottom: 20px;
 `
