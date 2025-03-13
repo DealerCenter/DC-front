@@ -7,9 +7,13 @@ import ContainerData from './rightColumnComponents/ContainerData'
 import DataOfRecipient from './rightColumnComponents/DataOfRecipient'
 import DealerData from './rightColumnComponents/DealerData'
 
-type Props = { orderData: ORDER_DATA; getOrderData: () => void }
+type Props = {
+  orderData: ORDER_DATA
+  getOrderData: () => void
+  isDealer?: boolean
+}
 
-const RightColumn = ({ orderData, getOrderData }: Props) => {
+const RightColumn = ({ orderData, getOrderData, isDealer }: Props) => {
   const { statusAndDates, container, receiver, dealer } = orderData
 
   return (
@@ -18,8 +22,12 @@ const RightColumn = ({ orderData, getOrderData }: Props) => {
         <ShippingStateBox isEditing={false} value={statusAndDates} />
       </BoxWithHeader>
       <ContainerData containerData={container} />
-      <DataOfRecipient receiverData={receiver} getOrderData={getOrderData} />
-      <DealerData data={dealer} />
+      <DataOfRecipient
+        receiverData={receiver}
+        getOrderData={getOrderData}
+        isDealer={isDealer}
+      />
+      <DealerData data={dealer} isDealer={isDealer} />
     </Container>
   )
 }

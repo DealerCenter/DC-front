@@ -9,19 +9,23 @@ import { useTranslations } from 'next-intl'
 import DeleteWarning from '@/common/components/deleteWarning/DeleteWarning'
 import AppModal from '@/common/components/modal/AppModal'
 
-import checkedGreen from '@/assets/icons/checkedGreen.svg'
 import editPencil from '@/assets/icons/editPencil.svg'
 import trashCan from '@/assets/icons/trashCan.svg'
-import uncheckedRed from '@/assets/icons/uncheckedRed.svg'
+import AddRecipientAdmin from '../../addRecipientAdmin/AddRecipientAdmin'
+import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
 
 type Props = {
   onClick: () => void
   receiverData: RECEIVER_DATA
 }
 
-const ListItemFullDropdown = ({
-  onClick,
-  receiverData: {
+const ListItemFullDropdown = ({ onClick, receiverData }: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isReceiverOpen, setIsReceiverOpen] = useState(false)
+
+  const t = useTranslations('')
+
+  const {
     id,
     personalId,
     firstName,
@@ -29,11 +33,7 @@ const ListItemFullDropdown = ({
     phoneNumber,
     createdAt,
     verificationStatus,
-  },
-}: Props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const t = useTranslations('')
+  } = receiverData
 
   return (
     <>
@@ -50,25 +50,13 @@ const ListItemFullDropdown = ({
         <Label>{formatDate(createdAt)}</Label>
         <DebtLabel></DebtLabel>
         <IconBox>
+          <VerificationIcon verificationStatus={verificationStatus} />
           <Icon>
-            {verificationStatus ? (
-              <Image
-                src={checkedGreen}
-                alt='checked icon'
-                width={20}
-                height={20}
-              />
-            ) : (
-              <Image
-                src={uncheckedRed}
-                alt='unchecked icon'
-                width={20}
-                height={20}
-              />
-            )}
-          </Icon>
-          <Icon>
-            <Image src={editPencil} alt='edit icon' onClick={onClick} />
+            <Image
+              src={editPencil}
+              alt='edit icon'
+              onClick={() => setIsReceiverOpen(true)}
+            />
           </Icon>
           <Icon>
             <Image
@@ -88,6 +76,22 @@ const ListItemFullDropdown = ({
           onDelete={() => console.log('delete')}
           header={t('delete recipient')}
           text={t('delete data warning')}
+        />
+      </AppModal>
+
+      <AppModal
+        isOpen={isReceiverOpen}
+        onRequestClose={() => setIsReceiverOpen(false)}
+      >
+        <AddRecipientAdmin
+          onClose={() => setIsReceiverOpen(false)}
+          receiverData={receiverData}
+          dealerId={NaN}
+          onSuccess={() => {
+            setIsReceiverOpen(false)
+            window.location.reload()
+          }}
+          dealerSection={false}
         />
       </AppModal>
     </>

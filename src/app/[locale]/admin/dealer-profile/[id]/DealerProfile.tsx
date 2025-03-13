@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useRouter } from '@/navigation'
 import { useMediaQuery } from 'react-responsive'
 
-import { routeName } from '@/common/helpers/constants'
+import { SHIPPING_STATUS, routeName } from '@/common/helpers/constants'
 import theme from '../../../theme'
 
 import EditButton from '../../components/common/EditButton'
@@ -20,7 +20,7 @@ import LoadingText from '@/common/components/readyComponents/LoadingText'
 import AppModal from '@/common/components/modal/AppModal'
 import EditModal from './components/EditModal'
 
-const ITEMS_PER_PAGE = 8
+const ITEMS_PER_PAGE = 100
 
 type Props = { dealerId: string }
 
@@ -82,6 +82,13 @@ const DealerProfile = ({ dealerId }: Props) => {
     )
   }
 
+  const carsArrivedCount =
+    ordersResponse?.data?.filter((car) => car.status === SHIPPING_STATUS.SENT)
+      .length ?? 0
+
+  // @ts-ignore
+  const carsOnTheWayCount = ordersResponse?.data?.length - carsArrivedCount
+
   return (
     <Container>
       <TopButtonsFrame>
@@ -97,8 +104,14 @@ const DealerProfile = ({ dealerId }: Props) => {
         <DealerDataBox dealerData={dealerData} />
         <MiddleFrame>
           <LabelValueBox label={t('current debt')} value={'NA'} />
-          <LabelValueBox label={t('cars on the way')} value={'NA'} />
-          <LabelValueBox label={t('total imported cars')} value={'NA'} />
+          <LabelValueBox
+            label={t('cars on the way')}
+            value={carsOnTheWayCount.toString() ?? ''}
+          />
+          <LabelValueBox
+            label={t('total imported cars')}
+            value={carsArrivedCount?.toString() ?? ''}
+          />
         </MiddleFrame>
         {!isMobile && <PdfAndImageBox image={dealerData?.idImageUrl} />}
       </Frame>

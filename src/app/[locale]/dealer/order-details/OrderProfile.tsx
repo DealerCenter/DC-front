@@ -85,7 +85,11 @@ const OrderProfile = ({ id }: Props) => {
           </TopFrame>
           <BottomFrame>
             <LeftColumn orderData={orderData} />
-            <RightColumn orderData={orderData} getOrderData={() => {}} />
+            <RightColumn
+              orderData={orderData}
+              getOrderData={() => {}}
+              isDealer
+            />
           </BottomFrame>
         </>
       )}

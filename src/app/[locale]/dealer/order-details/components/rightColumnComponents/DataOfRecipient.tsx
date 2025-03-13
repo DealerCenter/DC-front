@@ -14,10 +14,15 @@ import { RECEIVER_DATA } from '@/api/apiTypes'
 import AppModal from '@/common/components/modal/AppModal'
 import AddRecipient from '../../../users-list/components/addRecipient/AddRecipient'
 import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
+import AddRecipientAdmin from '@/app/[locale]/admin/dealers-list/components/addRecipientAdmin/AddRecipientAdmin'
 
-type Props = { receiverData?: RECEIVER_DATA; getOrderData: () => void }
+type Props = {
+  receiverData?: RECEIVER_DATA
+  getOrderData: () => void
+  isDealer?: boolean
+}
 
-const DataOfRecipient = ({ receiverData, getOrderData }: Props) => {
+const DataOfRecipient = ({ receiverData, getOrderData, isDealer }: Props) => {
   const t = useTranslations('')
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -50,13 +55,22 @@ const DataOfRecipient = ({ receiverData, getOrderData }: Props) => {
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
       >
-        <AddRecipient
-          onClose={() => setIsModalOpen(false)}
-          receiverData={receiverData}
-          setUpdatedSuccessfully={() => {}}
-          isReadOnly
-          getOrderData={getOrderData}
-        />
+        {isDealer ? (
+          <AddRecipient
+            onClose={() => setIsModalOpen(false)}
+            receiverData={receiverData}
+            setUpdatedSuccessfully={() => {}}
+            getOrderData={getOrderData}
+          />
+        ) : (
+          <AddRecipientAdmin
+            onClose={() => setIsModalOpen(false)}
+            receiverData={receiverData}
+            dealerSection={null}
+            dealerId={0}
+            onSuccess={getOrderData}
+          />
+        )}
       </AppModal>
     </BoxWithHeader>
   )

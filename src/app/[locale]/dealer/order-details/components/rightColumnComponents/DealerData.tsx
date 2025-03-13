@@ -12,13 +12,16 @@ import { routeName } from '@/common/helpers/constants'
 
 type Props = {
   data: DEALERS_DATA
+  isDealer?: boolean
 }
 
-const DealerData = ({ data }: Props) => {
+const DealerData = ({ data, isDealer }: Props) => {
   const router = useRouter()
 
   const handleEditClick = () =>
-    router.push(`${routeName.adminDealerProfile}/${data.id}`)
+    isDealer
+      ? () => {}
+      : router.push(`${routeName.adminDealerProfile}/${data.id}`)
 
   return (
     <BoxWithHeader headerText='dealer data'>
@@ -29,9 +32,11 @@ const DealerData = ({ data }: Props) => {
           <VerificationIcon
             verificationStatus={data.idImageVerificationStatus}
           />
-          <Icon onClick={handleEditClick}>
-            <Image src={editIcon} alt='pencil icon' />
-          </Icon>
+          {!isDealer && (
+            <Icon onClick={handleEditClick}>
+              <Image src={editIcon} alt='pencil icon' />
+            </Icon>
+          )}
         </IconBox>
       </DataFrame>
     </BoxWithHeader>
@@ -69,6 +74,7 @@ const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `
 
 const DataFrame = styled.div`
