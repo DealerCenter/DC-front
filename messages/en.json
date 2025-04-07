@@ -441,6 +441,12 @@
   "fulfilled orders": "245 Orders",
   "structural damage": "Structural damage",
   "is painted": "Prior paint",
-  "is drivable" : "Drivable"
+  "is drivable" : "Drivable",
+
+    "sedan": "Sedan",
+    "oversized_sedan": "Oversized Sedan",
+    "suv": "SUV",
+    "oversized_suv": "Oversized SUV",
+    "large_motorcycle": "Large Motorcycle"
   
 }

@@ -11,6 +11,7 @@ import {
 import { getCarDetailsByVin } from '@/common/helpers/utils'
 import { VehicleType, vehicleTypes } from '@/types/vehicleTypes'
 import { message } from 'antd'
+import { useTranslations } from 'next-intl'
 
 export type CalculatedResult = {
   totalPrice: number
@@ -26,6 +27,8 @@ type Select = {
 }
 
 const useTransportCalculator = () => {
+  const t = useTranslations('')
+
   const [locations, setLocations] = useState<Select[]>([{ label: '', id: '' }])
   const [destinations, setDestinations] = useState<string[]>([])
   const [vin, setVin] = useState('')
@@ -175,7 +178,7 @@ const useTransportCalculator = () => {
   return {
     locations,
     cargoTypes: vehicleTypes.map((veh) => ({
-      label: veh.body_class,
+      label: t(veh.body_class),
       id: veh.body_class,
     })),
     destinations: destinations.map((destination) => ({

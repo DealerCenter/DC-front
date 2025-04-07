@@ -47,7 +47,7 @@ const ParametersBox = ({ orderData }: Props) => {
         </LabelPair>
         <LabelPair>
           <Label>{t('category')}</Label>
-          <Value>{carCategory}</Value>
+          <Value>{t(carCategory)}</Value>
         </LabelPair>
         <LabelPair>
           <Label>{t('mileage')}</Label>
