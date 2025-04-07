@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import ErrorMessage from '../errorMessage/ErrorMessage'
 
 import arrowDown from '@/assets/icons/arrowDown.svg'
+import { useTranslations } from 'next-intl'
 
 type Props = {
   value?: string | number
@@ -40,6 +41,7 @@ const AppSelectAntDesign = ({
   const [selectedItem, setSelectedItem] = useState<number | string | undefined>(
     undefined
   )
+  const t = useTranslations('')
 
   const handleOnChange = (value: string | number) => {
     setSelectedItem(value)
@@ -103,7 +105,7 @@ const AppSelectAntDesign = ({
             optionsBasic
               ? optionsBasic.map((item, i) => ({
                   value: item,
-                  label: item,
+                  label: t(item) ?? item,
                 }))
               : optionsWithId?.map((item) => ({
                   value: item.id.toString(),
