@@ -41,6 +41,15 @@ const DealerProfile = ({ dealerId }: Props) => {
       setDealerData(response)
     }
     setIsLoading(false)
+
+    if (response) {
+      return {
+        firstName: response.firstName,
+        lastName: response.lastName,
+        phoneNumber: response.phoneNumber,
+      }
+    }
+    return null
   }
 
   useEffect(() => {
