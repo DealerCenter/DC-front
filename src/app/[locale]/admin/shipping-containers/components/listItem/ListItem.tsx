@@ -34,7 +34,7 @@ const ListItem = ({
           link={trackingUrl}
           departureDate={createdAtFormatted}
           arrivalDate={updatedAtFormatted}
-          id={id}
+          containerId={id}
           isDropdownOpen={isDropdownOpen}
           setIsDropdownOpen={setIsDropdownOpen}
         />
@@ -45,7 +45,7 @@ const ListItem = ({
           link={trackingUrl}
           departureDate={createdAtFormatted}
           arrivalDate={updatedAtFormatted}
-          id={id}
+          containerId={id}
           isDropdownOpen={isDropdownOpen}
           setIsDropdownOpen={setIsDropdownOpen}
           orders={orders}

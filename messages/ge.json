@@ -509,6 +509,10 @@
     "oversized_sedan": "დიდი სედანი",
     "suv": "ჯიპი",
     "oversized_suv": "დიდი ჯიპი",
-    "large_motorcycle": "დიდი მოტოციკლი"
+    "large_motorcycle": "დიდი მოტოციკლი",
+
+  "unasign order from container": "შეკვეთის წაშლა კონტეინერიდან",
+  "unsaign order warning": "დარწმუნებული ხართ, რომ გსურს შეკვეთის წაშლა კონტეინერიდან?"  
+
 
 }

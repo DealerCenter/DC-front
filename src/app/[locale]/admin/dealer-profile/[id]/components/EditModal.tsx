@@ -10,15 +10,44 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Select } from 'antd'
 import AppSelectAntDesign from '@/common/components/appSelect/AppSelectAntDesign'
+import TextInput from '@/common/components/InputElements/TextInput'
+import { useTranslations } from 'next-intl'
 
 type Props = {
   dealerId: string
-  getDealerData: () => void
+  getDealerData: () => Promise<{
+    firstName: string
+    lastName: string
+    phoneNumber: string
+  } | null>
   currentLevelId: number | undefined
 }
 
 const EditModal = ({ dealerId, getDealerData, currentLevelId }: Props) => {
+  const t = useTranslations('')
   const [levels, setLevels] = useState([{ id: NaN, label: '' }])
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+
+  useEffect(() => {
+    const fetchDealerData = async () => {
+      try {
+        const response = await getDealerData()
+        console.log('here', response)
+
+        if (response) {
+          console.log('res', response)
+          setFirstName(response.firstName)
+          setLastName(response.lastName)
+          setPhoneNumber(response.phoneNumber)
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+    fetchDealerData()
+  }, [])
 
   const handleVerify = async () => {
     try {
@@ -75,6 +104,31 @@ const EditModal = ({ dealerId, getDealerData, currentLevelId }: Props) => {
           value={currentLevelId}
         />
       </div>
+
+      <TextInput
+        type='text'
+        name={'firstName'}
+        placeholder={t('name')}
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
+        onBlur={() => {}}
+      />
+      <TextInput
+        type='text'
+        name={'lastName'}
+        placeholder={t('lastName')}
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
+        onBlur={() => {}}
+      />
+      <TextInput
+        type='text'
+        name={'phoneNumber'}
+        placeholder={t('number')}
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
+        onBlur={() => {}}
+      />
 
       <VerificationButtons>
         <AppButton text='Verify status' onClick={handleVerify} type='filled' />

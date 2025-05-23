@@ -447,6 +447,8 @@
     "oversized_sedan": "Oversized Sedan",
     "suv": "SUV",
     "oversized_suv": "Oversized SUV",
-    "large_motorcycle": "Large Motorcycle"
-  
+    "large_motorcycle": "Large Motorcycle",
+ 
+  "unasign order from container": "შეკვეთის წაშლა კონტეინერიდან",
+  "unsaign order warning": "დარწმუნებული ხართ, რომ გსურს შეკვეთის წაშლა კონტეინერიდან?"  
 }

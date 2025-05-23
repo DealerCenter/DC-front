@@ -52,18 +52,6 @@ export const SearchVehicleProvider = ({
   const [makeId, setMakeId] = useState<number>()
   const [activeFilters, setActiveFilters] = useState<Record<string, any>>({}) // Active filters state
 
-  // const initialValues = {
-  //   [FIELD_NAMES.PAGE]: 1,
-  //   [FIELD_NAMES.PER_PAGE]: 10,
-  //   [FIELD_NAMES.AUCTION_NAME]: '',
-  //   [FIELD_NAMES.MAKE]: '',
-  //   [FIELD_NAMES.MODEL]: '',
-  //   [FIELD_NAMES.YEAR_FROM]: '',
-  //   [FIELD_NAMES.YEAR_TO]: '',
-  //   [FIELD_NAMES.ODOMETER_FROM]: '',
-  //   [FIELD_NAMES.ODOMETER_TO]: '',
-  // }
-
   const initialValues: VehicleListFilters = {
     page: 1,
     per_page: 30,

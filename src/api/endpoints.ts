@@ -16,6 +16,7 @@ export const endpoints = {
   ORDERS_ADMIN: '/orders',
   DEALERS_ADMIN: '/dealers',
   CONTAINERS_ADMIN: '/containers',
+  UNASSIGN_ORDER_FROM_CONTAINER: '/:id/unassign-order',
   GET_CONTAINERS_BY_ORDER_ID_ADMIN: '/containers/by-order',
 
   ADMINS: '/admins',
@@ -45,4 +46,5 @@ export const endpoints = {
   RESET_PASS_FINALIZE: '/auth/password-reset/finalize',
   MAILINATOR_INBOX: '/mailinator/inbox',
   MAILINATOR_MESSAGE: '/mailinator/message',
+  ORDERS_WITHOUT_CONTAINER: '/orders/without-container',
 }

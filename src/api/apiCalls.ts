@@ -628,3 +628,56 @@ export const getMailinatorMessageById = async (id: string) => {
     console.error('Error getting mailinator message:', error)
   }
 }
+
+export const removeOrderFromContainer = async (
+  orderId: string,
+  containerId: string
+) => {
+  try {
+    const response = await axiosInstance.post(
+      `/containers/${containerId}/unassign-order`,
+      {
+        orderId,
+      }
+    )
+    message.success('Order removed from container successfully!')
+    return response
+  } catch (error: any) {
+    message.error(
+      'Error removing order from container!',
+      error.response.data.message
+    )
+    console.error('Error removing order from container:', error)
+  }
+}
+
+export const assignOrderToContainer = async (
+  orderId: string,
+  containerId: string
+) => {
+  try {
+    const response = await axiosInstance.post(
+      `/containers/${containerId}/assign-order`,
+      {
+        orderId,
+      }
+    )
+    message.success('Order assigned to container successfully!')
+    return response
+  } catch (error: any) {
+    message.error(
+      'Error assigning order to container!',
+      error.response.data.message
+    )
+    console.error('Error assigning order to container:', error.response.data)
+  }
+}
+
+export const getOrdersWithoutContainer = async () => {
+  try {
+    const response = await axiosInstance.get(endpoints.ORDERS_WITHOUT_CONTAINER)
+    return response.data
+  } catch (error) {
+    console.error('Error getting orders without container:', error)
+  }
+}

@@ -15,7 +15,7 @@ type Props = {
   link: string
   departureDate: string
   arrivalDate: string
-  id: number
+  containerId: number
 
   isDropdownOpen: boolean
   setIsDropdownOpen: (arg: boolean) => void
@@ -27,7 +27,7 @@ const ListItemMobile = ({
   link,
   departureDate,
   arrivalDate,
-  id,
+  containerId,
   isDropdownOpen,
   setIsDropdownOpen,
 }: Props) => {
@@ -79,7 +79,7 @@ const ListItemMobile = ({
       <LabelAndIconBox>
         <Image src={calendarIcon} alt='calendar icon' />
         <Label>
-          {t('added')} {id}
+          {t('added')} {containerId}
         </Label>
       </LabelAndIconBox>
     </Container>

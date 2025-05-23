@@ -18,11 +18,13 @@ import carImageDummy from '@/assets/images/DummyCarImage.jpg'
 import CarImageAndModelBox from './CarImageAndModelBox'
 import VerificationIcon from '@/common/components/readyIcons/VerificationIcon'
 import ReceiverBox from './ReceiverBox'
+import { removeOrderFromContainer } from '@/api/apiCalls'
 
 type Props = {
   onClick: () => void
   orderData: ORDER_DATA
   dashedLineHeight?: number
+  containerId: number
 }
 
 const ListItemFullDropdown = ({
@@ -39,9 +41,25 @@ const ListItemFullDropdown = ({
     dealer,
     carImages,
     transportationCost,
+    id: orderId,
   },
   dashedLineHeight = 85,
+  containerId,
 }: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const t = useTranslations('')
+
+  const unassignOrder = () => {
+    try {
+      console.log('removeOrderFromContainer', orderId, containerId)
+      removeOrderFromContainer(orderId.toString(), containerId.toString())
+      window.location.reload()
+      setIsModalOpen(false)
+    } catch (error) {
+      console.error('Error removing order from container:', error)
+    }
+  }
+
   return (
     <Container>
       <ImageAndDottedLineBox>
@@ -68,7 +86,25 @@ const ListItemFullDropdown = ({
           phoneNumber={dealer.phoneNumber}
         />
         <DebtLabel>{`$ ${carCost + transportationCost}`}</DebtLabel>
+        <Image
+          src={trashCan}
+          alt='trash icon'
+          onClick={() => setIsModalOpen(true)}
+          style={{ cursor: 'pointer' }}
+        />
       </ReceiverAndDebtFrame>
+
+      <AppModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <DeleteWarning
+          onCancel={() => setIsModalOpen(false)}
+          onDelete={unassignOrder}
+          header={t('unasign order from container')}
+          text={t('unsaign order warning')}
+        />
+      </AppModal>
     </Container>
   )
 }
@@ -125,6 +161,7 @@ const ReceiverAndDebtFrame = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing?.lg};
+  align-items: center;
 `
 
 const DebtLabel = styled.div`
